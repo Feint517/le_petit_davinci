@@ -1,2 +1,1 @@
-class APIConstants {
-}
+class APIConstants {}
