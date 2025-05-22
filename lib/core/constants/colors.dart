@@ -39,4 +39,11 @@ class AppColors {
   static const Color borderPrimary = Color(0xFFd9d9d9);
   static const Color borderSecondary = Color(0xFFe6e6e6);
 
+  //* splash screen colors
+  static const Color bluePrimary = Color(0xFF27C0FF);
+  static const Color greenPrimary = Color(0xFF8DD44F);
+  static const Color purpleAccent = Color(0xFFBF8FFD);
+  static const Color pinkAccent = Color(0xFFFF8BD2);
+  static const Color orangeAccent = Color(0xFFFFB425);
+  static const Color skyBlue = Color(0xFFF0FBFF);
 }

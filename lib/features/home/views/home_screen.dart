@@ -5,8 +5,8 @@ import 'package:le_petit_davinci/core/widgets/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/pill_button.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Login',
+              'Home',
               style: TextStyle(
                 fontFamily: 'DynaPuff_SemiCondensed',
                 fontSize: 42,
@@ -27,9 +27,9 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             PillButton(
-              label: 'Back to Home',
-              variant: ButtonVariant.primary,
-              onPressed: () => Get.toNamed(AppRoutes.home),
+              label: 'Go to Login',
+              variant: ButtonVariant.secondary,
+              onPressed: () => Get.toNamed(AppRoutes.login),
             ),
           ],
         ),
