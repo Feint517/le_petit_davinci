@@ -41,78 +41,42 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Spacer(flex: 2),
+                    const Spacer(),
                     
-                    // Welcome message
-                    Text(
-                      'Welcome to',
-                      style: TextStyle(
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                        fontSize: 32,
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ).animate().fadeIn(duration: const Duration(milliseconds: 800)),
-                    
-                    const SizedBox(height: 12),
-                    
-                    // App title
-                    Text(
-                      'Le Petit Davinci',
-                      style: TextStyle(
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                        fontSize: 42,
-                        color: AppColors.bluePrimary,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ).animate().fadeIn(
-                      duration: const Duration(milliseconds: 800), 
-                      delay: const Duration(milliseconds: 300)
-                    ).slideY(
-                      begin: 0.3, 
-                      end: 0, 
-                      curve: Curves.easeOutQuad
-                    ),
-                    
-                    const SizedBox(height: 24),
-                    
-                    // Description text
-                    Text(
-                      'Start your learning adventure with colorful letters and fun activities!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                        fontSize: 18,
-                        color: AppColors.textSecondary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ).animate().fadeIn(
-                      duration: const Duration(milliseconds: 800), 
-                      delay: const Duration(milliseconds: 600)
-                    ),
-                    
-                    const Spacer(flex: 3),
-                    
-                    // Continue button
-                    PillButton(
-                      label: 'Continue',
-                      icon: const Icon(Icons.arrow_forward),
-                      iconPosition: IconPosition.right,
-                      size: ButtonSize.lg,
-                      width: 200,
-                      onPressed: widget.onContinue,
-                    ).animate().fadeIn(
-                      duration: const Duration(milliseconds: 800),
-                      delay: const Duration(milliseconds: 1000),
-                    ).scale(
-                      begin: const Offset(0.9, 0.9),
-                      end: const Offset(1.0, 1.0),
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeOut,
-                      delay: const Duration(milliseconds: 1000),
-                    ),
+                    // Welcome text or logo can be added here
+                    // For example:
+                    // Text(
+                    //   'Bienvenue!',
+                    //   style: TextStyle(
+                    //     fontSize: 32,
+                    //     fontWeight: FontWeight.bold,
+                    //     color: AppColors.white,
+                    //   ),
+                    // ),
                     
                     const Spacer(),
+                    
+                    // Continue button at bottom
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 32.0),
+                      child: PillButton(
+                        label: 'Continue',
+                        icon: const Icon(Icons.arrow_forward),
+                        iconPosition: IconPosition.right,
+                        size: ButtonSize.lg,
+                        width: double.infinity,
+                        onPressed: widget.onContinue,
+                      ).animate().fadeIn(
+                        duration: const Duration(milliseconds: 800),
+                        delay: const Duration(milliseconds: 1000),
+                      ).scale(
+                        begin: const Offset(0.9, 0.9),
+                        end: const Offset(1.0, 1.0),
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeOut,
+                        delay: const Duration(milliseconds: 1000),
+                      ),
+                    ),
                   ],
                 ),
               ),

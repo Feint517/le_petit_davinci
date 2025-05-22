@@ -94,8 +94,11 @@ class CustomButton extends StatelessWidget {
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: disabled ? 0.6 : 1.0,
-              child: Center(
-                child: buttonContent,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Center(
+                  child: buttonContent,
+                ),
               ),
             ),
           ),

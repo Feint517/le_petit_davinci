@@ -21,4 +21,9 @@ class SvgAssets {
   static const String letterC = '$SVG_PATH/C.svg';
   static const String bear = '$SVG_PATH/bearSplash.svg';
   static const String bird = '$SVG_PATH/birdSplash.svg';
+  static const String choose = '$SVG_PATH/chooseSvg.svg';
+  static const String logo = '$SVG_PATH/Logo.svg';
 }
+
+// Alias for easier access
+class AssetsManager extends SvgAssets {}

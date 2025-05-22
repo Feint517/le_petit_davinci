@@ -46,4 +46,9 @@ class AppColors {
   static const Color pinkAccent = Color(0xFFFF8BD2);
   static const Color orangeAccent = Color(0xFFFFB425);
   static const Color skyBlue = Color(0xFFF0FBFF);
+  
+  // Additional colors for user selection screen
+  static const Color backgroundLight = Color(0xFFF0FBFF); // Light blue background
+  static const Color primaryBlue = bluePrimary; // Alias for consistency
+  static const Color primaryOrange = orangeAccent; // Alias for consistency
 }
