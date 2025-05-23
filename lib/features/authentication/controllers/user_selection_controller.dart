@@ -3,7 +3,7 @@ import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class UserSelectionController extends GetxController {
   void onParentSelected() {
-    Get.toNamed(Routes.PARENT_ONBOARDING);
+    Get.toNamed(Routes.PIN);
   }
   
   void onChildSelected() {

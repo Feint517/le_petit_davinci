@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
 
 /// A customizable button widget with various styles and states.
-/// 
+///
 /// Supports different variants, sizes, icons, and loading states.
 class CustomButton extends StatelessWidget {
   /// The text to display on the button
@@ -51,18 +51,17 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // Determine button height based on size
     final double buttonHeight = _getButtonHeight();
-    
+
     // Create the button content layout based on loading state
-    final Widget buttonContent = isLoading 
-      ? _buildLoadingIndicator() 
-      : _buildButtonContent();
+    final Widget buttonContent =
+        isLoading ? _buildLoadingIndicator() : _buildButtonContent();
 
     // Determine the button background color based on variant
     final Color backgroundColor = _getBackgroundColor();
-    
+
     // Determine the text color based on variant
     final Color textColor = _getTextColor();
-    
+
     // Create gradient based on variant
     final Gradient? gradient = _getGradient();
 
@@ -81,24 +80,23 @@ class CustomButton extends StatelessWidget {
               color: gradient == null ? backgroundColor : null,
               gradient: gradient,
               borderRadius: BorderRadius.circular(12),
-              boxShadow: variant != ButtonVariant.ghost 
-                ? [
-                    BoxShadow(
-                      offset: const Offset(0, 2),
-                      blurRadius: 2,
-                      color: Colors.black.withAlpha(26),
-                    )
-                  ]
-                : null,
+              boxShadow:
+                  variant != ButtonVariant.ghost
+                      ? [
+                        BoxShadow(
+                          offset: const Offset(0, 2),
+                          blurRadius: 2,
+                          color: Colors.black.withAlpha(26),
+                        ),
+                      ]
+                      : null,
             ),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: disabled ? 0.6 : 1.0,
               child: Padding(
                 padding: const EdgeInsets.only(top: 4),
-                child: Center(
-                  child: buttonContent,
-                ),
+                child: Center(child: buttonContent),
               ),
             ),
           ),
@@ -109,19 +107,18 @@ class CustomButton extends StatelessWidget {
 
   /// Builds the loading indicator with the appropriate color based on the button variant
   Widget _buildLoadingIndicator() {
-    final Color indicatorColor = variant == ButtonVariant.ghost 
-      ? AppColors.bluePrimary 
-      : AppColors.white;
-      
+    final Color indicatorColor =
+        variant == ButtonVariant.ghost
+            ? AppColors.bluePrimary
+            : AppColors.white;
+
     return SizedBox(
       height: 16,
       width: 16,
       child: CircularProgressIndicator(
         strokeWidth: 2,
         valueColor: AlwaysStoppedAnimation<Color>(indicatorColor),
-      )
-      .animate()
-      .fadeIn(duration: const Duration(milliseconds: 300)),
+      ).animate().fadeIn(duration: const Duration(milliseconds: 300)),
     );
   }
 
@@ -149,17 +146,10 @@ class CustomButton extends StatelessWidget {
     // Arrange icon and text according to iconPosition
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: iconPosition == IconPosition.left
-          ? [
-              icon!,
-              SizedBox(width: spacing),
-              textWidget,
-            ]
-          : [
-              textWidget,
-              SizedBox(width: spacing),
-              icon!,
-            ],
+      children:
+          iconPosition == IconPosition.left
+              ? [icon!, SizedBox(width: spacing), textWidget]
+              : [textWidget, SizedBox(width: spacing), icon!],
     );
   }
 
@@ -211,6 +201,7 @@ class CustomButton extends StatelessWidget {
 
     switch (variant) {
       case ButtonVariant.primary:
+        return AppColors.white;
       case ButtonVariant.secondary:
         return AppColors.white;
       case ButtonVariant.ghost:
@@ -244,163 +235,3 @@ class CustomButton extends StatelessWidget {
 }
 
 /// An icon button with customizable appearance
-class CustomIconButton extends StatelessWidget {
-  /// The icon to display
-  final Widget icon;
-  
-  /// The button variant that determines its color scheme
-  final ButtonVariant variant;
-  
-  /// The size of the button
-  final ButtonSize size;
-  
-  /// Whether the button is in a loading state
-  final bool isLoading;
-  
-  /// Whether the button is disabled
-  final bool disabled;
-  
-  /// Callback function when the button is pressed
-  final VoidCallback? onPressed;
-
-  const CustomIconButton({
-    super.key,
-    required this.icon,
-    this.variant = ButtonVariant.primary,
-    this.size = ButtonSize.md,
-    this.isLoading = false,
-    this.disabled = false,
-    this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final double buttonSize = _getButtonSize();
-    final Color backgroundColor = _getBackgroundColor();
-    final Gradient? gradient = _getGradient();
-
-    return SizedBox(
-      width: buttonSize,
-      height: buttonSize,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: (disabled || isLoading) ? null : onPressed,
-          borderRadius: BorderRadius.circular(buttonSize / 2),
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          child: Ink(
-            decoration: BoxDecoration(
-              color: gradient == null ? backgroundColor : null,
-              gradient: gradient,
-              shape: BoxShape.circle,
-              boxShadow: variant != ButtonVariant.ghost 
-                ? [
-                    BoxShadow(
-                      offset: const Offset(0, 2),
-                      blurRadius: 2,
-                      color: Colors.black.withAlpha(26),
-                    )
-                  ]
-                : null,
-            ),
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              opacity: disabled ? 0.6 : 1.0,
-              child: Center(
-                child: isLoading
-                    ? SizedBox(
-                        height: 16,
-                        width: 16,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            variant == ButtonVariant.ghost
-                                ? AppColors.bluePrimary
-                                : AppColors.white,
-                          ),
-                        ),
-                      )
-                    : IconTheme(
-                        data: IconThemeData(
-                          color: variant == ButtonVariant.ghost
-                              ? AppColors.bluePrimary
-                              : AppColors.white,
-                          size: _getIconSize(),
-                        ),
-                        child: icon,
-                      ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Gets the button size based on size enum
-  double _getButtonSize() {
-    switch (size) {
-      case ButtonSize.sm:
-        return 36;
-      case ButtonSize.md:
-        return 48;
-      case ButtonSize.lg:
-        return 56;
-    }
-  }
-
-  /// Gets the icon size based on button size
-  double _getIconSize() {
-    switch (size) {
-      case ButtonSize.sm:
-        return 16;
-      case ButtonSize.md:
-        return 20;
-      case ButtonSize.lg:
-        return 24;
-    }
-  }
-
-  /// Gets the background color based on variant
-  Color _getBackgroundColor() {
-    if (disabled) {
-      return AppColors.buttonDisabled;
-    }
-
-    switch (variant) {
-      case ButtonVariant.primary:
-        return AppColors.bluePrimary;
-      case ButtonVariant.secondary:
-        return AppColors.orangeAccent;
-      case ButtonVariant.ghost:
-        return Colors.transparent;
-    }
-  }
-
-  /// Gets the gradient based on variant
-  Gradient? _getGradient() {
-    if (disabled || variant == ButtonVariant.ghost) {
-      return null;
-    }
-
-    switch (variant) {
-      case ButtonVariant.primary:
-        return const LinearGradient(
-          colors: [AppColors.bluePrimary, Color(0xFF1AB1FF)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        );
-      case ButtonVariant.secondary:
-        return const LinearGradient(
-          colors: [AppColors.orangeAccent, Color(0xFFFFAA50)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        );
-      default:
-        return null;
-    }
-  }
-}
-
-// Using enums from buttons.dart

@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/app.dart';
 
 void main() {
-  runApp(DevicePreview(enabled: kDebugMode, builder: (context) => App()));
-  //runApp(const App());
+  //runApp(DevicePreview(enabled: kDebugMode, builder: (context) => App()));
+  runApp(const App());
 }

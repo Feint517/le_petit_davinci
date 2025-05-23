@@ -18,7 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool _isReady = false;
   final String _loadingText = "loading...";
-  
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       _isReady = true;
     });
-    
+
     if (widget.onReady != null) {
       widget.onReady!();
     } else {
@@ -52,34 +52,43 @@ class _SplashScreenState extends State<SplashScreen> {
             // Background
             Positioned.fill(
               child: SvgPicture.asset(
-                SvgAssets.bgSplash,
+                SvgAssets.splashBackground,
                 fit: BoxFit.cover,
                 semanticsLabel: 'Splash background',
               ),
             ),
-            
+
             // Loading text
             Positioned(
               bottom: 40,
               left: 0,
               right: 0,
-              child: _isReady 
-                ? const SizedBox.shrink()
-                : Center(
-                    child: Text(
-                      _loadingText,
-                      style: const TextStyle(
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                        fontSize: 24,
-                        color: AppColors.bluePrimary,
-                        fontWeight: FontWeight.w600,
+              child:
+                  _isReady
+                      ? const SizedBox.shrink()
+                      : Center(
+                        child:
+                            Text(
+                                  _loadingText,
+                                  style: const TextStyle(
+                                    fontFamily: 'DynaPuff_SemiCondensed',
+                                    fontSize: 24,
+                                    color: AppColors.bluePrimary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                )
+                                .animate(
+                                  onPlay: (controller) => controller.repeat(),
+                                )
+                                .fadeIn(
+                                  duration: const Duration(milliseconds: 800),
+                                )
+                                .then()
+                                .fadeOut(
+                                  duration: const Duration(milliseconds: 800),
+                                )
+                                .then(),
                       ),
-                    ).animate(onPlay: (controller) => controller.repeat())
-                      .fadeIn(duration: const Duration(milliseconds: 800))
-                      .then()
-                      .fadeOut(duration: const Duration(milliseconds: 800))
-                      .then(),
-                  ),
             ),
           ],
         ),

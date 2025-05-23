@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/features/onboarding/controllers/user_selection_controller.dart';
+import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
 
 class UserSelectionPage extends GetView<UserSelectionController> {
   const UserSelectionPage({super.key});
@@ -24,31 +24,28 @@ class UserSelectionPage extends GetView<UserSelectionController> {
             children: [
               Gap(20.h),
               // Logo from assets
-              SvgPicture.asset(
-                SvgAssets.logo,
-                height: 60.h,
-              ),
+              SvgPicture.asset(SvgAssets.logo, height: 60.h),
               // Expanded area for illustration and question
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // SVG Illustration with floating animation
-                    SvgPicture.asset(
-                      SvgAssets.choose,
-                      height: 300.h,
-                    ).animate(
-                      onPlay: (controller) => controller.repeat(reverse: true),
-                    ).moveY(
-                      begin: 0,
-                      end: -10,
-                      duration: const Duration(seconds: 2),
-                      curve: Curves.easeInOut,
-                    ),
+                    SvgPicture.asset(SvgAssets.choose, height: 300.h)
+                        .animate(
+                          onPlay:
+                              (controller) => controller.repeat(reverse: true),
+                        )
+                        .moveY(
+                          begin: 0,
+                          end: -10,
+                          duration: const Duration(seconds: 2),
+                          curve: Curves.easeInOut,
+                        ),
                     Gap(40.h),
                     // Question text
                     Text(
-                      CustomTexts.whoUsesApp,
+                      StringsManager.whoUsesApp,
                       style: TextStyle(
                         fontSize: 8.sp,
                         fontWeight: FontWeight.bold,
@@ -63,18 +60,16 @@ class UserSelectionPage extends GetView<UserSelectionController> {
               // Buttons at the bottom
               Column(
                 children: [
-                  // Parent button
                   CustomButton(
-                    label: CustomTexts.iAmParent,
+                    label: StringsManager.iAmParent,
                     onPressed: controller.onParentSelected,
                     variant: ButtonVariant.primary,
                     size: ButtonSize.lg,
                     width: double.infinity,
                   ),
                   Gap(16.h),
-                  // Child button
                   CustomButton(
-                    label: CustomTexts.itsMyChild,
+                    label: StringsManager.itsMyChild,
                     onPressed: controller.onChildSelected,
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,

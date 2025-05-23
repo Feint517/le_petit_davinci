@@ -14,15 +14,16 @@ class LottieAssets {}
 class IconAssets {}
 
 class SvgAssets {
-  // Splash screen assets
-  static const String bgSplash = '$SVG_PATH/bg.svg';
+  static const String splashBackground = '$SVG_PATH/splash_background.svg';
   static const String letterA = '$SVG_PATH/A.svg';
   static const String letterB = '$SVG_PATH/B.svg';
   static const String letterC = '$SVG_PATH/C.svg';
   static const String bear = '$SVG_PATH/bearSplash.svg';
   static const String bird = '$SVG_PATH/birdSplash.svg';
   static const String choose = '$SVG_PATH/chooseSvg.svg';
-  static const String logo = '$SVG_PATH/Logo.svg';
+  static const String logo = '$SVG_PATH/logo.svg';
+  static const String pinBackground = '$SVG_PATH/pin_background.svg';
+  static const String loginBackground = '$SVG_PATH/login_background.svg';
 }
 
 // Alias for easier access

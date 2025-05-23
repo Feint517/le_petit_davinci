@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/pill_button.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {

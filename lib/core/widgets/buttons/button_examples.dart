@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/custom_button.dart';
-import 'package:le_petit_davinci/core/widgets/pill_button.dart';
 
 /// A widget that demonstrates various button styles and configurations
 class ButtonExamples extends StatefulWidget {
@@ -23,9 +21,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Button Examples'),
-      ),
+      appBar: AppBar(title: const Text('Button Examples')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -34,13 +30,10 @@ class _ButtonExamplesState extends State<ButtonExamples> {
             // Custom Button Examples
             const Text(
               'Custom Buttons',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // Button Variants
             const Text('Button Variants:'),
             const SizedBox(height: 8),
@@ -48,10 +41,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               spacing: 16,
               runSpacing: 16,
               children: [
-                CustomButton(
-                  label: 'Primary',
-                  onPressed: () {},
-                ),
+                CustomButton(label: 'Primary', onPressed: () {}),
                 CustomButton(
                   label: 'Secondary',
                   variant: ButtonVariant.secondary,
@@ -65,7 +55,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Button Sizes
             const Text('Button Sizes:'),
             const SizedBox(height: 8),
@@ -91,7 +81,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Buttons with Icons
             const Text('Buttons with Icons:'),
             const SizedBox(height: 8),
@@ -114,7 +104,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Button States
             const Text('Button States:'),
             const SizedBox(height: 8),
@@ -140,7 +130,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Icon Buttons
             const Text('Icon Buttons:'),
             const SizedBox(height: 8),
@@ -148,10 +138,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               spacing: 16,
               runSpacing: 16,
               children: [
-                CustomIconButton(
-                  icon: const Icon(Icons.add),
-                  onPressed: () {},
-                ),
+                CustomIconButton(icon: const Icon(Icons.add), onPressed: () {}),
                 CustomIconButton(
                   icon: const Icon(Icons.favorite),
                   variant: ButtonVariant.secondary,
@@ -169,19 +156,16 @@ class _ButtonExamplesState extends State<ButtonExamples> {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             // Pill Button Examples
             const Text(
               'Pill Buttons (with hover effects)',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // Pill Button Variants
             const Text('Pill Button Variants:'),
             const SizedBox(height: 8),
@@ -189,10 +173,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               spacing: 16,
               runSpacing: 16,
               children: [
-                PillButton(
-                  label: 'Primary',
-                  onPressed: () {},
-                ),
+                PillButton(label: 'Primary', onPressed: () {}),
                 PillButton(
                   label: 'Secondary',
                   variant: ButtonVariant.secondary,
@@ -206,7 +187,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Pill Button Sizes
             const Text('Pill Button Sizes:'),
             const SizedBox(height: 8),
@@ -232,7 +213,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Pill Buttons with Icons
             const Text('Pill Buttons with Icons:'),
             const SizedBox(height: 8),
@@ -260,7 +241,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // Pill Button States
             const Text('Pill Button States:'),
             const SizedBox(height: 8),
@@ -268,11 +249,7 @@ class _ButtonExamplesState extends State<ButtonExamples> {
               spacing: 16,
               runSpacing: 16,
               children: [
-                PillButton(
-                  label: 'Disabled',
-                  disabled: true,
-                  onPressed: () {},
-                ),
+                PillButton(label: 'Disabled', disabled: true, onPressed: () {}),
                 PillButton(
                   label: 'Loading',
                   isLoading: _isLoading,
