@@ -1,11 +1,9 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:le_petit_davinci/app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  //runApp(DevicePreview(enabled: kDebugMode, builder: (context) => App()));
   //? Lock orientation to portrait only
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -9,4 +9,6 @@ class StringsManager {
   static const String loginText = "Connectez-vous\nau Petit Davinci";
   static const String goodMorningText =
       "Rebonjour Alex ! C'est l'heure de notre prochaine aventure !";
+  static const String createChildProfile = "Créer un profil enfant";
+  static const String back = "Retour";
 }
