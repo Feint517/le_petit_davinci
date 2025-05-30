@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
+import 'package:le_petit_davinci/features/authentication/views/kids_selection.dart';
+import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -15,7 +19,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -78,26 +83,27 @@ class LoginPage extends StatelessWidget {
                       CustomTextField(
                         hintText: 'Email',
                         controller: TextEditingController(),
-                        icon: Icon(
-                          Icons.email_outlined,
-                          color: AppColors.pinkAccent,
-                        ),
+                        icon: SvgPicture.asset(IconAssets.email),
                       ),
                       Gap(24.h),
                       CustomTextField(
-                        suffixIcon: Icon(Iconsax.eye_slash),
+                        suffixIcon: SvgPicture.asset(IconAssets.eye),
                         hintText: 'Mot de passe',
                         controller: TextEditingController(),
-                        icon: Icon(Icons.password, color: AppColors.pinkAccent),
+                        icon: SvgPicture.asset(IconAssets.password),
                       ),
                       Gap(24.h),
 
                       //* Login button
                       CustomButton(
                         onPressed: () {
-                          //Get.toNamed(Routes.home);
+                          Get.to(
+                            () => KidsSelection(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 500),
+                          );
                         },
-                        label: 'Se conncter',
+                        label: 'Se connecter',
                       ),
                     ],
                   ),

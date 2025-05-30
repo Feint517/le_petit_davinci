@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -18,24 +19,37 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        suffixIcon: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [suffixIcon ?? SizedBox()],
-        ),
-        prefixIcon: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [icon],
-        ),
-        hintText: hintText,
-        filled: true,
-        fillColor: Colors.grey.shade100,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.pinkAccentDark,
+            spreadRadius: 2,
+            blurRadius: 0,
+            offset: const Offset(5, 5), // changes position of shadow
+          ),
+        ],
+      ),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          suffixIcon: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [suffixIcon ?? SizedBox()],
+          ),
+          prefixIcon: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [icon],
+          ),
+          hintText: hintText,
+          filled: true,
+          fillColor: Colors.grey.shade100,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );
