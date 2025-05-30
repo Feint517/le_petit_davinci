@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
             ),
             Column(
               children: [
-                SvgPicture.asset(SvgAssets.logo, height: 60.h),
+                SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
                 Gap(40),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),

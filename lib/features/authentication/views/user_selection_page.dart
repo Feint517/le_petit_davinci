@@ -23,14 +23,11 @@ class UserSelectionPage extends GetView<UserSelectionController> {
           child: Column(
             children: [
               Gap(20.h),
-              // Logo from assets
-              SvgPicture.asset(SvgAssets.logo, height: 60.h),
-              // Expanded area for illustration and question
+              SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // SVG Illustration with floating animation
                     SvgPicture.asset(SvgAssets.choose, height: 300.h)
                         .animate(
                           onPlay:

@@ -6,9 +6,10 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/pin_entry_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/login_page.dart';
+import 'package:le_petit_davinci/features/authentication/views/error_page.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -24,113 +25,118 @@ class PinEntryPage extends GetView<PinEntryController> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Column(
-              children: [
-                SvgPicture.asset(SvgAssets.logo, height: 60.h),
-                Gap(40),
-                Center(
-                  child: Container(
-                    width: 320.w,
-                    padding: EdgeInsets.all(24.w),
-                    decoration: BoxDecoration(
-                      color: AppColors.pinkAccent,
-                      borderRadius: BorderRadius.circular(20.r),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(0, 4),
-                          blurRadius: 8,
-                          color: Colors.black.withAlpha(26),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Instruction text
-                        Text(
-                          StringsManager.enterPinCode,
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'DynaPuff_SemiCondensed',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Gap(24.h),
-
-                        //* PIN Input Boxes
-                        // Obx(
-                        //   () => Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: List.generate(
-                        //       4,
-                        //       (index) => Padding(
-                        //         padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        //         child: PinInputBox(
-                        //           value: controller.pin[index],
-                        //           isFocused:
-                        //               controller.currentIndex.value == index,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        PinCodeTextField(
-                          appContext: context,
-                          length: 4,
-                          onChanged: (value) {},
-                          pinTheme: PinTheme(
-                            shape: PinCodeFieldShape.box,
-                            borderRadius: BorderRadius.circular(8),
-                            fieldHeight: 55,
-                            fieldWidth: 55,
-                            activeFillColor: Colors.grey[100]!,
-                            inactiveFillColor: Colors.grey[100]!,
-                            selectedFillColor: Colors.white,
-                            activeColor: Colors.deepPurple,
-                            selectedColor: Colors.deepPurple,
-                            inactiveColor: Color(0XffF9FAFB),
-                          ),
-                          enableActiveFill: true,
-                        ),
-                        Gap(24.h),
-
-                        //* Submit button
-                        CustomButton(
-                          label: StringsManager.connectWithPin,
-                          //onPressed: () => Get.toNamed(Routes.HOME),
-                          onPressed: () => Get.to(() => const LoginPage()),
-                          variant: ButtonVariant.primary,
-                          size: ButtonSize.lg,
-                          width: double.infinity,
-                        ),
-                        Gap(16.h),
-
-                        //* Forgot password link
-                        GestureDetector(
-                          onTap: () => Get.toNamed(Routes.HOME),
-                          child: Text(
-                            StringsManager.forgotPassword,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: AppColors.white,
-                              decoration: TextDecoration.underline,
-                              fontFamily: 'DynaPuff_SemiCondensed',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
             Positioned(
               bottom: 0,
+              left: 0,
+              right: 0,
               child: SvgPicture.asset(
                 SvgAssets.pinBackground,
-                fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                  children: [
+                    Gap(20.h),
+                    SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
+                    Gap(40.h),
+                    Center(
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                            width: DeviceUtils.getScreenHeight() * 0.85,
+                            constraints: BoxConstraints(
+                              maxWidth: 400.w,
+                              minWidth: 280.w,
+                            ),
+                            padding: EdgeInsets.all(24.w),
+                            decoration: BoxDecoration(
+                              color: AppColors.pinkAccent,
+                              borderRadius: BorderRadius.circular(20.r),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: const Offset(0, 4),
+                                  blurRadius: 8,
+                                  color: Colors.black.withAlpha(26),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  StringsManager.enterPinCode,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'DynaPuff_SemiCondensed',
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Gap(24.h),
+                                SizedBox(
+                                  width: 240.w,
+                                  child: PinCodeTextField(
+                                    appContext: context,
+                                    length: 4,
+                                    onChanged: (value) {},
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    pinTheme: PinTheme(
+                                      shape: PinCodeFieldShape.box,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      fieldHeight: 50.h,
+                                      fieldWidth: 50.w,
+                                      activeFillColor: Colors.grey[100]!,
+                                      inactiveFillColor: Colors.grey[100]!,
+                                      selectedFillColor: Colors.white,
+                                      activeColor: Colors.deepPurple,
+                                      selectedColor: Colors.deepPurple,
+                                      inactiveColor: Color(0XffF9FAFB),
+                                    ),
+                                    enableActiveFill: true,
+                                  ),
+                                ),
+                                Gap(24.h),
+
+                                //* Submit button
+                                CustomButton(
+                                  label: StringsManager.connectWithPin,
+                                  onPressed:
+                                      () => Get.to(() => const ErrorPage()),
+                                  variant: ButtonVariant.primary,
+                                  size: ButtonSize.lg,
+                                  width: double.infinity,
+                                ),
+                                Gap(16.h),
+
+                                //* Forgot password link
+                                GestureDetector(
+                                  onTap: () => Get.toNamed(Routes.HOME),
+                                  child: Text(
+                                    StringsManager.forgotPassword,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: AppColors.white,
+                                      decoration: TextDecoration.underline,
+                                      fontFamily: 'DynaPuff_SemiCondensed',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Gap(40.h),
+                  ],
+                ),
               ),
             ),
           ],

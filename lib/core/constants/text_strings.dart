@@ -7,4 +7,6 @@ class StringsManager {
   static const String forgotPassword = 'Mot de passe oublié?';
   static const String connectWithPin = 'Connexion avec code PIN';
   static const String loginText = "Connectez-vous\nau Petit Davinci";
+  static const String goodMorningText =
+      "Rebonjour Alex ! C'est l'heure de notre prochaine aventure !";
 }

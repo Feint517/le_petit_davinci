@@ -1,9 +1,16 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:le_petit_davinci/app.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   //runApp(DevicePreview(enabled: kDebugMode, builder: (context) => App()));
-  runApp(const App());
+  //? Lock orientation to portrait only
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const App());
+  });
 }
