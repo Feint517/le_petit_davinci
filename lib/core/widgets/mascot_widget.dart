@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 
+/// Position de la bulle de dialogue par rapport à la mascotte
+enum BubblePosition { left, center, right }
+
 /// Un widget réutilisable pour afficher une mascotte avec une bulle de dialogue.
 /// 
 /// Ce widget suit les conventions de design du projet Le Petit Davinci.
@@ -28,6 +31,9 @@ class MascotWidget extends StatelessWidget {
 
   /// Taille du texte dans la bulle (optionnel)
   final double? textSize;
+  
+  /// Position de la bulle par rapport à la mascotte (optionnel, par défaut center)
+  final BubblePosition bubblePosition;
 
   const MascotWidget({
     super.key,
@@ -38,6 +44,7 @@ class MascotWidget extends StatelessWidget {
     this.mascotSize,
     this.maxBubbleWidth,
     this.textSize,
+    this.bubblePosition = BubblePosition.center,
   });
 
   @override
@@ -69,7 +76,7 @@ class MascotWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Bulle de dialogue
+        // Bulle de dialogue positioned above mascot
         _buildSpeechBubble(),
         
         // Espacement entre la bulle et la mascotte, ajusté dynamiquement
@@ -117,7 +124,7 @@ class MascotWidget extends StatelessWidget {
                 fontFamily: 'DynaPuff_SemiCondensed',
                 height: 1.3,
               ),
-              textAlign: TextAlign.center,
+              textAlign: _getTextAlignment(),
             ),
           ),
           
@@ -126,18 +133,54 @@ class MascotWidget extends StatelessWidget {
             bottom: -6.h,
             left: 0,
             right: 0,
-            child: Center(
-              child: CustomPaint(
-                size: Size(12.w, 8.h),
-                painter: _BubbleTailPainter(
-                  color: bubbleColor ?? AppColors.bluePrimary,
-                ),
-              ),
-            ),
+            child: _buildBubbleTail(),
           ),
         ],
       ),
     );
+  }
+
+  /// Détermine l'alignement du texte basé sur la position de la bulle
+  TextAlign _getTextAlignment() {
+    switch (bubblePosition) {
+      case BubblePosition.left:
+        return TextAlign.left;
+      case BubblePosition.center:
+        return TextAlign.center;
+      case BubblePosition.right:
+        return TextAlign.right;
+    }
+  }
+
+  /// Construit la queue de la bulle positionnée selon bubblePosition
+  Widget _buildBubbleTail() {
+    Widget tail = CustomPaint(
+      size: Size(12.w, 8.h),
+      painter: _BubbleTailPainter(
+        color: bubbleColor ?? AppColors.bluePrimary,
+      ),
+    );
+
+    switch (bubblePosition) {
+      case BubblePosition.left:
+        return Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20.w),
+            child: tail,
+          ),
+        );
+      case BubblePosition.center:
+        return Center(child: tail);
+      case BubblePosition.right:
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.only(right: 20.w),
+            child: tail,
+          ),
+        );
+    }
   }
 
   /// Construit l'image de la mascotte

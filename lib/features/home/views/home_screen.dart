@@ -1,61 +1,95 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/core/widgets/main_panel_widget.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
+import '../../../core/constants/assets_manager.dart';
+import '../widgets/profile_header.dart';
+import '../widgets/achievement_banner.dart';
+import '../widgets/homescreen_content.dart';
+import '../widgets/subject_selection.dart';
+import '../widgets/rewards_section.dart';
 
-/// Écran d'accueil principal avec la mascotte DaVinci
-class HomeScreen extends StatefulWidget {
+/// Main home screen after login - blank with profile header
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  bool _showQuestionsIntro = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(ImageAssets.masscotbg),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              children: [
-                const Spacer(),
-                
-                // Panneau principal avec mascotte
-                _showQuestionsIntro 
-                    ? MainPanelWidget(
-                        speechText: "Avant de commencer ton aventure, j'ai 5 petites questions pour mieux te connaître\n\nEt pendant que tu réponds, je vais bouger et te faire coucou !",
-                        buttonText: "Je suis prêt !",
-                      )
-                    : MainPanelWidget(
-                        speechText: "Bonjour ! Moi, c'est DaVinci ! Je suis prêt à commencer cette aventure avec toi !",
-                        buttonText: "Continuer",
-                        onButtonPressed: () {
-                          print('Continuer button pressed!');
-                          setState(() {
-                            _showQuestionsIntro = true;
-                          });
-                        },
-                      ),
-                
-                const Spacer(),
-                Gap(40.h),
-              ],
+      backgroundColor: AppColors.backgroundLight,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Profile Header
+            ProfileHeader(
+              userName: 'Alex',
+              userClass: 'Classe 2',
+              onChangeAvatar: () {
+                // TODO: Implement avatar change functionality
+                print('Change avatar pressed');
+              },
             ),
-          ),
+            
+            // Content area - Scrollable
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Achievement Banner with padding
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Column(
+                        children: [
+                          AchievementBanner(
+                            title: 'Explorateur des mots',
+                            starCount: 5,
+                            onRewardsPressed: () {
+                              // TODO: Navigate to rewards screen
+                              print('Rewards pressed');
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    Gap(8.h),
+                    
+                    // Homescreen Content Unit (Image + Mascot + Mission Card)
+                    HomescreenContent(
+                      mascotMessage: 'Bonjour Alex ! Prêt pour une nouvelle aventure ?',
+                      missionDescription: 'Trouve 5 mots qui riment !',
+                      onAcceptMission: () {
+                        // TODO: Navigate to mission
+                        print('Mission accepted');
+                      },
+                    ),
+                    
+                    Gap(24.h),
+                    
+                    // Subject Selection Grid
+                    const SubjectSelection(),
+                    
+                    Gap(24.h),
+                    
+                    // Rewards Section
+                    const RewardsSection(),
+                    
+                    Gap(40.h),
+                    
+                    // Bottom footer image
+                    SvgPicture.asset(
+                      SvgAssets.bottom,
+                      width: double.infinity,
+                      height: 300.h,
+                      fit: BoxFit.contain,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

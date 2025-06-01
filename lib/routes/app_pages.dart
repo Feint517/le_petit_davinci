@@ -12,6 +12,9 @@ import 'package:le_petit_davinci/features/questions/views/question_two_screen.da
 import 'package:le_petit_davinci/features/questions/views/question_three_screen.dart';
 import 'package:le_petit_davinci/features/questions/views/question_four_screen.dart';
 import 'package:le_petit_davinci/features/questions/views/question_five_screen.dart';
+import 'package:le_petit_davinci/features/home/views/welcome_status_screen.dart';
+import 'package:le_petit_davinci/features/home/views/intro_screen.dart';
+import 'package:le_petit_davinci/features/home/bindings/welcome_status_binding.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 /// App pages configuration
@@ -25,9 +28,14 @@ class AppPages {
     GetPage(
       name: AppRoutes.welcome,
       page: () => WelcomeScreen(
-        onContinue: () => Get.offAndToNamed(AppRoutes.home),
+        onContinue: () => Get.offAndToNamed(AppRoutes.intro),
       ),
       binding: AuthBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.intro,
+      page: () => const IntroScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -80,6 +88,12 @@ class AppPages {
       name: AppRoutes.questionFive,
       page: () => const QuestionFiveScreen(),
       transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.welcomeStatus,
+      page: () => const WelcomeStatusScreen(),
+      binding: WelcomeStatusBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

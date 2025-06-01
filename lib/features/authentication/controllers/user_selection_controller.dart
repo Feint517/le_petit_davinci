@@ -7,6 +7,7 @@ class UserSelectionController extends GetxController {
   }
   
   void onChildSelected() {
-    Get.toNamed(Routes.CHILD_SETUP);
+    // Navigate to intro screen to start the child flow
+    Get.toNamed(Routes.INTRO);
   }
 }

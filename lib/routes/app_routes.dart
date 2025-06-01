@@ -2,6 +2,7 @@
 class AppRoutes {
   static const String splash = '/splash';
   static const String welcome = '/welcome';
+  static const String intro = '/intro';
   static const String home = '/home';
   static const String login = '/login';
   static const String userSelection = '/user-selection';
@@ -15,12 +16,14 @@ class AppRoutes {
   static const String questionThree = '/question-three';
   static const String questionFour = '/question-four';
   static const String questionFive = '/question-five';
+  static const String welcomeStatus = '/welcome-status';
 }
 
 // Alias for easier access (following GetX convention)
 class Routes {
   static const String SPLASH = AppRoutes.splash;
   static const String WELCOME = AppRoutes.welcome;
+  static const String INTRO = AppRoutes.intro;
   static const String HOME = AppRoutes.home;
   static const String LOGIN = AppRoutes.login;
   static const String USER_SELECTION = AppRoutes.userSelection;
@@ -34,4 +37,5 @@ class Routes {
   static const String QUESTION_THREE = AppRoutes.questionThree;
   static const String QUESTION_FOUR = AppRoutes.questionFour;
   static const String QUESTION_FIVE = AppRoutes.questionFive;
+  static const String WELCOME_STATUS = AppRoutes.welcomeStatus;
 }

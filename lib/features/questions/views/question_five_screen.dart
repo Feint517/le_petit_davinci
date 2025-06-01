@@ -80,8 +80,8 @@ class QuestionFiveScreen extends StatelessWidget {
                   buttonText: "Terminer",
                   multipleSelection: false, // Single selection for favorite mission
                   onButtonPressed: () {
-                    // Navigate to user selection (end of questions)
-                    Get.toNamed(AppRoutes.userSelection);
+                    // Navigate to welcome status screen after completing questions
+                    Get.toNamed(AppRoutes.welcomeStatus);
                   },
                 ),
                 
