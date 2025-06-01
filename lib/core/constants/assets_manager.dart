@@ -6,7 +6,9 @@ const String ICONS_PATH = 'assets/icons';
 const String LOTTIE_PATH = 'assets/lottie/misc';
 const String ICON_PATH = 'assets/icons';
 
-class ImageAssets {}
+class ImageAssets {
+  static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
+}
 
 class LottieAssets {}
 
@@ -29,6 +31,9 @@ class SvgAssets {
   static const String headerVectorGreen = '$SVG_PATH/header_vector_green.svg';
   static const String headerVectorPurple = '$SVG_PATH/header_vector_purple.svg';
   static const String errorBackground = '$SVG_PATH/error_background.svg';
+  static const String bearMasscot = '$SVG_PATH/bear.svg';
+  static const String masscotBg = '$SVG_PATH/masscotbg.svg';
+  static const String compassIcon = '$SVG_PATH/compassIcon.svg';
 }
 
 // Alias for easier access

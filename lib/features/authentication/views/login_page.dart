@@ -23,9 +23,12 @@ class LoginPage extends StatelessWidget {
           children: [
             Positioned(
               bottom: 0,
+              left: 0,
+              right: 0,
               child: SvgPicture.asset(
                 SvgAssets.loginBackground,
-                fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fitWidth,
               ),
             ),
             Column(

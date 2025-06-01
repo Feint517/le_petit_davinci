@@ -35,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (widget.onReady != null) {
       widget.onReady!();
     } else {
-      // Navigate to welcome screen by default if no custom onReady callback is provided
-      Get.offAndToNamed(AppRoutes.welcome);
+      // Navigate to home screen (introductory mascot screen) by default
+      Get.offAndToNamed(AppRoutes.home);
     }
   }
 

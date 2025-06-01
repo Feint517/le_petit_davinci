@@ -51,4 +51,10 @@ class AppColors {
   static const Color backgroundLight = Color(0xFFF0FBFF); // Light blue background
   static const Color primaryBlue = bluePrimary; // Alias for consistency
   static const Color primaryOrange = orangeAccent; // Alias for consistency
+
+  // Couleurs pour le DynamicSelectionWidget
+  static const Color lightPink = Color(0xFFFFC0CB);
+  static const Color pinkPrimary = Color(0xFFFF6B8B);
+  static const Color pinkMedium = Color(0xFFB55A7E);
+  static const Color pinkDark = Color(0xFF9A2551);
 }
