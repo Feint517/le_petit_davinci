@@ -10,14 +10,14 @@ import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/profile_header.dart';
 
-class FrenchMapScreen extends StatefulWidget {
-  const FrenchMapScreen({super.key});
+class EnglishMapScreen extends StatefulWidget {
+  const EnglishMapScreen({super.key});
 
   @override
-  State<FrenchMapScreen> createState() => _FrenchMapScreenState();
+  State<EnglishMapScreen> createState() => _EnglishMapScreenState();
 }
 
-class _FrenchMapScreenState extends State<FrenchMapScreen> {
+class _EnglishMapScreenState extends State<EnglishMapScreen> {
   // Inject the controller
   // Get.put() initializes the controller if it hasn't been already.
   // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX binding).
@@ -44,12 +44,12 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            TopNavigation(text: 'French', buttonColor: AppColors.bluePrimary),
+            TopNavigation(text: 'Anglais', buttonColor: AppColors.buttonPrimary),
             Gap(10.h),
             SubHeader(
               paragraph: "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
-             color:  AppColors.bluePrimary, 
+             color:  AppColors.purple, 
              currentLevel:  1, // Current level
               maxLevel: 3, // Max level
             ),
@@ -81,7 +81,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.77, // Adjust multiplier as needed
-                            child: _buildMapButton('Magic Dictation',
+                            child: _buildMapButton('Dictée magique',
                               SvgAssets.headset,
                               AppColors.bluePrimary,
                               AppColors.blueSecondary,
@@ -92,7 +92,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             right: svgWidth * 0.0,
                             top: svgHeight * 0.46, // Adjust multiplier as needed
-                            child: _buildMapButton('Sentence Construction',
+                            child: _buildMapButton('Construction de phrases',
                               SvgAssets.chat,
                               AppColors.pinkLight,
                               AppColors.pinkPrimary,
@@ -103,7 +103,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2, // Adjust multiplier as needed
-                            child: _buildMapButton('Find errors',
+                            child: _buildMapButton("Trouver l'erreur",
                               SvgAssets.explore,
                               AppColors.purple,
                               AppColors.purpleSecondary,
@@ -158,71 +158,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
     );
   }
 
-  Widget _buildNavigation(String text, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: AppColors.borderSecondary,
-            ),
-            child: TextButton.icon(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              label: const Text('Home', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: AppColors.primaryBlue,
-            ),
-            child: Center(child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-    );
-  }
+   
 
-  Widget _buildPageContent(String paragraph, BuildContext context, int currentlevel, int maxLevel) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        children: [
-          Text(paragraph, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          Gap(10.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.05,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: AppColors.primaryBlue,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset(SvgAssets.learnHat, height: 20.h, width: 20.w),
-                    Gap(5.w),
-                    const Text('Explorateur des mots', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-              Text('Niveau $currentlevel/$maxLevel', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+   
 }

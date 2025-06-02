@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
@@ -18,16 +20,19 @@ class SubjectSelection extends StatelessWidget {
         label: 'Français',
         imageAssetPath: SvgAssets.frenchCard,
         cardColor: AppColors.bluePrimary,
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FrenchMapScreen()),
+        onTap: () => Get.to( () => const FrenchMapScreen(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
         ),
       ),
       SubjectData(
         label: 'English',
         imageAssetPath: SvgAssets.englishCard,
         cardColor: AppColors.greenPrimary,
-        onTap: () => print('English selected'),
+        onTap: () => Get.to( () => const EnglishMapScreen(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        ),
       ),
       SubjectData(
         label: 'Mathématiques',
