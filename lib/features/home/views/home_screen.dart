@@ -19,12 +19,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             // Profile Header
             ProfileHeader(
               userName: 'Alex',
               userClass: 'Classe 2',
+              changeAvatar: true,
               onChangeAvatar: () {
                 // TODO: Implement avatar change functionality
                 print('Change avatar pressed');

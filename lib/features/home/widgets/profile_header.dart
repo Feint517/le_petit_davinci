@@ -10,6 +10,7 @@ class ProfileHeader extends StatelessWidget {
   final String userName;
   final String userClass;
   final String? avatarPath;
+  final bool? changeAvatar;
   final VoidCallback? onChangeAvatar;
 
   const ProfileHeader({
@@ -17,7 +18,7 @@ class ProfileHeader extends StatelessWidget {
     required this.userName,
     required this.userClass,
     this.avatarPath,
-    this.onChangeAvatar,
+    this.onChangeAvatar, required this.changeAvatar,
   });
 
   @override
@@ -71,6 +72,7 @@ class ProfileHeader extends StatelessWidget {
           ),
           
           // Right Section - Change Avatar Action
+          if (changeAvatar == true)
           InkWell(
             onTap: onChangeAvatar ?? () {},
             borderRadius: BorderRadius.circular(8.r),
@@ -98,7 +100,8 @@ class ProfileHeader extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          ) else
+          const SizedBox(), // Empty widget if changeAvatar is false
         ],
       ),
     );

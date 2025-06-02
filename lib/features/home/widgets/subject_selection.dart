@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../models/subject_data.dart';
@@ -17,7 +18,10 @@ class SubjectSelection extends StatelessWidget {
         label: 'Français',
         imageAssetPath: SvgAssets.frenchCard,
         cardColor: AppColors.bluePrimary,
-        onTap: () => print('Français selected'),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FrenchMapScreen()),
+        ),
       ),
       SubjectData(
         label: 'English',

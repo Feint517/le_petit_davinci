@@ -27,6 +27,7 @@ class AppColors {
   static const Color primaryBackground = Color(0xFFF3F5FF);
 
   static const Color purple = Color(0xFF9D8CFF);
+  static const Color purpleSecondary = Color(0xFF9D63E7);
   static const Color softPurple = Color(0xFFDAD0FF);
   static const Color orange = Color(0xFFFF725E);
 
@@ -41,6 +42,7 @@ class AppColors {
 
   //* splash screen colors
   static const Color bluePrimary = Color(0xFF27C0FF);
+  static const Color blueSecondary = Color(0xFF0B9FD9);
   static const Color greenPrimary = Color(0xFF8DD44F);
   static const Color purpleAccent = Color(0xFFBF8FFD);
   static const Color pinkAccent = Color(0xFFFF8BD2);
@@ -54,7 +56,9 @@ class AppColors {
 
   // Couleurs pour le DynamicSelectionWidget
   static const Color lightPink = Color(0xFFFFC0CB);
-  static const Color pinkPrimary = Color(0xFFFF6B8B);
+  static const Color pinkPrimary = Color.fromRGBO(222, 83, 168, 1);
+  static const Color pinkSecondary = Color(0xFFFFB2C1);
+  static const Color pinkLight = Color.fromRGBO(255, 139, 210, 1);
   static const Color pinkMedium = Color(0xFFB55A7E);
   static const Color pinkDark = Color(0xFF9A2551);
 }
