@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart'; 
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
@@ -81,10 +82,10 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.77, // Adjust multiplier as needed
-                            child: _buildMapButton('Dictée magique',
-                              SvgAssets.headset,
-                              AppColors.bluePrimary,
-                              AppColors.blueSecondary,
+                            child: MapButton( title: 'Dictée magique',
+                             iconPath:  SvgAssets.headset,
+                             color:  AppColors.bluePrimary,
+                             shadowColor:  AppColors.blueSecondary,
                             ),
                           ),
 
@@ -92,10 +93,11 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                           Positioned(
                             right: svgWidth * 0.0,
                             top: svgHeight * 0.46, // Adjust multiplier as needed
-                            child: _buildMapButton('Construction de phrases',
-                              SvgAssets.chat,
-                              AppColors.pinkLight,
-                              AppColors.pinkPrimary,
+                            child: MapButton(
+                              title:  'Construction de phrases',
+                             iconPath:  SvgAssets.chat,
+                             color:  AppColors.pinkLight,
+                             shadowColor:  AppColors.pinkPrimary,
                             ),
                           ),
 
@@ -103,10 +105,11 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2, // Adjust multiplier as needed
-                            child: _buildMapButton("Trouver l'erreur",
-                              SvgAssets.explore,
-                              AppColors.purple,
-                              AppColors.purpleSecondary,
+                            child: MapButton(
+                              title: "Trouver l'erreur",
+                             iconPath:  SvgAssets.explore,
+                             color:  AppColors.purple,
+                             shadowColor:  AppColors.purpleSecondary,
                             ),
                           ), 
                         ],
@@ -126,38 +129,7 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
       ),
     );
   }
-
-  Widget _buildMapButton(String title,String iconPath, Color color, Color shadowColor,) {
-    return Column(spacing: 5,
-      children: [
-        Container(
-          width: 70.w,
-          height: 70.h,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: shadowColor,
-                spreadRadius: 2,
-                blurRadius: 0,
-                offset: const Offset(5, 5),
-              ),
-            ],
-          ),
-          child: Center(
-            child: SvgPicture.asset(
-              iconPath,
-              height: 40.h,
-              width: 40.w,
-            ),
-          ),
-        ),
-      Text(title, style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold, fontSize: 14) ),
-      ],
-    );
-  }
-
+ 
    
 
    

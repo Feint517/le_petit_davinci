@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import '../../../core/constants/assets_manager.dart';
@@ -38,7 +39,10 @@ class SubjectSelection extends StatelessWidget {
         label: 'Mathématiques',
         imageAssetPath: SvgAssets.mathCard,
         cardColor: AppColors.orangeAccent,
-        onTap: () => print('Mathématiques selected'),
+        onTap: () => Get.to( () => const MathematicMapScreen(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        ),
       ),
       SubjectData(
         label: 'Vie quotidienne',

@@ -24,7 +24,7 @@ class TopNavigation extends StatelessWidget {
               color: AppColors.borderSecondary,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.2),
                   spreadRadius: 2,
                   blurRadius: 10,
                 ),
@@ -34,7 +34,7 @@ class TopNavigation extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
               label: const Text('Home', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             ),
           ),

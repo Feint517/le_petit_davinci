@@ -11,14 +11,14 @@ import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/profile_header.dart';
 
-class FrenchMapScreen extends StatefulWidget {
-  const FrenchMapScreen({super.key});
+class MathematicMapScreen extends StatefulWidget {
+  const MathematicMapScreen({super.key});
 
   @override
-  State<FrenchMapScreen> createState() => _FrenchMapScreenState();
+  State<MathematicMapScreen> createState() => _MathematicMapScreenState();
 }
 
-class _FrenchMapScreenState extends State<FrenchMapScreen> {
+class _MathematicMapScreenState extends State<MathematicMapScreen> {
   // Inject the controller
   // Get.put() initializes the controller if it hasn't been already.
   // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX binding).
@@ -45,12 +45,12 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            TopNavigation(text: 'French', buttonColor: AppColors.bluePrimary),
+            TopNavigation(text: 'Mathematiques', buttonColor: AppColors.secondary),
             Gap(10.h),
             SubHeader(
-              paragraph: "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
-              label: 'Decouvert de nouveaux mots',
-             color:  AppColors.bluePrimary, 
+              paragraph: "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
+              label: 'Génie du calcul',
+             color:  AppColors.secondary, 
              currentLevel:  1, // Current level
               maxLevel: 3, // Max level
             ),
@@ -82,8 +82,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.77, // Adjust multiplier as needed
-                            child:  MapButton(
-                              title: 'Magic Dictation',
+                            child: MapButton( title: 'Dictée magique',
                              iconPath:  SvgAssets.headset,
                              color:  AppColors.bluePrimary,
                              shadowColor:  AppColors.blueSecondary,
@@ -94,8 +93,8 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             right: svgWidth * 0.0,
                             top: svgHeight * 0.46, // Adjust multiplier as needed
-                            child:  MapButton(
-                              title: 'Sentence Construction',
+                            child: MapButton(
+                              title:  'resoudre des énigmes',
                              iconPath:  SvgAssets.chat,
                              color:  AppColors.pinkLight,
                              shadowColor:  AppColors.pinkPrimary,
@@ -106,8 +105,8 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2, // Adjust multiplier as needed
-                            child:  MapButton(
-                              title: 'Find errors',
+                            child: MapButton(
+                              title: "Trouver l'erreur",
                              iconPath:  SvgAssets.explore,
                              color:  AppColors.purple,
                              shadowColor:  AppColors.purpleSecondary,
@@ -131,4 +130,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
     );
   }
  
+   
+
+   
 }
