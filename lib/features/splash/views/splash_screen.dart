@@ -35,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (widget.onReady != null) {
       widget.onReady!();
     } else {
-      // Navigate to welcome screen by default if no custom onReady callback is provided
-      Get.offAndToNamed(AppRoutes.welcome);
+      // Navigate to user selection screen to start the proper flow
+      Get.offAndToNamed(AppRoutes.userSelection);
     }
   }
 

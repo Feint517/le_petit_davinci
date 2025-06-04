@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class WelcomeScreen extends StatefulWidget {
   final VoidCallback? onContinue;
@@ -49,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             iconPosition: IconPosition.right,
                             size: ButtonSize.lg,
                             width: double.infinity,
-                            onPressed: widget.onContinue,
+                            onPressed: widget.onContinue ?? () => Get.offAndToNamed(AppRoutes.home),
                           )
                           .animate()
                           .fadeIn(
