@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart'; // For RenderBox
-import 'package:get/get.dart'; // Import GetX
+import 'package:get/get.dart';
 
 class FrenchMapController extends GetxController {
   // GlobalKey must be initialized before use.

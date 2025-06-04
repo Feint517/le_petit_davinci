@@ -54,12 +54,12 @@ class AppColors {
   static const Color orangeAccentDark = Color.fromRGBO(219, 149, 15, 1);
   static const Color skyBlue = Color(0xFFF0FBFF);
 
-  // Additional colors for user selection screen
+  //* Additional colors for user selection screen
   static const Color backgroundLight = Color(
     0xFFF0FBFF,
   ); // Light blue background
-  static const Color primaryBlue = bluePrimary; // Alias for consistency
-  static const Color primaryOrange = orangeAccent; // Alias for consistency
+  static const Color primaryBlue = bluePrimary;
+  static const Color primaryOrange = orangeAccent;
 
   // Couleurs pour le DynamicSelectionWidget
   static const Color lightPink = Color(0xFFFFC0CB);

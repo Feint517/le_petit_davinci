@@ -82,13 +82,16 @@ class CustomButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: (disabled || isLoading) ? null : () {
-            print('CustomButton InkWell onTap triggered');
-            onPressed?.call();
-          },
+          onTap:
+              (disabled || isLoading)
+                  ? null
+                  : () {
+                    print('CustomButton InkWell onTap triggered');
+                    onPressed?.call();
+                  },
           borderRadius: BorderRadius.circular(12),
-          splashColor: Colors.blue.withOpacity(0.3),
-          highlightColor: Colors.blue.withOpacity(0.1),
+          splashColor: Colors.blue.withValues(alpha: 0.3),
+          highlightColor: Colors.blue.withValues(alpha: 0.1),
           child: Ink(
             decoration: BoxDecoration(
               color: gradient == null ? backgroundColor : null,

@@ -8,8 +8,8 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/mascot_widget.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
+import 'package:le_petit_davinci/features/authentication/views/questions_intro.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class UserSelectionPage extends GetView<UserSelectionController> {
@@ -17,118 +17,13 @@ class UserSelectionPage extends GetView<UserSelectionController> {
 
   @override
   Widget build(BuildContext context) {
-    // Récupérer les arguments pour vérifier si nous devons afficher l'intro
-    final args = Get.arguments as Map<String, dynamic>?;
-    final showQuestionsIntro = args != null && args['showQuestionsIntro'] == true;
-    final introMessage = args != null ? args['introMessage'] as String? : null;
-    
-    // Si nous devons afficher l'intro, montrer l'écran d'intro
-    if (showQuestionsIntro && introMessage != null) {
-      return _buildQuestionsIntroScreen(context, introMessage);
+    //? Si nous devons afficher l'intro, montrer l'écran d'intro
+    if (controller.showQuestionsIntro && controller.introMessage != null) {
+      // return _buildQuestionsIntroScreen(context, controller.introMessage!);
+      return QuestionsIntroScreen(message: "i'm just testing");
     }
-    
-    // Sinon, afficher l'écran de sélection utilisateur normal
-    return _buildUserSelectionScreen(context);
-  }
-  
-  // Écran d'introduction aux questions
-  Widget _buildQuestionsIntroScreen(BuildContext context, String message) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Arrière-plan
-            Positioned.fill(
-              child: Image.asset(
-                ImageAssets.masscotbg,
-                fit: BoxFit.cover,
-              ),
-            ),
-            
-            // Contenu principal
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Message bulle en haut (à l'extérieur de la carte blanche)
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24.w, 
-                      vertical: 16.h,
-                    ),
-                    margin: EdgeInsets.symmetric(horizontal: 24.w),
-                    decoration: BoxDecoration(
-                      color: AppColors.bluePrimary,
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Text(
-                      message,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                        height: 1.3,
-                      ),
-                    ),
-                  ),
-                  
-                  Gap(20.h),
-                  
-                  // Carte blanche contenant la mascotte et le bouton
-                  Container(
-                    width: 350.w,
-                    padding: EdgeInsets.all(24.w),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.r),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(0, 6),
-                          blurRadius: 10,
-                          color: Colors.black.withAlpha(20),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Mascotte seule (sans bulle)
-                        SvgPicture.asset(
-                          SvgAssets.bearMasscot,
-                          height: 180.h,
-                        ),
-                        
-                        Gap(24.h),
-                        
-                        // Bouton "Je suis prêt!"
-                        PillButton(
-                          label: 'Je suis prêt !',
-                          icon: const Icon(Icons.arrow_forward, color: Colors.white),
-                          iconPosition: IconPosition.right,
-                          variant: ButtonVariant.secondary,
-                          size: ButtonSize.lg,
-                          width: double.infinity,
-                          onPressed: () {
-                            Get.offAndToNamed(AppRoutes.userSelection);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-  
-  // Écran de sélection utilisateur original
-  Widget _buildUserSelectionScreen(BuildContext context) {
+
+    //? Sinon, afficher l'écran de sélection utilisateur normal
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
@@ -154,7 +49,6 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                           curve: Curves.easeInOut,
                         ),
                     Gap(40.h),
-                    // Question text
                     Text(
                       StringsManager.whoUsesApp,
                       style: TextStyle(
@@ -168,12 +62,14 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   ],
                 ),
               ),
-              // Buttons at the bottom
+              //* Buttons for user selection
               Column(
                 children: [
                   CustomButton(
                     label: StringsManager.iAmParent,
-                    onPressed: controller.onParentSelected,
+                    onPressed: () {
+                      Get.toNamed(Routes.PIN);
+                    },
                     variant: ButtonVariant.primary,
                     size: ButtonSize.lg,
                     width: double.infinity,
@@ -181,7 +77,9 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   Gap(16.h),
                   CustomButton(
                     label: StringsManager.itsMyChild,
-                    onPressed: controller.onChildSelected,
+                    onPressed: () {
+                      Get.toNamed(Routes.INTRO);
+                    },
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,
                     width: double.infinity,

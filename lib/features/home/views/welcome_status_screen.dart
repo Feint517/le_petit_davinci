@@ -31,20 +31,20 @@ class WelcomeStatusScreen extends GetView<WelcomeStatusController> {
               child: Column(
                 children: [
                   Gap(30.h),
-                  
+
                   // Header message box with mascot
                   _buildHeaderMessageBox(),
-                  
+
                   Gap(40.h),
-                  
+
                   // Informational text section
                   _buildInformationalTextSection(),
-                  
+
                   Gap(60.h),
-                  
+
                   // Action button
                   _buildActionButton(),
-                  
+
                   const Spacer(),
                 ],
               ),
@@ -68,51 +68,50 @@ class WelcomeStatusScreen extends GetView<WelcomeStatusController> {
           // Text content
           Padding(
             padding: EdgeInsets.only(right: 80.w),
-            child: Obx(() => RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 18.sp,
-                  fontFamily: 'DynaPuff',
+            child: Obx(
+              () => RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 18.sp,
+                    fontFamily: 'DynaPuff',
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Bravo ',
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    TextSpan(
+                      text: controller.childName.value,
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' ! ',
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: 'Merci d\'avoir répondu à mes questions. 🎉',
+                    ),
+                  ],
                 ),
-                children: [
-                  TextSpan(
-                    text: 'Bravo ',
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  TextSpan(
-                    text: controller.childName.value,
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: ' ! ',
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const TextSpan(
-                    text: 'Merci d\'avoir répondu à mes questions. 🎉',
-                  ),
-                ],
               ),
-            )),
+            ),
           ),
-          
+
           // Mascot on the right - using bear mascot as placeholder
           Positioned(
             right: -30.w,
             top: -20.h,
-            child: SvgPicture.asset(
-              SvgAssets.bearMasscot,
-              height: 100.h,
-            ),
+            child: SvgPicture.asset(SvgAssets.bearMasscot, height: 100.h),
           ),
         ],
       ),
@@ -167,7 +166,7 @@ class WelcomeStatusScreen extends GetView<WelcomeStatusController> {
       icon: Container(
         padding: EdgeInsets.all(4.w),
         decoration: BoxDecoration(
-          color: AppColors.white.withOpacity(0.3),
+          color: AppColors.white.withValues(alpha: 0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(

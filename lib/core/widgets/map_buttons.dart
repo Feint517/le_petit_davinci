@@ -9,12 +9,12 @@ class MapButton extends StatelessWidget {
   final Color shadowColor;
 
   const MapButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.iconPath,
     required this.color,
     required this.shadowColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

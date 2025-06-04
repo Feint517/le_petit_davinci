@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
@@ -11,10 +10,10 @@ import 'package:le_petit_davinci/routes/app_routes.dart';
 class MainPanelWidget extends StatelessWidget {
   /// Message à afficher dans la bulle de la mascotte
   final String speechText;
-  
+
   /// Texte du bouton d'action
   final String buttonText;
-  
+
   /// Callback optionnel pour le bouton (si null, navigue vers userSelection)
   final VoidCallback? onButtonPressed;
 
@@ -31,12 +30,18 @@ class MainPanelWidget extends StatelessWidget {
     final double mascotSize = 200.h;
     final double speechBubbleHeight = 80.h; // Estimated speech bubble height
     final double totalMascotHeight = mascotSize + speechBubbleHeight;
-    final double containerTopPosition = totalMascotHeight * 0.6; // Container starts at 60% of mascot height
-    final double mascotOverlapIntoContainer = totalMascotHeight - containerTopPosition;
+    final double containerTopPosition =
+        totalMascotHeight * 0.6; // Container starts at 60% of mascot height
+    final double mascotOverlapIntoContainer =
+        totalMascotHeight - containerTopPosition;
     final double paddingBetweenMascotAndButton = 100.h; // Consistent gap
-    final double containerTopPadding = mascotOverlapIntoContainer + paddingBetweenMascotAndButton;
-    final double totalHeight = containerTopPosition + containerTopPadding + 100.h; // 80h for button + bottom padding
-    
+    final double containerTopPadding =
+        mascotOverlapIntoContainer + paddingBetweenMascotAndButton;
+    final double totalHeight =
+        containerTopPosition +
+        containerTopPadding +
+        100.h; // 80h for button + bottom padding
+
     return SizedBox(
       width: double.infinity,
       height: totalHeight,
@@ -64,7 +69,7 @@ class MainPanelWidget extends StatelessWidget {
                   BoxShadow(
                     offset: const Offset(0, 8),
                     blurRadius: 24,
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                   ),
                 ],
               ),
@@ -74,10 +79,7 @@ class MainPanelWidget extends StatelessWidget {
                   // Button at the bottom of white container
                   CustomButton(
                     label: buttonText,
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
+                    icon: Icon(Icons.arrow_forward, color: Colors.white),
                     iconPosition: IconPosition.right,
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,
@@ -88,7 +90,7 @@ class MainPanelWidget extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // Mascot with speech bubble positioned at the top, outside white box
           Positioned(
             top: 0,

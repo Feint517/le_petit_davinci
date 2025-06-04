@@ -45,7 +45,7 @@ class SubjectCard extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                 ),
               ),
-              
+
               // Content area
               Padding(
                 padding: EdgeInsets.all(16.w),
@@ -57,7 +57,7 @@ class SubjectCard extends StatelessWidget {
                       width: 32.w,
                       height: 32.w,
                       decoration: BoxDecoration(
-                        color: AppColors.white.withOpacity(0.9),
+                        color: AppColors.white.withValues(alpha: 0.9),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -66,9 +66,9 @@ class SubjectCard extends StatelessWidget {
                         size: 18.sp,
                       ),
                     ),
-                    
+
                     Gap(12.h),
-                    
+
                     // Subject label
                     Text(
                       label,

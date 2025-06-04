@@ -26,7 +26,7 @@ class CTACard extends StatelessWidget {
         color: AppColors.backgroundLight,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
-          color: AppColors.bluePrimary.withOpacity(0.2),
+          color: AppColors.bluePrimary.withValues(alpha: 0.2),
           width: 1,
         ),
       ),
@@ -45,14 +45,11 @@ class CTACard extends StatelessWidget {
               ),
             ),
           ),
-          
+
           Gap(16.w),
-          
+
           // Continue button
-          Expanded(
-            flex: 2,
-            child: _buildContinueButton(),
-          ),
+          Expanded(flex: 2, child: _buildContinueButton()),
         ],
       ),
     );
@@ -73,14 +70,10 @@ class CTACard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Book icon
-            SvgPicture.asset(
-              SvgAssets.book,
-              height: 16.h,
-              width: 16.w,
-            ),
-            
+            SvgPicture.asset(SvgAssets.book, height: 16.h, width: 16.w),
+
             Gap(6.w),
-            
+
             // Button text
             Flexible(
               child: Text(

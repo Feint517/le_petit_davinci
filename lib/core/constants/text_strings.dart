@@ -11,4 +11,8 @@ class StringsManager {
       "Rebonjour Alex ! C'est l'heure de notre prochaine aventure !";
   static const String createChildProfile = "Créer un profil enfant";
   static const String back = "Retour";
+  static const String continueText = "Continuer";
+  static const String newHere = "Nouveau ici?";
+  static const String createParentAccount = "Créer un compte parent";
+  static const String connect = "Se connecter";
 }

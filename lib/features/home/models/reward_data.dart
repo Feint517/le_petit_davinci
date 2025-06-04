@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class BadgeData {
   final String assetPath;
   final String name;

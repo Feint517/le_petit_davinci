@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 
 /// Un widget qui affiche une liste d'options sélectionnables.
-/// 
+///
 /// Chaque option peut contenir une icône, un texte principal, un texte secondaire
 /// et un indicateur de sélection. Le widget supporte à la fois la sélection simple
 /// et la sélection multiple.
 class DynamicSelectionWidget extends StatelessWidget {
   /// Liste des options disponibles pour la sélection
   final List<SelectionOption> options;
-  
+
   /// Valeur(s) actuellement sélectionnée(s)
   /// Pour la sélection simple, c'est une valeur unique
   /// Pour la sélection multiple, c'est une liste de valeurs
   final dynamic selectedValues;
-  
+
   /// Permet la sélection de plusieurs options (false par défaut)
   final bool allowMultiSelect;
-  
+
   /// Callback appelé lorsque la sélection change
   final Function(dynamic) onSelectionChange;
-  
+
   /// Styles personnalisés pour les options (optionnel)
   final SelectionOptionStyle? optionStyleOverrides;
 
@@ -44,7 +42,7 @@ class DynamicSelectionWidget extends StatelessWidget {
         // Création de la liste d'options
         ...options.map((option) {
           final bool isSelected = _isOptionSelected(option.value);
-          
+
           return Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: _SelectionOptionItem(
@@ -58,7 +56,7 @@ class DynamicSelectionWidget extends StatelessWidget {
       ],
     );
   }
-  
+
   /// Vérifie si une option est actuellement sélectionnée
   bool _isOptionSelected(dynamic value) {
     if (allowMultiSelect) {
@@ -72,13 +70,15 @@ class DynamicSelectionWidget extends StatelessWidget {
       return selectedValues == value;
     }
   }
-  
+
   /// Gère la sélection/désélection d'une option
   void _handleOptionTap(dynamic value) {
     if (allowMultiSelect) {
       // Mode sélection multiple
-      final List newSelectedValues = List.from(selectedValues is List ? selectedValues : []);
-      
+      final List newSelectedValues = List.from(
+        selectedValues is List ? selectedValues : [],
+      );
+
       if (newSelectedValues.contains(value)) {
         // Désélectionner l'option
         newSelectedValues.remove(value);
@@ -86,7 +86,7 @@ class DynamicSelectionWidget extends StatelessWidget {
         // Sélectionner l'option
         newSelectedValues.add(value);
       }
-      
+
       onSelectionChange(newSelectedValues);
     } else {
       // Mode sélection simple
@@ -119,9 +119,11 @@ class _SelectionOptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // Appliquer les styles par défaut ou personnalisés
     final backgroundColor = style?.backgroundColor ?? AppColors.lightPink;
-    final selectedIndicatorColor = style?.selectedIndicatorColor ?? AppColors.pinkPrimary;
+    final selectedIndicatorColor =
+        style?.selectedIndicatorColor ?? AppColors.pinkPrimary;
     final textColor = style?.textColor ?? AppColors.pinkDark;
-    final secondaryTextColor = style?.secondaryTextColor ?? AppColors.pinkMedium;
+    final secondaryTextColor =
+        style?.secondaryTextColor ?? AppColors.pinkMedium;
 
     return GestureDetector(
       onTap: onTap,
@@ -135,7 +137,7 @@ class _SelectionOptionItem extends StatelessWidget {
             BoxShadow(
               offset: const Offset(0, 2),
               blurRadius: 4,
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
             ),
           ],
         ),
@@ -150,7 +152,7 @@ class _SelectionOptionItem extends StatelessWidget {
                   color: Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     width: 2,
                   ),
                 ),
@@ -164,7 +166,7 @@ class _SelectionOptionItem extends StatelessWidget {
               ),
               SizedBox(width: 12.w),
             ],
-            
+
             // Contenu texte
             Expanded(
               child: Column(
@@ -180,7 +182,7 @@ class _SelectionOptionItem extends StatelessWidget {
                       fontFamily: 'DynaPuff_SemiCondensed',
                     ),
                   ),
-                  
+
                   // Texte secondaire (si présent)
                   if (option.secondaryText != null) ...[
                     SizedBox(height: 2.h),
@@ -197,7 +199,7 @@ class _SelectionOptionItem extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // Indicateur de sélection
             Container(
               width: 24.w,
@@ -210,13 +212,10 @@ class _SelectionOptionItem extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              child: isSelected
-                  ? Icon(
-                      Icons.check,
-                      size: 16.sp,
-                      color: Colors.white,
-                    )
-                  : null,
+              child:
+                  isSelected
+                      ? Icon(Icons.check, size: 16.sp, color: Colors.white)
+                      : null,
             ),
           ],
         ),
@@ -229,16 +228,16 @@ class _SelectionOptionItem extends StatelessWidget {
 class SelectionOption {
   /// Identifiant unique de l'option
   final String id;
-  
+
   /// Texte principal de l'option
   final String primaryText;
-  
+
   /// Texte secondaire optionnel
   final String? secondaryText;
-  
+
   /// Identifiant de l'icône dans assetManager (optionnel)
   final String? iconAssetId;
-  
+
   /// Valeur associée à cette option
   final dynamic value;
 
@@ -255,20 +254,26 @@ class SelectionOption {
 class SelectionOptionStyle {
   /// Couleur de fond de l'option
   final Color backgroundColor;
-  
+
   /// Couleur de l'indicateur de sélection
   final Color selectedIndicatorColor;
-  
+
   /// Couleur du texte principal
   final Color textColor;
-  
+
   /// Couleur du texte secondaire
   final Color secondaryTextColor;
 
   const SelectionOptionStyle({
     this.backgroundColor = const Color(0xFFFFC0CB), // Rose clair par défaut
-    this.selectedIndicatorColor = const Color(0xFFFF6B8B), // Rose plus foncé par défaut
-    this.textColor = const Color(0xFF9A2551), // Rose foncé par défaut pour le texte principal
-    this.secondaryTextColor = const Color(0xFFB55A7E), // Rose moyen par défaut pour le texte secondaire
+    this.selectedIndicatorColor = const Color(
+      0xFFFF6B8B,
+    ), // Rose plus foncé par défaut
+    this.textColor = const Color(
+      0xFF9A2551,
+    ), // Rose foncé par défaut pour le texte principal
+    this.secondaryTextColor = const Color(
+      0xFFB55A7E,
+    ), // Rose moyen par défaut pour le texte secondaire
   });
 }

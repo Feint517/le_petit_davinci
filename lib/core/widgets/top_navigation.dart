@@ -5,10 +5,7 @@ class TopNavigation extends StatelessWidget {
   final String text;
   final Color buttonColor;
 
-  const TopNavigation({
-    Key? key,
-    required this.text, required this.buttonColor,
-  }) : super(key: key);
+  const TopNavigation({super.key, required this.text, required this.buttonColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,7 @@ class TopNavigation extends StatelessWidget {
               color: AppColors.borderSecondary,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   spreadRadius: 2,
                   blurRadius: 10,
                 ),
@@ -35,7 +32,13 @@ class TopNavigation extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-              label: const Text('Home', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              label: const Text(
+                'Home',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           Container(
@@ -44,9 +47,16 @@ class TopNavigation extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: buttonColor,
-              
             ),
-            child: Center(child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+            child: Center(
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

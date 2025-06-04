@@ -37,7 +37,7 @@ class StarsCard extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          
+
           // Content area
           Padding(
             padding: EdgeInsets.all(20.w),
@@ -54,9 +54,9 @@ class StarsCard extends StatelessWidget {
                     fontFamily: 'DynaPuff_SemiCondensed',
                   ),
                 ),
-                
+
                 Gap(16.h),
-                
+
                 // Star stats row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +67,7 @@ class StarsCard extends StatelessWidget {
                       value: totalStars.toString(),
                       label: 'Total des étoiles',
                     ),
-                    
+
                     // Stars this week
                     _buildStatColumn(
                       icon: Icons.star,
@@ -76,7 +76,7 @@ class StarsCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 Gap(8.h),
               ],
             ),
@@ -98,11 +98,7 @@ class StarsCard extends StatelessWidget {
           // Icon and value row
           Row(
             children: [
-              Icon(
-                icon,
-                color: AppColors.white,
-                size: 16.sp,
-              ),
+              Icon(icon, color: AppColors.white, size: 16.sp),
               Gap(4.w),
               Text(
                 value,
@@ -115,14 +111,14 @@ class StarsCard extends StatelessWidget {
               ),
             ],
           ),
-          
+
           Gap(4.h),
-          
+
           // Label
           Text(
             label,
             style: TextStyle(
-              color: AppColors.white.withOpacity(0.9),
+              color: AppColors.white.withValues(alpha: 0.9),
               fontSize: 12.sp,
               fontWeight: FontWeight.w500,
               fontFamily: 'DynaPuff_SemiCondensed',

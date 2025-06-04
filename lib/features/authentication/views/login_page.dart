@@ -10,8 +10,6 @@ import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/views/kids_selection.dart';
-import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -59,7 +57,7 @@ class LoginPage extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Nouveau ici?',
+                            StringsManager.newHere,
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
@@ -69,7 +67,7 @@ class LoginPage extends StatelessWidget {
                           TextButton(
                             onPressed: () {},
                             child: Text(
-                              'Créer un compte parent',
+                              StringsManager.createParentAccount,
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: AppColors.accent,
@@ -84,16 +82,13 @@ class LoginPage extends StatelessWidget {
                       Gap(24.h),
 
                       CustomTextField(
-                        hintText: 'Email',
+                        type: TextFieldType.email,
                         controller: TextEditingController(),
-                        icon: SvgPicture.asset(IconAssets.email),
                       ),
                       Gap(24.h),
                       CustomTextField(
-                        suffixIcon: SvgPicture.asset(IconAssets.eye),
-                        hintText: 'Mot de passe',
+                        type: TextFieldType.password,
                         controller: TextEditingController(),
-                        icon: SvgPicture.asset(IconAssets.password),
                       ),
                       Gap(24.h),
 
@@ -106,7 +101,7 @@ class LoginPage extends StatelessWidget {
                             duration: const Duration(milliseconds: 500),
                           );
                         },
-                        label: 'Se connecter',
+                        label: StringsManager.connect,
                       ),
                     ],
                   ),

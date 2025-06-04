@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
-import '../../../core/constants/sizes.dart';
 import '../../../core/widgets/buttons.dart';
 
 class MissionCard extends StatelessWidget {
@@ -42,13 +41,15 @@ class MissionCard extends StatelessWidget {
               alignment: Alignment.bottomRight,
             ),
           ),
-          
+
           // Content section with its own padding
           Positioned.fill(
             child: Padding(
               padding: EdgeInsets.all(16.w), // Apply padding only to content
               child: Padding(
-                padding: EdgeInsets.only(right: 64.w), // Additional space for decorative image
+                padding: EdgeInsets.only(
+                  right: 64.w,
+                ), // Additional space for decorative image
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,15 +61,15 @@ class MissionCard extends StatelessWidget {
                         Text(
                           'Mission du jour',
                           style: TextStyle(
-                            color: AppColors.white.withOpacity(0.8),
+                            color: AppColors.white.withValues(alpha: 0.8),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'DynaPuff_SemiCondensed',
                           ),
                         ),
-                        
+
                         Gap(4.h),
-                        
+
                         // Main mission text
                         Text(
                           missionDescription,
@@ -81,7 +82,7 @@ class MissionCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
+
                     // Action button - smaller and left-aligned
                     SizedBox(
                       width: 160.w, // Limit button width to about half the card

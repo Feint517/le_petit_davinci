@@ -6,19 +6,19 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 class SquareSelectionWidget extends StatelessWidget {
   /// Titre de l'option
   final String title;
-  
+
   /// Icône à afficher
   final IconData icon;
-  
+
   /// Couleur de l'icône
   final Color iconColor;
-  
+
   /// État de sélection
   final bool isSelected;
-  
+
   /// Callback quand l'utilisateur tape
   final VoidCallback onTap;
-  
+
   /// Couleur de fond quand sélectionné
   final Color selectedColor;
 
@@ -49,7 +49,7 @@ class SquareSelectionWidget extends StatelessWidget {
             BoxShadow(
               offset: const Offset(0, 2),
               blurRadius: 4,
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
             ),
           ],
         ),
@@ -60,11 +60,11 @@ class SquareSelectionWidget extends StatelessWidget {
             Icon(
               icon,
               size: 36.sp,
-              color: isSelected ? iconColor : iconColor.withOpacity(0.7),
+              color: isSelected ? iconColor : iconColor.withValues(alpha: 0.7),
             ),
-            
+
             SizedBox(height: 8.h),
-            
+
             // Titre
             Text(
               title,
@@ -89,16 +89,16 @@ class SquareSelectionWidget extends StatelessWidget {
 class SquareSelectionGrid extends StatefulWidget {
   /// Liste des options
   final List<SquareSelectionOption> options;
-  
+
   /// Callback quand la sélection change
   final Function(List<String>) onSelectionChanged;
-  
+
   /// Permet la sélection multiple
   final bool multipleSelection;
-  
+
   /// Nombre de colonnes
   final int crossAxisCount;
-  
+
   /// Valeurs présélectionnées
   final List<String>? initialSelection;
 
@@ -135,7 +135,7 @@ class _SquareSelectionGridState extends State<SquareSelectionGrid> {
         selectedValues.add(value);
       }
     });
-    
+
     widget.onSelectionChanged(selectedValues);
   }
 
@@ -159,7 +159,9 @@ class _SquareSelectionGridState extends State<SquareSelectionGrid> {
           iconColor: option.iconColor,
           isSelected: selectedValues.contains(option.value),
           onTap: () => _onOptionTap(option.value),
-          selectedColor: option.selectedColor ?? AppColors.lightPink.withOpacity(0.3),
+          selectedColor:
+              option.selectedColor ??
+              AppColors.lightPink.withValues(alpha: 0.3),
         );
       },
     );

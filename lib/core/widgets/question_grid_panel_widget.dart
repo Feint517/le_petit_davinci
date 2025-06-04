@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/question_widget.dart';
 import 'package:le_petit_davinci/core/widgets/square_selection_widget.dart';
@@ -14,19 +13,19 @@ import 'package:le_petit_davinci/routes/app_routes.dart';
 class QuestionGridPanelWidget extends StatefulWidget {
   /// Question à afficher
   final String questionText;
-  
+
   /// Numéro de la question
   final int questionNumber;
-  
+
   /// Liste des options en grille
   final List<SquareSelectionOption> gridOptions;
-  
+
   /// Texte du bouton de continuer
   final String buttonText;
-  
+
   /// Callback optionnel pour le bouton
   final VoidCallback? onButtonPressed;
-  
+
   /// Permet la sélection multiple
   final bool multipleSelection;
 
@@ -41,7 +40,8 @@ class QuestionGridPanelWidget extends StatefulWidget {
   });
 
   @override
-  State<QuestionGridPanelWidget> createState() => _QuestionGridPanelWidgetState();
+  State<QuestionGridPanelWidget> createState() =>
+      _QuestionGridPanelWidgetState();
 }
 
 class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
@@ -52,11 +52,13 @@ class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
     // Calculate spacing
     final double questionWidgetHeight = 80.h;
     final double containerTopPosition = questionWidgetHeight * 0.5;
-    final double questionOverlapIntoContainer = questionWidgetHeight - containerTopPosition;
+    final double questionOverlapIntoContainer =
+        questionWidgetHeight - containerTopPosition;
     final double paddingBetweenQuestionAndContent = 40.h;
-    final double containerTopPadding = questionOverlapIntoContainer + paddingBetweenQuestionAndContent;
+    final double containerTopPadding =
+        questionOverlapIntoContainer + paddingBetweenQuestionAndContent;
     final double totalHeight = 550.h; // Slightly less height for grid layout
-    
+
     return SizedBox(
       width: double.infinity,
       height: totalHeight,
@@ -85,7 +87,7 @@ class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
                   BoxShadow(
                     offset: const Offset(0, 8),
                     blurRadius: 24,
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                   ),
                 ],
               ),
@@ -104,9 +106,9 @@ class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
                       crossAxisCount: 2,
                     ),
                   ),
-                  
+
                   Gap(20.h),
-                  
+
                   // Bottom section with button and mascot
                   Row(
                     children: [
@@ -115,22 +117,21 @@ class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
                         flex: 2,
                         child: CustomButton(
                           label: widget.buttonText,
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                          ),
+                          icon: Icon(Icons.arrow_forward, color: Colors.white),
                           iconPosition: IconPosition.right,
                           variant: ButtonVariant.secondary,
                           size: ButtonSize.lg,
                           disabled: selectedValues.isEmpty,
-                          onPressed: selectedValues.isNotEmpty 
-                              ? (widget.onButtonPressed ?? _defaultButtonAction)
-                              : null,
+                          onPressed:
+                              selectedValues.isNotEmpty
+                                  ? (widget.onButtonPressed ??
+                                      _defaultButtonAction)
+                                  : null,
                         ),
                       ),
-                      
+
                       Gap(16.w),
-                      
+
                       // Mascot on the right
                       Expanded(
                         flex: 1,
@@ -145,7 +146,7 @@ class _QuestionGridPanelWidgetState extends State<QuestionGridPanelWidget> {
               ),
             ),
           ),
-          
+
           // Question widget at the top
           Positioned(
             top: 0,

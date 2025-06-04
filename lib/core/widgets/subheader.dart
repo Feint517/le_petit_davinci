@@ -13,13 +13,13 @@ class SubHeader extends StatelessWidget {
   final int maxLevel;
 
   const SubHeader({
-    Key? key,
+    super.key,
     required this.paragraph,
     required this.label,
     required this.color,
     required this.currentLevel,
     required this.maxLevel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

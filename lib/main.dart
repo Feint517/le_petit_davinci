@@ -10,11 +10,12 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
-    runApp(
-      DevicePreview(
-        enabled: true, // Set to false in production
-        builder: (context) => const App(),
-      ),
-    );
+    // runApp(
+    //   DevicePreview(
+    //     enabled: true, // Set to false in production
+    //     builder: (context) => const App(),
+    //   ),
+    // );
+    runApp(const App());
   });
 }

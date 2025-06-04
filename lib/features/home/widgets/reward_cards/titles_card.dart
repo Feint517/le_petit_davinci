@@ -38,7 +38,7 @@ class TitlesCard extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          
+
           // Content area
           Padding(
             padding: EdgeInsets.all(20.w),
@@ -55,17 +55,17 @@ class TitlesCard extends StatelessWidget {
                     fontFamily: 'DynaPuff_SemiCondensed',
                   ),
                 ),
-                
+
                 Gap(16.h),
-                
+
                 // Progress bar
                 _buildProgressBar(),
-                
+
                 Gap(12.h),
-                
+
                 // Achieved titles
                 _buildTitlesWrap(),
-                
+
                 Gap(8.h),
               ],
             ),
@@ -82,19 +82,19 @@ class TitlesCard extends StatelessWidget {
         Text(
           'Progression générale',
           style: TextStyle(
-            color: AppColors.white.withOpacity(0.9),
+            color: AppColors.white.withValues(alpha: 0.9),
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             fontFamily: 'DynaPuff_SemiCondensed',
           ),
         ),
-        
+
         Gap(8.h),
-        
+
         Container(
           height: 8.h,
           decoration: BoxDecoration(
-            color: AppColors.white.withOpacity(0.3),
+            color: AppColors.white.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(4.r),
           ),
           child: FractionallySizedBox(
@@ -108,13 +108,13 @@ class TitlesCard extends StatelessWidget {
             ),
           ),
         ),
-        
+
         Gap(4.h),
-        
+
         Text(
           '${(progressValue * 100).toInt()}% complété',
           style: TextStyle(
-            color: AppColors.white.withOpacity(0.8),
+            color: AppColors.white.withValues(alpha: 0.8),
             fontSize: 10.sp,
             fontWeight: FontWeight.w400,
             fontFamily: 'DynaPuff_SemiCondensed',
@@ -125,24 +125,28 @@ class TitlesCard extends StatelessWidget {
   }
 
   Widget _buildTitlesWrap() {
-    final achievedTitles = subjectTitles.where((title) => title.isAchieved).toList();
-    
+    final achievedTitles =
+        subjectTitles.where((title) => title.isAchieved).toList();
+
     if (achievedTitles.isEmpty) {
       return Text(
         'Aucun titre obtenu pour le moment',
         style: TextStyle(
-          color: AppColors.white.withOpacity(0.8),
+          color: AppColors.white.withValues(alpha: 0.8),
           fontSize: 12.sp,
           fontStyle: FontStyle.italic,
           fontFamily: 'DynaPuff_SemiCondensed',
         ),
       );
     }
-    
+
     return Wrap(
       spacing: 6.w,
       runSpacing: 6.h,
-      children: achievedTitles.map((title) => _buildTitleChip(title.titleName)).toList(),
+      children:
+          achievedTitles
+              .map((title) => _buildTitleChip(title.titleName))
+              .toList(),
     );
   }
 
@@ -150,10 +154,10 @@ class TitlesCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.2),
+        color: AppColors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
-          color: AppColors.white.withOpacity(0.4),
+          color: AppColors.white.withValues(alpha: 0.4),
           width: 1,
         ),
       ),

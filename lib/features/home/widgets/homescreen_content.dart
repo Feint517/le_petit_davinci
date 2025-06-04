@@ -19,7 +19,7 @@ class HomescreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400.h, // Fixed height to prevent unbounded constraints
       child: Stack(
         alignment: Alignment.topCenter,

@@ -9,10 +9,7 @@ import '../../models/reward_data.dart';
 class BadgesCard extends StatelessWidget {
   final List<BadgeData> earnedBadges;
 
-  const BadgesCard({
-    super.key,
-    required this.earnedBadges,
-  });
+  const BadgesCard({super.key, required this.earnedBadges});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,7 @@ class BadgesCard extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          
+
           // Content area
           Padding(
             padding: EdgeInsets.all(20.w),
@@ -53,12 +50,12 @@ class BadgesCard extends StatelessWidget {
                     fontFamily: 'DynaPuff_SemiCondensed',
                   ),
                 ),
-                
+
                 Gap(16.h),
-                
+
                 // Badges grid
                 _buildBadgesGrid(),
-                
+
                 Gap(8.h),
               ],
             ),
@@ -71,14 +68,14 @@ class BadgesCard extends StatelessWidget {
   Widget _buildBadgesGrid() {
     // Create a fixed number of badge slots (6 total)
     const int totalSlots = 6;
-    
+
     return Wrap(
       spacing: 8.w,
       runSpacing: 8.h,
       children: List.generate(totalSlots, (index) {
         final hasEarnedBadge = index < earnedBadges.length;
         final badge = hasEarnedBadge ? earnedBadges[index] : null;
-        
+
         return _buildBadgeSlot(
           badge: badge,
           isLocked: !hasEarnedBadge || !(badge?.isEarned ?? false),
@@ -87,38 +84,35 @@ class BadgesCard extends StatelessWidget {
     );
   }
 
-  Widget _buildBadgeSlot({
-    BadgeData? badge,
-    required bool isLocked,
-  }) {
+  Widget _buildBadgeSlot({BadgeData? badge, required bool isLocked}) {
     return Container(
       width: 40.w,
       height: 40.w,
       decoration: BoxDecoration(
-        color: isLocked 
-            ? AppColors.white.withOpacity(0.3)
-            : AppColors.white.withOpacity(0.9),
+        color:
+            isLocked
+                ? AppColors.white.withValues(alpha: 0.3)
+                : AppColors.white.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          color: AppColors.white.withOpacity(0.5),
+          color: AppColors.white.withValues(alpha: 0.5),
           width: 1,
         ),
       ),
-      child: badge != null && badge.isEarned
-          ? Padding(
-              padding: EdgeInsets.all(6.w),
-              child: SvgPicture.asset(
-                badge.assetPath,
-                fit: BoxFit.contain,
+      child:
+          badge != null && badge.isEarned
+              ? Padding(
+                padding: EdgeInsets.all(6.w),
+                child: SvgPicture.asset(badge.assetPath, fit: BoxFit.contain),
+              )
+              : Icon(
+                isLocked ? Icons.lock : Icons.star_border,
+                color:
+                    isLocked
+                        ? AppColors.white.withValues(alpha: 0.6)
+                        : AppColors.purpleAccent,
+                size: 20.sp,
               ),
-            )
-          : Icon(
-              isLocked ? Icons.lock : Icons.star_border,
-              color: isLocked 
-                  ? AppColors.white.withOpacity(0.6)
-                  : AppColors.purpleAccent,
-              size: 20.sp,
-            ),
     );
   }
 }
