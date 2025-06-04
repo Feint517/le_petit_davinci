@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/features/authentication/views/pin_page.dart';
 import 'package:le_petit_davinci/features/authentication/views/welcome_screen.dart';
 import 'package:le_petit_davinci/features/home/home_feature.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
-import 'package:le_petit_davinci/features/authentication/views/user_selection_page.dart';
+import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 /// App pages configuration

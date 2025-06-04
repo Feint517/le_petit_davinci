@@ -65,9 +65,20 @@ class CustomButton extends StatelessWidget {
     // Create gradient based on variant
     final Gradient? gradient = _getGradient();
 
-    return SizedBox(
+    return Container(
       width: width,
       height: buttonHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.bluePrimaryDark,
+            spreadRadius: 2,
+            blurRadius: 0,
+            offset: const Offset(5, 5), // changes position of shadow
+          ),
+        ],
+      ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

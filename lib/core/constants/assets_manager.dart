@@ -10,7 +10,11 @@ class ImageAssets {}
 
 class LottieAssets {}
 
-class IconAssets {}
+class IconAssets {
+  static const String eye = '$ICONS_PATH/eye.svg';
+  static const String email = '$ICONS_PATH/email.svg';
+  static const String password = '$ICONS_PATH/password.svg';
+}
 
 class SvgAssets {
   static const String splashBackground = '$SVG_PATH/splash_background.svg';
@@ -24,6 +28,7 @@ class SvgAssets {
   static const String logoWhite = '$SVG_PATH/logo_white.svg';
   static const String pinBackground = '$SVG_PATH/pin_background.svg';
   static const String loginBackground = '$SVG_PATH/login_background.svg';
+  static const String backgroundA = '$SVG_PATH/background_A.svg';
   static const String goodmorningBackground = '$SVG_PATH/goodmorning_background.svg';
   static const String headerVectorBlue = '$SVG_PATH/header_vector_blue.svg';
   static const String headerVectorGreen = '$SVG_PATH/header_vector_green.svg';

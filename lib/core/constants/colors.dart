@@ -20,7 +20,9 @@ class AppColors {
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C757D);
   static const Color textWhite = Colors.white;
+  //* text field colors
 
+  static const Color textFieldSecondary = Color.fromRGBO(195, 195, 195, 1);
   //* background colors
   static const Color light = Color(0xFFF9ECFF);
   static const Color dark = Color(0xFF272727);
@@ -41,14 +43,19 @@ class AppColors {
 
   //* splash screen colors
   static const Color bluePrimary = Color(0xFF27C0FF);
+  static const Color bluePrimaryDark = Color.fromRGBO(11, 159, 217, 1);
   static const Color greenPrimary = Color(0xFF8DD44F);
   static const Color purpleAccent = Color(0xFFBF8FFD);
   static const Color pinkAccent = Color(0xFFFF8BD2);
+  static const Color pinkAccentDark = Color(0xFFDE53A8);
   static const Color orangeAccent = Color(0xFFFFB425);
+  static const Color orangeAccentDark = Color.fromRGBO(219, 149, 15, 1);
   static const Color skyBlue = Color(0xFFF0FBFF);
-  
+
   // Additional colors for user selection screen
-  static const Color backgroundLight = Color(0xFFF0FBFF); // Light blue background
+  static const Color backgroundLight = Color(
+    0xFFF0FBFF,
+  ); // Light blue background
   static const Color primaryBlue = bluePrimary; // Alias for consistency
   static const Color primaryOrange = orangeAccent; // Alias for consistency
 }
