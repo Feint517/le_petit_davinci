@@ -73,6 +73,8 @@ class SvgAssets {
   static const String tictactoe = '$SVG_PATH/tictactoe.svg';
   static const String chess = '$SVG_PATH/chess.svg';
   static const String biscuit = '$SVG_PATH/biscuit.svg';
+  static const String lamp = '$SVG_PATH/lamp.svg';
+  static const String beargames = '$SVG_PATH/beargames.svg';
 
 
 }

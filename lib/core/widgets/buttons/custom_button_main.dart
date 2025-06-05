@@ -1,6 +1,5 @@
  
-import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:flutter/material.dart'; 
 
 class CustomButtonNew extends StatelessWidget {
   final Color buttonColor;
@@ -9,8 +8,11 @@ class CustomButtonNew extends StatelessWidget {
   final Color labelColor;
   final VoidCallback? onPressed;
   final double? width;
+  final IconData? icon;
+  final Color? iconColor;
+  final MainAxisAlignment? mainAxisAlignment;
   const CustomButtonNew({
-    super.key, required this.buttonColor, required this.shadowColor, required this.label, required this.labelColor, this.onPressed, this.width,
+    super.key, required this.buttonColor, required this.shadowColor, required this.label, required this.labelColor, this.onPressed, this.width, this.icon, this.iconColor, this.mainAxisAlignment,
   });
 
   @override
@@ -29,11 +31,15 @@ class CustomButtonNew extends StatelessWidget {
            offset: const Offset(3, 3), // changes position of shadow
          )
        ],),
-      child: TextButton(onPressed: onPressed, child: 
-       Padding(
-         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5),
-         child: Text(label, style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-       )),
+      child: Row(
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+        children: [
+          TextButton(onPressed: onPressed, child: 
+           Text(label, style: TextStyle(color: labelColor, fontSize: 16, fontWeight: FontWeight.bold))),
+          if (icon != null && iconColor != null) 
+            Icon(icon, color: iconColor, size: 20),
+        ],
+      ),
     );
   }
 }

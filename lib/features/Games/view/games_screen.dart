@@ -84,7 +84,7 @@ class _GamesScreenState extends State<GamesScreen> {
                     ),
                     ),
                     SizedBox(
-                     
+                    width: MediaQuery.of(context).size.width  ,
                     child: GamesCards(
                       cardColor: AppColors.greenPrimary,
                       label: '0 Victoires',
