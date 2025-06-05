@@ -65,6 +65,7 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
                       fit: BoxFit.cover,
+                      width: context.width,
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
                   ),

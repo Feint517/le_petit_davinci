@@ -7,31 +7,32 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 
 class SubHeader extends StatelessWidget {
   final String paragraph;
-  final String label;
+  final String? label;
   final Color color;
-  final int currentLevel;
-  final int maxLevel;
+  final int? currentLevel;
+  final int? maxLevel;
 
   const SubHeader({
     Key? key,
     required this.paragraph,
-    required this.label,
+      this.label,
     required this.color,
-    required this.currentLevel,
-    required this.maxLevel,
+      this.currentLevel,
+      this.maxLevel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(paragraph, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Gap(10.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              label != null ?
               Container(
                 height: MediaQuery.of(context).size.height * 0.05,
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -44,10 +45,11 @@ class SubHeader extends StatelessWidget {
                   children: [
                     SvgPicture.asset(SvgAssets.learnHat, height: 20.h, width: 20.w),
                     Gap(5.w),
-                    Text(label, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      Text(label!, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)) 
                   ],
                 ),
-              ),
+              ): const SizedBox(),
+              if (currentLevel != null && maxLevel != null) 
               Text('Niveau $currentLevel/$maxLevel', 
                 style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
             ],

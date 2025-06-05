@@ -64,6 +64,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                     key: controller.svgKey,
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
+                      width: context.width,
                       fit: BoxFit.cover,
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
