@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
 class CustomIconButton extends StatelessWidget {
   /// The icon to display

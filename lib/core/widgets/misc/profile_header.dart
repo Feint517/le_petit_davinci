@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import '../../../core/constants/assets_manager.dart';
-import '../../../core/constants/colors.dart';
+import '../../constants/assets_manager.dart';
+import '../../constants/colors.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String userName;

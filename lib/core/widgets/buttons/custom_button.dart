@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
 /// A customizable button widget with various styles and states.
 ///
@@ -86,7 +87,9 @@ class CustomButton extends StatelessWidget {
               (disabled || isLoading)
                   ? null
                   : () {
-                    print('CustomButton InkWell onTap triggered');
+                    if (kDebugMode) {
+                      print('CustomButton InkWell onTap triggered');
+                    }
                     onPressed?.call();
                   },
           borderRadius: BorderRadius.circular(12),
@@ -122,7 +125,7 @@ class CustomButton extends StatelessWidget {
     );
   }
 
-  /// Builds the loading indicator with the appropriate color based on the button variant
+  // Builds the loading indicator with the appropriate color based on the button variant
   Widget _buildLoadingIndicator() {
     final Color indicatorColor =
         variant == ButtonVariant.ghost
@@ -170,7 +173,7 @@ class CustomButton extends StatelessWidget {
     );
   }
 
-  /// Gets the button height based on size
+  //* Gets the button height based on size
   double _getButtonHeight() {
     switch (size) {
       case ButtonSize.sm:

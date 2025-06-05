@@ -9,13 +9,20 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    // runApp(
-    //   DevicePreview(
-    //     enabled: true, // Set to false in production
-    //     builder: (context) => const App(),
-    //   ),
-    // );
-    runApp(const App());
-  });
+  ]);
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Set status bar color to transparent
+      systemNavigationBarColor: Colors.transparent, // Set navigation bar color to transparent
+      systemNavigationBarIconBrightness: Brightness.dark, // Set navigation bar icons to dark
+    ),
+  );
+  // runApp(
+  //   DevicePreview(
+  //     enabled: true, // Set to false in production
+  //     builder: (context) => const App(),
+  //   ),
+  // );
+  runApp(const App());
 }

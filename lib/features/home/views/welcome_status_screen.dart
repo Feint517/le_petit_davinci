@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/sizes.dart';
-import '../../../core/widgets/buttons.dart';
+import '../../../core/widgets/buttons/buttons.dart';
 import '../controllers/welcome_status_controller.dart';
 
 class WelcomeStatusScreen extends GetView<WelcomeStatusController> {

@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/mascot_widget.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/misc/mascot_widget.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 /// Écran d'introduction aux questions avec la mascotte DaVinci

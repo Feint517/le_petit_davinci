@@ -17,6 +17,8 @@ class AppRoutes {
   static const String questionFour = '/question-four';
   static const String questionFive = '/question-five';
   static const String welcomeStatus = '/welcome-status';
+  static const String frenchMap = '/french-map';
+  static const String englishMap = '/english-map';
 }
 
 // Alias for easier access (following GetX convention)
@@ -38,4 +40,6 @@ class Routes {
   static const String QUESTION_FOUR = AppRoutes.questionFour;
   static const String QUESTION_FIVE = AppRoutes.questionFive;
   static const String WELCOME_STATUS = AppRoutes.welcomeStatus;
+  static const String FRENCH_MAP = AppRoutes.frenchMap;
+  static const String ENGLISH_MAP = AppRoutes.englishMap;
 }

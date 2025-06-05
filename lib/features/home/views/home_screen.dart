@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/text_strings.dart';
+import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
 import '../../../core/constants/assets_manager.dart';
-import '../widgets/profile_header.dart';
+import '../../../core/widgets/misc/profile_header.dart';
 import '../widgets/achievement_banner.dart';
 import '../widgets/homescreen_content.dart';
 import '../widgets/subject_selection.dart';
 import '../widgets/rewards_section.dart';
 
 /// Main home screen after login - blank with profile header
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 
   @override
@@ -22,18 +25,16 @@ class HomeScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            // Profile Header
             ProfileHeader(
               userName: 'Alex',
               userClass: 'Classe 2',
               changeAvatar: true,
               onChangeAvatar: () {
                 // TODO: Implement avatar change functionality
-                print('Change avatar pressed');
               },
             ),
-            
-            // Content area - Scrollable
+
+            //* Content area - Scrollable
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -44,42 +45,41 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           AchievementBanner(
-                            title: 'Explorateur des mots',
-                            starCount: 5,
+                            title: StringsManager.exploreWords,
+                            starCount: 4,
                             onRewardsPressed: () {
                               // TODO: Navigate to rewards screen
-                              print('Rewards pressed');
                             },
                           ),
                         ],
                       ),
                     ),
-                    
+
                     Gap(8.h),
-                    
-                    // Homescreen Content Unit (Image + Mascot + Mission Card)
-                    HomescreenContent(
-                      mascotMessage: 'Bonjour Alex ! Prêt pour une nouvelle aventure ?',
+
+                    //* Homescreen Content Unit (Image + Mascot + Mission Card)
+                    HomeScreenContent(
+                      mascotMessage:
+                          StringsManager.homeScreenMessage,
                       missionDescription: 'Trouve 5 mots qui riment !',
                       onAcceptMission: () {
                         // TODO: Navigate to mission
-                        print('Mission accepted');
                       },
                     ),
-                    
+
                     Gap(24.h),
-                    
-                    // Subject Selection Grid
+
+                    //* Subject Selection Grid
                     const SubjectSelection(),
-                    
+
                     Gap(24.h),
-                    
-                    // Rewards Section
+
+                    //* Rewards Section
                     const RewardsSection(),
-                    
+
                     Gap(40.h),
-                    
-                    // Bottom footer image
+
+                    //* Bottom footer image
                     SvgPicture.asset(
                       SvgAssets.bottom,
                       width: double.infinity,

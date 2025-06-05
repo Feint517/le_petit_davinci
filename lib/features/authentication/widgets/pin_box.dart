@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/views/error_page.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

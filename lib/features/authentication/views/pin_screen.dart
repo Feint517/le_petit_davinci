@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/pin_entry_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/login_page.dart';
+import 'package:le_petit_davinci/features/authentication/views/login_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 

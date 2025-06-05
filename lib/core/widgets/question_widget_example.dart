@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/question_widget.dart';
+import 'package:le_petit_davinci/features/authentication/widgets/question_widget.dart';
 
 /// Widget d'exemple pour démontrer l'utilisation du QuestionWidget
 class QuestionWidgetExample extends StatelessWidget {

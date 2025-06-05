@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/pin_box.dart';
 

@@ -1,8 +1,8 @@
 // Barrel file for button widgets
 
-export 'buttons/custom_button.dart';
-export 'buttons/pill_button.dart';
-export 'buttons/custom_icon_button.dart';
+export 'custom_button.dart';
+export 'pill_button.dart';
+export 'custom_icon_button.dart';
 
 // Position of icon relative to the label in a button
 enum IconPosition {

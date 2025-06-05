@@ -7,9 +7,9 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/questions_intro.dart';
+import 'package:le_petit_davinci/features/authentication/views/questions_intro_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class UserSelectionPage extends GetView<UserSelectionController> {

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -15,34 +17,40 @@ class SubjectSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Subject data list
+    //* Subject data list
     final List<SubjectData> subjects = [
       SubjectData(
         label: 'Français',
         imageAssetPath: SvgAssets.frenchCard,
         cardColor: AppColors.bluePrimary,
-        onTap: () => Get.to( () => const FrenchMapScreen(),
-        duration: const Duration(milliseconds: 500),
-        transition: Transition.rightToLeft,
-        ),
+        onTap:
+            () => Get.to(
+              () => const FrenchMapScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeft,
+            ),
       ),
       SubjectData(
         label: 'English',
         imageAssetPath: SvgAssets.englishCard,
         cardColor: AppColors.greenPrimary,
-        onTap: () => Get.to( () => const EnglishMapScreen(),
-        duration: const Duration(milliseconds: 500),
-        transition: Transition.rightToLeft,
-        ),
+        onTap:
+            () => Get.to(
+              () => const EnglishMapScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeft,
+            ),
       ),
       SubjectData(
         label: 'Mathématiques',
         imageAssetPath: SvgAssets.mathCard,
         cardColor: AppColors.orangeAccent,
-        onTap: () => Get.to( () => const MathematicMapScreen(),
-        duration: const Duration(milliseconds: 500),
-        transition: Transition.rightToLeft,
-        ),
+        onTap:
+            () => Get.to(
+              () => const MathematicMapScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeft,
+            ),
       ),
       SubjectData(
         label: 'Vie quotidienne',
@@ -79,9 +87,9 @@ class SubjectSelection extends StatelessWidget {
               fontFamily: 'DynaPuff_SemiCondensed',
             ),
           ),
-          
+
           Gap(16.h),
-          
+
           // Grid of subject cards
           GridView.count(
             shrinkWrap: true,
@@ -89,12 +97,17 @@ class SubjectSelection extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 12.w,
             mainAxisSpacing: 12.h,
-            children: subjects.map((subject) => SubjectCard(
-              label: subject.label,
-              imageAssetPath: subject.imageAssetPath,
-              cardColor: subject.cardColor,
-              onTap: subject.onTap,
-            )).toList(),
+            children:
+                subjects
+                    .map(
+                      (subject) => SubjectCard(
+                        label: subject.label,
+                        imageAssetPath: subject.imageAssetPath,
+                        cardColor: subject.cardColor,
+                        onTap: subject.onTap,
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),

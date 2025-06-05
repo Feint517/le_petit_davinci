@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-// Assuming AppColors is defined in core/constants/colors.dart,
-
 
 
 /// A customizable button widget with various styles and states.

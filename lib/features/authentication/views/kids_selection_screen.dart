@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/profile_cards.dart';
 
 class KidsSelection extends StatelessWidget {
@@ -13,17 +15,21 @@ class KidsSelection extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
-        top: false,
+        top: true,
         bottom: false,
-
         child: Stack(
-          fit: StackFit.expand,
           children: [
             Positioned(
               bottom: 0,
+              left: 0,
+              right: 0,
               child: SvgPicture.asset(
-                SvgAssets.backgroundA,
+                SvgAssets.profileSelectionBackground,
+                width: 1.sw, //? 100% of screen width
+                height:
+                    (1.sw),
                 fit: BoxFit.contain,
+                alignment: Alignment.bottomCenter,
               ),
             ),
             Padding(
@@ -32,11 +38,9 @@ class KidsSelection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  //HeaderVector
-                  Gap(80),
                   Center(
                     child: Text(
-                      'Quel est ton profil ?',
+                      StringsManager.whatIsYourProfile,
                       style: TextStyle(
                         fontSize: 30,
                         color: AppColors.succuss,
@@ -50,7 +54,7 @@ class KidsSelection extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
-                    childAspectRatio: 2, // Adjust this ratio as needed
+                    childAspectRatio: 2, //? Adjust this ratio as needed
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 20,
                     children: [
@@ -58,7 +62,7 @@ class KidsSelection extends StatelessWidget {
                         username: 'Alex',
                         label: 'Classe 1',
                         picture: SvgPicture.asset(
-                          SvgAssets.backgroundA,
+                          SvgAssets.profileSelectionBackground,
                           height: 25,
                           width: 25,
                         ),
@@ -70,7 +74,7 @@ class KidsSelection extends StatelessWidget {
                         username: 'Emma',
                         label: 'Classe 3',
                         picture: SvgPicture.asset(
-                          SvgAssets.backgroundA,
+                          SvgAssets.profileSelectionBackground,
                           height: 25,
                           width: 25,
                         ),
@@ -82,7 +86,7 @@ class KidsSelection extends StatelessWidget {
                         username: 'José',
                         label: 'Classe 2',
                         picture: SvgPicture.asset(
-                          SvgAssets.backgroundA,
+                          SvgAssets.profileSelectionBackground,
                           height: 25,
                           width: 25,
                         ),
@@ -94,7 +98,7 @@ class KidsSelection extends StatelessWidget {
                         username: 'Omy',
                         label: 'Classe 1',
                         picture: SvgPicture.asset(
-                          SvgAssets.backgroundA,
+                          SvgAssets.profileSelectionBackground,
                           height: 25,
                           width: 25,
                         ),
@@ -106,7 +110,7 @@ class KidsSelection extends StatelessWidget {
                         label: 'Ajouter un autre enfant',
                         labelColor: AppColors.textSecondary,
                         picture: SvgPicture.asset(
-                          SvgAssets.backgroundA,
+                          SvgAssets.profileSelectionBackground,
                           height: 25,
                           width: 25,
                         ),

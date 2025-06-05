@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/mascot_widget.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/misc/mascot_widget.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 /// Widget principal contenant la mascotte DaVinci et le bouton d'action
 class MainPanelWidget extends StatelessWidget {
-  /// Message à afficher dans la bulle de la mascotte
   final String speechText;
-
-  /// Texte du bouton d'action
   final String buttonText;
-
-  /// Callback optionnel pour le bouton (si null, navigue vers userSelection)
   final VoidCallback? onButtonPressed;
 
   const MainPanelWidget({
@@ -93,7 +88,7 @@ class MainPanelWidget extends StatelessWidget {
 
           // Mascot with speech bubble positioned at the top, outside white box
           Positioned(
-            top: 0,
+            top: containerTopPosition - mascotSize * 0.6, // Adjusted to overlap
             left: 0,
             right: 0,
             child: MascotWidget(

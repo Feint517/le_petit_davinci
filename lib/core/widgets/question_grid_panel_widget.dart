@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/question_widget.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/features/authentication/widgets/question_widget.dart';
 import 'package:le_petit_davinci/core/widgets/square_selection_widget.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 

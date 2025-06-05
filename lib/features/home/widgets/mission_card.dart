@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
-import '../../../core/widgets/buttons.dart';
+import '../../../core/widgets/buttons/buttons.dart';
 
 class MissionCard extends StatelessWidget {
   final String missionTitle;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/core/widgets/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
 /// A widget that demonstrates various button styles and configurations
 class ButtonExamples extends StatefulWidget {

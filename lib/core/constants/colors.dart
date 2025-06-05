@@ -38,6 +38,10 @@ class AppColors {
   static const Color buttonSecondary = Color(0xFFFC715A);
   static const Color buttonDisabled = Color(0xFFc4c4c4);
 
+  //* checkbox colors
+  static const Color checkboxPrimary = Color(0xFFFF8BD2);
+  static const Color checkboxShadow = Color(0xFFDE53A8);
+
   //* border colors
   static const Color borderPrimary = Color(0xFFd9d9d9);
   static const Color borderSecondary = Color(0xFFe6e6e6);

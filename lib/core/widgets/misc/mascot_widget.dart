@@ -8,30 +8,30 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 enum BubblePosition { left, center, right }
 
 /// Un widget réutilisable pour afficher une mascotte avec une bulle de dialogue.
-/// 
+///
 /// Ce widget suit les conventions de design du projet Le Petit Davinci.
 class MascotWidget extends StatelessWidget {
   /// Le texte à afficher dans la bulle de dialogue
   final String speechText;
-  
+
   /// L'identifiant de l'asset SVG de la mascotte (par défaut bearMasscot)
   final String? mascotAssetId;
-  
+
   /// Couleur de fond personnalisée pour la bulle (optionnel)
   final Color? bubbleColor;
-  
+
   /// Couleur du texte personnalisée pour la bulle (optionnel)
   final Color? textColor;
-  
+
   /// Taille de la mascotte (optionnel, par défaut 120.h)
   final double? mascotSize;
-  
+
   /// Largeur maximale de la bulle de dialogue (optionnel)
   final double? maxBubbleWidth;
 
   /// Taille du texte dans la bulle (optionnel)
   final double? textSize;
-  
+
   /// Position de la bulle par rapport à la mascotte (optionnel, par défaut center)
   final BubblePosition bubblePosition;
 
@@ -64,25 +64,28 @@ class MascotWidget extends StatelessWidget {
       textDirection: TextDirection.ltr,
       maxLines: 10,
     );
-    
+
     // Ajuster la largeur contrainte pour le calcul
     final maxWidth = maxBubbleWidth ?? 280.w;
-    textPainter.layout(maxWidth: maxWidth - 32.w); // Soustraire le padding horizontal
-    
+    textPainter.layout(
+      maxWidth: maxWidth - 32.w,
+    ); // Soustraire le padding horizontal
+
     // Ajuster l'espacement vertical en fonction de la hauteur du texte
     final textHeight = textPainter.height;
-    final adjustedSpacing = (textHeight > 100) ? 16.h + (textHeight / 10).h : 8.h;
-    
+    final adjustedSpacing =
+        (textHeight > 100) ? 16.h + (textHeight / 10).h : 8.h;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // Bulle de dialogue positioned above mascot
         _buildSpeechBubble(),
-        
+
         // Espacement entre la bulle et la mascotte, ajusté dynamiquement
         SizedBox(height: adjustedSpacing),
-        
-        // Mascotte
+
+        //* Mascotte
         _buildMascot(),
       ],
     );
@@ -100,10 +103,9 @@ class MascotWidget extends StatelessWidget {
         children: [
           // Corps principal de la bulle
           Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 12.h,
-            ),
+            width: maxBubbleWidth,
+            height: 100.h,
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
               color: bubbleColor ?? AppColors.bluePrimary,
               borderRadius: BorderRadius.circular(16.r),
@@ -115,19 +117,23 @@ class MascotWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: Text(
-              speechText,
-              style: TextStyle(
-                fontSize: textSize ?? 14.sp, // Utiliser la taille de texte personnalisée si fournie
-                fontWeight: FontWeight.w500,
-                color: textColor ?? AppColors.white,
-                fontFamily: 'DynaPuff_SemiCondensed',
-                height: 1.3,
+            child: SingleChildScrollView(
+              child: Text(
+                speechText,
+                style: TextStyle(
+                  fontSize:
+                      textSize ??
+                      14.sp, // Utiliser la taille de texte personnalisée si fournie
+                  fontWeight: FontWeight.w500,
+                  color: textColor ?? AppColors.white,
+                  fontFamily: 'DynaPuff_SemiCondensed',
+                  height: 1.3,
+                ),
+                textAlign: _getTextAlignment(),
               ),
-              textAlign: _getTextAlignment(),
             ),
           ),
-          
+
           // Queue de la bulle (pointer vers la mascotte)
           Positioned(
             bottom: -6.h,
@@ -156,29 +162,21 @@ class MascotWidget extends StatelessWidget {
   Widget _buildBubbleTail() {
     Widget tail = CustomPaint(
       size: Size(12.w, 8.h),
-      painter: _BubbleTailPainter(
-        color: bubbleColor ?? AppColors.bluePrimary,
-      ),
+      painter: _BubbleTailPainter(color: bubbleColor ?? AppColors.bluePrimary),
     );
 
     switch (bubblePosition) {
       case BubblePosition.left:
         return Align(
           alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 20.w),
-            child: tail,
-          ),
+          child: Padding(padding: EdgeInsets.only(left: 20.w), child: tail),
         );
       case BubblePosition.center:
         return Center(child: tail);
       case BubblePosition.right:
         return Align(
           alignment: Alignment.centerRight,
-          child: Padding(
-            padding: EdgeInsets.only(right: 20.w),
-            child: tail,
-          ),
+          child: Padding(padding: EdgeInsets.only(right: 20.w), child: tail),
         );
     }
   }
@@ -187,7 +185,7 @@ class MascotWidget extends StatelessWidget {
   Widget _buildMascot() {
     final String assetPath = mascotAssetId ?? SvgAssets.bearMasscot;
     final double size = mascotSize ?? 120.h;
-    
+
     return SvgPicture.asset(
       assetPath,
       height: size,
@@ -206,12 +204,13 @@ class _BubbleTailPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    final Paint paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
 
     final Path path = Path();
-    
+
     // Créer la forme triangulaire de la queue
     path.moveTo(size.width / 2 - 6, 0); // Point gauche
     path.lineTo(size.width / 2 + 6, 0); // Point droit
