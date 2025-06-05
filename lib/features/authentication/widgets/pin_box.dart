@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -6,23 +8,17 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/features/authentication/views/error_page.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinBox extends StatelessWidget {
-  const PinBox({
-    super.key,
-  });
+  const PinBox({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: DeviceUtils.getScreenHeight() * 0.85,
-      constraints: BoxConstraints(
-        maxWidth: 400.w,
-        minWidth: 280.w,
-      ),
+      constraints: BoxConstraints(maxWidth: 400.w, minWidth: 280.w),
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: AppColors.pinkAccent,
@@ -55,8 +51,7 @@ class PinBox extends StatelessWidget {
               appContext: context,
               length: 4,
               onChanged: (value) {},
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               pinTheme: PinTheme(
                 shape: PinCodeFieldShape.box,
                 borderRadius: BorderRadius.circular(8.r),
@@ -73,18 +68,17 @@ class PinBox extends StatelessWidget {
             ),
           ),
           Gap(24.h),
-    
+
           //* Submit button
           CustomButton(
             label: StringsManager.connectWithPin,
-            onPressed:
-                () => Get.to(() => const ErrorPage()),
+            onPressed: () => Get.toNamed(Routes.ERROR),
             variant: ButtonVariant.primary,
             size: ButtonSize.lg,
             width: double.infinity,
           ),
           Gap(16.h),
-    
+
           //* Forgot password link
           GestureDetector(
             onTap: () => Get.toNamed(Routes.HOME),

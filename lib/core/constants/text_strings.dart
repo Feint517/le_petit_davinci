@@ -9,7 +9,11 @@ class StringsManager {
   static const String loginText = "Connectez-vous\nau Petit Davinci";
   static const String goodMorningText =
       "Rebonjour Alex ! C'est l'heure de notre prochaine aventure !";
+  static const String goodMorning = "Bonjour";
+  static const String nextAdventure = "C'est l'heure de notre prochaine aventure !";
   static const String createChildProfile = "Créer un profil enfant";
+  static const String noProfileError =
+      "Oops ! Aucun profil enfant n'a encore été configuré.";
   static const String back = "Retour";
   static const String continueText = "Continuer";
   static const String newHere = "Nouveau ici?";
@@ -19,4 +23,5 @@ class StringsManager {
   static const String exploreWords = "Explorateur des mots";
   static const String homeScreenMessage =
       "Bonjour Alex ! Prêt pour une nouvelle aventure ?";
+  static const String discoverMySpace = "Découvrir mon espace";
 }

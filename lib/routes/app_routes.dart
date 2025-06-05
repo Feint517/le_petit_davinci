@@ -10,13 +10,11 @@ class AppRoutes {
   static const String childSetup = '/child-setup';
   static const String forgotPassword = '/forgot-password';
   static const String pin = '/pin';
+  static const String goodMorning = '/good-morning';
+  static const String error = '/error';
   static const String questionsIntro = '/questions-intro';
   static const String question = '/question';
-  static const String questionTwo = '/question-two';
-  static const String questionThree = '/question-three';
-  static const String questionFour = '/question-four';
-  static const String questionFive = '/question-five';
-  static const String welcomeStatus = '/welcome-status';
+  static const String questionFinish = '/question-finish';
   static const String frenchMap = '/french-map';
   static const String englishMap = '/english-map';
 }
@@ -33,13 +31,11 @@ class Routes {
   static const String CHILD_SETUP = AppRoutes.childSetup;
   static const String FORGOT_PASSWORD = AppRoutes.forgotPassword;
   static const String PIN = AppRoutes.pin;
-  static const String QUESTIONS_INTRO = AppRoutes.questionsIntro;
+  static const String GOOD_MORNING = AppRoutes.goodMorning;
+  static const String ERROR = AppRoutes.error;
+  //static const String QUESTIONS_INTRO = AppRoutes.questionsIntro;
   static const String QUESTION = AppRoutes.question;
-  static const String QUESTION_TWO = AppRoutes.questionTwo;
-  static const String QUESTION_THREE = AppRoutes.questionThree;
-  static const String QUESTION_FOUR = AppRoutes.questionFour;
-  static const String QUESTION_FIVE = AppRoutes.questionFive;
-  static const String WELCOME_STATUS = AppRoutes.welcomeStatus;
+  static const String QUESTION_FINISH = AppRoutes.questionFinish;
   static const String FRENCH_MAP = AppRoutes.frenchMap;
   static const String ENGLISH_MAP = AppRoutes.englishMap;
 }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/authentication/data/models/question_model.dart';
+import 'package:le_petit_davinci/features/authentication/views/question_finish_screen.dart';
 
 class QuestionsController extends GetxController {
   final questions =
@@ -97,6 +98,7 @@ class QuestionsController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       // You can navigate or process answers here
+      Get.to(() => const WelcomeStatusScreen());
     }
   }
 

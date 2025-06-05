@@ -27,6 +27,7 @@ class SvgAssets {
   static const String letterB = '$SVG_PATH/B.svg';
   static const String letterC = '$SVG_PATH/C.svg';
   static const String bear = '$SVG_PATH/bear_splash.svg';
+  static const String bunny = '$SVG_PATH/bunny.svg';
   static const String bird = '$SVG_PATH/birdSplash.svg';
   static const String choose = '$SVG_PATH/chooseSvg.svg';
   static const String logoBlue = '$SVG_PATH/logo_blue.svg';
@@ -66,6 +67,7 @@ class SvgAssets {
   static const String explore = '$SVG_PATH/explore.svg';
   static const String chat = '$SVG_PATH/chat.svg';
   static const String headset = '$SVG_PATH/headset.svg';
+  static const String questionsFinishedBackground = '$SVG_PATH/questions_finish_background.svg';
   
 }
 

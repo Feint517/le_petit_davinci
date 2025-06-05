@@ -7,8 +7,8 @@ import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
 
-class GoodmorningPage extends StatelessWidget {
-  const GoodmorningPage({super.key});
+class GoodMorningScreen extends StatelessWidget {
+  const GoodMorningScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +36,23 @@ class GoodmorningPage extends StatelessWidget {
               left: 24.w,
               child: SizedBox(
                 width: DeviceUtils.getScreenWidth(context) - 48.w,
-                child: Text(
-                  StringsManager.goodMorningText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 32.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.secondary,
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      color: AppColors.secondary,
+                      fontSize: 32.sp,
+                      fontFamily: 'DynaPuff_SemiCondensed',
+                      fontWeight: FontWeight.w400,
+                    ),
+                    children: [
+                      TextSpan(text: StringsManager.goodMorning),
+                      TextSpan(
+                        text: " Alex ", //! Fetch the child name from controller
+                        style: TextStyle(color: AppColors.accent),
+                      ),
+                      TextSpan(text: '! '),
+                      const TextSpan(text: StringsManager.nextAdventure),
+                    ],
                   ),
                 ),
               ),

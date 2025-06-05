@@ -53,7 +53,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                       StringsManager.whoUsesApp,
                       style: TextStyle(
                         fontSize: 22.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.primary,
                         fontFamily: 'DynaPuff_SemiCondensed',
                       ),
@@ -68,7 +68,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   CustomButton(
                     label: StringsManager.iAmParent,
                     onPressed: () {
-                      Get.toNamed(Routes.PIN);
+                      Get.toNamed(Routes.LOGIN);
                     },
                     variant: ButtonVariant.primary,
                     size: ButtonSize.lg,
@@ -78,7 +78,13 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   CustomButton(
                     label: StringsManager.itsMyChild,
                     onPressed: () {
-                      Get.toNamed(Routes.INTRO);
+                      // Get.toNamed(Routes.ERROR);
+                      //Get.toNamed(Routes.QUESTION);
+                      Get.to(
+                        const QuestionsIntroScreen(
+                          message: 'Je suis juste un test',
+                        ),
+                      );
                     },
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,

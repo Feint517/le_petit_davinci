@@ -226,7 +226,10 @@ class QuestionScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          QuestionWidget(questionText: question.questionText),
+                          QuestionWidget(
+                            questionNumber: controller.currentIndex.value + 1,
+                            questionText: question.questionText,
+                          ),
                           Gap(20.h),
 
                           ...List.generate(
@@ -267,7 +270,7 @@ class QuestionScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 80.h,
+            bottom: 60.h,
             right: 20.w,
             child: SvgPicture.asset(
               SvgAssets.bearMasscot, // Replace with your mascot asset
