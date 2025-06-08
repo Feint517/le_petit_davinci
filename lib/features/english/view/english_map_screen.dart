@@ -65,6 +65,7 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
                       fit: BoxFit.cover,
+                      width: context.width,
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
                   ),
@@ -86,6 +87,9 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                              iconPath:  SvgAssets.headset,
                              color:  AppColors.bluePrimary,
                              shadowColor:  AppColors.blueSecondary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ),
 
@@ -98,6 +102,9 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                              iconPath:  SvgAssets.chat,
                              color:  AppColors.pinkLight,
                              shadowColor:  AppColors.pinkPrimary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ),
 
@@ -110,6 +117,9 @@ class _EnglishMapScreenState extends State<EnglishMapScreen> {
                              iconPath:  SvgAssets.explore,
                              color:  AppColors.purple,
                              shadowColor:  AppColors.purpleSecondary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ), 
                         ],

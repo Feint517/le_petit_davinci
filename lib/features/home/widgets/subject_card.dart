@@ -75,7 +75,7 @@ class SubjectCard extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w100,
                         fontFamily: 'DynaPuff_SemiCondensed',
                       ),
                     ),

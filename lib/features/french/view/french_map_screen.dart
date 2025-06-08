@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart'; 
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
+import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
 
 class FrenchMapScreen extends StatefulWidget {
   const FrenchMapScreen({super.key});
@@ -46,7 +46,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
               changeAvatar: false,
             ),
             TopNavigation(text: 'French', buttonColor: AppColors.bluePrimary),
-            Gap(10.h),
+            Gap(10),
             SubHeader(
               paragraph: "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
@@ -54,7 +54,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
              currentLevel:  1, // Current level
               maxLevel: 3, // Max level
             ),
-            Gap(10.h),
+            Gap(10),
             Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -65,6 +65,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
                       fit: BoxFit.cover,
+                      width: context.width, 
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
                   ),
@@ -78,27 +79,51 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                     if (svgWidth != null && svgHeight != null) {
                       return Stack( // Wrap Positioned widgets in a Stack to return multiple children
                         children: [
-                          // First button at the beginning of the road
+                          // First button at the beginning of the road+
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.77, // Adjust multiplier as needed
+                            top: svgHeight * 0.8, // Adjust multiplier as needed
+                            child:  MapButton(
+                              width: 70,
+                              height: 70,
+                              title: 'Le coin des leçons ',
+                             iconPath:  SvgAssets.lamp,
+                             color:  AppColors.secondary,
+                             shadowColor:  AppColors.orangeAccentDark,
+                              onTap: () {
+                                 Get.to( () => const IntroductionFrenchLessons(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        );
+                              },
+                            ),
+                          ), 
+                          Positioned(
+                            left: svgWidth * 0.25,
+                            top: svgHeight * 0.63, // Adjust multiplier as needed
                             child:  MapButton(
                               title: 'Magic Dictation',
                              iconPath:  SvgAssets.headset,
                              color:  AppColors.bluePrimary,
                              shadowColor:  AppColors.blueSecondary,
+                             onTap: () {
+                                 
+                              },
                             ),
                           ),
 
                           // Second button at the middle of the road
                           Positioned(
                             right: svgWidth * 0.0,
-                            top: svgHeight * 0.46, // Adjust multiplier as needed
+                            top: svgHeight * 0.4, // Adjust multiplier as needed
                             child:  MapButton(
                               title: 'Sentence Construction',
                              iconPath:  SvgAssets.chat,
                              color:  AppColors.pinkLight,
                              shadowColor:  AppColors.pinkPrimary,
+                             onTap: () {
+                                 
+                              },
                             ),
                           ),
 
@@ -111,8 +136,12 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                              iconPath:  SvgAssets.explore,
                              color:  AppColors.purple,
                              shadowColor:  AppColors.purpleSecondary,
+                             onTap: () {
+                                 
+                              },
                             ),
                           ), 
+                           
                         ],
                       );
                     } else {

@@ -12,38 +12,23 @@ class TopNavigation extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: AppColors.borderSecondary,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: TextButton.icon(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-              label: const Text(
-                'Home',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              backgroundColor: AppColors.backgroundLight,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
               ),
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 10),
+            label: const Text('Home', style: TextStyle(color: Colors.black, fontSize: 10)),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.05,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          Container( 
+            padding: const EdgeInsets.symmetric(horizontal: 10.0 ,vertical: 5.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: buttonColor,

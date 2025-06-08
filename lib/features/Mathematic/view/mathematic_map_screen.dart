@@ -46,7 +46,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
               changeAvatar: false,
             ),
             TopNavigation(text: 'Mathematiques', buttonColor: AppColors.secondary),
-            Gap(10.h),
+            Gap(10),
             SubHeader(
               paragraph: "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
               label: 'Génie du calcul',
@@ -54,7 +54,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
              currentLevel:  1, // Current level
               maxLevel: 3, // Max level
             ),
-            Gap(10.h),
+            Gap(10),
             Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -64,6 +64,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                     key: controller.svgKey,
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
+                      width: context.width,
                       fit: BoxFit.cover,
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
@@ -86,6 +87,9 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                              iconPath:  SvgAssets.headset,
                              color:  AppColors.bluePrimary,
                              shadowColor:  AppColors.blueSecondary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ),
 
@@ -98,6 +102,9 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                              iconPath:  SvgAssets.chat,
                              color:  AppColors.pinkLight,
                              shadowColor:  AppColors.pinkPrimary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ),
 
@@ -110,6 +117,9 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                              iconPath:  SvgAssets.explore,
                              color:  AppColors.purple,
                              shadowColor:  AppColors.purpleSecondary,
+                             onTap: () {
+                               
+                             },
                             ),
                           ), 
                         ],

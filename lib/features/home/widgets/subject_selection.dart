@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
+import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../models/subject_data.dart';
@@ -54,20 +56,31 @@ class SubjectSelection extends StatelessWidget {
       ),
       SubjectData(
         label: 'Vie quotidienne',
-        imageAssetPath: SvgAssets.lifeCard,
-        cardColor: AppColors.purpleAccent,
-        onTap: () => print('Vie quotidienne selected'),
+        imageAssetPath: SvgAssets.gameCard,
+        cardColor: AppColors.pinkAccent,
+        onTap:
+            () => Get.to(
+              () => const VieQuotidienneScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeft,
+            ),
       ),
       SubjectData(
         label: 'Jeux',
-        imageAssetPath: SvgAssets.gameCard,
-        cardColor: AppColors.pinkAccent,
-        onTap: () => print('Jeux selected'),
+        imageAssetPath: SvgAssets.lifeCard,
+        cardColor: AppColors.greenPrimary,
+        onTap:
+            () => Get.to(
+              () => const GamesScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeft,
+            ),
       ),
+
       SubjectData(
         label: 'Studio',
         imageAssetPath: SvgAssets.studioCard,
-        cardColor: AppColors.secondary,
+        cardColor: AppColors.bluePrimary,
         onTap: () => print('Studio selected'),
       ),
     ];

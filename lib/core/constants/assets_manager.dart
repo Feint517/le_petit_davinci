@@ -69,6 +69,19 @@ class SvgAssets {
   static const String headset = '$SVG_PATH/headset.svg';
   static const String questionsFinishedBackground = '$SVG_PATH/questions_finish_background.svg';
   
+  static const String vie_quotidienne_background = '$SVG_PATH/vie_quotidienne_background.svg';
+  static const String vie_quotidienne_background2 = '$SVG_PATH/vie_quotidienne_background2.svg';
+  static const String bearvq = '$SVG_PATH/bearvq.svg';
+  static const String bottom_backgroundvq = '$SVG_PATH/bottom_backgroundvq.svg';
+  static const String schoolTools = '$SVG_PATH/schoolTools.svg';
+  static const String games_background = '$SVG_PATH/games_background.svg';
+  static const String tictactoe = '$SVG_PATH/tictactoe.svg';
+  static const String chess = '$SVG_PATH/chess.svg';
+  static const String biscuit = '$SVG_PATH/biscuit.svg';
+  static const String lamp = '$SVG_PATH/lamp.svg';
+  static const String beargames = '$SVG_PATH/beargames.svg';
+
+
 }
 
 // Alias for easier access
