@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
@@ -45,13 +44,17 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            TopNavigation(text: 'Mathematiques', buttonColor: AppColors.secondary),
+            TopNavigation(
+              text: 'Mathematiques',
+              buttonColor: AppColors.secondary,
+            ),
             Gap(10),
             SubHeader(
-              paragraph: "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
+              paragraph:
+                  "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
               label: 'Génie du calcul',
-             color:  AppColors.secondary, 
-             currentLevel:  1, // Current level
+              color: AppColors.secondary,
+              currentLevel: 1, // Current level
               maxLevel: 3, // Max level
             ),
             Gap(10),
@@ -77,34 +80,34 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                     final double? svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
-                      return Stack( // Wrap Positioned widgets in a Stack to return multiple children
+                      return Stack(
+                        // Wrap Positioned widgets in a Stack to return multiple children
                         children: [
                           // First button at the beginning of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.77, // Adjust multiplier as needed
-                            child: MapButton( title: 'Dictée magique',
-                             iconPath:  SvgAssets.headset,
-                             color:  AppColors.bluePrimary,
-                             shadowColor:  AppColors.blueSecondary,
-                             onTap: () {
-                               
-                             },
+                            top:
+                                svgHeight * 0.77, // Adjust multiplier as needed
+                            child: MapButton(
+                              title: 'Dictée magique',
+                              iconPath: SvgAssets.headset,
+                              color: AppColors.bluePrimary,
+                              shadowColor: AppColors.blueSecondary,
+                              onTap: () {},
                             ),
                           ),
 
                           // Second button at the middle of the road
                           Positioned(
                             right: svgWidth * 0.0,
-                            top: svgHeight * 0.46, // Adjust multiplier as needed
+                            top:
+                                svgHeight * 0.46, // Adjust multiplier as needed
                             child: MapButton(
-                              title:  'resoudre des énigmes',
-                             iconPath:  SvgAssets.chat,
-                             color:  AppColors.pinkLight,
-                             shadowColor:  AppColors.pinkPrimary,
-                             onTap: () {
-                               
-                             },
+                              title: 'resoudre des énigmes',
+                              iconPath: SvgAssets.chat,
+                              color: AppColors.pinkLight,
+                              shadowColor: AppColors.pinkPrimary,
+                              onTap: () {},
                             ),
                           ),
 
@@ -114,14 +117,12 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             top: svgHeight * 0.2, // Adjust multiplier as needed
                             child: MapButton(
                               title: "Trouver l'erreur",
-                             iconPath:  SvgAssets.explore,
-                             color:  AppColors.purple,
-                             shadowColor:  AppColors.purpleSecondary,
-                             onTap: () {
-                               
-                             },
+                              iconPath: SvgAssets.explore,
+                              color: AppColors.purple,
+                              shadowColor: AppColors.purpleSecondary,
+                              onTap: () {},
                             ),
-                          ), 
+                          ),
                         ],
                       );
                     } else {
@@ -139,8 +140,4 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
       ),
     );
   }
- 
-   
-
-   
 }

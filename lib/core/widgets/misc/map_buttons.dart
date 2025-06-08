@@ -16,7 +16,7 @@ class MapButton extends StatelessWidget {
     required this.color,
     required this.shadowColor, this.width, this.height, required this.onTap,
 
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

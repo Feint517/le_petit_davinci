@@ -11,7 +11,6 @@ import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/home_feature.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
-import 'package:le_petit_davinci/features/onboarding/views/questions_intro_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_finish_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/intro_screen.dart';

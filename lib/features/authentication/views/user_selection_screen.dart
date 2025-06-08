@@ -79,12 +79,13 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                     label: StringsManager.itsMyChild,
                     onPressed: () {
                       // Get.toNamed(Routes.ERROR);
-                      //Get.toNamed(Routes.QUESTION);
-                      Get.to(
-                        const QuestionsIntroScreen(
-                          message: 'Je suis juste un test',
-                        ),
-                      );
+                      // Get.toNamed(Routes.QUESTION);
+                      // Get.to(
+                      //   const QuestionsIntroScreen(
+                      //     message: 'Je suis juste un test',
+                      //   ),
+                      // );
+                      Get.toNamed(Routes.HOME);
                     },
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,
