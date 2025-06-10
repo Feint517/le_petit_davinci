@@ -8,7 +8,9 @@ import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
+import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
+import 'package:le_petit_davinci/test.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../models/subject_data.dart';
@@ -38,7 +40,7 @@ class SubjectSelection extends StatelessWidget {
         cardColor: AppColors.greenPrimary,
         onTap:
             () => Get.to(
-              () => const EnglishMapScreen(),
+              () => const TestScreen(),
               duration: const Duration(milliseconds: 500),
               transition: Transition.rightToLeft,
             ),
@@ -90,20 +92,11 @@ class SubjectSelection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title
-          Text(
-            'Sélection des matières',
-            style: TextStyle(
-              color: AppColors.textPrimary,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'DynaPuff_SemiCondensed',
-            ),
-          ),
-
+          //* Title
+          const SectionHeading(sectionName: 'Sélection des matières'),
           Gap(16.h),
 
-          // Grid of subject cards
+          //* Grid of subject cards
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

@@ -21,7 +21,7 @@ class SubjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 0.85, // Slightly taller than wide
+      aspectRatio: 0.85, //? Slightly taller than wide
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(20.r),

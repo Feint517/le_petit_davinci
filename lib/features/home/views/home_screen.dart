@@ -39,7 +39,7 @@ class HomeScreen extends GetView<HomeController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Achievement Banner with padding
+                    //* Achievement Banner with padding
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Column(
@@ -65,17 +65,14 @@ class HomeScreen extends GetView<HomeController> {
                         // TODO: Navigate to mission
                       },
                     ),
-
                     Gap(24.h),
 
                     //* Subject Selection Grid
                     const SubjectSelection(),
-
                     Gap(24.h),
 
                     //* Rewards Section
                     const RewardsSection(),
-
                     Gap(40.h),
 
                     //* Bottom footer image
