@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 
 class VieQuotidienneScreen extends StatelessWidget {
   const VieQuotidienneScreen({super.key});
@@ -104,9 +104,9 @@ class ContentVieQuotidienne extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TopNavigation(
-                        text: 'Vie quotidienne',
-                        buttonColor: AppColors.secondary,
+                      CustomAppBar(
+                        chipText: 'Vie quotidienne',
+                        chipColor: AppColors.secondary,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),

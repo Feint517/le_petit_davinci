@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 
@@ -44,9 +44,9 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            TopNavigation(
-              text: 'Mathematiques',
-              buttonColor: AppColors.secondary,
+            CustomAppBar(
+              chipText: 'Mathematiques',
+              chipColor: AppColors.secondary,
             ),
             Gap(10),
             SubHeader(

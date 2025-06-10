@@ -6,8 +6,8 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 
 class GamesScreen extends StatefulWidget {
   const GamesScreen({super.key});
@@ -46,7 +46,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   userClass: 'Classe 2',
                   changeAvatar: false,
                 ),
-                TopNavigation(text: 'Jeux', buttonColor: AppColors.secondary),
+                CustomAppBar(chipText: 'Jeux', chipColor: AppColors.secondary),
                 Gap(10),
                 SubHeader(
                   paragraph:

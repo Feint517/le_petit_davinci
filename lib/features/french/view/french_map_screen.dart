@@ -6,8 +6,8 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
 
@@ -45,7 +45,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            TopNavigation(text: 'French', buttonColor: AppColors.bluePrimary),
+            CustomAppBar(chipText: 'French', chipColor: AppColors.bluePrimary),
             Gap(10),
             SubHeader(
               paragraph:

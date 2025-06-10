@@ -52,7 +52,7 @@ class DynamicSelectionWidget extends StatelessWidget {
               onTap: () => _handleOptionTap(option.value),
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/view/lessons.dart';
 
 class IntroductionFrenchLessons extends StatefulWidget {
@@ -47,9 +47,9 @@ class _IntroductionFrenchLessonsState extends State<IntroductionFrenchLessons> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TopNavigation(
-                        text: 'Français',
-                        buttonColor: AppColors.bluePrimaryDark,
+                      CustomAppBar(
+                        chipText: 'Français',
+                        chipColor: AppColors.bluePrimaryDark,
                       ),
                       SubHeader(paragraph: "", color: AppColors.secondary),
                       Center(
