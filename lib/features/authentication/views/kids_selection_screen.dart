@@ -26,8 +26,7 @@ class KidsSelection extends StatelessWidget {
               child: SvgPicture.asset(
                 SvgAssets.profileSelectionBackground,
                 width: 1.sw, //? 100% of screen width
-                height:
-                    (1.sw),
+                height: (1.sw),
                 fit: BoxFit.contain,
                 alignment: Alignment.bottomCenter,
               ),

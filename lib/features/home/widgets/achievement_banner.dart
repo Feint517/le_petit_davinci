@@ -21,12 +21,7 @@ class AchievementBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        left: 0,
-        right: 0,
-        top: 8.h,
-        bottom: 0,
-      ),
+      padding: EdgeInsets.only(left: 0, right: 0, top: 8.h, bottom: 0),
       decoration: BoxDecoration(
         color: AppColors.backgroundLight,
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusMd),
@@ -51,9 +46,9 @@ class AchievementBanner extends StatelessWidget {
                     fontFamily: 'DynaPuff_SemiCondensed',
                   ),
                 ),
-                
+
                 Gap(4.h),
-                
+
                 // Star Rating
                 Row(
                   children: List.generate(
@@ -71,7 +66,7 @@ class AchievementBanner extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Right Section - Rewards Button
           _buildRewardsButton(),
         ],
@@ -111,9 +106,9 @@ class AchievementBanner extends StatelessWidget {
                     fontFamily: 'DynaPuff_SemiCondensed',
                   ),
                 ),
-                
+
                 Gap(4.w),
-                
+
                 // Arrow Icon
                 Icon(
                   Icons.arrow_forward_ios,
@@ -124,7 +119,7 @@ class AchievementBanner extends StatelessWidget {
             ),
           ),
         ),
-        
+
         // Gift icon positioned on top
         Positioned(
           left: -6.w,

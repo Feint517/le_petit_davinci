@@ -32,7 +32,7 @@ class HomeScreenContent extends StatelessWidget {
             fit: BoxFit.cover,
             alignment: Alignment.topCenter,
           ),
-          
+
           //* Mascot widget positioned in center-right, slightly top
           Align(
             alignment: Alignment(1.0, -0.8),

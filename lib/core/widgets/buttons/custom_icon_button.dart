@@ -5,19 +5,19 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 class CustomIconButton extends StatelessWidget {
   /// The icon to display
   final Widget icon;
-  
+
   /// The button variant that determines its color scheme
   final ButtonVariant variant;
-  
+
   /// The size of the button
   final ButtonSize size;
-  
+
   /// Whether the button is in a loading state
   final bool isLoading;
-  
+
   /// Whether the button is disabled
   final bool disabled;
-  
+
   /// Callback function when the button is pressed
   final VoidCallback? onPressed;
 
@@ -52,42 +52,45 @@ class CustomIconButton extends StatelessWidget {
               color: gradient == null ? backgroundColor : null,
               gradient: gradient,
               shape: BoxShape.circle,
-              boxShadow: variant != ButtonVariant.ghost 
-                ? [
-                    BoxShadow(
-                      offset: const Offset(0, 2),
-                      blurRadius: 2,
-                      color: Colors.black.withAlpha(26),
-                    )
-                  ]
-                : null,
+              boxShadow:
+                  variant != ButtonVariant.ghost
+                      ? [
+                        BoxShadow(
+                          offset: const Offset(0, 2),
+                          blurRadius: 2,
+                          color: Colors.black.withAlpha(26),
+                        ),
+                      ]
+                      : null,
             ),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: disabled ? 0.6 : 1.0,
               child: Center(
-                child: isLoading
-                    ? SizedBox(
-                        height: 16,
-                        width: 16,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            variant == ButtonVariant.ghost
-                                ? AppColors.bluePrimary
-                                : AppColors.white,
+                child:
+                    isLoading
+                        ? SizedBox(
+                          height: 16,
+                          width: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              variant == ButtonVariant.ghost
+                                  ? AppColors.bluePrimary
+                                  : AppColors.white,
+                            ),
                           ),
+                        )
+                        : IconTheme(
+                          data: IconThemeData(
+                            color:
+                                variant == ButtonVariant.ghost
+                                    ? AppColors.bluePrimary
+                                    : AppColors.white,
+                            size: _getIconSize(),
+                          ),
+                          child: icon,
                         ),
-                      )
-                    : IconTheme(
-                        data: IconThemeData(
-                          color: variant == ButtonVariant.ghost
-                              ? AppColors.bluePrimary
-                              : AppColors.white,
-                          size: _getIconSize(),
-                        ),
-                        child: icon,
-                      ),
               ),
             ),
           ),

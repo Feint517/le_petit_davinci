@@ -5,21 +5,10 @@ export 'pill_button.dart';
 export 'custom_icon_button.dart';
 
 // Position of icon relative to the label in a button
-enum IconPosition {
-  left,
-  right,
-}
+enum IconPosition { left, right }
 
 // Button style variants
-enum ButtonVariant {
-  primary,
-  secondary,
-  ghost,
-}
+enum ButtonVariant { primary, secondary, ghost }
 
 // Button size variants
-enum ButtonSize {
-  sm,
-  md,
-  lg,
-}
+enum ButtonSize { sm, md, lg }

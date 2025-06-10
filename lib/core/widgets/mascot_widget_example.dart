@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/mascot_widget.dart';
 
 /// Exemple d'utilisation du MascotWidget
-/// 
+///
 /// Cette page démontre différentes configurations possibles du widget.
 class MascotWidgetExample extends StatelessWidget {
   const MascotWidgetExample({super.key});
@@ -35,13 +35,14 @@ class MascotWidgetExample extends StatelessWidget {
                 ),
               ),
               Gap(16.h),
-              
+
               const MascotWidget(
-                speechText: "Bonjour ! Moi, c'est DaVinci ! Je suis ton ami pour apprendre et t'amuser tous les jours !",
+                speechText:
+                    "Bonjour ! Moi, c'est DaVinci ! Je suis ton ami pour apprendre et t'amuser tous les jours !",
               ),
-              
+
               Gap(40.h),
-              
+
               // Exemple 2: Bulle personnalisée
               const Text(
                 'Exemple 2: Bulle verte personnalisée',
@@ -52,15 +53,15 @@ class MascotWidgetExample extends StatelessWidget {
                 ),
               ),
               Gap(16.h),
-              
+
               const MascotWidget(
                 speechText: "Prêt pour une nouvelle aventure ?",
                 bubbleColor: AppColors.greenPrimary,
                 mascotSize: 100,
               ),
-              
+
               Gap(40.h),
-              
+
               // Exemple 3: Texte plus long
               const Text(
                 'Exemple 3: Texte plus long',
@@ -71,15 +72,16 @@ class MascotWidgetExample extends StatelessWidget {
                 ),
               ),
               Gap(16.h),
-              
+
               const MascotWidget(
-                speechText: "Savais-tu que les couleurs peuvent nous aider à apprendre ? Aujourd'hui, nous allons découvrir ensemble comment mélanger les couleurs primaires pour créer de nouvelles couleurs !",
+                speechText:
+                    "Savais-tu que les couleurs peuvent nous aider à apprendre ? Aujourd'hui, nous allons découvrir ensemble comment mélanger les couleurs primaires pour créer de nouvelles couleurs !",
                 bubbleColor: AppColors.purpleAccent,
                 maxBubbleWidth: 320,
               ),
-              
+
               Gap(40.h),
-              
+
               // Exemple 4: Avec bouton en dessous
               const Text(
                 'Exemple 4: Avec interaction',
@@ -90,7 +92,7 @@ class MascotWidgetExample extends StatelessWidget {
                 ),
               ),
               Gap(16.h),
-              
+
               Column(
                 children: [
                   const MascotWidget(
@@ -114,7 +116,7 @@ class MascotWidgetExample extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               Gap(20.h),
             ],
           ),

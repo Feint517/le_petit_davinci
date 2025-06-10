@@ -3,7 +3,8 @@ import 'package:le_petit_davinci/core/utils/validation_utils.dart';
 extension StringExtensions on String {
   bool get isEmail => ValidationUtils.isValidEmail(this);
 
-  String get capitalize => isNotEmpty ? this[0].toUpperCase() + substring(1) : this;
+  String get capitalize =>
+      isNotEmpty ? this[0].toUpperCase() + substring(1) : this;
 }
 
 extension DateTimeExtensions on DateTime {

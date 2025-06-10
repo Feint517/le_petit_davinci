@@ -35,14 +35,14 @@ class QuestionWidgetExample extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            
+
             const QuestionWidget(
               questionText: 'Combien de temps veux-tu apprendre chaque jour?',
               questionNumber: 1,
             ),
-            
+
             Gap(40.h),
-            
+
             // Exemple 2: Question sans numéro
             const Text(
               'Exemple 2: Question sans numéro',
@@ -53,13 +53,13 @@ class QuestionWidgetExample extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            
+
             const QuestionWidget(
               questionText: 'Quelle est ta couleur préférée?',
             ),
-            
+
             Gap(40.h),
-            
+
             // Exemple 3: Question avec couleur personnalisée
             const Text(
               'Exemple 3: Question avec couleur personnalisée',
@@ -70,15 +70,15 @@ class QuestionWidgetExample extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            
+
             const QuestionWidget(
               questionText: 'Quel est ton animal préféré?',
               questionNumber: 3,
               backgroundColor: AppColors.orangeAccent,
             ),
-            
+
             Gap(40.h),
-            
+
             // Exemple 4: Question avec texte plus long
             const Text(
               'Exemple 4: Question avec texte plus long',
@@ -89,14 +89,15 @@ class QuestionWidgetExample extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            
+
             const QuestionWidget(
-              questionText: 'Qu\'est-ce que tu aimerais apprendre le plus aujourd\'hui? Tu peux choisir parmi plusieurs activités!',
+              questionText:
+                  'Qu\'est-ce que tu aimerais apprendre le plus aujourd\'hui? Tu peux choisir parmi plusieurs activités!',
               questionNumber: 4,
               backgroundColor: AppColors.purpleAccent,
               maxWidth: 350,
             ),
-            
+
             Gap(20.h),
           ],
         ),

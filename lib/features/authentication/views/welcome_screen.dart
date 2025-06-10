@@ -51,7 +51,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             iconPosition: IconPosition.right,
                             size: ButtonSize.lg,
                             width: double.infinity,
-                            onPressed: widget.onContinue ?? () => Get.offAndToNamed(AppRoutes.home),
+                            onPressed:
+                                widget.onContinue ??
+                                () => Get.offAndToNamed(AppRoutes.home),
                           )
                           .animate()
                           .fadeIn(

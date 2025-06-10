@@ -12,8 +12,7 @@ import 'package:le_petit_davinci/features/authentication/views/login_screen.dart
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-
-//TODO: Fix the aspect ratio of the background 
+//TODO: Fix the aspect ratio of the background
 class PinEntryPage extends GetView<PinEntryController> {
   const PinEntryPage({super.key});
 

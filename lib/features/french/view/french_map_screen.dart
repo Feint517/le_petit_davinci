@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
@@ -48,10 +48,11 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
             TopNavigation(text: 'French', buttonColor: AppColors.bluePrimary),
             Gap(10),
             SubHeader(
-              paragraph: "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
+              paragraph:
+                  "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
-             color:  AppColors.bluePrimary, 
-             currentLevel:  1, // Current level
+              color: AppColors.bluePrimary,
+              currentLevel: 1, // Current level
               maxLevel: 3, // Max level
             ),
             Gap(10),
@@ -65,7 +66,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
                       fit: BoxFit.cover,
-                      width: context.width, 
+                      width: context.width,
                       alignment: Alignment.topCenter, // Keeps top uncropped
                     ),
                   ),
@@ -77,38 +78,39 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                     final double? svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
-                      return Stack( // Wrap Positioned widgets in a Stack to return multiple children
+                      return Stack(
+                        // Wrap Positioned widgets in a Stack to return multiple children
                         children: [
                           // First button at the beginning of the road+
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.8, // Adjust multiplier as needed
-                            child:  MapButton(
+                            child: MapButton(
                               width: 70,
                               height: 70,
                               title: 'Le coin des leçons ',
-                             iconPath:  SvgAssets.lamp,
-                             color:  AppColors.secondary,
-                             shadowColor:  AppColors.orangeAccentDark,
+                              iconPath: SvgAssets.lamp,
+                              color: AppColors.secondary,
+                              shadowColor: AppColors.orangeAccentDark,
                               onTap: () {
-                                 Get.to( () => const IntroductionFrenchLessons(),
-        duration: const Duration(milliseconds: 500),
-        transition: Transition.rightToLeft,
-        );
+                                Get.to(
+                                  () => const IntroductionFrenchLessons(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
                               },
                             ),
-                          ), 
+                          ),
                           Positioned(
                             left: svgWidth * 0.25,
-                            top: svgHeight * 0.63, // Adjust multiplier as needed
-                            child:  MapButton(
+                            top:
+                                svgHeight * 0.63, // Adjust multiplier as needed
+                            child: MapButton(
                               title: 'Magic Dictation',
-                             iconPath:  SvgAssets.headset,
-                             color:  AppColors.bluePrimary,
-                             shadowColor:  AppColors.blueSecondary,
-                             onTap: () {
-                                 
-                              },
+                              iconPath: SvgAssets.headset,
+                              color: AppColors.bluePrimary,
+                              shadowColor: AppColors.blueSecondary,
+                              onTap: () {},
                             ),
                           ),
 
@@ -116,14 +118,12 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             right: svgWidth * 0.0,
                             top: svgHeight * 0.4, // Adjust multiplier as needed
-                            child:  MapButton(
+                            child: MapButton(
                               title: 'Sentence Construction',
-                             iconPath:  SvgAssets.chat,
-                             color:  AppColors.pinkLight,
-                             shadowColor:  AppColors.pinkPrimary,
-                             onTap: () {
-                                 
-                              },
+                              iconPath: SvgAssets.chat,
+                              color: AppColors.pinkLight,
+                              shadowColor: AppColors.pinkPrimary,
+                              onTap: () {},
                             ),
                           ),
 
@@ -131,17 +131,14 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2, // Adjust multiplier as needed
-                            child:  MapButton(
+                            child: MapButton(
                               title: 'Find errors',
-                             iconPath:  SvgAssets.explore,
-                             color:  AppColors.purple,
-                             shadowColor:  AppColors.purpleSecondary,
-                             onTap: () {
-                                 
-                              },
+                              iconPath: SvgAssets.explore,
+                              color: AppColors.purple,
+                              shadowColor: AppColors.purpleSecondary,
+                              onTap: () {},
                             ),
-                          ), 
-                           
+                          ),
                         ],
                       );
                     } else {
@@ -159,5 +156,4 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
       ),
     );
   }
- 
 }

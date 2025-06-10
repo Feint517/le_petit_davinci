@@ -5,14 +5,19 @@ class TopNavigation extends StatelessWidget {
   final String text;
   final Color buttonColor;
 
-  const TopNavigation({super.key, required this.text, required this.buttonColor});
+  const TopNavigation({
+    super.key,
+    required this.text,
+    required this.buttonColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextButton.icon(
             style: TextButton.styleFrom(
@@ -24,11 +29,21 @@ class TopNavigation extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 10),
-            label: const Text('Home', style: TextStyle(color: Colors.black, fontSize: 10)),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+              size: 10,
+            ),
+            label: const Text(
+              'Home',
+              style: TextStyle(color: Colors.black, fontSize: 10),
+            ),
           ),
-          Container( 
-            padding: const EdgeInsets.symmetric(horizontal: 10.0 ,vertical: 5.0),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 5.0,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: buttonColor,

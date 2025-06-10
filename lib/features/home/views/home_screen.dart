@@ -59,8 +59,7 @@ class HomeScreen extends GetView<HomeController> {
 
                     //* Homescreen Content Unit (Image + Mascot + Mission Card)
                     HomeScreenContent(
-                      mascotMessage:
-                          StringsManager.homeScreenMessage,
+                      mascotMessage: StringsManager.homeScreenMessage,
                       missionDescription: 'Trouve 5 mots qui riment !',
                       onAcceptMission: () {
                         // TODO: Navigate to mission

@@ -14,8 +14,5 @@ class SubjectTitleData {
   final String titleName;
   final bool isAchieved;
 
-  const SubjectTitleData({
-    required this.titleName,
-    this.isAchieved = false,
-  });
+  const SubjectTitleData({required this.titleName, this.isAchieved = false});
 }

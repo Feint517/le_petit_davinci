@@ -16,16 +16,14 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
   // Pour les cases individuelles
   bool _isOption1Selected = false;
   bool _isOption2Selected = false;
-  
+
   // Pour le groupe de cases à cocher
   List<String> _selectedGroupValues = [];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Exemples de cases à cocher'),
-      ),
+      appBar: AppBar(title: const Text('Exemples de cases à cocher')),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.w),
         child: Column(
@@ -40,7 +38,7 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
               ),
             ),
             Gap(16.h),
-            
+
             // Exemple de cases à cocher individuelles
             CheckboxWidget(
               title: '5 minutes',
@@ -53,7 +51,7 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
                 });
               },
             ),
-            
+
             CheckboxWidget(
               title: '10 minutes',
               subtitle: 'Un petit défi',
@@ -65,9 +63,9 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
                 });
               },
             ),
-            
+
             Gap(32.h),
-            
+
             Text(
               'Groupe de cases à cocher (sélection unique)',
               style: TextStyle(
@@ -77,7 +75,7 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
               ),
             ),
             Gap(16.h),
-            
+
             // Exemple de groupe avec sélection unique
             CheckboxGroup(
               options: [
@@ -108,7 +106,7 @@ class _CheckboxExampleScreenState extends State<CheckboxExampleScreen> {
               },
               multipleSelection: false,
             ),
-            
+
             Gap(20.h),
             Text('Sélection actuelle: ${_selectedGroupValues.join(", ")}'),
           ],

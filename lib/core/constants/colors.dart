@@ -8,7 +8,6 @@ class AppColors {
   static const Color accent = Color(0xFF9D63E7);
   static const Color background = Color(0xFFF9ECFF);
 
-  
   static const Color accent2 = Color(0xFF009688);
   static const Color accent3 = Color(0xFFFDCFFE);
   static const Color succuss = Color(0xFF4CAF50);

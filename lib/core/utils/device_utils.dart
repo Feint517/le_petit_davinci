@@ -27,7 +27,8 @@ class DeviceUtils {
 
   static void setFuLLScreen(bool enable) {
     SystemChrome.setEnabledSystemUIMode(
-        enable ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
+      enable ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge,
+    );
   }
 
   static double getScreenHeight() {
@@ -76,7 +77,8 @@ class DeviceUtils {
   }
 
   static Future<void> setPreferredOrientations(
-      List<DeviceOrientation> orientations) async {
+    List<DeviceOrientation> orientations,
+  ) async {
     await SystemChrome.setPreferredOrientations(orientations);
   }
 
@@ -85,8 +87,10 @@ class DeviceUtils {
   }
 
   static void showStatusBar() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
   }
 
   static haslnternetConnection() async {
@@ -105,6 +109,7 @@ class DeviceUtils {
   static bool isAndroid() {
     return Platform.isAndroid;
   }
+
   /*
     static void launchUrl(String url) async {
       if (await canLaunchUrlString(url)) {

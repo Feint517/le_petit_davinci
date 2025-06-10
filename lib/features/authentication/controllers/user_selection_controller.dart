@@ -12,5 +12,4 @@ class UserSelectionController extends GetxController {
     showQuestionsIntro = args != null && args!['showQuestionsIntro'] == true;
     introMessage = args != null ? args!['introMessage'] as String? : null;
   }
-
 }

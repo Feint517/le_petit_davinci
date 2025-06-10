@@ -9,8 +9,8 @@ const String ICON_PATH = 'assets/icons';
 class ImageAssets {
   static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';
-  static const String questionBackground = '$IMAGE_PATH/questions_background.png';
-
+  static const String questionBackground =
+      '$IMAGE_PATH/questions_background.png';
 }
 
 class LottieAssets {}
@@ -34,8 +34,10 @@ class SvgAssets {
   static const String logoWhite = '$SVG_PATH/logo_white.svg';
   static const String pinBackground = '$SVG_PATH/pin_background.svg';
   static const String loginBackground = '$SVG_PATH/login_background.svg';
-  static const String profileSelectionBackground = '$SVG_PATH/profile_selection_background.svg';
-  static const String goodmorningBackground = '$SVG_PATH/goodmorning_background.svg';
+  static const String profileSelectionBackground =
+      '$SVG_PATH/profile_selection_background.svg';
+  static const String goodmorningBackground =
+      '$SVG_PATH/goodmorning_background.svg';
   static const String headerVectorBlue = '$SVG_PATH/header_vector_blue.svg';
   static const String headerVectorGreen = '$SVG_PATH/header_vector_green.svg';
   static const String headerVectorPurple = '$SVG_PATH/header_vector_purple.svg';
@@ -43,13 +45,13 @@ class SvgAssets {
   static const String bearMasscot = '$SVG_PATH/bear_masscot.svg';
   static const String masscotBg = '$SVG_PATH/masscotbg.svg';
   static const String compassIcon = '$SVG_PATH/compassIcon.svg';
-  static const String rabbit = '$SVG_PATH/rabbit.svg'; 
-  static const String avatar1 = '$SVG_PATH/avatar1.svg'; 
-  static const String avatar2 = '$SVG_PATH/avatar2.svg'; 
-  static const String avatar3 = '$SVG_PATH/avatar3.svg'; 
-  static const String avatar4 = '$SVG_PATH/avatar4.svg'; 
-  static const String gift = '$SVG_PATH/gift.svg'; 
-  static const String homeScreenImage = '$SVG_PATH/homescreenImage.svg'; 
+  static const String rabbit = '$SVG_PATH/rabbit.svg';
+  static const String avatar1 = '$SVG_PATH/avatar1.svg';
+  static const String avatar2 = '$SVG_PATH/avatar2.svg';
+  static const String avatar3 = '$SVG_PATH/avatar3.svg';
+  static const String avatar4 = '$SVG_PATH/avatar4.svg';
+  static const String gift = '$SVG_PATH/gift.svg';
+  static const String homeScreenImage = '$SVG_PATH/homescreenImage.svg';
   static const String abcHome = '$SVG_PATH/abcHome.svg';
   static const String frenchCard = '$SVG_PATH/frenchCard.svg';
   static const String englishCard = '$SVG_PATH/englishCard.svg';
@@ -67,10 +69,13 @@ class SvgAssets {
   static const String explore = '$SVG_PATH/explore.svg';
   static const String chat = '$SVG_PATH/chat.svg';
   static const String headset = '$SVG_PATH/headset.svg';
-  static const String questionsFinishedBackground = '$SVG_PATH/questions_finish_background.svg';
-  
-  static const String vie_quotidienne_background = '$SVG_PATH/vie_quotidienne_background.svg';
-  static const String vie_quotidienne_background2 = '$SVG_PATH/vie_quotidienne_background2.svg';
+  static const String questionsFinishedBackground =
+      '$SVG_PATH/questions_finish_background.svg';
+
+  static const String vie_quotidienne_background =
+      '$SVG_PATH/vie_quotidienne_background.svg';
+  static const String vie_quotidienne_background2 =
+      '$SVG_PATH/vie_quotidienne_background2.svg';
   static const String bearvq = '$SVG_PATH/bearvq.svg';
   static const String bottom_backgroundvq = '$SVG_PATH/bottom_backgroundvq.svg';
   static const String schoolTools = '$SVG_PATH/schoolTools.svg';
@@ -80,8 +85,6 @@ class SvgAssets {
   static const String biscuit = '$SVG_PATH/biscuit.svg';
   static const String lamp = '$SVG_PATH/lamp.svg';
   static const String beargames = '$SVG_PATH/beargames.svg';
-
-
 }
 
 // Alias for easier access

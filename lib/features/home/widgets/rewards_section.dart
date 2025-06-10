@@ -29,32 +29,24 @@ class RewardsSection extends StatelessWidget {
               fontFamily: 'DynaPuff_SemiCondensed',
             ),
           ),
-          
+
           Gap(20.h),
-          
+
           // Stars card
-          StarsCard(
-            totalStars: 247,
-            starsThisWeek: 15,
-          ),
-          
+          StarsCard(totalStars: 247, starsThisWeek: 15),
+
           Gap(16.h),
-          
+
           // Badges card
-          BadgesCard(
-            earnedBadges: _getMockBadges(),
-          ),
-          
+          BadgesCard(earnedBadges: _getMockBadges()),
+
           Gap(16.h),
-          
+
           // Titles card
-          TitlesCard(
-            subjectTitles: _getMockTitles(),
-            progressValue: 0.65,
-          ),
-          
+          TitlesCard(subjectTitles: _getMockTitles(), progressValue: 0.65),
+
           Gap(16.h),
-          
+
           // CTA card
           CTACard(
             promptText: 'Encore 2 exercices pour devenir Génie du calcul !',
@@ -99,10 +91,7 @@ class RewardsSection extends StatelessWidget {
         titleName: 'Explorateur des mots',
         isAchieved: true,
       ),
-      const SubjectTitleData(
-        titleName: 'Petit génie',
-        isAchieved: true,
-      ),
+      const SubjectTitleData(titleName: 'Petit génie', isAchieved: true),
       const SubjectTitleData(
         titleName: 'Champion de lecture',
         isAchieved: true,
@@ -111,10 +100,7 @@ class RewardsSection extends StatelessWidget {
         titleName: 'Maître des calculs',
         isAchieved: false,
       ),
-      const SubjectTitleData(
-        titleName: 'Expert en anglais',
-        isAchieved: false,
-      ),
+      const SubjectTitleData(titleName: 'Expert en anglais', isAchieved: false),
     ];
   }
 }

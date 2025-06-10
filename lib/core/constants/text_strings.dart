@@ -10,7 +10,8 @@ class StringsManager {
   static const String goodMorningText =
       "Rebonjour Alex ! C'est l'heure de notre prochaine aventure !";
   static const String goodMorning = "Bonjour";
-  static const String nextAdventure = "C'est l'heure de notre prochaine aventure !";
+  static const String nextAdventure =
+      "C'est l'heure de notre prochaine aventure !";
   static const String createChildProfile = "Créer un profil enfant";
   static const String noProfileError =
       "Oops ! Aucun profil enfant n'a encore été configuré.";

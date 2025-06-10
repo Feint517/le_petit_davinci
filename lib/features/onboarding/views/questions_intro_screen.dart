@@ -29,7 +29,7 @@ class QuestionsIntroScreen extends StatelessWidget {
                 semanticLabel: 'Fond avec mascotte',
               ),
             ),
-            
+
             // Logo en haut
             Positioned(
               top: 40.h,
@@ -61,7 +61,7 @@ class QuestionsIntroScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Spacer(),
-                    
+
                     // Zone blanche avec mascotte
                     Container(
                       width: double.infinity,
@@ -82,30 +82,35 @@ class QuestionsIntroScreen extends StatelessWidget {
                         children: [
                           // Mascotte avec bulle
                           MascotWidget(
-                            speechText: "Avant de commencer ton aventure, j'ai 5 petites questions pour mieux te "
+                            speechText:
+                                "Avant de commencer ton aventure, j'ai 5 petites questions pour mieux te "
                                 "connaître\n\nEt pendant que tu réponds, je vais bouger et te faire coucou !",
                             bubbleColor: AppColors.bluePrimary,
                             mascotSize: 180.h,
                             maxBubbleWidth: 350.w,
                             textSize: 18.sp,
                           ),
-                          
+
                           Gap(30.h),
-                          
+
                           // Bouton "Je suis prêt!"
                           PillButton(
                             label: 'Je suis prêt !',
-                            icon: Icon(Icons.arrow_forward, color: Colors.white),
+                            icon: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                            ),
                             iconPosition: IconPosition.right,
                             variant: ButtonVariant.secondary,
                             size: ButtonSize.lg,
                             width: 280.w,
-                            onPressed: () => Get.toNamed(AppRoutes.userSelection),
+                            onPressed:
+                                () => Get.toNamed(AppRoutes.userSelection),
                           ),
                         ],
                       ),
                     ),
-                    
+
                     const Spacer(),
                   ],
                 ),

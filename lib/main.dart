@@ -14,8 +14,10 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Set status bar color to transparent
-      systemNavigationBarColor: Colors.transparent, // Set navigation bar color to transparent
-      systemNavigationBarIconBrightness: Brightness.dark, // Set navigation bar icons to dark
+      systemNavigationBarColor:
+          Colors.transparent, // Set navigation bar color to transparent
+      systemNavigationBarIconBrightness:
+          Brightness.dark, // Set navigation bar icons to dark
     ),
   );
   // runApp(

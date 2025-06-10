@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 
-
 /// A customizable button widget with various styles and states.
 ///
 /// Supports different variants, sizes, icons, and loading states.
@@ -37,7 +36,8 @@ class ProfileCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector( // Added GestureDetector to make the card tappable
+    return GestureDetector(
+      // Added GestureDetector to make the card tappable
       onTap: onPressed,
       child: Container(
         // Removed width and height here to allow content-based sizing
@@ -60,8 +60,11 @@ class ProfileCards extends StatelessWidget {
           child:
               Row(
                 // 'spacing' is not a property of Row. Use SizedBox for spacing.
-                mainAxisSize: MainAxisSize.min, // Make Row take minimum space horizontally
-                mainAxisAlignment: MainAxisAlignment.start, // Align content to start
+                mainAxisSize:
+                    MainAxisSize
+                        .min, // Make Row take minimum space horizontally
+                mainAxisAlignment:
+                    MainAxisAlignment.start, // Align content to start
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
@@ -71,17 +74,30 @@ class ProfileCards extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 24, // Explicitly set a radius for the avatar
-                      backgroundColor: Colors.grey[200], // Placeholder background
-                      child: picture ?? const Icon(Icons.person, size: 30, color: AppColors.textWhite), // Default icon
+                      backgroundColor:
+                          Colors.grey[200], // Placeholder background
+                      child:
+                          picture ??
+                          const Icon(
+                            Icons.person,
+                            size: 30,
+                            color: AppColors.textWhite,
+                          ), // Default icon
                     ),
                   ),
-                  const SizedBox(width: 10), // Add horizontal spacing between avatar and text
+                  const SizedBox(
+                    width: 10,
+                  ), // Add horizontal spacing between avatar and text
 
-                  Expanded( // Use Expanded to allow the Column to take available space
+                  Expanded(
+                    // Use Expanded to allow the Column to take available space
                     child: Column(
-                      mainAxisSize: MainAxisSize.min, // Make Column take minimum space vertically
+                      mainAxisSize:
+                          MainAxisSize
+                              .min, // Make Column take minimum space vertically
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align text to start
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // Align text to start
                       children: [
                         if (username != null)
                           Text(
@@ -91,7 +107,9 @@ class ProfileCards extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: AppColors.textWhite,
                             ),
-                            overflow: TextOverflow.ellipsis, // Prevent overflow with ellipsis
+                            overflow:
+                                TextOverflow
+                                    .ellipsis, // Prevent overflow with ellipsis
                             maxLines: 1, // Limit to one line
                           ),
                         if (label != null)
@@ -101,7 +119,9 @@ class ProfileCards extends StatelessWidget {
                               fontSize: 12,
                               color: labelColor ?? AppColors.textWhite,
                             ),
-                            overflow: TextOverflow.ellipsis, // Prevent overflow with ellipsis
+                            overflow:
+                                TextOverflow
+                                    .ellipsis, // Prevent overflow with ellipsis
                             maxLines: 1, // Limit to one line
                           ),
                       ],

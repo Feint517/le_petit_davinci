@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 
 enum TextFieldType { email, password, text }
+
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? hintText;

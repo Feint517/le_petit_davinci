@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
-/// A button with a pill-card look, following the design specs with 
+/// A button with a pill-card look, following the design specs with
 /// inner highlight, hover effects and pressed state.
 class PillButton extends StatefulWidget {
   /// The text to display on the button
@@ -68,9 +68,10 @@ class _PillButtonState extends State<PillButton> {
           duration: const Duration(milliseconds: 150),
           width: widget.width,
           height: _getButtonHeight(),
-          transform: _isPressed 
-              ? Matrix4.translationValues(0, 1, 0) 
-              : Matrix4.identity(),
+          transform:
+              _isPressed
+                  ? Matrix4.translationValues(0, 1, 0)
+                  : Matrix4.identity(),
           decoration: BoxDecoration(
             gradient: _getGradient(),
             borderRadius: BorderRadius.circular(12),
@@ -93,20 +94,15 @@ class _PillButtonState extends State<PillButton> {
                   // Gray overlay for disabled state
                   if (widget.disabled)
                     Positioned.fill(
-                      child: Container(
-                        color: Colors.grey.withAlpha(102),
-                      ),
+                      child: Container(color: Colors.grey.withAlpha(102)),
                     ),
-                    
+
                   // Inner highlight effect as a container with border
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Colors.transparent,
-                          width: 0,
-                        ),
+                        border: Border.all(color: Colors.transparent, width: 0),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.white.withAlpha(76),
@@ -118,12 +114,13 @@ class _PillButtonState extends State<PillButton> {
                       ),
                     ),
                   ),
-                  
+
                   // Button content
                   Center(
-                    child: widget.isLoading
-                        ? _buildLoadingIndicator()
-                        : _buildButtonContent(),
+                    child:
+                        widget.isLoading
+                            ? _buildLoadingIndicator()
+                            : _buildButtonContent(),
                   ),
                 ],
               ),
@@ -141,9 +138,7 @@ class _PillButtonState extends State<PillButton> {
       width: 16,
       child: CircularProgressIndicator(
         strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          _getTextColor(),
-        ),
+        valueColor: AlwaysStoppedAnimation<Color>(_getTextColor()),
       ).animate().fadeIn(duration: const Duration(milliseconds: 300)),
     );
   }
@@ -164,9 +159,7 @@ class _PillButtonState extends State<PillButton> {
     // If there's no icon, just return the text
     if (widget.icon == null) {
       return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: _getPadding(),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: _getPadding()),
         child: textWidget,
       );
     }
@@ -176,34 +169,33 @@ class _PillButtonState extends State<PillButton> {
 
     // Arrange icon and text according to iconPosition
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: _getPadding(),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: _getPadding()),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: widget.iconPosition == IconPosition.left
-            ? [
-                IconTheme(
-                  data: IconThemeData(
-                    color: _getTextColor(),
-                    size: _getIconSize(),
+        children:
+            widget.iconPosition == IconPosition.left
+                ? [
+                  IconTheme(
+                    data: IconThemeData(
+                      color: _getTextColor(),
+                      size: _getIconSize(),
+                    ),
+                    child: widget.icon!,
                   ),
-                  child: widget.icon!,
-                ),
-                SizedBox(width: spacing),
-                textWidget,
-              ]
-            : [
-                textWidget,
-                SizedBox(width: spacing),
-                IconTheme(
-                  data: IconThemeData(
-                    color: _getTextColor(),
-                    size: _getIconSize(),
+                  SizedBox(width: spacing),
+                  textWidget,
+                ]
+                : [
+                  textWidget,
+                  SizedBox(width: spacing),
+                  IconTheme(
+                    data: IconThemeData(
+                      color: _getTextColor(),
+                      size: _getIconSize(),
+                    ),
+                    child: widget.icon!,
                   ),
-                  child: widget.icon!,
-                ),
-              ],
+                ],
       ),
     );
   }
@@ -288,10 +280,7 @@ class _PillButtonState extends State<PillButton> {
         break;
       case ButtonVariant.ghost:
         return LinearGradient(
-          colors: [
-            Colors.transparent,
-            Colors.transparent,
-          ],
+          colors: [Colors.transparent, Colors.transparent],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         );
@@ -300,20 +289,36 @@ class _PillButtonState extends State<PillButton> {
     // Apply brightness adjustment for hover/pressed states
     if (_isPressed) {
       // Darker by 6% when pressed
-      baseColors = baseColors.map((color) => 
-        HSLColor.fromColor(color)
-            .withLightness((HSLColor.fromColor(color).lightness - 0.06)
-            .clamp(0.0, 1.0))
-            .toColor()
-      ).toList();
+      baseColors =
+          baseColors
+              .map(
+                (color) =>
+                    HSLColor.fromColor(color)
+                        .withLightness(
+                          (HSLColor.fromColor(color).lightness - 0.06).clamp(
+                            0.0,
+                            1.0,
+                          ),
+                        )
+                        .toColor(),
+              )
+              .toList();
     } else if (_isHovered) {
       // Brighter by 4% when hovered
-      baseColors = baseColors.map((color) => 
-        HSLColor.fromColor(color)
-            .withLightness((HSLColor.fromColor(color).lightness + 0.04)
-            .clamp(0.0, 1.0))
-            .toColor()
-      ).toList();
+      baseColors =
+          baseColors
+              .map(
+                (color) =>
+                    HSLColor.fromColor(color)
+                        .withLightness(
+                          (HSLColor.fromColor(color).lightness + 0.04).clamp(
+                            0.0,
+                            1.0,
+                          ),
+                        )
+                        .toColor(),
+              )
+              .toList();
     }
 
     return LinearGradient(
