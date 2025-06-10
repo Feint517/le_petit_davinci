@@ -1,1 +1,1 @@
-
+enum PracticeType { listenAndMatch, wordBuilder, findTheWord }

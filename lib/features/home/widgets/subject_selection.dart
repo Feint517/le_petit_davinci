@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
-import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
-import 'package:le_petit_davinci/test.dart';
+import 'package:le_petit_davinci/features/lessons/views/practice_page.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../models/subject_data.dart';
@@ -40,7 +40,7 @@ class SubjectSelection extends StatelessWidget {
         cardColor: AppColors.greenPrimary,
         onTap:
             () => Get.to(
-              () => const TestScreen(),
+              () => const PracticePage(type: PracticeType.listenAndMatch),
               duration: const Duration(milliseconds: 500),
               transition: Transition.rightToLeft,
             ),

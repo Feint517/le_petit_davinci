@@ -89,6 +89,11 @@ class SvgAssets {
   static const String micPink = '$SVG_PATH/mic_pink.svg';
   static const String micPurple = '$SVG_PATH/mic_purple.svg';
   static const String micYellow = '$SVG_PATH/mic_yellow.svg';
+  static const String soundIcon = '$SVG_PATH/sound_icon.svg';
+  static const String apple = '$SVG_PATH/apple.svg';
+  static const String igloo = '$SVG_PATH/igloo.svg';
+  static const String octopus = '$SVG_PATH/octopus.svg';
+  static const String happyCat = '$SVG_PATH/happy_cat.svg';
 }
 
 // Alias for easier access
