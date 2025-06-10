@@ -80,6 +80,9 @@ class SvgAssets {
   static const String biscuit = '$SVG_PATH/biscuit.svg';
   static const String lamp = '$SVG_PATH/lamp.svg';
   static const String beargames = '$SVG_PATH/beargames.svg';
+  static const String lessons = '$SVG_PATH/lessons.svg';
+  static const String mathbg = '$SVG_PATH/mathbg.svg';
+  static const String croco = '$SVG_PATH/croco.svg';
 
 
 }

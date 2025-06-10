@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
+import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
-import 'package:le_petit_davinci/features/home/widgets/profile_header.dart';
 
 class VieQuotidienneScreen extends StatelessWidget {
   const VieQuotidienneScreen({super.key});

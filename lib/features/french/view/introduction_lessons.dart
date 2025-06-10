@@ -6,12 +6,10 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
-import 'package:le_petit_davinci/core/widgets/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/lessons.dart';
-import 'package:le_petit_davinci/features/home/widgets/profile_header.dart';
 
 class IntroductionFrenchLessons extends StatefulWidget {
   const IntroductionFrenchLessons({super.key});
