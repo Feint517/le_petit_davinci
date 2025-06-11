@@ -8,7 +8,10 @@ import 'package:le_petit_davinci/core/widgets/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
+import 'package:le_petit_davinci/features/french/view/cherche_lerreur.dart';
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
+import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
+import 'package:le_petit_davinci/features/french/view/sentence_construction.dart';
 import 'package:le_petit_davinci/features/home/widgets/profile_header.dart';
 
 class FrenchMapScreen extends StatefulWidget {
@@ -32,7 +35,7 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
       controller.getSvgDimensions();
     });
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,8 +87,8 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.8, // Adjust multiplier as needed
                             child:  MapButton(
-                              width: 70,
-                              height: 70,
+                              width: 50,
+                              height: 50,
                               title: 'Le coin des leçons ',
                              iconPath:  SvgAssets.lamp,
                              color:  AppColors.secondary,
@@ -108,6 +111,10 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                              shadowColor:  AppColors.blueSecondary,
                              onTap: () {
                                  
+                                 Get.to( () => const FrenchMagicDictation(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        );
                               },
                             ),
                           ),
@@ -122,7 +129,10 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                              color:  AppColors.pinkLight,
                              shadowColor:  AppColors.pinkPrimary,
                              onTap: () {
-                                 
+                                 Get.to( () => const FrenchSentenceConstruction(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        );
                               },
                             ),
                           ),
@@ -137,7 +147,10 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                              color:  AppColors.purple,
                              shadowColor:  AppColors.purpleSecondary,
                              onTap: () {
-                                 
+                                 Get.to( () => const FrenchCherchelerreur(),
+        duration: const Duration(milliseconds: 500),
+        transition: Transition.rightToLeft,
+        );
                               },
                             ),
                           ), 

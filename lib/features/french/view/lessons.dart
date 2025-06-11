@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart'; 
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart'; 
-import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart'; 
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
