@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
 
 class VieQuotidienneScreen extends StatelessWidget {
   const VieQuotidienneScreen({super.key});

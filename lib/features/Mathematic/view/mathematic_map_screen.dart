@@ -7,7 +7,11 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
+import 'package:le_petit_davinci/features/Mathematic/controller/math_map_controller.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_additions_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_geometry_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_lessons.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_subtraction_screen.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 
 class MathematicMapScreen extends StatefulWidget {
@@ -21,7 +25,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
   // Inject the controller
   // Get.put() initializes the controller if it hasn't been already.
   // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX binding).
-  final FrenchMapController controller = Get.put(FrenchMapController());
+  final MathMapController controller = Get.put(MathMapController());
 
   @override
   void initState() {
@@ -86,41 +90,78 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                           // First button at the beginning of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top:
-                                svgHeight * 0.77, // Adjust multiplier as needed
+                            top: svgHeight * 0.8, // Adjust multiplier as needed
                             child: MapButton(
-                              title: 'Dictée magique',
+                              width: 70,
+                              height: 70,
+                              title: 'Lessons',
+                              iconPath: SvgAssets.lamp,
+                              color: AppColors.secondary,
+                              shadowColor: AppColors.orangeAccentDark,
+                              onTap: () {
+                                Get.to(
+                                  () => const MathLessons(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
+                            ),
+                          ),
+                          
+                          // Second button 
+                          Positioned(
+                            left: svgWidth * 0.25,
+                            top: svgHeight * 0.63, // Adjust multiplier as needed
+                            child: MapButton(
+                              title: 'Les additions magiques',
                               iconPath: SvgAssets.headset,
                               color: AppColors.bluePrimary,
                               shadowColor: AppColors.blueSecondary,
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(
+                                  () => const MathAdditionsScreen(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
                             ),
                           ),
 
-                          // Second button at the middle of the road
+                          // Third button
                           Positioned(
                             right: svgWidth * 0.0,
-                            top:
-                                svgHeight * 0.46, // Adjust multiplier as needed
+                            top: svgHeight * 0.4, // Adjust multiplier as needed
                             child: MapButton(
-                              title: 'resoudre des énigmes',
+                              title: 'Les soustractions en mission',
                               iconPath: SvgAssets.chat,
                               color: AppColors.pinkLight,
                               shadowColor: AppColors.pinkPrimary,
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(
+                                  () => const MathSubtractionScreen(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
                             ),
                           ),
 
-                          // Third button at the end of the road
+                          // Fourth button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2, // Adjust multiplier as needed
                             child: MapButton(
-                              title: "Trouver l'erreur",
+                              title: 'Le jeu des formes géométriques',
                               iconPath: SvgAssets.explore,
                               color: AppColors.purple,
                               shadowColor: AppColors.purpleSecondary,
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(
+                                  () => const MathGeometryScreen(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
                             ),
                           ),
                         ],

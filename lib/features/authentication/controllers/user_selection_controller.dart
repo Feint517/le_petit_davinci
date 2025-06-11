@@ -8,8 +8,15 @@ class UserSelectionController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    args = Get.arguments as Map<String, dynamic>?;
-    showQuestionsIntro = args != null && args!['showQuestionsIntro'] == true;
-    introMessage = args != null ? args!['introMessage'] as String? : null;
+    // Safely handle arguments
+    if (Get.arguments != null && Get.arguments is Map<String, dynamic>) {
+      args = Get.arguments as Map<String, dynamic>;
+      showQuestionsIntro = args!['showQuestionsIntro'] == true;
+      introMessage = args!['introMessage'] as String?;
+    } else {
+      // Default values when no arguments are passed
+      showQuestionsIntro = false;
+      introMessage = null;
+    }
   }
 }
