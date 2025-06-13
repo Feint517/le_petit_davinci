@@ -7,67 +7,60 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/features/Mathematic/controller/math_map_controller.dart';
+import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_controller.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_additions_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_geometry_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_lessons.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_subtraction_screen.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 
-class MathematicMapScreen extends StatefulWidget {
+class MathematicMapScreen extends GetView<MathMapController> {
   const MathematicMapScreen({super.key});
 
   @override
-  State<MathematicMapScreen> createState() => _MathematicMapScreenState();
-}
-
-class _MathematicMapScreenState extends State<MathematicMapScreen> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX binding).
-  final MathMapController controller = Get.put(MathMapController());
-
-  @override
-  void initState() {
-    super.initState();
-    // Schedule the call to the controller's method after the first frame is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.getSvgDimensions();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    //? Reset dimensions if both are null (first entry)
+    if (controller.svgRenderedWidth == null &&
+        controller.svgRenderedHeight == null) {
+      controller.resetSvgDimensions();
+    }
+
+    //? Call getSvgDimensions after the first frame, only if needed
+    if (controller.svgRenderedWidth == null ||
+        controller.svgRenderedHeight == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.getSvgDimensions();
+      });
+    }
     return Scaffold(
       body: SafeArea(
         bottom: false,
         child: Column(
           children: [
-            ProfileHeader(
+            const ProfileHeader(
               userName: 'Alex',
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            CustomAppBar(
+            const CustomAppBar(
               chipText: 'Mathematiques',
               chipColor: AppColors.secondary,
             ),
-            Gap(10),
-            SubHeader(
+            const Gap(10),
+            const SubHeader(
               paragraph:
                   "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
               label: 'Génie du calcul',
               color: AppColors.secondary,
-              currentLevel: 1, // Current level
-              maxLevel: 3, // Max level
+              currentLevel: 1,
+              maxLevel: 3,
             ),
-            Gap(10),
+            const Gap(10),
             Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
                   SizedBox(
-                    // Assign the controller's GlobalKey to the SizedBox
                     key: controller.svgKey,
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
@@ -77,27 +70,24 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                     ),
                   ),
 
-                  // Use Obx to rebuild only the Positioned widgets when dimensions change
                   Obx(() {
-                    // Check if dimensions are available from the controller
+                    //* Check if dimensions are available from the controller
                     final double? svgWidth = controller.svgRenderedWidth;
                     final double? svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
                       return Stack(
-                        // Wrap Positioned widgets in a Stack to return multiple children
                         children: [
-                          // First button at the beginning of the road
+                          //* First button at the beginning of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.8, // Adjust multiplier as needed
+                            top: svgHeight * 0.8,
                             child: MapButton(
                               width: 70,
                               height: 70,
                               title: 'Lessons',
                               iconPath: SvgAssets.lamp,
                               backgroundColor: AppColors.secondary,
-                              //shadowColor: AppColors.orangeAccentDark,
                               onTap: () {
                                 Get.to(
                                   () => const MathLessons(),
@@ -108,16 +98,14 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             ),
                           ),
 
-                          // Second button
+                          //* Second button
                           Positioned(
                             left: svgWidth * 0.25,
-                            top:
-                                svgHeight * 0.63, // Adjust multiplier as needed
+                            top: svgHeight * 0.58,
                             child: MapButton(
                               title: 'Les additions magiques',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
-                              //shadowColor: AppColors.blueSecondary,
                               onTap: () {
                                 Get.to(
                                   () => const MathAdditionsScreen(),
@@ -128,10 +116,10 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             ),
                           ),
 
-                          // Third button
+                          //* Third button
                           Positioned(
-                            right: svgWidth * 0.0,
-                            top: svgHeight * 0.4, // Adjust multiplier as needed
+                            right: svgWidth * -0.1,
+                            top: svgHeight * 0.4,
                             child: MapButton(
                               title: 'Les soustractions en mission',
                               iconPath: SvgAssets.chat,
@@ -147,10 +135,10 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             ),
                           ),
 
-                          // Fourth button at the end of the road
+                          //* Fourth button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.2, // Adjust multiplier as needed
+                            top: svgHeight * 0.2,
                             child: MapButton(
                               title: 'Le jeu des formes géométriques',
                               iconPath: SvgAssets.explore,
@@ -168,10 +156,7 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                         ],
                       );
                     } else {
-                      // Return an empty container or a loading indicator while dimensions are null
-                      return Container(
-                        // child: Center(child: CircularProgressIndicator()), // Optional loading indicator
-                      );
+                      return Center(child: CircularProgressIndicator());
                     }
                   }),
                 ],

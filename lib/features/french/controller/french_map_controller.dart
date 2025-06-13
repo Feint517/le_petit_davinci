@@ -9,7 +9,6 @@ class FrenchMapController extends GetxController {
   final RxDouble _svgRenderedWidth = RxDouble(0.0);
   final RxDouble _svgRenderedHeight = RxDouble(0.0);
 
-  // Expose them as getters (optional, but good practice)
   double? get svgRenderedWidth =>
       _svgRenderedWidth.value == 0.0 ? null : _svgRenderedWidth.value;
   double? get svgRenderedHeight =>
@@ -19,6 +18,12 @@ class FrenchMapController extends GetxController {
   void onInit() {
     super.onInit();
     getSvgDimensions();
+  }
+
+  @override
+  void onClose() {
+    resetSvgDimensions();
+    super.onClose();
   }
 
   void getSvgDimensions() {
@@ -39,5 +44,10 @@ class FrenchMapController extends GetxController {
       //? Retry after a short delay
       Future.delayed(const Duration(milliseconds: 50), getSvgDimensions);
     }
+  }
+
+  void resetSvgDimensions() {
+    _svgRenderedWidth.value = 0.0;
+    _svgRenderedHeight.value = 0.0;
   }
 }

@@ -16,6 +16,12 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
 
   @override
   Widget build(BuildContext context) {
+    //? Reset dimensions if both are null (first entry)
+    if (controller.svgRenderedWidth == null &&
+        controller.svgRenderedHeight == null) {
+      controller.resetSvgDimensions();
+    }
+
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {
@@ -76,7 +82,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Le coin des leçons ',
                               iconPath: SvgAssets.lamp,
                               backgroundColor: AppColors.secondary,
-                              //shadowColor: AppColors.orangeAccentDark,
                               onTap: () {
                                 Get.to(
                                   () => const IntroductionFrenchLessons(),
@@ -94,7 +99,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
-                              //shadowColor: AppColors.blueSecondary,
                               onTap: () {},
                             ),
                           ),
@@ -107,7 +111,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Sentence Construction',
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
-                              //shadowColor: AppColors.pinkPrimary,
                               onTap: () {},
                             ),
                           ),
@@ -120,7 +123,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
-                             // shadowColor: AppColors.purpleSecondary,
                               onTap: () {},
                             ),
                           ),

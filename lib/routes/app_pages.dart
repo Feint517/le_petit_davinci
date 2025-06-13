@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/bindings/math_binding.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/authentication/auth_feature.dart';
 import 'package:le_petit_davinci/features/authentication/bindings/auth_binding.dart';
@@ -99,6 +100,7 @@ class AppPages {
           page: () => const MathematicMapScreen(),
           transition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 500),
+          binding: MathBinding(),
         ),
         GetPage(
           name: AppRoutes.dailyLifeMap,

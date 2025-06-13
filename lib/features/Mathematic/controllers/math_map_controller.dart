@@ -2,10 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EnglishMapController extends GetxController {
+class MathMapController extends GetxController {
   final GlobalKey svgKey = GlobalKey();
 
-  // Make these observable so the UI rebuilds when they change
   final RxDouble _svgRenderedWidth = RxDouble(0.0);
   final RxDouble _svgRenderedHeight = RxDouble(0.0);
 

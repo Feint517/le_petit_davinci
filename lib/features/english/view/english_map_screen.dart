@@ -5,17 +5,25 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class EnglishMapScreen extends GetView<EnglishMapController> {
   const EnglishMapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //? Reset dimensions if both are null (first entry)
+    if (controller.svgRenderedWidth == null &&
+        controller.svgRenderedHeight == null) {
+      controller.resetSvgDimensions();
+    }
+
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {
@@ -63,9 +71,8 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                   ),
 
                   Obx(() {
-                    //? Check if dimensions are available from the controller
-                    final double? svgWidth = controller.svgRenderedWidth;
-                    final double? svgHeight = controller.svgRenderedHeight;
+                    final svgWidth = controller.svgRenderedWidth;
+                    final svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
                       return Stack(
@@ -73,44 +80,54 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                           //* First button at the beginning of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top:
-                                svgHeight *
-                                0.77, //? Adjust multiplier as needed
+                            top: svgHeight * 0.77,
                             child: MapButton(
-                              title: 'Dictée magique',
+                              title: 'Listen and Match',
+                              levelStatus: LevelStatus.completed,
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
-                              //shadowColor: AppColors.blueSecondary,
-                              onTap: () {},
+                              onTap:
+                                  () => Get.toNamed(
+                                    AppRoutes.home +
+                                        AppRoutes.englishMap +
+                                        AppRoutes.listenAndMatch,
+                                  ),
                             ),
                           ),
 
                           //* Second button at the middle of the road
                           Positioned(
-                            right: svgWidth * 0.0,
-                            top:
-                                svgHeight *
-                                0.46, //? Adjust multiplier as needed
+                            right: svgWidth * 0.05,
+                            top: svgHeight * 0.46,
                             child: MapButton(
-                              title: 'Construction de phrases',
+                              title: 'Word Builder',
+                              levelStatus: LevelStatus.inProgress,
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
-                              //shadowColor: AppColors.pinkPrimary,
-                              onTap: () {},
+                              onTap:
+                                  () => Get.toNamed(
+                                    AppRoutes.home +
+                                        AppRoutes.englishMap +
+                                        AppRoutes.wordBuilder,
+                                  ),
                             ),
                           ),
 
                           //* Third button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top:
-                                svgHeight * 0.2, //? Adjust multiplier as needed
+                            top: svgHeight * 0.2,
                             child: MapButton(
-                              title: "Trouver l'erreur",
+                              title: "Find the Word",
+                              levelStatus: LevelStatus.notStarted,
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
-                              //shadowColor: AppColors.purpleSecondary,
-                              onTap: () {},
+                              onTap:
+                                  () => Get.toNamed(
+                                    AppRoutes.home +
+                                        AppRoutes.englishMap +
+                                        AppRoutes.findTheWord,
+                                  ),
                             ),
                           ),
                         ],
