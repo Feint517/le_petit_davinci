@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/themes/theme.dart';
 import 'package:le_petit_davinci/routes/app_pages.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
@@ -18,10 +18,13 @@ class App extends StatelessWidget {
         return GetMaterialApp(
           title: 'Le Petit Davinci',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-            fontFamily: 'DynaPuff_SemiCondensed',
-          ),
+          // theme: ThemeData(
+          //   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+          //   fontFamily: 'DynaPuff_SemiCondensed',
+          // ),
+          themeMode: ThemeMode.system,
+          theme: CustomAppTheme.lightTheme,
+          darkTheme: CustomAppTheme.darkTheme,
           initialRoute: AppRoutes.splash,
           getPages: AppPages.routes,
         );

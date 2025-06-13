@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
 
 class CustomCheckboxTheme {
   CustomCheckboxTheme._();
@@ -14,7 +15,7 @@ class CustomCheckboxTheme {
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.blue;
+        return AppColors.primary;
       } else {
         return Colors.transparent;
       }
@@ -32,7 +33,7 @@ class CustomCheckboxTheme {
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return Colors.blue;
+        return AppColors.primary;
       } else {
         return Colors.transparent;
       }
