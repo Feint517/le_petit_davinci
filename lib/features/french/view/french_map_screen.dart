@@ -11,30 +11,18 @@ import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
 
-class FrenchMapScreen extends StatefulWidget {
+class FrenchMapScreen extends GetView<FrenchMapController> {
   const FrenchMapScreen({super.key});
 
   @override
-  State<FrenchMapScreen> createState() => _FrenchMapScreenState();
-}
-
-class _FrenchMapScreenState extends State<FrenchMapScreen> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX binding).
-  final FrenchMapController controller = Get.put(FrenchMapController());
-
-  @override
-  void initState() {
-    super.initState();
-    // Schedule the call to the controller's method after the first frame is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.getSvgDimensions();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    //? Call getSvgDimensions after the first frame, only if needed
+    if (controller.svgRenderedWidth == null ||
+        controller.svgRenderedHeight == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.getSvgDimensions();
+      });
+    }
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -52,8 +40,8 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                   "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
               color: AppColors.bluePrimary,
-              currentLevel: 1, // Current level
-              maxLevel: 3, // Max level
+              currentLevel: 1,
+              maxLevel: 3,
             ),
             Gap(10),
             Expanded(
@@ -61,37 +49,34 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   SizedBox(
-                    // Assign the controller's GlobalKey to the SizedBox
                     key: controller.svgKey,
                     child: SvgPicture.asset(
                       SvgAssets.frenchMapBackground,
                       fit: BoxFit.cover,
                       width: context.width,
-                      alignment: Alignment.topCenter, // Keeps top uncropped
+                      alignment: Alignment.topCenter, //? Keeps top uncropped
                     ),
                   ),
 
-                  // Use Obx to rebuild only the Positioned widgets when dimensions change
+                  
                   Obx(() {
-                    // Check if dimensions are available from the controller
                     final double? svgWidth = controller.svgRenderedWidth;
                     final double? svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
                       return Stack(
-                        // Wrap Positioned widgets in a Stack to return multiple children
                         children: [
-                          // First button at the beginning of the road+
+                          //* First button at the beginning of the road+
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.8, // Adjust multiplier as needed
+                            top: svgHeight * 0.8,
                             child: MapButton(
                               width: 70,
                               height: 70,
                               title: 'Le coin des leçons ',
                               iconPath: SvgAssets.lamp,
-                              color: AppColors.secondary,
-                              shadowColor: AppColors.orangeAccentDark,
+                              backgroundColor: AppColors.secondary,
+                              //shadowColor: AppColors.orangeAccentDark,
                               onTap: () {
                                 Get.to(
                                   () => const IntroductionFrenchLessons(),
@@ -104,48 +89,45 @@ class _FrenchMapScreenState extends State<FrenchMapScreen> {
                           Positioned(
                             left: svgWidth * 0.25,
                             top:
-                                svgHeight * 0.63, // Adjust multiplier as needed
+                                svgHeight * 0.63,
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
-                              color: AppColors.bluePrimary,
-                              shadowColor: AppColors.blueSecondary,
+                              backgroundColor: AppColors.bluePrimary,
+                              //shadowColor: AppColors.blueSecondary,
                               onTap: () {},
                             ),
                           ),
 
-                          // Second button at the middle of the road
+                          //* Second button at the middle of the road
                           Positioned(
                             right: svgWidth * 0.0,
-                            top: svgHeight * 0.4, // Adjust multiplier as needed
+                            top: svgHeight * 0.4, 
                             child: MapButton(
                               title: 'Sentence Construction',
                               iconPath: SvgAssets.chat,
-                              color: AppColors.pinkLight,
-                              shadowColor: AppColors.pinkPrimary,
+                              backgroundColor: AppColors.pinkLight,
+                              //shadowColor: AppColors.pinkPrimary,
                               onTap: () {},
                             ),
                           ),
 
-                          // Third button at the end of the road
+                          //* Third button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.2, // Adjust multiplier as needed
+                            top: svgHeight * 0.2, 
                             child: MapButton(
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,
-                              color: AppColors.purple,
-                              shadowColor: AppColors.purpleSecondary,
+                              backgroundColor: AppColors.purple,
+                             // shadowColor: AppColors.purpleSecondary,
                               onTap: () {},
                             ),
                           ),
                         ],
                       );
                     } else {
-                      // Return an empty container or a loading indicator while dimensions are null
-                      return Container(
-                        // child: Center(child: CircularProgressIndicator()), // Optional loading indicator
-                      );
+                      return Center(child: CircularProgressIndicator());
                     }
                   }),
                 ],

@@ -1,16 +1,10 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
-import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
-import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
-import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
-import 'package:le_petit_davinci/features/lessons/views/practice_page.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../models/subject_data.dart';
@@ -27,63 +21,38 @@ class SubjectSelection extends StatelessWidget {
         label: 'Français',
         imageAssetPath: SvgAssets.frenchCard,
         cardColor: AppColors.bluePrimary,
-        onTap:
-            () => Get.to(
-              () => const FrenchMapScreen(),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeft,
-            ),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.frenchMap),
       ),
       SubjectData(
         label: 'English',
         imageAssetPath: SvgAssets.englishCard,
         cardColor: AppColors.greenPrimary,
-        onTap:
-            () => Get.to(
-              () => const PracticePage(type: PracticeType.listenAndMatch),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeft,
-            ),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.englishMap),
       ),
       SubjectData(
         label: 'Mathématiques',
         imageAssetPath: SvgAssets.mathCard,
         cardColor: AppColors.orangeAccent,
-        onTap:
-            () => Get.to(
-              () => const MathematicMapScreen(),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeft,
-            ),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.mathMap),
       ),
       SubjectData(
         label: 'Vie quotidienne',
         imageAssetPath: SvgAssets.gameCard,
         cardColor: AppColors.pinkAccent,
-        onTap:
-            () => Get.to(
-              () => const VieQuotidienneScreen(),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeft,
-            ),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.dailyLifeMap),
       ),
       SubjectData(
         label: 'Jeux',
         imageAssetPath: SvgAssets.lifeCard,
         cardColor: AppColors.greenPrimary,
-        onTap:
-            () => Get.to(
-              () => const GamesScreen(),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeft,
-            ),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.games),
       ),
 
       SubjectData(
         label: 'Studio',
         imageAssetPath: SvgAssets.studioCard,
         cardColor: AppColors.bluePrimary,
-        onTap: () => print('Studio selected'),
+        onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.studio),
       ),
     ];
 

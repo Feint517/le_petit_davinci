@@ -8,14 +8,14 @@ class MathProblem {
   final int secondNumber;
   final List<int> answerChoices;
   final String operator;
-  
+
   MathProblem({
     required this.firstNumber,
     required this.secondNumber,
     required this.answerChoices,
     this.operator = '+', // Default to addition
   });
-  
+
   int get correctAnswer {
     switch (operator) {
       case '+':
@@ -30,11 +30,8 @@ class MathProblem {
 
 class MathProblemWidget extends StatefulWidget {
   final List<MathProblem>? problems;
-  
-  const MathProblemWidget({
-    super.key,
-    this.problems,
-  });
+
+  const MathProblemWidget({super.key, this.problems});
 
   @override
   State<MathProblemWidget> createState() => _MathProblemWidgetState();
@@ -49,7 +46,7 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
   String operator = '+';
   String? selectedAnswer;
   bool showResult = false;
-  
+
   // Problem management
   List<MathProblem> problems = [];
   int currentProblemIndex = 0;
@@ -60,13 +57,13 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
     super.initState();
     // Use provided problems or generate default ones
     problems = widget.problems ?? _getDefaultProblems();
-    
+
     // Load the first problem
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadCurrentProblem();
     });
   }
-  
+
   List<MathProblem> _getDefaultProblems() {
     return [
       MathProblem(firstNumber: 2, secondNumber: 3, answerChoices: [5, 8, 6]),
@@ -82,7 +79,7 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [        
+      children: [
         Column(
           children: [
             // Math equation tiles row
@@ -104,20 +101,21 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
                 ],
               ),
             ),
-            
+
             // Answer choice buttons
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: answerChoices.map((number) => 
-                  _buildAnswerButton(number.toString())
-                ).toList(),
+                children:
+                    answerChoices
+                        .map((number) => _buildAnswerButton(number.toString()))
+                        .toList(),
               ),
             ),
           ],
         ),
-        
+
         // Feedback panel at bottom (only shown when result is displayed)
         if (showResult)
           Positioned(
@@ -133,20 +131,16 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
   // Build the feedback panel with mascot and message
   Widget _buildFeedbackPanel() {
     bool isCorrect = selectedAnswer == correctAnswer.toString();
-    
+
     return Container(
       padding: const EdgeInsets.all(20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // Mascot illustration (left)
-          SvgPicture.asset(
-            SvgAssets.croco,
-            height: 120,
-            width: 80,
-          ),
+          SvgPicture.asset(SvgAssets.croco, height: 120, width: 80),
           const SizedBox(width: 16),
-          
+
           // Message bubble (right)
           Expanded(
             child: Container(
@@ -156,7 +150,7 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -179,13 +173,13 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  
+
                   // Message text
                   Expanded(
                     child: Text(
-                      isCorrect 
-                        ? 'Super ! Tu as raison.'
-                        : 'Dommage, ce n\'est pas la bonne réponse.',
+                      isCorrect
+                          ? 'Super ! Tu as raison.'
+                          : 'Dommage, ce n\'est pas la bonne réponse.',
                       style: TextStyle(
                         color: AppColors.bluePrimary,
                         fontSize: 16,
@@ -206,22 +200,28 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
   Widget _buildMathTile(String content) {
     // Check if it's an operator (+, -, or =)
     bool isOperator = content == '+' || content == '-' || content == '=';
-    
+
     return Container(
       width: 50,
       height: 50,
       decoration: BoxDecoration(
-        color: isOperator 
-          ? Colors.transparent // No background for operators
-          : AppColors.orangeAccentDark, // Darker orange for numbers and empty tile
+        color:
+            isOperator
+                ? Colors
+                    .transparent // No background for operators
+                : AppColors
+                    .orangeAccentDark, // Darker orange for numbers and empty tile
         borderRadius: BorderRadius.circular(12),
-        boxShadow: isOperator ? null : [
-          BoxShadow(
-            color: AppColors.orangeAccentDark.withOpacity(0.3),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow:
+            isOperator
+                ? null
+                : [
+                  BoxShadow(
+                    color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
       ),
       child: Center(
         child: Text(
@@ -240,25 +240,33 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
   Widget _buildAnswerButton(String number) {
     bool isSelected = selectedAnswer == number;
     bool isCorrect = number == correctAnswer.toString();
-    
+
     return GestureDetector(
       onTap: () => _onAnswerSelected(number),
       child: Container(
         width: 80,
         height: 80,
         decoration: BoxDecoration(
-          color: showResult 
-            ? (isCorrect ? Colors.green.shade100 : isSelected ? Colors.red.shade100 : AppColors.white)
-            : (isSelected ? AppColors.secondary.withOpacity(0.2) : AppColors.white),
+          color:
+              showResult
+                  ? (isCorrect
+                      ? Colors.green.shade100
+                      : isSelected
+                      ? Colors.red.shade100
+                      : AppColors.white)
+                  : (isSelected
+                      ? AppColors.secondary.withValues(alpha: 0.2)
+                      : AppColors.white),
           shape: BoxShape.circle,
-          border: showResult && isCorrect 
-            ? Border.all(color: Colors.green, width: 2)
-            : isSelected 
-              ? Border.all(color: AppColors.secondary, width: 2)
-              : null,
+          border:
+              showResult && isCorrect
+                  ? Border.all(color: Colors.green, width: 2)
+                  : isSelected
+                  ? Border.all(color: AppColors.secondary, width: 2)
+                  : null,
           boxShadow: [
             BoxShadow(
-              color: AppColors.secondary.withOpacity(0.4),
+              color: AppColors.secondary.withValues(alpha: 0.4),
               blurRadius: 6,
               offset: const Offset(0, 3),
             ),
@@ -268,11 +276,12 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
           child: Text(
             number,
             style: TextStyle(
-              color: showResult && isCorrect 
-                ? Colors.green.shade700
-                : showResult && isSelected && !isCorrect
-                  ? Colors.red.shade700
-                  : AppColors.secondary,
+              color:
+                  showResult && isCorrect
+                      ? Colors.green.shade700
+                      : showResult && isSelected && !isCorrect
+                      ? Colors.red.shade700
+                      : AppColors.secondary,
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
@@ -292,12 +301,12 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
       'userAnswer': int.tryParse(answer),
       'isCorrect': answer == correctAnswer.toString(),
     });
-    
+
     setState(() {
       selectedAnswer = answer;
       showResult = true;
     });
-    
+
     // Show result for 1.5 seconds, then move to next problem
     Future.delayed(const Duration(milliseconds: 1500), () {
       if (mounted) {
@@ -331,14 +340,17 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
 
   // Show completion message and stats
   void _showProblemSetComplete() {
-    int correctAnswers = problemHistory.where((p) => p['isCorrect'] == true).length;
-    
+    int correctAnswers =
+        problemHistory.where((p) => p['isCorrect'] == true).length;
+
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           title: Row(
             children: [
               Icon(Icons.star, color: AppColors.secondary, size: 28),
@@ -357,17 +369,14 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
             children: [
               Text(
                 'Tu as terminé ${problems.length} problèmes!',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.darkGrey,
-                ),
+                style: TextStyle(fontSize: 16, color: AppColors.darkGrey),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.1),
+                  color: AppColors.secondary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -398,17 +407,17 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.secondary,
                   foregroundColor: AppColors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
                 child: const Text(
                   'Continuer',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

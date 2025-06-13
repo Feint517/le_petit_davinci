@@ -70,7 +70,7 @@ class PinBox extends StatelessWidget {
           //* Submit button
           CustomButton(
             label: StringsManager.connectWithPin,
-            onPressed: () => Get.toNamed(Routes.ERROR),
+            onPressed: () => Get.toNamed(AppRoutes.error),
             variant: ButtonVariant.primary,
             size: ButtonSize.lg,
             width: double.infinity,
@@ -79,7 +79,7 @@ class PinBox extends StatelessWidget {
 
           //* Forgot password link
           GestureDetector(
-            onTap: () => Get.toNamed(Routes.HOME),
+            onTap: () => Get.toNamed(AppRoutes.home),
             child: Text(
               StringsManager.forgotPassword,
               style: TextStyle(

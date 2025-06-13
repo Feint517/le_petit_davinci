@@ -1,55 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 
 class MapButton extends StatelessWidget {
-  final String title;
-  final String iconPath;
-  final Color color;
-  final Color shadowColor;
-  final double? width;
-  final double? height;
-  final VoidCallback onTap;
   const MapButton({
     super.key,
     required this.title,
     required this.iconPath,
-    required this.color,
-    required this.shadowColor,
-    this.width,
-    this.height,
+    required this.backgroundColor,
+    this.levelStatus = LevelStatus.inProgress,
+    this.width = 70,
+    this.height = 70,
     required this.onTap,
   });
+
+  final String title;
+  final String iconPath;
+  final Color backgroundColor;
+  final double width;
+  final double height;
+  final VoidCallback onTap;
+  final LevelStatus levelStatus;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Column(
-        spacing: 5,
+        spacing: 6,
         children: [
-          Container(
-            width: 70,
-            height: 70,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: shadowColor,
-                  spreadRadius: 2,
-                  blurRadius: 0,
-                  offset: const Offset(5, 5),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                width: width,
+                height: height,
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.alphaBlend(
+                        Colors.black.withValues(alpha: 0.3),
+                        backgroundColor,
+                      ),
+                      spreadRadius: 2,
+                      blurRadius: 0,
+                      offset: const Offset(5, 5),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                iconPath,
-                height: width ?? 40,
-                width: height ?? 40,
+                child: Center(
+                  child: SvgPicture.asset(
+                    iconPath,
+                    height: height * 0.6,
+                    width: width * 0.6,
+                  ),
+                ),
               ),
-            ),
+              //*  Status icon (top right, slightly outside)
+              Positioned(
+                top: 0,
+                right: -5,
+                child: switch (levelStatus) {
+                  LevelStatus.completed => SvgPicture.asset(
+                    SvgAssets.check,
+                    height: 20,
+                    width: 20,
+                  ),
+                  LevelStatus.inProgress => SvgPicture.asset(
+                    SvgAssets.play,
+                    height: 20,
+                    width: 20,
+                  ),
+                  LevelStatus.notStarted => const SizedBox(),
+                },
+              ),
+            ],
           ),
           Text(
             title,

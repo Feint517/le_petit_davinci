@@ -24,12 +24,12 @@ class PinEntryController extends GetxController {
     final pinCode = pin.join();
     if (pinCode.length == 4) {
       // Validate PIN and navigate
-      Get.toNamed(Routes.LOGIN);
+      Get.toNamed(AppRoutes.login);
     }
   }
 
   void onForgotPassword() {
     // Navigate to password recovery
-    Get.toNamed(Routes.LOGIN);
+    Get.toNamed(AppRoutes.forgotPassword);
   }
 }

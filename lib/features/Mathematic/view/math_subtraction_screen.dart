@@ -20,37 +20,42 @@ class MathSubtractionScreen extends StatelessWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholderBuilder: (context) => Container(
-                color: AppColors.secondary,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
+              placeholderBuilder:
+                  (context) => Container(
+                    color: AppColors.secondary,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
-              ),
             ),
           ),
-          
+
           // Content
           SafeArea(
             child: Column(
               children: [
                 // Top navigation bar with back button and Mathématiques text
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       // Back button
                       GestureDetector(
                         onTap: () => Get.back(),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.white,
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 2,
                                 offset: const Offset(0, 1),
                               ),
@@ -80,13 +85,18 @@ class MathSubtractionScreen extends StatelessWidget {
                       const Spacer(),
                       // Mathématiques text with math theme background
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.secondary, // Math orange background
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.orangeAccentDark.withOpacity(0.3),
+                              color: AppColors.orangeAccentDark.withValues(
+                                alpha: 0.3,
+                              ),
                               blurRadius: 2,
                               offset: const Offset(0, 1),
                             ),
@@ -104,10 +114,13 @@ class MathSubtractionScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 // Title and subtitle section
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
+                  ),
                   child: Column(
                     children: [
                       // Main title
@@ -134,13 +147,11 @@ class MathSubtractionScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(height: 100),
                 // Math problem widget with subtraction problems
                 Expanded(
-                  child: MathProblemWidget(
-                    problems: _getSubtractionProblems(),
-                  ),
+                  child: MathProblemWidget(problems: _getSubtractionProblems()),
                 ),
               ],
             ),
@@ -153,13 +164,48 @@ class MathSubtractionScreen extends StatelessWidget {
   // Define subtraction problems
   List<MathProblem> _getSubtractionProblems() {
     return [
-      MathProblem(firstNumber: 8, secondNumber: 3, answerChoices: [5, 6, 4], operator: '-'),
-      MathProblem(firstNumber: 9, secondNumber: 2, answerChoices: [7, 8, 6], operator: '-'),
-      MathProblem(firstNumber: 7, secondNumber: 4, answerChoices: [3, 2, 4], operator: '-'),
-      MathProblem(firstNumber: 10, secondNumber: 5, answerChoices: [5, 6, 4], operator: '-'),
-      MathProblem(firstNumber: 6, secondNumber: 2, answerChoices: [4, 3, 5], operator: '-'),
-      MathProblem(firstNumber: 9, secondNumber: 6, answerChoices: [3, 4, 2], operator: '-'),
-      MathProblem(firstNumber: 8, secondNumber: 5, answerChoices: [3, 2, 4], operator: '-'),
+      MathProblem(
+        firstNumber: 8,
+        secondNumber: 3,
+        answerChoices: [5, 6, 4],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 9,
+        secondNumber: 2,
+        answerChoices: [7, 8, 6],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 7,
+        secondNumber: 4,
+        answerChoices: [3, 2, 4],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 10,
+        secondNumber: 5,
+        answerChoices: [5, 6, 4],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 6,
+        secondNumber: 2,
+        answerChoices: [4, 3, 5],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 9,
+        secondNumber: 6,
+        answerChoices: [3, 4, 2],
+        operator: '-',
+      ),
+      MathProblem(
+        firstNumber: 8,
+        secondNumber: 5,
+        answerChoices: [3, 2, 4],
+        operator: '-',
+      ),
     ];
   }
 }

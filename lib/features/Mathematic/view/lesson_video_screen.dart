@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
 import 'package:le_petit_davinci/core/widgets/video/lesson_video_player.dart';
 
 class LessonVideoScreen extends StatefulWidget {
@@ -34,12 +34,11 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top Navigation
-              TopNavigation(
-                text: 'Mathématiques',
-                buttonColor: AppColors.orangeAccentDark,
+              CustomAppBar(
+                chipText: 'Mathématiques',
+                chipColor: AppColors.orangeAccentDark,
               ),
-              
+
               Gap(20),
 
               // Video Player Section
@@ -58,7 +57,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         fontFamily: 'DynaPuff_SemiCondensed',
                       ),
                     ),
-                    
+
                     Gap(16),
 
                     // Video Player
@@ -89,7 +88,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha: 0.1),
                               blurRadius: 4,
                               offset: const Offset(0, 2),
                             ),
@@ -132,8 +131,13 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            _videoCompleted ? Icons.check_circle : Icons.play_circle_outline,
-                            color: _videoCompleted ? Colors.green : AppColors.secondary,
+                            _videoCompleted
+                                ? Icons.check_circle
+                                : Icons.play_circle_outline,
+                            color:
+                                _videoCompleted
+                                    ? Colors.green
+                                    : AppColors.secondary,
                             size: 24,
                           ),
                           Gap(12),
@@ -142,17 +146,22 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  _videoCompleted ? 'Leçon terminée!' : 'En cours...',
+                                  _videoCompleted
+                                      ? 'Leçon terminée!'
+                                      : 'En cours...',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: _videoCompleted ? Colors.green : AppColors.textPrimary,
+                                    color:
+                                        _videoCompleted
+                                            ? Colors.green
+                                            : AppColors.textPrimary,
                                   ),
                                 ),
                                 Text(
-                                  _videoCompleted 
-                                    ? 'Vous avez terminé cette leçon avec succès'
-                                    : 'Regardez la vidéo pour continuer',
+                                  _videoCompleted
+                                      ? 'Vous avez terminé cette leçon avec succès'
+                                      : 'Regardez la vidéo pour continuer',
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: AppColors.textSecondary,

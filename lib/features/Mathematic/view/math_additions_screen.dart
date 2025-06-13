@@ -20,37 +20,42 @@ class MathAdditionsScreen extends StatelessWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholderBuilder: (context) => Container(
-                color: AppColors.secondary,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
+              placeholderBuilder:
+                  (context) => Container(
+                    color: AppColors.secondary,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
-              ),
             ),
           ),
-          
+
           // Content will be added here widget by widget
           SafeArea(
             child: Column(
               children: [
                 // Top navigation bar with back button and Mathématiques text
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       // Back button
                       GestureDetector(
                         onTap: () => Get.back(),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.white,
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 2,
                                 offset: const Offset(0, 1),
                               ),
@@ -80,13 +85,18 @@ class MathAdditionsScreen extends StatelessWidget {
                       const Spacer(),
                       // Mathématiques text with math theme background
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.secondary, // Math orange background
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.orangeAccentDark.withOpacity(0.3),
+                              color: AppColors.orangeAccentDark.withValues(
+                                alpha: 0.3,
+                              ),
                               blurRadius: 2,
                               offset: const Offset(0, 1),
                             ),
@@ -104,10 +114,13 @@ class MathAdditionsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 // Title and subtitle section
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
+                  ),
                   child: Column(
                     children: [
                       // Main title
@@ -134,12 +147,10 @@ class MathAdditionsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(height: 100),
                 // Math problem widget with expanded height
-                Expanded(
-                  child: const MathProblemWidget(),
-                ),
+                Expanded(child: const MathProblemWidget()),
               ],
             ),
           ),

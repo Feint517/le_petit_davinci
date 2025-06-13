@@ -31,7 +31,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
     setState(() {
       _isPlaying = !_isPlaying;
     });
-    
+
     if (_isPlaying) {
       widget.onVideoStart?.call();
       // Start video playback
@@ -79,7 +79,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -97,10 +97,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.grey[800]!,
-                    Colors.grey[900]!,
-                  ],
+                  colors: [Colors.grey[800]!, Colors.grey[900]!],
                 ),
               ),
               child: Center(
@@ -110,7 +107,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                     Icon(
                       Icons.play_circle_outline,
                       size: 80,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -137,7 +134,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Colors.black.withOpacity(0.7),
+                        Colors.black.withValues(alpha: 0.7),
                       ],
                     ),
                   ),
@@ -167,7 +164,9 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                                   });
                                 },
                                 activeColor: AppColors.secondary,
-                                inactiveColor: Colors.white.withOpacity(0.3),
+                                inactiveColor: Colors.white.withValues(
+                                  alpha: 0.3,
+                                ),
                               ),
                             ),
                             Text(
@@ -190,7 +189,8 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  _currentPosition = (_currentPosition - 10).clamp(0, _duration);
+                                  _currentPosition = (_currentPosition - 10)
+                                      .clamp(0, _duration);
                                 });
                               },
                               icon: const Icon(
@@ -203,7 +203,9 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                             IconButton(
                               onPressed: _togglePlayPause,
                               icon: Icon(
-                                _isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
+                                _isPlaying
+                                    ? Icons.pause_circle_filled
+                                    : Icons.play_circle_filled,
                                 color: AppColors.secondary,
                                 size: 64,
                               ),
@@ -212,7 +214,8 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  _currentPosition = (_currentPosition + 10).clamp(0, _duration);
+                                  _currentPosition = (_currentPosition + 10)
+                                      .clamp(0, _duration);
                                 });
                               },
                               icon: const Icon(
@@ -237,9 +240,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
                     _showControls = !_showControls;
                   });
                 },
-                child: Container(
-                  color: Colors.transparent,
-                ),
+                child: Container(color: Colors.transparent),
               ),
             ),
           ],

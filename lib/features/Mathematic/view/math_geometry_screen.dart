@@ -17,28 +17,28 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
   Map<String, bool> shapeMatches = {};
   Map<String, String?> droppedLabels = {};
   List<String> availableLabels = [];
-  
+
   // Current level shapes (showing 4 at a time)
   List<ShapeData> currentShapes = [];
   int currentLevel = 0;
   int totalLevels = 2; // 8 shapes divided by 4
-  
+
   @override
   void initState() {
     super.initState();
     _initializeLevel();
   }
-  
+
   void _initializeLevel() {
     // Get 4 shapes for current level
     int startIndex = currentLevel * 4;
     int endIndex = (startIndex + 4).clamp(0, ShapeData.allShapes.length);
     currentShapes = ShapeData.allShapes.sublist(startIndex, endIndex);
-    
+
     // Initialize available labels
     availableLabels = currentShapes.map((shape) => shape.frenchName).toList();
     availableLabels.shuffle(); // Randomize label order
-    
+
     // Reset matches
     shapeMatches.clear();
     droppedLabels.clear();
@@ -60,27 +60,26 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholderBuilder: (context) => Container(
-                color: AppColors.secondary,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
+              placeholderBuilder:
+                  (context) => Container(
+                    color: AppColors.secondary,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
-              ),
             ),
           ),
-          
+
           // Content
           SafeArea(
             child: Column(
               children: [
                 // Top navigation bar
                 _buildTopNavigation(),
-                
+
                 // Title and subtitle
                 _buildTitleSection(),
-                
+
                 // Game content
                 Expanded(
                   child: Padding(
@@ -88,22 +87,15 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
                     child: Column(
                       children: [
                         // Shapes grid
-                        Expanded(
-                          flex: 2,
-                          child: _buildShapesGrid(),
-                        ),
-                        
+                        Expanded(flex: 2, child: _buildShapesGrid()),
+
                         const SizedBox(height: 20),
-                        
+
                         // Draggable labels
-                        Expanded(
-                          flex: 1,
-                          child: _buildDraggableLabels(),
-                        ),
-                        
+                        Expanded(flex: 1, child: _buildDraggableLabels()),
+
                         // Next level button
-                        if (_allShapesMatched())
-                          _buildNextLevelButton(),
+                        if (_allShapesMatched()) _buildNextLevelButton(),
                       ],
                     ),
                   ),
@@ -131,7 +123,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),
@@ -140,11 +132,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.chevron_left,
-                    color: AppColors.darkGrey,
-                    size: 16,
-                  ),
+                  Icon(Icons.chevron_left, color: AppColors.darkGrey, size: 16),
                   const SizedBox(width: 2),
                   Text(
                     'Back',
@@ -167,7 +155,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.orangeAccentDark.withOpacity(0.3),
+                  color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
                   blurRadius: 2,
                   offset: const Offset(0, 1),
                 ),
@@ -237,7 +225,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
   Widget _buildShapeDropTarget(ShapeData shape) {
     bool isMatched = shapeMatches[shape.name] ?? false;
     String? droppedLabel = droppedLabels[shape.name];
-    
+
     return DragTarget<String>(
       onAcceptWithDetails: (details) {
         setState(() {
@@ -248,11 +236,11 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               shapeMatches[key] = false;
             }
           });
-          
+
           // Add new assignment
           droppedLabels[shape.name] = details.data;
           shapeMatches[shape.name] = details.data == shape.frenchName;
-          
+
           // Remove from available labels if correct
           if (shapeMatches[shape.name]!) {
             availableLabels.remove(details.data);
@@ -262,23 +250,29 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
       builder: (context, candidateData, rejectedData) {
         return Container(
           decoration: BoxDecoration(
-            color: isMatched 
-              ? Colors.grey.shade200 // Light grey for better visibility
-              : candidateData.isNotEmpty 
-                ? AppColors.secondary.withOpacity(0.2)
-                : AppColors.white,
+            color:
+                isMatched
+                    ? Colors
+                        .grey
+                        .shade200 // Light grey for better visibility
+                    : candidateData.isNotEmpty
+                    ? AppColors.secondary.withValues(alpha: 0.2)
+                    : AppColors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isMatched 
-                ? Colors.green.shade600 // Green border when correct
-                : candidateData.isNotEmpty 
-                  ? AppColors.secondary
-                  : AppColors.grey.withOpacity(0.3),
+              color:
+                  isMatched
+                      ? Colors
+                          .green
+                          .shade600 // Green border when correct
+                      : candidateData.isNotEmpty
+                      ? AppColors.secondary
+                      : AppColors.grey.withValues(alpha: 0.3),
               width: isMatched ? 3 : 2, // Thicker border when matched
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -291,35 +285,38 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               SizedBox(
                 width: 60,
                 height: 60,
-                child: SvgPicture.string(
-                  shape.svgString,
-                  fit: BoxFit.contain,
-                ),
+                child: SvgPicture.string(shape.svgString, fit: BoxFit.contain),
               ),
-              
+
               const SizedBox(height: 6),
-              
+
               // Dropped label or placeholder
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: droppedLabel != null 
-                    ? (isMatched ? Colors.grey.shade300 : Colors.red.withOpacity(0.1))
-                    : Colors.grey.withOpacity(0.1),
+                  color:
+                      droppedLabel != null
+                          ? (isMatched
+                              ? Colors.grey.shade300
+                              : Colors.red.withValues(alpha: 0.1))
+                          : Colors.grey.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   droppedLabel ?? '?',
                   style: TextStyle(
-                    color: droppedLabel != null 
-                      ? (isMatched ? Colors.green.shade700 : Colors.red.shade700)
-                      : AppColors.grey,
+                    color:
+                        droppedLabel != null
+                            ? (isMatched
+                                ? Colors.green.shade700
+                                : Colors.red.shade700)
+                            : AppColors.grey,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              
+
               // Checkmark or X for feedback
               if (droppedLabel != null)
                 Icon(
@@ -338,11 +335,11 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.9),
+        color: AppColors.white.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -364,7 +361,10 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
               spacing: 12,
               runSpacing: 12,
               alignment: WrapAlignment.center,
-              children: availableLabels.map((label) => _buildDraggableLabel(label)).toList(),
+              children:
+                  availableLabels
+                      .map((label) => _buildDraggableLabel(label))
+                      .toList(),
             ),
           ),
         ],
@@ -384,7 +384,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -403,7 +403,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
       childWhenDragging: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: AppColors.grey.withOpacity(0.3),
+          color: AppColors.grey.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -422,7 +422,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: AppColors.orangeAccentDark.withOpacity(0.3),
+              color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -455,10 +455,7 @@ class _MathGeometryScreenState extends State<MathGeometryScreen> {
         ),
         child: Text(
           currentLevel < totalLevels - 1 ? 'Niveau suivant' : 'Recommencer',
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );

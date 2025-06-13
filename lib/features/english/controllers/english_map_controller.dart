@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FrenchMapController extends GetxController {
+class EnglishMapController extends GetxController {
   final GlobalKey svgKey = GlobalKey();
 
   // Make these observable so the UI rebuilds when they change

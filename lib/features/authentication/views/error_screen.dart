@@ -57,7 +57,7 @@ class ErrorScreen extends StatelessWidget {
                       CustomButton(
                         variant: ButtonVariant.primary,
                         label: StringsManager.back,
-                        onPressed: () => Get.offNamed(Routes.USER_SELECTION),
+                        onPressed: () => Get.offNamed(AppRoutes.userSelection),
                       ),
                       Gap(15.h),
                       CustomButton(

@@ -68,7 +68,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   CustomButton(
                     label: StringsManager.iAmParent,
                     onPressed: () {
-                      Get.toNamed(Routes.LOGIN);
+                      Get.toNamed(AppRoutes.login);
                     },
                     variant: ButtonVariant.primary,
                     size: ButtonSize.lg,
@@ -78,14 +78,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   CustomButton(
                     label: StringsManager.itsMyChild,
                     onPressed: () {
-                      // Get.toNamed(Routes.ERROR);
-                      // Get.toNamed(Routes.QUESTION);
-                      // Get.to(
-                      //   const QuestionsIntroScreen(
-                      //     message: 'Je suis juste un test',
-                      //   ),
-                      // );
-                      Get.toNamed(Routes.HOME);
+                      Get.toNamed(AppRoutes.home);
                     },
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,

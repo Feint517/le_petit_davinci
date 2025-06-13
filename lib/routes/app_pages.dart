@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/authentication/auth_feature.dart';
 import 'package:le_petit_davinci/features/authentication/bindings/auth_binding.dart';
 import 'package:le_petit_davinci/features/authentication/views/error_screen.dart';
@@ -6,14 +9,18 @@ import 'package:le_petit_davinci/features/authentication/views/goodmorning_scree
 import 'package:le_petit_davinci/features/authentication/views/pin_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/user_selection_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/welcome_screen.dart';
+import 'package:le_petit_davinci/features/english/bindings/english_binding.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
+import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/home_feature.dart';
+import 'package:le_petit_davinci/features/lessons/views/practice_page.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_finish_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/intro_screen.dart';
+import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class AppPages {
@@ -57,11 +64,53 @@ class AppPages {
           name: AppRoutes.frenchMap,
           page: () => const FrenchMapScreen(),
           transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+          binding: FrenchBinding(),
         ),
         GetPage(
           name: AppRoutes.englishMap,
           page: () => const EnglishMapScreen(),
           transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+          binding: EnglishBinding(),
+          children: [
+            GetPage(
+              name: AppRoutes.listenAndMatch,
+              page: () => PracticePage(type: PracticeType.listenAndMatch),
+              transition: Transition.rightToLeft,
+              transitionDuration: const Duration(microseconds: 500),
+            ),
+            GetPage(
+              name: AppRoutes.wordBuilder,
+              page: () => PracticePage(type: PracticeType.wordBuilder),
+              transition: Transition.rightToLeft,
+              transitionDuration: const Duration(microseconds: 500),
+            ),
+            GetPage(
+              name: AppRoutes.findTheWord,
+              page: () => PracticePage(type: PracticeType.findTheWord),
+              transition: Transition.rightToLeft,
+              transitionDuration: const Duration(microseconds: 500),
+            ),
+          ],
+        ),
+        GetPage(
+          name: AppRoutes.mathMap,
+          page: () => const MathematicMapScreen(),
+          transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+        ),
+        GetPage(
+          name: AppRoutes.dailyLifeMap,
+          page: () => const VieQuotidienneScreen(),
+          transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+        ),
+        GetPage(
+          name: AppRoutes.games,
+          page: () => const GamesScreen(),
+          transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
         ),
       ],
     ),
@@ -81,11 +130,6 @@ class AppPages {
       page: () => const PinEntryPage(),
       transition: Transition.cupertino,
     ),
-    // GetPage(
-    //   name: AppRoutes.questionsIntro,
-    //   page: () => const QuestionsIntroScreen(),
-    //   transition: Transition.rightToLeft,
-    // ),
     GetPage(
       name: AppRoutes.question,
       page: () => const QuestionScreen(),

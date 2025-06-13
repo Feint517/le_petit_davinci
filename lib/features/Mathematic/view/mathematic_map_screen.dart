@@ -96,8 +96,8 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                               height: 70,
                               title: 'Lessons',
                               iconPath: SvgAssets.lamp,
-                              color: AppColors.secondary,
-                              shadowColor: AppColors.orangeAccentDark,
+                              backgroundColor: AppColors.secondary,
+                              //shadowColor: AppColors.orangeAccentDark,
                               onTap: () {
                                 Get.to(
                                   () => const MathLessons(),
@@ -107,16 +107,17 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                               },
                             ),
                           ),
-                          
-                          // Second button 
+
+                          // Second button
                           Positioned(
                             left: svgWidth * 0.25,
-                            top: svgHeight * 0.63, // Adjust multiplier as needed
+                            top:
+                                svgHeight * 0.63, // Adjust multiplier as needed
                             child: MapButton(
                               title: 'Les additions magiques',
                               iconPath: SvgAssets.headset,
-                              color: AppColors.bluePrimary,
-                              shadowColor: AppColors.blueSecondary,
+                              backgroundColor: AppColors.bluePrimary,
+                              //shadowColor: AppColors.blueSecondary,
                               onTap: () {
                                 Get.to(
                                   () => const MathAdditionsScreen(),
@@ -134,8 +135,8 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             child: MapButton(
                               title: 'Les soustractions en mission',
                               iconPath: SvgAssets.chat,
-                              color: AppColors.pinkLight,
-                              shadowColor: AppColors.pinkPrimary,
+                              backgroundColor: AppColors.pinkLight,
+                              //shadowColor: AppColors.pinkPrimary,
                               onTap: () {
                                 Get.to(
                                   () => const MathSubtractionScreen(),
@@ -153,8 +154,8 @@ class _MathematicMapScreenState extends State<MathematicMapScreen> {
                             child: MapButton(
                               title: 'Le jeu des formes géométriques',
                               iconPath: SvgAssets.explore,
-                              color: AppColors.purple,
-                              shadowColor: AppColors.purpleSecondary,
+                              backgroundColor: AppColors.purple,
+                              //shadowColor: AppColors.purpleSecondary,
                               onTap: () {
                                 Get.to(
                                   () => const MathGeometryScreen(),

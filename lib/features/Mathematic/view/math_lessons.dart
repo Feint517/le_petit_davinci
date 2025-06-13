@@ -44,7 +44,10 @@ class MathLessons extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Get.back(),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(15),
@@ -72,7 +75,10 @@ class MathLessons extends StatelessWidget {
                   ),
                   // Math label button
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(15),
@@ -111,18 +117,23 @@ class MathLessons extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: GestureDetector(
-                        onTap: index == 0 ? () {
-                          // Only first lesson is clickable - navigate to video screen
-                          Get.to(
-                            () => LessonVideoScreen(
-                              lessonTitle: lessons[index],
-                              videoUrl: 'https://example.com/video/math-lesson-1',
-                              description: 'Apprenez à reconnaître et compter les nombres de 0 à 10. Découvrez comment les nombres nous entourent dans la vie quotidienne.',
-                            ),
-                            duration: const Duration(milliseconds: 500),
-                            transition: Transition.rightToLeft,
-                          );
-                        } : null, // Other lessons are not clickable
+                        onTap:
+                            index == 0
+                                ? () {
+                                  // Only first lesson is clickable - navigate to video screen
+                                  Get.to(
+                                    () => LessonVideoScreen(
+                                      lessonTitle: lessons[index],
+                                      videoUrl:
+                                          'https://example.com/video/math-lesson-1',
+                                      description:
+                                          'Apprenez à reconnaître et compter les nombres de 0 à 10. Découvrez comment les nombres nous entourent dans la vie quotidienne.',
+                                    ),
+                                    duration: const Duration(milliseconds: 500),
+                                    transition: Transition.rightToLeft,
+                                  );
+                                }
+                                : null, // Other lessons are not clickable
                         child: Container(
                           width: double.infinity,
                           padding: const EdgeInsets.symmetric(
@@ -130,15 +141,21 @@ class MathLessons extends StatelessWidget {
                             vertical: 16,
                           ),
                           decoration: BoxDecoration(
-                            color: index == 0 ? AppColors.white : AppColors.white.withOpacity(0.7),
+                            color:
+                                index == 0
+                                    ? AppColors.white
+                                    : AppColors.white.withValues(alpha: 0.7),
                             borderRadius: BorderRadius.circular(12),
-                            border: index == 0 ? Border.all(
-                              color: AppColors.secondary,
-                              width: 2,
-                            ) : null,
+                            border:
+                                index == 0
+                                    ? Border.all(
+                                      color: AppColors.secondary,
+                                      width: 2,
+                                    )
+                                    : null,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 4,
                                 offset: const Offset(0, 2),
                               ),
@@ -150,9 +167,15 @@ class MathLessons extends StatelessWidget {
                                 child: Text(
                                   lessons[index],
                                   style: TextStyle(
-                                    color: index == 0 ? AppColors.darkGrey : AppColors.grey,
+                                    color:
+                                        index == 0
+                                            ? AppColors.darkGrey
+                                            : AppColors.grey,
                                     fontSize: 16,
-                                    fontWeight: index == 0 ? FontWeight.w600 : FontWeight.w500,
+                                    fontWeight:
+                                        index == 0
+                                            ? FontWeight.w600
+                                            : FontWeight.w500,
                                   ),
                                 ),
                               ),

@@ -97,6 +97,9 @@ class SvgAssets {
   static const String igloo = '$SVG_PATH/igloo.svg';
   static const String octopus = '$SVG_PATH/octopus.svg';
   static const String happyCat = '$SVG_PATH/happy_cat.svg';
+  //* miscellaneous
+  static const String check = 'assets/svg/misc/check.svg';
+  static const String play = 'assets/svg/misc/play.svg';
 }
 
 // Alias for easier access

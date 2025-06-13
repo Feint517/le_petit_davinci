@@ -125,7 +125,7 @@ Recommended packages:
 - Avoid widget-returning functions; use **custom StatelessWidget**.
 - Place reusable widgets in `widgets/` folder of the screen.
 - Use `Gap` instead of `SizedBox` for spacing.
-- Use `withAlpha()` instead of deprecated `withOpacity()`.
+- Use `withAlpha()` instead of deprecated `withValues(alpha:)`.
 - Always use:
   - `color_manager` for colors
   - `assets_manager` for asset paths

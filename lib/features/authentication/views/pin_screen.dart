@@ -100,7 +100,7 @@ class PinEntryPage extends GetView<PinEntryController> {
                             ),
                             Gap(16.h),
                             GestureDetector(
-                              onTap: () => Get.toNamed(Routes.HOME),
+                              onTap: () => Get.toNamed(AppRoutes.home),
                               child: Text(
                                 StringsManager.forgotPassword,
                                 style: TextStyle(
