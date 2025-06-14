@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
-/// Position de la bulle de dialogue par rapport à la mascotte
 enum BubblePosition { left, center, right }
 
 /// Un widget réutilisable pour afficher une mascotte avec une bulle de dialogue.
-///
-/// Ce widget suit les conventions de design du projet Le Petit Davinci.
 class MascotWidget extends StatelessWidget {
   /// Le texte à afficher dans la bulle de dialogue
   final String speechText;
 
+  final String assetPath;
+
   /// L'identifiant de l'asset SVG de la mascotte (par défaut bearMasscot)
-  final String? mascotAssetId;
+  //final String? mascotAssetId;
 
   /// Couleur de fond personnalisée pour la bulle (optionnel)
-  final Color? bubbleColor;
+  final Color bubbleColor;
 
   /// Couleur du texte personnalisée pour la bulle (optionnel)
   final Color? textColor;
@@ -38,8 +38,8 @@ class MascotWidget extends StatelessWidget {
   const MascotWidget({
     super.key,
     required this.speechText,
-    this.mascotAssetId,
-    this.bubbleColor,
+    this.assetPath = SvgAssets.bearMasscot,
+    this.bubbleColor = AppColors.bluePrimary,
     this.textColor,
     this.mascotSize,
     this.maxBubbleWidth,
@@ -79,14 +79,14 @@ class MascotWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Bulle de dialogue positioned above mascot
+        //* Bulle de dialogue positioned above mascot
         _buildSpeechBubble(),
 
-        // Espacement entre la bulle et la mascotte, ajusté dynamiquement
-        SizedBox(height: adjustedSpacing),
+        //* Espacement entre la bulle et la mascotte, ajusté dynamiquement
+        Gap(adjustedSpacing),
 
         //* Mascotte
-        _buildMascot(),
+        ResponsiveSvgAsset(assetPath: assetPath, width: 120),
       ],
     );
   }
@@ -107,13 +107,17 @@ class MascotWidget extends StatelessWidget {
             height: 100.h,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: bubbleColor ?? AppColors.bluePrimary,
+              color: bubbleColor,
               borderRadius: BorderRadius.circular(16.r),
               boxShadow: [
                 BoxShadow(
-                  offset: const Offset(0, 2),
-                  blurRadius: 4,
-                  color: Colors.black.withAlpha(26),
+                  color: Color.alphaBlend(
+                    Colors.black.withValues(alpha: 0.3),
+                    bubbleColor,
+                  ),
+                  spreadRadius: 2,
+                  blurRadius: 0,
+                  offset: const Offset(3, 3),
                 ),
               ],
             ),
@@ -162,7 +166,7 @@ class MascotWidget extends StatelessWidget {
   Widget _buildBubbleTail() {
     Widget tail = CustomPaint(
       size: Size(12.w, 8.h),
-      painter: _BubbleTailPainter(color: bubbleColor ?? AppColors.bluePrimary),
+      painter: _BubbleTailPainter(color: bubbleColor),
     );
 
     switch (bubblePosition) {
@@ -179,20 +183,6 @@ class MascotWidget extends StatelessWidget {
           child: Padding(padding: EdgeInsets.only(right: 20.w), child: tail),
         );
     }
-  }
-
-  /// Construit l'image de la mascotte
-  Widget _buildMascot() {
-    final String assetPath = mascotAssetId ?? SvgAssets.bearMasscot;
-    final double size = mascotSize ?? 120.h;
-
-    return SvgPicture.asset(
-      assetPath,
-      height: size,
-      width: size,
-      fit: BoxFit.contain,
-      semanticsLabel: 'Mascotte DaVinci',
-    );
   }
 }
 

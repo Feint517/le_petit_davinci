@@ -13,10 +13,6 @@ class AppColors {
   static const Color accent2 = Color(0xFF009688);
   static const Color accent3 = Color(0xFFFDCFFE);
   static const Color succuss = Color(0xFF4CAF50);
-  static const Color grey = Color(0xFF576062);
-  static const Color darkGrey = Color(0xFF3D4141);
-  static const Color black = Color(0xFF000000);
-  static const Color white = Color(0xFFFFFFFF);
 
   //*text colors
   static const Color textPrimary = Color(0xFF333333);
@@ -63,9 +59,7 @@ class AppColors {
   static const Color skyBlue = Color(0xFFF0FBFF);
 
   //* Additional colors for user selection screen
-  static const Color backgroundLight = Color(
-    0xFFF0FBFF,
-  ); // Light blue background
+  static const Color backgroundLight = Color(0xFFF0FBFF);
   static const Color primaryBlue = bluePrimary;
   static const Color primaryOrange = orangeAccent;
 
@@ -76,4 +70,13 @@ class AppColors {
   static const Color pinkLight = Color.fromRGBO(255, 139, 210, 1);
   static const Color pinkMedium = Color(0xFFB55A7E);
   static const Color pinkDark = Color(0xFF9A2551);
+
+  //* neutral shades
+  static const Color black = Color(0xFF000000);
+  static const Color darkerGrey = Color(0xFF4F4F4F);
+  static const Color darkGrey = Color(0xFF939393);
+  static const Color grey = Color(0xFFE0E0E0);
+  static const Color softGrey = Color(0xFFF4F4F4);
+  static const Color lightGrey = Color(0xFFF9F9F9);
+  static const Color white = Color(0xFFFFFFFF);
 }

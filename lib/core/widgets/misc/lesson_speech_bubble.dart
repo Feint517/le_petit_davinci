@@ -34,20 +34,13 @@ class LessonSpeechBubble extends StatelessWidget {
             showPointer: true,
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 8.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             child: Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (type == BubbleType.completed)
-                    Icon(
-                      Icons.check_circle,
-                      color: Colors.white,
-                      size: 16.sp,
-                    ),
+                    Icon(Icons.check_circle, color: Colors.white, size: 16.sp),
                   if (type == BubbleType.completed) SizedBox(width: 4.w),
                   Flexible(
                     child: Text(
@@ -119,14 +112,16 @@ class SpeechBubblePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
 
-    final borderPaint = Paint()
-      ..color = borderColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+    final borderPaint =
+        Paint()
+          ..color = borderColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.0;
 
     final path = Path();
     const radius = 12.0;
@@ -135,34 +130,40 @@ class SpeechBubblePainter extends CustomPainter {
 
     // Start from top-left
     path.moveTo(radius, 0);
-    
+
     // Top side
     path.lineTo(size.width - radius, 0);
     path.arcToPoint(
       Offset(size.width, radius),
       radius: const Radius.circular(radius),
     );
-    
+
     // Right side
     path.lineTo(size.width, size.height - radius - pointerHeight);
     path.arcToPoint(
       Offset(size.width - radius, size.height - pointerHeight),
       radius: const Radius.circular(radius),
     );
-    
+
     // Bottom side with pointer
     if (showPointer) {
-      path.lineTo(size.width / 2 + pointerWidth / 2, size.height - pointerHeight);
+      path.lineTo(
+        size.width / 2 + pointerWidth / 2,
+        size.height - pointerHeight,
+      );
       path.lineTo(size.width / 2, size.height);
-      path.lineTo(size.width / 2 - pointerWidth / 2, size.height - pointerHeight);
+      path.lineTo(
+        size.width / 2 - pointerWidth / 2,
+        size.height - pointerHeight,
+      );
     }
-    
+
     path.lineTo(radius, size.height - pointerHeight);
     path.arcToPoint(
       Offset(0, size.height - radius - pointerHeight),
       radius: const Radius.circular(radius),
     );
-    
+
     // Left side
     path.lineTo(0, radius);
     path.arcToPoint(
@@ -172,7 +173,7 @@ class SpeechBubblePainter extends CustomPainter {
 
     // Draw filled bubble
     canvas.drawPath(path, paint);
-    
+
     // Draw border
     canvas.drawPath(path, borderPaint);
   }

@@ -63,7 +63,7 @@ class SvgAssets {
   static const String book = '$SVG_PATH/book.svg';
   static const String badgeR = '$SVG_PATH/badgeR.svg';
   static const String badge = '$SVG_PATH/badge.svg';
-  static const String bottom = '$SVG_PATH/bottom.svg';
+  static const String homeBottom = '$SVG_PATH/home_bottom.svg';
   static const String frenchMapBackground = '$SVG_PATH/frenchMapBackground.svg';
   static const String learnHat = '$SVG_PATH/learnHat.svg';
   static const String explore = '$SVG_PATH/explore.svg';

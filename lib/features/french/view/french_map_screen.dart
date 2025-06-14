@@ -64,7 +64,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                     ),
                   ),
 
-                  
                   Obx(() {
                     final double? svgWidth = controller.svgRenderedWidth;
                     final double? svgHeight = controller.svgRenderedHeight;
@@ -93,8 +92,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           ),
                           Positioned(
                             left: svgWidth * 0.25,
-                            top:
-                                svgHeight * 0.63,
+                            top: svgHeight * 0.63,
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
@@ -106,7 +104,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           //* Second button at the middle of the road
                           Positioned(
                             right: svgWidth * 0.0,
-                            top: svgHeight * 0.4, 
+                            top: svgHeight * 0.4,
                             child: MapButton(
                               title: 'Sentence Construction',
                               iconPath: SvgAssets.chat,
@@ -118,7 +116,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           //* Third button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.2, 
+                            top: svgHeight * 0.2,
                             child: MapButton(
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,

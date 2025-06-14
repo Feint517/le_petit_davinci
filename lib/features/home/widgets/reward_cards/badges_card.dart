@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import '../../../../core/constants/assets_manager.dart';
-import '../../../../core/constants/colors.dart';
-import '../../models/reward_data.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/features/home/models/reward_data.dart';
 
 class BadgesCard extends StatelessWidget {
-  final List<BadgeData> earnedBadges;
+  const BadgesCard({
+    super.key,
+    this.backgroundColor = AppColors.purpleAccent,
+    required this.earnedBadges,
+  });
 
-  const BadgesCard({super.key, required this.earnedBadges});
+  final Color backgroundColor;
+  final List<BadgeData> earnedBadges;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.purpleAccent,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: Color.alphaBlend(
+              Colors.black.withValues(alpha: 0.3),
+              backgroundColor,
+            ),
+            spreadRadius: 2,
+            blurRadius: 0,
+            offset: const Offset(4, 3),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
@@ -26,12 +42,7 @@ class BadgesCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: SvgPicture.asset(
-              SvgAssets.badgeR,
-              height: 80.h,
-              width: 80.w,
-              fit: BoxFit.contain,
-            ),
+            child: ResponsiveSvgAsset(assetPath: SvgAssets.badgeR, width: 70.w),
           ),
 
           // Content area
@@ -103,7 +114,7 @@ class BadgesCard extends StatelessWidget {
           badge != null && badge.isEarned
               ? Padding(
                 padding: EdgeInsets.all(6.w),
-                child: SvgPicture.asset(badge.assetPath, fit: BoxFit.contain),
+                child: ResponsiveSvgAsset(assetPath: badge.assetPath),
               )
               : Icon(
                 isLocked ? Icons.lock : Icons.star_border,

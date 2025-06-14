@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import '../../../core/constants/assets_manager.dart';
-import '../../../core/constants/colors.dart';
 import '../models/reward_data.dart';
 import 'reward_cards/stars_card.dart';
 import 'reward_cards/badges_card.dart';
@@ -43,16 +42,6 @@ class RewardsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Main title
-          Text(
-            'Mes récompenses',
-            style: TextStyle(
-              color: AppColors.textPrimary,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'DynaPuff_SemiCondensed',
-            ),
-          ),
           SectionHeading(sectionName: 'Mes récompenses'),
           Gap(20.h),
 

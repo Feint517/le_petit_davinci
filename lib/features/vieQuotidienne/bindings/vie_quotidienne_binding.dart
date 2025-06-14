@@ -4,8 +4,6 @@ import 'package:le_petit_davinci/features/vieQuotidienne/controllers/vie_quotidi
 class VieQuotidienneBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<VieQuotidienneController>(
-      () => VieQuotidienneController(),
-    );
+    Get.lazyPut<VieQuotidienneController>(() => VieQuotidienneController());
   }
 }

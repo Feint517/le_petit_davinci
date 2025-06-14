@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import '../../../../core/constants/assets_manager.dart';
-import '../../../../core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
 class CTACard extends StatelessWidget {
   final String promptText;
@@ -32,7 +32,7 @@ class CTACard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Prompt text section
+          //* Prompt text section
           Expanded(
             flex: 3,
             child: Text(
@@ -69,12 +69,12 @@ class CTACard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Book icon
-            SvgPicture.asset(SvgAssets.book, height: 16.h, width: 16.w),
+            //* Book icon
+            ResponsiveSvgAsset(assetPath: SvgAssets.book, width: 22.w),
 
             Gap(6.w),
 
-            // Button text
+            //* Button text
             Flexible(
               child: Text(
                 buttonText,

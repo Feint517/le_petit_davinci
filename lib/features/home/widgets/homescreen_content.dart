@@ -56,7 +56,6 @@ class HomeScreenContent extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: MissionCard(
-                missionTitle: 'Mission du jour',
                 missionDescription: missionDescription,
                 onAcceptMission: onAcceptMission,
               ),

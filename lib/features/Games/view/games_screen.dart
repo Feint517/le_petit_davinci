@@ -9,7 +9,6 @@ import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 
-
 class GamesScreen extends StatefulWidget {
   const GamesScreen({super.key});
 

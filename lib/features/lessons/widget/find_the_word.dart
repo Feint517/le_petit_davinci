@@ -6,9 +6,7 @@ import 'package:le_petit_davinci/features/lessons/widget/choice_option.dart';
 import 'package:le_petit_davinci/features/lessons/widget/icon_square.dart';
 
 class FindTheWord extends StatelessWidget {
-  const FindTheWord({
-    super.key,
-  });
+  const FindTheWord({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class FindTheWord extends StatelessWidget {
         const Gap(AppSizes.spaceBtwItems),
         const IconSquare(),
         const Gap(AppSizes.spaceBtwSections * 2),
-    
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

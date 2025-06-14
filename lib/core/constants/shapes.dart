@@ -60,20 +60,40 @@ class ShapeData {
   final String name;
   final String svgString;
   final String frenchName;
-  
+
   const ShapeData({
     required this.name,
     required this.svgString,
     required this.frenchName,
   });
-  
+
   static const List<ShapeData> allShapes = [
-    ShapeData(name: 'Circle', svgString: ShapesSVG.circle, frenchName: 'Cercle'),
+    ShapeData(
+      name: 'Circle',
+      svgString: ShapesSVG.circle,
+      frenchName: 'Cercle',
+    ),
     ShapeData(name: 'Square', svgString: ShapesSVG.square, frenchName: 'Carré'),
-    ShapeData(name: 'Triangle', svgString: ShapesSVG.triangle, frenchName: 'Triangle'),
-    ShapeData(name: 'Rectangle', svgString: ShapesSVG.rectangle, frenchName: 'Rectangle'),
-    ShapeData(name: 'Pentagon', svgString: ShapesSVG.pentagon, frenchName: 'Pentagone'),
-    ShapeData(name: 'Hexagon', svgString: ShapesSVG.hexagon, frenchName: 'Hexagone'),
+    ShapeData(
+      name: 'Triangle',
+      svgString: ShapesSVG.triangle,
+      frenchName: 'Triangle',
+    ),
+    ShapeData(
+      name: 'Rectangle',
+      svgString: ShapesSVG.rectangle,
+      frenchName: 'Rectangle',
+    ),
+    ShapeData(
+      name: 'Pentagon',
+      svgString: ShapesSVG.pentagon,
+      frenchName: 'Pentagone',
+    ),
+    ShapeData(
+      name: 'Hexagon',
+      svgString: ShapesSVG.hexagon,
+      frenchName: 'Hexagone',
+    ),
     ShapeData(name: 'Star', svgString: ShapesSVG.star, frenchName: 'Étoile'),
     ShapeData(name: 'Heart', svgString: ShapesSVG.heart, frenchName: 'Cœur'),
   ];

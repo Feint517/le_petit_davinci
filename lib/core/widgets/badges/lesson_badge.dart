@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LessonBadge extends StatelessWidget {
-  const LessonBadge({super.key, required this.label, required this.color, required this.svgIconPath});
+  const LessonBadge({
+    super.key,
+    required this.label,
+    required this.color,
+    required this.svgIconPath,
+  });
 
   final String label;
   final Color color;

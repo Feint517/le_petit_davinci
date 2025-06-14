@@ -13,10 +13,7 @@ class SubjectChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10.0,
-        vertical: 5.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: backgroundColor,

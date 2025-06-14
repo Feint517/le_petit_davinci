@@ -7,29 +7,40 @@ import '../../../core/constants/colors.dart';
 import '../../../core/widgets/buttons/buttons.dart';
 
 class MissionCard extends StatelessWidget {
-  final String missionTitle;
-  final String missionDescription;
-  final VoidCallback? onAcceptMission;
-
   const MissionCard({
     super.key,
-    required this.missionTitle,
     required this.missionDescription,
+    this.backgroundColor = AppColors.pinkAccent,
     this.onAcceptMission,
   });
+
+  final String missionDescription;
+  final Color backgroundColor;
+  final VoidCallback? onAcceptMission;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120.h, // Fixed height to prevent Stack sizing issues
+      height: 120.h, //? Fixed height to prevent Stack sizing issues
       decoration: BoxDecoration(
-        color: AppColors.pinkAccent,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Color.alphaBlend(
+              Colors.black.withValues(alpha: 0.3),
+              backgroundColor,
+            ),
+            spreadRadius: 2,
+            blurRadius: 0,
+            offset: const Offset(3, 3),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          // Decorative background image positioned in bottom right corner - no padding interference
+          //* decorative image
           Positioned(
             bottom: 0,
             right: 0,
@@ -42,7 +53,7 @@ class MissionCard extends StatelessWidget {
             ),
           ),
 
-          // Content section with its own padding
+          //* Content section
           Positioned.fill(
             child: Padding(
               padding: EdgeInsets.all(16.w), // Apply padding only to content
@@ -57,7 +68,7 @@ class MissionCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Small title
+                        //* Small title
                         Text(
                           'Mission du jour',
                           style: TextStyle(
@@ -88,7 +99,7 @@ class MissionCard extends StatelessWidget {
                       width: 160.w, // Limit button width to about half the card
                       child: PillButton(
                         label: 'Accepter la mission',
-                        onPressed: onAcceptMission ?? () {},
+                        onPressed: onAcceptMission,
                         variant: ButtonVariant.secondary, // Orange variant
                         size: ButtonSize.sm, // Smaller size
                       ),

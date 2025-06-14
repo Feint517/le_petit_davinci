@@ -1,44 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import '../../../../core/constants/assets_manager.dart';
-import '../../../../core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
 class StarsCard extends StatelessWidget {
-  final int totalStars;
-  final int starsThisWeek;
-
   const StarsCard({
     super.key,
     required this.totalStars,
     required this.starsThisWeek,
+    this.backgroundColor = AppColors.orangeAccent,
   });
+
+  final int totalStars;
+  final int starsThisWeek;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.orangeAccent,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: Color.alphaBlend(
+              Colors.black.withValues(alpha: 0.3),
+              backgroundColor,
+            ),
+            spreadRadius: 2,
+            blurRadius: 0,
+            offset: const Offset(4, 3),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          // Decorative star image in bottom right
+          //* Decorative star image in bottom right
           Positioned(
             bottom: 0,
             right: 0,
-            child: SvgPicture.asset(
-              SvgAssets.starR,
-              height: 80.h,
-              width: 80.w,
-              fit: BoxFit.contain,
-            ),
+            child: ResponsiveSvgAsset(assetPath: SvgAssets.starR, width: 100.w),
           ),
 
-          // Content area
+          //* Content area
           Padding(
             padding: EdgeInsets.all(20.w),
             child: Column(

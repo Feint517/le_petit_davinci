@@ -38,8 +38,8 @@ class FrenchMapController extends GetxController {
     } else {
       if (kDebugMode) {
         print(
-        'Controller: Warning: svgKey.currentContext is null. Could not get dimensions.',
-      );
+          'Controller: Warning: svgKey.currentContext is null. Could not get dimensions.',
+        );
       }
       //? Retry after a short delay
       Future.delayed(const Duration(milliseconds: 50), getSvgDimensions);

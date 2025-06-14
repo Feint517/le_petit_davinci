@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import '../../../core/constants/colors.dart';
 
 class SubjectCard extends StatelessWidget {
@@ -29,24 +29,32 @@ class SubjectCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: cardColor,
             borderRadius: BorderRadius.circular(20.r),
+            boxShadow: [
+              BoxShadow(
+                color: Color.alphaBlend(
+                  Colors.black.withValues(alpha: 0.3),
+                  cardColor,
+                ),
+                spreadRadius: 2,
+                blurRadius: 0,
+                offset: const Offset(4, 3),
+              ),
+            ],
           ),
           clipBehavior: Clip.antiAlias,
           child: Stack(
             children: [
-              // Decorative bottom-right image
+              //* Decorative bottom-right image
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: SvgPicture.asset(
-                  imageAssetPath,
-                  height: 80.h,
-                  width: 80.w,
-                  fit: BoxFit.contain,
-                  alignment: Alignment.bottomRight,
+                child: ResponsiveSvgAsset(
+                  assetPath: imageAssetPath,
+                  width: 100.w,
                 ),
               ),
 
-              // Content area
+              //* Content area
               Padding(
                 padding: EdgeInsets.all(16.w),
                 child: Column(

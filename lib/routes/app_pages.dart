@@ -15,7 +15,7 @@ import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
-import 'package:le_petit_davinci/features/home/home_feature.dart';
+import 'package:le_petit_davinci/features/home/views/home_screen.dart';
 import 'package:le_petit_davinci/features/lessons/views/practice_page.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
