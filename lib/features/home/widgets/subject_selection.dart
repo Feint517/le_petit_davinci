@@ -36,7 +36,6 @@ class SubjectSelection extends StatelessWidget {
         cardColor: AppColors.accent,
         onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.englishMap),
       ),
-
       SubjectData(
         label: 'Vie quotidienne',
         imageAssetPath: SvgAssets.lifeCard,
@@ -49,7 +48,6 @@ class SubjectSelection extends StatelessWidget {
         cardColor: AppColors.greenPrimary,
         onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.games),
       ),
-
       SubjectData(
         label: 'Studio',
         imageAssetPath: SvgAssets.studioCard,

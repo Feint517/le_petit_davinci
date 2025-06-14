@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
-class IconSquare extends StatelessWidget {
-  const IconSquare({
+class SoundPlayButton extends StatelessWidget {
+  const SoundPlayButton({
     super.key,
     this.backgroundColor = AppColors.accentDark,
     this.icon = SvgAssets.soundIcon,
@@ -21,7 +21,8 @@ class IconSquare extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
         width: 100,
         height: 100,
         decoration: BoxDecoration(
@@ -29,7 +30,10 @@ class IconSquare extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
         child: Center(
-          child: isSvg ? SvgPicture.asset(icon) : Image.asset(icon),
+          child:
+              isSvg
+                  ? ResponsiveSvgAsset(assetPath: icon, width: 50)
+                  : Image.asset(icon),
         ),
       ),
     );

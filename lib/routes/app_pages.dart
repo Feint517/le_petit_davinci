@@ -12,6 +12,7 @@ import 'package:le_petit_davinci/features/authentication/views/user_selection_sc
 import 'package:le_petit_davinci/features/authentication/views/welcome_screen.dart';
 import 'package:le_petit_davinci/features/english/bindings/english_binding.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
+import 'package:le_petit_davinci/features/english/view/listen_and_match.dart';
 import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
@@ -77,22 +78,22 @@ class AppPages {
           children: [
             GetPage(
               name: AppRoutes.listenAndMatch,
-              page: () => PracticePage(type: PracticeType.listenAndMatch),
+              page: () => const ListenAndMatch(),
               transition: Transition.rightToLeft,
               transitionDuration: const Duration(microseconds: 500),
             ),
-            GetPage(
-              name: AppRoutes.wordBuilder,
-              page: () => PracticePage(type: PracticeType.wordBuilder),
-              transition: Transition.rightToLeft,
-              transitionDuration: const Duration(microseconds: 500),
-            ),
-            GetPage(
-              name: AppRoutes.findTheWord,
-              page: () => PracticePage(type: PracticeType.findTheWord),
-              transition: Transition.rightToLeft,
-              transitionDuration: const Duration(microseconds: 500),
-            ),
+            // GetPage(
+            //   name: AppRoutes.wordBuilder,
+            //   page: () => PracticePage(type: PracticeType.wordBuilder),
+            //   transition: Transition.rightToLeft,
+            //   transitionDuration: const Duration(microseconds: 500),
+            // ),
+            // GetPage(
+            //   name: AppRoutes.findTheWord,
+            //   page: () => PracticePage(type: PracticeType.findTheWord),
+            //   transition: Transition.rightToLeft,
+            //   transitionDuration: const Duration(microseconds: 500),
+            // ),
           ],
         ),
         GetPage(

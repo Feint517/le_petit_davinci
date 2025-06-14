@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/chips/subject_chip.dart';
 
-class CustomNavBar extends StatelessWidget {
+class CustomNavBar extends StatelessWidget implements PreferredSizeWidget{
   const CustomNavBar({
     super.key,
     required this.chipText,
@@ -16,6 +17,9 @@ class CustomNavBar extends StatelessWidget {
   final Color chipColor;
   final String leadingText;
   final VoidCallback? leadingOnPressed;
+
+  @override
+  Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
 
   @override
   Widget build(BuildContext context) {

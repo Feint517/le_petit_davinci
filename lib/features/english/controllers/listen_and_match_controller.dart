@@ -25,11 +25,17 @@ class ListenAndMatchController extends GetxController {
           options: [SvgAssets.apple, SvgAssets.igloo, SvgAssets.octopus],
           correctIndex: 1,
         ),
+        ListenAndMatchItem(
+          audioAsset: AudioAssets.octopus,
+          options: [SvgAssets.apple, SvgAssets.igloo, SvgAssets.octopus],
+          correctIndex: 2,
+        ),
       ].obs;
 
   var currentIndex = 0.obs;
   var selectedOption = RxnInt();
   var isCorrect = RxnBool();
+  var isChecked = false.obs;
 
   void playAudio() async {
     try {
@@ -41,15 +47,33 @@ class ListenAndMatchController extends GetxController {
   }
 
   void selectOption(int index) {
+    if (isChecked.value) return; //? Prevent changing after checking
     selectedOption.value = index;
-    isCorrect.value = index == items[currentIndex.value].correctIndex;
+    //isCorrect.value = index == items[currentIndex.value].correctIndex;
+    isChecked.value = false; // Reset check state if user changes selection
+    isCorrect.value = false;
   }
+
+  void checkAnswer() {
+    if (selectedOption.value != null) {
+      isChecked.value = true;
+      isCorrect.value =
+          selectedOption.value == items[currentIndex.value].correctIndex;
+    }
+  }
+
+  String get feedbackMessage {
+  if (!isChecked.value) return '';
+  return isCorrect.value == true ? "Bravo ! C'est correct !" : "Oups ! Essaie encore !";
+}
 
   void nextQuestion() {
     if (currentIndex.value < items.length - 1) {
       currentIndex.value++;
       selectedOption.value = null;
-      isCorrect.value = null;
+      //isCorrect.value = null;
+      isChecked.value = false;
+      isCorrect.value = false;
     }
   }
 }

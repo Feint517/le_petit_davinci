@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/features/home/models/reward_data.dart';
 
@@ -23,17 +24,7 @@ class BadgesCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: Color.alphaBlend(
-              Colors.black.withValues(alpha: 0.3),
-              backgroundColor,
-            ),
-            spreadRadius: 2,
-            blurRadius: 0,
-            offset: const Offset(4, 3),
-          ),
-        ],
+        boxShadow: CustomShadowStyle.customCircleShadows(color:backgroundColor),
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(

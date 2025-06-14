@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/view/lessons.dart';
 
 class FrenchMagicDictation extends StatefulWidget {

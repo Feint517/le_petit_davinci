@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/view/finish.dart';
 import 'package:le_petit_davinci/features/french/model/check_error_model.dart';
 

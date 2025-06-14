@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 
 /// Un widget de case à cocher personnalisé et réutilisable.
 ///
@@ -28,7 +29,7 @@ class CheckboxWidget extends StatelessWidget {
 
   /// Couleur d'arrière-plan (rose par défaut)
   final Color backgroundColor;
-  final Color shadowColor;
+  //final Color shadowColor;
 
   /// Couleur du texte principal
   final Color titleColor;
@@ -48,7 +49,7 @@ class CheckboxWidget extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     this.backgroundColor = AppColors.checkboxPrimary,
-    this.shadowColor = AppColors.checkboxShadow,
+    //this.shadowColor = AppColors.checkboxShadow,
     this.titleColor = AppColors.pinkDark,
     this.subtitleColor = AppColors.pinkMedium,
     this.iconSize = 24,
@@ -64,14 +65,7 @@ class CheckboxWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: shadowColor,
-              spreadRadius: 2,
-              blurRadius: 0,
-              offset: const Offset(3, 2),
-            ),
-          ],
+          boxShadow: CustomShadowStyle.customCircleShadows(color:backgroundColor),
         ),
         child: Row(
           children: [

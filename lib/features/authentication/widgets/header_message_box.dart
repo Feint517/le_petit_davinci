@@ -17,7 +17,7 @@ class HeaderMessageBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryShadow,
+            color: AppColors.bluePrimaryDark,
             spreadRadius: 2,
             blurRadius: 0,
             offset: const Offset(3, 5),

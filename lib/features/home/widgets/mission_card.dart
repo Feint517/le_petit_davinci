@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/widgets/buttons/buttons.dart';
@@ -25,17 +26,7 @@ class MissionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Color.alphaBlend(
-              Colors.black.withValues(alpha: 0.3),
-              backgroundColor,
-            ),
-            spreadRadius: 2,
-            blurRadius: 0,
-            offset: const Offset(3, 3),
-          ),
-        ],
+        boxShadow: CustomShadowStyle.customCircleShadows(color:backgroundColor),
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(

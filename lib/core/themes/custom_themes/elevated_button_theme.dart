@@ -9,7 +9,7 @@ class CustomElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       foregroundColor: AppColors.black,
-      backgroundColor: AppColors.buttonPrimary,
+      backgroundColor: AppColors.primary,
       disabledForegroundColor: AppColors.grey,
       disabledBackgroundColor: AppColors.grey,
       minimumSize: Size(130, 40),
@@ -32,7 +32,7 @@ class CustomElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       foregroundColor: AppColors.black,
-      backgroundColor: AppColors.buttonPrimary,
+      backgroundColor: AppColors.primary,
       disabledForegroundColor: AppColors.grey,
       disabledBackgroundColor: AppColors.grey,
       minimumSize: Size(130, 40),

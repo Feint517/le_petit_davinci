@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import '../../../core/constants/colors.dart';
 
@@ -29,17 +30,7 @@ class SubjectCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: cardColor,
             borderRadius: BorderRadius.circular(20.r),
-            boxShadow: [
-              BoxShadow(
-                color: Color.alphaBlend(
-                  Colors.black.withValues(alpha: 0.3),
-                  cardColor,
-                ),
-                spreadRadius: 2,
-                blurRadius: 0,
-                offset: const Offset(4, 3),
-              ),
-            ],
+            boxShadow: CustomShadowStyle.customCircleShadows(color:cardColor)
           ),
           clipBehavior: Clip.antiAlias,
           child: Stack(

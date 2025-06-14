@@ -126,7 +126,7 @@ class CustomIconButton extends StatelessWidget {
   /// Gets the background color based on variant
   Color _getBackgroundColor() {
     if (disabled) {
-      return AppColors.buttonDisabled;
+      return AppColors.disabled;
     }
 
     switch (variant) {

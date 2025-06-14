@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppColors {
   //* app basic colors
   static const Color primary = Color(0xFF27C0FF);
-  static const Color primaryShadow = Color(0xFF0B9FD9);
   static const Color secondary = Color(0xFFFFB425);
   static const Color accent = Color(0xFFBF8FFD);
   static const Color accentDark = Color(0xFF9D63E7);
@@ -13,6 +12,7 @@ class AppColors {
   static const Color accent2 = Color(0xFF009688);
   static const Color accent3 = Color(0xFFFDCFFE);
   static const Color succuss = Color(0xFF4CAF50);
+  static const Color disabled = Color(0xFFC4C4C4);
 
   //*text colors
   static const Color textPrimary = Color(0xFF333333);
@@ -31,12 +31,6 @@ class AppColors {
   static const Color softPurple = Color(0xFFDAD0FF);
   static const Color orange = Color(0xFFFF725E);
 
-  //* button color
-  static const Color buttonPrimary = Color(0xFF27C0FF);
-  static const Color buttonPrimaryShadow = Color(0xFF0B9FD9);
-  static const Color buttonSecondary = Color(0xFFFFB425);
-  static const Color buttonSecondaryShadow = Color(0xFFDB950F);
-  static const Color buttonDisabled = Color(0xFFC4C4C4);
 
   //* checkbox colors
   static const Color checkboxPrimary = Color(0xFFFF8BD2);

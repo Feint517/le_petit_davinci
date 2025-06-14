@@ -50,6 +50,7 @@ flutter:
 
   assets:
     - assets/svg/
+    - assets/svg/mascots/
     - assets/svg/misc/
     - assets/animations/
     - assets/audio/

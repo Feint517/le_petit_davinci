@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
 /// A customizable button widget with various styles and states.
@@ -71,19 +72,17 @@ class CustomButton extends StatelessWidget {
       height: buttonHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            // color: AppColors.bluePrimaryDark,
-            color: switch (variant) {
-              ButtonVariant.primary => AppColors.buttonPrimaryShadow,
-              ButtonVariant.secondary => AppColors.buttonSecondaryShadow,
-              ButtonVariant.ghost => Colors.transparent,
-            },
-            spreadRadius: 2,
-            blurRadius: 0,
-            offset: const Offset(3, 5), // changes position of shadow
+        boxShadow: switch (variant) {
+          ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
+            color:AppColors.primary,
           ),
-        ],
+          ButtonVariant.secondary => CustomShadowStyle.customCircleShadows(
+            color:AppColors.secondary,
+          ),
+          ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
+            color:Colors.transparent,
+          ),
+        },
       ),
       child: Material(
         color: Colors.transparent,
@@ -205,7 +204,7 @@ class CustomButton extends StatelessWidget {
   /// Gets the background color based on variant
   Color _getBackgroundColor() {
     if (disabled) {
-      return AppColors.buttonDisabled;
+      return AppColors.disabled;
     }
 
     switch (variant) {

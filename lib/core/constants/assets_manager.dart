@@ -42,7 +42,8 @@ class SvgAssets {
   static const String headerVectorGreen = '$SVG_PATH/header_vector_green.svg';
   static const String headerVectorPurple = '$SVG_PATH/header_vector_purple.svg';
   static const String errorBackground = '$SVG_PATH/error_background.svg';
-  static const String bearMasscot = '$SVG_PATH/bear_masscot.svg';
+  //static const String bearMasscot = '$SVG_PATH/bear_masscot.svg';
+  
   static const String masscotBg = '$SVG_PATH/masscotbg.svg';
   static const String compassIcon = '$SVG_PATH/compassIcon.svg';
   static const String rabbit = '$SVG_PATH/rabbit.svg';
@@ -105,10 +106,14 @@ class SvgAssets {
   static const String apple = '$SVG_PATH/apple.svg';
   static const String igloo = '$SVG_PATH/igloo.svg';
   static const String octopus = '$SVG_PATH/octopus.svg';
-  static const String happyCat = '$SVG_PATH/happy_cat.svg';
+  
   //* miscellaneous
   static const String check = 'assets/svg/misc/check.svg';
   static const String play = 'assets/svg/misc/play.svg';
+
+  //* mascots
+  static const String bearMasscot = 'assets/svg/mascots/bear_masscot.svg';
+  static const String happyCat = 'assets/svg/mascots/happy_cat.svg';
 }
 
 class AudioAssets {

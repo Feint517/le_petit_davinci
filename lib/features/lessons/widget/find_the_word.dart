@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/lessons/widget/choice_option.dart';
-import 'package:le_petit_davinci/features/lessons/widget/icon_square.dart';
+import 'package:le_petit_davinci/core/widgets/audio/sound_play_button.dart';
 
 class FindTheWord extends StatelessWidget {
   const FindTheWord({super.key});
@@ -17,15 +17,15 @@ class FindTheWord extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         const Gap(AppSizes.spaceBtwItems),
-        const IconSquare(),
+        const SoundPlayButton(),
         const Gap(AppSizes.spaceBtwSections * 2),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const ChoiceOption(image: SvgAssets.apple),
-            const ChoiceOption(image: SvgAssets.apple),
-            const ChoiceOption(image: SvgAssets.apple),
+            // const ChoiceOption(image: SvgAssets.apple),
+            // const ChoiceOption(image: SvgAssets.apple),
+            // const ChoiceOption(image: SvgAssets.apple),
           ],
         ),
       ],

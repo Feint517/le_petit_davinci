@@ -93,7 +93,7 @@ class MainPanelWidget extends StatelessWidget {
             right: 0,
             child: MascotWidget(
               speechText: speechText,
-              bubbleColor: AppColors.bluePrimary,
+              bubbleColor: AppColors.primary,
               mascotSize: mascotSize, // Use calculated mascot size
               maxBubbleWidth: 320.w,
               textSize: 16.sp,

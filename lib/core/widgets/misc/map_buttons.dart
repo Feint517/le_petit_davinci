@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 
 class MapButton extends StatelessWidget {
   const MapButton({
@@ -40,17 +41,9 @@ class MapButton extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: backgroundColor,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.alphaBlend(
-                        Colors.black.withValues(alpha: 0.3),
-                        backgroundColor,
-                      ),
-                      spreadRadius: 2,
-                      blurRadius: 0,
-                      offset: const Offset(5, 5),
-                    ),
-                  ],
+                  boxShadow: CustomShadowStyle.customCircleShadows(
+                    color: backgroundColor,
+                  ),
                 ),
                 child: Center(
                   child: SvgPicture.asset(

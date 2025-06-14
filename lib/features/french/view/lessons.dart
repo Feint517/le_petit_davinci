@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 
 class FrenchLessons extends StatefulWidget {
@@ -27,7 +27,7 @@ class _FrenchLessonsState extends State<FrenchLessons> {
           child: Column(
             spacing: 15,
             children: [
-              CustomAppBar(
+              CustomNavBar(
                 chipText: 'Français',
                 chipColor: AppColors.bluePrimaryDark,
               ),

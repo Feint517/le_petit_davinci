@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
@@ -38,9 +38,9 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            CustomAppBar(
+            CustomNavBar(
               chipText: 'Anglais',
-              chipColor: AppColors.buttonPrimary,
+              chipColor: AppColors.primary,
             ),
             Gap(10.h),
             SubHeader(

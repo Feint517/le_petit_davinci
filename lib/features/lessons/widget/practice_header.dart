@@ -7,37 +7,41 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/badges/lesson_badge.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/lessons/widget/lesson_info.dart';
 
 class PracticeHeader extends StatelessWidget {
-  final PracticeType type;
-  const PracticeHeader({super.key, required this.type});
+  const PracticeHeader({
+    super.key,
+    required this.lessonName,
+    required this.lessonDescription,
+  });
+
+  final String lessonName;
+  final String lessonDescription;
 
   @override
   Widget build(BuildContext context) {
-    final String lessonName;
-    final String lessonDescription;
-    switch (type) {
-      case PracticeType.listenAndMatch:
-        {
-          lessonName = 'Listen & Match';
-          lessonDescription =
-              'Associer un mot entendu à son image correspondante.';
-        }
-      case PracticeType.wordBuilder:
-        {
-          lessonName = 'Word Builder';
-          lessonDescription =
-              'Associer un mot entendu à son image correspondante.';
-        }
-      case PracticeType.findTheWord:
-        {
-          lessonName = 'Find the Word';
-          lessonDescription =
-              'Identifier un objet dans une scène visuelle après écoute.';
-        }
-    }
+    // switch (type) {
+    //   case PracticeType.listenAndMatch:
+    //     {
+    //       lessonName = 'Listen & Match';
+    //       lessonDescription =
+    //           'Associer un mot entendu à son image correspondante.';
+    //     }
+    //   case PracticeType.wordBuilder:
+    //     {
+    //       lessonName = 'Word Builder';
+    //       lessonDescription =
+    //           'Associer un mot entendu à son image correspondante.';
+    //     }
+    //   case PracticeType.findTheWord:
+    //     {
+    //       lessonName = 'Find the Word';
+    //       lessonDescription =
+    //           'Identifier un objet dans une scène visuelle après écoute.';
+    //     }
+    // }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
