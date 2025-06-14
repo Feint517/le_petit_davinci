@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
@@ -19,17 +20,13 @@ class MathematicMapScreen extends GetView<MathMapController> {
 
   @override
   Widget build(BuildContext context) {
-    //? Reset dimensions if both are null (first entry)
-    if (controller.svgRenderedWidth == null &&
-        controller.svgRenderedHeight == null) {
-      controller.resetSvgDimensions();
-    }
-
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.getSvgDimensions();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          controller.getSvgDimensions();
+        });
       });
     }
     return Scaffold(
@@ -60,20 +57,16 @@ class MathematicMapScreen extends GetView<MathMapController> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  SizedBox(
-                    key: controller.svgKey,
-                    child: SvgPicture.asset(
-                      SvgAssets.frenchMapBackground,
-                      width: context.width,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter, // Keeps top uncropped
-                    ),
+                  ResponsiveSvgAsset(
+                    assetPath: SvgAssets.frenchMapBackground,
+                    svgKey: controller.svgKey,
+                    width: DeviceUtils.getScreenWidth(context),
                   ),
 
                   Obx(() {
                     //* Check if dimensions are available from the controller
-                    final double? svgWidth = controller.svgRenderedWidth;
-                    final double? svgHeight = controller.svgRenderedHeight;
+                    final svgWidth = controller.svgRenderedWidth;
+                    final svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
                       return Stack(

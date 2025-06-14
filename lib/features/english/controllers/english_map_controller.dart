@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 class EnglishMapController extends GetxController {
   final GlobalKey svgKey = GlobalKey();
 
-  // Make these observable so the UI rebuilds when they change
   final RxDouble _svgRenderedWidth = RxDouble(0.0);
   final RxDouble _svgRenderedHeight = RxDouble(0.0);
 
@@ -13,18 +12,6 @@ class EnglishMapController extends GetxController {
       _svgRenderedWidth.value == 0.0 ? null : _svgRenderedWidth.value;
   double? get svgRenderedHeight =>
       _svgRenderedHeight.value == 0.0 ? null : _svgRenderedHeight.value;
-
-  @override
-  void onInit() {
-    super.onInit();
-    getSvgDimensions();
-  }
-
-  @override
-  void onClose() {
-    resetSvgDimensions();
-    super.onClose();
-  }
 
   void getSvgDimensions() {
     if (svgKey.currentContext != null) {
@@ -41,13 +28,6 @@ class EnglishMapController extends GetxController {
           'Controller: Warning: svgKey.currentContext is null. Could not get dimensions.',
         );
       }
-      //? Retry after a short delay
-      Future.delayed(const Duration(milliseconds: 50), getSvgDimensions);
     }
-  }
-
-  void resetSvgDimensions() {
-    _svgRenderedWidth.value = 0.0;
-    _svgRenderedHeight.value = 0.0;
   }
 }

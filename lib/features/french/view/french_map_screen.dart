@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
@@ -16,17 +18,13 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
 
   @override
   Widget build(BuildContext context) {
-    //? Reset dimensions if both are null (first entry)
-    if (controller.svgRenderedWidth == null &&
-        controller.svgRenderedHeight == null) {
-      controller.resetSvgDimensions();
-    }
-
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        controller.getSvgDimensions();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          controller.getSvgDimensions();
+        });
       });
     }
     return Scaffold(
@@ -54,24 +52,20 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  SizedBox(
-                    key: controller.svgKey,
-                    child: SvgPicture.asset(
-                      SvgAssets.frenchMapBackground,
-                      fit: BoxFit.cover,
-                      width: context.width,
-                      alignment: Alignment.topCenter, //? Keeps top uncropped
-                    ),
+                  ResponsiveSvgAsset(
+                    assetPath: SvgAssets.frenchMapBackground,
+                    svgKey: controller.svgKey,
+                    width: DeviceUtils.getScreenWidth(context),
                   ),
 
                   Obx(() {
-                    final double? svgWidth = controller.svgRenderedWidth;
-                    final double? svgHeight = controller.svgRenderedHeight;
+                    final svgWidth = controller.svgRenderedWidth;
+                    final svgHeight = controller.svgRenderedHeight;
 
                     if (svgWidth != null && svgHeight != null) {
                       return Stack(
                         children: [
-                          //* First button at the beginning of the road+
+                          //* First button
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.8,
@@ -81,6 +75,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Le coin des leçons ',
                               iconPath: SvgAssets.lamp,
                               backgroundColor: AppColors.secondary,
+                              levelStatus: LevelStatus.completed,
                               onTap: () {
                                 Get.to(
                                   () => const IntroductionFrenchLessons(),
@@ -90,18 +85,20 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               },
                             ),
                           ),
+                          //* second button
                           Positioned(
                             left: svgWidth * 0.25,
-                            top: svgHeight * 0.63,
+                            top: svgHeight * 0.58,
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
+                              levelStatus: LevelStatus.completed,
                               onTap: () {},
                             ),
                           ),
 
-                          //* Second button at the middle of the road
+                          //* third button
                           Positioned(
                             right: svgWidth * 0.0,
                             top: svgHeight * 0.4,
@@ -109,11 +106,12 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Sentence Construction',
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
+                              levelStatus: LevelStatus.inProgress,
                               onTap: () {},
                             ),
                           ),
 
-                          //* Third button at the end of the road
+                          //* fourth button at the end of the road
                           Positioned(
                             left: svgWidth * 0.4,
                             top: svgHeight * 0.2,
@@ -121,6 +119,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
+                              levelStatus: LevelStatus.notStarted,
                               onTap: () {},
                             ),
                           ),

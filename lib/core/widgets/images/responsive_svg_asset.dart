@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/utils/svg_utils.dart';
 class ResponsiveSvgAsset extends StatelessWidget {
   const ResponsiveSvgAsset({
     super.key,
+    this.svgKey,
     required this.assetPath,
     this.width,
     this.fallbackAspectRatio = 0.3,
@@ -13,6 +14,7 @@ class ResponsiveSvgAsset extends StatelessWidget {
     this.alignment = Alignment.topCenter,
   });
 
+  final Key? svgKey;
   final String assetPath;
   final double? width;
   final double fallbackAspectRatio;
@@ -30,6 +32,7 @@ class ResponsiveSvgAsset extends StatelessWidget {
         final calculatedHeight = svgWidth * aspectRatio;
 
         return SvgPicture.asset(
+          key: svgKey,
           assetPath,
           width: svgWidth,
           height: calculatedHeight,
