@@ -33,6 +33,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   widgetbook: ^3.14.0
   device_preview: ^1.2.0 
+  just_audio: ^0.10.4
   
 
 dev_dependencies:
@@ -53,6 +54,8 @@ flutter:
     - assets/audio/
     - assets/icons/
     - assets/images/
+    - assets/audio/tts/
+    
   fonts:
     - family: DynaPuff_SemiCondensed
       fonts:  

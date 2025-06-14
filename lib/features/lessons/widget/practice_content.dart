@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/lessons/widget/find_the_word.dart';
-import 'package:le_petit_davinci/features/lessons/widget/listen_and_match.dart';
+import 'package:le_petit_davinci/features/lessons/listen&match/views/listen_and_match.dart';
 import 'package:le_petit_davinci/features/lessons/widget/word_builder.dart';
 
 class PracticeContent extends StatelessWidget {

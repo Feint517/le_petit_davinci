@@ -102,5 +102,11 @@ class SvgAssets {
   static const String play = 'assets/svg/misc/play.svg';
 }
 
+class AudioAssets {
+  static const String apple = 'assets/audio/tts/TTS_apple.mp3';
+  static const String igloo = 'assets/audio/tts/TTS_igloo.mp3';
+  static const String octopus = 'assets/audio/tts/TTS_octopus.mp3';
+}
+
 // Alias for easier access
 class AssetsManager extends SvgAssets {}

@@ -24,29 +24,6 @@ class PracticePage extends StatelessWidget {
           child: Stack(
             children: [
               CustomCurvedHeaderContainer(
-                // child: Column(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: [
-                //     Gap(DeviceUtils.getAppBarHeight()),
-                //     const CustomAppBar(
-                //       chipText: 'Anglais',
-                //       chipColor: AppColors.accent,
-                //     ),
-                //     const Gap(AppSizes.spaceBtwSections),
-
-                //     const LessonInfo(
-                //       lessonName: 'Listen & Match',
-                //       lessonDescription:
-                //           'Associer un mot entendu à son image correspondante.',
-                //     ),
-                //     const Gap(AppSizes.spaceBtwSections),
-                //     const LessonBadge(
-                //       label: 'Maître des sons',
-                //       color: AppColors.accent,
-                //       svgIconPath: SvgAssets.micPurple,
-                //     ),
-                //   ],
-                // ),
                 child: PracticeHeader(type: type),
               ),
               Positioned(
