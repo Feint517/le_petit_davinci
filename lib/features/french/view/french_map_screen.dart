@@ -12,6 +12,7 @@ import 'package:le_petit_davinci/core/widgets/navigation_bar/App_bar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
+import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
 
 class FrenchMapScreen extends GetView<FrenchMapController> {
   const FrenchMapScreen({super.key});
@@ -68,7 +69,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           //* First button
                           Positioned(
                             left: svgWidth * 0.4,
-                            top: svgHeight * 0.8,
+                            top: svgHeight * 0.8, // Adjust multiplier as needed
                             child: MapButton(
                               width: 70,
                               height: 70,
@@ -93,8 +94,13 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
-                              levelStatus: LevelStatus.completed,
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(
+                                  () => const FrenchMagicDictation(),
+                                  duration: const Duration(milliseconds: 500),
+                                  transition: Transition.rightToLeft,
+                                );
+                              },
                             ),
                           ),
 
@@ -106,7 +112,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Sentence Construction',
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
-                              levelStatus: LevelStatus.inProgress,
                               onTap: () {},
                             ),
                           ),
@@ -119,7 +124,6 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
-                              levelStatus: LevelStatus.notStarted,
                               onTap: () {},
                             ),
                           ),
