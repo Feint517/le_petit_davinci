@@ -28,7 +28,9 @@ class IconSquare extends StatelessWidget {
           color: backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        child: Center(child: isSvg ? SvgPicture.asset(icon) : Image.asset(icon)),
+        child: Center(
+          child: isSvg ? SvgPicture.asset(icon) : Image.asset(icon),
+        ),
       ),
     );
   }

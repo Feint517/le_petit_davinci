@@ -85,13 +85,16 @@ class SvgAssets {
   static const String biscuit = '$SVG_PATH/biscuit.svg';
   static const String lamp = '$SVG_PATH/lamp.svg';
   static const String beargames = '$SVG_PATH/beargames.svg';
-  static const String primaryBlueTopRoundBg = '$SVG_PATH/primaryBlueTopRoundBg.svg';
+  static const String primaryBlueTopRoundBg =
+      '$SVG_PATH/primaryBlueTopRoundBg.svg';
   static const String maitriseDesSons = '$SVG_PATH/maitriseDesSons.svg';
   static const String speaker = '$SVG_PATH/speaker.svg';
-  static const String architecteDesPhrases = '$SVG_PATH/architecteDesPhrases.svg';
+  static const String architecteDesPhrases =
+      '$SVG_PATH/architecteDesPhrases.svg';
   static const String chasseursDesFautes = '$SVG_PATH/chasseursDesFautes.svg';
   static const String bear1 = '$SVG_PATH/bear1.svg';
-  static const String stars = '$SVG_PATH/stars.svg';  static const String lessons = '$SVG_PATH/lessons.svg';
+  static const String stars = '$SVG_PATH/stars.svg';
+  static const String lessons = '$SVG_PATH/lessons.svg';
   static const String mathbg = '$SVG_PATH/mathbg.svg';
   static const String croco = '$SVG_PATH/croco.svg';
   static const String micBlue = '$SVG_PATH/mic_blue.svg';

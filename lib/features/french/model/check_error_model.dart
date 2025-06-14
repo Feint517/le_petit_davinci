@@ -8,5 +8,4 @@ class CheckError {
     required this.options,
     required this.correctAnswer,
   });
- 
 }

@@ -23,9 +23,7 @@ class PracticePage extends StatelessWidget {
           //? we wrapped the stack with SizedBox because because in a scroll view, the Stack takes only the height of its children
           child: Stack(
             children: [
-              CustomCurvedHeaderContainer(
-                child: PracticeHeader(type: type),
-              ),
+              CustomCurvedHeaderContainer(child: PracticeHeader(type: type)),
               Positioned(
                 top: 400 - 80,
                 right: 0,
