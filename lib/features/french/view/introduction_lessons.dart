@@ -47,7 +47,7 @@ class _IntroductionFrenchLessonsState extends State<IntroductionFrenchLessons> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomAppBar(
+                      CustomNavBar(
                         chipText: 'Français',
                         chipColor: AppColors.bluePrimaryDark,
                       ),

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/chips/subject_chip.dart';
 
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
+class CustomNavBar extends StatelessWidget {
+  const CustomNavBar({
     super.key,
     required this.chipText,
     required this.chipColor,

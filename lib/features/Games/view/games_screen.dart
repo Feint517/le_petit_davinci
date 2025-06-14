@@ -46,7 +46,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   userClass: 'Classe 2',
                   changeAvatar: false,
                 ),
-                CustomAppBar(chipText: 'Jeux', chipColor: AppColors.secondary),
+                CustomNavBar(chipText: 'Jeux', chipColor: AppColors.secondary),
                 Gap(10),
                 SubHeader(
                   paragraph:

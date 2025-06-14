@@ -34,7 +34,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomAppBar(
+              CustomNavBar(
                 chipText: 'Mathématiques',
                 chipColor: AppColors.orangeAccentDark,
               ),

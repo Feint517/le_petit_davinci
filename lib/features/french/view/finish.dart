@@ -4,10 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
-import 'package:le_petit_davinci/core/widgets/subheader.dart';
-import 'package:le_petit_davinci/core/widgets/top_navigation.dart';
-import 'package:le_petit_davinci/features/french/view/lessons.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/app_bar.dart';
 
 class FinishChercheLerreur extends StatefulWidget {
   const FinishChercheLerreur({super.key});
@@ -46,9 +43,9 @@ class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
                   Column(
                     spacing: 20,
                     children: [
-                      TopNavigation(
-                        text: 'Français',
-                        buttonColor: AppColors.bluePrimaryDark,
+                      const CustomNavBar(
+                        chipText: 'Français',
+                        chipColor: AppColors.bluePrimaryDark,
                       ),
                       Gap(20),
                       Text(

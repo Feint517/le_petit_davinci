@@ -42,7 +42,7 @@ class PracticeHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Gap(DeviceUtils.getAppBarHeight()),
-        const CustomAppBar(chipText: 'Anglais', chipColor: AppColors.accent),
+        const CustomNavBar(chipText: 'Anglais', chipColor: AppColors.accent),
         const Gap(AppSizes.spaceBtwSections),
         LessonInfo(
           lessonName: lessonName,

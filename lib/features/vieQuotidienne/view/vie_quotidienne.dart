@@ -104,7 +104,7 @@ class ContentVieQuotidienne extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomAppBar(
+                      CustomNavBar(
                         chipText: 'Vie quotidienne',
                         chipColor: AppColors.secondary,
                       ),
