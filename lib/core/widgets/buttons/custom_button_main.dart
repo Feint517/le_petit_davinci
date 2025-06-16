@@ -29,7 +29,10 @@ class CustomButtonNew extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: width ?? MediaQuery.of(context).size.width * 0.35,
-        height: 50,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.9,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: buttonColor,
           borderRadius: BorderRadius.circular(10),
@@ -38,24 +41,34 @@ class CustomButtonNew extends StatelessWidget {
               color: shadowColor,
               spreadRadius: 2,
               blurRadius: 0,
-              offset: const Offset(3, 3), // changes position of shadow
+              offset: const Offset(3, 3),
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                color: labelColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: labelColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.visible,
+                  softWrap: true,
+                  textAlign: TextAlign.start,
+                ),
               ),
-            ),
-            if (icon != null && iconColor != null)
-              Icon(icon, color: iconColor, size: 20),
-          ],
+              if (icon != null && iconColor != null) ...[
+                const SizedBox(width: 8),
+                Icon(icon, color: iconColor, size: 20),
+              ],
+            ],
+          ),
         ),
       ),
     );

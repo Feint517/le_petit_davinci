@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
+import 'package:le_petit_davinci/features/french/controller/youtube_service.dart';
+import 'package:le_petit_davinci/features/french/controller/visited_videos_controller.dart';
+import 'package:le_petit_davinci/features/french/model/youtube_video.dart';
+import 'package:le_petit_davinci/features/french/view/video_player_screen.dart';
 
 class FrenchLessons extends StatefulWidget {
   const FrenchLessons({super.key});
@@ -13,9 +18,32 @@ class FrenchLessons extends StatefulWidget {
 }
 
 class _FrenchLessonsState extends State<FrenchLessons> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX bi
+  final YouTubeApiService _youtubeService = YouTubeApiService();
+  final VisitedVideosController _visitedController = Get.put(VisitedVideosController());
+  List<YouTubeVideo> _videos = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVideos();
+  }
+
+  Future<void> _loadVideos() async {
+    try {
+      // Replace with your actual playlist ID
+      final videos = await _youtubeService.fetchPlaylistVideos('YOUR_PLAYLIST_ID');
+      setState(() {
+        _videos = videos;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error loading videos: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,187 +63,34 @@ class _FrenchLessonsState extends State<FrenchLessons> {
                 paragraph: "Matériel d'apprentissage",
                 color: AppColors.secondary,
               ),
-              Column(
-                spacing: 15,
-                children: [
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '1- Le déterminant',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '2- Comment identifier un déterminant ?',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '3- Le pronom',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '4- Comment identifier un adjectif ?',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '5- Le verbe',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '6- Le groupe du nom',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '7- Comment identifier un nom ?',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '8- Le nom commun et le nom propre',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '9- Survoler le texte',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '10- Activer mes connaissances',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '11- Résumer le texte',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '12- Identifier les informations importantes',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '13- Identifier mon intention de lecture',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '14- Me faire une image',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '15- Tenir compte de la ponctuation',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  CustomButtonNew(
-                    buttonColor: AppColors.white,
-                    shadowColor: AppColors.white,
-                    label: '16- Relire',
-                    labelColor: AppColors.textPrimary,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    onPressed: () {
-                      // Navigate to lessons screen
-                    },
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                ],
-              ),
+              if (_isLoading)
+                const Center(child: CircularProgressIndicator())
+              else
+                Obx(() => Column(
+                  spacing: 15,
+                  children: _videos.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final video = entry.value;
+                    final isVisited = _visitedController.isVideoVisited(video.id);
+                    return CustomButtonNew(
+                      buttonColor: isVisited ? AppColors.blueSecondary : AppColors.white,
+                      shadowColor: isVisited ? AppColors.blueSecondary : AppColors.white,
+                      label: '${index + 1}- ${video.title}',
+                      labelColor: isVisited ? AppColors.white : AppColors.textPrimary,
+                      icon: Icons.play_circle_fill_rounded,
+                      iconColor: isVisited ? AppColors.white : AppColors.bluePrimary,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      onPressed: () {
+                        _visitedController.markVideoAsVisited(video.id);
+                        Get.to(() => VideoPlayerScreen(
+                              videoId: video.id,
+                              videoTitle: video.title,
+                            ));
+                      },
+                      width: MediaQuery.of(context).size.width * 0.9,
+                    );
+                  }).toList(),
+                )),
               Gap(10),
             ],
           ),
