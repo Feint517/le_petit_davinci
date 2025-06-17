@@ -16,9 +16,11 @@ class ImageAssets {
 class LottieAssets {}
 
 class IconAssets {
-  static const String eye = '$ICONS_PATH/eye.svg';
-  static const String email = '$ICONS_PATH/email.svg';
-  static const String password = '$ICONS_PATH/password.svg';
+  static const String eye = 'assets/icons/eye.svg';
+  static const String email = 'assets/icons/email.svg';
+  static const String password = 'assets/icons/password.svg';
+  static const String check = 'assets/icons/check.svg';
+  static const String lock = 'assets/icons/lock.svg';
 }
 
 class SvgAssets {
@@ -43,7 +45,7 @@ class SvgAssets {
   static const String headerVectorPurple = '$SVG_PATH/header_vector_purple.svg';
   static const String errorBackground = '$SVG_PATH/error_background.svg';
   //static const String bearMasscot = '$SVG_PATH/bear_masscot.svg';
-  
+
   static const String masscotBg = '$SVG_PATH/masscotbg.svg';
   static const String compassIcon = '$SVG_PATH/compassIcon.svg';
   static const String rabbit = '$SVG_PATH/rabbit.svg';
@@ -106,10 +108,14 @@ class SvgAssets {
   static const String apple = '$SVG_PATH/apple.svg';
   static const String igloo = '$SVG_PATH/igloo.svg';
   static const String octopus = '$SVG_PATH/octopus.svg';
-  
+  static const String happyGift = 'assets/svg/happy_gift.svg';
+  static const String happyStar = 'assets/svg/happy_star.svg';
+  static const String happyMasscots = 'assets/svg/happy_masscots.svg';
+
   //* miscellaneous
   static const String check = 'assets/svg/misc/check.svg';
   static const String play = 'assets/svg/misc/play.svg';
+  static const String cross = 'assets/svg/misc/cross.svg';
 
   //* mascots
   static const String bearMasscot = 'assets/svg/mascots/bear_masscot.svg';
@@ -121,6 +127,3 @@ class AudioAssets {
   static const String igloo = 'assets/audio/tts/TTS_igloo.mp3';
   static const String octopus = 'assets/audio/tts/TTS_octopus.mp3';
 }
-
-// Alias for easier access
-class AssetsManager extends SvgAssets {}

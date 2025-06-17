@@ -23,4 +23,5 @@ class AppRoutes {
   static const String dailyLifeMap = '/daily-life-map';
   static const String games = '/games';
   static const String studio = '/studio';
+  static const String rewards = '/rewards';
 }

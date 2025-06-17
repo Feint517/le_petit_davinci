@@ -10,6 +10,7 @@ import 'package:le_petit_davinci/features/home/controllers/home_controller.dart'
 import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
 import 'package:le_petit_davinci/features/home/widgets/subject_selection.dart';
 import 'package:le_petit_davinci/features/home/widgets/welcome_section.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -22,6 +23,7 @@ class HomeScreen extends GetView<HomeController> {
         userName: 'Alex',
         userClass: 'Classe 2',
         changeAvatar: true,
+        onAvatarTap: () => Get.toNamed(AppRoutes.rewards),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -4,15 +4,17 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/chips/subject_chip.dart';
 
-class CustomNavBar extends StatelessWidget implements PreferredSizeWidget{
+class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomNavBar({
     super.key,
-    required this.chipText,
-    required this.chipColor,
+    this.chipText = '',
+    this.chipColor = Colors.transparent,
     this.leadingText = 'Back',
     this.leadingOnPressed,
+    this.activeChip = true,
   });
 
+  final bool activeChip;
   final String chipText;
   final Color chipColor;
   final String leadingText;
@@ -38,7 +40,7 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget{
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: AppColors.backgroundLight,
+                color: AppColors.white,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -54,7 +56,9 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget{
             ),
           ),
 
-          SubjectChip(backgroundColor: chipColor, text: chipText),
+          activeChip
+              ? SubjectChip(backgroundColor: chipColor, text: chipText)
+              : const SizedBox.shrink(),
         ],
       ),
     );

@@ -30,3 +30,33 @@ class CustomGridLayout extends StatelessWidget {
     );
   }
 }
+
+class CustomGridLayout2 extends StatelessWidget {
+  final int itemCount;
+  final IndexedWidgetBuilder itemBuilder;
+  final int columns;
+  final double spacing;
+
+  const CustomGridLayout2({
+    super.key,
+    required this.itemCount,
+    required this.itemBuilder,
+    this.columns = 2,
+    this.spacing = 8.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: itemCount,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: columns,
+        crossAxisSpacing: spacing,
+        mainAxisSpacing: spacing,
+      ),
+      itemBuilder: itemBuilder,
+    );
+  }
+}

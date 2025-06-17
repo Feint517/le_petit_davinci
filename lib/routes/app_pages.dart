@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/bindings/math_binding.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
@@ -17,7 +16,8 @@ import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/views/home_screen.dart';
-import 'package:le_petit_davinci/features/lessons/views/practice_page.dart';
+import 'package:le_petit_davinci/features/rewards/bindings/rewards_binding.dart';
+import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_finish_screen.dart';
@@ -142,6 +142,12 @@ class AppPages {
       name: AppRoutes.questionFinish,
       page: () => const WelcomeStatusScreen(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutes.rewards,
+      page: () => const RewardsScreen(),
+      transition: Transition.rightToLeft,
+      binding: RewardsBinding(),
     ),
   ];
 }

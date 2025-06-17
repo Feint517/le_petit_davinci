@@ -15,6 +15,7 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
     this.onChangeAvatar,
     this.bottomLineColor = AppColors.grey,
     this.changeAvatar = true,
+    this.onAvatarTap,
   });
 
   final String userName;
@@ -23,6 +24,7 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
   final bool changeAvatar;
   final Color bottomLineColor;
   final VoidCallback? onChangeAvatar;
+  final VoidCallback? onAvatarTap;
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +46,24 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                   children: [
                     //* Avatar
-                    Container(
-                      width: 48.w,
-                      height: 48.w,
-                      padding: EdgeInsets.all(2.w),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.bluePrimary,
-                          width: 2.5,
+                    GestureDetector(
+                      onTap: onAvatarTap,
+                      child: Container(
+                        width: 48.w,
+                        height: 48.w,
+                        padding: EdgeInsets.all(2.w),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.bluePrimary,
+                            width: 2.5,
+                          ),
                         ),
-                      ),
-                      child: ClipOval(
-                        child: SvgPicture.asset(
-                          avatarPath ?? SvgAssets.avatar1,
-                          fit: BoxFit.contain,
+                        child: ClipOval(
+                          child: SvgPicture.asset(
+                            avatarPath ?? SvgAssets.avatar1,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                     ),

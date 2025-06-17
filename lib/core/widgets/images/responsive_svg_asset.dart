@@ -12,6 +12,8 @@ class ResponsiveSvgAsset extends StatelessWidget {
     this.fallbackAspectRatio = 0.3,
     this.fit = BoxFit.contain,
     this.alignment = Alignment.topCenter,
+    this.filterColor = Colors.grey,
+    this.filtered = false,
   });
 
   final Key? svgKey;
@@ -20,24 +22,29 @@ class ResponsiveSvgAsset extends StatelessWidget {
   final double fallbackAspectRatio;
   final BoxFit fit;
   final Alignment alignment;
+  final Color filterColor;
+  final bool filtered;
 
   @override
   Widget build(BuildContext context) {
-    final double svgWidth = width ?? DeviceUtils.getScreenWidth(context);
-
     return FutureBuilder<double?>(
       future: SvgUtils.getSvgAspectRatio(assetPath),
       builder: (context, snapshot) {
         final aspectRatio = snapshot.data ?? fallbackAspectRatio;
-        final calculatedHeight = svgWidth * aspectRatio;
+        final calculatedHeight =
+            (width ?? DeviceUtils.getScreenWidth(context)) * aspectRatio;
 
         return SvgPicture.asset(
           key: svgKey,
           assetPath,
-          width: svgWidth,
+          width: width ?? DeviceUtils.getScreenWidth(context),
           height: calculatedHeight,
           fit: fit,
           alignment: alignment,
+          colorFilter:
+              filtered
+                  ? ColorFilter.mode(filterColor, BlendMode.saturation)
+                  : null,
         );
       },
     );

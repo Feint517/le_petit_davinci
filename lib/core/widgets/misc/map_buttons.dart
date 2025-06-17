@@ -14,7 +14,7 @@ class MapButton extends StatelessWidget {
     this.levelStatus = LevelStatus.inProgress,
     this.width = 70,
     this.height = 70,
-    required this.onTap,
+    this.onTap,
   });
 
   final String title;
@@ -22,7 +22,7 @@ class MapButton extends StatelessWidget {
   final Color backgroundColor;
   final double width;
   final double height;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final LevelStatus levelStatus;
 
   @override

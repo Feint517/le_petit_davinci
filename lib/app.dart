@@ -18,10 +18,6 @@ class App extends StatelessWidget {
         return GetMaterialApp(
           title: 'Le Petit Davinci',
           debugShowCheckedModeBanner: false,
-          // theme: ThemeData(
-          //   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-          //   fontFamily: 'DynaPuff_SemiCondensed',
-          // ),
           themeMode: ThemeMode.system,
           theme: CustomAppTheme.lightTheme,
           darkTheme: CustomAppTheme.darkTheme,
