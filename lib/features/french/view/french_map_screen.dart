@@ -14,6 +14,7 @@ import 'package:le_petit_davinci/features/french/controller/french_map_controlle
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
 import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
 import 'package:le_petit_davinci/features/lessons/french/views/alphabet_lesson.dart';
+import 'package:le_petit_davinci/features/lessons/french/views/construction_introduction_lesson.dart';
 
 class FrenchMapScreen extends GetView<FrenchMapController> {
   const FrenchMapScreen({super.key});
@@ -128,10 +129,10 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                             left: svgWidth * 0.4.w,
                             top: svgHeight * 0.2.h,
                             child: MapButton(
-                              title: 'Find errors',
+                              title: 'Construction des phrases',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
-                              onTap: () {},
+                              onTap: () => ConstructionIntroductionLesson(),
                             ),
                           ),
                         ],

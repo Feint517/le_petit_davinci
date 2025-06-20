@@ -27,7 +27,6 @@ class AppColors {
   //* background colors
   static const Color light = Color(0xFFF9ECFF);
   static const Color dark = Color(0xFF272727);
-  static const Color primaryBackground = Color(0xFFF3F5FF);
 
   static const Color purple = Color(0xFF9D8CFF);
   static const Color purpleSecondary = Color(0xFF9D63E7);
