@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/badges/lesson_badge.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
-import 'package:le_petit_davinci/features/lessons/widget/lesson_info.dart';
+import 'package:le_petit_davinci/features/lessons/english/widget/lesson_info.dart';
 
 class PracticeHeader extends StatelessWidget {
   const PracticeHeader({

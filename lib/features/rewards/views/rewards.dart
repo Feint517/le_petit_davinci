@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
@@ -59,42 +60,51 @@ class RewardsScreen extends GetView<RewardsController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Obx(
-                    () => SelectionTile(
-                      text: 'Mes Étoiles',
-                      backgroundColor: AppColors.primary,
-                      isSelected:
-                          controller.selectedSection.value == SectionType.stars,
-                      onTap:
-                          () =>
-                              controller.selectedSection.value =
-                                  SectionType.stars,
+                  Expanded(
+                    child: Obx(
+                      () => SelectionTile(
+                        text: 'Mes Étoiles',
+                        backgroundColor: AppColors.primary,
+                        isSelected:
+                            controller.selectedSection.value ==
+                            SectionType.stars,
+                        onTap:
+                            () =>
+                                controller.selectedSection.value =
+                                    SectionType.stars,
+                      ),
                     ),
                   ),
-                  Obx(
-                    () => SelectionTile(
-                      text: 'Mes Badges',
-                      backgroundColor: AppColors.accent,
-                      isSelected:
-                          controller.selectedSection.value ==
-                          SectionType.badges,
-                      onTap:
-                          () =>
-                              controller.selectedSection.value =
-                                  SectionType.badges,
+                  Gap(12.w),
+                  Expanded(
+                    child: Obx(
+                      () => SelectionTile(
+                        text: 'Mes Badges',
+                        backgroundColor: AppColors.accent,
+                        isSelected:
+                            controller.selectedSection.value ==
+                            SectionType.badges,
+                        onTap:
+                            () =>
+                                controller.selectedSection.value =
+                                    SectionType.badges,
+                      ),
                     ),
                   ),
-                  Obx(
-                    () => SelectionTile(
-                      text: 'Mes Titres',
-                      backgroundColor: AppColors.accent2,
-                      isSelected:
-                          controller.selectedSection.value ==
-                          SectionType.titles,
-                      onTap:
-                          () =>
-                              controller.selectedSection.value =
-                                  SectionType.titles,
+                  Gap(12.w),
+                  Expanded(
+                    child: Obx(
+                      () => SelectionTile(
+                        text: 'Mes Titres',
+                        backgroundColor: AppColors.accent2,
+                        isSelected:
+                            controller.selectedSection.value ==
+                            SectionType.titles,
+                        onTap:
+                            () =>
+                                controller.selectedSection.value =
+                                    SectionType.titles,
+                      ),
                     ),
                   ),
                 ],

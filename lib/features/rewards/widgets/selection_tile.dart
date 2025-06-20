@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
@@ -24,11 +25,11 @@ class SelectionTile extends GetView<RewardsController> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 120,
-        height: 40,
+        width: 120.w,
+        height: 40.h,
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(17),
+          borderRadius: BorderRadius.circular(17.r),
         ),
         child: Center(
           child:
@@ -36,14 +37,26 @@ class SelectionTile extends GetView<RewardsController> {
                   ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(text, style: TextStyle(color: AppColors.textWhite)),
-                      const ResponsiveSvgAsset(
+                      Text(
+                        text,
+                        style: TextStyle(
+                          color: AppColors.textWhite,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      ResponsiveSvgAsset(
                         assetPath: IconAssets.check,
-                        width: 15,
+                        width: 15.w,
                       ),
                     ],
                   )
-                  : Text(text, style: TextStyle(color: AppColors.textWhite)),
+                  : Text(
+                    text,
+                    style: TextStyle(
+                      color: AppColors.textWhite,
+                      fontSize: 14.sp,
+                    ),
+                  ),
         ),
       ),
     );

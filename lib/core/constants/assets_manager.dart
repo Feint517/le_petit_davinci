@@ -13,7 +13,9 @@ class ImageAssets {
       '$IMAGE_PATH/questions_background.png';
 }
 
-class LottieAssets {}
+class LottieAssets {
+  static const String confetti = '$LOTTIE_PATH/confetti.json';
+}
 
 class IconAssets {
   static const String eye = 'assets/icons/eye.svg';
@@ -127,3 +129,5 @@ class AudioAssets {
   static const String igloo = 'assets/audio/tts/TTS_igloo.mp3';
   static const String octopus = 'assets/audio/tts/TTS_octopus.mp3';
 }
+
+

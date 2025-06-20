@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
@@ -13,6 +13,7 @@ import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
 import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
+import 'package:le_petit_davinci/features/lessons/french/views/alphabet_lesson.dart';
 
 class FrenchMapScreen extends GetView<FrenchMapController> {
   const FrenchMapScreen({super.key});
@@ -31,6 +32,8 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
+        right: false,
+        left: false,
         child: Column(
           children: [
             ProfileHeader(
@@ -48,15 +51,17 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
               currentLevel: 1,
               maxLevel: 3,
             ),
-            Gap(10),
+            const Gap(10),
             Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  ResponsiveSvgAsset(
-                    assetPath: SvgAssets.frenchMapBackground,
-                    svgKey: controller.svgKey,
-                    width: DeviceUtils.getScreenWidth(context),
+                  SizedBox.expand(
+                    child: ResponsiveSvgAsset(
+                      assetPath: SvgAssets.frenchMapBackground,
+                      svgKey: controller.svgKey,
+                      fit: BoxFit.cover,
+                    ),
                   ),
 
                   Obx(() {
@@ -68,12 +73,12 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                         children: [
                           //* First button
                           Positioned(
-                            left: svgWidth * 0.4,
-                            top: svgHeight * 0.8, // Adjust multiplier as needed
+                            left: svgWidth * 0.4.w,
+                            top: svgHeight * 0.8.h,
                             child: MapButton(
                               width: 70,
                               height: 70,
-                              title: 'Le coin des leçons ',
+                              title: 'Le coin des leçons',
                               iconPath: SvgAssets.lamp,
                               backgroundColor: AppColors.secondary,
                               levelStatus: LevelStatus.completed,
@@ -88,38 +93,40 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           ),
                           //* second button
                           Positioned(
-                            left: svgWidth * 0.25,
-                            top: svgHeight * 0.58,
+                            left: svgWidth * 0.25.w,
+                            top: svgHeight * 0.58.h,
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.bluePrimary,
-                              onTap: () {
-                                Get.to(
-                                  () => const FrenchMagicDictation(),
-                                  duration: const Duration(milliseconds: 500),
-                                  transition: Transition.rightToLeft,
-                                );
-                              },
+                              onTap:
+                                  () => Get.to(
+                                    () => const FrenchMagicDictation(),
+                                    duration: const Duration(milliseconds: 500),
+                                    transition: Transition.rightToLeft,
+                                  ),
                             ),
                           ),
 
                           //* third button
                           Positioned(
-                            right: svgWidth * 0.0,
-                            top: svgHeight * 0.4,
+                            right: svgWidth * 0.0.w,
+                            top: svgHeight * 0.4.h,
                             child: MapButton(
-                              title: 'Sentence Construction',
+                              title: 'Alphabets et prononciation',
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
-                              onTap: () {},
+                              onTap:
+                                  () => Get.to(
+                                    () => const AlphabetLessonScreen(),
+                                  ),
                             ),
                           ),
 
                           //* fourth button at the end of the road
                           Positioned(
-                            left: svgWidth * 0.4,
-                            top: svgHeight * 0.2,
+                            left: svgWidth * 0.4.w,
+                            top: svgHeight * 0.2.h,
                             child: MapButton(
                               title: 'Find errors',
                               iconPath: SvgAssets.explore,

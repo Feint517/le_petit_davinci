@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/audio/sound_play_button.dart';
-import 'package:le_petit_davinci/features/lessons/widget/letter_choice.dart';
 
-class WordBuilder extends StatelessWidget {
-  const WordBuilder({super.key});
+class FindTheWord extends StatelessWidget {
+  const FindTheWord({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const Text(
-          "Glisser chaque lettre dans des emplacements vides",
+          "Sélectionnez l'image qui correspond au son",
           style: TextStyle(color: Colors.white),
         ),
         const Gap(AppSizes.spaceBtwItems),
@@ -22,11 +21,9 @@ class WordBuilder extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            LetterChoice(letter: 'e'),
-            LetterChoice(letter: 'u'),
-            LetterChoice(letter: 'h'),
-            LetterChoice(letter: 'o'),
-            LetterChoice(letter: 's'),
+            // const ChoiceOption(image: SvgAssets.apple),
+            // const ChoiceOption(image: SvgAssets.apple),
+            // const ChoiceOption(image: SvgAssets.apple),
           ],
         ),
       ],

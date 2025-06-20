@@ -2,7 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/features/lessons/listen&match/models/listen_and_match_item.dart';
+import 'package:le_petit_davinci/features/lessons/english/listen&match/models/listen_and_match_item.dart';
 import 'package:just_audio/just_audio.dart';
 
 class ListenAndMatchController extends GetxController {

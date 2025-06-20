@@ -10,8 +10,8 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
 import 'package:le_petit_davinci/core/widgets/misc/mascot_widget.dart';
 import 'package:le_petit_davinci/features/english/controllers/listen_and_match_controller.dart';
-import 'package:le_petit_davinci/features/lessons/widget/choice_option.dart';
-import 'package:le_petit_davinci/features/lessons/widget/practice_header.dart';
+import 'package:le_petit_davinci/features/lessons/english/widget/choice_option.dart';
+import 'package:le_petit_davinci/features/lessons/english/widget/practice_header.dart';
 
 class ListenAndMatch extends StatelessWidget {
   const ListenAndMatch({super.key});
