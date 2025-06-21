@@ -26,7 +26,7 @@ dependencies:
   # utils
   get: ^4.7.2
   dio: ^5.8.0+1
-  intl: ^0.19.0
+  intl: 0.20.2
   connectivity_plus: ^6.1.4
   device_info_plus: ^11.4.0
   json_annotation: ^4.9.0
@@ -39,6 +39,7 @@ dependencies:
   video_player: ^2.10.0
   chewie: ^1.11.3
   webview_flutter: ^4.4.2
+  http: ^1.4.0
   
 
 dev_dependencies:
