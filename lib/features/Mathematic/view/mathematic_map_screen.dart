@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
@@ -40,8 +41,7 @@ class MathematicMapScreen extends GetView<MathMapController> {
               changeAvatar: false,
             ),
             const CustomNavBar(
-              chipText: 'Mathematiques',
-              chipColor: AppColors.secondary,
+              variant: BadgeVariant.math,
             ),
             const Gap(10),
             const SubHeader(

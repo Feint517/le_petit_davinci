@@ -46,12 +46,14 @@ class PopupDialog extends StatelessWidget {
                     BadgeVariant.math => AppColors.secondary,
                     BadgeVariant.english => AppColors.accent,
                     BadgeVariant.dailyLife => AppColors.accent3,
+                    BadgeVariant.games => AppColors.secondary,
                   },
                   text: switch (variant) {
                     BadgeVariant.french => 'En Français',
                     BadgeVariant.math => 'En Mathematiques',
                     BadgeVariant.english => 'En Anglais',
                     BadgeVariant.dailyLife => 'En Vie Quotidienne',
+                    BadgeVariant.games => 'En Jeux',
                   },
                 ),
                 GestureDetector(

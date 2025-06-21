@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 
 class FinishChercheLerreur extends StatefulWidget {
@@ -44,8 +45,7 @@ class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
                     spacing: 20,
                     children: [
                       const CustomNavBar(
-                        chipText: 'Français',
-                        chipColor: AppColors.bluePrimaryDark,
+                        variant: BadgeVariant.french,
                       ),
                       Gap(20),
                       Text(

@@ -11,6 +11,8 @@ class ImageAssets {
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';
   static const String questionBackground =
       '$IMAGE_PATH/questions_background.png';
+  static const String iamSorry = 'assets/images/illustrations/sorry.png';
+  static const String desole = 'assets/images/illustrations/dsl.png';
 }
 
 class LottieAssets {
@@ -86,30 +88,33 @@ class SvgAssets {
   static const String schoolTools = '$SVG_PATH/schoolTools.svg';
   static const String games_background = '$SVG_PATH/games_background.svg';
   static const String tictactoe = '$SVG_PATH/tictactoe.svg';
-  static const String chess = '$SVG_PATH/chess.svg';
-  static const String biscuit = '$SVG_PATH/biscuit.svg';
-  static const String lamp = '$SVG_PATH/lamp.svg';
-  static const String beargames = '$SVG_PATH/beargames.svg';
+  static const String chess = 'assets/svg/chess.svg';
+  static const String biscuit = 'assets/svg/biscuit.svg';
+  static const String lamp = 'assets/svg/lamp.svg';
+  static const String beargames = 'assets/svg/beargames.svg';
   static const String primaryBlueTopRoundBg =
-      '$SVG_PATH/primaryBlueTopRoundBg.svg';
-  static const String maitriseDesSons = '$SVG_PATH/maitriseDesSons.svg';
-  static const String speaker = '$SVG_PATH/speaker.svg';
+      'assets/svg/primaryBlueTopRoundBg.svg';
+  static const String maitriseDesSons = 'assets/svg/maitriseDesSons.svg';
+  static const String speaker = 'assets/svg/speaker.svg';
   static const String architecteDesPhrases =
-      '$SVG_PATH/architecteDesPhrases.svg';
-  static const String chasseursDesFautes = '$SVG_PATH/chasseursDesFautes.svg';
-  static const String bear1 = '$SVG_PATH/bear1.svg';
-  static const String stars = '$SVG_PATH/stars.svg';
-  static const String lessons = '$SVG_PATH/lessons.svg';
-  static const String mathbg = '$SVG_PATH/mathbg.svg';
-  static const String croco = '$SVG_PATH/croco.svg';
-  static const String micBlue = '$SVG_PATH/mic_blue.svg';
-  static const String micPink = '$SVG_PATH/mic_pink.svg';
-  static const String micPurple = '$SVG_PATH/mic_purple.svg';
-  static const String micYellow = '$SVG_PATH/mic_yellow.svg';
-  static const String soundIcon = '$SVG_PATH/sound_icon.svg';
-  static const String apple = '$SVG_PATH/apple.svg';
-  static const String igloo = '$SVG_PATH/igloo.svg';
-  static const String octopus = '$SVG_PATH/octopus.svg';
+      'assets/svg/architecteDesPhrases.svg';
+  static const String chasseursDesFautes = 'assets/svg/chasseursDesFautes.svg';
+  static const String bear1 = 'assets/svg/bear1.svg';
+  static const String stars = 'assets/svg/stars.svg';
+  static const String lessons = 'assets/svg/lessons.svg';
+  static const String mathbg = 'assets/svg/mathbg.svg';
+  static const String croco = 'assets/svg/croco.svg';
+  static const String micBlue = 'assets/svg/mic_blue.svg';
+  static const String micPink = 'assets/svg/mic_pink.svg';
+  static const String micPurple = 'assets/svg/mic_purple.svg';
+  static const String micYellow = 'assets/svg/mic_yellow.svg';
+  static const String headsetBlue = 'assets/svg/headset_blue.svg';
+  static const String chatPink = 'assets/svg/chat_pink.svg';
+  static const String magnifierPurple = 'assets/svg/magnifier_purple.svg';
+  static const String soundIcon = 'assets/svg/sound_icon.svg';
+  static const String apple = 'assets/svg/apple.svg';
+  static const String igloo = 'assets/svg/igloo.svg';
+  static const String octopus = 'assets/svg/octopus.svg';
   static const String happyGift = 'assets/svg/happy_gift.svg';
   static const String happyStar = 'assets/svg/happy_star.svg';
   static const String happyMasscots = 'assets/svg/happy_masscots.svg';

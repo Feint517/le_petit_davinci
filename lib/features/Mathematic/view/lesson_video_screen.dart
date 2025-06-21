@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/video/lesson_video_player.dart';
 
@@ -35,8 +36,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomNavBar(
-                chipText: 'Mathématiques',
-                chipColor: AppColors.orangeAccentDark,
+                variant: BadgeVariant.math,
               ),
 
               Gap(20),

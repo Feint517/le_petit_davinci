@@ -2,5 +2,7 @@ enum PracticeType { listenAndMatch, wordBuilder, findTheWord }
 
 enum LevelStatus { completed, inProgress, notStarted }
 
-enum BadgeVariant { french, math, english, dailyLife }
+enum BadgeVariant { french, math, english, dailyLife, games }
+
+enum LessonBadgeType {soundMaster, phrasesBuilder, mistakesFinder, additionMaster, substractionMaster, formesMaster,}
 

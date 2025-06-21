@@ -8,10 +8,12 @@ class CustomCurvedHeaderContainer extends StatelessWidget {
     super.key,
     required this.child,
     this.backgroundColor = AppColors.backgroundLight,
+    this.height = 400,
   });
 
   final Widget child;
   final Color backgroundColor;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CustomCurvedHeaderContainer extends StatelessWidget {
       child: Container(
         color: backgroundColor,
         width: DeviceUtils.getScreenWidth(context),
-        height: 400,
+        height: height,
         child: child,
       ),
     );

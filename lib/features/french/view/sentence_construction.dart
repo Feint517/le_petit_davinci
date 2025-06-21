@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 
@@ -96,8 +97,7 @@ class _FrenchSentenceConstructionState
           spacing: 10,
           children: [
             const CustomNavBar(
-              chipText: 'Français',
-              chipColor: AppColors.bluePrimaryDark,
+            variant: BadgeVariant.french,
             ),
 
             Text(
@@ -310,7 +310,7 @@ class _FrenchSentenceConstructionState
                             width: context.width / 1.5,
                           ),
                           CustomButtonNew(
-                            buttonColor: AppColors.orange,
+                            buttonColor: AppColors.primary,
                             shadowColor: AppColors.pinkMedium,
                             label: 'Reset',
                             labelColor: AppColors.background,

@@ -37,14 +37,14 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
         left: false,
         child: Column(
           children: [
-            ProfileHeader(
+            const ProfileHeader(
               userName: 'Alex',
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            CustomNavBar(chipText: 'French', chipColor: AppColors.bluePrimary),
+            const CustomNavBar(variant: BadgeVariant.french),
             Gap(10),
-            SubHeader(
+            const SubHeader(
               paragraph:
                   "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
@@ -74,8 +74,8 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                         children: [
                           //* First button
                           Positioned(
-                            left: svgWidth * 0.4.w,
-                            top: svgHeight * 0.8.h,
+                            left: svgWidth * 0.3.w,
+                            top: svgHeight * 0.7.h,
                             child: MapButton(
                               width: 70,
                               height: 70,
@@ -94,8 +94,8 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           ),
                           //* second button
                           Positioned(
-                            left: svgWidth * 0.25.w,
-                            top: svgHeight * 0.58.h,
+                            left: svgWidth * 0.30.w,
+                            top: svgHeight * 0.5.h,
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
@@ -112,7 +112,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                           //* third button
                           Positioned(
                             right: svgWidth * 0.0.w,
-                            top: svgHeight * 0.4.h,
+                            top: svgHeight * 0.3.h,
                             child: MapButton(
                               title: 'Alphabets et prononciation',
                               iconPath: SvgAssets.chat,
@@ -120,19 +120,26 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               onTap:
                                   () => Get.to(
                                     () => const AlphabetLessonScreen(),
+                                    transition: Transition.rightToLeft,
+                                    duration: const Duration(milliseconds: 500),
                                   ),
                             ),
                           ),
 
                           //* fourth button at the end of the road
                           Positioned(
-                            left: svgWidth * 0.4.w,
-                            top: svgHeight * 0.2.h,
+                            left: svgWidth * 0.3.w,
+                            top: svgHeight * 0.15.h,
                             child: MapButton(
                               title: 'Construction des phrases',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
-                              onTap: () => ConstructionIntroductionLesson(),
+                              onTap:
+                                  () => Get.to(
+                                    () => ConstructionIntroductionLesson(),
+                                    transition: Transition.rightToLeft,
+                                    duration: const Duration(milliseconds: 500),
+                                  ),
                             ),
                           ),
                         ],

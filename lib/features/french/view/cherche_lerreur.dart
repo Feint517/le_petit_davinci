@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/view/finish.dart';
@@ -91,8 +92,7 @@ class _FrenchCherchelerreurState extends State<FrenchCherchelerreur> {
         child: Column(
           children: [
             const CustomNavBar(
-              chipText: 'Français',
-              chipColor: AppColors.bluePrimaryDark,
+              variant: BadgeVariant.french,
             ),
 
             Text(
@@ -185,7 +185,7 @@ class _FrenchCherchelerreurState extends State<FrenchCherchelerreur> {
                                 textColor = AppColors.white;
                               } else if (option == selectedAnswer &&
                                   !isCorrect) {
-                                buttonColor = AppColors.orange;
+                                buttonColor = AppColors.primary;
                                 textColor = AppColors.white;
                               }
                             }
@@ -229,7 +229,7 @@ class _FrenchCherchelerreurState extends State<FrenchCherchelerreur> {
                                 ),
                               ),
                             );
-                          }).toList(),
+                          }),
 
                           const SizedBox(height: 20),
 
@@ -250,7 +250,7 @@ class _FrenchCherchelerreurState extends State<FrenchCherchelerreur> {
                               buttonColor:
                                   isCorrect
                                       ? AppColors.accent
-                                      : AppColors.orange,
+                                      : AppColors.primary,
                               shadowColor:
                                   isCorrect
                                       ? AppColors.accent2

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
@@ -28,8 +29,7 @@ class _FrenchLessonsState extends State<FrenchLessons> {
             spacing: 15,
             children: [
               CustomNavBar(
-                chipText: 'Français',
-                chipColor: AppColors.bluePrimaryDark,
+                variant: BadgeVariant.french,
               ),
               SubHeader(
                 paragraph: "Matériel d'apprentissage",

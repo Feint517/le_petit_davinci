@@ -14,6 +14,13 @@ class CustomCurvedEdgesHill extends CustomClipper<Path> {
       size.height - 80,
     );
 
+    // path.quadraticBezierTo(
+    //   size.width / 2,
+    //   size.height - 80, // control point for the curve
+    //   size.width,
+    //   size.height,
+    // );
+
     path.lineTo(size.width, 0);
     path.close();
     return path;

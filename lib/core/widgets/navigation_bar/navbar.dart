@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/chips/subject_chip.dart';
 
 class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomNavBar({
     super.key,
-    this.chipText = '',
-    this.chipColor = Colors.transparent,
     this.leadingText = 'Back',
     this.leadingOnPressed,
-    this.activeChip = true,
+    this.activeChip = false,
+    this.variant,
   });
 
   final bool activeChip;
-  final String chipText;
-  final Color chipColor;
+  final BadgeVariant? variant;
   final String leadingText;
   final VoidCallback? leadingOnPressed;
 
@@ -57,10 +56,35 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
           ),
 
           activeChip
-              ? SubjectChip(backgroundColor: chipColor, text: chipText)
+              ? SubjectChip(
+                backgroundColor: _getColor(variant ?? BadgeVariant.french),
+                text: switch (variant) {
+                  BadgeVariant.french => 'Français',
+                  BadgeVariant.math => 'Mathématiques',
+                  BadgeVariant.english => 'Anglais',
+                  BadgeVariant.dailyLife => 'Vie quotidienne',
+                  BadgeVariant.games => 'Jeux',
+                  null => '',
+                },
+              )
               : const SizedBox.shrink(),
         ],
       ),
     );
+  }
+
+  Color _getColor(BadgeVariant badgeVariant) {
+    switch (badgeVariant) {
+      case BadgeVariant.french:
+        return AppColors.primary;
+      case BadgeVariant.math:
+        return AppColors.secondary;
+      case BadgeVariant.english:
+        return AppColors.accent;
+      case BadgeVariant.dailyLife:
+        return AppColors.accent3;
+      case BadgeVariant.games:
+        return AppColors.secondary;
+    }
   }
 }

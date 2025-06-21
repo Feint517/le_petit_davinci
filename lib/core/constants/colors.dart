@@ -31,7 +31,7 @@ class AppColors {
   static const Color purple = Color(0xFF9D8CFF);
   static const Color purpleSecondary = Color(0xFF9D63E7);
   static const Color softPurple = Color(0xFFDAD0FF);
-  static const Color orange = Color(0xFFFF725E);
+  //static const Color orange = Color(0xFFFF725E);
 
   //* checkbox colors
   static const Color checkboxPrimary = Color(0xFFFF8BD2);

@@ -33,12 +33,7 @@ class TitleDisplay extends StatelessWidget {
           width: 130,
           height: 30,
           decoration: BoxDecoration(
-            color: switch (variant) {
-              BadgeVariant.french => AppColors.primary,
-              BadgeVariant.math => AppColors.secondary,
-              BadgeVariant.english => AppColors.accent,
-              BadgeVariant.dailyLife => AppColors.accent3,
-            },
+            color: _getColor(variant),
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
@@ -51,6 +46,7 @@ class TitleDisplay extends StatelessWidget {
                 BadgeVariant.math => 'Math',
                 BadgeVariant.english => 'Anglais',
                 BadgeVariant.dailyLife => 'Vie Quotidienne',
+                BadgeVariant.games => 'Jeux',
               },
               style: Theme.of(
                 context,
@@ -64,26 +60,14 @@ class TitleDisplay extends StatelessWidget {
           padding: EdgeInsets.all(AppSizes.defaultSpace),
           decoration: BoxDecoration(
             color: AppColors.white,
-            border: BoxBorder.all(
-              color: switch (variant) {
-                BadgeVariant.french => AppColors.primary,
-                BadgeVariant.math => AppColors.secondary,
-                BadgeVariant.english => AppColors.accent,
-                BadgeVariant.dailyLife => AppColors.accent3,
-              },
-            ),
+            border: BoxBorder.all(color: _getColor(variant)),
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               bottomRight: Radius.circular(20),
               bottomLeft: Radius.circular(20),
             ),
             boxShadow: CustomShadowStyle.customCircleShadows(
-              color: switch (variant) {
-                BadgeVariant.french => AppColors.primary,
-                BadgeVariant.math => AppColors.secondary,
-                BadgeVariant.english => AppColors.accent,
-                BadgeVariant.dailyLife => AppColors.accent3,
-              },
+              color: _getColor(variant),
             ),
           ),
           child: Column(
@@ -111,12 +95,7 @@ class TitleDisplay extends StatelessWidget {
                     width: 180,
                     percent: currentLevel / totalLevels,
                     backgroundColor: AppColors.grey,
-                    progressColor: switch (variant) {
-                      BadgeVariant.french => AppColors.primary,
-                      BadgeVariant.math => AppColors.secondary,
-                      BadgeVariant.english => AppColors.accent,
-                      BadgeVariant.dailyLife => AppColors.accent3,
-                    },
+                    progressColor: _getColor(variant),
                     barRadius: Radius.circular(10),
                     padding: EdgeInsets.all(0),
                   ),
@@ -128,5 +107,20 @@ class TitleDisplay extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Color _getColor(BadgeVariant badgeVariant) {
+    switch (badgeVariant) {
+      case BadgeVariant.french:
+        return AppColors.primary;
+      case BadgeVariant.math:
+        return AppColors.secondary;
+      case BadgeVariant.english:
+        return AppColors.accent;
+      case BadgeVariant.dailyLife:
+        return AppColors.accent3;
+      case BadgeVariant.games:
+        return AppColors.secondary;
+    }
   }
 }

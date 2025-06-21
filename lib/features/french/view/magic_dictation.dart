@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/view/lessons.dart';
@@ -108,8 +110,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
         child: Column(
           children: [
             const CustomNavBar(
-              chipText: 'Français',
-              chipColor: AppColors.bluePrimaryDark,
+            variant: BadgeVariant.french,
             ),
 
             Text(
@@ -168,7 +169,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                             ),
                           ),
 
-                          SizedBox(height: 10),
+                          const Gap(10),
 
                           Text(
                             'Mot ${_currentWordIndex + 1}/${_words.length}',
@@ -181,7 +182,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                           Text(
                             currentWord.hint,
                             style: TextStyle(
-                              color: AppColors.white.withOpacity(0.8),
+                              color: AppColors.white.withValues(alpha: 0.8),
                               fontStyle: FontStyle.italic,
                             ),
                           ),
@@ -223,7 +224,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                                 ),
                                 hintText: 'Écrivez votre réponse',
                                 hintStyle: TextStyle(
-                                  color: AppColors.white.withOpacity(0.7),
+                                  color: AppColors.white.withValues(alpha: 0.7),
                                 ),
                               ),
                             ),
@@ -236,7 +237,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                                 color:
                                     _isCorrect
                                         ? AppColors.accent
-                                        : AppColors.orange,
+                                        : AppColors.primary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -256,7 +257,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                                 _showValidation
                                     ? (_isCorrect
                                         ? AppColors.accent
-                                        : AppColors.orange)
+                                        : AppColors.primary)
                                     : AppColors.secondary,
                             shadowColor:
                                 _showValidation

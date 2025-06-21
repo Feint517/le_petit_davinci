@@ -36,6 +36,8 @@ class CircularBadge extends StatelessWidget {
                     BadgeVariant.math => AppColors.secondary,
                     BadgeVariant.english => AppColors.accent,
                     BadgeVariant.dailyLife => AppColors.accent3,
+                    // TODO: Handle this case.
+                    BadgeVariant.games => throw UnimplementedError(),
                   }
                   : Colors.grey,
           shape: BoxShape.circle,
@@ -48,6 +50,8 @@ class CircularBadge extends StatelessWidget {
                           BadgeVariant.math => AppColors.secondary,
                           BadgeVariant.english => AppColors.accent,
                           BadgeVariant.dailyLife => AppColors.accent3,
+                          // TODO: Handle this case.
+                          BadgeVariant.games => throw UnimplementedError(),
                         },
                       )
                       : CustomShadowStyle.customDisabledCircleShadows()
@@ -62,6 +66,7 @@ class CircularBadge extends StatelessWidget {
                       BadgeVariant.math => SvgAssets.micYellow,
                       BadgeVariant.english => SvgAssets.micPurple,
                       BadgeVariant.dailyLife => SvgAssets.micPink,
+                      BadgeVariant.games => SvgAssets.micYellow,
                     },
                     width: dimension * 0.7,
                   ),
@@ -75,6 +80,7 @@ class CircularBadge extends StatelessWidget {
                           BadgeVariant.math => SvgAssets.micYellow,
                           BadgeVariant.english => SvgAssets.micPurple,
                           BadgeVariant.dailyLife => SvgAssets.micPink,
+                          BadgeVariant.games => SvgAssets.micYellow,
                         },
                         width: dimension * 0.7,
                         filtered: true,

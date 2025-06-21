@@ -39,8 +39,7 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
               changeAvatar: false,
             ),
             CustomNavBar(
-              chipText: 'Anglais',
-              chipColor: AppColors.primary,
+              variant: BadgeVariant.english,
             ),
             Gap(10.h),
             SubHeader(

@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/audio/sound_play_button.dart';
@@ -32,7 +33,6 @@ class ListenAndMatch extends StatelessWidget {
                       if (controller.isCorrect.value == true) {
                         controller.nextQuestion();
                       } else {
-                        // Allow user to try again: reset check state
                         controller.isChecked.value = false;
                         controller.isCorrect.value = null;
                       }
@@ -64,6 +64,8 @@ class ListenAndMatch extends StatelessWidget {
                   lessonName: 'Listen & Match',
                   lessonDescription:
                       'Associer un mot entendu à son image correspondante.',
+                  badgeVariant: BadgeVariant.english,
+                  badgeType: LessonBadgeType.soundMaster,
                 ),
               ),
               Positioned(

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
@@ -46,7 +47,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   userClass: 'Classe 2',
                   changeAvatar: false,
                 ),
-                CustomNavBar(chipText: 'Jeux', chipColor: AppColors.secondary),
+                CustomNavBar(variant: BadgeVariant.games,),
                 Gap(10),
                 SubHeader(
                   paragraph:
