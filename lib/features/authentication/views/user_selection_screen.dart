@@ -17,12 +17,17 @@ class UserSelectionPage extends GetView<UserSelectionController> {
 
   @override
   Widget build(BuildContext context) {
+    // Debug: Check controller state
+    print('🔍 Controller initialized: ${controller.showQuestionsIntro}');
+    print('🔍 Intro message: ${controller.introMessage}');
+    
     //? Si nous devons afficher l'intro, montrer l'écran d'intro
     if (controller.showQuestionsIntro && controller.introMessage != null) {
-      // return _buildQuestionsIntroScreen(context, controller.introMessage!);
+      print('📱 Showing questions intro screen');
       return QuestionsIntroScreen(message: "i'm just testing");
     }
 
+    print('📱 Showing normal user selection screen');
     //? Sinon, afficher l'écran de sélection utilisateur normal
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
@@ -32,15 +37,23 @@ class UserSelectionPage extends GetView<UserSelectionController> {
           child: Column(
             children: [
               Gap(20.h),
-              SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
+              // Logo with entrance animation
+              SvgPicture.asset(SvgAssets.logoBlue, height: 60.h)
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 600))
+                  .scale(
+                    begin: const Offset(0.8, 0.8),
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.elasticOut,
+                  ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // Floating character illustration
                     SvgPicture.asset(SvgAssets.choose, height: 300.h)
                         .animate(
-                          onPlay:
-                              (controller) => controller.repeat(reverse: true),
+                          onPlay: (controller) => controller.repeat(reverse: true),
                         )
                         .moveY(
                           begin: 0,
@@ -49,6 +62,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                           curve: Curves.easeInOut,
                         ),
                     Gap(40.h),
+                    // Question text with entrance animation
                     Text(
                       StringsManager.whoUsesApp,
                       style: TextStyle(
@@ -58,32 +72,68 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                         fontFamily: 'DynaPuff_SemiCondensed',
                       ),
                       textAlign: TextAlign.center,
-                    ),
+                    )
+                        .animate()
+                        .fadeIn(
+                          duration: const Duration(milliseconds: 600),
+                          delay: const Duration(milliseconds: 400),
+                        )
+                        .slideY(
+                          begin: 0.5,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeOutBack,
+                        ),
                   ],
                 ),
               ),
-              //* Buttons for user selection
+              //* Enhanced animated buttons for user selection
               Column(
                 children: [
+                  // Parent button with staggered entrance
                   CustomButton(
                     label: StringsManager.iAmParent,
-                    onPressed: () {
-                      Get.toNamed(AppRoutes.login);
-                    },
                     variant: ButtonVariant.primary,
                     size: ButtonSize.lg,
                     width: double.infinity,
-                  ),
+                    onPressed: () {
+                      print('🚀 Parent button pressed');
+                      Get.toNamed(AppRoutes.login);
+                    },
+                  )
+                      .animate()
+                      .fadeIn(
+                        duration: const Duration(milliseconds: 600),
+                        delay: const Duration(milliseconds: 600),
+                      )
+                      .scale(
+                        begin: const Offset(0.8, 0.8),
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.elasticOut,
+                      ),
                   Gap(16.h),
+                  // Child button with staggered entrance
                   CustomButton(
                     label: StringsManager.itsMyChild,
-                    onPressed: () {
-                      Get.toNamed(AppRoutes.home);
-                    },
                     variant: ButtonVariant.secondary,
                     size: ButtonSize.lg,
                     width: double.infinity,
-                  ),
+                    onPressed: () {
+                      print('🚀 Child button pressed');
+                      Get.toNamed(AppRoutes.home);
+                    },
+                  )
+                      .animate()
+                      .fadeIn(
+                        duration: const Duration(milliseconds: 600),
+                        delay: const Duration(milliseconds: 800),
+                      )
+                      .scale(
+                        begin: const Offset(0.8, 0.8),
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.elasticOut,
+                      ),
+                  
+                  
                   Gap(20.h),
                 ],
               ),

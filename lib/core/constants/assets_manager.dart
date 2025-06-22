@@ -119,6 +119,11 @@ class SvgAssets {
   static const String happyStar = 'assets/svg/happy_star.svg';
   static const String happyMasscots = 'assets/svg/happy_masscots.svg';
 
+  // French introduction screen assets
+  static const String bearFrench = '$SVG_PATH/brearFrench.svg';
+  static const String plants1 = '$SVG_PATH/plant1.svg';
+  static const String plants2 = '$SVG_PATH/plant2.svg';
+
   //* miscellaneous
   static const String check = 'assets/svg/misc/check.svg';
   static const String play = 'assets/svg/misc/play.svg';

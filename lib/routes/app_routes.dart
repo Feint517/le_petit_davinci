@@ -14,6 +14,7 @@ class AppRoutes {
   static const String questionsIntro = '/questions-intro';
   static const String question = '/question';
   static const String questionFinish = '/question-finish';
+  static const String frenchIntro = '/french-intro';
   static const String frenchMap = '/french-map';
   static const String englishMap = '/english-map';
   static const String listenAndMatch = '$home$englishMap/listen-and-match';

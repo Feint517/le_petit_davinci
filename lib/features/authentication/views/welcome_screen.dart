@@ -42,31 +42,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     const Spacer(),
 
-                    // Continue button at bottom
+                    // Continue button at bottom with delightful animations
                     Padding(
                       padding: const EdgeInsets.only(bottom: 32.0),
-                      child: PillButton(
-                            label: 'Continue',
-                            icon: const Icon(Icons.arrow_forward),
-                            iconPosition: IconPosition.right,
-                            size: ButtonSize.lg,
-                            width: double.infinity,
-                            onPressed:
-                                widget.onContinue ??
-                                () => Get.offAndToNamed(AppRoutes.home),
-                          )
-                          .animate()
-                          .fadeIn(
-                            duration: const Duration(milliseconds: 800),
-                            delay: const Duration(milliseconds: 1000),
-                          )
-                          .scale(
-                            begin: const Offset(0.9, 0.9),
-                            end: const Offset(1.0, 1.0),
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeOut,
-                            delay: const Duration(milliseconds: 1000),
-                          ),
+                      child: PrimaryAnimatedButton(
+                        label: 'Continue',
+                        icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                        iconPosition: IconPosition.right,
+                        width: double.infinity,
+                        entranceDelay: const Duration(milliseconds: 800),
+                        onPressed: widget.onContinue ?? () => Get.offAndToNamed(AppRoutes.home),
+                      ),
                     ),
                   ],
                 ),

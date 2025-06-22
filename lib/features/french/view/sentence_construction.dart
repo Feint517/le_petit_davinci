@@ -245,9 +245,9 @@ class _FrenchSentenceConstructionState
                               return SizedBox(
                                 width: 80, // Fixed width for input fields
                                 child: DragTarget<String>(
-                                  onWillAccept:
+                                  onWillAcceptWithDetails:
                                       (data) => true, // Always allow dropping
-                                  onAccept: (data) {
+                                  onAcceptWithDetails: (data) {
                                     setState(() {
                                       // If the slot is already filled, add the word back to draggable
                                       if (_droppedWords[index].isNotEmpty) {

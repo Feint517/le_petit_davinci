@@ -25,7 +25,7 @@ class _LessonVideoPlayerState extends State<LessonVideoPlayer> {
   bool _isPlaying = false;
   bool _showControls = true;
   double _currentPosition = 0.0;
-  double _duration = 100.0; // Mock duration for demo
+  final double _duration = 100.0; // Mock duration for demo
 
   void _togglePlayPause() {
     setState(() {

@@ -13,6 +13,7 @@ import 'package:le_petit_davinci/features/english/bindings/english_binding.dart'
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/english/view/listen_and_match.dart';
 import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
+import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/views/home_screen.dart';
@@ -62,6 +63,13 @@ class AppPages {
       transition: Transition.cupertino,
       binding: HomeBinding(),
       children: [
+        GetPage(
+          name: AppRoutes.frenchIntro,
+          page: () => const FrenchIntroScreen(),
+          transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+          binding: FrenchBinding(),
+        ),
         GetPage(
           name: AppRoutes.frenchMap,
           page: () => const FrenchMapScreen(),

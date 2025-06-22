@@ -24,7 +24,7 @@ class LessonSpeechBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: SizedBox(
         width: width ?? 120.w,
         height: height ?? 60.h,
         child: CustomPaint(

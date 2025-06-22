@@ -11,7 +11,7 @@ import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
-import 'package:le_petit_davinci/features/french/view/introduction_lessons.dart';
+import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
 import 'package:le_petit_davinci/features/lessons/french/views/alphabet_lesson.dart';
 import 'package:le_petit_davinci/features/lessons/french/views/construction_introduction_lesson.dart';
@@ -85,7 +85,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               levelStatus: LevelStatus.completed,
                               onTap: () {
                                 Get.to(
-                                  () => const IntroductionFrenchLessons(),
+                                  () => const FrenchIntroScreen(),
                                   duration: const Duration(milliseconds: 500),
                                   transition: Transition.rightToLeft,
                                 );

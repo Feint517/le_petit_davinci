@@ -43,7 +43,7 @@ class AppColors {
 
   //* splash screen colors
   static const Color bluePrimary = Color(0xFF27C0FF);
-  static const Color bluePrimaryDark = Color.fromRGBO(11, 159, 217, 1);
+  static const Color bluePrimaryDark = Color(0xFF0B9FD9);
   static const Color blueSecondary = Color(0xFF0B9FD9);
   static const Color greenPrimary = Color(0xFF8DD44F);
   static const Color purpleAccent = Color(0xFFBF8FFD);

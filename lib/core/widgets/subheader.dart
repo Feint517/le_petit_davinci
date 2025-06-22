@@ -57,7 +57,7 @@ class SubHeader extends StatelessWidget {
                           label!,
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
