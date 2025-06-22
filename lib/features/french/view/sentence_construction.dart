@@ -96,9 +96,7 @@ class _FrenchSentenceConstructionState
         child: Column(
           spacing: 10,
           children: [
-            const CustomNavBar(
-            variant: BadgeVariant.french,
-            ),
+            const CustomNavBar(variant: BadgeVariant.french),
 
             Text(
               'Phrase à reconstruire',
@@ -203,8 +201,8 @@ class _FrenchSentenceConstructionState
                                         child: Text(
                                           word,
                                           style: TextStyle(
-                                            color: AppColors.white.withOpacity(
-                                              0.4,
+                                            color: AppColors.white.withValues(
+                                              alpha: 0.4,
                                             ),
                                           ),
                                         ),
@@ -256,7 +254,8 @@ class _FrenchSentenceConstructionState
                                         );
                                       }
                                       _droppedWords[index] =
-                                          data; // Place the dropped word
+                                          data
+                                              as String; // Place the dropped word
                                       _draggableWords.remove(
                                         data,
                                       ); // Remove from draggable list
@@ -338,7 +337,7 @@ class _FrenchSentenceConstructionState
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withValues(alpha: 0.2),
                                     spreadRadius: 1,
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),

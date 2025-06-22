@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -7,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/controller/french_lessons_controller.dart';
 import 'package:le_petit_davinci/features/french/view/video_player_screen.dart';
@@ -19,7 +16,7 @@ class FrenchLessons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FrenchLessonsController());
-    
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -28,11 +25,7 @@ class FrenchLessons extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF4DC8FF),
-              Color(0xFF6B9EFF),
-              Color(0xFF8A7FFF),
-            ],
+            colors: [Color(0xFF4DC8FF), Color(0xFF6B9EFF), Color(0xFF8A7FFF)],
             stops: [0.0, 0.6, 1.0],
           ),
         ),
@@ -47,12 +40,12 @@ class FrenchLessons extends StatelessWidget {
                   width: 60.w,
                   height: 60.w,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                 ),
               ),
-              
+
               Positioned(
                 bottom: 200.h,
                 left: -20.w,
@@ -60,7 +53,7 @@ class FrenchLessons extends StatelessWidget {
                   width: 40.w,
                   height: 40.w,
                   decoration: BoxDecoration(
-                    color: Colors.yellow.withOpacity(0.15),
+                    color: Colors.yellow.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -71,42 +64,45 @@ class FrenchLessons extends StatelessWidget {
                 children: [
                   // Navigation bar
                   const CustomNavBar(variant: BadgeVariant.french),
-                  
+
                   Gap(15.h),
-                  
+
                   // Enhanced title with better alignment
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Container(
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 16.h,
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
+                        color: Colors.white.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(20.r),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.white.withValues(alpha: 0.3),
                           width: 1,
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                                                  Container(
-                          padding: EdgeInsets.all(6.w),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            SvgAssets.bearMasscot,
-                            width: 20.w,
-                            height: 20.w,
-                            colorFilter: ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
+                          Container(
+                            padding: EdgeInsets.all(6.w),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: SvgPicture.asset(
+                              SvgAssets.bearMasscot,
+                              width: 20.w,
+                              height: 20.w,
+                              colorFilter: ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
                             ),
                           ),
-                        ),
                           Gap(12.w),
                           Text(
                             "Matériel d'apprentissage",
@@ -130,9 +126,10 @@ class FrenchLessons extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Obx(
-                        () => controller.isLoading.value
-                            ? _buildOptimizedLoadingState()
-                            : controller.fetchedVideos.isEmpty
+                        () =>
+                            controller.isLoading.value
+                                ? _buildOptimizedLoadingState()
+                                : controller.fetchedVideos.isEmpty
                                 ? _buildEmptyState()
                                 : _buildOptimizedLessonsList(controller),
                       ),
@@ -140,8 +137,6 @@ class FrenchLessons extends StatelessWidget {
                   ),
                 ],
               ),
-
-
             ],
           ),
         ),
@@ -154,15 +149,16 @@ class FrenchLessons extends StatelessWidget {
     return Column(
       children: [
         // Simplified skeleton items
-        ...List.generate(5, (index) => 
-          Container(
+        ...List.generate(
+          5,
+          (index) => Container(
             margin: EdgeInsets.only(bottom: 12.h),
             height: 70.h,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12.r),
               border: Border.all(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),
@@ -175,7 +171,7 @@ class FrenchLessons extends StatelessWidget {
                     width: 24.w,
                     height: 24.w,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -190,7 +186,7 @@ class FrenchLessons extends StatelessWidget {
                           height: 14.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
+                            color: Colors.white.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(7.r),
                           ),
                         ),
@@ -199,7 +195,7 @@ class FrenchLessons extends StatelessWidget {
                           height: 10.h,
                           width: 200.w,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(5.r),
                           ),
                         ),
@@ -211,14 +207,14 @@ class FrenchLessons extends StatelessWidget {
             ),
           ),
         ),
-        
+
         Gap(20.h),
-        
+
         // Simple loading indicator
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20.r),
           ),
           child: Row(
@@ -236,7 +232,7 @@ class FrenchLessons extends StatelessWidget {
               Text(
                 "Chargement des leçons...",
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                   fontSize: 14.sp,
                   fontFamily: 'DynaPuff_SemiCondensed',
                 ),
@@ -257,12 +253,12 @@ class FrenchLessons extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.video_library_outlined,
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
               size: 48.sp,
             ),
           ),
@@ -270,7 +266,7 @@ class FrenchLessons extends StatelessWidget {
           Text(
             "Aucune leçon disponible",
             style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
               fontFamily: 'DynaPuff_SemiCondensed',
@@ -280,7 +276,7 @@ class FrenchLessons extends StatelessWidget {
           Text(
             "Veuillez réessayer plus tard",
             style: TextStyle(
-              color: Colors.white.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
               fontSize: 14.sp,
               fontFamily: 'DynaPuff_SemiCondensed',
             ),
@@ -300,13 +296,13 @@ class FrenchLessons extends StatelessWidget {
       itemBuilder: (context, index) {
         final video = controller.fetchedVideos[index];
         final isVisited = controller.isVideoVisited(video.id);
-        
+
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -337,9 +333,10 @@ class FrenchLessons extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
-                        color: isVisited 
-                            ? Colors.white.withOpacity(0.2)
-                            : AppColors.bluePrimary.withOpacity(0.1),
+                        color:
+                            isVisited
+                                ? Colors.white.withValues(alpha: 0.2)
+                                : AppColors.bluePrimary.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -357,7 +354,10 @@ class FrenchLessons extends StatelessWidget {
                           Text(
                             '${index + 1}. ${video.title}',
                             style: TextStyle(
-                              color: isVisited ? Colors.white : AppColors.textPrimary,
+                              color:
+                                  isVisited
+                                      ? Colors.white
+                                      : AppColors.textPrimary,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'DynaPuff_SemiCondensed',
@@ -370,7 +370,7 @@ class FrenchLessons extends StatelessWidget {
                             Text(
                               'Terminé',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.8),
+                                color: Colors.white.withValues(alpha: 0.8),
                                 fontSize: 12.sp,
                                 fontFamily: 'DynaPuff_SemiCondensed',
                               ),
@@ -382,9 +382,10 @@ class FrenchLessons extends StatelessWidget {
                     // Arrow icon
                     Icon(
                       Icons.arrow_forward_ios,
-                      color: isVisited 
-                          ? Colors.white.withOpacity(0.7)
-                          : AppColors.textSecondary,
+                      color:
+                          isVisited
+                              ? Colors.white.withValues(alpha: 0.7)
+                              : AppColors.textSecondary,
                       size: 16.sp,
                     ),
                   ],

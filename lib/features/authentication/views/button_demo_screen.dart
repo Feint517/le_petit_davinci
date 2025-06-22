@@ -37,7 +37,7 @@ class ButtonDemoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(20.h),
-                
+
                 // Section: Primary Animated Buttons
                 _buildSectionTitle('Primary Animated Buttons'),
                 Gap(16.h),
@@ -56,9 +56,9 @@ class ButtonDemoScreen extends StatelessWidget {
                   width: double.infinity,
                   onPressed: () => _showSnackbar('Learning started!'),
                 ),
-                
+
                 Gap(32.h),
-                
+
                 // Section: Secondary Animated Buttons
                 _buildSectionTitle('Secondary Animated Buttons'),
                 Gap(16.h),
@@ -77,13 +77,13 @@ class ButtonDemoScreen extends StatelessWidget {
                   width: double.infinity,
                   onPressed: () => _showSnackbar('Rewards opened!'),
                 ),
-                
+
                 Gap(32.h),
-                
+
                 // Section: Custom Animated Buttons
                 _buildSectionTitle('Custom Animation Settings'),
                 Gap(16.h),
-                
+
                 // Button with pulse effect
                 AnimatedButton(
                   label: 'Special Offer!',
@@ -96,9 +96,9 @@ class ButtonDemoScreen extends StatelessWidget {
                   enableFloatingAnimation: false,
                   onPressed: () => _showSnackbar('Special offer clicked!'),
                 ),
-                
+
                 Gap(12.h),
-                
+
                 // Button without floating animation
                 AnimatedButton(
                   label: 'Settings',
@@ -111,9 +111,9 @@ class ButtonDemoScreen extends StatelessWidget {
                   enableBounceOnTap: true,
                   onPressed: () => _showSnackbar('Settings opened!'),
                 ),
-                
+
                 Gap(32.h),
-                
+
                 // Section: Button Grid
                 _buildSectionTitle('Button Grid Layout'),
                 Gap(16.h),
@@ -142,9 +142,9 @@ class ButtonDemoScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 Gap(12.h),
-                
+
                 Row(
                   children: [
                     Expanded(
@@ -161,7 +161,10 @@ class ButtonDemoScreen extends StatelessWidget {
                     Expanded(
                       child: AnimatedButton(
                         label: 'Games',
-                        icon: const Icon(Icons.videogame_asset, color: Colors.white),
+                        icon: const Icon(
+                          Icons.videogame_asset,
+                          color: Colors.white,
+                        ),
                         variant: ButtonVariant.secondary,
                         size: ButtonSize.md,
                         entranceDelay: const Duration(milliseconds: 2000),
@@ -170,9 +173,9 @@ class ButtonDemoScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 Gap(40.h),
-                
+
                 // Reset demonstration button
                 Center(
                   child: AnimatedButton(
@@ -186,7 +189,7 @@ class ButtonDemoScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                
+
                 Gap(40.h),
               ],
             ),
@@ -212,7 +215,7 @@ class ButtonDemoScreen extends StatelessWidget {
     Get.snackbar(
       'Button Pressed',
       message,
-      backgroundColor: AppColors.primary.withOpacity(0.9),
+      backgroundColor: AppColors.primary.withValues(alpha: 0.9),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 2),
@@ -220,4 +223,4 @@ class ButtonDemoScreen extends StatelessWidget {
       borderRadius: 12,
     );
   }
-} 
+}
