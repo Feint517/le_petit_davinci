@@ -5,15 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
 import 'package:le_petit_davinci/features/lessons/english/widget/practice_header.dart';
 import 'package:le_petit_davinci/features/lessons/french/controllers/construction_lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/french/views/construction_exercice.dart';
 
 class ConstructionLesson extends StatelessWidget {
-  ConstructionLesson({super.key, required this.day}) {
-    print('ConstructionLesson initialized with day: $day');
-  }
+  const ConstructionLesson({super.key, required this.day});
 
   final int day;
 
@@ -100,19 +99,16 @@ class ConstructionLesson extends StatelessWidget {
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
+                    CustomButton(
+                      width: 140,
+                      variant: ButtonVariant.secondary,
+                      size: ButtonSize.lg,
+                      label: 'Retour',
+                      icon: Icon(Icons.arrow_back, color: AppColors.white),
                       onPressed:
                           controller.currentIndex.value > 0
                               ? controller.previousSentence
                               : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.secondary,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 15,
-                        ),
-                      ),
-                      child: Icon(Icons.arrow_back, color: AppColors.white),
                     ),
                     Obx(
                       () => IconButton(
@@ -127,7 +123,15 @@ class ConstructionLesson extends StatelessWidget {
                       ),
                     ),
                     controller.isLastSentence()
-                        ? ElevatedButton(
+                        ? CustomButton(
+                          width: 140,
+                          variant: ButtonVariant.secondary,
+                          size: ButtonSize.lg,
+                          label: 'Exercise',
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: AppColors.white,
+                          ),
                           onPressed: () {
                             Get.to(
                               () => ConstructionExercice(
@@ -137,34 +141,20 @@ class ConstructionLesson extends StatelessWidget {
                               duration: Duration(milliseconds: 500),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.secondary,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 15,
-                            ),
-                          ),
-                          child: Text(
-                            'Exercise',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
                         )
-                        : ElevatedButton(
+                        : CustomButton(
+                          width: 140,
+                          variant: ButtonVariant.secondary,
+                          size: ButtonSize.lg,
+                          label: 'Suivant',
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: AppColors.white,
+                          ),
                           onPressed:
                               !controller.isLastSentence()
                                   ? controller.nextSentence
                                   : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.secondary,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 15,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: AppColors.white,
-                          ),
                         ),
                   ],
                 ),

@@ -61,8 +61,7 @@ class RewardsSection extends StatelessWidget {
           CTACard(
             promptText: 'Encore 2 exercices pour devenir Génie du calcul !',
             onButtonPressed: () {
-              // TODO: Navigate to specific exercise/mission
-              print('Continue to next mission pressed');
+              // todo: Navigate to specific exercise/mission
             },
           ),
         ],

@@ -135,7 +135,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
                               onTap:
-                                  () => Get.to(
+                                  () => Get.offAll(
                                     () => ConstructionIntroductionLesson(),
                                     transition: Transition.rightToLeft,
                                     duration: const Duration(milliseconds: 500),

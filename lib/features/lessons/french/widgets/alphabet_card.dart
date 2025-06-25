@@ -47,58 +47,39 @@ class AlphabetCard extends StatelessWidget {
                 : null,
       ),
       child:
-          isExpanded ? _buildExpandedCard(context) : _buildCompactCard(context),
+          isExpanded
+              ? ExpandedCard(
+                letter: letter,
+                index: index,
+                isPlaying: isPlaying,
+                onTap: onTap,
+              )
+              : CompactCard(
+                letter: letter,
+                index: index,
+                isPlaying: isPlaying,
+                onTap: onTap,
+              ),
     );
   }
+}
 
-  Widget _buildCompactCard(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        child: AnimatedBuilder(
-          animation: animation ?? const AlwaysStoppedAnimation(1.0),
-          builder: (context, child) {
-            return Transform.scale(
-              scale: animation?.value ?? 1.0,
-              child: child,
-            );
-          },
-          child: Container(
-            height: 75,
-            width: 75,
-            padding: const EdgeInsets.all(8),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  letter.displayForm,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: letter.getColor(index),
-                  ),
-                ),
-                if (isPlaying)
-                  const SizedBox(
-                    height: 15,
-                    width: 15,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+class ExpandedCard extends StatelessWidget {
+  const ExpandedCard({
+    super.key,
+    required this.letter,
+    required this.index,
+    required this.isPlaying,
+    required this.onTap,
+  });
 
-  Widget _buildExpandedCard(BuildContext context) {
+  final AlphabetLetter letter;
+  final int index;
+  final bool isPlaying;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -108,6 +89,8 @@ class AlphabetCard extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,6 +230,71 @@ class AlphabetCard extends StatelessWidget {
                   ),
                 ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CompactCard extends StatelessWidget {
+  const CompactCard({
+    super.key,
+    required this.letter,
+    required this.index,
+    required this.isPlaying,
+    required this.onTap,
+    this.animation,
+  });
+
+  final AlphabetLetter letter;
+  final int index;
+  final bool isPlaying;
+  final VoidCallback onTap;
+  final Animation<double>? animation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(18),
+        child: AnimatedBuilder(
+          animation: animation ?? const AlwaysStoppedAnimation(1.0),
+          builder: (context, child) {
+            return Transform.scale(
+              scale: animation?.value ?? 1.0,
+              child: child,
+            );
+          },
+          child: Container(
+            height: 75,
+            width: 75,
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  letter.displayForm,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: letter.getColor(index),
+                  ),
+                ),
+                if (isPlaying)
+                  const SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

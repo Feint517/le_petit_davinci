@@ -7,11 +7,17 @@ import 'package:animations/animations.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
+import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_controller.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
+import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
+import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/home/models/subject_data.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
+import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 import 'subject_card.dart';
 
@@ -75,40 +81,46 @@ class SubjectSelection extends StatelessWidget {
             mainAxisExtent: 185.h,
             itemBuilder: (context, index) {
               final subject = subjects[index];
-              
-              // Special handling for French card with container transform
-              if (subject.label == 'Français') {
-                return OpenContainer<bool>(
-                  transitionType: ContainerTransitionType.fadeThrough,
-                  openBuilder: (BuildContext context, VoidCallback _) {
-                    // Manually initialize the controller for container transform
-                    Get.put(FrenchMapController(), permanent: false);
-                    return const FrenchMapScreen();
-                  },
-                  closedElevation: 0,
-                  closedShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  closedColor: subject.cardColor,
-                  openColor: const Color(0xFF4DC8FF), // Match intro screen gradient start
-                  transitionDuration: const Duration(milliseconds: 800),
-                  closedBuilder: (BuildContext context, VoidCallback openContainer) {
-                    return SubjectCard(
-                      label: subject.label,
-                      imageAssetPath: subject.imageAssetPath,
-                      cardColor: subject.cardColor,
-                      onTap: openContainer, // Use the openContainer callback
-                    );
-                  },
-                );
-              }
-              
-              // Regular cards for other subjects
-              return SubjectCard(
-                label: subject.label,
-                imageAssetPath: subject.imageAssetPath,
-                cardColor: subject.cardColor,
-                onTap: subject.onTap,
+              return OpenContainer(
+                transitionType: ContainerTransitionType.fadeThrough,
+                openBuilder: (BuildContext context, VoidCallback _) {
+                  // Handle navigation for each subject
+                  switch (subject.label) {
+                    case 'Français':
+                      Get.put(FrenchMapController(), permanent: false);
+                      return const FrenchMapScreen();
+                    case 'Mathématiques':
+                      Get.put(MathMapController());
+                      return const MathematicMapScreen();
+                    case 'English':
+                      Get.put(EnglishMapController());
+                      return const EnglishMapScreen();
+                    case 'Vie quotidienne':
+                      return const VieQuotidienneScreen();
+                    case 'Jeux':
+                      return const GamesScreen();
+                    // case 'Studio':
+                    //   // Return the appropriate screen for Studio
+                    //   return const SizedBox.shrink();
+                    default:
+                      return const SizedBox.shrink();
+                  }
+                },
+                closedElevation: 0,
+                closedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                closedColor: subject.cardColor,
+                openColor: subject.cardColor,
+                transitionDuration: const Duration(milliseconds: 800),
+                closedBuilder: (context, openContainer) {
+                  return SubjectCard(
+                    label: subject.label,
+                    imageAssetPath: subject.imageAssetPath,
+                    cardColor: subject.cardColor,
+                    onTap: openContainer,
+                  );
+                },
               );
             },
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/data/french_words_suggestions.dart';
 import 'package:le_petit_davinci/data/sentence_translation.dart';
 import 'dart:async';
@@ -31,7 +32,7 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
 
   // Timer related variables
   late Timer _timer;
-  int _remainingSeconds = 10;
+  int _remainingSeconds = 15;
   bool _timerActive = false;
 
   @override
@@ -49,7 +50,7 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
   }
 
   void _startTimer() {
-    _remainingSeconds = 10;
+    _remainingSeconds = 15;
     _timerActive = true;
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -146,27 +147,18 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
       barrierDismissible: false,
       builder:
           (context) => AlertDialog(
-            title: Text(
-              'Exercise Complete!',
-              style: TextStyle(fontFamily: 'BricolageGrotesque'),
-            ),
-            content: Text(
-              'Your score: $_score/${_sentences.length}',
-              style: TextStyle(fontFamily: 'BricolageGrotesque'),
-            ),
+            title: Text('Exercise Complete!'),
+            content: Text('Your score: $_score/${_sentences.length}'),
             actions: [
               TextButton(
                 onPressed: () {
-                  Get.to(
+                  Get.off(
                     () => ConstructionIntroductionLesson(),
                     transition: Transition.leftToRight,
                     duration: Duration(milliseconds: 500),
                   );
                 },
-                child: Text(
-                  'OK',
-                  style: TextStyle(fontFamily: 'BricolageGrotesque'),
-                ),
+                child: Text('OK'),
               ),
             ],
           ),
@@ -177,21 +169,14 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Jour ${widget.day} - Exercice',
-          style: TextStyle(fontFamily: 'BricolageGrotesque'),
-        ),
+        title: Text('Jour ${widget.day} - Exercice'),
         actions: [
           Center(
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: Text(
                 'Score: $_score/${_sentences.length}',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'BricolageGrotesque',
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -202,7 +187,7 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Timer display
+            //* Timer display
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -216,14 +201,13 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
                   child: Row(
                     children: [
                       Icon(Icons.timer, color: Colors.white),
-                      Gap(8),
+                      const Gap(8),
                       Text(
                         '$_remainingSeconds',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          fontFamily: 'BricolageGrotesque',
                         ),
                       ),
                     ],
@@ -233,21 +217,14 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
             ),
             Gap(16),
 
-            Text(
-              'Translate to French:',
-              style: TextStyle(fontSize: 18, fontFamily: 'BricolageGrotesque'),
-            ),
+            Text('Translate to French:', style: TextStyle(fontSize: 18)),
             Gap(20),
             Text(
               _sentences[_currentIndex].englishSentence,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'BricolageGrotesque',
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            Gap(30),
+            const Gap(30),
 
             // Multiple choice options
             Expanded(
@@ -296,7 +273,6 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
                                       isSelected
                                           ? FontWeight.bold
                                           : FontWeight.normal,
-                                  fontFamily: 'BricolageGrotesque',
                                 ),
                               ),
                             ),
@@ -323,53 +299,33 @@ class _ConstructionExerciceState extends State<ConstructionExercice> {
               ),
             ),
 
-            Gap(20),
+            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (!_showResult)
-                  ElevatedButton(
-                    onPressed: _selectedAnswer != null ? _checkAnswer : null,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30,
-                        vertical: 15,
-                      ),
+                !_showResult
+                    ? CustomButton(
+                      variant: ButtonVariant.secondary,
+                      size: ButtonSize.lg,
+                      width: 200,
+                      label: 'Verifier la Réponse',
+                      onPressed: _selectedAnswer != null ? _checkAnswer : null,
+                    )
+                    : CustomButton(
+                      variant: ButtonVariant.secondary,
+                      size: ButtonSize.lg,
+                      label:
+                          _currentIndex < _sentences.length - 1
+                              ? 'Question Suivante'
+                              : 'Terminer',
+                      onPressed: _nextQuestion,
                     ),
-                    child: Text(
-                      'Verifier la Réponse',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'BricolageGrotesque',
-                      ),
-                    ),
-                  )
-                else
-                  ElevatedButton(
-                    onPressed: _nextQuestion,
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30,
-                        vertical: 15,
-                      ),
-                    ),
-                    child: Text(
-                      _currentIndex < _sentences.length - 1
-                          ? 'Question Suivante'
-                          : 'Terminer',
-                      style: TextStyle(
-                        fontFamily: 'BricolageGrotesque',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
               ],
             ),
-            Gap(10),
+            const Gap(10),
             Text(
               'Question ${_currentIndex + 1} of ${_sentences.length}',
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'BricolageGrotesque'),
             ),
           ],
         ),

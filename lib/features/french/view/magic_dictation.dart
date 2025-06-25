@@ -109,9 +109,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
         bottom: false,
         child: Column(
           children: [
-            const CustomNavBar(
-            variant: BadgeVariant.french,
-            ),
+            const CustomNavBar(variant: BadgeVariant.french),
 
             Text(
               'Dictée magique',
@@ -236,7 +234,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                               style: TextStyle(
                                 color:
                                     _isCorrect
-                                        ? AppColors.accent
+                                        ? const Color.fromARGB(255, 68, 105, 36)
                                         : AppColors.primary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -256,14 +254,19 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                             buttonColor:
                                 _showValidation
                                     ? (_isCorrect
-                                        ? AppColors.accent
-                                        : AppColors.primary)
+                                        ? AppColors.secondary
+                                        : Colors.red)
                                     : AppColors.secondary,
                             shadowColor:
-                                _showValidation
+                                (_showValidation)
                                     ? (_isCorrect
-                                        ? AppColors.accent2
-                                        : AppColors.orangeAccentDark)
+                                        ? AppColors.orangeAccentDark
+                                        : const Color.fromARGB(
+                                          255,
+                                          157,
+                                          42,
+                                          34,
+                                        ))
                                     : AppColors.orangeAccentDark,
                             label:
                                 _showValidation

@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   # ui
   flutter_animate: ^4.5.2
+  animations: ^2.0.11
   animated_text_kit: ^4.2.3
   lottie: ^3.3.1
   rive: ^0.13.20
@@ -40,7 +41,7 @@ dependencies:
   chewie: ^1.11.3
   webview_flutter: ^4.4.2
   http: ^1.4.0
-  animations: ^2.0.11
+  
   
 
 dev_dependencies:

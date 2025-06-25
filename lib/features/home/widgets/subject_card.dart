@@ -30,7 +30,7 @@ class SubjectCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: cardColor,
             borderRadius: BorderRadius.circular(20.r),
-            boxShadow: CustomShadowStyle.customCircleShadows(color:cardColor)
+            boxShadow: CustomShadowStyle.customCircleShadows(color: cardColor),
           ),
           clipBehavior: Clip.antiAlias,
           child: Stack(

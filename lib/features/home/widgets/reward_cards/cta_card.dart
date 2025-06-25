@@ -3,19 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
 class CTACard extends StatelessWidget {
-  final String promptText;
-  final String buttonText;
-  final VoidCallback? onButtonPressed;
-
   const CTACard({
     super.key,
     required this.promptText,
     this.buttonText = 'Continuer',
+    this.buttonColor = AppColors.primary,
     this.onButtonPressed,
   });
+
+  final String promptText;
+  final String buttonText;
+  final Color buttonColor;
+  final VoidCallback? onButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +65,9 @@ class CTACard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: AppColors.bluePrimary,
+          color: buttonColor,
           borderRadius: BorderRadius.circular(16.r),
+          boxShadow: CustomShadowStyle.customCircleShadows(color: buttonColor),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -82,7 +86,6 @@ class CTACard extends StatelessWidget {
                   color: AppColors.white,
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'DynaPuff_SemiCondensed',
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
