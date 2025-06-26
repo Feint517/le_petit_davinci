@@ -29,12 +29,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     ]);
     // Enter full screen mode
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(
-        Uri.parse('https://www.youtube.com/embed/${widget.videoId}?autoplay=1&playsinline=0'),
-      );
+
+    _controller =
+        WebViewController()
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..loadRequest(
+            Uri.parse(
+              'https://www.youtube.com/embed/${widget.videoId}?autoplay=1&playsinline=0',
+            ),
+          );
   }
 
   @override
@@ -57,9 +60,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         child: Stack(
           children: [
             // Video player takes full screen
-            Center(
-              child: WebViewWidget(controller: _controller),
-            ),
+            Center(child: WebViewWidget(controller: _controller)),
             // Back button overlay
             Positioned(
               top: 16,
@@ -74,4 +75,4 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ),
     );
   }
-} 
+}

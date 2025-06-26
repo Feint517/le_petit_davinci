@@ -40,7 +40,7 @@ class SelectionTile extends GetView<RewardsController> {
                       Text(
                         text,
                         style: TextStyle(
-                          color: AppColors.textWhite,
+                          color: AppColors.white,
                           fontSize: 14.sp,
                         ),
                       ),
@@ -52,10 +52,7 @@ class SelectionTile extends GetView<RewardsController> {
                   )
                   : Text(
                     text,
-                    style: TextStyle(
-                      color: AppColors.textWhite,
-                      fontSize: 14.sp,
-                    ),
+                    style: TextStyle(color: AppColors.white, fontSize: 14.sp),
                   ),
         ),
       ),

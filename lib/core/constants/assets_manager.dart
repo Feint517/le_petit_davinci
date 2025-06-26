@@ -25,6 +25,9 @@ class IconAssets {
   static const String password = 'assets/icons/password.svg';
   static const String check = 'assets/icons/check.svg';
   static const String lock = 'assets/icons/lock.svg';
+  static const String play = 'assets/icons/play.svg';
+  static const String writingPen = 'assets/icons/writing_pen.svg';
+  static const String add = 'assets/icons/add.svg';
 }
 
 class SvgAssets {
@@ -139,5 +142,3 @@ class AudioAssets {
   static const String igloo = 'assets/audio/tts/TTS_igloo.mp3';
   static const String octopus = 'assets/audio/tts/TTS_octopus.mp3';
 }
-
-

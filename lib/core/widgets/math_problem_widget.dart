@@ -181,7 +181,7 @@ class _MathProblemWidgetState extends State<MathProblemWidget> {
                           ? 'Super ! Tu as raison.'
                           : 'Dommage, ce n\'est pas la bonne réponse.',
                       style: TextStyle(
-                        color: AppColors.bluePrimary,
+                        color: AppColors.primary,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),

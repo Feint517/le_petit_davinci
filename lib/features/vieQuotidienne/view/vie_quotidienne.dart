@@ -55,13 +55,11 @@ class VieQuotidienneScreen extends StatelessWidget {
                 bottom: 20,
                 right: 30,
                 child: CustomButtonNew(
-                  buttonColor: AppColors.primaryBlue,
+                  buttonColor: AppColors.primary,
                   shadowColor: AppColors.bluePrimaryDark,
                   label: 'Suivant',
                   labelColor: AppColors.white,
-                  onPressed: () {
-                    // Handle the next button action
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],

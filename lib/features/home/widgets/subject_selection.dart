@@ -31,7 +31,7 @@ class SubjectSelection extends StatelessWidget {
       SubjectData(
         label: 'Français',
         imageAssetPath: SvgAssets.frenchCard,
-        cardColor: AppColors.bluePrimary,
+        cardColor: AppColors.primary,
         onTap: () => Get.to(() => const FrenchIntroScreen()),
       ),
       SubjectData(
@@ -61,7 +61,7 @@ class SubjectSelection extends StatelessWidget {
       SubjectData(
         label: 'Studio',
         imageAssetPath: SvgAssets.studioCard,
-        cardColor: AppColors.bluePrimary,
+        cardColor: AppColors.primary,
         onTap: () => Get.toNamed(AppRoutes.home + AppRoutes.studio),
       ),
     ];

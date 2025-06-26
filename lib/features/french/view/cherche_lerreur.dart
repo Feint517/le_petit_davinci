@@ -91,9 +91,7 @@ class _FrenchCherchelerreurState extends State<FrenchCherchelerreur> {
         bottom: false,
         child: Column(
           children: [
-            const CustomNavBar(
-              variant: BadgeVariant.french,
-            ),
+            const CustomNavBar(variant: BadgeVariant.french),
 
             Text(
               "Cherche l'erreur",

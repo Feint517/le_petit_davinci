@@ -10,7 +10,7 @@ class AlphabetLetter {
   final String? audioPath;
   final Color? color;
   final String? imagePath;
-  
+
   const AlphabetLetter({
     required this.letter,
     required this.uppercase,
@@ -24,11 +24,11 @@ class AlphabetLetter {
   });
 
   String get displayForm => "$uppercase$lowercase";
-  
+
   // Récupérer la couleur ou une couleur par défaut
   Color getColor(int index) {
     if (color != null) return color!;
-    
+
     // Couleurs alternées en fonction de l'index
     final List<Color> colors = [
       const Color(0xFFBBA2FF), // Purple
@@ -36,7 +36,7 @@ class AlphabetLetter {
       const Color(0xFF13BB87), // Green
       const Color(0xFFFFC107), // Amber
     ];
-    
+
     return colors[index % colors.length];
   }
 }
@@ -45,7 +45,7 @@ class AlphabetSection {
   final String title;
   final String description;
   final List<AlphabetLetter> letters;
-  
+
   const AlphabetSection({
     required this.title,
     required this.description,
@@ -291,27 +291,31 @@ class AlphabetData {
       audioPath: "assets/sfx/letters/z.mp3",
     ),
   ];
-  
+
   // Sections d'apprentissage
   static final List<AlphabetSection> sections = [
     AlphabetSection(
       title: "L'Alphabet Français",
-      description: "Apprenez les 26 lettres de l'alphabet français et leur prononciation.",
+      description:
+          "Apprenez les 26 lettres de l'alphabet français et leur prononciation.",
       letters: allLetters,
     ),
     AlphabetSection(
       title: "Les Voyelles",
-      description: "Les lettres A, E, I, O, U sont des voyelles qui ont un son propre.",
+      description:
+          "Les lettres A, E, I, O, U sont des voyelles qui ont un son propre.",
       letters: allLetters.where((l) => "aeiou".contains(l.letter)).toList(),
     ),
     AlphabetSection(
       title: "Les Consonnes",
-      description: "Les consonnes sont les lettres qui ne sont pas des voyelles.",
+      description:
+          "Les consonnes sont les lettres qui ne sont pas des voyelles.",
       letters: allLetters.where((l) => !"aeiou".contains(l.letter)).toList(),
     ),
     AlphabetSection(
       title: "Les Sons Spéciaux",
-      description: "En français, certaines combinaisons de lettres créent des sons uniques.",
+      description:
+          "En français, certaines combinaisons de lettres créent des sons uniques.",
       letters: [
         const AlphabetLetter(
           letter: "é",

@@ -74,13 +74,19 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: switch (variant) {
           ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
-            color:AppColors.primary,
+            color: AppColors.primary,
           ),
           ButtonVariant.secondary => CustomShadowStyle.customCircleShadows(
-            color:AppColors.secondary,
+            color: AppColors.secondary,
+          ),
+          ButtonVariant.success => CustomShadowStyle.customCircleShadows(
+            color: AppColors.succuss,
+          ),
+          ButtonVariant.warning => CustomShadowStyle.customCircleShadows(
+            color: AppColors.warning,
           ),
           ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
-            color:Colors.transparent,
+            color: Colors.transparent,
           ),
         },
       ),
@@ -132,9 +138,7 @@ class CustomButton extends StatelessWidget {
   // Builds the loading indicator with the appropriate color based on the button variant
   Widget _buildLoadingIndicator() {
     final Color indicatorColor =
-        variant == ButtonVariant.ghost
-            ? AppColors.bluePrimary
-            : AppColors.white;
+        variant == ButtonVariant.ghost ? AppColors.primary : AppColors.white;
 
     return SizedBox(
       height: 16,
@@ -209,9 +213,13 @@ class CustomButton extends StatelessWidget {
 
     switch (variant) {
       case ButtonVariant.primary:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
       case ButtonVariant.secondary:
         return AppColors.orangeAccent;
+      case ButtonVariant.success:
+        return AppColors.succuss;
+      case ButtonVariant.warning:
+        return AppColors.warning;
       case ButtonVariant.ghost:
         return Colors.transparent;
     }
@@ -228,8 +236,12 @@ class CustomButton extends StatelessWidget {
         return AppColors.white;
       case ButtonVariant.secondary:
         return AppColors.white;
+      case ButtonVariant.success:
+        return AppColors.white;
+      case ButtonVariant.warning:
+        return AppColors.white;
       case ButtonVariant.ghost:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
     }
   }
 
@@ -242,7 +254,7 @@ class CustomButton extends StatelessWidget {
     switch (variant) {
       case ButtonVariant.primary:
         return const LinearGradient(
-          colors: [AppColors.bluePrimary, Color(0xFF1AB1FF)],
+          colors: [AppColors.primary, Color(0xFF1AB1FF)],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         );

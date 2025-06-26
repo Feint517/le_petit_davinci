@@ -85,7 +85,7 @@ class QuestionsIntroScreen extends StatelessWidget {
                             speechText:
                                 "Avant de commencer ton aventure, j'ai 5 petites questions pour mieux te "
                                 "connaître\n\nEt pendant que tu réponds, je vais bouger et te faire coucou !",
-                            bubbleColor: AppColors.bluePrimary,
+                            bubbleColor: AppColors.primary,
                             mascotSize: 180.h,
                             maxBubbleWidth: 350.w,
                             textSize: 18.sp,

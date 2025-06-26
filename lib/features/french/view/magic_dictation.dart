@@ -193,7 +193,7 @@ class _FrenchMagicDictationState extends State<FrenchMagicDictation> {
                               decoration: BoxDecoration(
                                 color:
                                     _isPlaying
-                                        ? AppColors.bluePrimary
+                                        ? AppColors.primary
                                         : Colors.transparent,
                                 shape: BoxShape.circle,
                               ),

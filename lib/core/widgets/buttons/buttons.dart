@@ -9,7 +9,7 @@ export 'animated_button.dart';
 enum IconPosition { left, right }
 
 // Button style variants
-enum ButtonVariant { primary, secondary, ghost }
+enum ButtonVariant { primary, secondary, success, warning, ghost }
 
 // Button size variants
 enum ButtonSize { sm, md, lg }

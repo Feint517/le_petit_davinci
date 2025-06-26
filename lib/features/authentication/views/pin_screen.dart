@@ -141,7 +141,7 @@ class PinInputBox extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
-          color: isFocused ? AppColors.bluePrimary : Colors.transparent,
+          color: isFocused ? AppColors.primary : Colors.transparent,
           width: 2,
         ),
       ),

@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                   style: const TextStyle(
                                     fontFamily: 'DynaPuff_SemiCondensed',
                                     fontSize: 24,
-                                    color: AppColors.bluePrimary,
+                                    color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 )

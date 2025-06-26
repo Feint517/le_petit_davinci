@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -35,9 +37,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomNavBar(
-                variant: BadgeVariant.math,
-              ),
+              CustomNavBar(variant: BadgeVariant.math),
 
               Gap(20),
 
@@ -182,7 +182,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppColors.bluePrimary,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
@@ -223,7 +223,7 @@ class _LessonVideoScreenState extends State<LessonVideoScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                foregroundColor: AppColors.bluePrimary,
+                                foregroundColor: AppColors.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
                                 ),

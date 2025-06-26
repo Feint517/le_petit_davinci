@@ -68,7 +68,7 @@ class LessonSpeechBubble extends StatelessWidget {
   Color _getBubbleColor() {
     switch (type) {
       case BubbleType.completed:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
       case BubbleType.active:
         return Colors.white;
       case BubbleType.locked:
@@ -81,7 +81,7 @@ class LessonSpeechBubble extends StatelessWidget {
       case BubbleType.completed:
         return AppColors.bluePrimaryDark;
       case BubbleType.active:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
       case BubbleType.locked:
         return Colors.grey[400]!;
     }

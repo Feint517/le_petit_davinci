@@ -16,7 +16,7 @@ class IntroductionFrenchLessons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bluePrimary,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         bottom: false,
         child: Stack(

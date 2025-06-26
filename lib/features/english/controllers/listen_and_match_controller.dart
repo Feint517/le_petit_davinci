@@ -63,9 +63,11 @@ class ListenAndMatchController extends GetxController {
   }
 
   String get feedbackMessage {
-  if (!isChecked.value) return '';
-  return isCorrect.value == true ? "Bravo ! C'est correct !" : "Oups ! Essaie encore !";
-}
+    if (!isChecked.value) return '';
+    return isCorrect.value == true
+        ? "Bravo ! C'est correct !"
+        : "Oups ! Essaie encore !";
+  }
 
   void nextQuestion() {
     if (currentIndex.value < items.length - 1) {

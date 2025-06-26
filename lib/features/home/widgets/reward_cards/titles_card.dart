@@ -26,7 +26,9 @@ class TitlesCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: CustomShadowStyle.customCircleShadows(color:backgroundColor),
+        boxShadow: CustomShadowStyle.customCircleShadows(
+          color: backgroundColor,
+        ),
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(

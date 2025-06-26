@@ -46,11 +46,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: PrimaryAnimatedButton(
                         label: 'Continue',
-                        icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                        icon: const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        ),
                         iconPosition: IconPosition.right,
                         width: double.infinity,
                         entranceDelay: const Duration(milliseconds: 800),
-                        onPressed: widget.onContinue ?? () => Get.offAndToNamed(AppRoutes.home),
+                        onPressed:
+                            widget.onContinue ??
+                            () => Get.offAndToNamed(AppRoutes.home),
                       ),
                     ),
                   ],

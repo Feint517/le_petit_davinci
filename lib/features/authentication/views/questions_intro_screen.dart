@@ -38,7 +38,7 @@ class QuestionsIntroScreen extends StatelessWidget {
                     ),
                     margin: EdgeInsets.symmetric(horizontal: 24.w),
                     decoration: BoxDecoration(
-                      color: AppColors.bluePrimary,
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Text(

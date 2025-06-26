@@ -55,7 +55,7 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppColors.bluePrimary,
+                            color: AppColors.primary,
                             width: 2.5,
                           ),
                         ),

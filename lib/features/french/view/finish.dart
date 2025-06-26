@@ -22,7 +22,7 @@ class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bluePrimary,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -44,9 +44,7 @@ class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
                   Column(
                     spacing: 20,
                     children: [
-                      const CustomNavBar(
-                        variant: BadgeVariant.french,
-                      ),
+                      const CustomNavBar(variant: BadgeVariant.french),
                       Gap(20),
                       Text(
                         '🎉 Hourra, votre réponse est correcte !',

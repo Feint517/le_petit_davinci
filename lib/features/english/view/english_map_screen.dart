@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
@@ -31,18 +30,18 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
+        right: false,
+        left: false,
         child: Column(
           children: [
-            ProfileHeader(
+            const ProfileHeader(
               userName: 'Alex',
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            CustomNavBar(
-              variant: BadgeVariant.english,
-            ),
+            const CustomNavBar(variant: BadgeVariant.english),
             Gap(10.h),
-            SubHeader(
+            const SubHeader(
               paragraph:
                   "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
@@ -55,10 +54,12 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  ResponsiveSvgAsset(
-                    assetPath: SvgAssets.frenchMapBackground,
-                    svgKey: controller.svgKey,
-                    width: DeviceUtils.getScreenWidth(context),
+                  SizedBox.expand(
+                    child: ResponsiveSvgAsset(
+                      assetPath: SvgAssets.frenchMapBackground,
+                      svgKey: controller.svgKey,
+                      fit: BoxFit.cover,
+                    ),
                   ),
 
                   Obx(() {
@@ -76,7 +77,7 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                               title: 'Listen and Match',
                               levelStatus: LevelStatus.completed,
                               iconPath: SvgAssets.headset,
-                              backgroundColor: AppColors.bluePrimary,
+                              backgroundColor: AppColors.primary,
                               onTap:
                                   () => Get.toNamed(
                                     AppRoutes.home +

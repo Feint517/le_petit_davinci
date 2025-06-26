@@ -10,34 +10,34 @@ class ConstructionLessonController extends GetxController {
   final day = 1.obs; // Default to day 1
   final currentIndex = 0.obs;
   final showFrench = true.obs;
-  
+
   // Non-reactive variables
   late List<EnglishToFrench> sentences;
   final FlutterTts flutterTts = FlutterTts();
-  
+
   @override
   void onInit() {
-    super.onInit(); 
+    super.onInit();
     loadSentences();
     initTts();
   }
-  
+
   @override
   void onClose() {
     flutterTts.stop();
     super.onClose();
   }
-  
+
   void loadSentences() {
     sentences = SentencesData.getSentencesByDay(day.value);
   }
-  
+
   Future<void> initTts() async {
     try {
-      await flutterTts.setLanguage('fr-FR');  // Set language to French
-      await flutterTts.setSpeechRate(0.5);    // Slightly slower speed for learning
-      await flutterTts.setVolume(1.0);        // Full volume
-      await flutterTts.setPitch(1.0);         // Normal pitch
+      await flutterTts.setLanguage('fr-FR'); // Set language to French
+      await flutterTts.setSpeechRate(0.5); // Slightly slower speed for learning
+      await flutterTts.setVolume(1.0); // Full volume
+      await flutterTts.setPitch(1.0); // Normal pitch
     } catch (e) {
       print('TTS initialization error: $e');
     }
@@ -48,17 +48,17 @@ class ConstructionLessonController extends GetxController {
       currentIndex.value++;
     }
   }
-  
+
   void previousSentence() {
     if (currentIndex.value > 0) {
       currentIndex.value--;
     }
   }
-  
+
   void toggleFrench() {
     showFrench.value = !showFrench.value;
   }
-  
+
   Future<void> speakFrenchSentence() async {
     try {
       final frenchText = sentences[currentIndex.value].frenchSentence;
@@ -67,19 +67,19 @@ class ConstructionLessonController extends GetxController {
       print('TTS speak error: $e');
     }
   }
-  
+
   String getCurrentEnglishSentence() {
     return sentences[currentIndex.value].englishSentence;
   }
-  
+
   String getCurrentFrenchSentence() {
     return sentences[currentIndex.value].frenchSentence;
   }
-  
+
   int getTotalSentences() {
     return sentences.length;
   }
-  
+
   bool isLastSentence() {
     return currentIndex.value >= sentences.length - 1;
   }

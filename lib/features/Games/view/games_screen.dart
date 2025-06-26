@@ -47,7 +47,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   userClass: 'Classe 2',
                   changeAvatar: false,
                 ),
-                CustomNavBar(variant: BadgeVariant.games,),
+                CustomNavBar(variant: BadgeVariant.games),
                 Gap(10),
                 SubHeader(
                   paragraph:

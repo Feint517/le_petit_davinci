@@ -40,7 +40,7 @@ class MascotWidget extends StatelessWidget {
     super.key,
     required this.speechText,
     this.assetPath = SvgAssets.bearMasscot,
-    this.bubbleColor = AppColors.bluePrimary,
+    this.bubbleColor = AppColors.primary,
     this.textColor,
     this.mascotSize,
     this.maxBubbleWidth,

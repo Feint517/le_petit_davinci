@@ -13,7 +13,7 @@ class HeaderMessageBox extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: AppColors.bluePrimary,
+        color: AppColors.primary,
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
         boxShadow: [
           BoxShadow(

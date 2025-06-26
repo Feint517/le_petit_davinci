@@ -336,12 +336,12 @@ class FrenchLessons extends StatelessWidget {
                         color:
                             isVisited
                                 ? Colors.white.withValues(alpha: 0.2)
-                                : AppColors.bluePrimary.withValues(alpha: 0.1),
+                                : AppColors.primary.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.play_circle_fill_rounded,
-                        color: isVisited ? Colors.white : AppColors.bluePrimary,
+                        color: isVisited ? Colors.white : AppColors.primary,
                         size: 24.sp,
                       ),
                     ),

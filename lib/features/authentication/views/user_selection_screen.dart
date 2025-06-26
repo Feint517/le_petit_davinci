@@ -22,7 +22,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
     // Debug: Check controller state
     print('🔍 Controller initialized: ${controller.showQuestionsIntro}');
     print('🔍 Intro message: ${controller.introMessage}');
-    
+
     //? Si nous devons afficher l'intro, montrer l'écran d'intro
     if (controller.showQuestionsIntro && controller.introMessage != null) {
       print('📱 Showing questions intro screen');
@@ -55,7 +55,8 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                     // Floating character illustration
                     SvgPicture.asset(SvgAssets.choose, height: 300.h)
                         .animate(
-                          onPlay: (controller) => controller.repeat(reverse: true),
+                          onPlay:
+                              (controller) => controller.repeat(reverse: true),
                         )
                         .moveY(
                           begin: 0,
@@ -66,15 +67,15 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                     Gap(40.h),
                     // Question text with entrance animation
                     Text(
-                      StringsManager.whoUsesApp,
-                      style: TextStyle(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.primary,
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                      ),
-                      textAlign: TextAlign.center,
-                    )
+                          StringsManager.whoUsesApp,
+                          style: TextStyle(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.primary,
+                            fontFamily: 'DynaPuff_SemiCondensed',
+                          ),
+                          textAlign: TextAlign.center,
+                        )
                         .animate()
                         .fadeIn(
                           duration: const Duration(milliseconds: 600),
@@ -93,15 +94,15 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                 children: [
                   // Parent button with staggered entrance
                   CustomButton(
-                    label: StringsManager.iAmParent,
-                    variant: ButtonVariant.primary,
-                    size: ButtonSize.lg,
-                    width: double.infinity,
-                    onPressed: () {
-                      print('🚀 Parent button pressed');
-                      Get.toNamed(AppRoutes.login);
-                    },
-                  )
+                        label: StringsManager.iAmParent,
+                        variant: ButtonVariant.primary,
+                        size: ButtonSize.lg,
+                        width: double.infinity,
+                        onPressed: () {
+                          print('🚀 Parent button pressed');
+                          Get.toNamed(AppRoutes.login);
+                        },
+                      )
                       .animate()
                       .fadeIn(
                         duration: const Duration(milliseconds: 600),
@@ -115,15 +116,15 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                   Gap(16.h),
                   // Child button with staggered entrance
                   CustomButton(
-                    label: StringsManager.itsMyChild,
-                    variant: ButtonVariant.secondary,
-                    size: ButtonSize.lg,
-                    width: double.infinity,
-                    onPressed: () {
-                      print('🚀 Child button pressed');
-                      Get.toNamed(AppRoutes.home);
-                    },
-                  )
+                        label: StringsManager.itsMyChild,
+                        variant: ButtonVariant.secondary,
+                        size: ButtonSize.lg,
+                        width: double.infinity,
+                        onPressed: () {
+                          print('🚀 Child button pressed');
+                          Get.toNamed(AppRoutes.home);
+                        },
+                      )
                       .animate()
                       .fadeIn(
                         duration: const Duration(milliseconds: 600),
@@ -134,8 +135,7 @@ class UserSelectionPage extends GetView<UserSelectionController> {
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.elasticOut,
                       ),
-                  
-                  
+
                   Gap(20.h),
                 ],
               ),

@@ -48,7 +48,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
               paragraph:
                   "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
               label: 'Decouvert de nouveaux mots',
-              color: AppColors.bluePrimary,
+              color: AppColors.primary,
               currentLevel: 1,
               maxLevel: 3,
             ),
@@ -99,7 +99,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                             child: MapButton(
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
-                              backgroundColor: AppColors.bluePrimary,
+                              backgroundColor: AppColors.primary,
                               onTap:
                                   () => Get.to(
                                     () => const FrenchMagicDictation(),

@@ -1,3 +1,3 @@
 import 'package:get/get.dart';
 
-class ConstructionExerciceController extends GetxController{}
+class ConstructionExerciceController extends GetxController {}

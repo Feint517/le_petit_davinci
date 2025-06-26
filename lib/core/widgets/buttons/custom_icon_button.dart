@@ -76,7 +76,7 @@ class CustomIconButton extends StatelessWidget {
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(
                               variant == ButtonVariant.ghost
-                                  ? AppColors.bluePrimary
+                                  ? AppColors.primary
                                   : AppColors.white,
                             ),
                           ),
@@ -85,7 +85,7 @@ class CustomIconButton extends StatelessWidget {
                           data: IconThemeData(
                             color:
                                 variant == ButtonVariant.ghost
-                                    ? AppColors.bluePrimary
+                                    ? AppColors.primary
                                     : AppColors.white,
                             size: _getIconSize(),
                           ),
@@ -128,12 +128,15 @@ class CustomIconButton extends StatelessWidget {
     if (disabled) {
       return AppColors.disabled;
     }
-
     switch (variant) {
       case ButtonVariant.primary:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
       case ButtonVariant.secondary:
         return AppColors.orangeAccent;
+      case ButtonVariant.success:
+        return AppColors.succuss;
+      case ButtonVariant.warning:
+        return AppColors.warning;
       case ButtonVariant.ghost:
         return Colors.transparent;
     }
@@ -148,7 +151,7 @@ class CustomIconButton extends StatelessWidget {
     switch (variant) {
       case ButtonVariant.primary:
         return const LinearGradient(
-          colors: [AppColors.bluePrimary, Color(0xFF1AB1FF)],
+          colors: [AppColors.primary, Color(0xFF1AB1FF)],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         );

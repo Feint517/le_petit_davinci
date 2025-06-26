@@ -81,7 +81,7 @@ class ProfileCards extends StatelessWidget {
                           const Icon(
                             Icons.person,
                             size: 30,
-                            color: AppColors.textWhite,
+                            color: AppColors.white,
                           ), // Default icon
                     ),
                   ),
@@ -105,7 +105,7 @@ class ProfileCards extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.textWhite,
+                              color: AppColors.white,
                             ),
                             overflow:
                                 TextOverflow
@@ -117,7 +117,7 @@ class ProfileCards extends StatelessWidget {
                             label!,
                             style: TextStyle(
                               fontSize: 12,
-                              color: labelColor ?? AppColors.textWhite,
+                              color: labelColor ?? AppColors.white,
                             ),
                             overflow:
                                 TextOverflow

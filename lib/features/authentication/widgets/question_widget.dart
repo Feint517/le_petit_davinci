@@ -32,7 +32,7 @@ class QuestionWidget extends StatelessWidget {
     super.key,
     required this.questionText,
     this.questionNumber,
-    this.backgroundColor = AppColors.bluePrimary,
+    this.backgroundColor = AppColors.primary,
     this.textColor = Colors.white,
     this.textSize,
     this.titleSize,

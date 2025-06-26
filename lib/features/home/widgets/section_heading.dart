@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';
 
 class SectionHeading extends StatelessWidget {
-  const SectionHeading({super.key, required this.sectionName});
+  const SectionHeading({
+    super.key,
+    required this.sectionName,
+    this.fontWeight = FontWeight.w400,
+  });
 
   final String sectionName;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +17,9 @@ class SectionHeading extends StatelessWidget {
       children: [
         Text(
           sectionName,
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'DynaPuff_SemiCondensed',
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall!.copyWith(fontWeight: fontWeight),
         ),
       ],
     );

@@ -65,7 +65,9 @@ class CheckboxWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(16.r),
-          boxShadow: CustomShadowStyle.customCircleShadows(color:backgroundColor),
+          boxShadow: CustomShadowStyle.customCircleShadows(
+            color: backgroundColor,
+          ),
         ),
         child: Row(
           children: [

@@ -252,10 +252,15 @@ class _PillButtonState extends State<PillButton> {
   Color _getTextColor() {
     switch (widget.variant) {
       case ButtonVariant.primary:
+        return AppColors.white;
       case ButtonVariant.secondary:
-        return Colors.white;
+        return AppColors.white;
+      case ButtonVariant.success:
+        return AppColors.white;
+      case ButtonVariant.warning:
+        return AppColors.white;
       case ButtonVariant.ghost:
-        return AppColors.bluePrimary;
+        return AppColors.primary;
     }
   }
 
@@ -273,11 +278,13 @@ class _PillButtonState extends State<PillButton> {
     List<Color> baseColors;
     switch (widget.variant) {
       case ButtonVariant.primary:
-        baseColors = const [AppColors.bluePrimary, Color(0xFF1AB1FF)];
-        break;
+        baseColors = const [AppColors.primary, Color(0xFF1AB1FF)];
       case ButtonVariant.secondary:
         baseColors = const [AppColors.orangeAccent, Color(0xFFFF9800)];
-        break;
+      case ButtonVariant.success:
+        baseColors = const [AppColors.orangeAccent, Color(0xFFFF9800)];
+      case ButtonVariant.warning:
+        baseColors = const [AppColors.orangeAccent, Color(0xFFFF9800)];
       case ButtonVariant.ghost:
         return LinearGradient(
           colors: [Colors.transparent, Colors.transparent],

@@ -11,7 +11,7 @@ class FrenchSentenceSuggestions {
     "Quel âge as-tu?",
     "J'aime ça",
     "Je n'aime pas ça",
-    
+
     // Common phrases
     "Comment ça va?",
     "Je vais bien",
@@ -23,7 +23,7 @@ class FrenchSentenceSuggestions {
     "Que veux-tu manger",
     "S'il te plaît, donne-moi de l'eau",
     "Puis-je m'asseoir ici",
-    
+
     // Day 3 phrases
     "Passez un bon moment",
     "Où habites-tu?",
@@ -35,7 +35,7 @@ class FrenchSentenceSuggestions {
     "Bonne nuit",
     "Je comprends",
     "Je ne comprends pas",
-    
+
     // Day 4 phrases
     "Qu'as-tu dit?",
     "C'est délicieux",
@@ -47,7 +47,7 @@ class FrenchSentenceSuggestions {
     "Donne-moi cela, s'il te plaît",
     "Attendez, s'il vous plaît",
     "Ça va",
-    
+
     // Day 5 phrases
     "Quel numéro est-ce",
     "Que recommandez-vous",
@@ -59,7 +59,7 @@ class FrenchSentenceSuggestions {
     "À plus tard",
     "D'où viens-tu?",
     "Comment est le temps",
-    
+
     // Day 6 phrases
     "Que devrais-je porter?",
     "Que voudriez-vous boire?",
@@ -71,7 +71,7 @@ class FrenchSentenceSuggestions {
     "Quels sont tes plans pour aujourd'hui",
     "Comment ça va ces derniers temps ?",
     "Quelle est ta couleur préférée?",
-    
+
     // Day 7 phrases
     "Est-ce que ce plat est épicé?",
     "Quel type de musique aimes-tu?",
@@ -83,7 +83,7 @@ class FrenchSentenceSuggestions {
     "J'aime cuisiner",
     "Il pleut",
     "Le printemps est ma saison préférée",
-    
+
     // Day 8 phrases
     "Merci, cela a été utile",
     "Cette tenue a l'air jolie",
@@ -95,7 +95,7 @@ class FrenchSentenceSuggestions {
     "Il fait froid",
     "Il fait chaud",
     "Quel est le prix?",
-    
+
     // Day 9 phrases
     "Quelles sont les attractions touristiques ici",
     "Je vais rencontrer un ami",
@@ -107,7 +107,7 @@ class FrenchSentenceSuggestions {
     "Comment utilise-t-on ceci?",
     "Il y a beaucoup à faire ici",
     "Quel est votre emploi du temps demain ?",
-    
+
     // Day 10 phrases
     "Cette ville est vraiment magnifique",
     "Je n'aime pas le café",
@@ -119,7 +119,7 @@ class FrenchSentenceSuggestions {
     "Je préfère travailler de chez moi",
     "J'aime décorer ma maison",
     "Quel type d'émissions de télévision aimes-tu",
-    
+
     // Day 11 phrases
     "Il y a beaucoup de vent aujourd'hui",
     "Bon appétit",
@@ -131,7 +131,7 @@ class FrenchSentenceSuggestions {
     "Courage",
     "Qu'est-ce qui s'est passé",
     "C'est juste",
-    
+
     // Day 12 phrases
     "As-tu mangé?",
     "Passe une journée heureuse",
@@ -143,7 +143,7 @@ class FrenchSentenceSuggestions {
     "Il fait plus froid qu'hier",
     "Quelles matières aimes-tu?",
     "Qu'est-ce qui t'a amené(e) ici?",
-    
+
     // Day 13 phrases
     "Que devrais-je faire maintenant?",
     "Que signifie cette phrase?",
@@ -155,7 +155,7 @@ class FrenchSentenceSuggestions {
     "Où se trouve ton café préféré?",
     "C'est joli",
     "Je te souhaite bonne chance",
-    
+
     // Day 14 phrases
     "Soyez prudent(e)",
     "C'est salé",
@@ -166,6 +166,6 @@ class FrenchSentenceSuggestions {
     "Quand est ton anniversaire?",
     "Que fais-tu dans la vie?",
     "C'est calme",
-    "C'est bruyant"
+    "C'est bruyant",
   ];
 }

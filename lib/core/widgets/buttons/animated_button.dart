@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
 /// An enhanced animated button wrapper designed for kids' educational apps
-/// 
+///
 /// Provides delightful animations including:
 /// - Bounce animations on tap
 /// - Scale animations for visual feedback
@@ -20,7 +20,7 @@ class AnimatedButton extends StatefulWidget {
   final bool disabled;
   final VoidCallback? onPressed;
   final double? width;
-  
+
   /// Animation configuration
   final Duration entranceDelay;
   final bool enableFloatingAnimation;
@@ -128,10 +128,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         animation: _scaleController,
         builder: (context, child) {
           final scale = 1.0 - (_scaleController.value * 0.05);
-          return Transform.scale(
-            scale: scale,
-            child: child,
-          );
+          return Transform.scale(scale: scale, child: child);
         },
         child: button,
       );
@@ -143,10 +140,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         animation: _pulseController,
         builder: (context, child) {
           final scale = 1.0 + (_pulseController.value * 0.03);
-          return Transform.scale(
-            scale: scale,
-            child: child,
-          );
+          return Transform.scale(scale: scale, child: child);
         },
         child: button,
       );
@@ -178,9 +172,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
     // Add floating animation if enabled
     if (widget.enableFloatingAnimation) {
       button = button
-          .animate(
-            onPlay: (controller) => controller.repeat(reverse: true),
-          )
+          .animate(onPlay: (controller) => controller.repeat(reverse: true))
           .moveY(
             begin: 0,
             end: -2,
@@ -283,10 +275,7 @@ class AnimatedPageTransition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (nextPage == null) {
-      return GestureDetector(
-        onTap: onTap,
-        child: child,
-      );
+      return GestureDetector(onTap: onTap, child: child);
     }
 
     return OpenContainer<void>(
@@ -296,11 +285,9 @@ class AnimatedPageTransition extends StatelessWidget {
       closedElevation: 0,
       openColor: Colors.transparent,
       openElevation: 0,
-      closedBuilder: (context, action) => GestureDetector(
-        onTap: action,
-        child: child,
-      ),
+      closedBuilder:
+          (context, action) => GestureDetector(onTap: action, child: child),
       openBuilder: (context, action) => nextPage!,
     );
   }
-} 
+}

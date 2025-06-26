@@ -29,7 +29,7 @@ class CTACard extends StatelessWidget {
         color: AppColors.backgroundLight,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
-          color: AppColors.bluePrimary.withValues(alpha: 0.2),
+          color: AppColors.primary.withValues(alpha: 0.2),
           width: 1,
         ),
       ),

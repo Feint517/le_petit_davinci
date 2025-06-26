@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
@@ -33,6 +32,8 @@ class MathematicMapScreen extends GetView<MathMapController> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
+        right: false,
+        left: false,
         child: Column(
           children: [
             const ProfileHeader(
@@ -40,9 +41,7 @@ class MathematicMapScreen extends GetView<MathMapController> {
               userClass: 'Classe 2',
               changeAvatar: false,
             ),
-            const CustomNavBar(
-              variant: BadgeVariant.math,
-            ),
+            const CustomNavBar(variant: BadgeVariant.math),
             const Gap(10),
             const SubHeader(
               paragraph:
@@ -57,10 +56,12 @@ class MathematicMapScreen extends GetView<MathMapController> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  ResponsiveSvgAsset(
-                    assetPath: SvgAssets.frenchMapBackground,
-                    svgKey: controller.svgKey,
-                    width: DeviceUtils.getScreenWidth(context),
+                  SizedBox.expand(
+                    child: ResponsiveSvgAsset(
+                      assetPath: SvgAssets.frenchMapBackground,
+                      svgKey: controller.svgKey,
+                      fit: BoxFit.cover,
+                    ),
                   ),
 
                   Obx(() {
@@ -98,7 +99,7 @@ class MathematicMapScreen extends GetView<MathMapController> {
                             child: MapButton(
                               title: 'Les additions magiques',
                               iconPath: SvgAssets.headset,
-                              backgroundColor: AppColors.bluePrimary,
+                              backgroundColor: AppColors.primary,
                               onTap: () {
                                 Get.to(
                                   () => const MathAdditionsScreen(),
