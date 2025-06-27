@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
 enum HeaderVectorColor {
   blue,
@@ -22,55 +23,22 @@ class HeaderVector extends StatelessWidget {
 
   final HeaderVectorColor color;
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Positioned(
-  //     top: 0,
-  //     left: 0,
-  //     right: 0,
-  //     child: Column(
-  //       children: [
-  //         SvgPicture.asset(
-  //           color.assetPath,
-  //           width: DeviceUtils.getScreenWidth(context),
-  //           fit: BoxFit.fitWidth,
-  //         ),
-  //         Transform.translate(
-  //           offset: Offset(0, -50.h), //? Adjust this value to move logo up/down
-  //           child: Center(
-  //             child: SvgPicture.asset(
-  //               SvgAssets.logoWhite,
-  //               width: DeviceUtils.getScreenWidth(context) * 0.35,
-  //               fit: BoxFit.fitWidth,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final double logoOffset = -(0.08.sh); // 8% of the screen height
+    // 8% of the screen height
     return Positioned(
       top: 0,
       left: 0,
       right: 0,
       child: Column(
         children: [
-          SvgPicture.asset(
-            color.assetPath,
-            width: 1.sw, // Full screen width using ScreenUtil
-            fit: BoxFit.fitWidth,
-          ),
+          ResponsiveSvgAsset(assetPath: color.assetPath),
           Transform.translate(
-            offset: Offset(0, logoOffset), // Move logo up by 50 logical pixels
+            offset: Offset(0, -(0.08.sh)), //? 8% of the screen height
             child: Center(
-              child: SvgPicture.asset(
-                SvgAssets.logoWhite,
-                width: 0.35.sw, // 35% of the screen width
-                fit: BoxFit.fitWidth,
+              child: ResponsiveSvgAsset(
+                assetPath: SvgAssets.logoWhite,
+                width: DeviceUtils.getScreenWidth(context) * 0.35,
               ),
             ),
           ),

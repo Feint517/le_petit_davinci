@@ -14,8 +14,8 @@ import 'package:le_petit_davinci/features/authentication/controllers/user_select
 import 'package:le_petit_davinci/features/authentication/views/questions_intro_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
-class UserSelectionPage extends GetView<UserSelectionController> {
-  const UserSelectionPage({super.key});
+class UserSelectionScreen extends GetView<UserSelectionController> {
+  const UserSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

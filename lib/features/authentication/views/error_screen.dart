@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
-import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/features/authentication/views/user_selection_screen.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/pin_box.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key});
@@ -25,41 +24,45 @@ class ErrorScreen extends StatelessWidget {
         top: false,
         child: Stack(
           children: [
-            Positioned(
+            const Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: SvgPicture.asset(
-                SvgAssets.errorBackground,
-                width: DeviceUtils.getScreenWidth(context),
-                fit: BoxFit.fitWidth,
-              ),
+              child: ResponsiveSvgAsset(assetPath: SvgAssets.errorBackground),
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                HeaderVector(color: HeaderVectorColor.green),
+                const Positioned(
+                  top: 0,
+                  child: HeaderVector(color: HeaderVectorColor.green),
+                ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.defaultSpace,
+                  ),
                   child: Column(
                     children: [
-                      Gap(40.h),
+                      const Gap(AppSizes.defaultSpace * 1.5),
                       Text(
                         StringsManager.noProfileError,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.w600,
+                        style: Theme.of(context).textTheme.headlineLarge!.apply(
                           color: AppColors.secondary,
                         ),
                       ),
-                      Gap(24.h),
+
+                      const Gap(AppSizes.defaultSpace),
+
                       CustomButton(
-                        variant: ButtonVariant.primary,
                         label: StringsManager.back,
-                        onPressed: () => Get.offNamed(AppRoutes.userSelection),
+                        onPressed:
+                            () => Get.offAll(() => const UserSelectionScreen()),
                       ),
-                      Gap(15.h),
+
+                      const Gap(AppSizes.spaceBtwItems),
+
                       CustomButton(
                         variant: ButtonVariant.secondary,
                         label: StringsManager.createChildProfile,
@@ -80,7 +83,7 @@ class ErrorScreen extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => PinBox(),
+      builder: (context) => const PinBox(isExpanded: true),
     );
   }
 }

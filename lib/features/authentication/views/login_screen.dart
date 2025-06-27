@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
+import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
+import 'package:le_petit_davinci/features/authentication/views/error_screen.dart';
 import 'package:le_petit_davinci/features/authentication/views/kids_selection_screen.dart';
 
 class LoginPage extends StatelessWidget {
@@ -15,6 +19,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLight,
@@ -23,20 +28,21 @@ class LoginPage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Positioned(
+            const Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: SvgPicture.asset(
-                SvgAssets.loginBackground,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fitWidth,
-              ),
+              child: ResponsiveSvgAsset(assetPath: SvgAssets.loginBackground),
             ),
             Column(
               children: [
-                SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
-                Gap(40),
+                ResponsiveSvgAsset(
+                  assetPath: SvgAssets.logoBlue,
+                  width: DeviceUtils.getScreenWidth(context) * 0.5,
+                ),
+
+                const Gap(AppSizes.defaultSpace * 1.6),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Column(
@@ -46,56 +52,45 @@ class LoginPage extends StatelessWidget {
                       //* Instruction text
                       Text(
                         StringsManager.loginText,
-                        style: TextStyle(
-                          fontSize: 30.sp,
+                        style: Theme.of(context).textTheme.headlineLarge!.apply(
                           color: AppColors.secondary,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'DynaPuff_SemiCondensed',
                         ),
                       ),
                       Row(
                         children: [
                           Text(
                             StringsManager.newHere,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'DynaPuff_SemiCondensed',
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () => Get.to(() => const ErrorScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: AppColors.accent,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'DynaPuff_SemiCondensed',
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .apply(color: AppColors.accent),
                             ),
                           ),
                         ],
                       ),
 
-                      Gap(24.h),
+                      Gap(AppSizes.spaceBtwItems.h),
 
                       CustomTextField(
                         type: TextFieldType.email,
-                        controller: TextEditingController(),
+                        controller: controller.email,
                       ),
-                      Gap(24.h),
+                      Gap(AppSizes.spaceBtwItems.h),
                       CustomTextField(
                         type: TextFieldType.password,
-                        controller: TextEditingController(),
+                        controller: controller.password,
                       ),
-                      Gap(24.h),
+                      Gap(AppSizes.spaceBtwSections.h),
 
                       //* Login button
                       CustomButton(
                         onPressed: () {
                           Get.to(
-                            () => KidsSelection(),
+                            () => KidsSelectionScreen(),
                             transition: Transition.rightToLeft,
                             duration: const Duration(milliseconds: 500),
                           );

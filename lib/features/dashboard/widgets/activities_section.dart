@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/activity_display.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 

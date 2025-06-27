@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:animations/animations.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
@@ -12,13 +12,14 @@ import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_contro
 import 'package:le_petit_davinci/features/Mathematic/view/mathematic_map_screen.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
+import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
-import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/home/models/subject_data.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
+
 import 'subject_card.dart';
 
 class SubjectSelection extends StatelessWidget {

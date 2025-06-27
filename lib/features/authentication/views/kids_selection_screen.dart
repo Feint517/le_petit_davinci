@@ -5,10 +5,10 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/profile_cards.dart';
+import 'package:le_petit_davinci/core/widgets/misc/profile_card.dart';
 
-class KidsSelection extends StatelessWidget {
-  const KidsSelection({super.key});
+class KidsSelectionScreen extends StatelessWidget {
+  const KidsSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,75 +48,51 @@ class KidsSelection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Gap(40),
+                  const Gap(40),
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
-                    childAspectRatio: 2, //? Adjust this ratio as needed
+                    childAspectRatio: 2,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 20,
                     children: [
-                      ProfileCards(
-                        username: 'Alex',
-                        label: 'Classe 1',
-                        picture: SvgPicture.asset(
-                          SvgAssets.profileSelectionBackground,
-                          height: 25,
-                          width: 25,
-                        ),
+                      ProfileCard(
+                        isExpanded: true,
+                        name: 'Alex',
+                        subInfo: 'Classe 1',
+                        image: SvgAssets.profileSelectionBackground,
                         backgroundColor: AppColors.primary,
-                        shadowColor: AppColors.bluePrimaryDark,
-                        onPressed: () {},
                       ),
-                      ProfileCards(
-                        username: 'Emma',
-                        label: 'Classe 3',
-                        picture: SvgPicture.asset(
-                          SvgAssets.profileSelectionBackground,
-                          height: 25,
-                          width: 25,
-                        ),
+                      ProfileCard(
+                        isExpanded: true,
+                        name: 'Emma',
+                        subInfo: 'Classe 3',
+                        image: SvgAssets.profileSelectionBackground,
                         backgroundColor: AppColors.primaryOrange,
-                        shadowColor: AppColors.orangeAccentDark,
-                        onPressed: () {},
                       ),
-                      ProfileCards(
-                        username: 'José',
-                        label: 'Classe 2',
-                        picture: SvgPicture.asset(
-                          SvgAssets.profileSelectionBackground,
-                          height: 25,
-                          width: 25,
-                        ),
+                      ProfileCard(
+                        isExpanded: true,
+                        name: 'José',
+                        subInfo: 'Classe 2',
+                        image: SvgAssets.profileSelectionBackground,
                         backgroundColor: AppColors.purpleAccent,
-                        shadowColor: AppColors.purple,
-                        onPressed: () {},
                       ),
-                      ProfileCards(
-                        username: 'Omy',
-                        label: 'Classe 1',
-                        picture: SvgPicture.asset(
-                          SvgAssets.profileSelectionBackground,
-                          height: 25,
-                          width: 25,
-                        ),
+                      ProfileCard(
+                        isExpanded: true,
+                        name: 'Omy',
+                        subInfo: 'Classe 1',
+                        image: SvgAssets.profileSelectionBackground,
                         backgroundColor: AppColors.pinkAccent,
-                        shadowColor: AppColors.pinkAccentDark,
-                        onPressed: () {},
                       ),
-                      ProfileCards(
-                        label: 'Ajouter un autre enfant',
-                        labelColor: AppColors.textSecondary,
-                        picture: SvgPicture.asset(
-                          SvgAssets.profileSelectionBackground,
-                          height: 25,
-                          width: 25,
-                        ),
-                        backgroundColor: AppColors.white,
-                        shadowColor: AppColors.bluePrimaryDark,
-                        onPressed: () {},
-                      ),
+                      // ProfileCard(
+                      //   name: '',
+                      //   label: 'Ajouter un autre enfant',
+                      //   labelColor: AppColors.textSecondary,
+                      //   picture: SvgAssets.profileSelectionBackground,
+                      //   backgroundColor: AppColors.white,
+                      //   onPressed: () {},
+                      // ),
                     ],
                   ),
                 ],

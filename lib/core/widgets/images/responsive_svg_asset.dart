@@ -28,7 +28,7 @@ class ResponsiveSvgAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<double?>(
-      future: SvgUtils.getSvgAspectRatio(assetPath),
+      future: ImageUtils.getSvgAspectRatio(assetPath),
       builder: (context, snapshot) {
         final aspectRatio = snapshot.data ?? fallbackAspectRatio;
         final calculatedHeight =

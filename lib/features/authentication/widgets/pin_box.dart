@@ -3,90 +3,79 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
+import 'package:le_petit_davinci/features/authentication/views/login_screen.dart';
+import 'package:le_petit_davinci/features/home/views/home_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 class PinBox extends StatelessWidget {
-  const PinBox({super.key});
+  const PinBox({super.key, this.isExpanded = false});
+
+  final bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceUtils.getScreenHeight() * 0.85,
-      constraints: BoxConstraints(maxWidth: 400.w, minWidth: 280.w),
+      width:
+          isExpanded
+              ? DeviceUtils.getScreenWidth(context)
+              : DeviceUtils.getScreenWidth(context) * 0.85,
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: AppColors.pinkAccent,
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 4),
-            blurRadius: 8,
-            color: Colors.black.withAlpha(26),
-          ),
-        ],
+        boxShadow: CustomShadowStyle.customCircleShadows(
+          color: AppColors.pinkAccent,
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             StringsManager.enterPinCode,
-            style: TextStyle(
-              fontSize: 18.sp,
-              color: AppColors.white,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'DynaPuff_SemiCondensed',
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall!.apply(color: AppColors.white),
             textAlign: TextAlign.center,
           ),
-          Gap(24.h),
-          SizedBox(
-            width: 240.w,
-            child: PinCodeTextField(
-              appContext: context,
-              length: 4,
-              onChanged: (value) {},
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              pinTheme: PinTheme(
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(8.r),
-                fieldHeight: 50.h,
-                fieldWidth: 50.w,
-                activeFillColor: Colors.grey[100]!,
-                inactiveFillColor: Colors.grey[100]!,
-                selectedFillColor: Colors.white,
-                activeColor: Colors.deepPurple,
-                selectedColor: Colors.deepPurple,
-                inactiveColor: Color(0XffF9FAFB),
-              ),
-              enableActiveFill: true,
+          Gap(AppSizes.spaceBtwSections),
+          PinCodeTextField(
+            appContext: context,
+            length: 4,
+            onChanged: (value) {},
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.box,
+              borderRadius: BorderRadius.circular(8),
+              fieldHeight: 55,
+              fieldWidth: 55,
+              activeFillColor: AppColors.white,
+              inactiveFillColor: AppColors.white,
+              selectedFillColor: AppColors.white,
+              activeColor: AppColors.primary,
+              selectedColor: AppColors.primary,
+              inactiveColor: AppColors.white,
             ),
+            enableActiveFill: true,
           ),
           Gap(24.h),
-
-          //* Submit button
           CustomButton(
             label: StringsManager.connectWithPin,
-            onPressed: () => Get.toNamed(AppRoutes.error),
-            variant: ButtonVariant.primary,
+            onPressed: () => Get.to(() => const LoginPage()),
             size: ButtonSize.lg,
-            width: double.infinity,
           ),
-          Gap(16.h),
 
-          //* Forgot password link
+          const Gap(AppSizes.spaceBtwItems),
+
           GestureDetector(
-            onTap: () => Get.toNamed(AppRoutes.home),
+            onTap: () => Get.to(() => const HomeScreen()),
             child: Text(
               StringsManager.forgotPassword,
-              style: TextStyle(
-                fontSize: 14.sp,
+              style: Theme.of(context).textTheme.bodyMedium!.apply(
                 color: AppColors.white,
                 decoration: TextDecoration.underline,
-                fontFamily: 'DynaPuff_SemiCondensed',
               ),
             ),
           ),

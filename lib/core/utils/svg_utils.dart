@@ -1,6 +1,10 @@
 import 'package:flutter/services.dart' show rootBundle;
 
-class SvgUtils {
+class ImageUtils {
+  static bool isSvg(String assetPath) {
+    return assetPath.toLowerCase().endsWith('.svg');
+  }
+
   static Future<double?> getSvgAspectRatio(String assetPath) async {
     final String svgString = await rootBundle.loadString(assetPath);
     final viewBoxMatch = RegExp(

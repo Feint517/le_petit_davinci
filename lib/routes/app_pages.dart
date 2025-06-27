@@ -132,13 +132,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.userSelection,
-      page: () => const UserSelectionPage(),
+      page: () => const UserSelectionScreen(),
       binding: AuthBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: AppRoutes.pin,
-      page: () => const PinEntryPage(),
+      page: () => const PinEntryScreen(),
       transition: Transition.cupertino,
     ),
     GetPage(

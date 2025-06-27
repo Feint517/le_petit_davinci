@@ -47,12 +47,11 @@ class SvgAssets {
       '$SVG_PATH/profile_selection_background.svg';
   static const String goodmorningBackground =
       '$SVG_PATH/goodmorning_background.svg';
-  static const String headerVectorBlue = '$SVG_PATH/header_vector_blue.svg';
-  static const String headerVectorGreen = '$SVG_PATH/header_vector_green.svg';
-  static const String headerVectorPurple = '$SVG_PATH/header_vector_purple.svg';
-  static const String errorBackground = '$SVG_PATH/error_background.svg';
-  //static const String bearMasscot = '$SVG_PATH/bear_masscot.svg';
-
+  static const String headerVectorBlue = 'assets/svg/header_vector_blue.svg';
+  static const String headerVectorGreen = 'assets/svg/header_vector_green.svg';
+  static const String headerVectorPurple = 'assets/svg/header_vector_purple.svg';
+  static const String errorBackground = 'assets/svg/error_background.svg';
+  static const String createProfileBackground = 'assets/svg/create_profile_background.svg';
   static const String masscotBg = '$SVG_PATH/masscotbg.svg';
   static const String compassIcon = '$SVG_PATH/compassIcon.svg';
   static const String rabbit = '$SVG_PATH/rabbit.svg';
