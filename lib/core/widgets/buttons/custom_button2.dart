@@ -1,12 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomButton2 extends StatefulWidget {
+  const CustomButton2({
     super.key,
     required this.label,
     this.icon,
@@ -30,13 +29,49 @@ class CustomButton extends StatelessWidget {
   final double? width;
 
   @override
+  State<CustomButton2> createState() => _CustomButton2State();
+}
+
+class _CustomButton2State extends State<CustomButton2>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleTap() {
+    if (!(widget.disabled || widget.isLoading)) {
+      print('animation is triggered');
+      _controller.forward(from: 0);
+      _controller.addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        }
+        widget.onPressed?.call();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     //? Determine button height based on size
     final double buttonHeight = _getButtonHeight();
 
     // Create the button content layout based on loading state
     final Widget buttonContent =
-        isLoading ? _buildLoadingIndicator() : _buildButtonContent();
+        widget.isLoading ? _buildLoadingIndicator() : _buildButtonContent();
 
     // Determine the button background color based on variant
     final Color backgroundColor = _getBackgroundColor();
@@ -47,66 +82,69 @@ class CustomButton extends StatelessWidget {
     // Create gradient based on variant
     final Gradient? gradient = _getGradient();
 
-    return Container(
-      width: width,
-      height: buttonHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: switch (variant) {
-          ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
-            color: AppColors.primary,
-          ),
-          ButtonVariant.secondary => CustomShadowStyle.customCircleShadows(
-            color: AppColors.secondary,
-          ),
-          ButtonVariant.success => CustomShadowStyle.customCircleShadows(
-            color: AppColors.succuss,
-          ),
-          ButtonVariant.warning => CustomShadowStyle.customCircleShadows(
-            color: AppColors.warning,
-          ),
-          ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
-            color: Colors.transparent,
-          ),
-        },
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap:
-              (disabled || isLoading)
-                  ? null
-                  : () {
-                    if (kDebugMode) {
-                      print('CustomButton InkWell onTap triggered');
-                    }
-                    onPressed?.call();
-                  },
+    return Animate(
+      controller: _controller,
+      effects: [
+        SlideEffect(
+          begin: const Offset(0, 0),
+          end: const Offset(0, -0.3),
+          curve: Curves.linear,
+          duration: const Duration(milliseconds: 100),
+        ),
+      ],
+      child: Container(
+        width: widget.width,
+        height: buttonHeight,
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          splashColor: Colors.blue.withValues(alpha: 0.3),
-          highlightColor: Colors.blue.withValues(alpha: 0.1),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: gradient == null ? backgroundColor : null,
-              gradient: gradient,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow:
-                  variant != ButtonVariant.ghost
-                      ? [
-                        BoxShadow(
-                          offset: const Offset(0, 2),
-                          blurRadius: 2,
-                          color: Colors.black.withAlpha(26),
-                        ),
-                      ]
-                      : null,
+          boxShadow: switch (widget.variant) {
+            ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
+              color: AppColors.primary,
             ),
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              opacity: disabled ? 0.6 : 1.0,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Center(child: buttonContent),
+            ButtonVariant.secondary => CustomShadowStyle.customCircleShadows(
+              color: AppColors.secondary,
+            ),
+            ButtonVariant.success => CustomShadowStyle.customCircleShadows(
+              color: AppColors.succuss,
+            ),
+            ButtonVariant.warning => CustomShadowStyle.customCircleShadows(
+              color: AppColors.warning,
+            ),
+            ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
+              color: Colors.transparent,
+            ),
+          },
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: _handleTap,
+            borderRadius: BorderRadius.circular(12),
+            splashColor: Colors.blue.withValues(alpha: 0.3),
+            highlightColor: Colors.blue.withValues(alpha: 0.1),
+            child: Ink(
+              decoration: BoxDecoration(
+                color: gradient == null ? backgroundColor : null,
+                gradient: gradient,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow:
+                    widget.variant != ButtonVariant.ghost
+                        ? [
+                          BoxShadow(
+                            offset: const Offset(0, 2),
+                            blurRadius: 2,
+                            color: Colors.black.withAlpha(26),
+                          ),
+                        ]
+                        : null,
+              ),
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 200),
+                opacity: widget.disabled ? 0.6 : 1.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Center(child: buttonContent),
+                ),
               ),
             ),
           ),
@@ -118,7 +156,9 @@ class CustomButton extends StatelessWidget {
   // Builds the loading indicator with the appropriate color based on the button variant
   Widget _buildLoadingIndicator() {
     final Color indicatorColor =
-        variant == ButtonVariant.ghost ? AppColors.primary : AppColors.white;
+        widget.variant == ButtonVariant.ghost
+            ? AppColors.primary
+            : AppColors.white;
 
     return SizedBox(
       height: 16,
@@ -134,7 +174,7 @@ class CustomButton extends StatelessWidget {
   Widget _buildButtonContent() {
     // Create text widget with appropriate style
     final textWidget = Text(
-      label,
+      widget.label,
       style: TextStyle(
         fontFamily: 'DynaPuff_SemiCondensed',
         fontSize: _getFontSize(),
@@ -144,26 +184,26 @@ class CustomButton extends StatelessWidget {
     );
 
     // If there's no icon, just return the text
-    if (icon == null) {
+    if (widget.icon == null) {
       return textWidget;
     }
 
     // Determine spacing between icon and text
-    final double spacing = size == ButtonSize.sm ? 4 : 8;
+    final double spacing = widget.size == ButtonSize.sm ? 4 : 8;
 
     // Arrange icon and text according to iconPosition
     return Row(
       mainAxisSize: MainAxisSize.min,
       children:
-          iconPosition == IconPosition.left
-              ? [icon!, SizedBox(width: spacing), textWidget]
-              : [textWidget, SizedBox(width: spacing), icon!],
+          widget.iconPosition == IconPosition.left
+              ? [widget.icon!, SizedBox(width: spacing), textWidget]
+              : [textWidget, SizedBox(width: spacing), widget.icon!],
     );
   }
 
   //* Gets the button height based on size
   double _getButtonHeight() {
-    switch (size) {
+    switch (widget.size) {
       case ButtonSize.sm:
         return 40;
       case ButtonSize.md:
@@ -175,7 +215,7 @@ class CustomButton extends StatelessWidget {
 
   /// Gets the font size based on button size
   double _getFontSize() {
-    switch (size) {
+    switch (widget.size) {
       case ButtonSize.sm:
         return 14;
       case ButtonSize.md:
@@ -187,11 +227,11 @@ class CustomButton extends StatelessWidget {
 
   /// Gets the background color based on variant
   Color _getBackgroundColor() {
-    if (disabled) {
+    if (widget.disabled) {
       return AppColors.disabled;
     }
 
-    switch (variant) {
+    switch (widget.variant) {
       case ButtonVariant.primary:
         return AppColors.primary;
       case ButtonVariant.secondary:
@@ -207,11 +247,11 @@ class CustomButton extends StatelessWidget {
 
   /// Gets the text color based on variant
   Color _getTextColor() {
-    if (disabled) {
+    if (widget.disabled) {
       return AppColors.grey;
     }
 
-    switch (variant) {
+    switch (widget.variant) {
       case ButtonVariant.primary:
         return AppColors.white;
       case ButtonVariant.secondary:
@@ -227,11 +267,11 @@ class CustomButton extends StatelessWidget {
 
   /// Gets the gradient based on variant
   Gradient? _getGradient() {
-    if (disabled || variant == ButtonVariant.ghost) {
+    if (widget.disabled || widget.variant == ButtonVariant.ghost) {
       return null;
     }
 
-    switch (variant) {
+    switch (widget.variant) {
       case ButtonVariant.primary:
         return const LinearGradient(
           colors: [AppColors.primary, Color(0xFF1AB1FF)],
