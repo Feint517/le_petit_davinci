@@ -30,48 +30,44 @@ class ErrorScreen extends StatelessWidget {
               right: 0,
               child: ResponsiveSvgAsset(assetPath: SvgAssets.errorBackground),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Positioned(
-                  top: 0,
-                  child: HeaderVector(color: HeaderVectorColor.green),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSizes.defaultSpace,
+            const Positioned(
+              top: 0,
+              child: HeaderVector(color: HeaderVectorColor.green),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.defaultSpace,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Gap(AppSizes.defaultSpace * 1.5),
+                  Text(
+                    StringsManager.noProfileError,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineLarge!.apply(
+                      color: AppColors.secondary,
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      const Gap(AppSizes.defaultSpace * 1.5),
-                      Text(
-                        StringsManager.noProfileError,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineLarge!.apply(
-                          color: AppColors.secondary,
-                        ),
-                      ),
 
-                      const Gap(AppSizes.defaultSpace),
+                  const Gap(AppSizes.defaultSpace),
 
-                      CustomButton(
-                        label: StringsManager.back,
-                        onPressed:
-                            () => Get.offAll(() => const UserSelectionScreen()),
-                      ),
-
-                      const Gap(AppSizes.spaceBtwItems),
-
-                      CustomButton(
-                        variant: ButtonVariant.secondary,
-                        label: StringsManager.createChildProfile,
-                        onPressed: () => _showBottomSheet(context),
-                      ),
-                    ],
+                  CustomButton(
+                    label: StringsManager.back,
+                    onPressed:
+                        () => Get.offAll(() => const UserSelectionScreen()),
                   ),
-                ),
-              ],
+
+                  const Gap(AppSizes.spaceBtwItems),
+
+                  CustomButton(
+                    variant: ButtonVariant.secondary,
+                    label: StringsManager.createChildProfile,
+                    onPressed: () => _showBottomSheet(context),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -1,11 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:gap/gap.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 
-class CustomButton extends StatelessWidget {
+enum AnimationType { bounceUp, scaleDown }
+
+class CustomButton extends StatefulWidget {
   const CustomButton({
     super.key,
     required this.label,
@@ -17,6 +20,8 @@ class CustomButton extends StatelessWidget {
     this.disabled = false,
     this.onPressed,
     this.width,
+    this.borderRadius,
+    this.animationType = AnimationType.bounceUp,
   });
 
   final String label;
@@ -28,190 +33,201 @@ class CustomButton extends StatelessWidget {
   final bool disabled;
   final VoidCallback? onPressed;
   final double? width;
+  final double? borderRadius;
+  final AnimationType animationType;
+
+  @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 50),
+    );
+
+    switch (widget.animationType) {
+      case AnimationType.bounceUp:
+        _animation = Tween<double>(
+          begin: 0.0,
+          end: 4.0,
+        ).animate(CurvedAnimation(parent: controller, curve: Curves.bounceIn));
+      case AnimationType.scaleDown:
+        _animation = Tween<double>(
+          begin: 1,
+          end: 0.9,
+        ).animate(CurvedAnimation(parent: controller, curve: Curves.linear));
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    //? Determine button height based on size
-    final double buttonHeight = _getButtonHeight();
-
-    // Create the button content layout based on loading state
-    final Widget buttonContent =
-        isLoading ? _buildLoadingIndicator() : _buildButtonContent();
-
-    // Determine the button background color based on variant
-    final Color backgroundColor = _getBackgroundColor();
-
-    // Determine the text color based on variant
-    //final Color textColor = _getTextColor();
-
-    // Create gradient based on variant
-    final Gradient? gradient = _getGradient();
-
-    return Container(
-      width: width,
-      height: buttonHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: switch (variant) {
-          ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
-            color: AppColors.primary,
-          ),
-          ButtonVariant.secondary => CustomShadowStyle.customCircleShadows(
-            color: AppColors.secondary,
-          ),
-          ButtonVariant.success => CustomShadowStyle.customCircleShadows(
-            color: AppColors.succuss,
-          ),
-          ButtonVariant.warning => CustomShadowStyle.customCircleShadows(
-            color: AppColors.warning,
-          ),
-          ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
-            color: Colors.transparent,
-          ),
-        },
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap:
-              (disabled || isLoading)
-                  ? null
-                  : () {
-                    if (kDebugMode) {
-                      print('CustomButton InkWell onTap triggered');
-                    }
-                    onPressed?.call();
-                  },
-          borderRadius: BorderRadius.circular(12),
-          splashColor: Colors.blue.withValues(alpha: 0.3),
-          highlightColor: Colors.blue.withValues(alpha: 0.1),
-          child: Ink(
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return Transform(
+          alignment: Alignment.center,
+          transform: switch (widget.animationType) {
+            AnimationType.bounceUp =>
+              Matrix4.identity()..translate(Vector3(0, _animation.value, 0)),
+            AnimationType.scaleDown =>
+              Matrix4.identity()..scale(_animation.value),
+          },
+          child: Container(
+            width: widget.width,
+            height: switch (widget.size) {
+              ButtonSize.sm => 40,
+              ButtonSize.md => 48,
+              ButtonSize.lg => 56,
+            },
             decoration: BoxDecoration(
-              color: gradient == null ? backgroundColor : null,
-              gradient: gradient,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow:
-                  variant != ButtonVariant.ghost
-                      ? [
-                        BoxShadow(
-                          offset: const Offset(0, 2),
-                          blurRadius: 2,
-                          color: Colors.black.withAlpha(26),
-                        ),
-                      ]
-                      : null,
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
+              boxShadow: switch (widget.variant) {
+                ButtonVariant.primary => CustomShadowStyle.customCircleShadows(
+                  color: AppColors.primary,
+                ),
+                ButtonVariant.secondary =>
+                  CustomShadowStyle.customCircleShadows(
+                    color: AppColors.secondary,
+                  ),
+                ButtonVariant.success => CustomShadowStyle.customCircleShadows(
+                  color: AppColors.succuss,
+                ),
+                ButtonVariant.warning => CustomShadowStyle.customCircleShadows(
+                  color: AppColors.warning,
+                ),
+                ButtonVariant.ghost => CustomShadowStyle.customCircleShadows(
+                  color: Colors.transparent,
+                ),
+              },
             ),
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 200),
-              opacity: disabled ? 0.6 : 1.0,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Center(child: buttonContent),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  if (!(widget.disabled || widget.isLoading)) {
+                    controller.forward(from: 0);
+                    controller.addStatusListener((status) {
+                      if (status == AnimationStatus.completed) {
+                        controller.reverse();
+                      }
+                      widget.onPressed?.call();
+                    });
+                  }
+                },
+                borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
+                splashColor: Colors.blue.withValues(alpha: 0.3),
+                highlightColor: Colors.blue.withValues(alpha: 0.1),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: _getGradient(),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 200),
+                    opacity: widget.disabled ? 0.6 : 1.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Center(
+                        child:
+                            widget.isLoading
+                                //* loading indicator
+                                ? SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      widget.variant == ButtonVariant.ghost
+                                          ? AppColors.primary
+                                          : AppColors.white,
+                                    ),
+                                  ).animate().fadeIn(
+                                    duration: const Duration(milliseconds: 300),
+                                  ),
+                                )
+                                : Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (widget.iconPosition ==
+                                            IconPosition.left &&
+                                        widget.icon != null)
+                                      widget.icon!,
+                                    if (widget.iconPosition ==
+                                            IconPosition.left &&
+                                        widget.icon != null)
+                                      Gap(widget.size == ButtonSize.sm ? 4 : 8),
+                                    Text(
+                                      widget.label,
+                                      style: TextStyle(
+                                        fontFamily: 'DynaPuff_SemiCondensed',
+                                        fontSize: switch (widget.size) {
+                                          ButtonSize.sm => 14,
+                                          ButtonSize.md => 16,
+                                          ButtonSize.lg => 18,
+                                        },
+                                        fontWeight: FontWeight.w600,
+                                        color: _getTextColor(),
+                                      ),
+                                    ),
+                                    if (widget.iconPosition ==
+                                            IconPosition.right &&
+                                        widget.icon != null)
+                                      Gap(widget.size == ButtonSize.sm ? 4 : 8),
+                                    if (widget.iconPosition ==
+                                            IconPosition.right &&
+                                        widget.icon != null)
+                                      widget.icon!,
+                                  ],
+                                ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  // Builds the loading indicator with the appropriate color based on the button variant
-  Widget _buildLoadingIndicator() {
-    final Color indicatorColor =
-        variant == ButtonVariant.ghost ? AppColors.primary : AppColors.white;
+  // Color _getBackgroundColor() {
+  //   if (widget.disabled) {
+  //     return AppColors.disabled;
+  //   }
+  //   switch (widget.variant) {
+  //     case ButtonVariant.primary:
+  //       return AppColors.primary;
+  //     case ButtonVariant.secondary:
+  //       return AppColors.orangeAccent;
+  //     case ButtonVariant.success:
+  //       return AppColors.succuss;
+  //     case ButtonVariant.warning:
+  //       return AppColors.warning;
+  //     case ButtonVariant.ghost:
+  //       return Colors.transparent;
+  //   }
+  // }
 
-    return SizedBox(
-      height: 16,
-      width: 16,
-      child: CircularProgressIndicator(
-        strokeWidth: 2,
-        valueColor: AlwaysStoppedAnimation<Color>(indicatorColor),
-      ).animate().fadeIn(duration: const Duration(milliseconds: 300)),
-    );
-  }
-
-  /// Builds the button content with icon and label based on iconPosition
-  Widget _buildButtonContent() {
-    // Create text widget with appropriate style
-    final textWidget = Text(
-      label,
-      style: TextStyle(
-        fontFamily: 'DynaPuff_SemiCondensed',
-        fontSize: _getFontSize(),
-        fontWeight: FontWeight.w600,
-        color: _getTextColor(),
-      ),
-    );
-
-    // If there's no icon, just return the text
-    if (icon == null) {
-      return textWidget;
-    }
-
-    // Determine spacing between icon and text
-    final double spacing = size == ButtonSize.sm ? 4 : 8;
-
-    // Arrange icon and text according to iconPosition
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children:
-          iconPosition == IconPosition.left
-              ? [icon!, SizedBox(width: spacing), textWidget]
-              : [textWidget, SizedBox(width: spacing), icon!],
-    );
-  }
-
-  //* Gets the button height based on size
-  double _getButtonHeight() {
-    switch (size) {
-      case ButtonSize.sm:
-        return 40;
-      case ButtonSize.md:
-        return 48;
-      case ButtonSize.lg:
-        return 56;
-    }
-  }
-
-  /// Gets the font size based on button size
-  double _getFontSize() {
-    switch (size) {
-      case ButtonSize.sm:
-        return 14;
-      case ButtonSize.md:
-        return 16;
-      case ButtonSize.lg:
-        return 18;
-    }
-  }
-
-  /// Gets the background color based on variant
-  Color _getBackgroundColor() {
-    if (disabled) {
-      return AppColors.disabled;
-    }
-
-    switch (variant) {
-      case ButtonVariant.primary:
-        return AppColors.primary;
-      case ButtonVariant.secondary:
-        return AppColors.orangeAccent;
-      case ButtonVariant.success:
-        return AppColors.succuss;
-      case ButtonVariant.warning:
-        return AppColors.warning;
-      case ButtonVariant.ghost:
-        return Colors.transparent;
-    }
-  }
-
-  /// Gets the text color based on variant
   Color _getTextColor() {
-    if (disabled) {
+    if (widget.disabled) {
       return AppColors.grey;
     }
-
-    switch (variant) {
+    switch (widget.variant) {
       case ButtonVariant.primary:
         return AppColors.white;
       case ButtonVariant.secondary:
@@ -225,13 +241,11 @@ class CustomButton extends StatelessWidget {
     }
   }
 
-  /// Gets the gradient based on variant
   Gradient? _getGradient() {
-    if (disabled || variant == ButtonVariant.ghost) {
+    if (widget.disabled || widget.variant == ButtonVariant.ghost) {
       return null;
     }
-
-    switch (variant) {
+    switch (widget.variant) {
       case ButtonVariant.primary:
         return const LinearGradient(
           colors: [AppColors.primary, Color(0xFF1AB1FF)],
@@ -248,4 +262,23 @@ class CustomButton extends StatelessWidget {
         return null;
     }
   }
+}
+
+class MyCustomRouteTransition extends PageRouteBuilder {
+  MyCustomRouteTransition({required this.route})
+    : super(
+        pageBuilder: (context, animation, secondaryAnimation) => route,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          //? what transition do you want to add while going to this page
+          final tween = Tween(
+            begin: const Offset(0, -1),
+            end: const Offset(0, 0),
+          ).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          );
+          return SlideTransition(position: tween, child: child);
+        },
+      );
+
+  final Widget route;
 }

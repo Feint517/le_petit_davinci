@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button2.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button3.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button4.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
 import 'package:le_petit_davinci/features/authentication/views/error_screen.dart';
-import 'package:le_petit_davinci/features/authentication/views/kids_selection_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -100,30 +95,6 @@ class LoginPage extends StatelessWidget {
                         //     duration: const Duration(milliseconds: 500),
                         //   );
                         // },
-                      ),
-
-                      Gap(AppSizes.spaceBtwSections.h),
-
-                      CustomButton2(
-                        label: 'test',
-                        variant: ButtonVariant.primary,
-                        onPressed: () {},
-                      ),
-
-                      Gap(AppSizes.spaceBtwSections.h),
-
-                      CustomButton3(
-                        label: 'test CustomButton 3',
-                        variant: ButtonVariant.primary,
-                        onPressed: () {},
-                      ),
-
-                      Gap(AppSizes.spaceBtwSections.h),
-
-                      CustomButton4(
-                        label: 'test CustomButton 4',
-                        variant: ButtonVariant.primary,
-                        onPressed: () {},
                       ),
                     ],
                   ),
