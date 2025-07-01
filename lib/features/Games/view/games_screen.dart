@@ -1,194 +1,125 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
-import 'package:le_petit_davinci/core/widgets/subheader.dart';
+import 'package:le_petit_davinci/features/Games/models/game_model.dart';
+import 'package:le_petit_davinci/features/Games/view/snake.dart';
+import 'package:le_petit_davinci/features/Games/view/tic_tac_toe.dart';
+import 'package:le_petit_davinci/features/Games/widgets/game_card.dart';
 
-class GamesScreen extends StatefulWidget {
+class GamesScreen extends StatelessWidget {
   const GamesScreen({super.key});
-
-  @override
-  State<GamesScreen> createState() => _GamesScreenState();
-}
-
-class _GamesScreenState extends State<GamesScreen> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX bi
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bluePrimaryDark,
-      body: SafeArea(
-        bottom: false,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: SvgPicture.asset(
-                SvgAssets.games_background,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-              ),
+      backgroundColor: AppColors.backgroundLight,
+      body: Stack(
+        children: [
+          CustomCurvedHeaderContainer(
+            backgroundColor: AppColors.primary,
+            height: DeviceUtils.getScreenHeight() * 0.5,
+          ),
+          Positioned(
+            bottom: 0,
+            child: const ResponsiveSvgAsset(
+              assetPath: SvgAssets.gamesBackground2,
             ),
-            Column(
+          ),
+          SizedBox.expand(
+            child: Column(
               children: [
-                ProfileHeader(
+                const ProfileHeader(
                   userName: 'Alex',
-                  userClass: 'Classe 2',
+                  userClass: 'Class 2',
                   changeAvatar: false,
                 ),
-                CustomNavBar(variant: BadgeVariant.games),
-                Gap(10),
-                SubHeader(
-                  paragraph:
-                      "C'est l'heure de s'amuser !\n Choisis ton jeu préféré !",
-                  color: AppColors.secondary,
+                const Divider(
+                  color: AppColors.grey,
+                  thickness: 1.5,
+                  indent: 30,
+                  endIndent: 30,
                 ),
-                Gap(10),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Wrap(
-                    spacing: 20,
-                    runSpacing: 20,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.defaultSpace,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.42,
-                        child: GamesCards(
-                          cardColor: AppColors.primary,
-                          label: '5 Victoires',
-                          title: 'Tic Tac Toe',
-                          shadowColor: AppColors.bluePrimaryDark,
-                          assetPath: SvgAssets.tictactoe,
-                          onTap: () {},
-                        ),
+                      const Gap(AppSizes.spaceBtwItems),
+                      const CustomNavBar(
+                        activeChip: true,
+                        variant: BadgeVariant.games,
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.42,
-                        child: GamesCards(
-                          cardColor: AppColors.pinkLight,
-                          label: '2 Victoires',
-                          title: 'Échecs simplifiés',
-                          shadowColor: AppColors.pinkAccentDark,
-                          assetPath: SvgAssets.chess,
-                          onTap: () {},
-                        ),
+                      const Gap(AppSizes.spaceBtwItems),
+                      Text(
+                        "C'est l'heure de s'amuser !\nChoisis ton jeu préféré !",
+                        style: Theme.of(context).textTheme.headlineMedium!
+                            .apply(color: AppColors.white),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: GamesCards(
-                          cardColor: AppColors.greenPrimary,
-                          label: '0 Victoires',
-                          title: 'Suites logiques',
-                          shadowColor: AppColors.succuss,
-                          assetPath: SvgAssets.biscuit,
-                          onTap: () {},
-                        ),
+                      Text(
+                        'Glisser les bons objets dans un sac.',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyLarge!.apply(color: AppColors.white),
+                      ),
+                      const Gap(AppSizes.spaceBtwSections),
+                      CustomGridLayout(
+                        mainAxisExtent: 250,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          final List<GameModel> gamesList = [
+                            GameModel(
+                              name: 'Tic Tac Toe',
+                              numOfVictories: 5,
+                              color: AppColors.primaryDeep,
+                              icon: SvgAssets.tictactoe,
+                              gameScreen: const TicTacToe(),
+                            ),
+                            GameModel(
+                              name: 'Échecs simplifiés',
+                              numOfVictories: 2,
+                              color: AppColors.accent,
+                              icon: SvgAssets.chess,
+                              gameScreen: const SnakeGame(),
+                            ),
+                            GameModel(
+                              name: 'Suites logiques',
+                              numOfVictories: 0,
+                              color: AppColors.accent2,
+                              icon: SvgAssets.biscuit,
+                              gameScreen: const Placeholder(),
+                            ),
+                          ];
+                          return GameCard(
+                            cardColor: gamesList[index].color,
+                            label: gamesList[index].numOfVictories,
+                            title: gamesList[index].name,
+                            assetPath: gamesList[index].icon,
+                            onTap:
+                                () => Get.to(() => gamesList[index].gameScreen),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
-}
-
-class GamesCards extends StatelessWidget {
-  final Color cardColor;
-  final String label;
-  final String title;
-  final String assetPath;
-  final Color shadowColor;
-  final VoidCallback? onTap;
-  const GamesCards({
-    super.key,
-    required this.cardColor,
-    required this.label,
-    required this.title,
-    required this.shadowColor,
-    this.onTap,
-    required this.assetPath,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: shadowColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-            child: Text(
-              label,
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: cardColor,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: shadowColor,
-                spreadRadius: 2,
-                blurRadius: 0,
-                offset: const Offset(5, 5), // changes position of shadow
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              SvgPicture.asset(assetPath),
-              Text(
-                title,
-                style: TextStyle(
-                  color: AppColors.background,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w100,
-                ),
-              ),
-              CustomButtonNew(
-                buttonColor: AppColors.secondary,
-                shadowColor: AppColors.orangeAccentDark,
-                label: 'Jouer',
-                labelColor: AppColors.background,
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

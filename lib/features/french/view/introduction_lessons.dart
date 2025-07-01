@@ -25,7 +25,7 @@ class IntroductionFrenchLessons extends StatelessWidget {
               bottom: 0,
               left: 0,
               right: 0,
-              child: ResponsiveSvgAsset(assetPath: SvgAssets.games_background),
+              child: ResponsiveSvgAsset(assetPath: SvgAssets.gamesBackground),
             ),
 
             Column(

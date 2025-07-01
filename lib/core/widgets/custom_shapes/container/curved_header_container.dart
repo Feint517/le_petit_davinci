@@ -6,12 +6,12 @@ import 'package:le_petit_davinci/core/widgets/custom_shapes/curved_edges/curved_
 class CustomCurvedHeaderContainer extends StatelessWidget {
   const CustomCurvedHeaderContainer({
     super.key,
-    required this.child,
+    this.child,
     this.backgroundColor = AppColors.backgroundLight,
     this.height = 400,
   });
 
-  final Widget child;
+  final Widget? child;
   final Color backgroundColor;
   final double height;
 

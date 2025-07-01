@@ -13,6 +13,17 @@ class ImageAssets {
       '$IMAGE_PATH/questions_background.png';
   static const String iamSorry = 'assets/images/illustrations/sorry.png';
   static const String desole = 'assets/images/illustrations/dsl.png';
+  static const String o = 'assets/images/tictactoe/o.png';
+  static const String x = 'assets/images/tictactoe/x.png';
+  static const String emptyBox = 'assets/images/tictactoe/box.png';
+  static const String blackX = 'assets/images/tictactoe/black-X.png';
+  static const String ticTacToeOff = 'assets/images/tictactoe/off.png';
+  static const String ticTacToeOn = 'assets/images/tictactoe/on.png';
+}
+
+
+class GifAssets {
+  static const String congrats = 'assets/images/tictactoe/congrats.gif';
 }
 
 class LottieAssets {
@@ -88,7 +99,8 @@ class SvgAssets {
   static const String bearvq = '$SVG_PATH/bearvq.svg';
   static const String bottom_backgroundvq = '$SVG_PATH/bottom_backgroundvq.svg';
   static const String schoolTools = '$SVG_PATH/schoolTools.svg';
-  static const String games_background = 'assets/svg/games_background.svg';
+  static const String gamesBackground = 'assets/svg/games_background.svg';
+  static const String gamesBackground2 = 'assets/svg/games_background2.svg';
   static const String tictactoe = '$SVG_PATH/tictactoe.svg';
   static const String chess = 'assets/svg/chess.svg';
   static const String biscuit = 'assets/svg/biscuit.svg';

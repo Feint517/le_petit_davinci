@@ -35,7 +35,7 @@ class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
                     left: 0,
                     right: 0,
                     child: SvgPicture.asset(
-                      SvgAssets.games_background,
+                      SvgAssets.gamesBackground,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.cover,
                     ),
