@@ -11,12 +11,16 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
     this.leadingText = 'Back',
     this.leadingOnPressed,
     this.activeChip = false,
+    this.chipText,
+    this.chipColor,
     this.variant,
   });
 
   final bool activeChip;
   final BadgeVariant? variant;
   final String leadingText;
+  final String? chipText;
+  final Color? chipColor;
   final VoidCallback? leadingOnPressed;
 
   @override
@@ -57,15 +61,18 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
 
           activeChip
               ? SubjectChip(
-                backgroundColor: _getColor(variant ?? BadgeVariant.french),
-                text: switch (variant) {
-                  BadgeVariant.french => 'Français',
-                  BadgeVariant.math => 'Mathématiques',
-                  BadgeVariant.english => 'Anglais',
-                  BadgeVariant.dailyLife => 'Vie quotidienne',
-                  BadgeVariant.games => 'Jeux',
-                  null => '',
-                },
+                backgroundColor:
+                    chipColor ?? _getColor(variant ?? BadgeVariant.french),
+                text:
+                    chipText ??
+                    switch (variant) {
+                      BadgeVariant.french => 'Français',
+                      BadgeVariant.math => 'Mathématiques',
+                      BadgeVariant.english => 'Anglais',
+                      BadgeVariant.dailyLife => 'Vie quotidienne',
+                      BadgeVariant.games => 'Jeux',
+                      null => '',
+                    },
               )
               : const SizedBox.shrink(),
         ],

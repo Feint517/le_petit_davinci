@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/custom_shapes/curved_edges/curved_edges_hill_widget.dart';
+import 'package:le_petit_davinci/core/widgets/custom_shapes/curved_edges/curved_edges_hill_downwards_widget.dart';
 
 class CustomCurvedHeaderContainer extends StatelessWidget {
   const CustomCurvedHeaderContainer({
@@ -17,7 +17,7 @@ class CustomCurvedHeaderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurvedEdgesHillWidget(
+    return CustomCurvedEdgesHillDownwardsWidget(
       child: Container(
         color: backgroundColor,
         width: DeviceUtils.getScreenWidth(context),

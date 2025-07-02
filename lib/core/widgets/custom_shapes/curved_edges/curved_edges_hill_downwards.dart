@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomCurvedEdgesHill extends CustomClipper<Path> {
+class CustomCurvedEdgesHillDownwards extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
@@ -13,13 +13,6 @@ class CustomCurvedEdgesHill extends CustomClipper<Path> {
       size.width,
       size.height - 80,
     );
-
-    // path.quadraticBezierTo(
-    //   size.width / 2,
-    //   size.height - 80, // control point for the curve
-    //   size.width,
-    //   size.height,
-    // );
 
     path.lineTo(size.width, 0);
     path.close();

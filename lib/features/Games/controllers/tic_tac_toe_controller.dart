@@ -7,6 +7,8 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 
 class TicTacToeController extends GetxController
     with GetSingleTickerProviderStateMixin {
+      static TicTacToeController get instance => Get.find();
+      
   //* Game assets
   final txtPlayerO = ImageAssets.o;
   final txtPlayerX = ImageAssets.x;

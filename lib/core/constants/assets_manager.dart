@@ -21,7 +21,6 @@ class ImageAssets {
   static const String ticTacToeOn = 'assets/images/tictactoe/on.png';
 }
 
-
 class GifAssets {
   static const String congrats = 'assets/images/tictactoe/congrats.gif';
 }
@@ -42,6 +41,8 @@ class IconAssets {
 }
 
 class SvgAssets {
+  static const String tictactoeIntroBackground =
+      'assets/svg/tictactoe_intro_background.svg';
   static const String splashBackground = '$SVG_PATH/splash_background.svg';
   static const String letterA = '$SVG_PATH/A.svg';
   static const String letterB = '$SVG_PATH/B.svg';
@@ -60,9 +61,11 @@ class SvgAssets {
       '$SVG_PATH/goodmorning_background.svg';
   static const String headerVectorBlue = 'assets/svg/header_vector_blue.svg';
   static const String headerVectorGreen = 'assets/svg/header_vector_green.svg';
-  static const String headerVectorPurple = 'assets/svg/header_vector_purple.svg';
+  static const String headerVectorPurple =
+      'assets/svg/header_vector_purple.svg';
   static const String errorBackground = 'assets/svg/error_background.svg';
-  static const String createProfileBackground = 'assets/svg/create_profile_background.svg';
+  static const String createProfileBackground =
+      'assets/svg/create_profile_background.svg';
   static const String masscotBg = '$SVG_PATH/masscotbg.svg';
   static const String compassIcon = '$SVG_PATH/compassIcon.svg';
   static const String rabbit = '$SVG_PATH/rabbit.svg';

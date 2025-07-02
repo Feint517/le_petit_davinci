@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -15,6 +14,7 @@ import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 import 'package:le_petit_davinci/features/Games/view/snake.dart';
 import 'package:le_petit_davinci/features/Games/view/tic_tac_toe.dart';
+import 'package:le_petit_davinci/features/Games/view/tic_tac_toe_intro.dart';
 import 'package:le_petit_davinci/features/Games/widgets/game_card.dart';
 
 class GamesScreen extends StatelessWidget {
@@ -85,7 +85,7 @@ class GamesScreen extends StatelessWidget {
                               numOfVictories: 5,
                               color: AppColors.primaryDeep,
                               icon: SvgAssets.tictactoe,
-                              gameScreen: const TicTacToe(),
+                              gameScreen: const TicTacToeIntroScreen(),
                             ),
                             GameModel(
                               name: 'Échecs simplifiés',
