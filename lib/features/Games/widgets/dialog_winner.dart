@@ -4,6 +4,11 @@ import 'dart:math' as math;
 import 'package:gif/gif.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:lottie/lottie.dart';
 
 class CongratulationsDialog extends StatefulWidget {
   final VoidCallback onPressed;
@@ -86,22 +91,30 @@ class _CongratulationsDialogOState extends State<CongratulationsDialog>
                     width: 300,
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      color: AppColors.accentDark,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: CustomShadowStyle.customCircleShadows(
+                        color: AppColors.accentDark,
+                      ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Gif(
-                          image: AssetImage(GifAssets.congrats),
-                          fps: 30,
+                        // Gif(
+                        //   image: AssetImage(GifAssets.congrats),
+                        //   fps: 30,
+                        //   width: 150,
+                        //   height: 150,
+                        //   //duration: const Duration(seconds: 3),
+                        //   autostart: Autostart.loop,
+                        // ),
+                        Lottie.asset(
+                          LottieAssets.confetti,
                           width: 150,
                           height: 150,
-                          //duration: const Duration(seconds: 3),
-                          autostart: Autostart.loop,
                         ),
-                        Gap(10),
+                        Gap(AppSizes.spaceBtwItems),
                         Text(
                           'Félicitations!',
                           textAlign: TextAlign.center,
@@ -109,55 +122,27 @@ class _CongratulationsDialogOState extends State<CongratulationsDialog>
                             fontWeight: FontWeight.bold,
                             fontSize: 26,
                             color: AppColors.secondary,
-                            fontFamily: 'BricolageGrotesque',
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'vous avez gagné!',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  color: AppColors.textPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'BricolageGrotesque',
-                                ),
-                              ),
-                            ],
+                        Text(
+                          'vous avez gagné!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: AppColors.textPrimary,
                           ),
                         ),
-                        Gap(20),
-                        ElevatedButton(
+
+                        const Gap(AppSizes.spaceBtwItems),
+
+                        CustomButton(
+                          variant: ButtonVariant.secondary,
+                          label: 'Super!',
+                          width: 100,
                           onPressed: () {
                             Navigator.of(context).pop();
                             widget.onPressed();
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.secondary,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 10,
-                            ),
-                          ),
-                          child: Text(
-                            'Super!',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              fontFamily: 'BricolageGrotesque',
-                            ),
-                          ),
                         ),
                       ],
                     ),

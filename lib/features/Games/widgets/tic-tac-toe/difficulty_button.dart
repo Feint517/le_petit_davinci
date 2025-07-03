@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/features/Games/controllers/tic_tac_toe_controll
 class DifficultyButton extends GetView<TicTacToeController> {
   const DifficultyButton(this.value, this.label, {super.key});
 
-
   final String value;
   final String label;
 
@@ -15,19 +14,17 @@ class DifficultyButton extends GetView<TicTacToeController> {
     return Expanded(
       child: GestureDetector(
         onTap: () => controller.setDifficulty(value),
-        child: Obx(() => AnimatedContainer(
+        child: Obx(
+          () => AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             height: 35,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.white,
-                width: 2,
-              ),
+              border: Border.all(color: AppColors.white, width: 2),
               color:
                   controller.aiDifficulty.value == value
                       ? Colors.white
-                      : AppColors.purple,
+                      : AppColors.accent,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
@@ -35,10 +32,9 @@ class DifficultyButton extends GetView<TicTacToeController> {
                 label,
                 style: TextStyle(
                   fontSize: 12,
-                  fontFamily: 'BricolageGrotesque',
                   color:
                       controller.aiDifficulty.value == value
-                          ? AppColors.purple
+                          ? AppColors.accent
                           : Colors.white,
                 ),
               ),

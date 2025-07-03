@@ -65,6 +65,7 @@ flutter:
 
   assets:
     - assets/svg/
+    - assets/svg/tic_tac_toe/
     - assets/svg/mascots/
     - assets/svg/misc/
     - assets/animations/
@@ -76,6 +77,8 @@ flutter:
     - assets/audio/tts/
     - assets/sfx/
     - assets/sfx/alphabet/
+    - assets/lottie/
+    - assets/lottie/misc/
     
   fonts:
     - family: DynaPuff_SemiCondensed

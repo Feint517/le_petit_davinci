@@ -7,20 +7,20 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 
 class TicTacToeController extends GetxController
     with GetSingleTickerProviderStateMixin {
-      static TicTacToeController get instance => Get.find();
-      
+  static TicTacToeController get instance => Get.find();
+
   //* Game assets
-  final txtPlayerO = ImageAssets.o;
-  final txtPlayerX = ImageAssets.x;
-  final emptyBox = ImageAssets.emptyBox;
+  final txtPlayerO = SvgAssets.o;
+  final txtPlayerX = SvgAssets.x;
+  final emptyBox = '';
 
   //* Animation controller for the popup
   late AnimationController animationController;
   late Animation<Offset> slideAnimation;
 
   //* Game board
-  final xorOList =
-      List.generate(16, (_) => ImageAssets.emptyBox).obs;
+  final xorOList = List.generate(16, (_) => '').obs;
+
 
   //* Game state
   final playerO = 0.obs;
@@ -102,7 +102,7 @@ class TicTacToeController extends GetxController
 
   void clearGame() {
     for (int i = 0; i < xorOList.length; i++) {
-      xorOList[i] = emptyBox;
+      xorOList[i] = '';
     }
     playerO(0);
     playerX(0);
@@ -120,7 +120,7 @@ class TicTacToeController extends GetxController
 
   void resetBoard() {
     for (int i = 0; i < xorOList.length; i++) {
-      xorOList[i] = emptyBox;
+      xorOList[i] = '';
     }
     filledBoxes(0);
     winnerO(false);

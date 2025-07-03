@@ -26,7 +26,7 @@ class GifAssets {
 }
 
 class LottieAssets {
-  static const String confetti = '$LOTTIE_PATH/confetti.json';
+  static const String confetti = 'assets/lottie/confetti.json';
 }
 
 class IconAssets {
@@ -41,8 +41,14 @@ class IconAssets {
 }
 
 class SvgAssets {
+  //* Tic Tac Toe
+  static const String x = 'assets/svg/tic_tac_toe/x.svg';
+  static const String o = 'assets/svg/tic_tac_toe/o.svg';
+  static const String ticTacToeIntroMascot =
+      'assets/svg/tic_tac_toe/intro_mascot.svg';
   static const String tictactoeIntroBackground =
       'assets/svg/tictactoe_intro_background.svg';
+
   static const String splashBackground = '$SVG_PATH/splash_background.svg';
   static const String letterA = '$SVG_PATH/A.svg';
   static const String letterB = '$SVG_PATH/B.svg';

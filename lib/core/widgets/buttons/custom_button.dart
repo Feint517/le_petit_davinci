@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
@@ -170,10 +171,10 @@ class _CustomButtonState extends State<CustomButton>
                                             IconPosition.left &&
                                         widget.icon != null)
                                       Gap(widget.size == ButtonSize.sm ? 4 : 8),
+                                    const Gap(AppSizes.sm),
                                     Text(
                                       widget.label,
                                       style: TextStyle(
-                                        fontFamily: 'DynaPuff_SemiCondensed',
                                         fontSize: switch (widget.size) {
                                           ButtonSize.sm => 14,
                                           ButtonSize.md => 16,
@@ -183,6 +184,7 @@ class _CustomButtonState extends State<CustomButton>
                                         color: _getTextColor(),
                                       ),
                                     ),
+                                    const Gap(AppSizes.sm),
                                     if (widget.iconPosition ==
                                             IconPosition.right &&
                                         widget.icon != null)

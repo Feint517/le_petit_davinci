@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/features/Games/view/tic_tac_toe.dart';
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -364,7 +363,7 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
               child: SafeArea(
                 child: Column(
                   children: [
-                    CommonHeader(pageTitle: 'Jeu du Serpent'),
+                    //CommonHeader(pageTitle: 'Jeu du Serpent'),
                     Gap(20),
                     
                     Column(

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
 import 'package:le_petit_davinci/features/Games/controllers/tic_tac_toe_controller.dart';
 import 'package:le_petit_davinci/features/Games/widgets/dialog_winner.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_board.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_controls.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/mode_selection_popup.dart';
-import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/progress_section.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/turn_indicator.dart';
 
 class TicTacToe extends GetView<TicTacToeController> {
@@ -34,6 +34,11 @@ class TicTacToe extends GetView<TicTacToeController> {
 
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
+      appBar: ProfileHeader(
+        userName: 'Alex',
+        userClass: 'Classe 2',
+        changeAvatar: false,
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -42,11 +47,6 @@ class TicTacToe extends GetView<TicTacToeController> {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: [
-                  CommonHeader(pageTitle: 'Tic Tac Toe'),
-                  const Gap(20),
-
-                  const ProgressSection(),
-
                   const GameControls(),
                   const Gap(20),
 
@@ -58,11 +58,11 @@ class TicTacToe extends GetView<TicTacToeController> {
               ),
             ),
 
-            // Mode selection popup at the bottom
+            //* Mode selection popup at the bottom
             Obx(
               () =>
                   controller.showModeSelection.value
-                      ? ModeSelectionPopup()
+                      ? const ModeSelectionPopup()
                       : const SizedBox(),
             ),
           ],
@@ -111,76 +111,4 @@ void _showDrawDialog(BuildContext context, TicTacToeController controller) {
           },
         ),
   );
-}
-
-
-//TODO: Fix the issue where the draw screen doesn't show up
-class CommonHeader extends StatelessWidget {
-  const CommonHeader({
-    super.key,
-    this.pageTitle,
-    this.trailing,
-    this.onTapTrailing,
-  });
-
-  final String? pageTitle;
-  final Widget? trailing;
-  final VoidCallback? onTapTrailing;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.textSecondary,
-                    size: 18,
-                  ),
-                  Text(
-                    'Retour',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'BricolageGrotesque',
-                      color: AppColors.textSecondary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child:
-                  pageTitle != null
-                      ? Text(
-                        pageTitle!,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'BricolageGrotesque',
-                          color: AppColors.secondary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                      : const SizedBox.shrink(),
-            ),
-          ],
-        ),
-        Spacer(),
-        trailing != null
-            ? GestureDetector(onTap: onTapTrailing, child: trailing!)
-            : const SizedBox.shrink(),
-      ],
-    );
-  }
 }
