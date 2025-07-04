@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class DashboardController extends GetxController {
+class DashboardController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final textController = TextEditingController();
   final capsuleName = TextEditingController();
   final capsuleText = TextEditingController();

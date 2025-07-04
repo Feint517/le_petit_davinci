@@ -8,7 +8,6 @@
 // import 'package:le_petit_davinci/features/lessons/french/widgets/alphabet_card.dart';
 // import 'package:le_petit_davinci/features/lessons/french/widgets/navigation_row.dart';
 
-
 // class AlphabetLessonScreen extends StatelessWidget {
 //   const AlphabetLessonScreen({super.key});
 

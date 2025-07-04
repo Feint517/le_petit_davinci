@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
@@ -31,19 +32,15 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
       });
     }
     return Scaffold(
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       body: SafeArea(
         bottom: false,
         right: false,
         left: false,
         child: Column(
           children: [
-            const ProfileHeader(
-              userName: 'Alex',
-              userClass: 'Classe 2',
-              changeAvatar: false,
-            ),
-            const CustomNavBar(variant: BadgeVariant.french),
-            Gap(10),
+            //const CustomNavBar(variant: BadgeVariant.french),
+            const Gap(AppSizes.defaultSpace),
             const SubHeader(
               paragraph:
                   "Aujourd'hui, on va jouer avec les mots et écrire comme un auteur !",
@@ -57,12 +54,10 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  SizedBox.expand(
-                    child: ResponsiveSvgAsset(
-                      assetPath: SvgAssets.frenchMapBackground,
-                      svgKey: controller.svgKey,
-                      fit: BoxFit.cover,
-                    ),
+                  ResponsiveSvgAsset(
+                    assetPath: SvgAssets.frenchMapBackground,
+                    svgKey: controller.svgKey,
+                    fit: BoxFit.cover,
                   ),
 
                   Obx(() {
@@ -135,7 +130,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
                               onTap:
-                                  () => Get.offAll(
+                                  () => Get.to(
                                     () => ConstructionIntroductionLesson(),
                                     transition: Transition.rightToLeft,
                                     duration: const Duration(milliseconds: 500),

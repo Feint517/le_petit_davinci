@@ -15,7 +15,8 @@ class BoardSizeDropdown extends GetView<TicTacToeController> {
         border: Border.all(color: AppColors.purple, width: 2),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Obx(() => DropdownButton<String>(
+      child: Obx(
+        () => DropdownButton<String>(
           items: [
             DropdownMenuItem(
               value: '3',

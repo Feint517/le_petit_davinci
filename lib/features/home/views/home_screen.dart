@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
 import 'package:le_petit_davinci/features/home/widgets/subject_selection.dart';
@@ -22,8 +22,8 @@ class HomeScreen extends GetView<HomeController> {
       appBar: ProfileHeader(
         userName: 'Alex',
         userClass: 'Classe 2',
-        changeAvatar: true,
-        onAvatarTap: () => Get.to(() => const RewardsScreen()),
+        showTrailingIcon: false,
+        avatarOnTap: () => Get.to(() => RewardsScreen()),
       ),
       body: SingleChildScrollView(
         child: Column(

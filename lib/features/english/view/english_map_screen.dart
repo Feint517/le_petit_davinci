@@ -10,7 +10,7 @@ import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class EnglishMapScreen extends GetView<EnglishMapController> {
@@ -28,18 +28,13 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
       });
     }
     return Scaffold(
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       body: SafeArea(
         bottom: false,
         right: false,
         left: false,
         child: Column(
           children: [
-            const ProfileHeader(
-              userName: 'Alex',
-              userClass: 'Classe 2',
-              changeAvatar: false,
-            ),
-            const CustomNavBar(variant: BadgeVariant.english),
             Gap(10.h),
             const SubHeader(
               paragraph:

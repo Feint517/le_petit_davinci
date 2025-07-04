@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/chips/subject_chip.dart';
 
@@ -14,6 +15,8 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
     this.chipText,
     this.chipColor,
     this.variant,
+    this.applyPadding = true,
+    this.padding,
   });
 
   final bool activeChip;
@@ -22,60 +25,67 @@ class CustomNavBar extends StatelessWidget implements PreferredSizeWidget {
   final String? chipText;
   final Color? chipColor;
   final VoidCallback? leadingOnPressed;
+  final bool applyPadding;
+  final double? padding;
 
   @override
   Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: leadingOnPressed ?? () => Get.back(),
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 5.0,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: AppColors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                    size: 10,
-                  ),
-                  Text(leadingText, style: TextStyle(color: Colors.black)),
-                ],
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: applyPadding ? padding ?? AppSizes.defaultSpace : 0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: leadingOnPressed ?? () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 5.0,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: AppColors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                      size: 10,
+                    ),
+                    Text(leadingText, style: TextStyle(color: Colors.black)),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          activeChip
-              ? SubjectChip(
-                backgroundColor:
-                    chipColor ?? _getColor(variant ?? BadgeVariant.french),
-                text:
-                    chipText ??
-                    switch (variant) {
-                      BadgeVariant.french => 'Français',
-                      BadgeVariant.math => 'Mathématiques',
-                      BadgeVariant.english => 'Anglais',
-                      BadgeVariant.dailyLife => 'Vie quotidienne',
-                      BadgeVariant.games => 'Jeux',
-                      null => '',
-                    },
-              )
-              : const SizedBox.shrink(),
-        ],
+            activeChip
+                ? SubjectChip(
+                  backgroundColor:
+                      chipColor ?? _getColor(variant ?? BadgeVariant.french),
+                  text:
+                      chipText ??
+                      switch (variant) {
+                        BadgeVariant.french => 'Français',
+                        BadgeVariant.math => 'Mathématiques',
+                        BadgeVariant.english => 'Anglais',
+                        BadgeVariant.dailyLife => 'Vie quotidienne',
+                        BadgeVariant.games => 'Jeux',
+                        null => '',
+                      },
+                )
+                : const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }

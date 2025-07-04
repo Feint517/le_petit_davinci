@@ -21,7 +21,6 @@ class TicTacToeController extends GetxController
   //* Game board
   final xorOList = List.generate(16, (_) => '').obs;
 
-
   //* Game state
   final playerO = 0.obs;
   final playerX = 0.obs;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/Games/controllers/tic_tac_toe_controller.dart';
 import 'package:le_petit_davinci/features/Games/widgets/dialog_winner.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_board.dart';
@@ -37,7 +37,7 @@ class TicTacToe extends GetView<TicTacToeController> {
       appBar: ProfileHeader(
         userName: 'Alex',
         userClass: 'Classe 2',
-        changeAvatar: false,
+        showTrailingIcon: false,
       ),
       body: SafeArea(
         child: Stack(

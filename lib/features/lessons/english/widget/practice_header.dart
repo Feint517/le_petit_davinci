@@ -31,7 +31,7 @@ class PracticeHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Gap(DeviceUtils.getAppBarHeight()),
-        CustomNavBar(activeChip: true, variant: badgeVariant),
+        //CustomNavBar(activeChip: true, variant: badgeVariant),
         const Gap(AppSizes.spaceBtwSections),
 
         Text(lessonName, textAlign: TextAlign.center),

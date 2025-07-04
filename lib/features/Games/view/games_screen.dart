@@ -9,11 +9,10 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 import 'package:le_petit_davinci/features/Games/view/snake.dart';
-import 'package:le_petit_davinci/features/Games/view/tic_tac_toe.dart';
 import 'package:le_petit_davinci/features/Games/view/tic_tac_toe_intro.dart';
 import 'package:le_petit_davinci/features/Games/widgets/game_card.dart';
 
@@ -42,7 +41,7 @@ class GamesScreen extends StatelessWidget {
                 const ProfileHeader(
                   userName: 'Alex',
                   userClass: 'Class 2',
-                  changeAvatar: false,
+                  showTrailingIcon: false,
                 ),
                 const Divider(
                   color: AppColors.grey,

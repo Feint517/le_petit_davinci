@@ -8,6 +8,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/lessons/english/widget/practice_header.dart';
 import 'package:le_petit_davinci/features/lessons/french/controllers/construction_introduction_lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/french/widgets/day_option_list_tile.dart';
@@ -20,7 +21,9 @@ class ConstructionIntroductionLesson extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: AppColors.primary,
+      appBar: CustomNavBar(activeChip: true),
       body: SingleChildScrollView(
         child: Column(
           children: [

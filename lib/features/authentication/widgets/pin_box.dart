@@ -11,6 +11,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/views/login_screen.dart';
 import 'package:le_petit_davinci/features/home/views/home_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
 class PinBox extends StatelessWidget {
   const PinBox({super.key, this.isExpanded = false});
 

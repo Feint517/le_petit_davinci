@@ -17,10 +17,6 @@ class FrenchSentenceConstruction extends StatefulWidget {
 
 class _FrenchSentenceConstructionState
     extends State<FrenchSentenceConstruction> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.lllhhh
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX bi
-  // Define the initial set of words to be dragged
   final List<String> _initialDraggableWords = [
     'lire',
     "J'aime",

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
@@ -13,7 +14,7 @@ import 'package:le_petit_davinci/features/Mathematic/view/math_additions_screen.
 import 'package:le_petit_davinci/features/Mathematic/view/math_geometry_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_lessons.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_subtraction_screen.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_header.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 
 class MathematicMapScreen extends GetView<MathMapController> {
   const MathematicMapScreen({super.key});
@@ -30,19 +31,18 @@ class MathematicMapScreen extends GetView<MathMapController> {
       });
     }
     return Scaffold(
+      appBar: const ProfileHeader(
+        userName: 'Alex',
+        userClass: 'Classe 2',
+        type: ProfileHeaderType.compact,
+      ),
       body: SafeArea(
         bottom: false,
         right: false,
         left: false,
         child: Column(
           children: [
-            const ProfileHeader(
-              userName: 'Alex',
-              userClass: 'Classe 2',
-              changeAvatar: false,
-            ),
-            const CustomNavBar(variant: BadgeVariant.math),
-            const Gap(10),
+            const Gap(AppSizes.defaultSpace),
             const SubHeader(
               paragraph:
                   "Bienvenue dans le monde des chiffres ! Allons résoudre des énigmes ensemble.",
@@ -51,17 +51,17 @@ class MathematicMapScreen extends GetView<MathMapController> {
               currentLevel: 1,
               maxLevel: 3,
             ),
-            const Gap(10),
+
+            const Gap(AppSizes.spaceBtwSections),
+
             Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
-                  SizedBox.expand(
-                    child: ResponsiveSvgAsset(
-                      assetPath: SvgAssets.frenchMapBackground,
-                      svgKey: controller.svgKey,
-                      fit: BoxFit.cover,
-                    ),
+                  ResponsiveSvgAsset(
+                    assetPath: SvgAssets.frenchMapBackground,
+                    svgKey: controller.svgKey,
+                    fit: BoxFit.cover,
                   ),
 
                   Obx(() {

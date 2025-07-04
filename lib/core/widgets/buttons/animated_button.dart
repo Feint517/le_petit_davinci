@@ -291,5 +291,3 @@ class AnimatedPageTransition extends StatelessWidget {
     );
   }
 }
-
-

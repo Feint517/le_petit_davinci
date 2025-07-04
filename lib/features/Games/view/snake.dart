@@ -365,7 +365,7 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
                   children: [
                     //CommonHeader(pageTitle: 'Jeu du Serpent'),
                     Gap(20),
-                    
+
                     Column(
                       children: [
                         Row(
