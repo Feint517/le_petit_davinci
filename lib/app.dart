@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/bindings/general_bindings.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/themes/theme.dart';
 import 'package:le_petit_davinci/features/home/views/home_screen.dart';
-import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/routes/app_pages.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,9 +23,14 @@ class App extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: CustomAppTheme.lightTheme,
           darkTheme: CustomAppTheme.darkTheme,
-          // initialRoute: AppRoutes.splash,
-          home: const HomeScreen(),
+          initialBinding: GeneralBindings(),
           getPages: AppPages.routes,
+          home: const Scaffold(
+            backgroundColor: AppColors.primary,
+            body: Center(
+              child: CircularProgressIndicator(color: AppColors.white),
+            ),
+          ),
         );
       },
     );

@@ -34,14 +34,14 @@ class ResponsiveImageAsset extends StatelessWidget {
       builder: (context, snapshot) {
         final aspectRatio = snapshot.data ?? fallbackAspectRatio;
         final calculatedHeight =
-            (width ?? DeviceUtils.getScreenWidth(context)) * aspectRatio;
+            (width ?? DeviceUtils.getScreenWidth()) * aspectRatio;
         final isSvg = ImageUtils.isSvg(assetPath);
 
         return isSvg
             ? SvgPicture.asset(
               key: imageKey,
               assetPath,
-              width: width ?? DeviceUtils.getScreenWidth(context),
+              width: width ?? DeviceUtils.getScreenWidth(),
               height: calculatedHeight,
               fit: fit,
               alignment: alignment,
@@ -53,7 +53,7 @@ class ResponsiveImageAsset extends StatelessWidget {
             : Image.asset(
               key: imageKey,
               assetPath,
-              width: width ?? DeviceUtils.getScreenWidth(context),
+              width: width ?? DeviceUtils.getScreenWidth(),
               height: calculatedHeight,
               fit: fit,
               scale: scale,

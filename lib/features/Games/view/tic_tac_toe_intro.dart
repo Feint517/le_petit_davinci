@@ -67,7 +67,7 @@ class TicTacToeIntroScreen extends StatelessWidget {
 
                                 Container(
                                   width:
-                                      DeviceUtils.getScreenWidth(context) -
+                                      DeviceUtils.getScreenWidth() -
                                       (AppSizes.defaultSpace * 2),
                                   //height: 500,
                                   padding: EdgeInsets.all(AppSizes.md),
@@ -81,14 +81,10 @@ class TicTacToeIntroScreen extends StatelessWidget {
                                     children: [
                                       Container(
                                         width:
-                                            DeviceUtils.getScreenWidth(
-                                              context,
-                                            ) -
+                                            DeviceUtils.getScreenWidth() -
                                             (AppSizes.defaultSpace * 2),
                                         height:
-                                            DeviceUtils.getScreenWidth(
-                                              context,
-                                            ) -
+                                            DeviceUtils.getScreenWidth() -
                                             (AppSizes.defaultSpace * 3.3),
                                         decoration: BoxDecoration(
                                           color: AppColors.accent,
@@ -164,9 +160,7 @@ class TicTacToeIntroScreen extends StatelessWidget {
                                             assetPath:
                                                 SvgAssets.ticTacToeIntroMascot,
                                             width:
-                                                DeviceUtils.getScreenWidth(
-                                                  context,
-                                                ) /
+                                                DeviceUtils.getScreenWidth() /
                                                 3,
                                           ),
                                           const Gap(AppSizes.defaultSpace),

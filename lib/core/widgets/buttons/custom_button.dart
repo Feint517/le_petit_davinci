@@ -125,9 +125,9 @@ class _CustomButtonState extends State<CustomButton>
                       if (status == AnimationStatus.completed) {
                         controller.reverse();
                       }
-                      widget.onPressed?.call();
                     });
                   }
+                  widget.onPressed?.call();
                 },
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
                 splashColor: Colors.blue.withValues(alpha: 0.3),
@@ -206,24 +206,6 @@ class _CustomButtonState extends State<CustomButton>
       },
     );
   }
-
-  // Color _getBackgroundColor() {
-  //   if (widget.disabled) {
-  //     return AppColors.disabled;
-  //   }
-  //   switch (widget.variant) {
-  //     case ButtonVariant.primary:
-  //       return AppColors.primary;
-  //     case ButtonVariant.secondary:
-  //       return AppColors.orangeAccent;
-  //     case ButtonVariant.success:
-  //       return AppColors.succuss;
-  //     case ButtonVariant.warning:
-  //       return AppColors.warning;
-  //     case ButtonVariant.ghost:
-  //       return Colors.transparent;
-  //   }
-  // }
 
   Color _getTextColor() {
     if (widget.disabled) {

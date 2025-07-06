@@ -57,7 +57,7 @@ class QuestionScreen extends StatelessWidget {
                       questionText: question.questionText,
                     ),
                     Gap(20.h),
-              
+
                     ...List.generate(
                       question.options.length,
                       (i) => CheckboxWidget(
@@ -66,9 +66,7 @@ class QuestionScreen extends StatelessWidget {
                         //icon: question.options[i].iconWidget,
                         isSelected: selected == question.options[i].value,
                         onTap: () {
-                          controller.answers[controller
-                                  .currentIndex
-                                  .value] =
+                          controller.answers[controller.currentIndex.value] =
                               question.options[i].value;
                         },
                       ),
@@ -94,10 +92,10 @@ class QuestionScreen extends StatelessWidget {
           ),
           Positioned(
             bottom: DeviceUtils.getBottomNavigationBarHeight(),
-            right: DeviceUtils.getScreenWidth(context) * 0.1,
+            right: DeviceUtils.getScreenWidth() * 0.1,
             child: ResponsiveImageAsset(
               assetPath: SvgAssets.bearMasscot,
-              width: DeviceUtils.getScreenWidth(context) * 0.4,
+              width: DeviceUtils.getScreenWidth() * 0.4,
             ),
           ),
         ],

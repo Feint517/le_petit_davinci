@@ -27,7 +27,7 @@ class LessonTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceUtils.getScreenWidth(context) * 0.9,
+      width: DeviceUtils.getScreenWidth() * 0.9,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.all(Radius.circular(40)),

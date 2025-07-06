@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/loaders.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
@@ -45,6 +47,16 @@ class HomeScreen extends GetView<HomeController> {
 
             //* Rewards Section
             const ScrollAnimatedItem(child: RewardsSection()),
+            Gap(40.h),
+
+            CustomButton(
+              label: 'testing',
+              onPressed:
+                  () => CustomLoaders.showSnackBar(
+                    type: SnackBarType.warning,
+                    title: 'No Interbet Connection',
+                  ),
+            ),
             Gap(40.h),
 
             //* Bottom footer image

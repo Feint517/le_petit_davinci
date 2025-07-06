@@ -38,7 +38,7 @@ class HeaderVector extends StatelessWidget {
             child: Center(
               child: ResponsiveImageAsset(
                 assetPath: SvgAssets.logoWhite,
-                width: DeviceUtils.getScreenWidth(context) * 0.35,
+                width: DeviceUtils.getScreenWidth() * 0.35,
               ),
             ),
           ),

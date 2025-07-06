@@ -30,7 +30,7 @@ class CapsulesSection extends GetView<DashboardController> {
               children: List.generate(
                 5,
                 (index) => Container(
-                  width: DeviceUtils.getScreenWidth(context),
+                  width: DeviceUtils.getScreenWidth(),
                   padding: EdgeInsets.all(AppSizes.md),
                   decoration: BoxDecoration(
                     color: AppColors.accent2,
@@ -75,7 +75,7 @@ class CapsulesSection extends GetView<DashboardController> {
         const Gap(AppSizes.spaceBtwItems),
 
         Container(
-          width: DeviceUtils.getScreenWidth(context),
+          width: DeviceUtils.getScreenWidth(),
           height: 700,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSizes.md,

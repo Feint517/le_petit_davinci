@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 ResponsiveImageAsset(
                   assetPath: SvgAssets.logoBlue,
-                  width: DeviceUtils.getScreenWidth(context) * 0.5,
+                  width: DeviceUtils.getScreenWidth() * 0.5,
                 ),
 
                 const Gap(AppSizes.defaultSpace * 1.6),

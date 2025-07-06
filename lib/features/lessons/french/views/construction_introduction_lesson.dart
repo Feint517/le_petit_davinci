@@ -43,7 +43,7 @@ class ConstructionIntroductionLesson extends StatelessWidget {
                   Center(
                     child: Container(
                       height: 300,
-                      width: DeviceUtils.getScreenWidth(context) * 0.8,
+                      width: DeviceUtils.getScreenWidth() * 0.8,
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,

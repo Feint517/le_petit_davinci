@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class QuestionFinishController extends GetxController with GetSingleTickerProviderStateMixin{
+class QuestionFinishController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   late AnimationController animationController;
   late List<Animation<double>> fadeAnimations;
 

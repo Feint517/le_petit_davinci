@@ -14,7 +14,7 @@ class InfoDisplaySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceUtils.getScreenWidth(context),
+      width: DeviceUtils.getScreenWidth(),
       height: 250,
       decoration: BoxDecoration(
         color: AppColors.white,

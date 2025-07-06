@@ -26,7 +26,7 @@ class GoodMorningScreen extends StatelessWidget {
               right: 0,
               child: SvgPicture.asset(
                 SvgAssets.goodmorningBackground,
-                width: DeviceUtils.getScreenWidth(context),
+                width: DeviceUtils.getScreenWidth(),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -35,7 +35,7 @@ class GoodMorningScreen extends StatelessWidget {
               top: 200.h,
               left: 24.w,
               child: SizedBox(
-                width: DeviceUtils.getScreenWidth(context) - 48.w,
+                width: DeviceUtils.getScreenWidth() - 48.w,
                 child: RichText(
                   text: TextSpan(
                     style: TextStyle(

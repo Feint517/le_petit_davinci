@@ -20,7 +20,7 @@ class CustomCurvedHeaderContainer extends StatelessWidget {
     return CustomCurvedEdgesHillDownwardsWidget(
       child: Container(
         color: backgroundColor,
-        width: DeviceUtils.getScreenWidth(context),
+        width: DeviceUtils.getScreenWidth(),
         height: height,
         child: child,
       ),

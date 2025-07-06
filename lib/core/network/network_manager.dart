@@ -23,8 +23,12 @@ class NetworkManager extends GetxController {
   //? update connection status based on changes in connectivity and show a relevant popup for no internet connection
   void _updateConnectionStatus(List<ConnectivityResult> result) {
     _connectionStatus.value = result.first;
+
     if (_connectionStatus.value == ConnectivityResult.none) {
-      CustomLoaders.warningSnackBar(title: 'No Internet Connection');
+      CustomLoaders.showSnackBar(
+        type: SnackBarType.warning,
+        title: 'No Internet Connection',
+      );
     }
   }
 

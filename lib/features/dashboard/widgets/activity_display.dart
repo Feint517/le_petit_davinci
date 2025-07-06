@@ -67,7 +67,7 @@ class ActivityDisplay extends StatelessWidget {
           ),
         ),
         Container(
-          width: DeviceUtils.getScreenWidth(context),
+          width: DeviceUtils.getScreenWidth(),
           height: 120,
           padding: EdgeInsets.all(AppSizes.defaultSpace),
           decoration: BoxDecoration(

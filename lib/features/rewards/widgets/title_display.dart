@@ -55,7 +55,7 @@ class TitleDisplay extends StatelessWidget {
           ),
         ),
         Container(
-          width: DeviceUtils.getScreenWidth(context),
+          width: DeviceUtils.getScreenWidth(),
           height: 150,
           padding: EdgeInsets.all(AppSizes.defaultSpace),
           decoration: BoxDecoration(

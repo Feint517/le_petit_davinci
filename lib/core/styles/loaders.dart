@@ -4,6 +4,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 
+enum SnackBarType { succes, warning, error }
+
 class CustomLoaders {
   static hideSnackBar() =>
       ScaffoldMessenger.of(Get.context!).hideCurrentMaterialBanner();
@@ -21,13 +23,15 @@ class CustomLoaders {
             borderRadius: BorderRadius.circular(30),
             color:
                 DeviceUtils.isDarkMode(Get.context!)
-                    ? AppColors.darkGrey.withValues(alpha: 0.9)
-                    : AppColors.grey.withValues(alpha: 0.9),
+                    ? AppColors.primary.withValues(alpha: 0.9)
+                    : AppColors.accent.withValues(alpha: 0.9),
           ),
           child: Center(
             child: Text(
               message,
-              style: Theme.of(Get.context!).textTheme.labelLarge,
+              style: Theme.of(
+                Get.context!,
+              ).textTheme.bodyMedium!.apply(color: AppColors.white),
             ),
           ),
         ),
@@ -35,48 +39,37 @@ class CustomLoaders {
     );
   }
 
-  static successSnackBar({required title, message = '', duration = 3}) {
+  static showSnackBar({
+    required SnackBarType type,
+    required String title,
+    String message = '',
+    Color? backgroundColor,
+    Widget? icon,
+    Color? iconColor,
+    duration = 3,
+  }) {
     Get.snackbar(
       title,
       message,
       isDismissible: true,
       shouldIconPulse: true,
-      colorText: Colors.white,
-      backgroundColor: AppColors.primary,
+      colorText: AppColors.white,
+      backgroundColor: switch (type) {
+        SnackBarType.succes => backgroundColor ?? AppColors.primary,
+        SnackBarType.warning => backgroundColor ?? Colors.orange,
+        SnackBarType.error => backgroundColor ?? Colors.red.shade600,
+      },
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(10),
-      icon: const Icon(Iconsax.check, color: AppColors.white),
-    );
-  }
-
-  static warningSnackBar({required title, message = '', duration = 3}) {
-    Get.snackbar(
-      title,
-      message,
-      isDismissible: true,
-      shouldIconPulse: true,
-      colorText: Colors.white,
-      backgroundColor: Colors.orange,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: duration),
-      margin: const EdgeInsets.all(10),
-      icon: const Icon(Iconsax.warning_2, color: AppColors.white),
-    );
-  }
-
-  static errorSnackBar({required title, message = '', duration = 3}) {
-    Get.snackbar(
-      title,
-      message,
-      isDismissible: true,
-      shouldIconPulse: true,
-      colorText: Colors.white,
-      backgroundColor: Colors.red.shade600,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: duration),
-      margin: const EdgeInsets.all(10),
-      icon: const Icon(Iconsax.warning_2, color: AppColors.white),
+      icon: switch (type) {
+        SnackBarType.succes =>
+          icon ?? Icon(Iconsax.check, color: iconColor ?? AppColors.white),
+        SnackBarType.warning =>
+          icon ?? Icon(Iconsax.warning_2, color: iconColor ?? AppColors.white),
+        SnackBarType.error =>
+          icon ?? Icon(Iconsax.warning_2, color: iconColor ?? AppColors.white),
+      },
     );
   }
 }

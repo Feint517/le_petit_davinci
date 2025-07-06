@@ -22,8 +22,8 @@ class PinBox extends StatelessWidget {
     return Container(
       width:
           isExpanded
-              ? DeviceUtils.getScreenWidth(context)
-              : DeviceUtils.getScreenWidth(context) * 0.85,
+              ? DeviceUtils.getScreenWidth()
+              : DeviceUtils.getScreenWidth() * 0.85,
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: AppColors.pinkAccent,

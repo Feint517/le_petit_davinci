@@ -35,12 +35,16 @@ class DeviceUtils {
     );
   }
 
+  static Size screenSize() {
+    return MediaQuery.of(Get.context!).size;
+  }
+
   static double getScreenHeight() {
     return MediaQuery.of(Get.context!).size.height;
   }
 
-  static double getScreenWidth(BuildContext context) {
-    return MediaQuery.of(context).size.width;
+  static double getScreenWidth() {
+    return MediaQuery.of(Get.context!).size.width;
   }
 
   static double getPixetRatio() {
@@ -113,13 +117,4 @@ class DeviceUtils {
   static bool isAndroid() {
     return Platform.isAndroid;
   }
-
-  /*
-    static void launchUrl(String url) async {
-      if (await canLaunchUrlString(url)) {
-        await launchUrlString(url);
-      }else {
-        throw 'Could not launch $url';
-    }
-  */
 }

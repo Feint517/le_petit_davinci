@@ -48,7 +48,10 @@ class HeaderMessageBox extends StatelessWidget {
           Positioned(
             right: -30.w,
             top: 20.h,
-            child: const ResponsiveImageAsset(assetPath: SvgAssets.bunny, width: 60),
+            child: const ResponsiveImageAsset(
+              assetPath: SvgAssets.bunny,
+              width: 60,
+            ),
           ),
         ],
       ),

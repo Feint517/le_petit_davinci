@@ -34,8 +34,8 @@ class CustomRoundedImage extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: width ?? DeviceUtils.getScreenWidth(context) * 0.9,
-        height: height ?? DeviceUtils.getScreenWidth(context) * 0.3,
+        width: width ?? DeviceUtils.getScreenWidth() * 0.9,
+        height: height ?? DeviceUtils.getScreenWidth() * 0.3,
         padding: padding,
         decoration: BoxDecoration(
           border: border,

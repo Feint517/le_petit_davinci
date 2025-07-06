@@ -36,7 +36,7 @@ class IntroductionFrenchLessons extends StatelessWidget {
 
                 ResponsiveImageAsset(
                   assetPath: SvgAssets.beargames,
-                  width: DeviceUtils.getScreenWidth(context) * 0.5,
+                  width: DeviceUtils.getScreenWidth() * 0.5,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),

@@ -132,7 +132,6 @@ class CheckboxWidget extends StatelessWidget {
   }
 }
 
-
 class CheckboxGroup extends StatefulWidget {
   /// Liste des options à afficher
   final List<CheckboxOption> options;

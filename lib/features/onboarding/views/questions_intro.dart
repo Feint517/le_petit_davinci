@@ -29,7 +29,7 @@ class QuestionsIntroScreen extends GetView<IntroController> {
             top: DeviceUtils.getAppBarHeight(),
             child: ResponsiveImageAsset(
               assetPath: SvgAssets.logoWhite,
-              width: DeviceUtils.getScreenWidth(context) * 0.5,
+              width: DeviceUtils.getScreenWidth() * 0.5,
             ),
           ),
           Positioned(

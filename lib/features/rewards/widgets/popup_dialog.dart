@@ -24,7 +24,7 @@ class PopupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceUtils.getScreenWidth(context) * 0.9,
+      width: DeviceUtils.getScreenWidth() * 0.9,
       height: DeviceUtils.getScreenHeight() * 0.5,
 
       decoration: BoxDecoration(
@@ -84,7 +84,7 @@ class PopupDialog extends StatelessWidget {
           const Spacer(),
           ResponsiveImageAsset(
             assetPath: SvgAssets.happyMasscots,
-            width: DeviceUtils.getScreenWidth(context) * 0.81,
+            width: DeviceUtils.getScreenWidth() * 0.81,
           ),
         ],
       ),

@@ -32,7 +32,7 @@ class PinEntryScreen extends GetView<PinEntryController> {
               children: [
                 ResponsiveImageAsset(
                   assetPath: SvgAssets.logoBlue,
-                  width: DeviceUtils.getScreenWidth(context) * 0.5,
+                  width: DeviceUtils.getScreenWidth() * 0.5,
                 ),
 
                 const Gap(AppSizes.defaultSpace * 1.4),

@@ -143,8 +143,7 @@ class FrenchIntroScreen extends StatelessWidget {
                             // ),
                             ResponsiveImageAsset(
                                   assetPath: SvgAssets.bearFrench,
-                                  width:
-                                      DeviceUtils.getScreenWidth(context) * 0.6,
+                                  width: DeviceUtils.getScreenWidth() * 0.6,
                                 )
                                 .animate(
                                   onPlay:
@@ -266,7 +265,7 @@ class FrenchIntroScreen extends StatelessWidget {
                           SvgAssets
                               .plants1, // Reduced height to prevent overlap
                       width:
-                          DeviceUtils.getScreenWidth(context) *
+                          DeviceUtils.getScreenWidth() *
                           0.3, // Responsive width
                       fit: BoxFit.contain,
                     )
@@ -287,7 +286,7 @@ class FrenchIntroScreen extends StatelessWidget {
                 right: 0,
                 child: ResponsiveImageAsset(
                       assetPath: SvgAssets.plants2,
-                      width: DeviceUtils.getScreenWidth(context) * 0.25,
+                      width: DeviceUtils.getScreenWidth() * 0.25,
                     )
                     .animate()
                     .fadeIn(

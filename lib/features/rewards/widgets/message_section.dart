@@ -11,7 +11,7 @@ class MessageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DeviceUtils.getScreenWidth(context),
+      width: DeviceUtils.getScreenWidth(),
       height: 50,
       padding: EdgeInsets.symmetric(horizontal: AppSizes.md),
       decoration: BoxDecoration(
