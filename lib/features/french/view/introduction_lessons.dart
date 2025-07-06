@@ -25,7 +25,7 @@ class IntroductionFrenchLessons extends StatelessWidget {
               bottom: 0,
               left: 0,
               right: 0,
-              child: ResponsiveSvgAsset(assetPath: SvgAssets.gamesBackground),
+              child: ResponsiveImageAsset(assetPath: SvgAssets.gamesBackground),
             ),
 
             Column(
@@ -34,7 +34,7 @@ class IntroductionFrenchLessons extends StatelessWidget {
                 const CustomNavBar(variant: BadgeVariant.french),
                 const Gap(15),
 
-                ResponsiveSvgAsset(
+                ResponsiveImageAsset(
                   assetPath: SvgAssets.beargames,
                   width: DeviceUtils.getScreenWidth(context) * 0.5,
                 ),

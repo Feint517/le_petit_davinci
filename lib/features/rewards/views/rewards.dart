@@ -54,7 +54,7 @@ class RewardsScreen extends GetView<RewardsController> {
                             style: Theme.of(context).textTheme.headlineMedium!
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
-                          const ResponsiveSvgAsset(
+                          const ResponsiveImageAsset(
                             assetPath: SvgAssets.happyGift,
                             width: 60,
                           ),

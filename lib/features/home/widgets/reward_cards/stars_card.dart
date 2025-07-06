@@ -36,7 +36,10 @@ class StarsCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: ResponsiveSvgAsset(assetPath: SvgAssets.starR, width: 100.w),
+            child: ResponsiveImageAsset(
+              assetPath: SvgAssets.starR,
+              width: 100.w,
+            ),
           ),
 
           //* Content area

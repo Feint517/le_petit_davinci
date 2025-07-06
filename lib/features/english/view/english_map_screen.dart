@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
@@ -50,9 +49,9 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   SizedBox.expand(
-                    child: ResponsiveSvgAsset(
+                    child: ResponsiveImageAsset(
                       assetPath: SvgAssets.frenchMapBackground,
-                      svgKey: controller.svgKey,
+                      imageKey: controller.svgKey,
                       fit: BoxFit.cover,
                     ),
                   ),

@@ -74,7 +74,7 @@ class CTACard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //* Book icon
-            ResponsiveSvgAsset(assetPath: SvgAssets.book, width: 22.w),
+            ResponsiveImageAsset(assetPath: SvgAssets.book, width: 22.w),
 
             Gap(6.w),
 

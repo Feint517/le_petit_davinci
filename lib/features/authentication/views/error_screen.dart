@@ -28,7 +28,7 @@ class ErrorScreen extends StatelessWidget {
               bottom: 0,
               left: 0,
               right: 0,
-              child: ResponsiveSvgAsset(assetPath: SvgAssets.errorBackground),
+              child: ResponsiveImageAsset(assetPath: SvgAssets.errorBackground),
             ),
             const Positioned(
               top: 0,

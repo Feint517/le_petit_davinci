@@ -37,7 +37,7 @@ class InfoDisplaySection extends StatelessWidget {
                 ),
               ),
               const Gap(AppSizes.spaceBtwItems),
-              const ResponsiveSvgAsset(
+              const ResponsiveImageAsset(
                 assetPath: SvgAssets.happyStar,
                 width: 50,
               ),

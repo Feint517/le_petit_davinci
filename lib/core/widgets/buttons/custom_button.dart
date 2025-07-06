@@ -118,17 +118,17 @@ class _CustomButtonState extends State<CustomButton>
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                // onTap: () {
-                //   if (!(widget.disabled || widget.isLoading)) {
-                //     controller.forward(from: 0);
-                //     controller.addStatusListener((status) {
-                //       if (status == AnimationStatus.completed) {
-                //         controller.reverse();
-                //       }
-                //       widget.onPressed?.call();
-                //     });
-                //   }
-                // },
+                onTap: () {
+                  if (!(widget.disabled || widget.isLoading)) {
+                    controller.forward(from: 0);
+                    controller.addStatusListener((status) {
+                      if (status == AnimationStatus.completed) {
+                        controller.reverse();
+                      }
+                      widget.onPressed?.call();
+                    });
+                  }
+                },
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
                 splashColor: Colors.blue.withValues(alpha: 0.3),
                 highlightColor: Colors.blue.withValues(alpha: 0.1),

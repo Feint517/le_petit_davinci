@@ -26,7 +26,7 @@ class CreateProfileScreen extends StatelessWidget {
           const HeaderVector(color: HeaderVectorColor.green),
           const Positioned(
             bottom: 0,
-            child: ResponsiveSvgAsset(
+            child: ResponsiveImageAsset(
               assetPath: SvgAssets.createProfileBackground,
             ),
           ),

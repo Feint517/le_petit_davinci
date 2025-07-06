@@ -23,14 +23,14 @@ class PinEntryScreen extends GetView<PinEntryController> {
           children: [
             Positioned(
               bottom: 0,
-              child: const ResponsiveSvgAsset(
+              child: const ResponsiveImageAsset(
                 assetPath: SvgAssets.pinBackground,
               ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ResponsiveSvgAsset(
+                ResponsiveImageAsset(
                   assetPath: SvgAssets.logoBlue,
                   width: DeviceUtils.getScreenWidth(context) * 0.5,
                 ),

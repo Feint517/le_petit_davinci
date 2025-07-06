@@ -5,12 +5,11 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/misc/mascot_widget.dart';
+import 'package:le_petit_davinci/core/widgets/misc/mascot_widget_old.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
-/// Écran d'introduction aux questions avec la mascotte DaVinci
-class QuestionsIntroScreen extends StatelessWidget {
-  const QuestionsIntroScreen({super.key});
+class QuestionsIntroScreen2 extends StatelessWidget {
+  const QuestionsIntroScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -122,3 +121,4 @@ class QuestionsIntroScreen extends StatelessWidget {
     );
   }
 }
+

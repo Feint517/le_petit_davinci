@@ -31,11 +31,11 @@ class LoginPage extends StatelessWidget {
               bottom: 0,
               left: 0,
               right: 0,
-              child: ResponsiveSvgAsset(assetPath: SvgAssets.loginBackground),
+              child: ResponsiveImageAsset(assetPath: SvgAssets.loginBackground),
             ),
             Column(
               children: [
-                ResponsiveSvgAsset(
+                ResponsiveImageAsset(
                   assetPath: SvgAssets.logoBlue,
                   width: DeviceUtils.getScreenWidth(context) * 0.5,
                 ),

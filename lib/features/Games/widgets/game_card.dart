@@ -66,7 +66,7 @@ class GameCard extends StatelessWidget {
               SizedBox(
                 width: 70,
                 height: 70,
-                child: ResponsiveSvgAsset(assetPath: assetPath, width: 70),
+                child: ResponsiveImageAsset(assetPath: assetPath, width: 70),
               ),
               Text(
                 title,

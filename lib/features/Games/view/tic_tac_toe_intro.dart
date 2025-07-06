@@ -25,7 +25,7 @@ class TicTacToeIntroScreen extends StatelessWidget {
           children: [
             Positioned(
               bottom: 0,
-              child: const ResponsiveSvgAsset(
+              child: const ResponsiveImageAsset(
                 assetPath: SvgAssets.tictactoeIntroBackground,
               ),
             ),
@@ -117,14 +117,14 @@ class TicTacToeIntroScreen extends StatelessWidget {
                                                     alignment: Alignment.center,
                                                     child:
                                                         (row == 0 && col == 0)
-                                                            ? ResponsiveSvgAsset(
+                                                            ? ResponsiveImageAsset(
                                                               assetPath:
                                                                   SvgAssets.x,
                                                               width: 48,
                                                             )
                                                             : (row == 2 &&
                                                                 col == 2)
-                                                            ? ResponsiveSvgAsset(
+                                                            ? ResponsiveImageAsset(
                                                               assetPath:
                                                                   SvgAssets.o,
                                                               width: 48,
@@ -160,7 +160,7 @@ class TicTacToeIntroScreen extends StatelessWidget {
 
                                       Row(
                                         children: [
-                                          ResponsiveSvgAsset(
+                                          ResponsiveImageAsset(
                                             assetPath:
                                                 SvgAssets.ticTacToeIntroMascot,
                                             width:

@@ -37,7 +37,7 @@ class GameBoard extends StatelessWidget {
                         child:
                             controller.xorOList[index] == controller.emptyBox
                                 ? null
-                                : ResponsiveSvgAsset(
+                                : ResponsiveImageAsset(
                                   assetPath: controller.xorOList[index],
                                   width: 30,
                                 ),

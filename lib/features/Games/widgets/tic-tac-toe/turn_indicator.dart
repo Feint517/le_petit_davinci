@@ -25,7 +25,7 @@ class TurnIndicator extends GetView<TicTacToeController> {
 
           const Gap(10),
 
-          ResponsiveSvgAsset(
+          ResponsiveImageAsset(
             assetPath: controller.isTurnO.value ? SvgAssets.o : SvgAssets.x,
             width: 30,
           ),

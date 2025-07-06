@@ -4,40 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 
-/// Un widget de case à cocher personnalisé et réutilisable.
-///
-/// Affiche une option avec un fond rose, une icône à gauche,
-/// des textes (principal et secondaire) et un indicateur de sélection à droite.
 class CheckboxWidget extends StatelessWidget {
-  /// Titre principal de la case à cocher
   final String title;
-
-  /// Sous-titre ou description (optionnel)
   final String? subtitle;
-
-  /// Chemin vers l'icône à afficher (optionnel)
   final String? iconPath;
-
-  /// Widget d'icône personnalisée (prioritaire sur iconPath si les deux sont fournis)
   final Widget? iconWidget;
-
-  /// État de sélection de la case à cocher
   final bool isSelected;
-
-  /// Fonction appelée lorsque l'utilisateur tape sur la case à cocher
   final VoidCallback onTap;
-
-  /// Couleur d'arrière-plan (rose par défaut)
   final Color backgroundColor;
-  //final Color shadowColor;
-
-  /// Couleur du texte principal
   final Color titleColor;
-
-  /// Couleur du sous-titre
   final Color subtitleColor;
-
-  /// Taille de l'icône
   final double iconSize;
 
   const CheckboxWidget({
@@ -49,7 +25,6 @@ class CheckboxWidget extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
     this.backgroundColor = AppColors.checkboxPrimary,
-    //this.shadowColor = AppColors.checkboxShadow,
     this.titleColor = AppColors.pinkDark,
     this.subtitleColor = AppColors.pinkMedium,
     this.iconSize = 24,
@@ -113,7 +88,6 @@ class CheckboxWidget extends StatelessWidget {
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                       color: titleColor,
-                      fontFamily: 'DynaPuff_SemiCondensed',
                     ),
                   ),
 
@@ -126,7 +100,6 @@ class CheckboxWidget extends StatelessWidget {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         color: subtitleColor,
-                        fontFamily: 'DynaPuff_SemiCondensed',
                       ),
                     ),
                   ],
@@ -159,7 +132,7 @@ class CheckboxWidget extends StatelessWidget {
   }
 }
 
-/// Widget qui gère un groupe de cases à cocher
+
 class CheckboxGroup extends StatefulWidget {
   /// Liste des options à afficher
   final List<CheckboxOption> options;

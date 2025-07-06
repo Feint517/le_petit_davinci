@@ -44,7 +44,7 @@ class SelectionTile extends GetView<RewardsController> {
                           fontSize: 14.sp,
                         ),
                       ),
-                      ResponsiveSvgAsset(
+                      ResponsiveImageAsset(
                         assetPath: IconAssets.check,
                         width: 15.w,
                       ),

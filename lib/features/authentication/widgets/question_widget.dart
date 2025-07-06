@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 
-/// Un widget qui affiche une question dans une bulle bleue arrondie.
-///
-/// Ce widget est utilisé pour afficher les questions de manière uniforme
-/// à travers l'application, avec un style visuel adapté aux enfants.
 class QuestionWidget extends StatelessWidget {
-  /// Le texte de la question à afficher
   final String questionText;
-
-  /// Le numéro de la question (optionnel)
   final int? questionNumber;
-
-  /// Couleur de fond de la bulle (par défaut: bluePrimary)
   final Color backgroundColor;
-
-  /// Couleur du texte (par défaut: white)
   final Color textColor;
-
-  /// Taille du texte de la question (par défaut: 18.sp)
   final double? textSize;
-
-  /// Taille du texte du titre (par défaut: 16.sp)
   final double? titleSize;
-
-  /// Largeur maximale de la bulle (optionnel)
   final double? maxWidth;
 
   const QuestionWidget({
@@ -48,13 +32,9 @@ class QuestionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 2),
-            blurRadius: 6,
-            color: Colors.black.withAlpha(20),
-          ),
-        ],
+        boxShadow: CustomShadowStyle.customCircleShadows(
+          color: backgroundColor,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

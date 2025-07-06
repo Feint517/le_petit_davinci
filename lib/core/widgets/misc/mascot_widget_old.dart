@@ -87,7 +87,7 @@ class MascotWidget extends StatelessWidget {
         Gap(adjustedSpacing),
 
         //* Mascotte
-        ResponsiveSvgAsset(assetPath: assetPath, width: 120),
+        ResponsiveImageAsset(assetPath: assetPath, width: 120),
       ],
     );
   }

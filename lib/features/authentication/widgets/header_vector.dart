@@ -32,11 +32,11 @@ class HeaderVector extends StatelessWidget {
       right: 0,
       child: Column(
         children: [
-          ResponsiveSvgAsset(assetPath: color.assetPath),
+          ResponsiveImageAsset(assetPath: color.assetPath),
           Transform.translate(
             offset: Offset(0, -(0.08.sh)), //? 8% of the screen height
             child: Center(
-              child: ResponsiveSvgAsset(
+              child: ResponsiveImageAsset(
                 assetPath: SvgAssets.logoWhite,
                 width: DeviceUtils.getScreenWidth(context) * 0.35,
               ),

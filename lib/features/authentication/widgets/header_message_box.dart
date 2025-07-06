@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 
 class HeaderMessageBox extends StatelessWidget {
   const HeaderMessageBox({super.key});
@@ -15,41 +16,31 @@ class HeaderMessageBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.bluePrimaryDark,
-            spreadRadius: 2,
-            blurRadius: 0,
-            offset: const Offset(3, 5),
-          ),
-        ],
+        boxShadow: CustomShadowStyle.customCircleShadows(
+          color: AppColors.primary,
+        ),
       ),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           //* Text content
-          Padding(
-            padding: EdgeInsets.only(right: 80.w),
-            child: RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 18.sp,
-                  fontFamily: 'DynaPuff_SemiCondensed',
-                  fontWeight: FontWeight.w400,
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall!.apply(color: AppColors.white),
+              children: [
+                TextSpan(text: 'Bravo ', style: TextStyle(fontSize: 22.sp)),
+                TextSpan(
+                  text: "Alex", //! Fetch the child name from controller
+                  style: TextStyle(fontSize: 24.sp, color: AppColors.accent),
                 ),
-                children: [
-                  TextSpan(text: 'Bravo ', style: TextStyle(fontSize: 22.sp)),
-                  TextSpan(
-                    text: "Alex", //! Fetch the child name from controller
-                    style: TextStyle(fontSize: 24.sp, color: AppColors.accent),
-                  ),
-                  TextSpan(text: ' ! ', style: TextStyle(fontSize: 22.sp)),
-                  const TextSpan(
-                    text: 'Merci d\'avoir répondu à mes questions. 🎉',
-                  ),
-                ],
-              ),
+                TextSpan(text: ' ! ', style: TextStyle(fontSize: 22.sp)),
+                const TextSpan(
+                  text: 'Merci d\'avoir répondu à mes questions. 🎉',
+                ),
+              ],
             ),
           ),
 
@@ -57,7 +48,7 @@ class HeaderMessageBox extends StatelessWidget {
           Positioned(
             right: -30.w,
             top: 20.h,
-            child: SvgPicture.asset(SvgAssets.bunny, height: 100.h),
+            child: const ResponsiveImageAsset(assetPath: SvgAssets.bunny, width: 60),
           ),
         ],
       ),

@@ -21,8 +21,7 @@ import 'package:le_petit_davinci/features/rewards/bindings/rewards_binding.dart'
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
-import 'package:le_petit_davinci/features/authentication/views/question_finish_screen.dart';
-import 'package:le_petit_davinci/features/authentication/views/intro_screen.dart';
+import 'package:le_petit_davinci/features/authentication/views/question_finish.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
@@ -40,11 +39,6 @@ class AppPages {
             onContinue: () => Get.offAndToNamed(AppRoutes.intro),
           ),
       binding: AuthBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: AppRoutes.intro,
-      page: () => const IntroScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -148,7 +142,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.questionFinish,
-      page: () => const WelcomeStatusScreen(),
+      page: () => const QuestionFinishScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(

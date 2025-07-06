@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
@@ -35,19 +36,21 @@ class HomeScreen extends GetView<HomeController> {
               endIndent: 30,
             ),
 
-            const WelcomeSection(),
+            const ScrollAnimatedItem(child: WelcomeSection()),
             Gap(24.h),
 
             //* Subject Selection Grid
-            const SubjectSelection(),
+            const ScrollAnimatedItem(child: SubjectSelection()),
             Gap(24.h),
 
             //* Rewards Section
-            const RewardsSection(),
+            const ScrollAnimatedItem(child: RewardsSection()),
             Gap(40.h),
 
             //* Bottom footer image
-            const ResponsiveSvgAsset(assetPath: SvgAssets.homeBottom),
+            const ScrollAnimatedItem(
+              child: ResponsiveImageAsset(assetPath: SvgAssets.homeBottom),
+            ),
           ],
         ),
       ),

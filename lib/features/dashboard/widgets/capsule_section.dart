@@ -51,7 +51,7 @@ class CapsulesSection extends GetView<DashboardController> {
                         onTap: () {},
                         child: Row(
                           children: [
-                            const ResponsiveSvgAsset(
+                            const ResponsiveImageAsset(
                               assetPath: IconAssets.writingPen,
                               width: 10,
                             ),

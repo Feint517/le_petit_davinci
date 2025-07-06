@@ -47,7 +47,7 @@ class ActivityDisplay extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ResponsiveSvgAsset(
+              ResponsiveImageAsset(
                 assetPath: switch (status) {
                   ActivityStatus.completed => IconAssets.check,
                   ActivityStatus.started => IconAssets.play,

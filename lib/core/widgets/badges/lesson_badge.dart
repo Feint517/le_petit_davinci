@@ -75,20 +75,23 @@ class LessonBadge extends StatelessWidget {
   Widget _getBadgeIcon(LessonBadgeType badgeType) {
     switch (badgeType) {
       case LessonBadgeType.soundMaster:
-        return ResponsiveSvgAsset(assetPath: SvgAssets.headsetBlue, width: 80);
+        return ResponsiveImageAsset(
+          assetPath: SvgAssets.headsetBlue,
+          width: 80,
+        );
       case LessonBadgeType.phrasesBuilder:
-        return ResponsiveSvgAsset(assetPath: SvgAssets.chatPink, width: 80);
+        return ResponsiveImageAsset(assetPath: SvgAssets.chatPink, width: 80);
       case LessonBadgeType.mistakesFinder:
-        return ResponsiveSvgAsset(
+        return ResponsiveImageAsset(
           assetPath: SvgAssets.magnifierPurple,
           width: 80,
         );
       case LessonBadgeType.additionMaster:
-        return ResponsiveSvgAsset(assetPath: SvgAssets.micYellow, width: 80);
+        return ResponsiveImageAsset(assetPath: SvgAssets.micYellow, width: 80);
       case LessonBadgeType.substractionMaster:
-        return ResponsiveSvgAsset(assetPath: SvgAssets.micYellow, width: 80);
+        return ResponsiveImageAsset(assetPath: SvgAssets.micYellow, width: 80);
       case LessonBadgeType.formesMaster:
-        return ResponsiveSvgAsset(assetPath: SvgAssets.micYellow, width: 80);
+        return ResponsiveImageAsset(assetPath: SvgAssets.micYellow, width: 80);
     }
   }
 }

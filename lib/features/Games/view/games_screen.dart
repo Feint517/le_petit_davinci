@@ -31,7 +31,7 @@ class GamesScreen extends StatelessWidget {
           ),
           Positioned(
             bottom: 0,
-            child: const ResponsiveSvgAsset(
+            child: const ResponsiveImageAsset(
               assetPath: SvgAssets.gamesBackground2,
             ),
           ),

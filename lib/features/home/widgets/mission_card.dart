@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/widgets/buttons/buttons.dart';
@@ -21,8 +22,81 @@ class MissionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return Container(
+    //   height: 120.h, //? Fixed height to prevent Stack sizing issues
+    //   decoration: BoxDecoration(
+    //     color: backgroundColor,
+    //     borderRadius: BorderRadius.circular(16.r),
+    //     boxShadow: CustomShadowStyle.customCircleShadows(
+    //       color: backgroundColor,
+    //     ),
+    //   ),
+    //   clipBehavior: Clip.antiAlias,
+    //   child: Stack(
+    //     children: [
+    //       //* decorative image
+    //       const Positioned(
+    //         bottom: 0,
+    //         right: 0,
+    //         child: ResponsiveImageAsset(
+    //           assetPath: SvgAssets.abcHome,
+    //           width: 110,
+    //         ),
+    //       ),
+
+    //       //* Content section
+    //       Positioned.fill(
+    //         child: Padding(
+    //           padding: EdgeInsets.all(16.w),
+    //           child: Padding(
+    //             padding: EdgeInsets.only(
+    //               right: 64.w,
+    //             ), // Additional space for decorative image
+    //             child: Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //               children: [
+    //                 Column(
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: [
+    //                     //* Small title
+    //                     Text(
+    //                       'Mission du jour',
+    //                       style: Theme.of(context).textTheme.labelLarge!.apply(
+    //                         color: AppColors.white.withValues(alpha: 0.8),
+    //                       ),
+    //                     ),
+
+    //                     Gap(AppSizes.xs.h),
+
+    //                     // Main mission text
+    //                     Text(
+    //                       missionDescription,
+    //                       style: Theme.of(
+    //                         context,
+    //                       ).textTheme.titleSmall!.apply(color: AppColors.white),
+    //                     ),
+    //                   ],
+    //                 ),
+
+    //                 CustomButton(
+    //                   variant: ButtonVariant.secondary,
+    //                   label: 'Accepter la mission',
+    //                   width: 160,
+    //                   size: ButtonSize.sm,
+    //                   onPressed: () {},
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
     return Container(
       height: 120.h, //? Fixed height to prevent Stack sizing issues
+      padding: EdgeInsets.only(top: AppSizes.md, left: AppSizes.md),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16.r),
@@ -31,77 +105,36 @@ class MissionCard extends StatelessWidget {
         ),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Stack(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          //* decorative image
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: SvgPicture.asset(
-              SvgAssets.abcHome,
-              height: 70.h,
-              width: 80.w,
-              fit: BoxFit.contain,
-              alignment: Alignment.bottomRight,
-            ),
-          ),
-
-          //* Content section
-          Positioned.fill(
-            child: Padding(
-              padding: EdgeInsets.all(16.w), // Apply padding only to content
-              child: Padding(
-                padding: EdgeInsets.only(
-                  right: 64.w,
-                ), // Additional space for decorative image
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //* Small title
-                        Text(
-                          'Mission du jour',
-                          style: TextStyle(
-                            color: AppColors.white.withValues(alpha: 0.8),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'DynaPuff_SemiCondensed',
-                          ),
-                        ),
-
-                        Gap(4.h),
-
-                        // Main mission text
-                        Text(
-                          missionDescription,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'DynaPuff_SemiCondensed',
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // Action button - smaller and left-aligned
-                    SizedBox(
-                      width: 160.w, // Limit button width to about half the card
-                      child: PillButton(
-                        label: 'Accepter la mission',
-                        onPressed: onAcceptMission,
-                        variant: ButtonVariant.secondary, // Orange variant
-                        size: ButtonSize.sm, // Smaller size
-                      ),
-                    ),
-                  ],
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Mission du jour',
+                style: Theme.of(context).textTheme.labelLarge!.apply(
+                  color: AppColors.white.withValues(alpha: 0.8),
                 ),
               ),
-            ),
+              Gap(AppSizes.xs.h),
+              Text(
+                missionDescription,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.apply(color: AppColors.white),
+              ),
+              CustomButton(
+                variant: ButtonVariant.secondary,
+                label: 'Accepter la mission',
+                width: 160,
+                size: ButtonSize.sm,
+                onPressed: () {},
+              ),
+              Spacer(),
+            ],
           ),
+          ResponsiveImageAsset(assetPath: SvgAssets.abcHome, width: 110),
         ],
       ),
     );

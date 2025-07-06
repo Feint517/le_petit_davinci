@@ -35,7 +35,10 @@ class BadgesCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: ResponsiveSvgAsset(assetPath: SvgAssets.badgeR, width: 70.w),
+            child: ResponsiveImageAsset(
+              assetPath: SvgAssets.badgeR,
+              width: 70.w,
+            ),
           ),
 
           // Content area
@@ -107,7 +110,7 @@ class BadgesCard extends StatelessWidget {
           badge != null && badge.isEarned
               ? Padding(
                 padding: EdgeInsets.all(6.w),
-                child: ResponsiveSvgAsset(assetPath: badge.assetPath),
+                child: ResponsiveImageAsset(assetPath: badge.assetPath),
               )
               : Icon(
                 isLocked ? Icons.lock : Icons.star_border,

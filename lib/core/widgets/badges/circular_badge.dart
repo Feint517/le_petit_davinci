@@ -60,7 +60,7 @@ class CircularBadge extends StatelessWidget {
         child:
             unlocked
                 ? Center(
-                  child: ResponsiveSvgAsset(
+                  child: ResponsiveImageAsset(
                     assetPath: switch (variant) {
                       BadgeVariant.french => SvgAssets.micBlue,
                       BadgeVariant.math => SvgAssets.micYellow,
@@ -74,7 +74,7 @@ class CircularBadge extends StatelessWidget {
                 : Stack(
                   children: [
                     Center(
-                      child: ResponsiveSvgAsset(
+                      child: ResponsiveImageAsset(
                         assetPath: switch (variant) {
                           BadgeVariant.french => SvgAssets.micBlue,
                           BadgeVariant.math => SvgAssets.micYellow,
@@ -88,7 +88,7 @@ class CircularBadge extends StatelessWidget {
                     ),
 
                     Center(
-                      child: ResponsiveSvgAsset(
+                      child: ResponsiveImageAsset(
                         assetPath: IconAssets.lock,
                         width: dimension * 0.3,
                       ),

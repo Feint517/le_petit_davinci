@@ -32,7 +32,7 @@ class SoundPlayButton extends StatelessWidget {
         child: Center(
           child:
               isSvg
-                  ? ResponsiveSvgAsset(assetPath: icon, width: 50)
+                  ? ResponsiveImageAsset(assetPath: icon, width: 50)
                   : Image.asset(icon),
         ),
       ),

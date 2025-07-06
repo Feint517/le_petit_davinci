@@ -58,7 +58,7 @@ class PopupDialog extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: ResponsiveSvgAsset(
+                  child: ResponsiveImageAsset(
                     assetPath: SvgAssets.cross,
                     width: 35,
                   ),
@@ -82,7 +82,7 @@ class PopupDialog extends StatelessWidget {
           ),
           const Gap(AppSizes.defaultSpace * 2),
           const Spacer(),
-          ResponsiveSvgAsset(
+          ResponsiveImageAsset(
             assetPath: SvgAssets.happyMasscots,
             width: DeviceUtils.getScreenWidth(context) * 0.81,
           ),

@@ -37,7 +37,10 @@ class TitlesCard extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: ResponsiveSvgAsset(assetPath: SvgAssets.book, width: 110.w),
+            child: ResponsiveImageAsset(
+              assetPath: SvgAssets.book,
+              width: 110.w,
+            ),
           ),
 
           //* Content area
