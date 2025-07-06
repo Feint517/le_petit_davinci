@@ -15,19 +15,40 @@ class NetworkManager extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('onInit ==> ${_connectionStatus.value}');
+    _initConnectivity();
     _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
       _updateConnectionStatus,
     );
   }
 
+  //? initial connectivity check
+  Future<void> _initConnectivity() async {
+    try {
+      final result = await _connectivity.checkConnectivity();
+      _updateConnectionStatus(result);
+    } on PlatformException {
+      _connectionStatus.value = ConnectivityResult.none;
+    }
+  }
+
+
   //? update connection status based on changes in connectivity and show a relevant popup for no internet connection
   void _updateConnectionStatus(List<ConnectivityResult> result) {
     _connectionStatus.value = result.first;
+    print(_connectionStatus.value);
 
     if (_connectionStatus.value == ConnectivityResult.none) {
       CustomLoaders.showSnackBar(
         type: SnackBarType.warning,
         title: 'No Internet Connection',
+        message: "Please make sure you're connected to the internet",
+      );
+    }
+    if (_connectionStatus.value != ConnectivityResult.wifi) {
+      CustomLoaders.showSnackBar(
+        type: SnackBarType.succes,
+        title: 'Conntected!',
       );
     }
   }

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/bindings/general_bindings.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/themes/theme.dart';
-import 'package:le_petit_davinci/features/home/views/home_screen.dart';
 import 'package:le_petit_davinci/routes/app_pages.dart';
 
 class App extends StatelessWidget {

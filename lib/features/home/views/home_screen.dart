@@ -49,6 +49,13 @@ class HomeScreen extends GetView<HomeController> {
             const ScrollAnimatedItem(child: RewardsSection()),
             Gap(40.h),
 
+            //* Bottom footer image
+            const ScrollAnimatedItem(
+              child: ResponsiveImageAsset(assetPath: SvgAssets.homeBottom),
+            ),
+
+            Gap(40.h),
+
             CustomButton(
               label: 'testing',
               onPressed:
@@ -56,12 +63,6 @@ class HomeScreen extends GetView<HomeController> {
                     type: SnackBarType.warning,
                     title: 'No Interbet Connection',
                   ),
-            ),
-            Gap(40.h),
-
-            //* Bottom footer image
-            const ScrollAnimatedItem(
-              child: ResponsiveImageAsset(assetPath: SvgAssets.homeBottom),
             ),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/data/repositories/youtube_service.dart';
-import 'package:le_petit_davinci/data/models/youtube_video.dart';
+import 'package:le_petit_davinci/data/models/youtube_video_model.dart';
 
 class FrenchLessonsController extends GetxController {
   final YouTubeApiService youtubeService = YouTubeApiService();

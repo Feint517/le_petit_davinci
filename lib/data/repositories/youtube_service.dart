@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:le_petit_davinci/data/models/youtube_video.dart';
+import 'package:le_petit_davinci/data/models/youtube_video_model.dart';
 
 class YouTubeApiService {
   final String baseUrl = 'https://www.googleapis.com/youtube/v3';
