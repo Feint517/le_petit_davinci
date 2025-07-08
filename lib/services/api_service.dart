@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../data/network/api_routes.dart';
 

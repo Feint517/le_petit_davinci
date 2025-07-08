@@ -8,7 +8,7 @@ class LoggerHelper {
   );
 
   static void debug(String message) {
-    _logger.d(message,);
+    _logger.d(message);
   }
 
   static void info(String message) {

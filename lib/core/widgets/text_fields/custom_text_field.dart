@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/utils/validation_utils.dart';
 
 enum TextFieldType { email, password, text }
 
@@ -72,6 +73,14 @@ class CustomTextField extends StatelessWidget {
         obscureText: obscureText.value,
         keyboardType: keyboardType,
         cursorColor: cursorColor,
+        validator: switch (type) {
+          TextFieldType.email =>
+            (value) => ValidationUtils.validateEmail(value),
+          TextFieldType.password =>
+            (value) => ValidationUtils.validatePassword(value),
+          TextFieldType.text =>
+            (value) => ValidationUtils.validateEmptyText('Text', value),
+        },
         decoration: InputDecoration(
           prefixIcon: switch (type) {
             TextFieldType.email => Icon(

@@ -29,9 +29,7 @@ class MathematicMapScreen extends GetView<MathMapController> {
       });
     }
     return Scaffold(
-      appBar: const ProfileHeader(
-        type: ProfileHeaderType.compact,
-      ),
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       body: SafeArea(
         bottom: false,
         right: false,

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/utils/string_utils.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/progression_row.dart';
 
@@ -26,7 +27,7 @@ class ProgressionSection extends GetView<UserController> {
                 style: TextStyle(color: AppColors.black),
               ),
               TextSpan(
-                text: controller.user.value!.name,
+                text: StringUtils.capitalize(controller.user.value!.name),
                 style: const TextStyle(color: AppColors.primary),
               ),
             ],

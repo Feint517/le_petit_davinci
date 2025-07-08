@@ -75,28 +75,30 @@ class LoginScreen extends GetView<LoginController> {
 
                       Gap(AppSizes.spaceBtwItems.h),
 
-                      CustomTextField(
-                        type: TextFieldType.email,
-                        controller: controller.email,
-                      ),
-                      Gap(AppSizes.spaceBtwInputFields.h),
+                      Form(
+                        key: controller.loginFormKey,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              type: TextFieldType.email,
+                              controller: controller.email,
+                            ),
+                            Gap(AppSizes.spaceBtwInputFields.h),
 
-                      CustomTextField(
-                        type: TextFieldType.password,
-                        controller: controller.password,
+                            CustomTextField(
+                              type: TextFieldType.password,
+                              controller: controller.password,
+                            ),
+                          ],
+                        ),
                       ),
+
                       Gap(AppSizes.spaceBtwSections.h),
 
                       //* Login button
                       CustomButton(
                         label: StringsManager.connect,
-                        // onPressed: () {
-                        //   Get.to(
-                        //     () => KidsSelectionScreen(),
-                        //     transition: Transition.rightToLeft,
-                        //     duration: const Duration(milliseconds: 500),
-                        //   );
-                        // },
+                        onPressed: () => controller.login(),
                       ),
                     ],
                   ),

@@ -5,7 +5,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
-import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/activities_section.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/exercices_section.dart';
@@ -51,7 +50,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 const Gap(AppSizes.spaceBtwSections),
 
                 const ScrollAnimatedItem(child: SettingsSection()),
-                const Gap(AppSizes.spaceBtwSections),
+                const Gap(AppSizes.spaceBtwSections * 2),
 
                 // const CapsulesSection(),
                 // const Gap(AppSizes.defaultSpace * 2),

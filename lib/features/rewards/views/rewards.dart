@@ -22,9 +22,7 @@ class RewardsScreen extends GetView<RewardsController> {
     Get.put(RewardsController());
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
-      appBar: const ProfileHeader(
-        showTrailingIcon: true,
-      ),
+      appBar: const ProfileHeader(showTrailingIcon: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(

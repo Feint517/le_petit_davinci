@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/styles/loaders.dart';
 
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
@@ -31,7 +30,6 @@ class NetworkManager extends GetxController {
       _connectionStatus.value = ConnectivityResult.none;
     }
   }
-
 
   //? update connection status based on changes in connectivity and show a relevant popup for no internet connection
   void _updateConnectionStatus(List<ConnectivityResult> result) {

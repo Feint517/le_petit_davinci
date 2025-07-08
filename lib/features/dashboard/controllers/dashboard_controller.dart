@@ -1,8 +1,9 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
+import 'package:le_petit_davinci/features/authentication/views/login_screen.dart';
+import 'package:le_petit_davinci/services/storage_service.dart';
 
 class DashboardController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -76,5 +77,13 @@ class DashboardController extends GetxController
 
     totalTime = hours;
     return totalTime;
+  }
+
+  void logout() async {
+    final response = await AuthenticationRepository.instance.logout(id: 123);
+    if (response.status == 0) {
+      StorageService.instance.clear();
+      Get.offAll(() => const LoginScreen());
+    }
   }
 }

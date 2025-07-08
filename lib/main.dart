@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:le_petit_davinci/app.dart';
 import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
+import 'package:le_petit_davinci/services/storage_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,13 +24,12 @@ void main() async {
     ),
   );
 
-  // final WidgetsBinding widgetsBinding =
-  // WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   //! this line ensures that the firebase initialization finishes first, then initialize the design widgets
 
   //* init local storage
-  await GetStorage.init();
+  final storageService = Get.put(StorageService());
+  await storageService.init();
 
   Get.put(AuthenticationRepository());
 

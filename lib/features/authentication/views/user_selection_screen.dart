@@ -20,7 +20,7 @@ class UserSelectionScreen extends GetView<UserSelectionController> {
   @override
   Widget build(BuildContext context) {
     Get.put(UserSelectionController());
-    
+
     print('🔍 Controller initialized: ${controller.showQuestionsIntro}');
     print('🔍 Intro message: ${controller.introMessage}');
 

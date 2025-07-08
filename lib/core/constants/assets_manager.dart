@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 const String IMAGE_PATH = 'assets/images';
-const String SVG_PATH = 'assets/svg';
 const String ICONS_PATH = 'assets/icons';
 const String LOTTIE_PATH = 'assets/lottie/misc';
 const String ICON_PATH = 'assets/icons';
@@ -27,6 +26,8 @@ class GifAssets {
 
 class LottieAssets {
   static const String confetti = 'assets/lottie/confetti.json';
+  static const String check = 'assets/lottie/misc/checked.json';
+  static const String loadingDots = 'assets/lottie/misc/loading_dots.json';
 }
 
 class IconAssets {

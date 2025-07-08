@@ -84,20 +84,33 @@ class SettingsSection extends GetView<DashboardController> {
         const Gap(AppSizes.spaceBtwItems),
         Text("Réinitialiser l'app ou supprimer un profil (code requis)"),
         const Gap(AppSizes.spaceBtwItems),
-        Row(
+        Column(
+          spacing: AppSizes.spaceBtwItems,
           children: [
-            Expanded(
-              child: CustomButton(
-                label: 'Réinitialiser',
-                variant: ButtonVariant.primary,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                    label: 'Réinitialiser',
+                    variant: ButtonVariant.primary,
+                  ),
+                ),
+                const Gap(AppSizes.spaceBtwItems),
+                Expanded(
+                  child: CustomButton(
+                    label: 'Supprimer',
+                    variant: ButtonVariant.warning,
+                  ),
+                ),
+              ],
             ),
-            const Gap(AppSizes.spaceBtwItems),
-            Expanded(
-              child: CustomButton(
-                label: 'Supprimer',
-                variant: ButtonVariant.warning,
-              ),
+            CustomButton(
+              variant: ButtonVariant.secondary,
+              label: 'Logout',
+              onPressed: () async {
+                await Future.delayed(const Duration(seconds: 2));
+                controller.logout();
+              },
             ),
           ],
         ),

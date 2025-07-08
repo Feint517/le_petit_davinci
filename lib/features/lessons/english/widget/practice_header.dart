@@ -5,7 +5,6 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/badges/lesson_badge.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 
 class PracticeHeader extends StatelessWidget {
   const PracticeHeader({
