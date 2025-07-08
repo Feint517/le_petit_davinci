@@ -5,6 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/utils/string_utils.dart';
+import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
+import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import '../../constants/assets_manager.dart';
@@ -12,11 +15,10 @@ import '../../constants/colors.dart';
 
 enum ProfileHeaderType { normal, compact }
 
-class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
+class ProfileHeader extends GetView<UserController>
+    implements PreferredSizeWidget {
   const ProfileHeader({
     super.key,
-    this.userName,
-    this.userClass,
     this.avatarPath,
     this.trailingIconOnTap,
     this.bottomLineColor = AppColors.grey,
@@ -25,8 +27,6 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
     this.type = ProfileHeaderType.normal,
   });
 
-  final String? userName;
-  final String? userClass;
   final String? avatarPath;
   final bool showTrailingIcon;
   final Color bottomLineColor;
@@ -81,24 +81,32 @@ class ProfileHeader extends StatelessWidget implements PreferredSizeWidget {
                         Gap(12.w),
 
                         //* User Name and Class
-                        (userName != null && userClass != null)
-                            ? Text(
-                              '$userName | $userClass',
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            )
-                            : SizedBox.shrink(),
+                        Obx(
+                          () =>
+                              ((controller.isLoading.value)
+                                  ? const CustomShimmerEffect(
+                                    width: 160,
+                                    height: 25,
+                                  )
+                                  : Text(
+                                    '${StringUtils.capitalize(controller.user.value!.name)} | ${StringUtils.capitalize(controller.user.value!.userClass)}',
+                                    style:
+                                        Theme.of(
+                                          context,
+                                        ).textTheme.headlineSmall,
+                                  )),
+                        ),
                       ],
                     ),
 
                     //* Right Section - Change Avatar Action
-                    showTrailingIcon
-                        ? IconButton(
-                          onPressed:
-                              trailingIconOnTap ??
-                              () => Get.to(() => const DashboardScreen()),
-                          icon: Icon(Iconsax.setting),
-                        )
-                        : const SizedBox.shrink(),
+                    if (showTrailingIcon)
+                      IconButton(
+                        onPressed:
+                            trailingIconOnTap ??
+                            () => Get.to(() => const DashboardScreen()),
+                        icon: Icon(Iconsax.setting),
+                      ),
                   ],
                 )
                 : Row(

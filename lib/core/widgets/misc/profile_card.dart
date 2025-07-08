@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
@@ -15,6 +14,7 @@ class ProfileCard extends StatelessWidget {
     required this.subInfo,
     required this.image,
     required this.backgroundColor,
+    this.imageBackgroundColor,
   });
 
   final bool isExpanded;
@@ -23,6 +23,7 @@ class ProfileCard extends StatelessWidget {
   final String subInfo;
   final String image;
   final Color backgroundColor;
+  final Color? imageBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +42,9 @@ class ProfileCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomCircularImage(
-              image: SvgAssets.profileSelectionBackground,
+              image: image,
               boderColor: backgroundColor,
+              backgroundColor: imageBackgroundColor,
             ),
             if (isExpanded) const Gap(AppSizes.sm),
             if (isExpanded)

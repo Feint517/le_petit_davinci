@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/progression_row.dart';
 
-class ProgressionSection extends StatelessWidget {
+class ProgressionSection extends GetView<UserController> {
   const ProgressionSection({super.key});
 
   @override
@@ -24,31 +26,33 @@ class ProgressionSection extends StatelessWidget {
                 style: TextStyle(color: AppColors.black),
               ),
               TextSpan(
-                text: 'Alex',
+                text: controller.user.value!.name,
                 style: const TextStyle(color: AppColors.primary),
               ),
             ],
           ),
         ),
         const Gap(AppSizes.spaceBtwItems),
-        const ProgressionRow(
+        ProgressionRow(
           text: 'Français',
           variant: BadgeVariant.french,
-          currentLevel: 4,
+          currentLevel:
+              int.tryParse(controller.user.value!.french.progress) ?? 0,
           totalLevels: 5,
         ),
         const Gap(AppSizes.spaceBtwItems),
-        const ProgressionRow(
+        ProgressionRow(
           text: 'Mathématiques',
           variant: BadgeVariant.math,
-          currentLevel: 12,
+          currentLevel: int.tryParse(controller.user.value!.math.progress) ?? 0,
           totalLevels: 14,
         ),
         const Gap(AppSizes.spaceBtwItems),
-        const ProgressionRow(
+        ProgressionRow(
           text: 'Anglais',
           variant: BadgeVariant.english,
-          currentLevel: 2,
+          currentLevel:
+              int.tryParse(controller.user.value!.english.progress) ?? 0,
           totalLevels: 5,
         ),
         const Gap(AppSizes.spaceBtwItems),

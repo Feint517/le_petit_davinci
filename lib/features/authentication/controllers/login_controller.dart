@@ -2,6 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  final email = TextEditingController();
-  final password = TextEditingController();
+  final email = TextEditingController(text: 'arselene.dev@gmail.com');
+  final password = TextEditingController(text: '12345678');
 }

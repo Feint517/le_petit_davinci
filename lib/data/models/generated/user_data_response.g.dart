@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_model.dart';
+part of '../responses/user_data_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_ApiResponseModel _$ApiResponseModelFromJson(Map<String, dynamic> json) =>
-    _ApiResponseModel(
+_UserDataResponse _$UserDataResponseFromJson(Map<String, dynamic> json) =>
+    _UserDataResponse(
       status: (json['status'] as num).toInt(),
       message: json['message'] as String,
-      parent: ParentModel.fromJson(json['parent'] as Map<String, dynamic>),
+      data: UserData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ApiResponseModelToJson(_ApiResponseModel instance) =>
+Map<String, dynamic> _$UserDataResponseToJson(_UserDataResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'parent': instance.parent,
+      'data': instance.data,
     };

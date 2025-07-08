@@ -1,13 +1,16 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/widgets/pie_indicator.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 
-class StatisticsSection extends StatelessWidget {
+class StatisticsSection extends GetView<DashboardController> {
   const StatisticsSection({super.key});
 
   @override
@@ -21,8 +24,8 @@ class StatisticsSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 150,
-              height: 150,
+              width: DeviceUtils.getScreenWidth() * 0.4,
+              height: DeviceUtils.getScreenWidth() * 0.4,
               child: Stack(
                 children: [
                   PieChart(
@@ -33,31 +36,31 @@ class StatisticsSection extends StatelessWidget {
                         PieChartSectionData(
                           showTitle: false,
                           radius: 20,
-                          value: 40,
+                          value: controller.frenchTimePercentage,
                           color: _getColor(BadgeVariant.french),
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           radius: 20,
-                          value: 15,
+                          value: controller.englishTimePercentage,
                           color: _getColor(BadgeVariant.english),
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           radius: 20,
-                          value: 20,
+                          value: controller.mathTimePercentage,
                           color: _getColor(BadgeVariant.math),
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           radius: 20,
-                          value: 10,
+                          value: controller.dailyLifeTimePercentage,
                           color: _getColor(BadgeVariant.dailyLife),
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           radius: 20,
-                          value: 15,
+                          value: controller.gamesTimePercentage,
                           color: _getColor(BadgeVariant.games),
                         ),
                       ],
@@ -78,7 +81,7 @@ class StatisticsSection extends StatelessWidget {
                             ).textTheme.bodyMedium!.copyWith(fontSize: 10),
                           ),
                           Text(
-                            '4 heures',
+                            '${controller.calculateTotalTime()} hours',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ],

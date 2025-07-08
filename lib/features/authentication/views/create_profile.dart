@@ -9,17 +9,20 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/dropdown/custom_dropdown_field.dart';
 import 'package:le_petit_davinci/core/widgets/misc/profile_card.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/create_profile_controller.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
 
-class CreateProfileScreen extends StatelessWidget {
+class CreateProfileScreen extends GetView<CreateProfileController> {
   const CreateProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CreateProfileController());
+    Get.put(CreateProfileController());
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const CustomNavBar(),
       backgroundColor: AppColors.backgroundLight,
       body: Stack(
         children: [
@@ -30,13 +33,13 @@ class CreateProfileScreen extends StatelessWidget {
               assetPath: SvgAssets.createProfileBackground,
             ),
           ),
-          Align(
-            alignment: Alignment.center,
+          SizedBox.expand(
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSizes.defaultSpace,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -71,38 +74,31 @@ class CreateProfileScreen extends StatelessWidget {
 
                   Text('Choisissez votre avatar'),
                   const Gap(AppSizes.spaceBtwItems),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const ProfileCard(
-                        isExpanded: false,
-                        name: 'Alex',
-                        subInfo: 'class 2',
-                        image: SvgAssets.profileSelectionBackground,
-                        backgroundColor: AppColors.primary,
-                      ),
-                      const ProfileCard(
-                        isExpanded: false,
-                        name: 'Alex',
-                        subInfo: 'class 2',
-                        image: SvgAssets.profileSelectionBackground,
-                        backgroundColor: AppColors.secondary,
-                      ),
-                      const ProfileCard(
-                        isExpanded: false,
-                        name: 'Alex',
-                        subInfo: 'class 2',
-                        image: SvgAssets.profileSelectionBackground,
-                        backgroundColor: AppColors.accent,
-                      ),
-                      const ProfileCard(
-                        isExpanded: false,
-                        name: 'Alex',
-                        subInfo: 'class 2',
-                        image: SvgAssets.profileSelectionBackground,
-                        backgroundColor: AppColors.accent3,
-                      ),
-                    ],
+                  Obx(
+                    () => Wrap(
+                      spacing: 16,
+                      runSpacing: 16,
+                      alignment: WrapAlignment.center,
+                      children:
+                          controller.profiles.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final profile = entry.value;
+                            final isSelected =
+                                controller.selectedCardIndex.value == index;
+
+                            return ProfileCard(
+                              name: profile.name,
+                              subInfo: profile.subInfo,
+                              image: profile.image,
+                              backgroundColor: profile.backgroundColor,
+                              imageBackgroundColor:
+                                  isSelected
+                                      ? AppColors.accent2
+                                      : AppColors.white,
+                              onTap: () => controller.selectProfile(index),
+                            );
+                          }).toList(),
+                    ),
                   ),
 
                   const Gap(AppSizes.spaceBtwSections),
@@ -135,7 +131,6 @@ class CreateProfileScreen extends StatelessWidget {
                           (val) => controller.selectedLanguage.value = val,
                     ),
                   ),
-
                   const Gap(AppSizes.spaceBtwSections),
 
                   Obx(
@@ -173,7 +168,6 @@ class CreateProfileScreen extends StatelessWidget {
                       onChanged: (val) => controller.selectedTime.value = val,
                     ),
                   ),
-
                   const Gap(AppSizes.spaceBtwSections),
 
                   CustomButton(
@@ -188,4 +182,18 @@ class CreateProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class ProfileData {
+  final String name;
+  final String subInfo;
+  final String image;
+  final Color backgroundColor;
+
+  ProfileData({
+    required this.name,
+    required this.subInfo,
+    required this.image,
+    required this.backgroundColor,
+  });
 }

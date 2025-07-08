@@ -121,7 +121,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.login,
-      page: () => const LoginPage(),
+      page: () => const LoginScreen(),
       transition: Transition.cupertino,
     ),
     GetPage(

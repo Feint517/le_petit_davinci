@@ -100,13 +100,18 @@
   "files.exclude": {
     "**/.dart_tool": true,
     "**/.idea": true,
+    "**/.gitignore": true,
+    "**/analysis_options.yaml": true,
+    "**devtools_options.yaml": true,
+    "**le_petit_davinci.iml": true,
+    "**LePetitDavinci.md": true,
     "**/.metadata": true,
     "**pubspec.lock": true,
     "**README.md": true,
     "**/test": true,
     "**/build": true,
     "**/web": true,
-    "**/windows": true,
+    "**/windows": false,
     "**.flutter-plugins": true,
     "**.flutter-plugins-dependencies": true
   }

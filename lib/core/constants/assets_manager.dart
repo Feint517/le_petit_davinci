@@ -53,22 +53,22 @@ class SvgAssets {
   static const String tictactoeIntroBackground =
       'assets/svg/tictactoe_intro_background.svg';
 
-  static const String splashBackground = '$SVG_PATH/splash_background.svg';
-  static const String letterA = '$SVG_PATH/A.svg';
-  static const String letterB = '$SVG_PATH/B.svg';
-  static const String letterC = '$SVG_PATH/C.svg';
-  static const String bear = '$SVG_PATH/bear_splash.svg';
-  static const String bunny = '$SVG_PATH/bunny.svg';
-  static const String bird = '$SVG_PATH/birdSplash.svg';
-  static const String choose = '$SVG_PATH/chooseSvg.svg';
+  static const String splashBackground = 'assets/svg/splash_background.svg';
+  static const String letterA = 'assets/svg/A.svg';
+  static const String letterB = 'assets/svg/B.svg';
+  static const String letterC = 'assets/svg/C.svg';
+  static const String bear = 'assets/svg/bear_splash.svg';
+  static const String bunny = 'assets/svg/bunny.svg';
+  static const String bird = 'assets/svg/birdSplash.svg';
+  static const String choose = 'assets/svg/chooseSvg.svg';
   static const String logoBlue = 'assets/svg/logo_blue.svg';
   static const String logoWhite = 'assets/svg//logo_white.svg';
-  static const String pinBackground = '$SVG_PATH/pin_background.svg';
-  static const String loginBackground = '$SVG_PATH/login_background.svg';
+  static const String pinBackground = 'assets/svg/pin_background.svg';
+  static const String loginBackground = 'assets/svg/login_background.svg';
   static const String profileSelectionBackground =
-      '$SVG_PATH/profile_selection_background.svg';
+      'assets/svg/profile_selection_background.svg';
   static const String goodmorningBackground =
-      '$SVG_PATH/goodmorning_background.svg';
+      'assets/svg/goodmorning_background.svg';
   static const String headerVectorBlue = 'assets/svg/header_vector_blue.svg';
   static const String headerVectorGreen = 'assets/svg/header_vector_green.svg';
   static const String headerVectorPurple =
@@ -76,42 +76,44 @@ class SvgAssets {
   static const String errorBackground = 'assets/svg/error_background.svg';
   static const String createProfileBackground =
       'assets/svg/create_profile_background.svg';
-  static const String masscotBg = '$SVG_PATH/masscotbg.svg';
-  static const String compassIcon = '$SVG_PATH/compassIcon.svg';
-  static const String rabbit = '$SVG_PATH/rabbit.svg';
-  static const String avatar1 = '$SVG_PATH/avatar1.svg';
-  static const String avatar2 = '$SVG_PATH/avatar2.svg';
-  static const String avatar3 = '$SVG_PATH/avatar3.svg';
-  static const String avatar4 = '$SVG_PATH/avatar4.svg';
-  static const String gift = '$SVG_PATH/gift.svg';
-  static const String homeScreenImage = '$SVG_PATH/homescreenImage.svg';
-  static const String abcHome = '$SVG_PATH/abcHome.svg';
-  static const String frenchCard = '$SVG_PATH/frenchCard.svg';
-  static const String englishCard = '$SVG_PATH/englishCard.svg';
-  static const String mathCard = '$SVG_PATH/mathCard.svg';
-  static const String lifeCard = '$SVG_PATH/lifeCard.svg';
-  static const String gameCard = '$SVG_PATH/GameCard.svg';
-  static const String studioCard = '$SVG_PATH/studioCard.svg';
-  static const String starR = '$SVG_PATH/starR.svg';
-  static const String book = '$SVG_PATH/book.svg';
-  static const String badgeR = '$SVG_PATH/badgeR.svg';
-  static const String badge = '$SVG_PATH/badge.svg';
-  static const String homeBottom = '$SVG_PATH/home_bottom.svg';
-  static const String frenchMapBackground = '$SVG_PATH/frenchMapBackground.svg';
-  static const String learnHat = '$SVG_PATH/learnHat.svg';
-  static const String explore = '$SVG_PATH/explore.svg';
-  static const String chat = '$SVG_PATH/chat.svg';
-  static const String headset = '$SVG_PATH/headset.svg';
+  static const String masscotBg = 'assets/svg/masscotbg.svg';
+  static const String compassIcon = 'assets/svg/compassIcon.svg';
+  static const String rabbit = 'assets/svg/rabbit.svg';
+  static const String avatar1 = 'assets/svg/avatar1.svg';
+  static const String avatar2 = 'assets/svg/avatar2.svg';
+  static const String avatar3 = 'assets/svg/avatar3.svg';
+  static const String avatar4 = 'assets/svg/avatar4.svg';
+  static const String gift = 'assets/svg/gift.svg';
+  static const String homeScreenImage = 'assets/svg/homescreenImage.svg';
+  static const String abcHome = 'assets/svg/abcHome.svg';
+  static const String frenchCard = 'assets/svg/frenchCard.svg';
+  static const String englishCard = 'assets/svg/englishCard.svg';
+  static const String mathCard = 'assets/svg/mathCard.svg';
+  static const String lifeCard = 'assets/svg/lifeCard.svg';
+  static const String gameCard = 'assets/svg/GameCard.svg';
+  static const String studioCard = 'assets/svg/studioCard.svg';
+  static const String starR = 'assets/svg/starR.svg';
+  static const String book = 'assets/svg/book.svg';
+  static const String badgeR = 'assets/svg/badgeR.svg';
+  static const String badge = 'assets/svg/badge.svg';
+  static const String homeBottom = 'assets/svg/home_bottom.svg';
+  static const String frenchMapBackground =
+      'assets/svg/frenchMapBackground.svg';
+  static const String learnHat = 'assets/svg/learnHat.svg';
+  static const String explore = 'assets/svg/explore.svg';
+  static const String chat = 'assets/svg/chat.svg';
+  static const String headset = 'assets/svg/headset.svg';
   static const String questionsFinishedBackground =
       'assets/svg/questions_finish_background.svg';
 
   static const String vie_quotidienne_background =
-      '$SVG_PATH/vie_quotidienne_background.svg';
+      'assets/svg/vie_quotidienne_background.svg';
   static const String vie_quotidienne_background2 =
-      '$SVG_PATH/vie_quotidienne_background2.svg';
-  static const String bearvq = '$SVG_PATH/bearvq.svg';
-  static const String bottom_backgroundvq = '$SVG_PATH/bottom_backgroundvq.svg';
-  static const String schoolTools = '$SVG_PATH/schoolTools.svg';
+      'assets/svg/vie_quotidienne_background2.svg';
+  static const String bearvq = 'assets/svg/bearvq.svg';
+  static const String bottom_backgroundvq =
+      'assets/svg/bottom_backgroundvq.svg';
+  static const String schoolTools = 'assets/svg/schoolTools.svg';
   static const String gamesBackground = 'assets/svg/games_background.svg';
   static const String gamesBackground2 = 'assets/svg/games_background2.svg';
   static const String tictactoe = 'assets/svg//tictactoe.svg';
@@ -147,9 +149,9 @@ class SvgAssets {
   static const String happyMasscots = 'assets/svg/happy_masscots.svg';
 
   //* French introduction screen assets
-  static const String bearFrench = '$SVG_PATH/brearFrench.svg';
-  static const String plants1 = '$SVG_PATH/plant1.svg';
-  static const String plants2 = '$SVG_PATH/plant2.svg';
+  static const String bearFrench = 'assets/svg/brearFrench.svg';
+  static const String plants1 = 'assets/svg/plant1.svg';
+  static const String plants2 = 'assets/svg/plant2.svg';
 
   //* miscellaneous
   static const String check = 'assets/svg/misc/check.svg';

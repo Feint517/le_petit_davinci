@@ -17,15 +17,24 @@ class CustomShimmerEffect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = DeviceUtils.isDarkMode(context);
     return Shimmer.fromColors(
-      baseColor: dark ? Colors.grey[850]! : Colors.grey[300]!,
-      highlightColor: dark ? Colors.grey[700]! : Colors.grey[100]!,
+      baseColor:
+          DeviceUtils.isDarkMode(context)
+              ? Colors.grey[850]!
+              : Colors.grey[300]!,
+      highlightColor:
+          DeviceUtils.isDarkMode(context)
+              ? Colors.grey[700]!
+              : Colors.grey[100]!,
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: color ?? (dark ? AppColors.darkGrey : AppColors.white),
+          color:
+              color ??
+              (DeviceUtils.isDarkMode(context)
+                  ? AppColors.darkGrey
+                  : AppColors.white),
           borderRadius: BorderRadius.circular(radius),
         ),
       ),

@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button_main.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 
@@ -13,7 +14,8 @@ class VieQuotidienneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greenPrimary,
+      appBar: const ProfileHeader(),
+      backgroundColor: AppColors.accent2,
       body: SafeArea(
         bottom: false,
         child: SafeArea(
@@ -22,11 +24,6 @@ class VieQuotidienneScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  ProfileHeader(
-                    userName: 'Alex',
-                    userClass: 'Classe 2',
-                    showTrailingIcon: false,
-                  ),
                   ContentVieQuotidienne(),
                   SvgPicture.asset(SvgAssets.schoolTools),
                 ],
@@ -41,27 +38,20 @@ class VieQuotidienneScreen extends StatelessWidget {
               ),
 
               Positioned(
-                bottom: 20,
-                left: 30,
-                child: CustomButtonNew(
-                  buttonColor: AppColors.secondary,
-                  shadowColor: AppColors.orangeAccentDark,
-                  label: 'Précédent',
-                  labelColor: AppColors.white,
-                  onPressed: () {},
+                bottom: DeviceUtils.getBottomNavigationBarHeight(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButton(
+                      variant: ButtonVariant.secondary,
+                      label: 'Précédent',
+                      onPressed: () {},
+                    ),
+                    CustomButton(label: 'Suivant', onPressed: () {}),
+                  ],
                 ),
               ),
-              Positioned(
-                bottom: 20,
-                right: 30,
-                child: CustomButtonNew(
-                  buttonColor: AppColors.primary,
-                  shadowColor: AppColors.bluePrimaryDark,
-                  label: 'Suivant',
-                  labelColor: AppColors.white,
-                  onPressed: () {},
-                ),
-              ),
+
             ],
           ),
         ),

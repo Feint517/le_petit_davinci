@@ -40,7 +40,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final obscureText = false.obs;
+    var obscureText = false.obs;
     TextInputType keyboardType;
     String defaultHint;
     switch (type) {
@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: switch (type) {
             TextFieldType.email => Icon(
-              Iconsax.lock,
+              Icons.mail_outline,
               color: prefixIconColor ?? AppColors.darkGrey,
             ),
             TextFieldType.password => Icon(

@@ -22,6 +22,8 @@ class GamesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const ProfileHeader(),
       backgroundColor: AppColors.backgroundLight,
       body: Stack(
         children: [
@@ -38,16 +40,9 @@ class GamesScreen extends StatelessWidget {
           SizedBox.expand(
             child: Column(
               children: [
-                const ProfileHeader(
-                  userName: 'Alex',
-                  userClass: 'Class 2',
-                  showTrailingIcon: false,
-                ),
-                const Divider(
-                  color: AppColors.grey,
-                  thickness: 1.5,
-                  indent: 30,
-                  endIndent: 30,
+                const CustomNavBar(
+                  activeChip: true,
+                  variant: BadgeVariant.games,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -57,10 +52,7 @@ class GamesScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Gap(AppSizes.spaceBtwItems),
-                      const CustomNavBar(
-                        activeChip: true,
-                        variant: BadgeVariant.games,
-                      ),
+
                       const Gap(AppSizes.spaceBtwItems),
                       Text(
                         "C'est l'heure de s'amuser !\nChoisis ton jeu préféré !",

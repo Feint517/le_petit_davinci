@@ -42,7 +42,7 @@ class ErrorScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Gap(AppSizes.defaultSpace * 1.5),
+                  const Gap(AppSizes.defaultSpace * 8),
                   Text(
                     StringsManager.noProfileError,
                     textAlign: TextAlign.center,

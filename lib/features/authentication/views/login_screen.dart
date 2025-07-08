@@ -11,14 +11,14 @@ import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/error_screen.dart';
+import 'package:le_petit_davinci/features/authentication/views/create_profile.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginScreen extends GetView<LoginController> {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLight,
@@ -62,7 +62,8 @@ class LoginPage extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           TextButton(
-                            onPressed: () => Get.to(() => const ErrorScreen()),
+                            onPressed:
+                                () => Get.to(() => const CreateProfileScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
                               style: Theme.of(context).textTheme.bodyMedium!
@@ -78,7 +79,8 @@ class LoginPage extends StatelessWidget {
                         type: TextFieldType.email,
                         controller: controller.email,
                       ),
-                      Gap(AppSizes.spaceBtwItems.h),
+                      Gap(AppSizes.spaceBtwInputFields.h),
+
                       CustomTextField(
                         type: TextFieldType.password,
                         controller: controller.password,

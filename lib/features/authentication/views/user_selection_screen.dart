@@ -11,7 +11,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/questions_intro_screen.dart';
+import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class UserSelectionScreen extends GetView<UserSelectionController> {
@@ -19,14 +19,15 @@ class UserSelectionScreen extends GetView<UserSelectionController> {
 
   @override
   Widget build(BuildContext context) {
-    // Debug: Check controller state
+    Get.put(UserSelectionController());
+    
     print('🔍 Controller initialized: ${controller.showQuestionsIntro}');
     print('🔍 Intro message: ${controller.introMessage}');
 
     //? Si nous devons afficher l'intro, montrer l'écran d'intro
     if (controller.showQuestionsIntro && controller.introMessage != null) {
       print('📱 Showing questions intro screen');
-      return QuestionsIntroScreen(message: "i'm just testing");
+      return const QuestionsIntroScreen();
     }
 
     print('📱 Showing normal user selection screen');

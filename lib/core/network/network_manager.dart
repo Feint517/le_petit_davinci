@@ -38,19 +38,19 @@ class NetworkManager extends GetxController {
     _connectionStatus.value = result.first;
     print(_connectionStatus.value);
 
-    if (_connectionStatus.value == ConnectivityResult.none) {
-      CustomLoaders.showSnackBar(
-        type: SnackBarType.warning,
-        title: 'No Internet Connection',
-        message: "Please make sure you're connected to the internet",
-      );
-    }
-    if (_connectionStatus.value != ConnectivityResult.wifi) {
-      CustomLoaders.showSnackBar(
-        type: SnackBarType.succes,
-        title: 'Conntected!',
-      );
-    }
+    // if (_connectionStatus.value == ConnectivityResult.none) {
+    //   CustomLoaders.showSnackBar(
+    //     type: SnackBarType.warning,
+    //     title: 'No Internet Connection',
+    //     message: "Please make sure you're connected to the internet",
+    //   );
+    // }
+    // if (_connectionStatus.value != ConnectivityResult.wifi) {
+    //   CustomLoaders.showSnackBar(
+    //     type: SnackBarType.succes,
+    //     title: 'Conntected!',
+    //   );
+    // }
   }
 
   //? check the internet connection status

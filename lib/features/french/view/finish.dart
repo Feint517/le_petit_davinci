@@ -15,10 +15,6 @@ class FinishChercheLerreur extends StatefulWidget {
 }
 
 class _FinishChercheLerreurState extends State<FinishChercheLerreur> {
-  // Inject the controller
-  // Get.put() initializes the controller if it hasn't been already.
-  // Using Get.find() if you know it's already been initialized elsewhere (e.g., GetX bi
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

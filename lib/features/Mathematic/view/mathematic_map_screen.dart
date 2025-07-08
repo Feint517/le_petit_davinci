@@ -30,8 +30,6 @@ class MathematicMapScreen extends GetView<MathMapController> {
     }
     return Scaffold(
       appBar: const ProfileHeader(
-        userName: 'Alex',
-        userClass: 'Classe 2',
         type: ProfileHeaderType.compact,
       ),
       body: SafeArea(

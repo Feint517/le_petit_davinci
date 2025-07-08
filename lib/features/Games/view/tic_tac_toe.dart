@@ -35,8 +35,6 @@ class TicTacToe extends GetView<TicTacToeController> {
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(
-        userName: 'Alex',
-        userClass: 'Classe 2',
         showTrailingIcon: false,
       ),
       body: SafeArea(
