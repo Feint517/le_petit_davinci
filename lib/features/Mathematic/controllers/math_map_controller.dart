@@ -1,33 +1,42 @@
-import 'package:flutter/foundation.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MathMapController extends GetxController {
-  final GlobalKey svgKey = GlobalKey();
+  var levels = <String>[].obs;
+  final scrollController = ScrollController();
+  var isLoading = false.obs;
 
-  final RxDouble _svgRenderedWidth = RxDouble(0.0);
-  final RxDouble _svgRenderedHeight = RxDouble(0.0);
+  @override
+  void onInit() async {
+    super.onInit();
+    loadMoreLevels();
 
-  double? get svgRenderedWidth =>
-      _svgRenderedWidth.value == 0.0 ? null : _svgRenderedWidth.value;
-  double? get svgRenderedHeight =>
-      _svgRenderedHeight.value == 0.0 ? null : _svgRenderedHeight.value;
-
-  void getSvgDimensions() {
-    if (svgKey.currentContext != null) {
-      final RenderBox renderBox =
-          svgKey.currentContext!.findRenderObject() as RenderBox;
-      _svgRenderedWidth.value = renderBox.size.width;
-      _svgRenderedHeight.value = renderBox.size.height;
-      if (kDebugMode) {
-        print('SVG dimensions: ${renderBox.size}');
-      }
-    } else {
-      if (kDebugMode) {
-        print(
-          'Controller: Warning: svgKey.currentContext is null. Could not get dimensions.',
-        );
-      }
-    }
+    scrollController.addListener(() {
+  if (scrollController.position.pixels >=
+      scrollController.position.maxScrollExtent - 100 &&
+      !isLoading.value) {
+    loadMoreLevels();
   }
+});
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  void loadMoreLevels() {
+  if (isLoading.value) return;
+  isLoading.value = true;
+  Future.delayed(Duration(seconds: 2), () {
+    print('add new levels called');
+    levels.addAll(
+      List.generate(20, (index) => 'Level ${levels.length + index + 1}'),
+    );
+    isLoading.value = false;
+  });
+}
 }

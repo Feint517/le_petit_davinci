@@ -108,7 +108,7 @@
     "**/.metadata": true,
     "**pubspec.lock": true,
     "**README.md": true,
-    "**/test": true,
+    "**/test": false,
     "**/build": true,
     "**/web": true,
     "**/windows": false,

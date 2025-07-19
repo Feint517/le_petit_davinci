@@ -1,20 +1,11 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
-import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
-import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_controller.dart';
-import 'package:le_petit_davinci/features/Mathematic/view/math_map_old.dart';
-import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
-import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
-import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
-import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
-import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'subject_card.dart';
 
 class SubjectSelection extends GetView<HomeController> {

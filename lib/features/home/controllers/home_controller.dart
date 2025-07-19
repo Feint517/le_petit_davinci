@@ -7,7 +7,7 @@ import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/models/subject_card_model.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
-
+import 'package:le_petit_davinci/test.dart';
 class HomeController extends GetxController {
   //* Subject data list
     final List<SubjectCardModel> subjects = [
@@ -45,6 +45,7 @@ class HomeController extends GetxController {
         name: 'Studio',
         imagePath: SvgAssets.studioCard,
         cardColor: AppColors.primary,
+        destination: const PageHome(),
       ),
     ];
 }

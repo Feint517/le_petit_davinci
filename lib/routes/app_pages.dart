@@ -98,13 +98,13 @@ class AppPages {
             // ),
           ],
         ),
-        GetPage(
-          name: AppRoutes.mathMap,
-          page: () => const MathematicMapScreen(),
-          transition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 500),
-          binding: MathBinding(),
-        ),
+        // GetPage(
+        //   name: AppRoutes.mathMap,
+        //   page: () => const MathematicMapScreen(),
+        //   transition: Transition.rightToLeft,
+        //   transitionDuration: const Duration(milliseconds: 500),
+        //   binding: MathBinding(),
+        // ),
         GetPage(
           name: AppRoutes.dailyLifeMap,
           page: () => const VieQuotidienneScreen(),

@@ -87,6 +87,7 @@ flutter:
     - assets/sfx/alphabet/
     - assets/lottie/
     - assets/lottie/misc/
+    - assets/test/
     
   fonts:
     - family: DynaPuff_SemiCondensed
