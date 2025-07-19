@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -352,6 +352,7 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       backgroundColor: AppColors.light,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),

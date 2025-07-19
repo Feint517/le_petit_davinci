@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/Games/controllers/tic_tac_toe_controller.dart';
-import 'package:le_petit_davinci/features/Games/widgets/dialog_winner.dart';
+import 'package:le_petit_davinci/features/Games/widgets/draw_dialogue.dart';
+import 'package:le_petit_davinci/features/Games/widgets/win_dialogue.dart';
+import 'package:le_petit_davinci/features/Games/widgets/game_over_dialog.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_board.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_controls.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/mode_selection_popup.dart';
@@ -72,7 +74,7 @@ void _showWinnerDialog(BuildContext context, TicTacToeController controller) {
   showDialog(
     context: context,
     builder:
-        (context) => CongratulationsDialog(
+        (context) => WinDialogue(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -101,7 +103,7 @@ void _showDrawDialog(BuildContext context, TicTacToeController controller) {
   showDialog(
     context: context,
     builder:
-        (context) => CongratulationsDialogEqual(
+        (context) => DrawDialogue(
           onPressed: () {
             Navigator.of(context).pop();
           },

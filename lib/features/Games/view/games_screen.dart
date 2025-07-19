@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 import 'package:le_petit_davinci/features/Games/view/snake.dart';
 import 'package:le_petit_davinci/features/Games/view/tic_tac_toe_intro.dart';
@@ -23,7 +20,7 @@ class GamesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const ProfileHeader(),
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       backgroundColor: AppColors.backgroundLight,
       body: Stack(
         children: [
@@ -40,10 +37,7 @@ class GamesScreen extends StatelessWidget {
           SizedBox.expand(
             child: Column(
               children: [
-                const CustomNavBar(
-                  activeChip: true,
-                  variant: BadgeVariant.games,
-                ),
+                Gap(DeviceUtils.getAppBarHeight() + AppSizes.defaultSpace),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSizes.defaultSpace,
@@ -68,7 +62,7 @@ class GamesScreen extends StatelessWidget {
                       const Gap(AppSizes.spaceBtwSections),
                       CustomGridLayout(
                         mainAxisExtent: 250,
-                        itemCount: 3,
+                        itemCount: 2,
                         itemBuilder: (context, index) {
                           final List<GameModel> gamesList = [
                             GameModel(
@@ -85,21 +79,9 @@ class GamesScreen extends StatelessWidget {
                               icon: SvgAssets.chess,
                               gameScreen: const SnakeGame(),
                             ),
-                            GameModel(
-                              name: 'Suites logiques',
-                              numOfVictories: 0,
-                              color: AppColors.accent2,
-                              icon: SvgAssets.biscuit,
-                              gameScreen: const Placeholder(),
-                            ),
                           ];
                           return GameCard(
-                            cardColor: gamesList[index].color,
-                            label: gamesList[index].numOfVictories,
-                            title: gamesList[index].name,
-                            assetPath: gamesList[index].icon,
-                            onTap:
-                                () => Get.to(() => gamesList[index].gameScreen),
+                            gameModel: gamesList[index],
                           );
                         },
                       ),
