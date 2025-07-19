@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/network/network_manager.dart';
 import 'package:le_petit_davinci/core/styles/loaders.dart';
 import 'package:le_petit_davinci/core/widgets/popups/fullscreen_loader.dart';
 import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
-import 'package:le_petit_davinci/features/home/views/home_screen.dart';
+import 'package:le_petit_davinci/features/home/views/home.dart';
 
 class LoginController extends GetxController {
   final email = TextEditingController(text: 'arselene.dev@gmail.com');

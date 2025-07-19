@@ -59,7 +59,9 @@ class LoginScreen extends GetView<LoginController> {
                         children: [
                           Text(
                             StringsManager.newHere,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.black,
+                            ),
                           ),
                           TextButton(
                             onPressed:

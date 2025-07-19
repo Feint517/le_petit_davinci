@@ -21,6 +21,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(FrenchMapController());
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {

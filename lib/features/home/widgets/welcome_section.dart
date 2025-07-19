@@ -16,7 +16,7 @@ class WelcomeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const AchievementBanner(starCount: 4),
+        //const AchievementBanner(starCount: 4),
         Gap(AppSizes.spaceBtwItems.h),
         Stack(
           alignment: Alignment.topCenter,

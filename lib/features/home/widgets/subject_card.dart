@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/features/home/models/subject_card_model.dart';
 import '../../../core/constants/colors.dart';
 
 class SubjectCard extends StatelessWidget {
-  final String label;
-  final String imageAssetPath;
-  final Color cardColor;
-  final VoidCallback? onTap;
+  const SubjectCard({super.key, required this.subject});
 
-  const SubjectCard({
-    super.key,
-    required this.label,
-    required this.imageAssetPath,
-    required this.cardColor,
-    this.onTap,
-  });
+  final SubjectCardModel subject;
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 0.85, //? Slightly taller than wide
       child: InkWell(
-        onTap: onTap,
+        onTap: () {
+          if (subject.destination != null) {
+            Get.to(() => subject.destination!);
+          }
+        },
         borderRadius: BorderRadius.circular(20.r),
         child: Container(
           decoration: BoxDecoration(
-            color: cardColor,
+            color: subject.cardColor,
             borderRadius: BorderRadius.circular(20.r),
-            boxShadow: CustomShadowStyle.customCircleShadows(color: cardColor),
+            boxShadow: CustomShadowStyle.customCircleShadows(
+              color: subject.cardColor,
+            ),
           ),
           clipBehavior: Clip.antiAlias,
           child: Stack(
@@ -40,7 +39,7 @@ class SubjectCard extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: ResponsiveImageAsset(
-                  assetPath: imageAssetPath,
+                  assetPath: subject.imagePath,
                   width: 100.w,
                 ),
               ),
@@ -61,7 +60,7 @@ class SubjectCard extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.north_east,
-                        color: cardColor,
+                        color: subject.cardColor,
                         size: 18.sp,
                       ),
                     ),
@@ -70,7 +69,7 @@ class SubjectCard extends StatelessWidget {
 
                     // Subject label
                     Text(
-                      label,
+                      subject.name,
                       style: TextStyle(
                         color: AppColors.white,
                         fontSize: 18.sp,

@@ -17,6 +17,8 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(EnglishMapController());
+
     //? Call getSvgDimensions after the first frame, only if needed
     if (controller.svgRenderedWidth == null ||
         controller.svgRenderedHeight == null) {

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/login_screen.dart';
+import 'package:le_petit_davinci/features/authentication/views/login.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
 
 class DashboardController extends GetxController

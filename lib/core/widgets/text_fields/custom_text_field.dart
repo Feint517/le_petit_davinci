@@ -69,6 +69,7 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        
         controller: controller,
         obscureText: obscureText.value,
         keyboardType: keyboardType,

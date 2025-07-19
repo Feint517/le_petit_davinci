@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/features/authentication/views/question_screen.dart';
+import 'package:le_petit_davinci/features/authentication/views/question.dart';
 
 class IntroController extends GetxController {
   final speechText =

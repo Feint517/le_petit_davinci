@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
@@ -21,7 +20,7 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    final testController = Get.put(LoginController());
+    Get.put(HomeController());
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(
@@ -39,12 +38,6 @@ class HomeScreen extends GetView<HomeController> {
 
             const ScrollAnimatedItem(child: WelcomeSection()),
             Gap(24.h),
-
-            // CustomButton(
-            //   label: 'testing',
-            //   onPressed: () => testController.test(),
-            // ),
-            // Gap(40.h),
 
             //* Subject Selection Grid
             const ScrollAnimatedItem(child: SubjectSelection()),
