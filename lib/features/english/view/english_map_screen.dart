@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
+import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
@@ -71,7 +72,11 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                             top: svgHeight * 0.77,
                             child: MapButton(
                               title: 'Listen and Match',
-                              levelStatus: LevelStatus.completed,
+                              level: LevelModel(
+                                title: 'listen and Match',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.primary,
                               onTap:
@@ -89,7 +94,11 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                             top: svgHeight * 0.46,
                             child: MapButton(
                               title: 'Word Builder',
-                              levelStatus: LevelStatus.inProgress,
+                              level: LevelModel(
+                                title: 'Word Builder',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
                               onTap:
@@ -107,9 +116,13 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
                             top: svgHeight * 0.2,
                             child: MapButton(
                               title: "Find the Word",
-                              levelStatus: LevelStatus.notStarted,
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
+                              level: LevelModel(
+                                title: 'Find the Word',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               onTap:
                                   () => Get.toNamed(
                                     AppRoutes.home +

@@ -9,6 +9,7 @@ class ResponsiveImageAsset extends StatelessWidget {
     this.imageKey,
     required this.assetPath,
     this.width,
+    this.height,
     this.fallbackAspectRatio = 0.3,
     this.fit = BoxFit.contain,
     this.scale,
@@ -20,6 +21,7 @@ class ResponsiveImageAsset extends StatelessWidget {
   final Key? imageKey;
   final String assetPath;
   final double? width;
+  final double? height;
   final double fallbackAspectRatio;
   final BoxFit fit;
   final double? scale;
@@ -42,19 +44,19 @@ class ResponsiveImageAsset extends StatelessWidget {
               key: imageKey,
               assetPath,
               width: width ?? DeviceUtils.getScreenWidth(),
-              height: calculatedHeight,
+              height: height ?? calculatedHeight,
               fit: fit,
               alignment: alignment,
               colorFilter:
                   filtered
-                      ? ColorFilter.mode(filterColor, BlendMode.saturation)
+                      ? ColorFilter.mode(filterColor, BlendMode.color)
                       : null,
             )
             : Image.asset(
               key: imageKey,
               assetPath,
               width: width ?? DeviceUtils.getScreenWidth(),
-              height: calculatedHeight,
+              height: height ?? calculatedHeight,
               fit: fit,
               scale: scale,
               alignment: alignment,

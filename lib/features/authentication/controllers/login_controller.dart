@@ -33,11 +33,10 @@ class LoginController extends GetxController {
         return;
       }
 
-      await AuthenticationRepository.instance
-          .loginWithEmailAndPassword(
-            email: email.text.trim(),
-            password: password.text.trim(),
-          );
+      await AuthenticationRepository.instance.loginWithEmailAndPassword(
+        email: email.text.trim(),
+        password: password.text.trim(),
+      );
 
       AuthenticationRepository.instance.saveLoginStatus(token: '12345678');
 

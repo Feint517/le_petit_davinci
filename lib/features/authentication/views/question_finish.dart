@@ -7,7 +7,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/question_finish_controller.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_message_box.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/informational_text_section.dart';

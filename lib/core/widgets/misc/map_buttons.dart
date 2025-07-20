@@ -1,34 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
+import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 
 class MapButton extends StatelessWidget {
   const MapButton({
     super.key,
-    required this.title,
+    this.title,
     required this.iconPath,
     required this.backgroundColor,
-    this.levelStatus = LevelStatus.inProgress,
-    this.width = 70,
-    this.height = 70,
+    required this.level,
+    this.dimension = 70.0,
     this.onTap,
   });
 
-  final String title;
+  final String? title;
   final String iconPath;
   final Color backgroundColor;
-  final double width;
-  final double height;
+  final double dimension;
   final VoidCallback? onTap;
-  final LevelStatus levelStatus;
+  final LevelModel level;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        if (level.levelStatus != LevelStatus.locked && level.content != null) {
+          Get.to(() => level.content!);
+        }
+      },
       child: Column(
         spacing: 6,
         children: [
@@ -36,28 +41,63 @@ class MapButton extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Container(
-                width: width,
-                height: height,
+                width: dimension,
+                height: dimension,
                 decoration: BoxDecoration(
-                  color: backgroundColor,
+                  color:
+                      level.levelStatus == LevelStatus.locked
+                          ? Colors.grey
+                          : level.levelStatus == LevelStatus.completed
+                          ? AppColors.accent2
+                          : backgroundColor,
                   shape: BoxShape.circle,
                   boxShadow: CustomShadowStyle.customCircleShadows(
-                    color: backgroundColor,
+                    color:
+                        level.levelStatus == LevelStatus.locked
+                            ? Colors.grey
+                            : level.levelStatus == LevelStatus.completed
+                            ? AppColors.accent2
+                            : backgroundColor,
                   ),
                 ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    iconPath,
-                    height: height * 0.6,
-                    width: width * 0.6,
-                  ),
-                ),
+                child:
+                    (level.levelStatus == LevelStatus.locked ||
+                            level.levelStatus == LevelStatus.completed)
+                        ? Stack(
+                          children: [
+                            Center(
+                              child: ResponsiveImageAsset(
+                                assetPath: iconPath,
+                                width: dimension * 0.7,
+                                filtered: true,
+                                filterColor:
+                                    (level.levelStatus == LevelStatus.locked)
+                                        ? Colors.grey
+                                        : AppColors.accent2,
+                              ),
+                            ),
+                            if (level.levelStatus == LevelStatus.locked)
+                              Center(
+                                child: ResponsiveImageAsset(
+                                  assetPath: IconAssets.lock,
+                                  width: dimension * 0.3,
+                                ),
+                              ),
+                          ],
+                        )
+                        : Center(
+                          child: SvgPicture.asset(
+                            iconPath,
+                            height: dimension * 0.6,
+                            width: dimension * 0.6,
+                          ),
+                        ),
               ),
               //*  Status icon (top right, slightly outside)
               Positioned(
                 top: 0,
                 right: -5,
-                child: switch (levelStatus) {
+                child: switch (level.levelStatus) {
                   LevelStatus.completed => SvgPicture.asset(
                     SvgAssets.check,
                     height: 20,
@@ -68,19 +108,20 @@ class MapButton extends StatelessWidget {
                     height: 20,
                     width: 20,
                   ),
-                  LevelStatus.notStarted => const SizedBox(),
+                  LevelStatus.locked => const SizedBox(),
                 },
               ),
             ],
           ),
-          Text(
-            title,
-            style: TextStyle(
-              color: AppColors.textPrimary,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+          if (title != null)
+            Text(
+              title!,
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-          ),
         ],
       ),
     );

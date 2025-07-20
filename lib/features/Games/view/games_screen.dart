@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/custom_shapes/container/curved_header_container.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
@@ -80,9 +80,7 @@ class GamesScreen extends StatelessWidget {
                               gameScreen: const SnakeGame(),
                             ),
                           ];
-                          return GameCard(
-                            gameModel: gamesList[index],
-                          );
+                          return GameCard(gameModel: gamesList[index]);
                         },
                       ),
                     ],

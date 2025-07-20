@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/mascot_widget_old.dart';
 import 'package:le_petit_davinci/features/home/widgets/achievement_banner.dart';
 import 'package:le_petit_davinci/features/home/widgets/mission_card.dart';

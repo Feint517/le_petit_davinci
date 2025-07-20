@@ -2,41 +2,126 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
+import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 
 class MathMapController extends GetxController {
-  var levels = <String>[].obs;
   final scrollController = ScrollController();
   var isLoading = false.obs;
 
-  @override
-  void onInit() async {
-    super.onInit();
-    loadMoreLevels();
-
-    scrollController.addListener(() {
-  if (scrollController.position.pixels >=
-      scrollController.position.maxScrollExtent - 100 &&
-      !isLoading.value) {
-    loadMoreLevels();
-  }
-});
-  }
+  final mapSections = [
+    SectionData(
+      color: Colors.blue,
+      etapa: 1,
+      seccion: 1,
+      title: 'Preséntate',
+      levels: [
+        LevelModel(
+          title: 'Level 1',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.completed,
+        ),
+        LevelModel(
+          title: 'Level 2',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.completed,
+        ),
+        LevelModel(
+          title: 'Level 3',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.completed,
+        ),
+        LevelModel(
+          title: 'Level 4',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.inProgress,
+        ),
+        LevelModel(
+          title: 'Level 5',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 6',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 7',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 8',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 9',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+      ],
+    ),
+    SectionData(
+      color: Colors.orange,
+      etapa: 1,
+      seccion: 2,
+      title: "Usa el tiempo presente",
+      levels: [
+        LevelModel(
+          title: 'Level 1',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 2',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 3',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 4',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 5',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 6',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 7',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 8',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+        LevelModel(
+          title: 'Level 9',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.locked,
+        ),
+      ],
+    ),
+  ];
 
   @override
   void dispose() {
     scrollController.dispose();
     super.dispose();
   }
-
-  void loadMoreLevels() {
-  if (isLoading.value) return;
-  isLoading.value = true;
-  Future.delayed(Duration(seconds: 2), () {
-    print('add new levels called');
-    levels.addAll(
-      List.generate(20, (index) => 'Level ${levels.length + index + 1}'),
-    );
-    isLoading.value = false;
-  });
-}
 }

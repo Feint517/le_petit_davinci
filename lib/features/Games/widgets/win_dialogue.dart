@@ -18,7 +18,8 @@ class WinDialogue extends StatefulWidget {
   State<WinDialogue> createState() => _WinDialogueState();
 }
 
-class _WinDialogueState extends State<WinDialogue> with TickerProviderStateMixin {
+class _WinDialogueState extends State<WinDialogue>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _rotationAnimation;
@@ -154,6 +155,3 @@ class _WinDialogueState extends State<WinDialogue> with TickerProviderStateMixin
     );
   }
 }
-
-
-

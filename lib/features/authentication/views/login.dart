@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
 import 'package:le_petit_davinci/features/authentication/views/create_profile.dart';
@@ -59,9 +59,8 @@ class LoginScreen extends GetView<LoginController> {
                         children: [
                           Text(
                             StringsManager.newHere,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.black,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: AppColors.black),
                           ),
                           TextButton(
                             onPressed:

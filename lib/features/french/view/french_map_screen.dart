@@ -6,10 +6,11 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/core/widgets/subheader.dart';
+import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 import 'package:le_petit_davinci/features/french/controller/french_map_controller.dart';
 import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/magic_dictation.dart';
@@ -72,12 +73,14 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                             left: svgWidth * 0.3.w,
                             top: svgHeight * 0.7.h,
                             child: MapButton(
-                              width: 70,
-                              height: 70,
                               title: 'Le coin des leçons',
                               iconPath: SvgAssets.lamp,
                               backgroundColor: AppColors.secondary,
-                              levelStatus: LevelStatus.completed,
+                              level: LevelModel(
+                                title: 'Le coin des leçons',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               onTap: () {
                                 Get.to(
                                   () => const FrenchIntroScreen(),
@@ -95,6 +98,11 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Magic Dictation',
                               iconPath: SvgAssets.headset,
                               backgroundColor: AppColors.primary,
+                              level: LevelModel(
+                                title: 'Magic Dictation',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               onTap:
                                   () => Get.to(
                                     () => const FrenchMagicDictation(),
@@ -112,6 +120,11 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Alphabets et prononciation',
                               iconPath: SvgAssets.chat,
                               backgroundColor: AppColors.pinkLight,
+                              level: LevelModel(
+                                title: 'Alphabets et prononciation',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               onTap:
                                   () => Get.to(
                                     () => const AlphabetLessonScreen(),
@@ -129,6 +142,11 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               title: 'Construction des phrases',
                               iconPath: SvgAssets.explore,
                               backgroundColor: AppColors.purple,
+                              level: LevelModel(
+                                title: 'Construction des phrases',
+                                levelType: LevelType.lesson,
+                                levelStatus: LevelStatus.locked,
+                              ),
                               onTap:
                                   () => Get.to(
                                     () => ConstructionIntroductionLesson(),

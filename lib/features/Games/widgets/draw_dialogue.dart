@@ -11,7 +11,8 @@ class DrawDialogue extends StatefulWidget {
   State<DrawDialogue> createState() => _DrawDialogueState();
 }
 
-class _DrawDialogueState extends State<DrawDialogue> with TickerProviderStateMixin {
+class _DrawDialogueState extends State<DrawDialogue>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late AnimationController _pulseController;
   late Animation<double> _scaleAnimation;

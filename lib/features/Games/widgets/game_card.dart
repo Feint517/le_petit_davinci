@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_svg_asset.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 
 class GameCard extends StatelessWidget {
@@ -61,7 +61,9 @@ class GameCard extends StatelessWidget {
               bottomLeft: Radius.circular(15),
               bottomRight: Radius.circular(15),
             ),
-            boxShadow: CustomShadowStyle.customCircleShadows(color: gameModel.color),
+            boxShadow: CustomShadowStyle.customCircleShadows(
+              color: gameModel.color,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +72,10 @@ class GameCard extends StatelessWidget {
               SizedBox(
                 width: 70,
                 height: 70,
-                child: ResponsiveImageAsset(assetPath: gameModel.icon, width: 70),
+                child: ResponsiveImageAsset(
+                  assetPath: gameModel.icon,
+                  width: 70,
+                ),
               ),
               Text(
                 gameModel.name,

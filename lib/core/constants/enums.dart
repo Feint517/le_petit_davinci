@@ -1,6 +1,11 @@
 enum PracticeType { listenAndMatch, wordBuilder, findTheWord }
 
-enum LevelStatus { completed, inProgress, notStarted }
+enum LevelStatus { completed, inProgress, locked }
+
+enum LevelType { lesson, exercise }
+
+//*======================= Math Section Enums =======================
+enum MathLevelType { calculation, geometry, time, money }
 
 enum ActivityStatus { completed, started }
 

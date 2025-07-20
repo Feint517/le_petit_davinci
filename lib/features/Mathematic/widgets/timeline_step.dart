@@ -23,10 +23,7 @@ class TimelineStep extends StatelessWidget {
             left: 32,
             top: isFirst ? 50 : 0,
             bottom: isLast ? 50 : 0,
-            child: Container(
-              width: 4,
-              color: Colors.blue.shade100,
-            ),
+            child: Container(width: 4, color: Colors.blue.shade100),
           ),
           // Draw the curved step (circle)
           Positioned(
@@ -52,10 +49,7 @@ class TimelineStep extends StatelessWidget {
           Positioned(
             left: 64,
             top: 40,
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            child: Text(label, style: Theme.of(context).textTheme.titleMedium),
           ),
         ],
       ),

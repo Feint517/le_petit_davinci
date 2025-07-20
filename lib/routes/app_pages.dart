@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
-import 'package:le_petit_davinci/features/Mathematic/bindings/math_binding.dart';
-import 'package:le_petit_davinci/features/Mathematic/view/math_map_old.dart';
 import 'package:le_petit_davinci/features/authentication/bindings/auth_binding.dart';
 import 'package:le_petit_davinci/features/authentication/views/error.dart';
 import 'package:le_petit_davinci/features/authentication/views/goodmorning.dart';
