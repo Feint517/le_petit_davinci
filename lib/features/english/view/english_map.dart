@@ -6,18 +6,18 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/colors_utils.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_controller.dart';
 import 'package:le_petit_davinci/features/Mathematic/widgets/map_section.dart';
+import 'package:le_petit_davinci/features/english/controllers/english_map_controller.dart';
 
-class MathMapScreen extends GetView<MathMapController> {
-  const MathMapScreen({super.key});
+class EnglishMapScreen extends GetView<EnglishMapController> {
+  const EnglishMapScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MathMapController());
+    Get.put(EnglishMapController());
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: ColorsUtils.makeDarker(AppColors.secondary),
+      backgroundColor: ColorsUtils.makeDarker(AppColors.accent),
       appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),

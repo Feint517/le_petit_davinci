@@ -6,11 +6,11 @@ class LevelModel {
     required this.title,
     required this.levelType,
     required this.levelStatus,
-    this.content,
+    this.onTap,
   });
 
   final String title;
   final LevelType levelType;
   final LevelStatus levelStatus;
-  final Widget? content;
+  final VoidCallback? onTap;
 }

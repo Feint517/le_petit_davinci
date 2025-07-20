@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:le_petit_davinci/core/constants/colors.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({super.key, required this.title});
@@ -10,18 +11,17 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(child: Divider(color: Color(0xFF2D3D41))),
+        const Expanded(child: Divider(color: AppColors.white)),
         const Gap(16),
         Text(
           title,
-          style: const TextStyle(
-            color: Color(0xFF52656D),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: AppColors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 18.0,
           ),
         ),
         const Gap(16),
-        const Expanded(child: Divider(color: Color(0xFF2D3D41))),
+        const Expanded(child: Divider(color: AppColors.white)),
       ],
     );
   }

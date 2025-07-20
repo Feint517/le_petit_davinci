@@ -7,9 +7,6 @@ import 'package:le_petit_davinci/features/authentication/views/login.dart';
 import 'package:le_petit_davinci/features/authentication/views/pin.dart';
 import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
 import 'package:le_petit_davinci/features/authentication/views/welcome.dart';
-import 'package:le_petit_davinci/features/english/bindings/english_binding.dart';
-import 'package:le_petit_davinci/features/english/view/english_map_screen.dart';
-import 'package:le_petit_davinci/features/english/view/listen_and_match.dart';
 import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
@@ -69,33 +66,33 @@ class AppPages {
           transitionDuration: const Duration(milliseconds: 500),
           binding: FrenchBinding(),
         ),
-        GetPage(
-          name: AppRoutes.englishMap,
-          page: () => const EnglishMapScreen(),
-          transition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 500),
-          binding: EnglishBinding(),
-          children: [
-            GetPage(
-              name: AppRoutes.listenAndMatch,
-              page: () => const ListenAndMatch(),
-              transition: Transition.rightToLeft,
-              transitionDuration: const Duration(microseconds: 500),
-            ),
-            // GetPage(
-            //   name: AppRoutes.wordBuilder,
-            //   page: () => PracticePage(type: PracticeType.wordBuilder),
-            //   transition: Transition.rightToLeft,
-            //   transitionDuration: const Duration(microseconds: 500),
-            // ),
-            // GetPage(
-            //   name: AppRoutes.findTheWord,
-            //   page: () => PracticePage(type: PracticeType.findTheWord),
-            //   transition: Transition.rightToLeft,
-            //   transitionDuration: const Duration(microseconds: 500),
-            // ),
-          ],
-        ),
+        // GetPage(
+        //   name: AppRoutes.englishMap,
+        //   page: () => const EnglishMapScreen(),
+        //   transition: Transition.rightToLeft,
+        //   transitionDuration: const Duration(milliseconds: 500),
+        //   binding: EnglishBinding(),
+        //   children: [
+        //     GetPage(
+        //       name: AppRoutes.listenAndMatch,
+        //       page: () => const ListenAndMatch(),
+        //       transition: Transition.rightToLeft,
+        //       transitionDuration: const Duration(microseconds: 500),
+        //     ),
+        //     GetPage(
+        //       name: AppRoutes.wordBuilder,
+        //       page: () => PracticePage(type: PracticeType.wordBuilder),
+        //       transition: Transition.rightToLeft,
+        //       transitionDuration: const Duration(microseconds: 500),
+        //     ),
+        //     GetPage(
+        //       name: AppRoutes.findTheWord,
+        //       page: () => PracticePage(type: PracticeType.findTheWord),
+        //       transition: Transition.rightToLeft,
+        //       transitionDuration: const Duration(microseconds: 500),
+        //     ),
+        //   ],
+        // ),
         // GetPage(
         //   name: AppRoutes.mathMap,
         //   page: () => const MathematicMapScreen(),

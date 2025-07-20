@@ -15,7 +15,7 @@ class MathMapController extends GetxController {
       color: Colors.blue,
       etapa: 1,
       seccion: 1,
-      title: 'Preséntate',
+      title: 'Calculations',
       levels: [
         LevelModel(
           title: 'Level 1',
@@ -68,7 +68,7 @@ class MathMapController extends GetxController {
       color: Colors.orange,
       etapa: 1,
       seccion: 2,
-      title: "Usa el tiempo presente",
+      title: "Geometry",
       levels: [
         LevelModel(
           title: 'Level 1',
