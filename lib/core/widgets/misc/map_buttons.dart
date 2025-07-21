@@ -39,7 +39,7 @@ class MapButton extends StatelessWidget {
         print('Level status: ${level.levelStatus}');
         print('Content is null: ${level.content == null}');
         print('Content type: ${level.content.runtimeType}');
-        
+
         if (level.levelStatus != LevelStatus.locked && level.content != null) {
           print('Navigating to content for ${level.title}');
           Get.to(() => level.content!);
