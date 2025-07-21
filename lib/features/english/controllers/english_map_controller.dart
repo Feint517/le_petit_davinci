@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/features/lessons/english/widget/word_builder.dart';
+import 'package:le_petit_davinci/features/english/view/listen_and_match.dart';
+import 'package:le_petit_davinci/features/lessons/english/widget/find_the_word.dart';
 
 class EnglishMapController extends GetxController {
   // final GlobalKey svgKey = GlobalKey();

@@ -5,6 +5,11 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/animal_counting_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/number_puzzle_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_additions_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_subtraction_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/math_geometry_screen.dart';
 
 class MathMapController extends GetxController {
   final scrollController = ScrollController();
@@ -18,24 +23,28 @@ class MathMapController extends GetxController {
       title: 'Calculations',
       levels: [
         LevelModel(
-          title: 'Level 1',
+          title: 'Compter avec les Animaux',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.completed,
+          content: const AnimalCountingScreen(),
         ),
         LevelModel(
-          title: 'Level 2',
+          title: 'Puzzle des Nombres',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.completed,
+          content: const NumberPuzzleScreen(),
         ),
         LevelModel(
-          title: 'Level 3',
+          title: 'Les Additions Magiques',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.completed,
+          content: const MathAdditionsScreen(),
         ),
         LevelModel(
-          title: 'Level 4',
+          title: 'Les Soustractions en Mission',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.inProgress,
+          content: const MathSubtractionScreen(),
         ),
         LevelModel(
           title: 'Level 5',
@@ -71,9 +80,10 @@ class MathMapController extends GetxController {
       title: "Geometry",
       levels: [
         LevelModel(
-          title: 'Level 1',
+          title: 'Le Jeu des Formes Géométriques',
           levelType: LevelType.lesson,
-          levelStatus: LevelStatus.locked,
+          levelStatus: LevelStatus.completed,
+          content: const MathGeometryScreen(),
         ),
         LevelModel(
           title: 'Level 2',
