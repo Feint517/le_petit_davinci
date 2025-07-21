@@ -23,6 +23,13 @@ class AppRoutes {
   static const String mathMap = '/math-map';
   static const String dailyLifeMap = '/daily-life-map';
   static const String games = '/games';
-  static const String studio = '/studio';
+  // static const String studio = '/studio';
   static const String rewards = '/rewards';
+
+  // Studio routes
+  static const String studio = '/studio';
+  static const String studioMain = '/studio-main';
+  static const String drawingCanvas = '/studio/drawing-canvas';
+  static const String studioGallery = '/studio/gallery';
+  static const String templateSelection = '/studio/templates';
 }

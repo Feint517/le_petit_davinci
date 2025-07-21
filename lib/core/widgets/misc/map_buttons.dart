@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -29,27 +30,12 @@ class MapButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   if (level.levelStatus != LevelStatus.locked && level.onTap != null) {
-      //     Get.to(level.onTap);
-      //   }
-      // },
-      onTap: () {
-        print('MapButton tapped for: ${level.title}');
-        print('Level status: ${level.levelStatus}');
-        print('Content is null: ${level.content == null}');
-        print('Content type: ${level.content.runtimeType}');
-
-        if (level.levelStatus != LevelStatus.locked && level.content != null) {
-          print('Navigating to content for ${level.title}');
-          Get.to(() => level.content!);
-        } else if (level.levelStatus != LevelStatus.locked) {
-          print('Level is not locked but content is null');
-          Get.snackbar('Info', 'Content coming soon!');
-        } else {
-          print('Level is locked');
-        }
-      },
+      onTap:
+          onTap ??
+          () {
+              level.onTap!.call(); // Use the onTap from LevelModel if provided
+            
+          },
       child: Column(
         spacing: 6,
         children: [

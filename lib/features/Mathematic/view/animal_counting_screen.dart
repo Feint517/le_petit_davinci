@@ -38,12 +38,13 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholderBuilder: (context) => Container(
-                color: AppColors.secondary,
-                child: const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
-              ),
+              placeholderBuilder:
+                  (context) => Container(
+                    color: AppColors.secondary,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+                  ),
             ),
           ),
 
@@ -82,9 +83,12 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
           ),
 
           // Celebration overlay
-          Obx(() => controller.showCelebration.value 
-              ? _buildCelebrationOverlay() 
-              : const SizedBox.shrink()),
+          Obx(
+            () =>
+                controller.showCelebration.value
+                    ? _buildCelebrationOverlay()
+                    : const SizedBox.shrink(),
+          ),
         ],
       ),
     );
@@ -108,17 +112,13 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
                     color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
-                  )
+                  ),
                 ],
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.chevron_left,
-                    color: AppColors.darkGrey,
-                    size: 16,
-                  ),
+                  Icon(Icons.chevron_left, color: AppColors.darkGrey, size: 16),
                   const SizedBox(width: 2),
                   Text(
                     'Back',
@@ -196,16 +196,13 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
     return Obx(() {
       final animals = controller.getCurrentAnimals();
       final selectedNumber = controller.selectedNumber.value;
-      
+
       if (animals.isEmpty) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '🧺',
-                style: TextStyle(fontSize: 60),
-              ),
+              Text('🧺', style: TextStyle(fontSize: 60)),
               const SizedBox(height: 16),
               Text(
                 'Choisis un nombre pour voir les animaux!',
@@ -287,10 +284,7 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              animal.emoji,
-              style: const TextStyle(fontSize: 40),
-            ),
+            Text(animal.emoji, style: const TextStyle(fontSize: 40)),
             const SizedBox(height: 4),
             Text(
               animal.frenchName,
@@ -314,6 +308,10 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
 
   Widget _buildNumberButtons() {
     return Obx(() {
+      final isLoading = controller.isLoading.value;
+      final selectedNumber = controller.selectedNumber.value;
+      final completedNumbers = controller.completedNumbers;
+
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 5,
@@ -324,19 +322,14 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
         itemCount: 10,
         itemBuilder: (context, index) {
           final number = index + 1;
-          final isCompleted = controller.isNumberCompleted(number);
-          final isSelected = controller.selectedNumber.value == number;
-          
+          final isCompleted = completedNumbers.contains(number);
+          final isSelected = selectedNumber == number;
+
           return PrimaryAnimatedButton(
             label: number.toString(),
-            onPressed: controller.isLoading.value 
-                ? null 
-                : () => controller.selectNumber(number),
+            onPressed: isLoading ? null : () => controller.selectNumber(number),
             entranceDelay: Duration(milliseconds: index * 50),
-          ).animate().scale(
-            duration: 300.ms,
-            curve: Curves.easeOutBack,
-          );
+          ).animate().scale(duration: 300.ms, curve: Curves.easeOutBack);
         },
       );
     });
@@ -344,6 +337,9 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
 
   Widget _buildBottomControls() {
     return Obx(() {
+      final completedCount = controller.completedNumbers.length;
+      final selectedNumber = controller.selectedNumber.value;
+
       return Padding(
         padding: const EdgeInsets.only(top: 16),
         child: Row(
@@ -352,14 +348,10 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
             // Progress indicator
             Row(
               children: [
-                Icon(
-                  Icons.star,
-                  color: AppColors.secondary,
-                  size: 20,
-                ),
+                Icon(Icons.star, color: AppColors.secondary, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  '${controller.completedNumbers.length}/10',
+                  '$completedCount/10',
                   style: TextStyle(
                     color: AppColors.darkGrey,
                     fontSize: 16,
@@ -370,7 +362,7 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
             ),
 
             // Replay button
-            if (controller.selectedNumber.value > 0)
+            if (selectedNumber > 0)
               SecondaryAnimatedButton(
                 label: '🔊',
                 onPressed: () => controller.replayCurrentNumber(),
@@ -403,10 +395,7 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  '🎉',
-                  style: TextStyle(fontSize: 60),
-                ),
+                Text('🎉', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Bravo!',
@@ -428,10 +417,7 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
                 ),
               ],
             ),
-          ).animate().scale(
-            duration: 600.ms,
-            curve: Curves.elasticOut,
-          ),
+          ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
         ),
       ),
     );

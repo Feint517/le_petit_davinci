@@ -17,6 +17,11 @@ import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
 import 'package:le_petit_davinci/features/authentication/views/question.dart';
 import 'package:le_petit_davinci/features/authentication/views/question_finish.dart';
+import 'package:le_petit_davinci/features/studio/bindings/studio_binding.dart';
+import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
+import 'package:le_petit_davinci/features/studio/views/gallery_screen.dart';
+import 'package:le_petit_davinci/features/studio/views/studio_main_screen.dart';
+import 'package:le_petit_davinci/features/studio/views/template_selection_screen.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
@@ -145,6 +150,38 @@ class AppPages {
       page: () => const RewardsScreen(),
       transition: Transition.rightToLeft,
       binding: RewardsBinding(),
+    ),
+
+    // Studio routes
+    GetPage(
+      name: AppRoutes.studio,
+      page: () => const StudioMainScreen(),
+      binding: StudioBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.studioMain,
+      page: () => const StudioMainScreen(),
+      binding: StudioBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.drawingCanvas,
+      page: () => const DrawingCanvasScreen(),
+      binding: StudioBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.studioGallery,
+      page: () => const GalleryScreen(),
+      binding: StudioBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.templateSelection,
+      page: () => const TemplateSelectionScreen(),
+      binding: StudioBinding(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }

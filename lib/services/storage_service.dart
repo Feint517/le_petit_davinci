@@ -26,4 +26,10 @@ class StorageService extends GetxController {
   Future<void> remove(String key) async => await locacStorage.remove(key);
 
   Future<void> clear() async => await locacStorage.erase();
+
+  // Get a list from storage (returns List<dynamic> or null)
+  List<dynamic>? getList(String key) => locacStorage.read<List<dynamic>>(key);
+
+  // Set a list in storage
+  Future<void> setList(String key, List<dynamic> value) async => await locacStorage.write(key, value);
 }

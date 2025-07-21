@@ -49,19 +49,16 @@ class EnglishMapController extends GetxController {
           title: 'Level 1',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.inProgress,
-          content: const WordBuilder(),
         ),
         LevelModel(
           title: 'Level 2',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.inProgress,
-          content: const ListenAndMatch(),
         ),
         LevelModel(
           title: 'Level 3',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.inProgress,
-          content: const FindTheWord(),
         ),
         LevelModel(
           title: 'Level 4',

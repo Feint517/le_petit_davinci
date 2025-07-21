@@ -38,12 +38,13 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholderBuilder: (context) => Container(
-                color: AppColors.secondary,
-                child: const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
-              ),
+              placeholderBuilder:
+                  (context) => Container(
+                    color: AppColors.secondary,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+                  ),
             ),
           ),
 
@@ -82,14 +83,20 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
           ),
 
           // Level complete overlay
-          Obx(() => controller.showLevelComplete.value 
-              ? _buildLevelCompleteOverlay() 
-              : const SizedBox.shrink()),
+          Obx(
+            () =>
+                controller.showLevelComplete.value
+                    ? _buildLevelCompleteOverlay()
+                    : const SizedBox.shrink(),
+          ),
 
           // Game complete celebration
-          Obx(() => controller.showCelebration.value 
-              ? _buildCelebrationOverlay() 
-              : const SizedBox.shrink()),
+          Obx(
+            () =>
+                controller.showCelebration.value
+                    ? _buildCelebrationOverlay()
+                    : const SizedBox.shrink(),
+          ),
         ],
       ),
     );
@@ -113,17 +120,13 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
                     color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
-                  )
+                  ),
                 ],
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.chevron_left,
-                    color: AppColors.darkGrey,
-                    size: 16,
-                  ),
+                  Icon(Icons.chevron_left, color: AppColors.darkGrey, size: 16),
                   const SizedBox(width: 2),
                   Text(
                     'Back',
@@ -184,7 +187,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
-            
+
             // Level indicator
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -208,9 +211,9 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 8),
-            
+
             // Sequence hint
             Text(
               controller.getCurrentSequenceHint(),
@@ -231,9 +234,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
     return Obx(() {
       final sequence = controller.getCurrentSequence();
       if (sequence == null) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+        return const Center(child: CircularProgressIndicator());
       }
 
       return Column(
@@ -243,9 +244,9 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
             '🌻',
             style: TextStyle(fontSize: 40),
           ).animate().fadeIn(duration: 800.ms),
-          
+
           const SizedBox(height: 20),
-          
+
           // Sequence containers (flower beds)
           Expanded(
             child: Row(
@@ -256,9 +257,9 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 20),
-          
+
           // Progress indicator for current sequence
           LinearProgressIndicator(
             value: controller.getCurrentLevelProgress(),
@@ -294,19 +295,24 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: candidateData.isNotEmpty 
-                  ? [AppColors.accent2.withValues(alpha: 0.8), AppColors.accent2]
-                  : canDrop
-                    ? [AppColors.white, AppColors.lightGrey]
-                    : [AppColors.softGrey, AppColors.grey],
+                colors:
+                    candidateData.isNotEmpty
+                        ? [
+                          AppColors.accent2.withValues(alpha: 0.8),
+                          AppColors.accent2,
+                        ]
+                        : canDrop
+                        ? [AppColors.white, AppColors.lightGrey]
+                        : [AppColors.softGrey, AppColors.grey],
               ),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: isHinted 
-                  ? AppColors.accent2
-                  : candidateData.isNotEmpty 
-                    ? AppColors.accent2 
-                    : AppColors.borderPrimary,
+                color:
+                    isHinted
+                        ? AppColors.accent2
+                        : candidateData.isNotEmpty
+                        ? AppColors.accent2
+                        : AppColors.borderPrimary,
                 width: isHinted ? 3 : 2,
               ),
               boxShadow: [
@@ -321,12 +327,9 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Flower decoration
-                Text(
-                  canDrop ? '🌱' : '🌸',
-                  style: TextStyle(fontSize: 20),
-                ),
+                Text(canDrop ? '🌱' : '🌸', style: TextStyle(fontSize: 20)),
                 const SizedBox(height: 4),
-                
+
                 // Number or empty space
                 if (number != null)
                   Container(
@@ -383,16 +386,13 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
   Widget _buildDraggableNumbers() {
     return Obx(() {
       final availableNumbers = controller.availableNumbers;
-      
+
       if (availableNumbers.isEmpty) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '🎉',
-                style: TextStyle(fontSize: 40),
-              ),
+              Text('🎉', style: TextStyle(fontSize: 40)),
               const SizedBox(height: 8),
               Text(
                 'Séquence terminée!',
@@ -418,18 +418,33 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          
+
           Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: _getCrossAxisCount(availableNumbers.length),
-                childAspectRatio: 1.0,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemCount: availableNumbers.length,
-              itemBuilder: (context, index) {
-                return _buildDraggableNumber(availableNumbers[index], index);
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final crossAxisCount = _getCrossAxisCount(
+                  availableNumbers.length,
+                );
+                final itemWidth =
+                    (constraints.maxWidth - (crossAxisCount - 1) * 10) /
+                    crossAxisCount;
+                final childAspectRatio = itemWidth / 60; // Fixed height of 60
+
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    childAspectRatio: childAspectRatio,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: availableNumbers.length,
+                  itemBuilder: (context, index) {
+                    return _buildDraggableNumber(
+                      availableNumbers[index],
+                      index,
+                    );
+                  },
+                );
               },
             ),
           ),
@@ -455,32 +470,48 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
     );
   }
 
-  Widget _buildNumberTile(int number, {bool isDragging = false, bool isGhost = false}) {
+  Widget _buildNumberTile(
+    int number, {
+    bool isDragging = false,
+    bool isGhost = false,
+  }) {
     return GestureDetector(
       onTap: () => controller.speakNumber(number),
       child: Container(
-        width: 60,
-        height: 60,
+        constraints: const BoxConstraints(
+          minWidth: 50,
+          minHeight: 50,
+          maxWidth: 70,
+          maxHeight: 70,
+        ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: isGhost 
-              ? [AppColors.grey.withValues(alpha: 0.5), AppColors.lightGrey.withValues(alpha: 0.5)]
-              : isDragging
-                ? [AppColors.accent.withValues(alpha: 0.9), AppColors.accentDark.withValues(alpha: 0.9)]
-                : [AppColors.accent, AppColors.accentDark],
+            colors:
+                isGhost
+                    ? [
+                      AppColors.grey.withValues(alpha: 0.5),
+                      AppColors.lightGrey.withValues(alpha: 0.5),
+                    ]
+                    : isDragging
+                    ? [
+                      AppColors.accent.withValues(alpha: 0.9),
+                      AppColors.accentDark.withValues(alpha: 0.9),
+                    ]
+                    : [AppColors.accent, AppColors.accentDark],
           ),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: isGhost 
-            ? []
-            : [
-                BoxShadow(
-                  color: AppColors.accentDark.withValues(alpha: 0.3),
-                  blurRadius: isDragging ? 12 : 6,
-                  offset: Offset(0, isDragging ? 6 : 3),
-                ),
-              ],
+          boxShadow:
+              isGhost
+                  ? []
+                  : [
+                    BoxShadow(
+                      color: AppColors.accentDark.withValues(alpha: 0.3),
+                      blurRadius: isDragging ? 12 : 6,
+                      offset: Offset(0, isDragging ? 6 : 3),
+                    ),
+                  ],
         ),
         child: Center(
           child: Text(
@@ -506,11 +537,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
             // Level progress
             Row(
               children: [
-                Icon(
-                  Icons.local_florist,
-                  color: AppColors.accent2,
-                  size: 20,
-                ),
+                Icon(Icons.local_florist, color: AppColors.accent2, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Niveau ${controller.currentLevel.value}/${controller.maxLevel}',
@@ -533,16 +560,18 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
                     final nextPos = controller.getNextEmptyPosition();
                     if (nextPos != null) {
                       final sequence = controller.getCurrentSequence();
-                      final correctNumber = sequence?.getCorrectNumberAt(nextPos);
+                      final correctNumber = sequence?.getCorrectNumberAt(
+                        nextPos,
+                      );
                       if (correctNumber != null) {
                         controller.speakNumber(correctNumber);
                       }
                     }
                   },
                 ),
-                
+
                 const SizedBox(width: 8),
-                
+
                 // Reset level button
                 SecondaryAnimatedButton(
                   label: 'Reset',
@@ -572,10 +601,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  '🌻',
-                  style: TextStyle(fontSize: 60),
-                ),
+                Text('🌻', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Niveau terminé!',
@@ -597,10 +623,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
                 ),
               ],
             ),
-          ).animate().scale(
-            duration: 600.ms,
-            curve: Curves.elasticOut,
-          ),
+          ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
         ),
       ),
     );
@@ -621,10 +644,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  '🎉🌺🎉',
-                  style: TextStyle(fontSize: 60),
-                ),
+                Text('🎉🌺🎉', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Félicitations!',
@@ -651,10 +671,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
                 ),
               ],
             ),
-          ).animate().scale(
-            duration: 600.ms,
-            curve: Curves.elasticOut,
-          ),
+          ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
         ),
       ),
     );
@@ -663,7 +680,7 @@ class _NumberPuzzleScreenState extends State<NumberPuzzleScreen> {
   int _getCrossAxisCount(int itemCount) {
     if (itemCount <= 3) return 3;
     if (itemCount <= 6) return 3;
-    if (itemCount <= 9) return 3;
-    return 4;
+    if (itemCount <= 12) return 4;
+    return 5;
   }
 }

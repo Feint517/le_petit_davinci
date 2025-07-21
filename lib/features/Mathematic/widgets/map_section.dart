@@ -33,15 +33,10 @@ class MapSection extends GetView<MathMapController> {
                       right: getRight(index),
                     ),
                     child: MapButton(
-                      // ✅ ONLY pass valid MapButton parameters
                       title: data.levels[index].title,
                       iconPath: SvgAssets.chat,
                       backgroundColor: _getButtonColor(index),
                       level: data.levels[index],
-                      onTap: () {
-                        print('🔥 BUTTON TAPPED: ${data.levels[index].title}');
-                        _handleLevelTap(data.levels[index]);
-                      },
                     ),
                   )
                   : Container(
@@ -55,56 +50,6 @@ class MapSection extends GetView<MathMapController> {
         ),
       ],
     );
-  }
-
-  // ✅ Handle level navigation
-  void _handleLevelTap(dynamic level) {
-    print('🎯 Level tapped: ${level.title}');
-    print('📱 Level status: ${level.levelStatus}');
-    print('📄 Level content: ${level.content?.runtimeType ?? 'null'}');
-
-    // Check if level is accessible (not locked)
-    if (level.levelStatus == LevelStatus.locked) {
-      print('🔒 Level is locked');
-      Get.snackbar(
-        'Niveau verrouillé',
-        'Complète les niveaux précédents pour débloquer celui-ci!',
-        backgroundColor: AppColors.warning.withOpacity(0.1),
-        colorText: AppColors.warning,
-        duration: const Duration(seconds: 2),
-      );
-      return;
-    }
-
-    // Navigate to the level content if it exists
-    if (level.content != null) {
-      print('🚀 Navigating to: ${level.content.runtimeType}');
-      try {
-        Get.to(
-          () => level.content!,
-          duration: const Duration(milliseconds: 500),
-          transition: Transition.rightToLeft,
-        );
-      } catch (e) {
-        print('❌ Navigation error: $e');
-        Get.snackbar(
-          'Erreur',
-          'Impossible d\'ouvrir ce niveau',
-          backgroundColor: AppColors.warning.withOpacity(0.1),
-          colorText: AppColors.warning,
-        );
-      }
-    } else {
-      // Handle levels without content (coming soon)
-      print('📋 No content for level: ${level.title}');
-      Get.snackbar(
-        'Bientôt disponible',
-        'Ce niveau sera bientôt disponible!',
-        backgroundColor: AppColors.accent2.withOpacity(0.1),
-        colorText: AppColors.accent2,
-        duration: const Duration(seconds: 2),
-      );
-    }
   }
 
   // ✅ Dynamic button colors based on status
