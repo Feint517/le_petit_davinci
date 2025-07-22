@@ -11,6 +11,15 @@ enum ActivityStatus { completed, started }
 
 enum BadgeVariant { french, math, english, dailyLife, games }
 
+//*======================= English Section Enums =======================
+enum ExerciseType {
+  fillTheBlank,
+  listenAndChoose,
+  pictureMatch,
+  reorderWords,
+  tapTheWord,
+}
+
 enum LessonBadgeType {
   soundMaster,
   phrasesBuilder,

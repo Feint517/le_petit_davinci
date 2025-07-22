@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'dart:math' as math;
-import 'package:gif/gif.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
@@ -10,9 +9,14 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:lottie/lottie.dart';
 
 class WinDialogue extends StatefulWidget {
-  final VoidCallback onPressed;
+  const WinDialogue({
+    super.key,
+    required this.onPressed,
+    this.backgroundColor = AppColors.accent,
+  });
 
-  const WinDialogue({super.key, required this.onPressed});
+  final Color backgroundColor;
+  final VoidCallback onPressed;
 
   @override
   State<WinDialogue> createState() => _WinDialogueState();
@@ -90,24 +94,16 @@ class _WinDialogueState extends State<WinDialogue>
                     width: 300,
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppColors.accentDark,
+                      color: widget.backgroundColor,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: CustomShadowStyle.customCircleShadows(
-                        color: AppColors.accentDark,
+                        color: widget.backgroundColor,
                       ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Gif(
-                        //   image: AssetImage(GifAssets.congrats),
-                        //   fps: 30,
-                        //   width: 150,
-                        //   height: 150,
-                        //   //duration: const Duration(seconds: 3),
-                        //   autostart: Autostart.loop,
-                        // ),
                         Lottie.asset(
                           LottieAssets.confetti,
                           width: 150,

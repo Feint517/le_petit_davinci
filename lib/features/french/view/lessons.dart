@@ -32,7 +32,6 @@ class FrenchLessons extends StatelessWidget {
         child: SafeArea(
           child: Stack(
             children: [
-              // Simplified floating elements (reduced for performance)
               Positioned(
                 top: 100.h,
                 right: -10.w,

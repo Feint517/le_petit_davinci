@@ -79,7 +79,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               level: LevelModel(
                                 title: 'Le coin des leçons',
                                 levelType: LevelType.lesson,
-                                levelStatus: LevelStatus.locked,
+                                levelStatus: LevelStatus.inProgress,
                               ),
                               onTap: () {
                                 Get.to(
@@ -101,7 +101,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               level: LevelModel(
                                 title: 'Magic Dictation',
                                 levelType: LevelType.lesson,
-                                levelStatus: LevelStatus.locked,
+                                levelStatus: LevelStatus.inProgress,
                               ),
                               onTap:
                                   () => Get.to(
@@ -123,7 +123,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               level: LevelModel(
                                 title: 'Alphabets et prononciation',
                                 levelType: LevelType.lesson,
-                                levelStatus: LevelStatus.locked,
+                                levelStatus: LevelStatus.inProgress,
                               ),
                               onTap:
                                   () => Get.to(
@@ -145,7 +145,7 @@ class FrenchMapScreen extends GetView<FrenchMapController> {
                               level: LevelModel(
                                 title: 'Construction des phrases',
                                 levelType: LevelType.lesson,
-                                levelStatus: LevelStatus.locked,
+                                levelStatus: LevelStatus.inProgress,
                               ),
                               onTap:
                                   () => Get.to(

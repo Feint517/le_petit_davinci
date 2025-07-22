@@ -9,9 +9,7 @@ class MathLessonIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondary,
-      appBar: ProfileHeader(
-        type: ProfileHeaderType.compact,
-      ),
+      appBar: ProfileHeader(type: ProfileHeaderType.compact),
       body: Placeholder(),
     );
   }

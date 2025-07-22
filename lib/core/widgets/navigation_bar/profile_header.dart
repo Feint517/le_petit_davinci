@@ -35,6 +35,9 @@ class ProfileHeader extends GetView<UserController>
   final ProfileHeaderType type;
 
   @override
+  Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       left: false,
@@ -164,7 +167,4 @@ class ProfileHeader extends GetView<UserController>
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
 }

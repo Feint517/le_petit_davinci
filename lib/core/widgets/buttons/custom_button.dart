@@ -126,8 +126,8 @@ class _CustomButtonState extends State<CustomButton>
                         controller.reverse();
                       }
                     });
+                    widget.onPressed?.call();
                   }
-                  widget.onPressed?.call();
                 },
                 borderRadius: BorderRadius.circular(widget.borderRadius ?? 12),
                 splashColor: Colors.blue.withValues(alpha: 0.3),

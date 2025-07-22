@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/data/repositories/youtube_service.dart';
+import 'package:le_petit_davinci/services/youtube_service.dart';
 import 'package:le_petit_davinci/data/models/youtube_video_model.dart';
 
 class FrenchLessonsController extends GetxController {
-  final YouTubeApiService youtubeService = YouTubeApiService();
+  // final YouTubeApiService youtubeService = YouTubeApiService();
   List<YouTubeVideo> fetchedVideos = [];
   final RxBool isLoading = false.obs;
   final RxSet<String> visitedVideoIds = <String>{}.obs;
@@ -18,7 +18,7 @@ class FrenchLessonsController extends GetxController {
 
   Future<void> loadVideos() async {
     try {
-      final videos = await youtubeService.fetchPlaylistVideos(
+      final videos = await YouTubeApiService.fetchPlaylistVideos(
         playlistId: 'PLaeXjdOcp1n1pluHNqy3YYlBe8pUIR9DH',
       );
 

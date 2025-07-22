@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:le_petit_davinci/data/models/youtube_video_model.dart';
 
 class YouTubeApiService {
-  final String baseUrl = 'https://www.googleapis.com/youtube/v3';
+  static String baseUrl = 'https://www.googleapis.com/youtube/v3';
 
-  Future<List<YouTubeVideo>> fetchPlaylistVideos({
+  static Future<List<YouTubeVideo>> fetchPlaylistVideos({
     required String playlistId,
     int maxResults = 50,
   }) async {
@@ -44,6 +44,34 @@ class YouTubeApiService {
       }
     } catch (e) {
       print('Error fetching playlist videos: $e');
+      rethrow;
+    }
+  }
+
+  static Future<YouTubeVideo?> fetchVideoDetails(String videoId) async {
+    final String url =
+        '$baseUrl/videos?part=snippet,contentDetails&id=$videoId&key=AIzaSyDqrhsTwe8Bj5Uf2OoXJ8LeyFr3eNlhaww';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        final List<dynamic> items = data['items'] ?? [];
+
+        if (items.isNotEmpty) {
+          return YouTubeVideo.fromJson(items.first);
+        } else {
+          print('No video found with ID: $videoId');
+          return null;
+        }
+      } else {
+        print('Failed to load video details: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to load video details');
+      }
+    } catch (e) {
+      print('Error fetching video details: $e');
       rethrow;
     }
   }
