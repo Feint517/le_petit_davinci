@@ -28,35 +28,44 @@ class DrawingToolbar extends GetView<StudioController> {
           ),
         ],
       ),
-      child: Row(
-        children: AnimationConfiguration.toStaggeredList(
-          duration: const Duration(milliseconds: 375),
-          childAnimationBuilder:
-              (widget) => SlideAnimation(
-                horizontalOffset: 50.0,
-                child: FadeInAnimation(child: widget),
-              ),
-          children: [
-            // Undo/Redo section
-            _buildUndoRedoSection(),
-            Gap(16.w),
-            _buildVerticalDivider(),
-            Gap(16.w),
+      child: _buildToolbarRow(),
+    );
+  }
 
-            // Drawing tools section
-            _buildDrawingToolsSection(),
-            Gap(16.w),
-            _buildVerticalDivider(),
-            Gap(16.w),
+  // FIXED: Separate the Row structure from animations to prevent layout issues
+  Widget _buildToolbarRow() {
+    return Row(
+      children: [
+        // Animated section 1: Undo/Redo
+        _buildAnimatedSection(0, _buildUndoRedoSection()),
 
-            // Brush size section
-            _buildBrushSizeSection(),
-            const Spacer(),
+        Gap(16.w), // Gap directly in Row - FIXED
+        _buildVerticalDivider(),
+        Gap(16.w), // Gap directly in Row - FIXED
+        // Animated section 2: Drawing tools
+        _buildAnimatedSection(1, _buildDrawingToolsSection()),
 
-            // Action buttons
-            _buildActionButtons(),
-          ],
-        ),
+        Gap(16.w), // Gap directly in Row - FIXED
+        _buildVerticalDivider(),
+        Gap(16.w), // Gap directly in Row - FIXED
+        // Animated section 3: Brush size
+        _buildAnimatedSection(2, _buildBrushSizeSection()),
+
+        const Spacer(), // Spacer directly in Row - FIXED
+        // Animated section 4: Action buttons
+        _buildAnimatedSection(3, _buildActionButtons()),
+      ],
+    );
+  }
+
+  // FIXED: Apply animations to individual sections instead of wrapping Gap/Spacer
+  Widget _buildAnimatedSection(int index, Widget child) {
+    return AnimationConfiguration.staggeredList(
+      position: index,
+      duration: const Duration(milliseconds: 375),
+      child: SlideAnimation(
+        horizontalOffset: 50.0,
+        child: FadeInAnimation(child: child),
       ),
     );
   }
@@ -64,7 +73,7 @@ class DrawingToolbar extends GetView<StudioController> {
   Widget _buildUndoRedoSection() {
     return Row(
       children: [
-        // Undo button - FIXED with proper observable usage
+        // Undo button
         Obx(
           () => _buildToolButton(
             icon: Icons.undo,
@@ -77,7 +86,7 @@ class DrawingToolbar extends GetView<StudioController> {
 
         Gap(8.w),
 
-        // Redo button - FIXED with proper observable usage
+        // Redo button
         Obx(
           () => _buildToolButton(
             icon: Icons.redo,
@@ -145,67 +154,61 @@ class DrawingToolbar extends GetView<StudioController> {
   }
 
   Widget _buildBrushSizeSection() {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Icon(Icons.circle, size: 12.sp, color: AppColors.textSecondary),
-            Gap(8.w),
+        Icon(Icons.circle, size: 12.sp, color: AppColors.textSecondary),
+        Gap(8.w),
 
-            // Brush size selector - FIXED with proper Row structure for Gap widgets
-            Obx(
-              () => SizedBox(
-                width: 120.w,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:
-                      controller.availableSizes.map((size) {
-                        final isSelected = controller.brushSize.value == size;
-                        return GestureDetector(
-                          onTap: () => controller.setBrushSize(size),
-                          child: Container(
-                            width: 24.w,
-                            height: 24.w,
-                            decoration: BoxDecoration(
-                              color:
-                                  isSelected
-                                      ? AppColors.primary.withOpacity(0.1)
-                                      : Colors.transparent,
-                              borderRadius: BorderRadius.circular(12.r),
-                              border:
-                                  isSelected
-                                      ? Border.all(
-                                        color: AppColors.primary,
-                                        width: 2,
-                                      )
-                                      : Border.all(
-                                        color: AppColors.borderPrimary,
-                                        width: 1,
-                                      ),
-                            ),
-                            child: Center(
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                width: (size * 0.5).clamp(4.0, 14.0),
-                                height: (size * 0.5).clamp(4.0, 14.0),
-                                decoration: BoxDecoration(
-                                  color:
-                                      isSelected
-                                          ? controller.selectedColor.value
-                                          : AppColors.textSecondary,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
+        // Brush size selector - FIXED: Proper Row structure without SizedBox wrapper
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children:
+                controller.availableSizes.map((size) {
+                  final isSelected = controller.brushSize.value == size;
+                  return GestureDetector(
+                    onTap: () => controller.setBrushSize(size),
+                    child: Container(
+                      width: 24.w,
+                      height: 24.w,
+                      margin: EdgeInsets.symmetric(horizontal: 4.w),
+                      decoration: BoxDecoration(
+                        color:
+                            isSelected
+                                ? AppColors.primary.withOpacity(0.1)
+                                : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                          color:
+                              isSelected
+                                  ? AppColors.primary
+                                  : AppColors.borderPrimary,
+                          width: isSelected ? 2 : 1,
+                        ),
+                      ),
+                      child: Center(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: (size * 0.5).clamp(4.0, 14.0),
+                          height: (size * 0.5).clamp(4.0, 14.0),
+                          decoration: BoxDecoration(
+                            color:
+                                isSelected
+                                    ? controller.selectedColor.value
+                                    : AppColors.textSecondary,
+                            shape: BoxShape.circle,
                           ),
-                        );
-                      }).toList(),
-                ),
-              ),
-            ),
-          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+          ),
         ),
+
+        Gap(8.w),
+        Icon(Icons.circle, size: 20.sp, color: AppColors.textSecondary),
       ],
     );
   }
@@ -230,6 +233,22 @@ class DrawingToolbar extends GetView<StudioController> {
           tooltip: 'Tout effacer',
           color: AppColors.error,
         ),
+
+        Gap(8.w),
+
+        // Save button
+        Obx(
+          () => _buildToolButton(
+            icon: Icons.save,
+            onPressed:
+                controller.hasUnsavedChanges.value
+                    ? () => controller.saveArtwork()
+                    : null,
+            tooltip: 'Sauvegarder',
+            color: AppColors.greenPrimary,
+            isEnabled: controller.hasUnsavedChanges.value,
+          ),
+        ),
       ],
     );
   }
@@ -253,30 +272,33 @@ class DrawingToolbar extends GetView<StudioController> {
             ? (selectedColor ?? AppColors.primary)
             : isEnabled
             ? buttonColor
-            : AppColors.textSecondary;
+            : AppColors.textSecondary.withOpacity(0.5);
 
     return Tooltip(
       message: tooltip,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        child: InkWell(
-          onTap: isEnabled ? onPressed : null,
-          borderRadius: BorderRadius.circular(8.r),
-          child: Container(
-            width: 40.w,
-            height: 40.w,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(8.r),
-              border:
-                  isSelected
-                      ? Border.all(
-                        color: selectedColor ?? AppColors.primary,
-                        width: 2,
-                      )
-                      : null,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: isEnabled ? onPressed : null,
+            borderRadius: BorderRadius.circular(8.r),
+            child: Container(
+              width: 40.w,
+              height: 40.w,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(8.r),
+                border:
+                    isSelected
+                        ? Border.all(
+                          color: selectedColor ?? AppColors.primary,
+                          width: 2,
+                        )
+                        : null,
+              ),
+              child: Icon(icon, color: iconColor, size: 20.sp),
             ),
-            child: Icon(icon, color: iconColor, size: 20.sp),
           ),
         ),
       ),
@@ -284,13 +306,13 @@ class DrawingToolbar extends GetView<StudioController> {
   }
 
   Widget _buildVerticalDivider() {
-    return Container(width: 1, height: 24.h, color: AppColors.borderPrimary);
+    return Container(width: 1, height: 30.h, color: AppColors.borderPrimary);
   }
 
   void _showColorPicker() {
     Get.bottomSheet(
       Container(
-        height: 300.h,
+        height: 350.h,
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -305,6 +327,7 @@ class DrawingToolbar extends GetView<StudioController> {
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
+                fontFamily: 'DynaPuff_SemiCondensed',
               ),
             ),
             Gap(20.h),
@@ -340,6 +363,13 @@ class DrawingToolbar extends GetView<StudioController> {
                                   color: AppColors.borderPrimary,
                                   width: 1,
                                 ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child:
                           isSelected
@@ -363,7 +393,7 @@ class DrawingToolbar extends GetView<StudioController> {
   void _showTemplateSelector() {
     Get.bottomSheet(
       Container(
-        height: 400.h,
+        height: 450.h,
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -378,76 +408,112 @@ class DrawingToolbar extends GetView<StudioController> {
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
+                fontFamily: 'DynaPuff_SemiCondensed',
               ),
             ),
             Gap(20.h),
 
             Expanded(
               child: Obx(
-                () => GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12.w,
-                    mainAxisSpacing: 12.w,
-                    childAspectRatio: 1.2,
-                  ),
-                  itemCount: controller.templates.length,
-                  itemBuilder: (context, index) {
-                    final template = controller.templates[index];
-                    final isSelected =
-                        controller.selectedTemplate.value?.id == template.id;
-
-                    return GestureDetector(
-                      onTap: () {
-                        controller.selectTemplate(template);
-                        Get.back();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(
-                            color:
-                                isSelected
-                                    ? AppColors.primary
-                                    : AppColors.borderPrimary,
-                            width: isSelected ? 2 : 1,
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.all(8.w),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      template.previewImagePath,
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                () =>
+                    controller.templates.isEmpty
+                        ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.auto_awesome_outlined,
+                                size: 48.sp,
+                                color: AppColors.textSecondary,
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.w),
-                              child: Text(
-                                template.name,
+                              Gap(16.h),
+                              Text(
+                                'Aucun modèle disponible',
                                 style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textPrimary,
+                                  fontSize: 16.sp,
+                                  color: AppColors.textSecondary,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                        )
+                        : GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 12.w,
+                                mainAxisSpacing: 12.w,
+                                childAspectRatio: 1.2,
+                              ),
+                          itemCount: controller.templates.length,
+                          itemBuilder: (context, index) {
+                            final template = controller.templates[index];
+                            final isSelected =
+                                controller.selectedTemplate.value?.id ==
+                                template.id;
+
+                            return GestureDetector(
+                              onTap: () {
+                                controller.selectTemplate(template);
+                                Get.back();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: Border.all(
+                                    color:
+                                        isSelected
+                                            ? AppColors.primary
+                                            : AppColors.borderPrimary,
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.05),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.all(8.w),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            8.r,
+                                          ),
+                                          color: AppColors.backgroundSecondary,
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.image_outlined,
+                                            size: 32.sp,
+                                            color: AppColors.textSecondary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8.w),
+                                      child: Text(
+                                        template.name,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.textPrimary,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                    );
-                  },
-                ),
               ),
             ),
           ],
@@ -459,11 +525,17 @@ class DrawingToolbar extends GetView<StudioController> {
   void _showClearDialog() {
     Get.dialog(
       AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
         title: Row(
           children: [
-            Icon(Icons.warning, color: AppColors.error),
+            Icon(Icons.warning, color: AppColors.error, size: 24.sp),
             Gap(8.w),
-            Text('Effacer le dessin'),
+            Text(
+              'Effacer le dessin',
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+            ),
           ],
         ),
         content: Text(
@@ -483,7 +555,7 @@ class DrawingToolbar extends GetView<StudioController> {
               controller.clearCanvas();
               Get.back();
               Get.snackbar(
-                'Effacé',
+                'Effacé! 🗑️',
                 'Le dessin a été effacé',
                 backgroundColor: AppColors.greenPrimary.withOpacity(0.8),
                 colorText: AppColors.white,
@@ -493,8 +565,11 @@ class DrawingToolbar extends GetView<StudioController> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
               foregroundColor: AppColors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
             ),
-            child: Text('Effacer'),
+            child: const Text('Effacer'),
           ),
         ],
       ),

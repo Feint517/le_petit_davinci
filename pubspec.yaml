@@ -89,6 +89,8 @@ flutter:
     - assets/lottie/
     - assets/lottie/misc/
     - assets/test/
+    - assets/sounds/
+    - assets/sounds/select.mp3
 
   fonts:
     - family: DynaPuff_SemiCondensed
