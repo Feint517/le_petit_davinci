@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
@@ -30,8 +31,9 @@ class MapSection extends StatelessWidget {
                       right: getRight(index),
                     ),
                     child: MapButton(
+                      title: data.levels[index].title,
                       iconPath: SvgAssets.chat,
-                      backgroundColor: AppColors.pinkLight,
+                      backgroundColor: _getButtonColor(index),
                       level: data.levels[index],
                     ),
                   )
@@ -46,6 +48,22 @@ class MapSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  // ✅ Dynamic button colors based on status
+  Color _getButtonColor(int index) {
+    final level = data.levels[index];
+
+    switch (level.levelStatus) {
+      case LevelStatus.completed:
+        return AppColors.accent2; // Green for completed
+      case LevelStatus.inProgress:
+        return AppColors.secondary; // Orange for in progress
+      case LevelStatus.locked:
+        return AppColors.grey; // Grey for locked
+      default:
+        return AppColors.pinkLight; // Default pink
+    }
   }
 
   double getLeft(int indice) {

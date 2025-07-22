@@ -6,7 +6,7 @@ class LevelModel {
     required this.title,
     required this.levelType,
     required this.levelStatus,
-    this.onTap,
+    this.onTap
   });
 
   final String title;

@@ -1,6 +1,6 @@
 name: le_petit_davinci
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -38,7 +38,7 @@ dependencies:
   device_info_plus: ^11.4.0
   flutter_cache_manager: ^3.4.1
   flutter_screenutil: ^5.9.3
-  device_preview: ^1.2.0 
+  device_preview: ^1.2.0
   flutter_tts: ^3.8.3
   just_audio: ^0.10.4
   video_player: ^2.10.0
@@ -55,9 +55,10 @@ dependencies:
 
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
-  
+  share_plus: ^11.0.0
 
-  
+  flutter_drawing_board: ^0.9.8
+  flutter_staggered_animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -92,10 +93,17 @@ flutter:
     - assets/lottie/
     - assets/lottie/misc/
     - assets/test/
-    
+    - assets/sounds/
+    - assets/sounds/select.mp3
+    - assets/templates/previews/
+    - assets/templates/cat_template.png
+    - assets/templates/circle_template.png
+    - assets/templates/previews/cat_preview.png
+    - assets/templates/previews/circle_preview.png
+
   fonts:
     - family: DynaPuff_SemiCondensed
-      fonts:  
+      fonts:
         - asset: assets/fonts/DynaPuff_SemiCondensed-Regular.ttf
         - asset: assets/fonts/DynaPuff_SemiCondensed-Bold.ttf
           weight: 800
@@ -103,4 +111,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/DynaPuff_SemiCondensed-Medium.ttf
           weight: 500
-
