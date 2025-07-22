@@ -15,7 +15,11 @@ import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.da
 import 'package:le_petit_davinci/features/exercises/widgets/progress_bar.dart';
 
 class ReorderWordsScreen extends GetView<ReorderWordsController> {
-  const ReorderWordsScreen({super.key, required this.exercises, required this.dialect});
+  const ReorderWordsScreen({
+    super.key,
+    required this.exercises,
+    required this.dialect,
+  });
 
   final List<ReorderWordsExercise> exercises;
   final String dialect;
@@ -168,7 +172,9 @@ class ReorderWordsScreen extends GetView<ReorderWordsController> {
                     const Spacer(),
                     CustomButton(
                       label: 'Check',
-                      disabled: selectedOrder.length != controller.currentExercise.correctOrder.length,
+                      disabled:
+                          selectedOrder.length !=
+                          controller.currentExercise.correctOrder.length,
                       onPressed: controller.checkAnswer,
                     ),
                     Gap(DeviceUtils.getBottomNavigationBarHeight()),

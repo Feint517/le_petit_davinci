@@ -66,16 +66,16 @@ class AnimalCountingData {
   // Get random animals for a specific count
   static List<Animal> getAnimalsForCount(int count) {
     if (count <= 0 || count > 10) return [];
-    
+
     List<Animal> selectedAnimals = [];
     List<Animal> availableAnimals = List.from(allAnimals);
-    
+
     for (int i = 0; i < count; i++) {
       if (availableAnimals.isEmpty) {
         // If we need more animals than available, repeat the list
         availableAnimals = List.from(allAnimals);
       }
-      
+
       // Pick a random animal and remove it to avoid immediate duplicates
       final randomIndex = (i % availableAnimals.length);
       selectedAnimals.add(availableAnimals[randomIndex]);
@@ -83,7 +83,7 @@ class AnimalCountingData {
         availableAnimals.removeAt(randomIndex);
       }
     }
-    
+
     return selectedAnimals;
   }
 }

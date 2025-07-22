@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
-import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class TemplateSelectionScreen extends GetView<StudioController> {
@@ -44,9 +43,11 @@ class TemplateSelectionScreen extends GetView<StudioController> {
                 width: double.infinity,
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -191,7 +192,7 @@ class TemplateSelectionScreen extends GetView<StudioController> {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.1),
+              color: AppColors.black.withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -302,7 +303,7 @@ class TemplateSelectionScreen extends GetView<StudioController> {
                       width: double.infinity,
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6.r),
                       ),
                       child: Text(

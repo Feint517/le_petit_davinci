@@ -6,8 +6,6 @@ import 'package:le_petit_davinci/features/Mathematic/controllers/number_puzzle_c
 class NumberPuzzleBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<NumberPuzzleController>(
-      () => NumberPuzzleController(),
-    );
+    Get.lazyPut<NumberPuzzleController>(() => NumberPuzzleController());
   }
 }

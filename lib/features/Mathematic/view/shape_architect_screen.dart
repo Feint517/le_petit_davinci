@@ -119,7 +119,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),
@@ -153,7 +153,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.orangeAccentDark.withOpacity(0.3),
+                  color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
                   blurRadius: 2,
                   offset: const Offset(0, 1),
                 ),
@@ -206,7 +206,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.accentDark.withOpacity(0.3),
+                      color: AppColors.accentDark.withValues(alpha: 0.3),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -259,14 +259,14 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF8B4513).withOpacity(0.8),
-                const Color(0xFF654321).withOpacity(0.8),
+                const Color(0xFF8B4513).withValues(alpha: 0.8),
+                const Color(0xFF654321).withValues(alpha: 0.8),
               ],
             ),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(-2, 4),
               ),
@@ -357,7 +357,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -411,10 +411,10 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
         width: isDragging ? shape.width * 1.2 : shape.width,
         height: isDragging ? shape.height * 1.2 : shape.height,
         decoration: BoxDecoration(
-          color: isGhost ? shape.color.withOpacity(0.3) : shape.color,
+          color: isGhost ? shape.color.withValues(alpha: 0.3) : shape.color,
           borderRadius: _getShapeBorderRadius(shape.type),
           border: Border.all(
-            color: Colors.white.withOpacity(isGhost ? 0.3 : 0.7),
+            color: Colors.white.withValues(alpha: isGhost ? 0.3 : 0.7),
             width: 2,
           ),
           boxShadow:
@@ -422,7 +422,9 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                   ? []
                   : [
                     BoxShadow(
-                      color: Colors.black.withOpacity(isDragging ? 0.3 : 0.15),
+                      color: Colors.black.withValues(
+                        alpha: isDragging ? 0.3 : 0.15,
+                      ),
                       blurRadius: isDragging ? 12 : 6,
                       offset: Offset(0, isDragging ? 6 : 3),
                     ),
@@ -462,7 +464,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
           angle: 0.785398, // 45 degrees
           child: Container(
             decoration: BoxDecoration(
-              color: color.withOpacity(0.8),
+              color: color.withValues(alpha: 0.8),
               borderRadius: BorderRadius.circular(4),
             ),
           ),
@@ -482,15 +484,15 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
       builder: (ctrl) {
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.white.withOpacity(0.95),
+            color: AppColors.white.withValues(alpha: 0.95),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppColors.accent.withOpacity(0.3),
+              color: AppColors.accent.withValues(alpha: 0.3),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(2, 4),
               ),
@@ -502,7 +504,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.accent.withOpacity(0.1),
+                  color: AppColors.accent.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
@@ -595,13 +597,13 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.skyBlue.withOpacity(0.3),
-            AppColors.lightGrey.withOpacity(0.5),
+            AppColors.skyBlue.withValues(alpha: 0.3),
+            AppColors.lightGrey.withValues(alpha: 0.5),
           ],
         ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.accent.withOpacity(0.2),
+          color: AppColors.accent.withValues(alpha: 0.2),
           width: 1,
           style: BorderStyle.solid,
         ),
@@ -624,7 +626,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
             color: AppColors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: AppColors.accent.withOpacity(0.3),
+              color: AppColors.accent.withValues(alpha: 0.3),
               width: 2,
               style: BorderStyle.solid,
             ),
@@ -674,7 +676,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
           decoration: BoxDecoration(
             color:
                 candidateData.isNotEmpty
-                    ? AppColors.accent.withOpacity(0.1)
+                    ? AppColors.accent.withValues(alpha: 0.1)
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
           ),
@@ -721,7 +723,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.accent.withOpacity(0.1),
+              color: AppColors.accent.withValues(alpha: 0.1),
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
@@ -827,12 +829,15 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [AppColors.accent2, AppColors.accent2.withOpacity(0.8)],
+                colors: [
+                  AppColors.accent2,
+                  AppColors.accent2.withValues(alpha: 0.8),
+                ],
               ),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -867,7 +872,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   Widget _buildLevelCompleteOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withOpacity(0.7),
+        color: Colors.black.withValues(alpha: 0.7),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -910,7 +915,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   Widget _buildCelebrationOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.black.withValues(alpha: 0.8),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -993,14 +998,14 @@ class BlueprintPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint =
         Paint()
-          ..color = AppColors.accent.withOpacity(0.3)
+          ..color = AppColors.accent.withValues(alpha: 0.3)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..strokeCap = StrokeCap.round;
 
     final dashedPaint =
         Paint()
-          ..color = AppColors.accent.withOpacity(0.5)
+          ..color = AppColors.accent.withValues(alpha: 0.5)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1;
 
@@ -1019,8 +1024,8 @@ class BlueprintPainter extends CustomPainter {
 
       final currentPaint =
           isFulfilled
-              ? (paint..color = AppColors.accent2.withOpacity(0.6))
-              : (paint..color = AppColors.accent.withOpacity(0.4));
+              ? (paint..color = AppColors.accent2.withValues(alpha: 0.6))
+              : (paint..color = AppColors.accent.withValues(alpha: 0.4));
 
       _drawShapeOutline(
         canvas,

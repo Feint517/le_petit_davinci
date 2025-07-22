@@ -31,5 +31,6 @@ class StorageService extends GetxController {
   List<dynamic>? getList(String key) => locacStorage.read<List<dynamic>>(key);
 
   // Set a list in storage
-  Future<void> setList(String key, List<dynamic> value) async => await locacStorage.write(key, value);
+  Future<void> setList(String key, List<dynamic> value) async =>
+      await locacStorage.write(key, value);
 }

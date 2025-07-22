@@ -62,7 +62,10 @@ Widget? getLevelPage(int level) {
       dialect: 'en-US', //? Default to English dialect
     );
   } else if (reorderWordsEnglishLevels.containsKey(level)) {
-    return ReorderWordsScreen(exercises: reorderWordsEnglishLevels[level]!, dialect: 'en-US');
+    return ReorderWordsScreen(
+      exercises: reorderWordsEnglishLevels[level]!,
+      dialect: 'en-US',
+    );
   } else if (level == 1) {
     return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
   }

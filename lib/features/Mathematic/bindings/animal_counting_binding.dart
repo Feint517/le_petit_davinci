@@ -6,8 +6,6 @@ import 'package:le_petit_davinci/features/Mathematic/controllers/animal_counting
 class AnimalCountingBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AnimalCountingController>(
-      () => AnimalCountingController(),
-    );
+    Get.lazyPut<AnimalCountingController>(() => AnimalCountingController());
   }
 }

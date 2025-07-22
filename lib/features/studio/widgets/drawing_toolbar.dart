@@ -3,10 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_drawing_board/paint_contents.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
-import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
 
 class DrawingToolbar extends GetView<StudioController> {
   const DrawingToolbar({super.key});
@@ -23,7 +21,7 @@ class DrawingToolbar extends GetView<StudioController> {
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.05),
+            color: AppColors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -281,7 +279,7 @@ class DrawingToolbar extends GetView<StudioController> {
             ? (selectedColor ?? AppColors.primary)
             : isEnabled
             ? AppColors.textPrimary
-            : AppColors.textSecondary.withOpacity(0.5);
+            : AppColors.textSecondary.withValues(alpha: 0.5);
 
     return Material(
       color: Colors.transparent,
@@ -294,7 +292,9 @@ class DrawingToolbar extends GetView<StudioController> {
           decoration: BoxDecoration(
             color:
                 isSelected
-                    ? (selectedColor ?? AppColors.primary).withOpacity(0.1)
+                    ? (selectedColor ?? AppColors.primary).withValues(
+                      alpha: 0.1,
+                    )
                     : Colors.transparent,
             borderRadius: BorderRadius.circular(4.r),
             border:
@@ -355,7 +355,7 @@ class DrawingToolbar extends GetView<StudioController> {
                             decoration: BoxDecoration(
                               color:
                                   isSelected
-                                      ? AppColors.primary.withOpacity(0.1)
+                                      ? AppColors.primary.withValues(alpha: 0.1)
                                       : Colors.transparent,
                               borderRadius: BorderRadius.circular(20.r),
                               border: Border.all(
@@ -443,7 +443,7 @@ class DrawingToolbar extends GetView<StudioController> {
                                 ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 4,
                             offset: const Offset(0, 2),
                           ),
@@ -548,7 +548,9 @@ class DrawingToolbar extends GetView<StudioController> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.05,
+                                      ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),
@@ -636,7 +638,7 @@ class DrawingToolbar extends GetView<StudioController> {
               Get.snackbar(
                 'Effacé! 🗑️',
                 'Le dessin a été effacé',
-                backgroundColor: AppColors.greenPrimary.withOpacity(0.8),
+                backgroundColor: AppColors.greenPrimary.withValues(alpha: 0.8),
                 colorText: AppColors.white,
                 duration: const Duration(seconds: 2),
               );

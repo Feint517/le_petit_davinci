@@ -80,7 +80,7 @@ class CandyShopData {
       description: 'Achète 3 bonbons avec 3 pièces',
       maxCandiesPerType: 5,
     ),
-     CandyShopLevel(
+    CandyShopLevel(
       level: 2,
       numberOfCoins: 5,
       availableCandies: [
@@ -92,7 +92,7 @@ class CandyShopData {
       description: 'Achète 5 bonbons avec 5 pièces',
       maxCandiesPerType: 8,
     ),
-     CandyShopLevel(
+    CandyShopLevel(
       level: 3,
       numberOfCoins: 7,
       availableCandies: [

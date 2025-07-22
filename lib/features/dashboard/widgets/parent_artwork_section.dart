@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
@@ -103,9 +102,11 @@ class ParentArtworkSection extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 20.w),
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Row(
                   children: [
@@ -119,7 +120,7 @@ class ParentArtworkSection extends StatelessWidget {
                     Container(
                       width: 1,
                       height: 30.h,
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       margin: EdgeInsets.symmetric(horizontal: 16.w),
                     ),
 
@@ -133,7 +134,7 @@ class ParentArtworkSection extends StatelessWidget {
                     Container(
                       width: 1,
                       height: 30.h,
-                      color: AppColors.primary.withOpacity(0.3),
+                      color: AppColors.primary.withValues(alpha: 0.3),
                       margin: EdgeInsets.symmetric(horizontal: 16.w),
                     ),
 
@@ -213,7 +214,7 @@ class ParentArtworkSection extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.1),
+              color: AppColors.black.withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -303,7 +304,9 @@ class ParentArtworkSection extends StatelessWidget {
                             vertical: 2.h,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.orangeAccent.withOpacity(0.2),
+                            color: AppColors.orangeAccent.withValues(
+                              alpha: 0.2,
+                            ),
                             borderRadius: BorderRadius.circular(6.r),
                           ),
                           child: Text(
@@ -474,7 +477,7 @@ class ParentArtworkSection extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 8.h),
                 padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Column(
@@ -611,8 +614,8 @@ class ParentArtworkSection extends StatelessWidget {
                           Get.snackbar(
                             'Message envoyé!',
                             'Votre enfant va être très content!',
-                            backgroundColor: AppColors.greenPrimary.withOpacity(
-                              0.8,
+                            backgroundColor: AppColors.greenPrimary.withValues(
+                              alpha: 0.8,
                             ),
                             colorText: AppColors.white,
                           );

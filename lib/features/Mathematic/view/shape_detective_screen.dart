@@ -136,7 +136,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),
@@ -170,7 +170,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.orangeAccentDark.withOpacity(0.3),
+                  color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
                   blurRadius: 2,
                   offset: const Offset(0, 1),
                 ),
@@ -226,7 +226,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primaryDeep.withOpacity(0.3),
+                    color: AppColors.primaryDeep.withValues(alpha: 0.3),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -278,7 +278,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -336,8 +336,8 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFFE1BEE7).withOpacity(0.8), // Light purple
-                const Color(0xFFF8BBD9).withOpacity(0.6), // Pink
+                const Color(0xFFE1BEE7).withValues(alpha: 0.8), // Light purple
+                const Color(0xFFF8BBD9).withValues(alpha: 0.6), // Pink
               ],
             ),
           ),
@@ -404,7 +404,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                   width: 40,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.lightBlue.withOpacity(0.3),
+                    color: Colors.lightBlue.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: const Color(0xFFC0C0C0),
@@ -452,8 +452,8 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFFFFE082).withOpacity(0.8), // Light yellow
-                const Color(0xFFFFF9C4).withOpacity(0.6), // Cream
+                const Color(0xFFFFE082).withValues(alpha: 0.8), // Light yellow
+                const Color(0xFFFFF9C4).withValues(alpha: 0.6), // Cream
               ],
             ),
           ),
@@ -485,7 +485,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                   width: 80,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.lightBlue.withOpacity(0.3),
+                    color: Colors.lightBlue.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(color: Colors.brown, width: 3),
                   ),
@@ -626,8 +626,8 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF81C784).withOpacity(0.8), // Light green
-                const Color(0xFFA5D6A7).withOpacity(0.6), // Lighter green
+                const Color(0xFF81C784).withValues(alpha: 0.8), // Light green
+                const Color(0xFFA5D6A7).withValues(alpha: 0.6), // Lighter green
               ],
             ),
           ),
@@ -796,8 +796,10 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF90CAF9).withOpacity(0.8), // Light blue sky
-                const Color(0xFFE0E0E0).withOpacity(0.6), // Gray city
+                const Color(
+                  0xFF90CAF9,
+                ).withValues(alpha: 0.8), // Light blue sky
+                const Color(0xFFE0E0E0).withValues(alpha: 0.6), // Gray city
               ],
             ),
           ),
@@ -1083,7 +1085,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                     decoration: BoxDecoration(
                       border: Border.all(color: shape.shapeColor, width: 3),
                       borderRadius: BorderRadius.circular(8),
-                      color: shape.shapeColor.withOpacity(0.2),
+                      color: shape.shapeColor.withValues(alpha: 0.2),
                     ),
                     child: Center(
                       child: Icon(
@@ -1111,11 +1113,11 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.white.withValues(alpha: 0.9),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -1135,7 +1137,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                       decoration: BoxDecoration(
                         color:
                             isSelected
-                                ? scene.themeColor.withOpacity(0.3)
+                                ? scene.themeColor.withValues(alpha: 0.3)
                                 : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -1178,13 +1180,13 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.primary.withOpacity(0.1),
-              AppColors.primaryDeep.withOpacity(0.05),
+              AppColors.primary.withValues(alpha: 0.1),
+              AppColors.primaryDeep.withValues(alpha: 0.05),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             width: 2,
           ),
         ),
@@ -1235,7 +1237,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -1271,11 +1273,11 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.8),
+        color: AppColors.white.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -1323,7 +1325,9 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.primary.withOpacity(1.0 - progress),
+                        color: AppColors.primary.withValues(
+                          alpha: 1.0 - progress,
+                        ),
                         width: 2,
                       ),
                     ),
@@ -1353,7 +1357,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             // Progress bar
             LinearProgressIndicator(
               value: progress,
-              backgroundColor: AppColors.grey.withOpacity(0.3),
+              backgroundColor: AppColors.grey.withValues(alpha: 0.3),
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
               minHeight: 6,
             ).animate().slideX(duration: 600.ms),
@@ -1431,14 +1435,14 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    foundShape.shapeColor.withOpacity(0.9),
-                    foundShape.shapeColor.withOpacity(0.7),
+                    foundShape.shapeColor.withValues(alpha: 0.9),
+                    foundShape.shapeColor.withValues(alpha: 0.7),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: foundShape.shapeColor.withOpacity(0.3),
+                    color: foundShape.shapeColor.withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -1496,12 +1500,15 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [AppColors.accent2, AppColors.accent2.withOpacity(0.8)],
+              colors: [
+                AppColors.accent2,
+                AppColors.accent2.withValues(alpha: 0.8),
+              ],
             ),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -1535,7 +1542,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
   Widget _buildLevelCompleteOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withOpacity(0.7),
+        color: Colors.black.withValues(alpha: 0.7),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -1581,7 +1588,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
   Widget _buildCelebrationOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.black.withValues(alpha: 0.8),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),

@@ -4,12 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 import 'package:le_petit_davinci/features/studio/views/gallery_screen.dart';
@@ -87,14 +83,14 @@ class StudioMainScreen extends StatelessWidget {
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primary.withOpacity(0.8)],
+          colors: [AppColors.primary, AppColors.primary.withValues(alpha: 0.8)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
+            color: AppColors.primary.withValues(alpha: 0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -119,7 +115,7 @@ class StudioMainScreen extends StatelessWidget {
                 Text(
                   'Libère ta créativité et crée des dessins magiques!',
                   style: TextStyle(
-                    color: AppColors.white.withOpacity(0.9),
+                    color: AppColors.white.withValues(alpha: 0.9),
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     height: 1.3,
@@ -132,7 +128,7 @@ class StudioMainScreen extends StatelessWidget {
                     vertical: 6.h,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.white.withOpacity(0.2),
+                    color: AppColors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Text(
@@ -152,7 +148,7 @@ class StudioMainScreen extends StatelessWidget {
             width: 80.w,
             height: 80.w,
             decoration: BoxDecoration(
-              color: AppColors.white.withOpacity(0.2),
+              color: AppColors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Icon(Icons.palette, color: AppColors.white, size: 40.sp),
@@ -232,7 +228,7 @@ class StudioMainScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.05),
+              color: AppColors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -404,7 +400,7 @@ class StudioMainScreen extends StatelessWidget {
             width: 80.w,
             height: 80.w,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(40.r),
             ),
             child: Icon(Icons.palette, size: 40.sp, color: AppColors.primary),
@@ -482,12 +478,12 @@ class StudioMainScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(color: color.withOpacity(0.3), width: 1),
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -577,7 +573,7 @@ class StudioMainScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.1),
+              color: AppColors.black.withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),

@@ -11,10 +11,6 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 
-
-
-
-
 class ReorderWordsController extends GetxController {
   ReorderWordsController(this.exercises, {required this.dialect});
 

@@ -49,13 +49,7 @@ class NumberBond {
   String get frenchEquation => '$firstNumber plus $secondNumber fait $target';
 }
 
-enum ChestState {
-  closed,
-  glowing,
-  opening,
-  opened,
-  sparkling,
-}
+enum ChestState { closed, glowing, opening, opened, sparkling }
 
 class TreasureChest {
   final String id;
@@ -99,16 +93,18 @@ class TreasureChest {
   bool get isFull => currentAmount == targetAmount;
   bool get isOverfull => currentAmount > targetAmount;
   bool get isEmpty => currentAmount == 0;
-  double get fillPercentage => targetAmount == 0 ? 0.0 : currentAmount / targetAmount;
-  int get remainingSpace => (targetAmount - currentAmount).clamp(0, targetAmount);
+  double get fillPercentage =>
+      targetAmount == 0 ? 0.0 : currentAmount / targetAmount;
+  int get remainingSpace =>
+      (targetAmount - currentAmount).clamp(0, targetAmount);
   bool get isNearTarget => remainingSpace <= 2 && remainingSpace > 0;
 }
 
 enum LevelType {
-  visualMake10,        // Visual completion with pre-existing items
-  numberBonds,         // Equation-based number bonds
-  discoverAll,         // Find all combinations
-  otherTargets,        // Different target numbers
+  visualMake10, // Visual completion with pre-existing items
+  numberBonds, // Equation-based number bonds
+  discoverAll, // Find all combinations
+  otherTargets, // Different target numbers
 }
 
 class TreasureLevel {
@@ -150,7 +146,7 @@ class TreasureChestData {
       emoji: '🪙',
       color: 'gold',
     ),
-    
+
     // Gems
     TreasureItem(
       id: 'ruby',
@@ -173,7 +169,7 @@ class TreasureChestData {
       emoji: '💙',
       color: 'blue',
     ),
-    
+
     // Jewelry
     TreasureItem(
       id: 'crown',
@@ -189,7 +185,7 @@ class TreasureChestData {
       emoji: '💍',
       color: 'gold',
     ),
-    
+
     // Pearls
     TreasureItem(
       id: 'pearl',
@@ -203,34 +199,30 @@ class TreasureChestData {
   // Get all possible number bonds for a target
   static List<NumberBond> getAllBondsForTarget(int target) {
     final bonds = <NumberBond>[];
-    
+
     for (int i = 0; i <= target; i++) {
       final complement = target - i;
       if (complement >= 0) {
-        bonds.add(NumberBond(
-          firstNumber: i,
-          secondNumber: complement,
-          target: target,
-        ));
+        bonds.add(
+          NumberBond(firstNumber: i, secondNumber: complement, target: target),
+        );
       }
     }
-    
+
     return bonds;
   }
 
   // Get specific number bonds (avoiding duplicates like 3+7 and 7+3)
   static List<NumberBond> getUniqueBondsForTarget(int target) {
     final bonds = <NumberBond>[];
-    
+
     for (int i = 0; i <= target ~/ 2; i++) {
       final complement = target - i;
-      bonds.add(NumberBond(
-        firstNumber: i,
-        secondNumber: complement,
-        target: target,
-      ));
+      bonds.add(
+        NumberBond(firstNumber: i, secondNumber: complement, target: target),
+      );
     }
-    
+
     return bonds;
   }
 
@@ -242,7 +234,8 @@ class TreasureChestData {
       type: LevelType.visualMake10,
       title: 'Complete the Treasure',
       frenchTitle: 'Compléter le Trésor',
-      description: 'Il y a déjà 6 pièces d\'or dans le coffre. Ajoute les pièces manquantes pour faire exactement 10!',
+      description:
+          'Il y a déjà 6 pièces d\'or dans le coffre. Ajoute les pièces manquantes pour faire exactement 10!',
       instruction: 'Fais glisser des pièces pour compléter le trésor',
       targetNumber: 10,
       availableItems: List.filled(10, allTreasureItems[0]), // 10 gold coins
@@ -255,9 +248,7 @@ class TreasureChestData {
         title: 'Magic Chest',
         frenchTitle: 'Coffre Magique',
       ),
-      targetBonds: [
-        NumberBond(firstNumber: 6, secondNumber: 4, target: 10),
-      ],
+      targetBonds: [NumberBond(firstNumber: 6, secondNumber: 4, target: 10)],
     ),
 
     // Level 2: Number Bonds to 10
@@ -266,7 +257,8 @@ class TreasureChestData {
       type: LevelType.numberBonds,
       title: 'Number Bonds to 10',
       frenchTitle: 'Combinaisons pour 10',
-      description: 'Résous l\'équation: 7 + ? = 10. Glisse le bon nombre de trésors dans le coffre!',
+      description:
+          'Résous l\'équation: 7 + ? = 10. Glisse le bon nombre de trésors dans le coffre!',
       instruction: 'Complete l\'équation avec des trésors',
       targetNumber: 10,
       availableItems: List.filled(15, allTreasureItems[1]), // 15 rubies
@@ -293,7 +285,8 @@ class TreasureChestData {
       type: LevelType.discoverAll,
       title: 'Discover All Ways',
       frenchTitle: 'Découvrir Toutes les Façons',
-      description: 'Trouve TOUTES les façons de faire 10! Chaque nouvelle combinaison révèle un morceau de la carte au trésor.',
+      description:
+          'Trouve TOUTES les façons de faire 10! Chaque nouvelle combinaison révèle un morceau de la carte au trésor.',
       instruction: 'Trouve toutes les combinaisons possibles',
       targetNumber: 10,
       availableItems: List.filled(20, allTreasureItems[2]), // 20 emeralds
@@ -315,7 +308,8 @@ class TreasureChestData {
       type: LevelType.otherTargets,
       title: 'New Challenges',
       frenchTitle: 'Nouveaux Défis',
-      description: 'Maîtrise d\'autres nombres! Trouve les façons de faire 8, puis 12.',
+      description:
+          'Maîtrise d\'autres nombres! Trouve les façons de faire 8, puis 12.',
       instruction: 'Explore différents nombres cibles',
       targetNumber: 8, // Will cycle through 8, 9, 12
       availableItems: allTreasureItems, // Mix of all treasures
@@ -365,21 +359,42 @@ class TreasureChestData {
   // Get French number name
   static String getFrenchNumber(int number) {
     const frenchNumbers = {
-      0: 'zéro', 1: 'un', 2: 'deux', 3: 'trois', 4: 'quatre', 5: 'cinq',
-      6: 'six', 7: 'sept', 8: 'huit', 9: 'neuf', 10: 'dix',
-      11: 'onze', 12: 'douze', 13: 'treize', 14: 'quatorze', 15: 'quinze',
-      16: 'seize', 17: 'dix-sept', 18: 'dix-huit', 19: 'dix-neuf', 20: 'vingt',
+      0: 'zéro',
+      1: 'un',
+      2: 'deux',
+      3: 'trois',
+      4: 'quatre',
+      5: 'cinq',
+      6: 'six',
+      7: 'sept',
+      8: 'huit',
+      9: 'neuf',
+      10: 'dix',
+      11: 'onze',
+      12: 'douze',
+      13: 'treize',
+      14: 'quatorze',
+      15: 'quinze',
+      16: 'seize',
+      17: 'dix-sept',
+      18: 'dix-huit',
+      19: 'dix-neuf',
+      20: 'vingt',
     };
-    
+
     return frenchNumbers[number] ?? number.toString();
   }
 
   // Get completion message for number bonds
-  static String getCompletionMessage(int target, int firstNumber, int secondNumber) {
+  static String getCompletionMessage(
+    int target,
+    int firstNumber,
+    int secondNumber,
+  ) {
     final frenchTarget = getFrenchNumber(target);
     final frenchFirst = getFrenchNumber(firstNumber);
     final frenchSecond = getFrenchNumber(secondNumber);
-    
+
     return '$frenchFirst plus $frenchSecond font $frenchTarget!';
   }
 

@@ -63,8 +63,12 @@ class AppColors {
   static const Color lightGrey = Color(0xFFF9F9F9);
   static const Color white = Color(0xFFFFFFFF);
 
-  static const Color backgroundSecondary = Color(0xFFF5F6FA); // light neutral for backgrounds
-  static const Color textTertiary = Color(0xFFB0B0B0); // light grey for tertiary text
+  static const Color backgroundSecondary = Color(
+    0xFFF5F6FA,
+  ); // light neutral for backgrounds
+  static const Color textTertiary = Color(
+    0xFFB0B0B0,
+  ); // light grey for tertiary text
   static const Color error = Color(0xFFFF3B3B); // standard error red
   static const Color orange = Color(0xFFFF9800); // standard orange
 }

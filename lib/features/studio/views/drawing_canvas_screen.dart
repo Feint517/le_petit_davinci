@@ -146,7 +146,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black.withOpacity(0.1),
+                        color: AppColors.black.withValues(alpha: 0.1),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -221,7 +221,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
       Get.snackbar(
         'Attention',
         'Dessine quelque chose avant de sauvegarder!',
-        backgroundColor: Colors.orange.withOpacity(0.8),
+        backgroundColor: Colors.orange.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
       return;
@@ -414,8 +414,8 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                                 Get.snackbar(
                                   'Attention',
                                   'Donne un nom à ton dessin!',
-                                  backgroundColor: Colors.orange.withOpacity(
-                                    0.8,
+                                  backgroundColor: Colors.orange.withValues(
+                                    alpha: 0.8,
                                   ),
                                   colorText: Colors.white,
                                 );

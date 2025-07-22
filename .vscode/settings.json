@@ -110,7 +110,7 @@
     "**README.md": true,
     "**/test": false,
     "**/build": true,
-    "**/web": true,
+    "**/web": false,
     "**/windows": false,
     "**.flutter-plugins": true,
     "**.flutter-plugins-dependencies": true

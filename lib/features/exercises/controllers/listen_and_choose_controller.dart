@@ -30,9 +30,7 @@ class ListenAndChooseController extends GetxController {
   void onInit() async {
     super.onInit();
     await BackgroundMusicController.instance.stopMusic();
-    await _audioPlayer.setAsset(
-      AudioAssets.correctSound,
-    );
+    await _audioPlayer.setAsset(AudioAssets.correctSound);
     await _audioPlayer.setAsset(AudioAssets.errorSound);
   }
 

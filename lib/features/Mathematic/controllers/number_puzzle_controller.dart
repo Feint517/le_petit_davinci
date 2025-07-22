@@ -11,12 +11,12 @@ class NumberPuzzleController extends GetxController {
   final isLoading = false.obs;
   final showCelebration = false.obs;
   final showLevelComplete = false.obs;
-  
+
   // Drag and drop state
   final availableNumbers = <int>[].obs;
   final droppedNumbers = <int, int?>{}.obs; // position -> number
   final draggedNumber = Rxn<int>();
-  
+
   // Current sequence data
   final currentSequences = <NumberSequence>[].obs;
   final completedLevels = <int>[].obs;
@@ -52,21 +52,24 @@ class NumberPuzzleController extends GetxController {
   // Initialize current level
   void _initializeLevel() {
     isLoading.value = true;
-    
+
     try {
       // Get sequences for current level
-      currentSequences.value = NumberPuzzleData.getSequencesForLevel(currentLevel.value);
+      currentSequences.value = NumberPuzzleData.getSequencesForLevel(
+        currentLevel.value,
+      );
       currentSequenceIndex.value = 0;
-      
+
       // Get all available numbers for this level (shuffled)
-      availableNumbers.value = NumberPuzzleData.getAllMissingNumbersForLevel(currentLevel.value);
-      
+      availableNumbers.value = NumberPuzzleData.getAllMissingNumbersForLevel(
+        currentLevel.value,
+      );
+
       // Reset dropped numbers
       droppedNumbers.clear();
-      
+
       // Initialize drop positions for current sequence
       _initializeCurrentSequence();
-      
     } catch (e) {
       print('Error initializing level: $e');
     } finally {
@@ -78,10 +81,10 @@ class NumberPuzzleController extends GetxController {
   void _initializeCurrentSequence() {
     final sequence = getCurrentSequence();
     if (sequence == null) return;
-    
+
     // Clear previous drops for this sequence
     droppedNumbers.clear();
-    
+
     // Initialize empty drop positions
     for (int i = 0; i < sequence.sequence.length; i++) {
       if (sequence.sequence[i] == null) {
@@ -109,25 +112,23 @@ class NumberPuzzleController extends GetxController {
     try {
       // Check if this is the correct number for this position
       final correctNumber = sequence.getCorrectNumberAt(position);
-      
+
       if (correctNumber == number) {
         // Correct drop
         droppedNumbers[position] = number;
         availableNumbers.remove(number);
-        
+
         // Speak the number
         await speakNumber(number);
-        
+
         // Check if sequence is complete
         if (_isCurrentSequenceComplete()) {
           await _handleSequenceComplete();
         }
-        
       } else {
         // Incorrect drop - provide feedback
         await _handleIncorrectDrop(number);
       }
-      
     } catch (e) {
       print('Error handling drop: $e');
     } finally {
@@ -139,7 +140,7 @@ class NumberPuzzleController extends GetxController {
   bool _isCurrentSequenceComplete() {
     final sequence = getCurrentSequence();
     if (sequence == null) return false;
-    
+
     for (int i = 0; i < sequence.sequence.length; i++) {
       if (sequence.sequence[i] == null && droppedNumbers[i] == null) {
         return false;
@@ -151,7 +152,7 @@ class NumberPuzzleController extends GetxController {
   // Handle sequence completion
   Future<void> _handleSequenceComplete() async {
     await flutterTts.speak('Parfait!');
-    
+
     // Move to next sequence
     if (currentSequenceIndex.value < currentSequences.length - 1) {
       // More sequences in this level
@@ -167,13 +168,13 @@ class NumberPuzzleController extends GetxController {
   Future<void> _handleLevelComplete() async {
     completedLevels.add(currentLevel.value);
     showLevelComplete.value = true;
-    
+
     await flutterTts.speak('Niveau terminé! Bravo!');
-    
+
     // Hide level complete after 2 seconds
     await Future.delayed(const Duration(seconds: 2));
     showLevelComplete.value = false;
-    
+
     // Check if game is complete
     if (currentLevel.value >= maxLevel) {
       await _handleGameComplete();
@@ -188,7 +189,7 @@ class NumberPuzzleController extends GetxController {
   Future<void> _handleGameComplete() async {
     showCelebration.value = true;
     await flutterTts.speak('Félicitations! Tu as terminé tous les niveaux!');
-    
+
     // Hide celebration after 3 seconds
     await Future.delayed(const Duration(seconds: 3));
     showCelebration.value = false;
@@ -199,8 +200,8 @@ class NumberPuzzleController extends GetxController {
     // Speak encouraging message
     final messages = [
       'Essaie encore!',
-      'Pas tout à fait!', 
-      'Continue d\'essayer!'
+      'Pas tout à fait!',
+      'Continue d\'essayer!',
     ];
     final message = messages[DateTime.now().millisecond % messages.length];
     await flutterTts.speak(message);
@@ -210,13 +211,29 @@ class NumberPuzzleController extends GetxController {
   Future<void> speakNumber(int number) async {
     try {
       final frenchNumbers = {
-        1: 'un', 2: 'deux', 3: 'trois', 4: 'quatre', 5: 'cinq',
-        6: 'six', 7: 'sept', 8: 'huit', 9: 'neuf', 10: 'dix',
-        11: 'onze', 12: 'douze', 13: 'treize', 14: 'quatorze', 15: 'quinze',
-        16: 'seize', 17: 'dix-sept', 18: 'dix-huit', 19: 'dix-neuf', 20: 'vingt',
+        1: 'un',
+        2: 'deux',
+        3: 'trois',
+        4: 'quatre',
+        5: 'cinq',
+        6: 'six',
+        7: 'sept',
+        8: 'huit',
+        9: 'neuf',
+        10: 'dix',
+        11: 'onze',
+        12: 'douze',
+        13: 'treize',
+        14: 'quatorze',
+        15: 'quinze',
+        16: 'seize',
+        17: 'dix-sept',
+        18: 'dix-huit',
+        19: 'dix-neuf',
+        20: 'vingt',
         25: 'vingt-cinq',
       };
-      
+
       final frenchNumber = frenchNumbers[number] ?? number.toString();
       await flutterTts.speak(frenchNumber);
     } catch (e) {
@@ -228,18 +245,18 @@ class NumberPuzzleController extends GetxController {
   bool canDrop(int position) {
     final sequence = getCurrentSequence();
     if (sequence == null) return false;
-    
+
     // Can only drop on null positions
-    return position < sequence.sequence.length && 
-           sequence.sequence[position] == null &&
-           droppedNumbers[position] == null;
+    return position < sequence.sequence.length &&
+        sequence.sequence[position] == null &&
+        droppedNumbers[position] == null;
   }
 
   // Get number at position (either from sequence or dropped)
   int? getNumberAtPosition(int position) {
     final sequence = getCurrentSequence();
     if (sequence == null) return null;
-    
+
     // Return dropped number if exists, otherwise original sequence number
     return droppedNumbers[position] ?? sequence.sequence[position];
   }
@@ -309,7 +326,7 @@ class NumberPuzzleController extends GetxController {
   int? getNextEmptyPosition() {
     final sequence = getCurrentSequence();
     if (sequence == null) return null;
-    
+
     for (int i = 0; i < sequence.sequence.length; i++) {
       if (sequence.sequence[i] == null && droppedNumbers[i] == null) {
         return i;

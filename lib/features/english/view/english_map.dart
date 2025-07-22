@@ -23,7 +23,7 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
       appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       body: Stack(
         children: [
-          Positioned.fill(
+          const Positioned.fill(
             child: ResponsiveImageAsset(
               assetPath: SvgAssets.mapBackground,
               fit: BoxFit.cover,

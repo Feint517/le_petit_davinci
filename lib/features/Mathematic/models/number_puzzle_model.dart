@@ -23,7 +23,7 @@ class NumberSequence {
   // Get the correct number for a specific position
   int? getCorrectNumberAt(int index) {
     if (index < 0 || index >= sequence.length) return null;
-    
+
     // Calculate what the number should be based on the pattern
     switch (difficulty) {
       case SequenceDifficulty.sequential:
@@ -76,10 +76,10 @@ class NumberSequence {
 }
 
 enum SequenceDifficulty {
-  sequential,    // 1, 2, 3, 4, 5
-  skipByTwo,     // 2, 4, 6, 8, 10
-  skipByFive,    // 5, 10, 15, 20, 25
-  backwards,     // 10, 9, 8, 7, 6
+  sequential, // 1, 2, 3, 4, 5
+  skipByTwo, // 2, 4, 6, 8, 10
+  skipByFive, // 5, 10, 15, 20, 25
+  backwards, // 10, 9, 8, 7, 6
 }
 
 class NumberPuzzleData {
@@ -179,15 +179,15 @@ class NumberPuzzleData {
   static List<int> getAllMissingNumbersForLevel(int level) {
     final sequences = getSequencesForLevel(level);
     final allNumbers = <int>[];
-    
+
     for (final sequence in sequences) {
       allNumbers.addAll(sequence.missingNumbers);
     }
-    
+
     // Add some extra distractors
     final distractors = _getDistractorsForLevel(level);
     allNumbers.addAll(distractors);
-    
+
     allNumbers.shuffle();
     return allNumbers;
   }

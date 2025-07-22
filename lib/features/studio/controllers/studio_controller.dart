@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
@@ -267,7 +266,7 @@ class StudioController extends GetxController {
       Get.snackbar(
         'Sauvé! 🎨',
         'Ton dessin "${artwork.title}" a été sauvé',
-        backgroundColor: Colors.green.withOpacity(0.8),
+        backgroundColor: Colors.green.withValues(alpha: 0.8),
         colorText: Colors.white,
         duration: const Duration(seconds: 3),
       );
@@ -276,7 +275,7 @@ class StudioController extends GetxController {
       Get.snackbar(
         'Erreur',
         'Impossible de sauvegarder le dessin',
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: Colors.red.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
     } finally {
@@ -347,7 +346,7 @@ class StudioController extends GetxController {
       Get.snackbar(
         'Supprimé 🗑️',
         '"${artwork.title}" a été supprimé',
-        backgroundColor: Colors.orange.withOpacity(0.8),
+        backgroundColor: Colors.orange.withValues(alpha: 0.8),
         colorText: Colors.white,
         duration: const Duration(seconds: 2),
       );
