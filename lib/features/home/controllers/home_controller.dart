@@ -4,7 +4,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/Games/view/games_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_map.dart';
 import 'package:le_petit_davinci/features/english/view/english_map.dart';
-import 'package:le_petit_davinci/features/english/view/english_map_screen_old.dart';
 import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
 import 'package:le_petit_davinci/features/home/models/subject_card_model.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';

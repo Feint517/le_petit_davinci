@@ -22,9 +22,11 @@ class ImageAssets {
   //* listen and choose
   static const String apple = 'assets/images/listen_and_choose/apple.png';
   static const String banana = 'assets/images/listen_and_choose/banana.png';
+  static const String bear = 'assets/images/listen_and_choose/bear.png';
   static const String bed = 'assets/images/listen_and_choose/bed.png';
   static const String cat = 'assets/images/listen_and_choose/cat.png';
   static const String dog = 'assets/images/listen_and_choose/dog.png';
+  static const String elephant = 'assets/images/listen_and_choose/elephant.png';
   static const String home = 'assets/images/listen_and_choose/home.png';
   static const String lion = 'assets/images/listen_and_choose/lion.png';
   static const String monkey = 'assets/images/listen_and_choose/monkey.png';
@@ -37,6 +39,7 @@ class ImageAssets {
   static const String strawberry =
       'assets/images/listen_and_choose/strawberry.png';
   static const String table = 'assets/images/listen_and_choose/table.png';
+  static const String tiger = 'assets/images/listen_and_choose/tiger.png';
   static const String zebra = 'assets/images/listen_and_choose/zebra.png';
 }
 
@@ -226,9 +229,11 @@ class AudioAssets {
   //* listen and choose
   static const String apple = 'assets/audio/listen_and_choose/apple.mp3';
   static const String banana = 'assets/audio/listen_and_choose/banana.mp3';
+  static const String bear = 'assets/audio/listen_and_choose/bear.mp3';
   static const String bed = 'assets/audio/listen_and_choose/bed.mp3';
   static const String cat = 'assets/audio/listen_and_choose/cat.mp3';
   static const String dog = 'assets/audio/listen_and_choose/dog.mp3';
+  static const String elephant = 'assets/audio/listen_and_choose/elephant.mp3';
   static const String home = 'assets/audio/listen_and_choose/home.mp3';
   static const String lion = 'assets/audio/listen_and_choose/lion.mp3';
   static const String monkey = 'assets/audio/listen_and_choose/monkey.mp3';
@@ -241,5 +246,6 @@ class AudioAssets {
   static const String strawberry =
       'assets/audio/listen_and_choose/strawberry.mp3';
   static const String table = 'assets/audio/listen_and_choose/table.mp3';
+  static const String tiger = 'assets/audio/listen_and_choose/tigerq.mp3';
   static const String zebra = 'assets/audio/listen_and_choose/zebra.mp3';
 }

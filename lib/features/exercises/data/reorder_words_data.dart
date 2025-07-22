@@ -1,6 +1,6 @@
 import 'package:le_petit_davinci/features/exercises/controllers/reorder_words_controller.dart';
 
-final reorderWordsLevels = {
+final reorderWordsEnglishLevels = {
   4: [
     // Level 4
     ReorderWordsExercise(
@@ -11,7 +11,6 @@ final reorderWordsLevels = {
       words: ['banana', 'eat', 'I'],
       correctOrder: [2, 1, 0],
     ),
-    // Add more exercises for this level...
   ],
   // Add more levels as needed
 };
