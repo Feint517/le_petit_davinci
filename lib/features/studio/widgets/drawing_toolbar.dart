@@ -39,21 +39,18 @@ class DrawingToolbar extends GetView<StudioController> {
           children: [
             // Undo/Redo section
             _buildUndoRedoSection(),
-
             Gap(16.w),
             _buildVerticalDivider(),
             Gap(16.w),
 
             // Drawing tools section
             _buildDrawingToolsSection(),
-
             Gap(16.w),
             _buildVerticalDivider(),
             Gap(16.w),
 
             // Brush size section
             _buildBrushSizeSection(),
-
             const Spacer(),
 
             // Action buttons
@@ -67,32 +64,27 @@ class DrawingToolbar extends GetView<StudioController> {
   Widget _buildUndoRedoSection() {
     return Row(
       children: [
-        // Undo button
+        // Undo button - FIXED with proper observable usage
         Obx(
           () => _buildToolButton(
             icon: Icons.undo,
             onPressed:
-                controller.drawingController.canUndo()
-                    ? () => controller.undo()
-                    : null,
-            tooltip:
-                'Annuler (${controller.drawingController.getHistory.length} actions)',
-            isEnabled: controller.drawingController.canUndo(),
+                controller.canUndo.value ? () => controller.undo() : null,
+            tooltip: 'Annuler (${controller.historyLength.value} actions)',
+            isEnabled: controller.canUndo.value,
           ),
         ),
 
         Gap(8.w),
 
-        // Redo button
+        // Redo button - FIXED with proper observable usage
         Obx(
           () => _buildToolButton(
             icon: Icons.redo,
             onPressed:
-                controller.drawingController.canRedo()
-                    ? () => controller.redo()
-                    : null,
+                controller.canRedo.value ? () => controller.redo() : null,
             tooltip: 'Refaire',
-            isEnabled: controller.drawingController.canRedo(),
+            isEnabled: controller.canRedo.value,
           ),
         ),
       ],
@@ -106,9 +98,9 @@ class DrawingToolbar extends GetView<StudioController> {
         Obx(
           () => _buildToolButton(
             icon: Icons.brush,
-            isSelected: controller.selectedTool.value == DrawingTool.brush,
             onPressed: () => controller.selectTool(DrawingTool.brush),
             tooltip: 'Pinceau',
+            isSelected: controller.selectedTool.value == DrawingTool.brush,
             selectedColor: AppColors.primary,
           ),
         ),
@@ -119,43 +111,33 @@ class DrawingToolbar extends GetView<StudioController> {
         Obx(
           () => _buildToolButton(
             icon: Icons.auto_fix_high,
-            isSelected: controller.selectedTool.value == DrawingTool.eraser,
             onPressed: () => controller.selectTool(DrawingTool.eraser),
             tooltip: 'Gomme',
-            selectedColor: AppColors.secondary,
+            isSelected: controller.selectedTool.value == DrawingTool.eraser,
+            selectedColor: AppColors.error,
           ),
         ),
 
         Gap(8.w),
 
-        // Color indicator (shows current selected color)
+        // Color picker button
         Obx(
-          () => Container(
-            width: 40.w,
-            height: 40.w,
-            decoration: BoxDecoration(
-              color:
-                  controller.selectedTool.value == DrawingTool.eraser
-                      ? AppColors.backgroundSecondary
-                      : controller.selectedColor.value,
-              borderRadius: BorderRadius.circular(8.r),
-              border: Border.all(color: AppColors.borderPrimary, width: 2),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+          () => GestureDetector(
+            onTap: () => _showColorPicker(),
+            child: Container(
+              width: 40.w,
+              height: 40.w,
+              decoration: BoxDecoration(
+                color: controller.selectedColor.value,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: AppColors.borderPrimary, width: 2),
+              ),
+              child: Icon(
+                Icons.palette,
+                color: _getContrastColor(controller.selectedColor.value),
+                size: 20.sp,
+              ),
             ),
-            child:
-                controller.selectedTool.value == DrawingTool.eraser
-                    ? Icon(
-                      Icons.auto_fix_high,
-                      color: AppColors.textSecondary,
-                      size: 16.sp,
-                    )
-                    : null,
           ),
         ),
       ],
@@ -168,84 +150,61 @@ class DrawingToolbar extends GetView<StudioController> {
       children: [
         Row(
           children: [
-            Icon(
-              Icons.line_weight,
-              size: 14.sp,
-              color: AppColors.textSecondary,
-            ),
-            Gap(4.w),
-            Text(
-              'Taille',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
+            Icon(Icons.circle, size: 12.sp, color: AppColors.textSecondary),
+            Gap(8.w),
 
-        Gap(4.h),
-
-        Obx(
-          () => Container(
-            width: 120.w,
-            height: 32.h,
-            decoration: BoxDecoration(
-              color: AppColors.backgroundSecondary,
-              borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: AppColors.borderPrimary, width: 1),
-            ),
-            child: Row(
-              children:
-                  controller.availableSizes.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final size = entry.value;
-                    final isSelected = controller.brushSize.value == size;
-
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () => controller.selectBrushSize(size),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          margin: EdgeInsets.all(2.w),
-                          decoration: BoxDecoration(
-                            color:
-                                isSelected
-                                    ? AppColors.white
-                                    : Colors.transparent,
-                            borderRadius: BorderRadius.circular(14.r),
-                            boxShadow:
-                                isSelected
-                                    ? [
-                                      BoxShadow(
-                                        color: AppColors.black.withOpacity(0.1),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 1),
+            // Brush size selector - FIXED with proper Row structure for Gap widgets
+            Obx(
+              () => SizedBox(
+                width: 120.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:
+                      controller.availableSizes.map((size) {
+                        final isSelected = controller.brushSize.value == size;
+                        return GestureDetector(
+                          onTap: () => controller.setBrushSize(size),
+                          child: Container(
+                            width: 24.w,
+                            height: 24.w,
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? AppColors.primary.withOpacity(0.1)
+                                      : Colors.transparent,
+                              borderRadius: BorderRadius.circular(12.r),
+                              border:
+                                  isSelected
+                                      ? Border.all(
+                                        color: AppColors.primary,
+                                        width: 2,
+                                      )
+                                      : Border.all(
+                                        color: AppColors.borderPrimary,
+                                        width: 1,
                                       ),
-                                    ]
-                                    : null,
-                          ),
-                          child: Center(
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: (size * 0.4).clamp(4.0, 16.0),
-                              height: (size * 0.4).clamp(4.0, 16.0),
-                              decoration: BoxDecoration(
-                                color:
-                                    isSelected
-                                        ? controller.selectedColor.value
-                                        : AppColors.textSecondary,
-                                shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                width: (size * 0.5).clamp(4.0, 14.0),
+                                height: (size * 0.5).clamp(4.0, 14.0),
+                                decoration: BoxDecoration(
+                                  color:
+                                      isSelected
+                                          ? controller.selectedColor.value
+                                          : AppColors.textSecondary,
+                                  shape: BoxShape.circle,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );
@@ -303,10 +262,9 @@ class DrawingToolbar extends GetView<StudioController> {
         child: InkWell(
           onTap: isEnabled ? onPressed : null,
           borderRadius: BorderRadius.circular(8.r),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: 44.w,
-            height: 44.w,
+          child: Container(
+            width: 40.w,
+            height: 40.w,
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(8.r),
@@ -318,11 +276,7 @@ class DrawingToolbar extends GetView<StudioController> {
                       )
                       : null,
             ),
-            child: AnimatedScale(
-              duration: const Duration(milliseconds: 100),
-              scale: isSelected ? 1.1 : 1.0,
-              child: Icon(icon, color: iconColor, size: 20.sp),
-            ),
+            child: Icon(icon, color: iconColor, size: 20.sp),
           ),
         ),
       ),
@@ -330,58 +284,112 @@ class DrawingToolbar extends GetView<StudioController> {
   }
 
   Widget _buildVerticalDivider() {
-    return Container(width: 1, height: 35.h, color: AppColors.borderPrimary);
+    return Container(width: 1, height: 24.h, color: AppColors.borderPrimary);
   }
 
-  void _showTemplateSelector() {
+  void _showColorPicker() {
     Get.bottomSheet(
       Container(
         height: 300.h,
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.r),
-            topRight: Radius.circular(20.r),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Choisir un modèle',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'DynaPuff_SemiCondensed',
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    controller.selectTemplate(null);
-                    Get.back();
-                  },
-                  child: Text(
-                    'Dessin libre',
-                    style: TextStyle(color: AppColors.primary, fontSize: 14.sp),
-                  ),
-                ),
-              ],
+            Text(
+              'Choisir une couleur',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
+            Gap(20.h),
 
-            Gap(16.h),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                  crossAxisSpacing: 12.w,
+                  mainAxisSpacing: 12.w,
+                ),
+                itemCount: controller.availableColors.length,
+                itemBuilder: (context, index) {
+                  final color = controller.availableColors[index];
+                  final isSelected = controller.selectedColor.value == color;
+
+                  return GestureDetector(
+                    onTap: () {
+                      controller.setColor(color);
+                      Get.back();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: color,
+                        shape: BoxShape.circle,
+                        border:
+                            isSelected
+                                ? Border.all(
+                                  color: AppColors.textPrimary,
+                                  width: 3,
+                                )
+                                : Border.all(
+                                  color: AppColors.borderPrimary,
+                                  width: 1,
+                                ),
+                      ),
+                      child:
+                          isSelected
+                              ? Icon(
+                                Icons.check,
+                                color: _getContrastColor(color),
+                                size: 24.sp,
+                              )
+                              : null,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showTemplateSelector() {
+    Get.bottomSheet(
+      Container(
+        height: 400.h,
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Choisir un modèle',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            Gap(20.h),
 
             Expanded(
               child: Obx(
                 () => GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
+                    crossAxisCount: 2,
                     crossAxisSpacing: 12.w,
-                    mainAxisSpacing: 12.h,
-                    childAspectRatio: 0.8,
+                    mainAxisSpacing: 12.w,
+                    childAspectRatio: 1.2,
                   ),
                   itemCount: controller.templates.length,
                   itemBuilder: (context, index) {
@@ -394,11 +402,10 @@ class DrawingToolbar extends GetView<StudioController> {
                         controller.selectTemplate(template);
                         Get.back();
                       },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
+                      child: Container(
                         decoration: BoxDecoration(
                           color: AppColors.white,
-                          borderRadius: BorderRadius.circular(8.r),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(
                             color:
                                 isSelected
@@ -406,36 +413,23 @@ class DrawingToolbar extends GetView<StudioController> {
                                     : AppColors.borderPrimary,
                             width: isSelected ? 2 : 1,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.black.withOpacity(0.1),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
                         ),
                         child: Column(
                           children: [
                             Expanded(
                               child: Container(
-                                width: double.infinity,
+                                margin: EdgeInsets.all(8.w),
                                 decoration: BoxDecoration(
-                                  color: _getCategoryColor(
-                                    template.category,
-                                  ).withOpacity(0.1),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8.r),
-                                    topRight: Radius.circular(8.r),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      template.previewImagePath,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                                child: Icon(
-                                  _getCategoryIcon(template.category),
-                                  color: _getCategoryColor(template.category),
-                                  size: 32.sp,
                                 ),
                               ),
                             ),
-
                             Padding(
                               padding: EdgeInsets.all(8.w),
                               child: Text(
@@ -443,9 +437,9 @@ class DrawingToolbar extends GetView<StudioController> {
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
+                                  color: AppColors.textPrimary,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ],
@@ -465,91 +459,52 @@ class DrawingToolbar extends GetView<StudioController> {
   void _showClearDialog() {
     Get.dialog(
       AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
-        ),
         title: Row(
           children: [
-            Icon(Icons.warning_amber, color: Colors.orange, size: 20.sp),
+            Icon(Icons.warning, color: AppColors.error),
             Gap(8.w),
-            Text(
-              'Tout effacer?',
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'DynaPuff_SemiCondensed',
-              ),
-            ),
+            Text('Effacer le dessin'),
           ],
         ),
         content: Text(
-          'Tu vas perdre tout ton dessin actuel. Es-tu sûr de vouloir recommencer?',
-          style: TextStyle(fontSize: 14.sp, color: AppColors.textSecondary),
+          'Êtes-vous sûr de vouloir effacer tout le dessin ? Cette action ne peut pas être annulée.',
+          style: TextStyle(fontSize: 14.sp),
         ),
         actions: [
           TextButton(
             onPressed: () => Get.back(),
             child: Text(
-              'Non, garder',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 14.sp),
+              'Annuler',
+              style: TextStyle(color: AppColors.textSecondary),
             ),
           ),
           ElevatedButton(
             onPressed: () {
               controller.clearCanvas();
               Get.back();
+              Get.snackbar(
+                'Effacé',
+                'Le dessin a été effacé',
+                backgroundColor: AppColors.greenPrimary.withOpacity(0.8),
+                colorText: AppColors.white,
+                duration: const Duration(seconds: 2),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
+              foregroundColor: AppColors.white,
             ),
-            child: Text(
-              'Oui, effacer tout',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            child: Text('Effacer'),
           ),
         ],
       ),
     );
   }
 
-  IconData _getCategoryIcon(TemplateCategory category) {
-    switch (category) {
-      case TemplateCategory.animals:
-        return Icons.pets;
-      case TemplateCategory.shapes:
-        return Icons.category;
-      case TemplateCategory.letters:
-        return Icons.text_fields;
-      case TemplateCategory.numbers:
-        return Icons.numbers;
-      case TemplateCategory.seasonal:
-        return Icons.wb_sunny;
-      case TemplateCategory.daily:
-        return Icons.home;
-    }
-  }
-
-  Color _getCategoryColor(TemplateCategory category) {
-    switch (category) {
-      case TemplateCategory.animals:
-        return AppColors.greenPrimary;
-      case TemplateCategory.shapes:
-        return AppColors.secondary;
-      case TemplateCategory.letters:
-        return AppColors.primary;
-      case TemplateCategory.numbers:
-        return AppColors.accent;
-      case TemplateCategory.seasonal:
-        return AppColors.orangeAccent;
-      case TemplateCategory.daily:
-        return AppColors.pinkAccent;
-    }
+  Color _getContrastColor(Color color) {
+    // Calculate luminance to determine if white or black text is more readable
+    final luminance =
+        (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+    return luminance > 0.5 ? Colors.black : Colors.white;
   }
 }
