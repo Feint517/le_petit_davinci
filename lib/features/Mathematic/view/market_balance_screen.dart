@@ -75,8 +75,8 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
 
                         const SizedBox(height: 16),
 
-                        // Available items or comparison buttons
-                        Expanded(flex: 2, child: _buildInteractionArea()),
+                        // Available items or comparison buttons - FIXED HEIGHT
+                        SizedBox(height: 200, child: _buildInteractionArea()),
 
                         // Controls and progress
                         _buildControls(),
@@ -596,17 +596,23 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
 
   Widget _buildInteractionArea() {
     return Obx(() {
-      final isInteractive = controller.isInteractive;
+      // Get current level type to determine what to show
+      final currentLevel = controller.currentLevel.value;
+      final levelData = MarketBalanceData.getLevelData(currentLevel);
+      final levelType = levelData.type;
       final availableItems = controller.availableItems;
 
-      if (isInteractive && availableItems.isNotEmpty) {
-        // Show draggable items
-        return _buildAvailableItems();
-      } else if (!isInteractive) {
-        // Show comparison buttons for viewing levels
+      // For visual comparison and same item comparison levels, show comparison buttons
+      if (levelType == LevelType.visualComparison ||
+          levelType == LevelType.sameItemComparison) {
         return _buildComparisonButtons();
-      } else {
-        // All items used
+      }
+      // For interactive levels (makeEqual and numberVsObject), show draggable items
+      else if (availableItems.isNotEmpty) {
+        return _buildAvailableItems();
+      }
+      // All items used
+      else {
         return _buildCompletionMessage();
       }
     });
@@ -618,6 +624,7 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
 
       return Container(
         width: double.infinity,
+        height: 200, // Fixed height
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.accent2.withValues(alpha: 0.1),
@@ -738,6 +745,7 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
   Widget _buildComparisonButtons() {
     return Container(
       width: double.infinity,
+      height: 200, // Fixed height instead of using Expanded
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.primary.withValues(alpha: 0.1),
@@ -760,34 +768,140 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
           ),
           const SizedBox(height: 16),
 
+          // Use regular Column instead of Expanded for buttons
           Expanded(
-            child: Row(
+            child: Column(
               children: [
+                // First button row
                 Expanded(
-                  child: PrimaryAnimatedButton(
-                    label: 'Plus à gauche >',
-                    onPressed:
-                        () => controller.checkComparison(
-                          ComparisonType.leftGreater,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              print("Left Greater button pressed"); // Debug
+                              controller.checkComparison(
+                                ComparisonType.leftGreater,
+                              );
+                            },
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withValues(alpha: 0.8),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.primary.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Plus à gauche >',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: PrimaryAnimatedButton(
-                    label: 'Équilibre =',
-                    onPressed:
-                        () => controller.checkComparison(ComparisonType.equal),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: PrimaryAnimatedButton(
-                    label: 'Plus à droite <',
-                    onPressed:
-                        () => controller.checkComparison(
-                          ComparisonType.rightGreater,
+                      ),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              print("Equal button pressed"); // Debug
+                              controller.checkComparison(ComparisonType.equal);
+                            },
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.accent2.withValues(alpha: 0.8),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.accent2.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Équilibre =',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
+                      ),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              print("Right Greater button pressed"); // Debug
+                              controller.checkComparison(
+                                ComparisonType.rightGreater,
+                              );
+                            },
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.secondary.withValues(
+                                  alpha: 0.8,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.secondary.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Plus à droite <',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -799,25 +913,28 @@ class _MarketBalanceScreenState extends State<MarketBalanceScreen> {
   }
 
   Widget _buildCompletionMessage() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '⚖️✨',
-            style: TextStyle(fontSize: 48),
-          ).animate().scale(duration: 800.ms, curve: Curves.elasticOut),
-          const SizedBox(height: 16),
-          Text(
-            'Tous les objets ont été placés!',
-            style: TextStyle(
-              color: AppColors.accent2,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+    return Container(
+      height: 200, // Fixed height
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '⚖️✨',
+              style: TextStyle(fontSize: 48),
+            ).animate().scale(duration: 800.ms, curve: Curves.elasticOut),
+            const SizedBox(height: 16),
+            Text(
+              'Tous les objets ont été placés!',
+              style: TextStyle(
+                color: AppColors.accent2,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

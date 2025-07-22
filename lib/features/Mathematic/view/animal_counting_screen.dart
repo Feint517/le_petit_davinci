@@ -1,4 +1,5 @@
 // lib/features/Mathematic/view/animal_counting_screen.dart
+// FIXED VERSION
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,7 +24,26 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
   @override
   void initState() {
     super.initState();
-    controller = Get.put(AnimalCountingController());
+    // FIX 1: Use Get.find() if already exists, otherwise create new
+    try {
+      controller = Get.find<AnimalCountingController>();
+    } catch (e) {
+      controller = Get.put(AnimalCountingController(), permanent: false);
+    }
+
+    // FIX 2: Add debug logging to verify controller state
+    print(
+      'AnimalCountingScreen initialized with controller: ${controller.hashCode}',
+    );
+  }
+
+  @override
+  void dispose() {
+    // FIX 3: Clean up controller on dispose
+    if (Get.isRegistered<AnimalCountingController>()) {
+      Get.delete<AnimalCountingController>();
+    }
+    super.dispose();
   }
 
   @override
@@ -94,6 +114,49 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
     );
   }
 
+  Widget _buildNumberButtons() {
+    return Obx(() {
+      final isLoading = controller.isLoading.value;
+      final selectedNumber = controller.selectedNumber.value;
+      final completedNumbers = controller.completedNumbers;
+
+      // FIX 4: Add debug logging
+      print(
+        'Building number buttons - isLoading: $isLoading, selectedNumber: $selectedNumber',
+      );
+
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 5,
+          childAspectRatio: 1.0,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          final number = index + 1;
+          final isCompleted = completedNumbers.contains(number);
+          final isSelected = selectedNumber == number;
+
+          // FIX 5: Ensure button always has a valid onPressed function
+          return PrimaryAnimatedButton(
+            label: number.toString(),
+            onPressed: () {
+              // FIX 6: Add immediate debug feedback
+              print('Button $number pressed - isLoading: $isLoading');
+
+              // FIX 7: Call selectNumber without loading check here
+              // (let the controller handle the loading state internally)
+              controller.selectNumberSafely(number);
+            },
+            entranceDelay: Duration(milliseconds: index * 50),
+          ).animate().scale(duration: 300.ms, curve: Curves.easeOutBack);
+        },
+      );
+    });
+  }
+
+  // Rest of the methods remain the same...
   Widget _buildTopNavigation() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -132,9 +195,7 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
               ),
             ),
           ),
-
           const Spacer(),
-
           // Math label
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -266,6 +327,13 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
     });
   }
 
+  int _getCrossAxisCount(int animalCount) {
+    if (animalCount <= 4) return 2;
+    if (animalCount <= 6) return 3;
+    if (animalCount <= 9) return 3;
+    return 4;
+  }
+
   Widget _buildAnimalCard(Animal animal, int index) {
     return GestureDetector(
       onTap: () => controller.speakAnimalName(animal),
@@ -304,35 +372,6 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
       delay: (index * 100).ms,
       curve: Curves.easeOutBack,
     );
-  }
-
-  Widget _buildNumberButtons() {
-    return Obx(() {
-      final isLoading = controller.isLoading.value;
-      final selectedNumber = controller.selectedNumber.value;
-      final completedNumbers = controller.completedNumbers;
-
-      return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
-          childAspectRatio: 1.0,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          final number = index + 1;
-          final isCompleted = completedNumbers.contains(number);
-          final isSelected = selectedNumber == number;
-
-          return PrimaryAnimatedButton(
-            label: number.toString(),
-            onPressed: isLoading ? null : () => controller.selectNumber(number),
-            entranceDelay: Duration(milliseconds: index * 50),
-          ).animate().scale(duration: 300.ms, curve: Curves.easeOutBack);
-        },
-      );
-    });
   }
 
   Widget _buildBottomControls() {
@@ -409,25 +448,17 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
                 Text(
                   'Tu as compté jusqu\'à 10!',
                   style: TextStyle(
-                    color: AppColors.darkGrey,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
-          ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
+          ),
         ),
       ),
     );
-  }
-
-  int _getCrossAxisCount(int itemCount) {
-    if (itemCount <= 2) return 2;
-    if (itemCount <= 4) return 2;
-    if (itemCount <= 6) return 3;
-    if (itemCount <= 9) return 3;
-    return 4;
   }
 }

@@ -1,5 +1,3 @@
-// lib/features/Mathematic/view/shape_architect_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -18,13 +16,11 @@ class ShapeArchitectScreen extends StatefulWidget {
 }
 
 class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
-  late ShapeArchitectController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = Get.put(ShapeArchitectController());
-  }
+  // The controller is now initialized directly by GetX in the build method
+  // using Get.find(), so we don't need to manage it in initState.
+  final ShapeArchitectController controller = Get.put(
+    ShapeArchitectController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +78,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
             ),
           ),
 
-          // Construction hint overlay
+          // Overlays can still use the simpler Obx syntax
           Obx(
             () =>
                 controller.showConstructionHint.value
@@ -90,7 +86,6 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                     : const SizedBox.shrink(),
           ),
 
-          // Level complete overlay
           Obx(
             () =>
                 controller.showLevelComplete.value
@@ -98,7 +93,6 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                     : const SizedBox.shrink(),
           ),
 
-          // Game complete celebration
           Obx(
             () =>
                 controller.showCelebration.value
@@ -125,7 +119,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
+                    color: Colors.black.withOpacity(0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),
@@ -159,7 +153,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
+                  color: AppColors.orangeAccentDark.withOpacity(0.3),
                   blurRadius: 2,
                   offset: const Offset(0, 1),
                 ),
@@ -180,162 +174,164 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   }
 
   Widget _buildTitleSection() {
-    return Obx(() {
-      final currentLevel = controller.currentLevel.value;
-      final levelTitle = controller.getCurrentLevelTitle();
-      final instruction = controller.getCurrentLevelInstruction();
-
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          children: [
-            Text(
-              'Architecte des Formes',
-              style: TextStyle(
-                color: AppColors.darkGrey,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-
-            // Level indicator
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    AppColors.accent,
-                    AppColors.accentDark,
-                  ], // Purple architect theme
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
+            children: [
+              Text(
+                'Architecte des Formes',
+                style: TextStyle(
+                  color: AppColors.darkGrey,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
                 ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.accentDark.withValues(alpha: 0.3),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                textAlign: TextAlign.center,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('🏗️', style: TextStyle(fontSize: 16)),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Niveau $currentLevel - $levelTitle',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+              const SizedBox(height: 8),
+
+              // Level indicator
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [AppColors.accent, AppColors.accentDark],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.accentDark.withOpacity(0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('🏗️', style: TextStyle(fontSize: 16)),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Niveau ${ctrl.currentLevel.value} - ${ctrl.getCurrentLevelTitle()}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 8),
+              const SizedBox(height: 8),
 
-            // Instruction
-            Text(
-              instruction,
-              style: TextStyle(
-                color: AppColors.grey,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+              // Instruction
+              Text(
+                ctrl.getCurrentLevelInstruction(),
+                style: TextStyle(
+                  color: AppColors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildToolbox() {
-    return Obx(() {
-      final availableShapes = controller.availableShapes;
-      final shapeCounts = controller.getShapeCountByType();
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        final shapeCounts = ctrl.getShapeCountByType();
 
-      return Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              const Color(0xFF8B4513).withValues(alpha: 0.8), // Wood brown
-              const Color(0xFF654321).withValues(alpha: 0.8),
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFF8B4513).withOpacity(0.8),
+                const Color(0xFF654321).withOpacity(0.8),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8,
+                offset: const Offset(-2, 4),
+              ),
             ],
           ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.2),
-              blurRadius: 8,
-              offset: const Offset(-2, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            // Toolbox header
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFF654321),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+          child: Column(
+            children: [
+              // Toolbox header
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF654321),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const Text('🧰', style: TextStyle(fontSize: 20)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Boîte à Outils',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                children: [
-                  Text('🧰', style: TextStyle(fontSize: 20)),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Boîte à Outils',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
 
-            // Shape inventory
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child:
-                    availableShapes.isEmpty
-                        ? Center(
-                          child: Text(
-                            'Toutes les formes utilisées!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontStyle: FontStyle.italic,
+              // Shape inventory
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child:
+                      ctrl.availableShapes.isEmpty
+                          ? const Center(
+                            child: Text(
+                              'Toutes les formes utilisées!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontStyle: FontStyle.italic,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
+                          )
+                          : SingleChildScrollView(
+                            child: Column(
+                              children: _buildShapeInventoryByType(shapeCounts),
+                            ),
                           ),
-                        )
-                        : SingleChildScrollView(
-                          child: Column(
-                            children: _buildShapeInventoryByType(shapeCounts),
-                          ),
-                        ),
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 
   List<Widget> _buildShapeInventoryByType(Map<BuildingShape, int> shapeCounts) {
@@ -361,7 +357,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
+                  color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -415,10 +411,10 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
         width: isDragging ? shape.width * 1.2 : shape.width,
         height: isDragging ? shape.height * 1.2 : shape.height,
         decoration: BoxDecoration(
-          color: isGhost ? shape.color.withValues(alpha: 0.3) : shape.color,
+          color: isGhost ? shape.color.withOpacity(0.3) : shape.color,
           borderRadius: _getShapeBorderRadius(shape.type),
           border: Border.all(
-            color: Colors.white.withValues(alpha: isGhost ? 0.3 : 0.7),
+            color: Colors.white.withOpacity(isGhost ? 0.3 : 0.7),
             width: 2,
           ),
           boxShadow:
@@ -426,9 +422,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
                   ? []
                   : [
                     BoxShadow(
-                      color: Colors.black.withValues(
-                        alpha: isDragging ? 0.3 : 0.15,
-                      ),
+                      color: Colors.black.withOpacity(isDragging ? 0.3 : 0.15),
                       blurRadius: isDragging ? 12 : 6,
                       offset: Offset(0, isDragging ? 6 : 3),
                     ),
@@ -448,11 +442,9 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
       case BuildingShape.rectangle:
         return BorderRadius.circular(8);
       case BuildingShape.triangle:
-        return BorderRadius.circular(4);
       case BuildingShape.diamond:
-        return BorderRadius.circular(4);
       case BuildingShape.semicircle:
-        return BorderRadius.circular(25);
+        return BorderRadius.circular(4);
     }
   }
 
@@ -470,7 +462,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
           angle: 0.785398, // 45 degrees
           child: Container(
             decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.8),
+              color: color.withOpacity(0.8),
               borderRadius: BorderRadius.circular(4),
             ),
           ),
@@ -486,111 +478,111 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   }
 
   Widget _buildConstructionArea() {
-    return Obx(() {
-      final isFreeBuildingMode = controller.isFreeBuildingMode;
-
-      return Container(
-        decoration: BoxDecoration(
-          color: AppColors.white.withValues(alpha: 0.95),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.accent.withValues(alpha: 0.3),
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 8,
-              offset: const Offset(2, 4),
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.white.withOpacity(0.95),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: AppColors.accent.withOpacity(0.3),
+              width: 2,
             ),
-          ],
-        ),
-        child: Column(
-          children: [
-            // Construction header
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.accent.withValues(alpha: 0.1),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(2, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              // Construction header
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.accent.withOpacity(0.1),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      ctrl.isFreeBuildingMode ? '🎨' : '📋',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      ctrl.isFreeBuildingMode
+                          ? 'Construction Libre'
+                          : 'Plan de Construction',
+                      style: TextStyle(
+                        color: AppColors.accent,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Spacer(),
+                    if (!ctrl.isFreeBuildingMode) _buildBlueprintSelector(),
+                  ],
                 ),
               ),
-              child: Row(
-                children: [
-                  Text(
-                    isFreeBuildingMode ? '🎨' : '📋',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    isFreeBuildingMode
-                        ? 'Construction Libre'
-                        : 'Plan de Construction',
-                    style: TextStyle(
-                      color: AppColors.accent,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-
-                  // Blueprint selector or feedback
-                  if (!isFreeBuildingMode) _buildBlueprintSelector(),
-                ],
+              Expanded(
+                child:
+                    ctrl.isFreeBuildingMode
+                        ? _buildFreeCanvas()
+                        : _buildBlueprintCanvas(),
               ),
-            ),
-
-            // Canvas area
-            Expanded(
-              child:
-                  isFreeBuildingMode
-                      ? _buildFreeCanvas()
-                      : _buildBlueprintCanvas(),
-            ),
-
-            // Construction feedback
-            _buildConstructionFeedback(),
-          ],
-        ),
-      );
-    });
+              _buildConstructionFeedback(),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildBlueprintSelector() {
-    return Obx(() {
-      final blueprints = controller.getAvailableBlueprints();
-      final selectedId = controller.selectedBlueprintId.value;
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        final blueprints = ctrl.getAvailableBlueprints();
+        if (blueprints.length <= 1) return const SizedBox.shrink();
 
-      if (blueprints.length <= 1) return const SizedBox.shrink();
-
-      return DropdownButton<String>(
-        value: selectedId,
-        items:
-            blueprints.map((blueprint) {
-              return DropdownMenuItem<String>(
-                value: blueprint.id,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(blueprint.emoji, style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 4),
-                    Text(blueprint.frenchName, style: TextStyle(fontSize: 12)),
-                    if (controller.isBlueprintCompleted(blueprint.id))
-                      Text(' ✓', style: TextStyle(color: AppColors.accent2)),
-                  ],
-                ),
-              );
-            }).toList(),
-        onChanged: (value) {
-          if (value != null) {
-            controller.selectBlueprint(value);
-          }
-        },
-        underline: const SizedBox.shrink(),
-      );
-    });
+        return DropdownButton<String>(
+          value: ctrl.selectedBlueprintId.value,
+          items:
+              blueprints.map((blueprint) {
+                return DropdownMenuItem<String>(
+                  value: blueprint.id,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        blueprint.emoji,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        blueprint.frenchName,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      if (ctrl.isBlueprintCompleted(blueprint.id))
+                        Text(' ✓', style: TextStyle(color: AppColors.accent2)),
+                    ],
+                  ),
+                );
+              }).toList(),
+          onChanged: (value) {
+            if (value != null) {
+              ctrl.selectBlueprint(value);
+            }
+          },
+          underline: const SizedBox.shrink(),
+        );
+      },
+    );
   }
 
   Widget _buildFreeCanvas() {
@@ -603,13 +595,13 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.skyBlue.withValues(alpha: 0.3),
-            AppColors.lightGrey.withValues(alpha: 0.5),
+            AppColors.skyBlue.withOpacity(0.3),
+            AppColors.lightGrey.withOpacity(0.5),
           ],
         ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppColors.accent.withValues(alpha: 0.2),
+          color: AppColors.accent.withOpacity(0.2),
           width: 1,
           style: BorderStyle.solid,
         ),
@@ -619,35 +611,34 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   }
 
   Widget _buildBlueprintCanvas() {
-    return Obx(() {
-      final blueprint = controller.getCurrentBlueprint();
-      if (blueprint == null) return const SizedBox.shrink();
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        final blueprint = ctrl.getCurrentBlueprint();
+        if (blueprint == null) return const SizedBox.shrink();
 
-      return Container(
-        key: controller.canvasKey,
-        width: double.infinity,
-        margin: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: AppColors.accent.withValues(alpha: 0.3),
-            width: 2,
-            style: BorderStyle.solid,
+        return Container(
+          key: controller.canvasKey,
+          width: double.infinity,
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: AppColors.accent.withOpacity(0.3),
+              width: 2,
+              style: BorderStyle.solid,
+            ),
           ),
-        ),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Blueprint guidelines
-            _buildBlueprintGuidelines(blueprint),
-
-            // Placed shapes
-            _buildCanvasWithShapes(),
-          ],
-        ),
-      );
-    });
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              _buildBlueprintGuidelines(blueprint),
+              _buildCanvasWithShapes(),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildBlueprintGuidelines(BlueprintObject blueprint) {
@@ -661,47 +652,44 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   }
 
   Widget _buildCanvasWithShapes() {
-    return Obx(() {
-      final placedShapes = controller.placedShapes;
-
-      return DragTarget<ArchitectShape>(
-        onAcceptWithDetails: (details) {
-          // Get drop position relative to canvas
-          final RenderBox? renderBox =
-              controller.canvasKey.currentContext?.findRenderObject()
-                  as RenderBox?;
-          if (renderBox != null) {
-            final localPosition = renderBox.globalToLocal(details.offset);
-            controller.dropShapeOnCanvas(details.data, localPosition);
-          }
-        },
-        onWillAcceptWithDetails: (details) {
-          return true; // Controller handles validation
-        },
-        builder: (context, candidateData, rejectedData) {
-          return Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color:
-                  candidateData.isNotEmpty
-                      ? AppColors.accent.withValues(alpha: 0.1)
-                      : Colors.transparent,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children:
-                  placedShapes.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final placedShape = entry.value;
-                    return _buildPlacedShape(placedShape, index);
-                  }).toList(),
-            ),
-          );
-        },
-      );
-    });
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return DragTarget<ArchitectShape>(
+          onAcceptWithDetails: (details) {
+            final RenderBox? renderBox =
+                controller.canvasKey.currentContext?.findRenderObject()
+                    as RenderBox?;
+            if (renderBox != null) {
+              final localPosition = renderBox.globalToLocal(details.offset);
+              ctrl.dropShapeOnCanvas(details.data, localPosition);
+            }
+          },
+          onWillAcceptWithDetails: (details) {
+            return true;
+          },
+          builder: (context, candidateData, rejectedData) {
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color:
+                    candidateData.isNotEmpty
+                        ? AppColors.accent.withOpacity(0.1)
+                        : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children:
+                    ctrl.placedShapes.asMap().entries.map((entry) {
+                      return _buildPlacedShape(entry.value, entry.key);
+                    }).toList(),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   Widget _buildPlacedShape(PlacedShape placedShape, int index) {
@@ -723,176 +711,161 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   }
 
   Widget _buildConstructionFeedback() {
-    return Obx(() {
-      final feedback = controller.getCurrentFeedback();
-
-      return GestureDetector(
-        onTap: () => controller.speakFeedback(),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: AppColors.accent.withValues(alpha: 0.1),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(16),
-              bottomRight: Radius.circular(16),
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return GestureDetector(
+          onTap: () => ctrl.speakFeedback(),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.accent.withOpacity(0.1),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              Icon(Icons.info_outline, color: AppColors.accent, size: 16),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  feedback,
-                  style: TextStyle(
-                    color: AppColors.accent,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, color: AppColors.accent, size: 16),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    ctrl.getCurrentFeedback(),
+                    style: TextStyle(
+                      color: AppColors.accent,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              Icon(Icons.volume_up, color: AppColors.accent, size: 16),
-            ],
+                Icon(Icons.volume_up, color: AppColors.accent, size: 16),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget _buildControls() {
-    return Obx(() {
-      final currentLevel = controller.currentLevel.value;
-      final maxLevel = controller.maxLevel;
-      final progress = controller.getCurrentLevelProgress();
-
-      return Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            // Progress bar
-            LinearProgressIndicator(
-              value: progress,
-              backgroundColor: AppColors.grey,
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
-              minHeight: 6,
-            ).animate().slideX(duration: 600.ms),
-
-            const SizedBox(height: 12),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Level progress
-                Row(
-                  children: [
-                    Icon(Icons.architecture, color: AppColors.accent, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Niveau $currentLevel/$maxLevel',
-                      style: TextStyle(
-                        color: AppColors.darkGrey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: ctrl.getCurrentLevelProgress(),
+                backgroundColor: AppColors.grey,
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
+                minHeight: 6,
+              ).animate().slideX(duration: 600.ms),
+              const SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.architecture,
+                        color: AppColors.accent,
+                        size: 20,
                       ),
-                    ),
-                  ],
-                ),
-
-                // Control buttons
-                Row(
-                  children: [
-                    // Instructions button
-                    SecondaryAnimatedButton(
-                      label: '🔊',
-                      onPressed: () => controller.speakInstructions(),
-                    ),
-
-                    const SizedBox(width: 8),
-
-                    // Hint button (blueprint mode only)
-                    if (!controller.isFreeBuildingMode)
-                      SecondaryAnimatedButton(
-                        label: '💡',
-                        onPressed: () => controller.showHint(),
-                      ),
-
-                    if (!controller.isFreeBuildingMode)
                       const SizedBox(width: 8),
-
-                    // Reset level button
-                    SecondaryAnimatedButton(
-                      label: 'Reset',
-                      icon: const Icon(Icons.refresh, size: 16),
-                      onPressed: () => controller.resetCurrentLevel(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    });
+                      Text(
+                        'Niveau ${ctrl.currentLevel.value}/${ctrl.maxLevel}',
+                        style: TextStyle(
+                          color: AppColors.darkGrey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      SecondaryAnimatedButton(
+                        label: '🔊',
+                        onPressed: () => ctrl.speakInstructions(),
+                      ),
+                      const SizedBox(width: 8),
+                      if (!ctrl.isFreeBuildingMode)
+                        SecondaryAnimatedButton(
+                          label: '💡',
+                          onPressed: () => ctrl.showHint(),
+                        ),
+                      if (!ctrl.isFreeBuildingMode) const SizedBox(width: 8),
+                      SecondaryAnimatedButton(
+                        label: 'Reset',
+                        icon: const Icon(Icons.refresh, size: 16),
+                        onPressed: () => ctrl.resetCurrentLevel(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildHintOverlay() {
-    return Obx(() {
-      final hint = controller.currentHint.value;
-
-      return Positioned(
-        top: 100,
-        left: 20,
-        right: 20,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                AppColors.accent2,
-                AppColors.accent2.withValues(alpha: 0.8),
+    return GetX<ShapeArchitectController>(
+      builder: (ctrl) {
+        return Positioned(
+          top: 100,
+          left: 20,
+          right: 20,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [AppColors.accent2, AppColors.accent2.withOpacity(0.8)],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
               ],
             ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.2),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Text('💡', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  hint,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+            child: Row(
+              children: [
+                const Text('💡', style: TextStyle(fontSize: 24)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    ctrl.currentHint.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
+          ).animate().slideY(
+            begin: -1,
+            duration: 400.ms,
+            curve: Curves.easeOutBack,
           ),
-        ).animate().slideY(
-          begin: -1,
-          duration: 400.ms,
-          curve: Curves.easeOutBack,
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget _buildLevelCompleteOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withValues(alpha: 0.7),
+        color: Colors.black.withOpacity(0.7),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -904,7 +877,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('🏗️✨', style: TextStyle(fontSize: 60)),
+                const Text('🏗️✨', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Construction réussie!',
@@ -935,7 +908,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
   Widget _buildCelebrationOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withValues(alpha: 0.8),
+        color: Colors.black.withOpacity(0.8),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -947,7 +920,7 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('🎉🏗️🎉', style: TextStyle(fontSize: 60)),
+                const Text('🎉🏗️🎉', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Maître Architecte!',
@@ -1018,22 +991,20 @@ class BlueprintPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint =
         Paint()
-          ..color = AppColors.accent.withValues(alpha: 0.3)
+          ..color = AppColors.accent.withOpacity(0.3)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..strokeCap = StrokeCap.round;
 
     final dashedPaint =
         Paint()
-          ..color = AppColors.accent.withValues(alpha: 0.5)
+          ..color = AppColors.accent.withOpacity(0.5)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1;
 
-    // Draw blueprint requirements
     for (final requirement in blueprint.requirements) {
       if (requirement.isOptional) continue;
 
-      // Check if this requirement is fulfilled
       final isFulfilled = placedShapes.any(
         (placedShape) =>
             placedShape.shape.type == requirement.shapeType &&
@@ -1046,10 +1017,9 @@ class BlueprintPainter extends CustomPainter {
 
       final currentPaint =
           isFulfilled
-              ? (paint..color = AppColors.accent2.withValues(alpha: 0.6))
-              : (paint..color = AppColors.accent.withValues(alpha: 0.4));
+              ? (paint..color = AppColors.accent2.withOpacity(0.6))
+              : (paint..color = AppColors.accent.withOpacity(0.4));
 
-      // Draw shape outline based on type
       _drawShapeOutline(
         canvas,
         requirement.shapeType,
@@ -1057,7 +1027,6 @@ class BlueprintPainter extends CustomPainter {
         currentPaint,
       );
 
-      // Draw tolerance circle
       canvas.drawCircle(
         requirement.targetPosition,
         requirement.tolerance,

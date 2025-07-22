@@ -65,21 +65,22 @@ class MathMapController extends GetxController {
           onTap: () => Get.to(() => const TidyRoomScreen()),
         ),
         LevelModel(
-          title: 'Level 7',
-          levelType: LevelType.lesson,
-          levelStatus: LevelStatus.completed,
-          onTap: () => Get.to(() => const MarketBalanceScreen()),
-        ),
-        LevelModel(
           title: 'Level 8',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.completed,
           onTap: () => Get.to(() => const TreasureChestScreen()),
         ),
         LevelModel(
+          title: 'Level 7',
+          levelType: LevelType.lesson,
+          levelStatus: LevelStatus.inProgress,
+          onTap: () => Get.to(() => const MarketBalanceScreen()),
+        ),
+
+        LevelModel(
           title: 'Level 9',
           levelType: LevelType.lesson,
-          levelStatus: LevelStatus.completed,
+          levelStatus: LevelStatus.locked,
         ),
       ],
     ),

@@ -487,7 +487,7 @@ class _TidyRoomScreenState extends State<TidyRoomScreen> {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: sortingBoxes.length > 2 ? 3 : 2,
-                childAspectRatio: 1.0,
+                childAspectRatio: 1.2,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
               ),
@@ -624,7 +624,7 @@ class _TidyRoomScreenState extends State<TidyRoomScreen> {
                     '${toysInBox.length}',
                     style: TextStyle(
                       color: AppColors.accent,
-                      fontSize: 10,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

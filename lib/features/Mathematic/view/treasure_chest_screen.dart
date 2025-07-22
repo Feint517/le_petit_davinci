@@ -73,7 +73,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
                         // Equation or treasure map
                         _buildMathDisplay(),
 
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 10),
 
                         // Available treasure items
                         Expanded(flex: 2, child: _buildTreasureItems()),
@@ -294,7 +294,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
               ],
             ).animate().fadeIn(duration: 800.ms),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
 
             // Main treasure chest
             Expanded(child: _buildAnimatedTreasureChest(chest, glowIntensity)),
@@ -469,7 +469,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: items.length > 6 ? 4 : 3,
-          childAspectRatio: 1.0,
+          childAspectRatio: 2,
           crossAxisSpacing: 2,
           mainAxisSpacing: 2,
         ),
@@ -750,7 +750,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
 
       return Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.accent3.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16),
@@ -775,7 +775,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 6),
 
             Expanded(
               child:
@@ -793,10 +793,10 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
                       )
                       : GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: availableItems.length > 12 ? 6 : 5,
-                          childAspectRatio: 1.0,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
+                          crossAxisCount: availableItems.length > 12 ? 5 : 5,
+                          childAspectRatio: 1.3,
+                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 6,
                         ),
                         itemCount: availableItems.length,
                         itemBuilder: (context, index) {
@@ -869,7 +869,7 @@ class _TreasureChestScreenState extends State<TreasureChestScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(item.emoji, style: TextStyle(fontSize: isDragging ? 28 : 24)),
-            const SizedBox(height: 2),
+            const SizedBox(height: 1),
             Text(
               item.frenchName,
               style: TextStyle(
