@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_drawing_board/paint_contents.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -13,8 +14,8 @@ class DrawingToolbar extends GetView<StudioController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70.h,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      height: 60.h,
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(
@@ -28,285 +29,363 @@ class DrawingToolbar extends GetView<StudioController> {
           ),
         ],
       ),
-      child: _buildToolbarRow(),
+      child: _buildCompactToolbar(),
     );
   }
 
-  // FIXED: Separate the Row structure from animations to prevent layout issues
-  Widget _buildToolbarRow() {
+  Widget _buildCompactToolbar() {
     return Row(
       children: [
-        // Animated section 1: Undo/Redo
-        _buildAnimatedSection(0, _buildUndoRedoSection()),
+        // Left section: Essential tools (undo/redo + main tool)
+        _buildEssentialTools(),
 
-        Gap(16.w), // Gap directly in Row - FIXED
+        Gap(4.w),
         _buildVerticalDivider(),
-        Gap(16.w), // Gap directly in Row - FIXED
-        // Animated section 2: Drawing tools
-        _buildAnimatedSection(1, _buildDrawingToolsSection()),
+        Gap(4.w),
 
-        Gap(16.w), // Gap directly in Row - FIXED
+        // Middle section: Scrollable tools
+        Expanded(child: _buildScrollableTools()),
+
+        Gap(4.w),
         _buildVerticalDivider(),
-        Gap(16.w), // Gap directly in Row - FIXED
-        // Animated section 3: Brush size
-        _buildAnimatedSection(2, _buildBrushSizeSection()),
+        Gap(4.w),
 
-        const Spacer(), // Spacer directly in Row - FIXED
-        // Animated section 4: Action buttons
-        _buildAnimatedSection(3, _buildActionButtons()),
+        // Right section: Menu for additional actions
+        _buildMoreMenu(),
       ],
     );
   }
 
-  // FIXED: Apply animations to individual sections instead of wrapping Gap/Spacer
-  Widget _buildAnimatedSection(int index, Widget child) {
-    return AnimationConfiguration.staggeredList(
-      position: index,
-      duration: const Duration(milliseconds: 375),
-      child: SlideAnimation(
-        horizontalOffset: 50.0,
-        child: FadeInAnimation(child: child),
+  Widget _buildEssentialTools() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Undo button
+        Obx(
+          () => _buildCompactButton(
+            icon: Icons.undo,
+            onPressed:
+                controller.canUndo.value ? () => controller.undo() : null,
+            isEnabled: controller.canUndo.value,
+            size: 32.w,
+          ),
+        ),
+
+        Gap(2.w),
+
+        // Redo button
+        Obx(
+          () => _buildCompactButton(
+            icon: Icons.redo,
+            onPressed:
+                controller.canRedo.value ? () => controller.redo() : null,
+            isEnabled: controller.canRedo.value,
+            size: 32.w,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildScrollableTools() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Drawing tools
+          Obx(
+            () => _buildCompactButton(
+              icon: Icons.brush,
+              onPressed: () => controller.selectTool(SimpleLine()),
+              isSelected: controller.selectedTool.value == SimpleLine,
+              selectedColor: AppColors.primary,
+              size: 32.w,
+            ),
+          ),
+          Gap(2.w),
+
+          Obx(
+            () => _buildCompactButton(
+              icon: Icons.circle_outlined,
+              onPressed: () => controller.selectTool(Circle()),
+              isSelected: controller.selectedTool.value == Circle,
+              selectedColor: AppColors.primary,
+              size: 32.w,
+            ),
+          ),
+          Gap(2.w),
+
+          Obx(
+            () => _buildCompactButton(
+              icon: Icons.crop_square,
+              onPressed: () => controller.selectTool(Rectangle()),
+              isSelected: controller.selectedTool.value == Rectangle,
+              selectedColor: AppColors.primary,
+              size: 32.w,
+            ),
+          ),
+          Gap(2.w),
+
+          Obx(
+            () => _buildCompactButton(
+              icon: Icons.auto_fix_high,
+              onPressed: () => controller.selectTool(Eraser()),
+              isSelected: controller.selectedTool.value == Eraser,
+              selectedColor: AppColors.error,
+              size: 32.w,
+            ),
+          ),
+          Gap(4.w),
+
+          // Color indicator
+          Obx(
+            () => GestureDetector(
+              onTap: () => _showColorPicker(),
+              child: Container(
+                width: 32.w,
+                height: 32.w,
+                decoration: BoxDecoration(
+                  color: controller.selectedColor.value,
+                  borderRadius: BorderRadius.circular(4.r),
+                  border: Border.all(color: AppColors.borderPrimary, width: 1),
+                ),
+                child: Icon(
+                  Icons.palette,
+                  color: _getContrastColor(controller.selectedColor.value),
+                  size: 14.sp,
+                ),
+              ),
+            ),
+          ),
+          Gap(4.w),
+
+          // Brush size indicator
+          Obx(
+            () => GestureDetector(
+              onTap: _showBrushSizeSelector,
+              child: Container(
+                width: 32.w,
+                height: 32.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  border: Border.all(color: AppColors.borderPrimary, width: 1),
+                ),
+                child: Center(
+                  child: Container(
+                    width: (controller.brushSize.value * 0.3).clamp(4.0, 12.0),
+                    height: (controller.brushSize.value * 0.3).clamp(4.0, 12.0),
+                    decoration: BoxDecoration(
+                      color: controller.selectedColor.value,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildUndoRedoSection() {
-    return Row(
-      children: [
-        // Undo button
-        Obx(
-          () => _buildToolButton(
-            icon: Icons.undo,
-            onPressed:
-                controller.canUndo.value ? () => controller.undo() : null,
-            tooltip: 'Annuler (${controller.historyLength.value} actions)',
-            isEnabled: controller.canUndo.value,
-          ),
-        ),
-
-        Gap(8.w),
-
-        // Redo button
-        Obx(
-          () => _buildToolButton(
-            icon: Icons.redo,
-            onPressed:
-                controller.canRedo.value ? () => controller.redo() : null,
-            tooltip: 'Refaire',
-            isEnabled: controller.canRedo.value,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDrawingToolsSection() {
-    return Row(
-      children: [
-        // Brush tool
-        Obx(
-          () => _buildToolButton(
-            icon: Icons.brush,
-            onPressed: () => controller.selectTool(DrawingTool.brush),
-            tooltip: 'Pinceau',
-            isSelected: controller.selectedTool.value == DrawingTool.brush,
-            selectedColor: AppColors.primary,
-          ),
-        ),
-
-        Gap(8.w),
-
-        // Eraser tool
-        Obx(
-          () => _buildToolButton(
-            icon: Icons.auto_fix_high,
-            onPressed: () => controller.selectTool(DrawingTool.eraser),
-            tooltip: 'Gomme',
-            isSelected: controller.selectedTool.value == DrawingTool.eraser,
-            selectedColor: AppColors.error,
-          ),
-        ),
-
-        Gap(8.w),
-
-        // Color picker button
-        Obx(
-          () => GestureDetector(
-            onTap: () => _showColorPicker(),
-            child: Container(
-              width: 40.w,
-              height: 40.w,
-              decoration: BoxDecoration(
-                color: controller.selectedColor.value,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: AppColors.borderPrimary, width: 2),
-              ),
-              child: Icon(
-                Icons.palette,
-                color: _getContrastColor(controller.selectedColor.value),
-                size: 20.sp,
+  Widget _buildMoreMenu() {
+    return PopupMenuButton<String>(
+      icon: Icon(Icons.more_horiz, size: 20.sp, color: AppColors.textPrimary),
+      offset: Offset(0, 40.h),
+      itemBuilder:
+          (context) => [
+            PopupMenuItem(
+              value: 'template',
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.auto_awesome,
+                    size: 16.sp,
+                    color: AppColors.accent,
+                  ),
+                  Gap(8.w),
+                  const Text('Modèles'),
+                ],
               ),
             ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBrushSizeSection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.circle, size: 12.sp, color: AppColors.textSecondary),
-        Gap(8.w),
-
-        // Brush size selector - FIXED: Proper Row structure without SizedBox wrapper
-        Obx(
-          () => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:
-                controller.availableSizes.map((size) {
-                  final isSelected = controller.brushSize.value == size;
-                  return GestureDetector(
-                    onTap: () => controller.setBrushSize(size),
-                    child: Container(
-                      width: 24.w,
-                      height: 24.w,
-                      margin: EdgeInsets.symmetric(horizontal: 4.w),
-                      decoration: BoxDecoration(
+            PopupMenuItem(
+              value: 'clear',
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.clear_all, size: 16.sp, color: AppColors.error),
+                  Gap(8.w),
+                  const Text('Effacer'),
+                ],
+              ),
+            ),
+            PopupMenuItem(
+              value: 'save',
+              child: Obx(
+                () => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.save,
+                      size: 16.sp,
+                      color:
+                          controller.hasUnsavedChanges.value
+                              ? AppColors.greenPrimary
+                              : AppColors.textSecondary,
+                    ),
+                    Gap(8.w),
+                    Text(
+                      'Sauvegarder',
+                      style: TextStyle(
                         color:
-                            isSelected
-                                ? AppColors.primary.withOpacity(0.1)
-                                : Colors.transparent,
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                          color:
-                              isSelected
-                                  ? AppColors.primary
-                                  : AppColors.borderPrimary,
-                          width: isSelected ? 2 : 1,
-                        ),
-                      ),
-                      child: Center(
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          width: (size * 0.5).clamp(4.0, 14.0),
-                          height: (size * 0.5).clamp(4.0, 14.0),
-                          decoration: BoxDecoration(
-                            color:
-                                isSelected
-                                    ? controller.selectedColor.value
-                                    : AppColors.textSecondary,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
+                            controller.hasUnsavedChanges.value
+                                ? AppColors.textPrimary
+                                : AppColors.textSecondary,
                       ),
                     ),
-                  );
-                }).toList(),
-          ),
-        ),
-
-        Gap(8.w),
-        Icon(Icons.circle, size: 20.sp, color: AppColors.textSecondary),
-      ],
+                  ],
+                ),
+              ),
+            ),
+          ],
+      onSelected: (value) {
+        switch (value) {
+          case 'template':
+            _showTemplateSelector();
+            break;
+          case 'clear':
+            _showClearDialog();
+            break;
+          case 'save':
+            if (controller.hasUnsavedChanges.value) {
+              controller.saveArtwork();
+            }
+            break;
+        }
+      },
     );
   }
 
-  Widget _buildActionButtons() {
-    return Row(
-      children: [
-        // Template selector
-        _buildToolButton(
-          icon: Icons.auto_awesome,
-          onPressed: () => _showTemplateSelector(),
-          tooltip: 'Choisir un modèle',
-          color: AppColors.accent,
-        ),
-
-        Gap(8.w),
-
-        // Clear canvas button
-        _buildToolButton(
-          icon: Icons.clear_all,
-          onPressed: () => _showClearDialog(),
-          tooltip: 'Tout effacer',
-          color: AppColors.error,
-        ),
-
-        Gap(8.w),
-
-        // Save button
-        Obx(
-          () => _buildToolButton(
-            icon: Icons.save,
-            onPressed:
-                controller.hasUnsavedChanges.value
-                    ? () => controller.saveArtwork()
-                    : null,
-            tooltip: 'Sauvegarder',
-            color: AppColors.greenPrimary,
-            isEnabled: controller.hasUnsavedChanges.value,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildToolButton({
+  Widget _buildCompactButton({
     required IconData icon,
     required VoidCallback? onPressed,
-    required String tooltip,
     bool isSelected = false,
     bool isEnabled = true,
-    Color? color,
     Color? selectedColor,
+    required double size,
   }) {
-    final buttonColor = color ?? AppColors.textPrimary;
-    final backgroundColor =
-        isSelected
-            ? (selectedColor ?? AppColors.primary).withOpacity(0.1)
-            : Colors.transparent;
     final iconColor =
         isSelected
             ? (selectedColor ?? AppColors.primary)
             : isEnabled
-            ? buttonColor
+            ? AppColors.textPrimary
             : AppColors.textSecondary.withOpacity(0.5);
 
-    return Tooltip(
-      message: tooltip,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: isEnabled ? onPressed : null,
-            borderRadius: BorderRadius.circular(8.r),
-            child: Container(
-              width: 40.w,
-              height: 40.w,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(8.r),
-                border:
-                    isSelected
-                        ? Border.all(
-                          color: selectedColor ?? AppColors.primary,
-                          width: 2,
-                        )
-                        : null,
-              ),
-              child: Icon(icon, color: iconColor, size: 20.sp),
-            ),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: isEnabled ? onPressed : null,
+        borderRadius: BorderRadius.circular(4.r),
+        child: Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color:
+                isSelected
+                    ? (selectedColor ?? AppColors.primary).withOpacity(0.1)
+                    : Colors.transparent,
+            borderRadius: BorderRadius.circular(4.r),
+            border:
+                isSelected
+                    ? Border.all(
+                      color: selectedColor ?? AppColors.primary,
+                      width: 1,
+                    )
+                    : null,
           ),
+          child: Icon(icon, color: iconColor, size: 16.sp),
         ),
       ),
     );
   }
 
   Widget _buildVerticalDivider() {
-    return Container(width: 1, height: 30.h, color: AppColors.borderPrimary);
+    return Container(width: 1, height: 20.h, color: AppColors.borderPrimary);
+  }
+
+  void _showBrushSizeSelector() {
+    Get.bottomSheet(
+      Container(
+        height: 200.h,
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Taille du pinceau',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+                fontFamily: 'DynaPuff_SemiCondensed',
+              ),
+            ),
+            Gap(20.h),
+            Expanded(
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:
+                      controller.availableSizes.map((size) {
+                        final isSelected = controller.brushSize.value == size;
+                        return GestureDetector(
+                          onTap: () {
+                            controller.setBrushSize(size);
+                            Get.back();
+                          },
+                          child: Container(
+                            width: 40.w,
+                            height: 40.w,
+                            decoration: BoxDecoration(
+                              color:
+                                  isSelected
+                                      ? AppColors.primary.withOpacity(0.1)
+                                      : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20.r),
+                              border: Border.all(
+                                color:
+                                    isSelected
+                                        ? AppColors.primary
+                                        : AppColors.borderPrimary,
+                                width: isSelected ? 2 : 1,
+                              ),
+                            ),
+                            child: Center(
+                              child: Container(
+                                width: (size * 0.5).clamp(6.0, 20.0),
+                                height: (size * 0.5).clamp(6.0, 20.0),
+                                decoration: BoxDecoration(
+                                  color: controller.selectedColor.value,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showColorPicker() {
@@ -331,7 +410,6 @@ class DrawingToolbar extends GetView<StudioController> {
               ),
             ),
             Gap(20.h),
-
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -387,6 +465,7 @@ class DrawingToolbar extends GetView<StudioController> {
           ],
         ),
       ),
+      isScrollControlled: true,
     );
   }
 
@@ -412,7 +491,6 @@ class DrawingToolbar extends GetView<StudioController> {
               ),
             ),
             Gap(20.h),
-
             Expanded(
               child: Obx(
                 () =>
@@ -519,6 +597,7 @@ class DrawingToolbar extends GetView<StudioController> {
           ],
         ),
       ),
+      isScrollControlled: true,
     );
   }
 
@@ -577,7 +656,6 @@ class DrawingToolbar extends GetView<StudioController> {
   }
 
   Color _getContrastColor(Color color) {
-    // Calculate luminance to determine if white or black text is more readable
     final luminance =
         (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
     return luminance > 0.5 ? Colors.black : Colors.white;

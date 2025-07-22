@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -6,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
-import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
 import 'package:le_petit_davinci/features/studio/widgets/drawing_toolbar.dart';
 import 'package:le_petit_davinci/features/studio/widgets/color_palette.dart';
 
@@ -72,7 +70,6 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                         ),
               ),
             ),
-
             // Menu button
             PopupMenuButton<String>(
               icon: Icon(
@@ -134,9 +131,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
             children: [
               // Enhanced toolbar
               const DrawingToolbar(),
-
               Divider(height: 1, color: AppColors.borderPrimary),
-
               // Canvas area with professional drawing board
               Expanded(
                 child: Container(
@@ -159,214 +154,56 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
-                    child: Stack(
-                      children: [
-                        // Template background (if selected)
-                        Obx(() {
-                          if (controller.selectedTemplate.value != null) {
-                            return Positioned.fill(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      controller
-                                          .selectedTemplate
-                                          .value!
-                                          .templateImagePath,
-                                    ),
-                                    fit: BoxFit.contain,
-                                    opacity: 0.3,
-                                  ),
-                                ),
-                              ),
+                    // FINAL FIX: Use a LayoutBuilder to get the available constraints.
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        // The LayoutBuilder provides the exact width and height the
+                        // DrawingBoard can occupy.
+                        return DrawingBoard(
+                          controller: controller.drawingController,
+                          // BEST PRACTICE: Pass these constraints to the background widget.
+                          // This gives the background a definite size, which the DrawingBoard
+                          // needs to initialize its canvas correctly.
+                          background: Obx(() {
+                            final template = controller.selectedTemplate.value;
+                            // Create a base background container with the EXACT size
+                            // from the LayoutBuilder.
+                            Widget backgroundWidget = Container(
+                              width: constraints.maxWidth,
+                              height: constraints.maxHeight,
+                              color: Colors.white,
                             );
-                          }
-                          return const SizedBox.shrink();
-                        }),
 
-                        // High-performance drawing board
-                        RepaintBoundary(
-                          key: controller.canvasKey,
-                          child: DrawingBoard(
-                            controller: controller.drawingController,
-                            background: Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              color: Colors.transparent,
-                            ),
-                            showDefaultActions:
-                                false, // We'll use our custom toolbar
-                            showDefaultTools: false,
-                          ),
-                        ),
-
-                        // Template hint overlay
-                        Obx(() {
-                          if (controller.selectedTemplate.value != null &&
-                              controller
-                                      .selectedTemplate
-                                      .value!
-                                      .educationalPrompt !=
-                                  null) {
-                            return Positioned(
-                              top: 16.h,
-                              left: 16.w,
-                              right: 16.w,
-                              child: Container(
-                                padding: EdgeInsets.all(12.w),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withOpacity(0.9),
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.lightbulb,
-                                      color: AppColors.white,
-                                      size: 16.sp,
-                                    ),
-                                    Gap(8.w),
-                                    Expanded(
-                                      child: Text(
-                                        controller
-                                            .selectedTemplate
-                                            .value!
-                                            .educationalPrompt!,
-                                        style: TextStyle(
-                                          color: AppColors.white,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Hide hint by removing template (optional)
-                                      },
-                                      child: Icon(
-                                        Icons.close,
-                                        color: AppColors.white,
-                                        size: 14.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        }),
-
-                        // Canvas status indicator
-                        Positioned(
-                          bottom: 16.h,
-                          right: 16.w,
-                          child: Obx(
-                            () => AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color:
-                                    controller.hasUnsavedChanges.value
-                                        ? Colors.orange.withOpacity(0.9)
-                                        : Colors.green.withOpacity(0.9),
-                                borderRadius: BorderRadius.circular(12.r),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                            if (template != null) {
+                              // If a template exists, stack it on top of the sized container.
+                              return Stack(
+                                alignment: Alignment.center,
                                 children: [
-                                  Icon(
-                                    controller.hasUnsavedChanges.value
-                                        ? Icons.edit
-                                        : Icons.check,
-                                    color: AppColors.white,
-                                    size: 12.sp,
-                                  ),
-                                  Gap(4.w),
-                                  Text(
-                                    controller.hasUnsavedChanges.value
-                                        ? 'Non sauvé'
-                                        : 'Sauvé',
-                                    style: TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                  backgroundWidget,
+                                  Image.asset(
+                                    template.templateImagePath,
+                                    fit: BoxFit.contain,
+                                    opacity: const AlwaysStoppedAnimation(0.3),
                                   ),
                                 ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                              );
+                            }
+
+                            return backgroundWidget;
+                          }),
+                          showDefaultActions: false,
+                          showDefaultTools: false,
+                        );
+                      },
                     ),
                   ),
                 ),
               ),
-
-              // Enhanced color palette
               const ColorPalette(),
-
               Gap(16.h),
             ],
           ),
         ),
-
-        // Floating action buttons for common actions
-        floatingActionButton: Obx(
-          () =>
-              controller.hasUnsavedChanges.value
-                  ? Container(
-                    margin: EdgeInsets.only(bottom: 20.h),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Undo button
-                        FloatingActionButton.small(
-                          heroTag: "undo",
-                          onPressed:
-                              controller.drawingController.canUndo()
-                                  ? () => controller.undo()
-                                  : null,
-                          backgroundColor:
-                              controller.drawingController.canUndo()
-                                  ? AppColors.secondary
-                                  : AppColors.textSecondary,
-                          child: Icon(
-                            Icons.undo,
-                            color: AppColors.white,
-                            size: 18.sp,
-                          ),
-                        ),
-
-                        Gap(8.h),
-
-                        // Redo button
-                        FloatingActionButton.small(
-                          heroTag: "redo",
-                          onPressed:
-                              controller.drawingController.canRedo()
-                                  ? () => controller.redo()
-                                  : null,
-                          backgroundColor:
-                              controller.drawingController.canRedo()
-                                  ? AppColors.accent
-                                  : AppColors.textSecondary,
-                          child: Icon(
-                            Icons.redo,
-                            color: AppColors.white,
-                            size: 18.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                  : const SizedBox.shrink(),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
@@ -389,13 +226,11 @@ class DrawingCanvasScreen extends GetView<StudioController> {
       );
       return;
     }
-
     await controller.saveArtwork();
   }
 
   void _shareCurrentArtwork() async {
     if (controller.currentArtworkId.value.isEmpty) {
-      // Save first, then share
       await controller.saveArtwork();
       if (controller.currentArtworkId.value.isNotEmpty) {
         await controller.shareWithParent(controller.currentArtworkId.value);
@@ -407,7 +242,6 @@ class DrawingCanvasScreen extends GetView<StudioController> {
 
   void _exportCurrentArtwork() async {
     if (controller.currentArtworkId.value.isEmpty) {
-      // Save first, then export
       await controller.saveArtwork();
       if (controller.currentArtworkId.value.isNotEmpty) {
         await controller.exportArtwork(controller.currentArtworkId.value);
@@ -444,8 +278,8 @@ class DrawingCanvasScreen extends GetView<StudioController> {
         actions: [
           TextButton(
             onPressed: () {
-              Get.back(); // Close dialog
-              Get.back(); // Exit drawing screen without saving
+              Get.back();
+              Get.back();
             },
             child: Text(
               'Quitter sans sauver',
@@ -453,7 +287,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
             ),
           ),
           TextButton(
-            onPressed: () => Get.back(), // Just close dialog
+            onPressed: () => Get.back(),
             child: Text(
               'Continuer le dessin',
               style: TextStyle(color: AppColors.textSecondary, fontSize: 14.sp),
@@ -461,9 +295,9 @@ class DrawingCanvasScreen extends GetView<StudioController> {
           ),
           ElevatedButton(
             onPressed: () async {
-              Get.back(); // Close dialog
+              Get.back();
               await controller.saveArtwork();
-              Get.back(); // Exit after saving
+              Get.back();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
@@ -531,9 +365,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                     style: TextStyle(fontSize: 14.sp),
                     maxLength: 30,
                   ),
-
                   Gap(16.h),
-
                   CheckboxListTile(
                     value: shareWithParents,
                     onChanged: (value) {
@@ -589,9 +421,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                                 );
                                 return;
                               }
-
-                              await controller.saveArtwork(title: title);
-
+                              await controller.saveArtwork(customTitle: title);
                               if (shareWithParents &&
                                   controller
                                       .currentArtworkId
@@ -601,8 +431,7 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                                   controller.currentArtworkId.value,
                                 );
                               }
-
-                              Get.back(); // Close dialog
+                              Get.back();
                             },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,

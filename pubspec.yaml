@@ -91,6 +91,11 @@ flutter:
     - assets/test/
     - assets/sounds/
     - assets/sounds/select.mp3
+    - assets/templates/previews/
+    - assets/templates/cat_template.png
+    - assets/templates/circle_template.png
+    - assets/templates/previews/cat_preview.png
+    - assets/templates/previews/circle_preview.png
 
   fonts:
     - family: DynaPuff_SemiCondensed

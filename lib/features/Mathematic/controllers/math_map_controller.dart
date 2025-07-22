@@ -12,7 +12,10 @@ import 'package:le_petit_davinci/features/Mathematic/view/number_puzzle_screen.d
 import 'package:le_petit_davinci/features/Mathematic/view/math_additions_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_subtraction_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/math_geometry_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/shape_architect_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/shape_detective_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/tidy_room_screen.dart';
+import 'package:le_petit_davinci/features/Mathematic/view/treasure_chest_screen.dart';
 
 class MathMapController extends GetxController {
   final scrollController = ScrollController();
@@ -71,7 +74,7 @@ class MathMapController extends GetxController {
           title: 'Level 8',
           levelType: LevelType.lesson,
           levelStatus: LevelStatus.completed,
-          onTap: () => Get.to(() => const TidyRoomScreen()),
+          onTap: () => Get.to(() => const TreasureChestScreen()),
         ),
         LevelModel(
           title: 'Level 9',
@@ -95,12 +98,14 @@ class MathMapController extends GetxController {
         LevelModel(
           title: 'Level 2',
           levelType: LevelType.lesson,
-          levelStatus: LevelStatus.locked,
+          levelStatus: LevelStatus.completed,
+          onTap: () => Get.to(() => const ShapeArchitectScreen()),
         ),
         LevelModel(
           title: 'Level 3',
           levelType: LevelType.lesson,
-          levelStatus: LevelStatus.locked,
+          levelStatus: LevelStatus.completed,
+          onTap: () => Get.to(() => const ShapeDetectiveScreen()),
         ),
         LevelModel(
           title: 'Level 4',

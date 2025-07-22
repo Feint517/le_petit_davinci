@@ -48,7 +48,7 @@ class ColorPalette extends GetView<StudioController> {
 
           Gap(12.w),
 
-          // Color palette
+          // Color palette - Fixed: Removed problematic Obx wrapper
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -95,11 +95,14 @@ class ColorPalette extends GetView<StudioController> {
   }
 
   Widget _buildColorButton(Color color) {
+    // Fixed: Single Obx per color button, proper color comparison
     return Obx(() {
-      final isSelected = controller.selectedColor.value == color;
+      final isSelected = controller.selectedColor.value.value == color.value;
 
       return GestureDetector(
-        onTap: () => controller.setColor(color),
+        onTap: () {
+          controller.setColor(color);
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           width: isSelected ? 40.w : 36.w,
@@ -181,7 +184,6 @@ class ColorPalette extends GetView<StudioController> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // The color is already updated in the picker
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
@@ -257,45 +259,49 @@ class ColorPalette extends GetView<StudioController> {
       itemCount: extendedColors.length,
       itemBuilder: (context, index) {
         final color = extendedColors[index];
-        final isSelected = controller.selectedColor.value == color;
 
-        return GestureDetector(
-          onTap: () {
-            controller.setColor(color);
-            Get.back();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color:
+        return Obx(() {
+          final isSelected =
+              controller.selectedColor.value.value == color.value;
+
+          return GestureDetector(
+            onTap: () {
+              controller.setColor(color);
+              Get.back();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color:
+                      isSelected
+                          ? AppColors.textPrimary
+                          : AppColors.borderPrimary,
+                  width: isSelected ? 3 : 1,
+                ),
+                boxShadow:
                     isSelected
-                        ? AppColors.textPrimary
-                        : AppColors.borderPrimary,
-                width: isSelected ? 3 : 1,
+                        ? [
+                          BoxShadow(
+                            color: color.withValues(alpha: 0.3),
+                            blurRadius: 4,
+                            offset: const Offset(0, 1),
+                          ),
+                        ]
+                        : null,
               ),
-              boxShadow:
+              child:
                   isSelected
-                      ? [
-                        BoxShadow(
-                          color: color.withValues(alpha: 0.3),
-                          blurRadius: 4,
-                          offset: const Offset(0, 1),
-                        ),
-                      ]
+                      ? Icon(
+                        Icons.check,
+                        color: _getContrastColor(color),
+                        size: 16.sp,
+                      )
                       : null,
             ),
-            child:
-                isSelected
-                    ? Icon(
-                      Icons.check,
-                      color: _getContrastColor(color),
-                      size: 16.sp,
-                    )
-                    : null,
-          ),
-        );
+          );
+        });
       },
     );
   }
