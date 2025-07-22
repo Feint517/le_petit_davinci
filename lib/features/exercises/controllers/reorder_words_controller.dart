@@ -3,11 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:collection/collection.dart';
+import 'package:le_petit_davinci/background_music_controller.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/features/exercises/views/victory_screen.dart';
+import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 
 class ReorderWordOptionModel {
   ReorderWordOptionModel({required this.optionText});
@@ -40,6 +41,12 @@ class ReorderWordsController extends GetxController {
     await _tts.setLanguage('en-US');
     await _tts.setSpeechRate(0.5);
     await _tts.speak(sentence);
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await BackgroundMusicController.instance.stopMusic();
   }
 
   void checkAnswer() {

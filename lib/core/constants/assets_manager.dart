@@ -201,7 +201,9 @@ class SvgAssets {
 
 class AudioAssets {
   //* sound effects
-  static const String victory = 'assets/audio/sound_effects/victory.mp3';
+  static const String victorySound = 'assets/audio/sound_effects/victory.mp3';
+  static const String backgroundMusic =
+      'assets/audio/sound_effects/background_music.mp3';
 
   //* alphabets english
   static const String a_en = 'assets/audio/alphabets_en/a.mp3';

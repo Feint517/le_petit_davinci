@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/background_music_controller.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises/views/victory_screen.dart';
+import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 
 class FillTheBlankController extends GetxController {
   FillTheBlankController(this.exercises);
@@ -17,6 +18,12 @@ class FillTheBlankController extends GetxController {
 
   FillTheBlankExercise get currentExercise =>
       exercises[currentExerciseIndex.value];
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await BackgroundMusicController.instance.stopMusic();
+  }
 
   void checkAnswer() {
     final isCorrect = selectedIndex.value == currentExercise.correctIndex;
