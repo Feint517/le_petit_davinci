@@ -62,7 +62,7 @@ Widget? getLevelPage(int level) {
       dialect: 'fr-FR', //? Default to French dialect
     );
   } else if (reorderWordsFrenchLevels.containsKey(level)) {
-    return ReorderWordsScreen(exercises: reorderWordsFrenchLevels[level]!);
+    return ReorderWordsScreen(exercises: reorderWordsFrenchLevels[level]!, dialect: 'fr-FR');
   } else if (level == 1) {
     return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
   }

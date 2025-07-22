@@ -27,9 +27,10 @@ class ReorderWordsExercise {
 }
 
 class ReorderWordsController extends GetxController {
-  ReorderWordsController(this.exercises);
+  ReorderWordsController(this.exercises,{required this.dialect});
 
   final FlutterTts _tts = FlutterTts();
+  final String dialect;
   final List<ReorderWordsExercise> exercises;
   var currentExerciseIndex = 0.obs;
   var selectedOrder = <int>[].obs;

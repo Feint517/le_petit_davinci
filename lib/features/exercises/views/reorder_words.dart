@@ -14,14 +14,15 @@ import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.da
 import 'package:le_petit_davinci/features/exercises/widgets/progress_bar.dart';
 
 class ReorderWordsScreen extends GetView<ReorderWordsController> {
-  const ReorderWordsScreen({super.key, required this.exercises});
+  const ReorderWordsScreen({super.key, required this.exercises, required this.dialect});
 
   final List<ReorderWordsExercise> exercises;
+  final String dialect;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReorderWordsController>(
-      init: ReorderWordsController(exercises),
+      init: ReorderWordsController(exercises, dialect: dialect),
       builder: (controller) {
         return Scaffold(
           appBar: ProfileHeader(type: ProfileHeaderType.compact),
