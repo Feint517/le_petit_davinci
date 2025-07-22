@@ -651,42 +651,44 @@ class _ShapeArchitectScreenState extends State<ShapeArchitectScreen> {
     );
   }
 
+  // FIXED: The problematic GetX widget was removed from here.
   Widget _buildCanvasWithShapes() {
-    return GetX<ShapeArchitectController>(
-      builder: (ctrl) {
-        return DragTarget<ArchitectShape>(
-          onAcceptWithDetails: (details) {
-            final RenderBox? renderBox =
-                controller.canvasKey.currentContext?.findRenderObject()
-                    as RenderBox?;
-            if (renderBox != null) {
-              final localPosition = renderBox.globalToLocal(details.offset);
-              ctrl.dropShapeOnCanvas(details.data, localPosition);
-            }
-          },
-          onWillAcceptWithDetails: (details) {
-            return true;
-          },
-          builder: (context, candidateData, rejectedData) {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color:
-                    candidateData.isNotEmpty
-                        ? AppColors.accent.withOpacity(0.1)
-                        : Colors.transparent,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children:
-                    ctrl.placedShapes.asMap().entries.map((entry) {
-                      return _buildPlacedShape(entry.value, entry.key);
-                    }).toList(),
-              ),
+    // The DragTarget itself is not reactive. Callbacks use the state's `controller`.
+    return DragTarget<ArchitectShape>(
+      onAcceptWithDetails: (details) {
+        final RenderBox? renderBox =
+            controller.canvasKey.currentContext?.findRenderObject()
+                as RenderBox?;
+        if (renderBox != null) {
+          final localPosition = renderBox.globalToLocal(details.offset);
+          controller.dropShapeOnCanvas(details.data, localPosition);
+        }
+      },
+      onWillAcceptWithDetails: (details) {
+        return true;
+      },
+      builder: (context, candidateData, rejectedData) {
+        return Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color:
+                candidateData.isNotEmpty
+                    ? AppColors.accent.withOpacity(0.1)
+                    : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          // CORRECT: Use Obx to wrap only the widget that depends on the observable state.
+          // This ensures GetX can track the dependency `controller.placedShapes` correctly.
+          child: Obx(() {
+            return Stack(
+              clipBehavior: Clip.none,
+              children:
+                  controller.placedShapes.asMap().entries.map((entry) {
+                    return _buildPlacedShape(entry.value, entry.key);
+                  }).toList(),
             );
-          },
+          }),
         );
       },
     );

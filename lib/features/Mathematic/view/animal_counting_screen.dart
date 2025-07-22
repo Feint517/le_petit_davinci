@@ -120,11 +120,6 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
       final selectedNumber = controller.selectedNumber.value;
       final completedNumbers = controller.completedNumbers;
 
-      // FIX 4: Add debug logging
-      print(
-        'Building number buttons - isLoading: $isLoading, selectedNumber: $selectedNumber',
-      );
-
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 5,
@@ -138,19 +133,32 @@ class _AnimalCountingScreenState extends State<AnimalCountingScreen> {
           final isCompleted = completedNumbers.contains(number);
           final isSelected = selectedNumber == number;
 
-          // FIX 5: Ensure button always has a valid onPressed function
-          return PrimaryAnimatedButton(
-            label: number.toString(),
+          // TEMPORARY: Use standard button for testing
+          return ElevatedButton(
             onPressed: () {
-              // FIX 6: Add immediate debug feedback
-              print('Button $number pressed - isLoading: $isLoading');
-
-              // FIX 7: Call selectNumber without loading check here
-              // (let the controller handle the loading state internally)
+              print('Standard button $number pressed');
               controller.selectNumberSafely(number);
             },
-            entranceDelay: Duration(milliseconds: index * 50),
-          ).animate().scale(duration: 300.ms, curve: Curves.easeOutBack);
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  isSelected
+                      ? AppColors.primary
+                      : isCompleted
+                      ? AppColors.secondary
+                      : AppColors.white,
+            ),
+            child: Text(
+              number.toString(),
+              style: TextStyle(
+                color:
+                    isSelected || isCompleted
+                        ? Colors.white
+                        : AppColors.darkGrey,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
         },
       );
     });

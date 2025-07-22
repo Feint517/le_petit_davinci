@@ -136,7 +136,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
+                    color: Colors.black.withOpacity(0.1),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),
@@ -170,7 +170,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.orangeAccentDark.withValues(alpha: 0.3),
+                  color: AppColors.orangeAccentDark.withOpacity(0.3),
                   blurRadius: 2,
                   offset: const Offset(0, 1),
                 ),
@@ -226,7 +226,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primaryDeep.withValues(alpha: 0.3),
+                    color: AppColors.primaryDeep.withOpacity(0.3),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -235,7 +235,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🔍', style: TextStyle(fontSize: 16)),
+                  const Text('🔍', style: TextStyle(fontSize: 16)),
                   const SizedBox(width: 8),
                   Text(
                     'Niveau $currentLevel - $levelTitle',
@@ -270,14 +270,15 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
   Widget _buildSceneExplorer() {
     return Obx(() {
       final scene = controller.currentScene.value;
-      if (scene == null) return const SizedBox.shrink();
+      if (scene == null)
+        return const Center(child: CircularProgressIndicator());
 
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.2),
+              color: Colors.black.withOpacity(0.2),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -325,647 +326,731 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
     }
   }
 
+  // FIXED: Wrapped with LayoutBuilder
   Widget _buildBedroomScene(DetectiveScene scene) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            const Color(0xFFE1BEE7).withValues(alpha: 0.8), // Light purple
-            const Color(0xFFF8BBD9).withValues(alpha: 0.6), // Pink
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          // Bed
-          Positioned(
-            left: 0.3,
-            top: 0.5,
-            child: Container(
-              width: 120,
-              height: 80,
-              decoration: BoxDecoration(
-                color: const Color(0xFF8B4513), // Brown
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(child: Text('🛏️', style: TextStyle(fontSize: 40))),
-            ),
-          ),
-
-          // Clock (circle shape)
-          Positioned(
-            right: 0.1,
-            top: 0.15,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.brown, width: 3),
-              ),
-              child: Center(child: Text('🕐', style: TextStyle(fontSize: 30))),
-            ),
-          ),
-
-          // Picture frame (square shape)
-          Positioned(
-            left: 0.1,
-            top: 0.25,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: Colors.brown, width: 2),
-              ),
-              child: Center(child: Text('🖼️', style: TextStyle(fontSize: 20))),
-            ),
-          ),
-
-          // Mirror (oval shape)
-          Positioned(
-            right: 0.2,
-            top: 0.35,
-            child: Container(
-              width: 40,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.lightBlue.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Color(0xFFC0C0C0), width: 2),
-              ),
-              child: Center(child: Text('🪞', style: TextStyle(fontSize: 25))),
-            ),
-          ),
-
-          // Lamp with button
-          Positioned(
-            left: 0.25,
-            top: 0.45,
-            child: Column(
-              children: [
-                Text('💡', style: TextStyle(fontSize: 30)),
-                Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFFE1BEE7).withOpacity(0.8), // Light purple
+                const Color(0xFFF8BBD9).withOpacity(0.6), // Pink
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildKitchenScene(DetectiveScene scene) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            const Color(0xFFFFE082).withValues(alpha: 0.8), // Light yellow
-            const Color(0xFFFFF9C4).withValues(alpha: 0.6), // Cream
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          // Refrigerator (rectangle)
-          Positioned(
-            left: 0.05,
-            top: 0.3,
-            child: Container(
-              width: 60,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey, width: 2),
+          child: Stack(
+            children: [
+              // Bed
+              Positioned(
+                left: constraints.maxWidth * 0.3,
+                top: constraints.maxHeight * 0.5,
+                child: Container(
+                  width: 120,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF8B4513), // Brown
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Text('🛏️', style: TextStyle(fontSize: 40)),
+                  ),
+                ),
               ),
-              child: Center(child: Text('🧊', style: TextStyle(fontSize: 25))),
-            ),
-          ),
 
-          // Window (rectangle)
-          Positioned(
-            right: 0.1,
-            top: 0.15,
-            child: Container(
-              width: 80,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.lightBlue.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: Colors.brown, width: 3),
-              ),
-              child: Center(child: Text('🪟', style: TextStyle(fontSize: 35))),
-            ),
-          ),
-
-          // Plates on shelf (circles)
-          Positioned(
-            left: 0.15,
-            top: 0.25,
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
+              // Clock (circle shape)
+              Positioned(
+                right: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.15,
+                child: Container(
+                  width: 60,
+                  height: 60,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.blue, width: 2),
+                    border: Border.all(color: Colors.brown, width: 3),
                   ),
-                  child: Center(
-                    child: Text('🍽️', style: TextStyle(fontSize: 20)),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Container(
-                  width: 35,
-                  height: 35,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.blue, width: 2),
-                  ),
-                  child: Center(
-                    child: Text('🍽️', style: TextStyle(fontSize: 18)),
+                  child: const Center(
+                    child: Text('🕐', style: TextStyle(fontSize: 30)),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
 
-          // Stove with burner (circle)
-          Positioned(
-            left: 0.45,
-            top: 0.45,
-            child: Column(
-              children: [
-                Container(
-                  width: 80,
+              // Picture frame (square shape)
+              Positioned(
+                left: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.25,
+                child: Container(
+                  width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.amber,
                     borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: Colors.brown, width: 2),
+                  ),
+                  child: const Center(
+                    child: Text('🖼️', style: TextStyle(fontSize: 20)),
                   ),
                 ),
-                Container(
-                  width: 35,
+              ),
+
+              // Mirror (oval shape)
+              Positioned(
+                right: constraints.maxWidth * 0.2,
+                top: constraints.maxHeight * 0.35,
+                child: Container(
+                  width: 40,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: const Color(0xFFC0C0C0),
+                      width: 2,
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text('🪞', style: TextStyle(fontSize: 25)),
+                  ),
+                ),
+              ),
+
+              // Lamp with button
+              Positioned(
+                left: constraints.maxWidth * 0.25,
+                top: constraints.maxHeight * 0.45,
+                child: Column(
+                  children: [
+                    const Text('💡', style: TextStyle(fontSize: 30)),
+                    Container(
+                      width: 20,
+                      height: 20,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // FIXED: Wrapped with LayoutBuilder
+  Widget _buildKitchenScene(DetectiveScene scene) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFFFFE082).withOpacity(0.8), // Light yellow
+                const Color(0xFFFFF9C4).withOpacity(0.6), // Cream
+              ],
+            ),
+          ),
+          child: Stack(
+            children: [
+              // Refrigerator (rectangle)
+              Positioned(
+                left: constraints.maxWidth * 0.05,
+                top: constraints.maxHeight * 0.3,
+                child: Container(
+                  width: 60,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Center(
+                    child: Text('🧊', style: TextStyle(fontSize: 25)),
+                  ),
+                ),
+              ),
+
+              // Window (rectangle)
+              Positioned(
+                right: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.15,
+                child: Container(
+                  width: 80,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: Colors.brown, width: 3),
+                  ),
+                  child: const Center(
+                    child: Text('🪟', style: TextStyle(fontSize: 35)),
+                  ),
+                ),
+              ),
+
+              // Plates on shelf (circles)
+              Positioned(
+                left: constraints.maxWidth * 0.15,
+                top: constraints.maxHeight * 0.25,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.blue, width: 2),
+                      ),
+                      child: const Center(
+                        child: Text('🍽️', style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.blue, width: 2),
+                      ),
+                      child: const Center(
+                        child: Text('🍽️', style: TextStyle(fontSize: 18)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Stove with burner (circle)
+              Positioned(
+                left: constraints.maxWidth * 0.45,
+                top: constraints.maxHeight * 0.45,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    Container(
+                      width: 35,
+                      height: 35,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Text('🔥', style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Pizza slice (triangle)
+              Positioned(
+                left: constraints.maxWidth * 0.35,
+                bottom: constraints.maxHeight * 0.2,
+                child: CustomPaint(
+                  painter: TrianglePainter(color: Colors.orange),
+                  size: const Size(50, 40),
+                  child: const SizedBox(
+                    width: 50,
+                    height: 40,
+                    child: Center(
+                      child: Text('🍕', style: TextStyle(fontSize: 25)),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Cutting board (rectangle)
+              Positioned(
+                right: constraints.maxWidth * 0.3,
+                bottom: constraints.maxHeight * 0.3,
+                child: Container(
+                  width: 60,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF8B4513),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Center(
+                    child: Text('🔪', style: TextStyle(fontSize: 20)),
+                  ),
+                ),
+              ),
+
+              // Egg (oval)
+              Positioned(
+                right: constraints.maxWidth * 0.2,
+                bottom: constraints.maxHeight * 0.1,
+                child: Container(
+                  width: 25,
                   height: 35,
                   decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Center(
+                    child: Text('🥚', style: TextStyle(fontSize: 15)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // FIXED: Wrapped with LayoutBuilder
+  Widget _buildPlaygroundScene(DetectiveScene scene) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFF81C784).withOpacity(0.8), // Light green
+                const Color(0xFFA5D6A7).withOpacity(0.6), // Lighter green
+              ],
+            ),
+          ),
+          child: Stack(
+            children: [
+              // Sky with sun (circle)
+              Positioned(
+                right: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.05,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    color: Colors.yellow,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Text('☀️', style: TextStyle(fontSize: 30)),
+                  ),
+                ),
+              ),
+
+              // Slide with triangle roof
+              Positioned(
+                right: constraints.maxWidth * 0.25,
+                top: constraints.maxHeight * 0.2,
+                child: Column(
+                  children: [
+                    CustomPaint(
+                      painter: TrianglePainter(color: Colors.red),
+                      size: const Size(60, 40),
+                    ),
+                    Container(
+                      width: 60,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Center(
+                        child: Text('🛝', style: TextStyle(fontSize: 30)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Swings (rectangles)
+              Positioned(
+                left: constraints.maxWidth * 0.15,
+                top: constraints.maxHeight * 0.5,
+                child: Column(
+                  children: [
+                    Container(height: 40, width: 2, color: Colors.brown),
+                    Container(
+                      width: 40,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: Colors.brown,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Positioned(
+                left: constraints.maxWidth * 0.25,
+                top: constraints.maxHeight * 0.5,
+                child: Column(
+                  children: [
+                    Container(height: 40, width: 2, color: Colors.brown),
+                    Container(
+                      width: 40,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: Colors.brown,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Sandbox (square)
+              Positioned(
+                left: constraints.maxWidth * 0.4,
+                bottom: constraints.maxHeight * 0.1,
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.brown[300],
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.brown, width: 3),
+                  ),
+                  child: const Center(
+                    child: Text('🏖️', style: TextStyle(fontSize: 35)),
+                  ),
+                ),
+              ),
+
+              // Balls (circles)
+              Positioned(
+                right: constraints.maxWidth * 0.35,
+                bottom: constraints.maxHeight * 0.25,
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: Text('🔥', style: TextStyle(fontSize: 20)),
+                  child: const Center(
+                    child: Text('⚽', style: TextStyle(fontSize: 20)),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
 
-          // Pizza slice (triangle)
-          Positioned(
-            left: 0.35,
-            bottom: 0.2,
-            child: CustomPaint(
-              painter: TrianglePainter(color: Colors.orange),
-              size: const Size(50, 40),
-              child: Container(
-                width: 50,
-                height: 40,
-                child: Center(
-                  child: Text('🍕', style: TextStyle(fontSize: 25)),
+              Positioned(
+                left: constraints.maxWidth * 0.45,
+                bottom: constraints.maxHeight * 0.2,
+                child: Container(
+                  width: 25,
+                  height: 25,
+                  decoration: const BoxDecoration(
+                    color: Colors.orange,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Text('🏀', style: TextStyle(fontSize: 15)),
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          // Cutting board (rectangle)
-          Positioned(
-            right: 0.3,
-            bottom: 0.3,
-            child: Container(
-              width: 60,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFF8B4513),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Center(child: Text('🔪', style: TextStyle(fontSize: 20))),
-            ),
-          ),
-
-          // Egg (oval)
-          Positioned(
-            right: 0.2,
-            bottom: 0.1,
-            child: Container(
-              width: 25,
-              height: 35,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(child: Text('🥚', style: TextStyle(fontSize: 15))),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPlaygroundScene(DetectiveScene scene) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            const Color(0xFF81C784).withValues(alpha: 0.8), // Light green
-            const Color(0xFFA5D6A7).withValues(alpha: 0.6), // Lighter green
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          // Sky with sun (circle)
-          Positioned(
-            right: 0.1,
-            top: 0.05,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-                shape: BoxShape.circle,
-              ),
-              child: Center(child: Text('☀️', style: TextStyle(fontSize: 30))),
-            ),
-          ),
-
-          // Slide with triangle roof
-          Positioned(
-            right: 0.25,
-            top: 0.2,
-            child: Column(
-              children: [
-                CustomPaint(
-                  painter: TrianglePainter(color: Colors.red),
-                  size: const Size(60, 40),
-                ),
-                Container(
+              // Monkey bars (rectangle)
+              Positioned(
+                right: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.35,
+                child: Container(
                   width: 60,
-                  height: 80,
+                  height: 15,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.brown,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Center(
-                    child: Text('🛝', style: TextStyle(fontSize: 30)),
+                  child: const Center(
+                    child: Text('🐵', style: TextStyle(fontSize: 10)),
                   ),
                 ),
-              ],
-            ),
-          ),
-
-          // Swings (rectangles)
-          Positioned(
-            left: 0.15,
-            top: 0.5,
-            child: Column(
-              children: [
-                Container(height: 40, width: 2, color: Colors.brown),
-                Container(
-                  width: 40,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          Positioned(
-            left: 0.25,
-            top: 0.5,
-            child: Column(
-              children: [
-                Container(height: 40, width: 2, color: Colors.brown),
-                Container(
-                  width: 40,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Sandbox (square)
-          Positioned(
-            left: 0.4,
-            bottom: 0.1,
-            child: Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.brown[300],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.brown, width: 3),
               ),
-              child: Center(child: Text('🏖️', style: TextStyle(fontSize: 35))),
-            ),
+            ],
           ),
-
-          // Balls (circles)
-          Positioned(
-            right: 0.35,
-            bottom: 0.25,
-            child: Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              child: Center(child: Text('⚽', style: TextStyle(fontSize: 20))),
-            ),
-          ),
-
-          Positioned(
-            left: 0.45,
-            bottom: 0.2,
-            child: Container(
-              width: 25,
-              height: 25,
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                shape: BoxShape.circle,
-              ),
-              child: Center(child: Text('🏀', style: TextStyle(fontSize: 15))),
-            ),
-          ),
-
-          // Monkey bars (rectangle)
-          Positioned(
-            right: 0.1,
-            top: 0.35,
-            child: Container(
-              width: 60,
-              height: 15,
-              decoration: BoxDecoration(
-                color: Colors.brown,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(child: Text('🐵', style: TextStyle(fontSize: 10))),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
+  // FIXED: Wrapped with LayoutBuilder
   Widget _buildCityScene(DetectiveScene scene) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            const Color(0xFF90CAF9).withValues(alpha: 0.8), // Light blue sky
-            const Color(0xFFE0E0E0).withValues(alpha: 0.6), // Gray city
-          ],
-        ),
-      ),
-      child: Stack(
-        children: [
-          // Buildings with windows (rectangles)
-          Positioned(
-            left: 0.05,
-            top: 0.15,
-            child: Container(
-              width: 80,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.grey[400],
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                      Container(width: 20, height: 30, color: Colors.lightBlue),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Buildings with triangle roofs
-          Positioned(
-            right: 0.1,
-            top: 0.1,
-            child: Column(
-              children: [
-                CustomPaint(
-                  painter: TrianglePainter(color: Colors.red),
-                  size: const Size(60, 40),
-                ),
-                Container(
-                  width: 60,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Center(
-                    child: Text('🏠', style: TextStyle(fontSize: 30)),
-                  ),
-                ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color(0xFF90CAF9).withOpacity(0.8), // Light blue sky
+                const Color(0xFFE0E0E0).withOpacity(0.6), // Gray city
               ],
             ),
           ),
-
-          Positioned(
-            right: 0.02,
-            top: 0.15,
-            child: Column(
-              children: [
-                CustomPaint(
-                  painter: TrianglePainter(color: Colors.green),
-                  size: const Size(50, 35),
+          child: Stack(
+            children: [
+              // Buildings with windows (rectangles)
+              Positioned(
+                left: constraints.maxWidth * 0.05,
+                top: constraints.maxHeight * 0.15,
+                child: Container(
+                  width: 80,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.lightBlue,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Container(
-                  width: 50,
+              ),
+
+              // Buildings with triangle roofs
+              Positioned(
+                right: constraints.maxWidth * 0.1,
+                top: constraints.maxHeight * 0.1,
+                child: Column(
+                  children: [
+                    CustomPaint(
+                      painter: TrianglePainter(color: Colors.red),
+                      size: const Size(60, 40),
+                    ),
+                    Container(
+                      width: 60,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Center(
+                        child: Text('🏠', style: TextStyle(fontSize: 30)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Positioned(
+                right: constraints.maxWidth * 0.02,
+                top: constraints.maxHeight * 0.15,
+                child: Column(
+                  children: [
+                    CustomPaint(
+                      painter: TrianglePainter(color: Colors.green),
+                      size: const Size(50, 35),
+                    ),
+                    Container(
+                      width: 50,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Center(
+                        child: Text('🏠', style: TextStyle(fontSize: 25)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Traffic light (circles)
+              Positioned(
+                right: constraints.maxWidth * 0.25,
+                top: constraints.maxHeight * 0.3,
+                child: Container(
+                  width: 30,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Center(
-                    child: Text('🏠', style: TextStyle(fontSize: 25)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: const BoxDecoration(
+                          color: Colors.yellow,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-
-          // Traffic light (circles)
-          Positioned(
-            right: 0.25,
-            top: 0.3,
-            child: Container(
-              width: 30,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(15),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Colors.yellow,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
 
-          // Car with wheels (circles)
-          Positioned(
-            left: 0.3,
-            bottom: 0.1,
-            child: Stack(
-              children: [
-                Container(
+              // Car with wheels (circles)
+              Positioned(
+                left: constraints.maxWidth * 0.3,
+                bottom: constraints.maxHeight * 0.1,
+                child: SizedBox(
+                  width: 100,
+                  height: 50,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Container(
+                          width: 80,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Center(
+                            child: Text('🚗', style: TextStyle(fontSize: 20)),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 10,
+                        bottom: 5,
+                        child: Container(
+                          width: 25,
+                          height: 25,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 10,
+                        bottom: 5,
+                        child: Container(
+                          width: 25,
+                          height: 25,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Bus with windows (rectangles)
+              Positioned(
+                left: constraints.maxWidth * 0.25,
+                bottom: constraints.maxHeight * 0.2,
+                child: Container(
                   width: 80,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(width: 15, height: 25, color: Colors.lightBlue),
+                      Container(width: 15, height: 25, color: Colors.lightBlue),
+                      Container(width: 15, height: 25, color: Colors.lightBlue),
+                    ],
+                  ),
+                ),
+              ),
+
+              // Stop sign (square)
+              Positioned(
+                right: constraints.maxWidth * 0.35,
+                top: constraints.maxHeight * 0.45,
+                child: Container(
+                  width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Center(
-                    child: Text('🚗', style: TextStyle(fontSize: 20)),
-                  ),
-                ),
-                Positioned(
-                  left: 10,
-                  bottom: -5,
-                  child: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
+                  child: const Center(
+                    child: Text('🛑', style: TextStyle(fontSize: 20)),
                   ),
                 ),
-                Positioned(
-                  right: 10,
-                  bottom: -5,
-                  child: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Bus with windows (rectangles)
-          Positioned(
-            left: 0.25,
-            bottom: 0.2,
-            child: Container(
-              width: 80,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-                borderRadius: BorderRadius.circular(8),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(width: 15, height: 25, color: Colors.lightBlue),
-                  Container(width: 15, height: 25, color: Colors.lightBlue),
-                  Container(width: 15, height: 25, color: Colors.lightBlue),
-                ],
-              ),
-            ),
+            ],
           ),
-
-          // Stop sign (square)
-          Positioned(
-            right: 0.35,
-            top: 0.45,
-            child: Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Center(child: Text('🛑', style: TextStyle(fontSize: 20))),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -978,36 +1063,40 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
     );
   }
 
+  // FIXED: Wrapped with LayoutBuilder
   Widget _buildFoundShapesOverlay(DetectiveScene scene) {
-    return Positioned.fill(
-      child: Stack(
-        children:
-            scene.hiddenShapes
-                .where((shape) => shape.isFound)
-                .map((shape) => _buildFoundShapeIndicator(shape, scene))
-                .toList(),
-      ),
-    );
-  }
-
-  Widget _buildFoundShapeIndicator(HiddenShape shape, DetectiveScene scene) {
-    return Positioned(
-      left:
-          shape.position.dx * 300 -
-          shape.size.width / 2, // Approximate conversion
-      top: shape.position.dy * 200 - shape.size.height / 2,
-      child: Container(
-        width: shape.size.width,
-        height: shape.size.height,
-        decoration: BoxDecoration(
-          border: Border.all(color: shape.shapeColor, width: 3),
-          borderRadius: BorderRadius.circular(8),
-          color: shape.shapeColor.withValues(alpha: 0.2),
-        ),
-        child: Center(
-          child: Icon(Icons.check_circle, color: shape.shapeColor, size: 20),
-        ),
-      ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stack(
+          children:
+              scene.hiddenShapes.where((shape) => shape.isFound).map((shape) {
+                return Positioned(
+                  left:
+                      constraints.maxWidth * shape.position.dx -
+                      shape.size.width / 2,
+                  top:
+                      constraints.maxHeight * shape.position.dy -
+                      shape.size.height / 2,
+                  child: Container(
+                    width: shape.size.width,
+                    height: shape.size.height,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: shape.shapeColor, width: 3),
+                      borderRadius: BorderRadius.circular(8),
+                      color: shape.shapeColor.withOpacity(0.2),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.check_circle,
+                        color: shape.shapeColor,
+                        size: 20,
+                      ),
+                    ),
+                  ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
+                );
+              }).toList(),
+        );
+      },
     );
   }
 
@@ -1022,11 +1111,11 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.9),
+            color: Colors.white.withOpacity(0.9),
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
+                color: Colors.black.withOpacity(0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -1046,13 +1135,16 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                       decoration: BoxDecoration(
                         color:
                             isSelected
-                                ? scene.themeColor.withValues(alpha: 0.3)
+                                ? scene.themeColor.withOpacity(0.3)
                                 : Colors.transparent,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
                         children: [
-                          Text(scene.emoji, style: TextStyle(fontSize: 20)),
+                          Text(
+                            scene.emoji,
+                            style: const TextStyle(fontSize: 20),
+                          ),
                           Text(
                             scene.frenchName,
                             style: TextStyle(
@@ -1086,13 +1178,13 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.primary.withValues(alpha: 0.1),
-              AppColors.primaryDeep.withValues(alpha: 0.05),
+              AppColors.primary.withOpacity(0.1),
+              AppColors.primaryDeep.withOpacity(0.05),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.3),
+            color: AppColors.primary.withOpacity(0.3),
             width: 2,
           ),
         ),
@@ -1101,7 +1193,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             // Dashboard header
             Row(
               children: [
-                Text('🕵️‍♂️', style: TextStyle(fontSize: 24)),
+                const Text('🕵️‍♂️', style: TextStyle(fontSize: 24)),
                 const SizedBox(width: 12),
                 Text(
                   'Tableau de Détective',
@@ -1143,7 +1235,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
+                  color: AppColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -1179,11 +1271,11 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.white.withValues(alpha: 0.8),
+        color: AppColors.white.withOpacity(0.8),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -1191,7 +1283,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
       ),
       child: Column(
         children: [
-          Text(emoji, style: TextStyle(fontSize: 24)),
+          Text(emoji, style: const TextStyle(fontSize: 24)),
           const SizedBox(height: 4),
           Text(
             value,
@@ -1231,9 +1323,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.primary.withValues(
-                          alpha: 1.0 - progress,
-                        ),
+                        color: AppColors.primary.withOpacity(1.0 - progress),
                         width: 2,
                       ),
                     ),
@@ -1263,7 +1353,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             // Progress bar
             LinearProgressIndicator(
               value: progress,
-              backgroundColor: AppColors.grey,
+              backgroundColor: AppColors.grey.withOpacity(0.3),
               valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
               minHeight: 6,
             ).animate().slideX(duration: 600.ms),
@@ -1341,14 +1431,14 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    foundShape.shapeColor.withValues(alpha: 0.9),
-                    foundShape.shapeColor.withValues(alpha: 0.7),
+                    foundShape.shapeColor.withOpacity(0.9),
+                    foundShape.shapeColor.withOpacity(0.7),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: foundShape.shapeColor.withValues(alpha: 0.3),
+                    color: foundShape.shapeColor.withOpacity(0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -1356,11 +1446,11 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
               ),
               child: Column(
                 children: [
-                  Text(foundShape.emoji, style: TextStyle(fontSize: 48)),
+                  Text(foundShape.emoji, style: const TextStyle(fontSize: 48)),
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Trouvé!',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -1406,15 +1496,12 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                AppColors.accent2,
-                AppColors.accent2.withValues(alpha: 0.8),
-              ],
+              colors: [AppColors.accent2, AppColors.accent2.withOpacity(0.8)],
             ),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.2),
+                color: Colors.black.withOpacity(0.2),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -1422,7 +1509,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
           ),
           child: Row(
             children: [
-              Text('💡', style: TextStyle(fontSize: 32)),
+              const Text('💡', style: TextStyle(fontSize: 32)),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -1448,7 +1535,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
   Widget _buildLevelCompleteOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withValues(alpha: 0.7),
+        color: Colors.black.withOpacity(0.7),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -1460,7 +1547,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('🔍✨', style: TextStyle(fontSize: 60)),
+                const Text('🔍✨', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Mission accomplie!',
@@ -1494,7 +1581,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
   Widget _buildCelebrationOverlay() {
     return Positioned.fill(
       child: Container(
-        color: Colors.black.withValues(alpha: 0.8),
+        color: Colors.black.withOpacity(0.8),
         child: Center(
           child: Container(
             margin: const EdgeInsets.all(32),
@@ -1506,7 +1593,7 @@ class _ShapeDetectiveScreenState extends State<ShapeDetectiveScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('🎉🔍🎉', style: TextStyle(fontSize: 60)),
+                const Text('🎉🔍🎉', style: TextStyle(fontSize: 60)),
                 const SizedBox(height: 16),
                 Text(
                   'Maître Détective!',
