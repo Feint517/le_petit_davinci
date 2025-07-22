@@ -21,7 +21,7 @@ class ColorPalette extends GetView<StudioController> {
       ),
       child: Row(
         children: [
-          // Current color indicator
+          //* Current color indicator
           Obx(
             () => Container(
               width: 44.w,
@@ -48,7 +48,7 @@ class ColorPalette extends GetView<StudioController> {
 
           Gap(12.w),
 
-          // Color palette - Fixed: Removed problematic Obx wrapper
+          //* Color palette - Fixed: Removed problematic Obx wrapper
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -66,7 +66,7 @@ class ColorPalette extends GetView<StudioController> {
 
           Gap(12.w),
 
-          // Custom color picker button
+          //* Custom color picker button
           GestureDetector(
             onTap: _showCustomColorPicker,
             child: Container(
@@ -94,10 +94,9 @@ class ColorPalette extends GetView<StudioController> {
     );
   }
 
-  Widget _buildColorButton(Color color) {
-    // Fixed: Single Obx per color button, proper color comparison
+  Widget _buildColorButton(MaterialColor color) {
     return Obx(() {
-      final isSelected = controller.selectedColor.value.value == color.value;
+      final isSelected = controller.selectedColor.value == color;
 
       return GestureDetector(
         onTap: () {
@@ -161,7 +160,6 @@ class ColorPalette extends GetView<StudioController> {
             ),
             Gap(20.h),
 
-            // Simple color picker with predefined colors
             Expanded(child: _buildSimpleColorPicker()),
 
             Gap(20.h),
@@ -204,7 +202,7 @@ class ColorPalette extends GetView<StudioController> {
 
   Widget _buildSimpleColorPicker() {
     // Extended color palette for custom picker
-    final List<Color> extendedColors = [
+    final List<MaterialColor> extendedColors = [
       // Basic colors
       Colors.red,
       Colors.pink,
@@ -225,29 +223,29 @@ class ColorPalette extends GetView<StudioController> {
       Colors.brown,
       Colors.grey,
       Colors.blueGrey,
-      Colors.black,
+      // Colors.black,
 
-      // Light variations
-      Colors.red.shade200,
-      Colors.pink.shade200,
-      Colors.purple.shade200,
-      Colors.deepPurple.shade200,
-      Colors.indigo.shade200,
-      Colors.blue.shade200,
-      Colors.lightBlue.shade200,
-      Colors.cyan.shade200,
-      Colors.teal.shade200,
-      Colors.green.shade200,
-      Colors.lightGreen.shade200,
-      Colors.lime.shade200,
-      Colors.yellow.shade200,
-      Colors.amber.shade200,
-      Colors.orange.shade200,
-      Colors.deepOrange.shade200,
-      Colors.brown.shade200,
-      Colors.grey.shade200,
-      Colors.blueGrey.shade200,
-      Colors.white,
+      // // Light variations
+      // Colors.red.shade200,
+      // Colors.pink.shade200,
+      // Colors.purple.shade200,
+      // Colors.deepPurple.shade200,
+      // Colors.indigo.shade200,
+      // Colors.blue.shade200,
+      // Colors.lightBlue.shade200,
+      // Colors.cyan.shade200,
+      // Colors.teal.shade200,
+      // Colors.green.shade200,
+      // Colors.lightGreen.shade200,
+      // Colors.lime.shade200,
+      // Colors.yellow.shade200,
+      // Colors.amber.shade200,
+      // Colors.orange.shade200,
+      // Colors.deepOrange.shade200,
+      // Colors.brown.shade200,
+      // Colors.grey.shade200,
+      // Colors.blueGrey.shade200,
+      // Colors.white,
     ];
 
     return GridView.builder(
@@ -262,7 +260,7 @@ class ColorPalette extends GetView<StudioController> {
 
         return Obx(() {
           final isSelected =
-              controller.selectedColor.value.value == color.value;
+              controller.selectedColor.value == color.value;
 
           return GestureDetector(
             onTap: () {

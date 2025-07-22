@@ -88,7 +88,7 @@ class TemplateSelectionScreen extends GetView<StudioController> {
   }
 
   Widget _buildCategoryTabs() {
-    return Container(
+    return SizedBox(
       height: 40.h,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -184,7 +184,7 @@ class TemplateSelectionScreen extends GetView<StudioController> {
         controller.selectTemplate(template);
         Get.toNamed(
           AppRoutes.drawingCanvas,
-        ); // ✅ Uses proper binding instead of Get.to()
+        );
       },
       child: Container(
         decoration: BoxDecoration(

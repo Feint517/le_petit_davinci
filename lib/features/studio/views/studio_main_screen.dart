@@ -16,7 +16,6 @@ class StudioMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Properly initialize the controller
     return GetBuilder<StudioController>(
       init: StudioController(),
       builder: (controller) {
@@ -310,7 +309,7 @@ class StudioMainScreen extends StatelessWidget {
   Widget _buildRecentArtworks(StudioController controller) {
     return Obx(() {
       if (controller.isLoading.value) {
-        return Container(
+        return SizedBox(
           height: 200.h,
           child: const Center(child: CircularProgressIndicator()),
         );

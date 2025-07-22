@@ -15,7 +15,7 @@ class StudioController extends GetxController {
   late DrawingController drawingController;
 
   // Drawing state - All observable variables
-  final Rx<Color> selectedColor = Colors.blue.obs;
+  final Rx<MaterialColor> selectedColor = Colors.blue.obs;
   final RxDouble brushSize = 5.0.obs;
   // MODIFIED: Tracks the type of the current drawing tool (e.g., SimpleLine, Circle).
   final Rx<Type> selectedTool = (SimpleLine).obs;
@@ -41,23 +41,34 @@ class StudioController extends GetxController {
   final GlobalKey canvasKey = GlobalKey();
 
   // Available colors for child-friendly palette
-  final List<Color> availableColors = [
-    const Color(0xFFE53E3E), // Red
-    const Color(0xFF3182CE), // Blue
-    const Color(0xFF38A169), // Green
-    const Color(0xFFD69E2E), // Yellow
-    const Color(0xFFDD6B20), // Orange
-    const Color(0xFF9F7AEA), // Purple
-    const Color(0xFFED64A6), // Pink
-    const Color(0xFF975A16), // Brown
-    const Color(0xFF1A202C), // Black
-    const Color(0xFF718096), // Grey
-    const Color(0xFFFFFFFF), // White
-    const Color(0xFFF56565), // Light Red
-    const Color(0xFF63B3ED), // Light Blue
-    const Color(0xFF68D391), // Light Green
-    const Color(0xFFFBD38D), // Light Yellow
-    const Color(0xFFFBB6CE), // Light Pink
+  final List<MaterialColor> availableColors = [
+    // const Color(0xFFE53E3E), // Red
+    // const Color(0xFF3182CE), // Blue
+    // const Color(0xFF38A169), // Green
+    // const Color(0xFFD69E2E), // Yellow
+    // const Color(0xFFDD6B20), // Orange
+    // const Color(0xFF9F7AEA), // Purple
+    // const Color(0xFFED64A6), // Pink
+    // const Color(0xFF975A16), // Brown
+    // const Color(0xFF1A202C), // Black
+    // const Color(0xFF718096), // Grey
+    // const Color(0xFFFFFFFF), // White
+    // const Color(0xFFF56565), // Light Red
+    // const Color(0xFF63B3ED), // Light Blue
+    // const Color(0xFF68D391), // Light Green
+    // const Color(0xFFFBD38D), // Light Yellow
+    // const Color(0xFFFBB6CE), // Light Pink
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.brown,
+    // Colors.black,
+    Colors.grey,
+    // Colors.white,
   ];
 
   // Available brush sizes optimized for kids
@@ -155,7 +166,7 @@ class StudioController extends GetxController {
   }
 
   // MODIFIED: Color selection method directly updates the controller's style.
-  void setColor(Color color) {
+  void setColor(MaterialColor color) {
     selectedColor.value = color;
     drawingController.setStyle(color: color);
     _playSound('select.mp3');

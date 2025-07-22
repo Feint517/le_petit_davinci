@@ -3,7 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:collection/collection.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/background_music_controller.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
@@ -15,6 +17,7 @@ class ReorderWordsController extends GetxController {
   ReorderWordsController(this.exercises, {required this.dialect});
 
   final FlutterTts _tts = FlutterTts();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final String dialect;
   final List<ReorderWordsExercise> exercises;
   var currentExerciseIndex = 0.obs;
@@ -33,9 +36,11 @@ class ReorderWordsController extends GetxController {
   void onInit() async {
     super.onInit();
     await BackgroundMusicController.instance.stopMusic();
+    await _audioPlayer.setAsset(AudioAssets.correctSound);
+    await _audioPlayer.setAsset(AudioAssets.errorSound);
   }
 
-  void checkAnswer() {
+  void checkAnswer() async{
     final isCorrect = ListEquality().equals(
       selectedOrder,
       currentExercise.correctOrder,
@@ -43,6 +48,16 @@ class ReorderWordsController extends GetxController {
     final correctSentence = currentExercise.correctOrder
         .map((i) => currentExercise.words[i])
         .join(' ');
+
+        if (isCorrect) {
+      await _audioPlayer.setAsset(AudioAssets.correctSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    } else {
+      await _audioPlayer.setAsset(AudioAssets.errorSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    }
 
     Get.bottomSheet(
       Container(

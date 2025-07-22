@@ -12,8 +12,8 @@ import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/game_control
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/mode_selection_popup.dart';
 import 'package:le_petit_davinci/features/Games/widgets/tic-tac-toe/turn_indicator.dart';
 
-class TicTacToe extends GetView<TicTacToeController> {
-  const TicTacToe({super.key});
+class TicTacToeScreen extends GetView<TicTacToeController> {
+  const TicTacToeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class TicTacToe extends GetView<TicTacToeController> {
 
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
-      appBar: ProfileHeader(showTrailingIcon: false),
+      appBar: ProfileHeader(type: ProfileHeaderType.compact),
       body: SafeArea(
         child: Stack(
           children: [

@@ -149,7 +149,7 @@ class SvgAssets {
   static const String schoolTools = 'assets/svg/schoolTools.svg';
   static const String gamesBackground = 'assets/svg/games_background.svg';
   static const String gamesBackground2 = 'assets/svg/games_background2.svg';
-  static const String tictactoe = 'assets/svg//tictactoe.svg';
+  static const String tictactoe = 'assets/svg/tictactoe.svg';
   static const String chess = 'assets/svg/chess.svg';
   static const String biscuit = 'assets/svg/biscuit.svg';
   static const String lamp = 'assets/svg/lamp.svg';

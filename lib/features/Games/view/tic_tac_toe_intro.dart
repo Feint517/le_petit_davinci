@@ -145,7 +145,7 @@ class TicTacToeIntroScreen extends StatelessWidget {
                                             label: 'Jouer avec la mascotte',
                                             onPressed:
                                                 () => Get.to(
-                                                  () => const TicTacToe(),
+                                                  () => const TicTacToeScreen(),
                                                 ),
                                           ),
                                           CustomButton(label: 'Jouer à deux'),

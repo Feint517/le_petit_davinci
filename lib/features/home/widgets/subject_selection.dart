@@ -28,40 +28,6 @@ class SubjectSelection extends GetView<HomeController> {
             mainAxisExtent: 185.h,
             itemBuilder: (context, index) {
               final subject = controller.subjects[index];
-              // return OpenContainer(
-              //   transitionType: ContainerTransitionType.fadeThrough,
-              //   openBuilder: ( context,  _) {
-              //     switch (subject.name) {
-              //       case 'Français':
-              //         Get.put(FrenchMapController(), permanent: false);
-              //         return const FrenchMapScreen();
-              //       case 'Mathématiques':
-              //         Get.put(MathMapController());
-              //         return const MathematicMapScreen();
-              //       case 'English':
-              //         Get.put(EnglishMapController());
-              //         return const EnglishMapScreen();
-              //       case 'Vie quotidienne':
-              //         return const VieQuotidienneScreen();
-              //       case 'Jeux':
-              //         return const GamesScreen();
-              //       default:
-              //         return const SizedBox.shrink();
-              //     }
-              //   },
-              //   closedElevation: 0,
-              //   closedShape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(20.r),
-              //   ),
-              //   closedColor: subject.cardColor,
-              //   openColor: subject.cardColor,
-              //   transitionDuration: const Duration(milliseconds: 800),
-              //   closedBuilder: (context, openContainer) {
-              //     return SubjectCard(
-              //       subject: subject,
-              //     );
-              //   },
-              // );
               return SubjectCard(subject: subject);
             },
           ),

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 
 class VieQuotidienneScreen extends StatelessWidget {
   const VieQuotidienneScreen({super.key});
@@ -14,7 +12,7 @@ class VieQuotidienneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ProfileHeader(),
+      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
       backgroundColor: AppColors.accent2,
       body: SafeArea(
         bottom: false,
@@ -92,7 +90,6 @@ class ContentVieQuotidienne extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomNavBar(variant: BadgeVariant.dailyLife),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(

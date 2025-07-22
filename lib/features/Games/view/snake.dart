@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
+import 'package:le_petit_davinci/features/Games/widgets/snake/control_button.dart';
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -577,20 +581,16 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
           showModeSelection
               ? SlideTransition(
                 position: _slideAnimation,
-                child: Container(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: AppColors.purple,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary,
-                        spreadRadius: 3,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
+                    color: AppColors.accentDark,
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    boxShadow: CustomShadowStyle.customCircleShadows(
+                      color: AppColors.accentDark,
+                    ),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -750,85 +750,21 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
                         ),
                       ),
                       Gap(25),
-                      Center(
-                        child: GestureDetector(
-                          onTap: startGame,
-                          child: Container(
-                            width: double.infinity,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.accent3,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.secondary.withValues(
-                                    alpha: 0.3,
-                                  ),
-                                  spreadRadius: 1,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Démarrer le jeu',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'BricolageGrotesque',
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Gap(8),
-                                Icon(
-                                  Icons.play_arrow_outlined,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
-                            ),
-                          ),
+                      CustomButton(
+                        variant: ButtonVariant.secondary,
+                        label: 'Démarrer le jeu',
+                        icon: Icon(
+                          Icons.play_arrow_outlined,
+                          color: AppColors.white,
                         ),
+                        iconPosition: IconPosition.right,
+                        onPressed: () => startGame(),
                       ),
                     ],
                   ),
                 ),
               )
               : null,
-    );
-  }
-}
-
-class ControlButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  const ControlButton({super.key, required this.icon, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: AppColors.accent,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(0, 3)),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(15),
-          child: Container(
-            padding: EdgeInsets.all(15),
-            child: Icon(icon, color: Colors.white, size: 30),
-          ),
-        ),
-      ),
     );
   }
 }
