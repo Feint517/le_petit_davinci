@@ -4,22 +4,30 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:flutter_drawing_board/paint_contents.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class StudioController extends GetxController {
   final StorageService _storageService = Get.find<StorageService>();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  // Drawing board controller - High performance drawing engine
+  late DrawingController drawingController;
 
   // Drawing state
-  final RxList<DrawingPath> drawingPaths = <DrawingPath>[].obs;
-  final RxList<DrawingPath> redoPaths = <DrawingPath>[].obs;
   final Rx<Color> selectedColor = Colors.blue.obs;
   final RxDouble brushSize = 5.0.obs;
   final Rx<DrawingTool> selectedTool = DrawingTool.brush.obs;
   final RxBool isDrawing = false.obs;
+  final RxBool hasUnsavedChanges = false.obs;
 
   // Artwork management
   final RxList<ArtworkModel> artworks = <ArtworkModel>[].obs;
@@ -36,108 +44,228 @@ class StudioController extends GetxController {
 
   // Available colors for child-friendly palette
   final List<Color> availableColors = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange,
-    Colors.purple,
-    Colors.pink,
-    Colors.brown,
-    Colors.black,
-    Colors.grey,
+    const Color(0xFFE53E3E), // Red
+    const Color(0xFF3182CE), // Blue
+    const Color(0xFF38A169), // Green
+    const Color(0xFFD69E2E), // Yellow
+    const Color(0xFFDD6B20), // Orange
+    const Color(0xFF9F7AEA), // Purple
+    const Color(0xFFED64A6), // Pink
+    const Color(0xFF975A16), // Brown
+    const Color(0xFF1A202C), // Black
+    const Color(0xFF718096), // Grey
   ];
 
-  // Available brush sizes
-  final List<double> availableSizes = [2.0, 5.0, 10.0, 15.0];
+  // Available brush sizes optimized for kids
+  final List<double> availableSizes = [3.0, 6.0, 12.0, 20.0];
 
   @override
   void onInit() {
     super.onInit();
+    _initializeDrawingController();
     loadArtworks();
     initializeTemplates();
   }
 
-  // Drawing functions
-  void startDrawing(Offset point) {
-    isDrawing.value = true;
-    redoPaths.clear(); // Clear redo history when starting new drawing
+  @override
+  void onClose() {
+    drawingController.dispose();
+    _audioPlayer.dispose();
+    super.onClose();
+  }
 
-    final newPath = DrawingPath(
-      points: [point],
-      color:
-          selectedTool.value == DrawingTool.eraser
-              ? Colors.transparent
-              : selectedColor.value,
+  void _initializeDrawingController() {
+    drawingController = DrawingController();
+
+    // Set default drawing style optimized for kids using setStyle
+    drawingController.setStyle(
+      color: selectedColor.value,
       strokeWidth: brushSize.value,
-      tool: selectedTool.value,
+      style: PaintingStyle.stroke,
+      strokeCap: StrokeCap.round,
+      strokeJoin: StrokeJoin.round,
+      isAntiAlias: true, // Smooth lines
     );
 
-    drawingPaths.add(newPath);
+    // Set default drawing tool to SimpleLine (freehand drawing)
+    drawingController.setPaintContent(SimpleLine());
+
+    // Listen for drawing changes
+    drawingController.addListener(() {
+      hasUnsavedChanges.value = drawingController.getHistory.isNotEmpty;
+    });
   }
 
-  void updateDrawing(Offset point) {
-    if (isDrawing.value && drawingPaths.isNotEmpty) {
-      final currentPath = drawingPaths.last;
-      final updatedPoints = List<Offset>.from(currentPath.points)..add(point);
-
-      drawingPaths[drawingPaths.length - 1] = DrawingPath(
-        points: updatedPoints,
-        color: currentPath.color,
-        strokeWidth: currentPath.strokeWidth,
-        tool: currentPath.tool,
-      );
-      drawingPaths.refresh();
-    }
-  }
-
-  void endDrawing() {
-    isDrawing.value = false;
-  }
-
-  void undo() {
-    if (drawingPaths.isNotEmpty) {
-      final lastPath = drawingPaths.removeLast();
-      redoPaths.add(lastPath);
-    }
-  }
-
-  void redo() {
-    if (redoPaths.isNotEmpty) {
-      final pathToRedo = redoPaths.removeLast();
-      drawingPaths.add(pathToRedo);
-    }
-  }
-
-  void clearCanvas() {
-    drawingPaths.clear();
-    redoPaths.clear();
-  }
-
+  // Enhanced drawing functions with audio feedback
   void selectColor(Color color) {
     selectedColor.value = color;
     if (selectedTool.value == DrawingTool.eraser) {
       selectedTool.value = DrawingTool.brush;
     }
+
+    // Update drawing controller paint
+    _updateDrawingPaint();
+
+    // Play color selection sound
+    _playSound('color_select.mp3');
+
+    // Haptic feedback
+    HapticFeedback.lightImpact();
+
+    // Visual feedback
+    Get.snackbar(
+      '',
+      '',
+      duration: const Duration(milliseconds: 800),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: color.withOpacity(0.9),
+      colorText: _getContrastColor(color),
+      messageText: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.palette, color: _getContrastColor(color), size: 16),
+          const SizedBox(width: 8),
+          Text(
+            'Couleur ${_getColorName(color)} sélectionnée!',
+            style: TextStyle(
+              color: _getContrastColor(color),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+      titleText: const SizedBox.shrink(),
+      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
+    );
   }
 
   void selectBrushSize(double size) {
     brushSize.value = size;
+    _updateDrawingPaint();
+    _playSound('brush_select.mp3');
+    HapticFeedback.selectionClick();
   }
 
   void selectTool(DrawingTool tool) {
     selectedTool.value = tool;
+
+    switch (tool) {
+      case DrawingTool.brush:
+        // Set brush tool with SimpleLine for freehand drawing
+        drawingController.setPaintContent(SimpleLine());
+        drawingController.setStyle(
+          color: selectedColor.value,
+          strokeWidth: brushSize.value,
+          style: PaintingStyle.stroke,
+          strokeCap: StrokeCap.round,
+          strokeJoin: StrokeJoin.round,
+          isAntiAlias: true,
+        );
+        break;
+      case DrawingTool.eraser:
+        // Set eraser tool
+        drawingController.setPaintContent(Eraser());
+        drawingController.setStyle(
+          strokeWidth: brushSize.value * 1.5, // Bigger eraser
+          strokeCap: StrokeCap.round,
+        );
+        break;
+      default:
+        break;
+    }
+
+    _playSound('tool_select.mp3');
+    HapticFeedback.mediumImpact();
+  }
+
+  void _updateDrawingPaint() {
+    if (selectedTool.value == DrawingTool.brush) {
+      drawingController.setStyle(
+        color: selectedColor.value,
+        strokeWidth: brushSize.value,
+        style: PaintingStyle.stroke,
+        strokeCap: StrokeCap.round,
+        strokeJoin: StrokeJoin.round,
+        isAntiAlias: true,
+      );
+    }
+  }
+
+  // Undo/Redo with improved feedback
+  void undo() {
+    if (drawingController.canUndo()) {
+      drawingController.undo();
+      _playSound('undo.mp3');
+      HapticFeedback.lightImpact();
+
+      Get.snackbar(
+        'Annulé!',
+        'Dernière action annulée',
+        duration: const Duration(seconds: 1),
+        backgroundColor: Colors.orange.withOpacity(0.8),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
+      );
+    }
+  }
+
+  void redo() {
+    if (drawingController.canRedo()) {
+      drawingController.redo();
+      _playSound('redo.mp3');
+      HapticFeedback.lightImpact();
+
+      Get.snackbar(
+        'Refait!',
+        'Action refaite',
+        duration: const Duration(seconds: 1),
+        backgroundColor: Colors.green.withOpacity(0.8),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
+      );
+    }
+  }
+
+  void clearCanvas() {
+    drawingController.clear();
+    hasUnsavedChanges.value = false;
+    _playSound('clear.mp3');
+    HapticFeedback.mediumImpact();
   }
 
   void selectTemplate(TemplateModel? template) {
     selectedTemplate.value = template;
     clearCanvas(); // Clear existing drawing when selecting template
+
+    if (template != null) {
+      _playSound('template_select.mp3');
+      Get.snackbar(
+        'Modèle sélectionné!',
+        'Tu peux maintenant dessiner sur ${template.name}',
+        backgroundColor: Colors.blue.withOpacity(0.8),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 2),
+      );
+    }
   }
 
-  // Save artwork
+  // Enhanced save with better error handling
   Future<void> saveArtwork({String? title}) async {
     try {
       isLoading.value = true;
+
+      if (drawingController.getHistory.isEmpty) {
+        Get.snackbar(
+          'Attention',
+          'Dessine quelque chose avant de sauvegarder!',
+          backgroundColor: Colors.orange.withOpacity(0.8),
+          colorText: Colors.white,
+        );
+        return;
+      }
 
       final artworkTitle = title ?? currentArtworkTitle.value;
       final artworkId =
@@ -145,15 +273,17 @@ class StudioController extends GetxController {
               ? _generateArtworkId()
               : currentArtworkId.value;
 
-      // Capture canvas as image
-      final image = await _captureCanvas();
-      if (image == null) {
-        Get.snackbar('Erreur', 'Impossible de sauvegarder le dessin');
-        return;
+      // Capture drawing as image with high quality - Fixed ByteData conversion
+      final imageData = await drawingController.getImageData();
+      if (imageData == null) {
+        throw Exception('Impossible de capturer le dessin');
       }
 
+      // Convert ByteData to Uint8List
+      final uint8ListData = imageData.buffer.asUint8List();
+
       // Save image to file
-      final imagePath = await _saveImageToFile(image, artworkId);
+      final imagePath = await _saveImageToFile(uint8ListData, artworkId);
 
       // Create artwork model
       final artwork = ArtworkModel(
@@ -168,8 +298,10 @@ class StudioController extends GetxController {
                 ? ArtworkType.template
                 : ArtworkType.freeDrawing,
         metadata: {
-          'pathsCount': drawingPaths.length,
-          'colorsUsed': _getUsedColors(),
+          'strokesCount': drawingController.getHistory.length,
+          'colorsUsed': [selectedColor.value.toString()],
+          'brushSizeUsed': brushSize.value,
+          'lastTool': selectedTool.value.toString(),
         },
       );
 
@@ -186,21 +318,33 @@ class StudioController extends GetxController {
 
       currentArtworkId.value = artworkId;
       currentArtworkTitle.value = artworkTitle;
+      hasUnsavedChanges.value = false;
+
+      // Success feedback
+      _playSound('save_success.mp3');
+      HapticFeedback.heavyImpact();
 
       Get.snackbar(
-        'Succès',
-        'Dessin sauvegardé!',
-        backgroundColor: Colors.green.withOpacity(0.8),
+        'Bravo! 🎨',
+        'Ton dessin "$artworkTitle" est sauvegardé!',
+        backgroundColor: Colors.green.withOpacity(0.9),
         colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
       );
     } catch (e) {
-      Get.snackbar('Erreur', 'Impossible de sauvegarder: $e');
+      Get.snackbar(
+        'Erreur',
+        'Impossible de sauvegarder: ${e.toString()}',
+        backgroundColor: Colors.red.withOpacity(0.8),
+        colorText: Colors.white,
+      );
     } finally {
       isLoading.value = false;
     }
   }
 
-  // Share artwork with parents
+  // Enhanced sharing with better UX
   Future<void> shareWithParent(String artworkId) async {
     try {
       final artwork = artworks.firstWhere((a) => a.id == artworkId);
@@ -211,34 +355,43 @@ class StudioController extends GetxController {
       final index = artworks.indexWhere((a) => a.id == artworkId);
       artworks[index] = updatedArtwork;
 
+      _playSound('share_success.mp3');
+      HapticFeedback.heavyImpact();
+
       Get.snackbar(
-        'Partagé!',
-        'Ton dessin a été envoyé à papa et maman!',
-        backgroundColor: Colors.blue.withOpacity(0.8),
+        'Partagé! 👨‍👩‍👧‍👦',
+        'Papa et maman vont adorer ton dessin!',
+        backgroundColor: Colors.blue.withOpacity(0.9),
         colorText: Colors.white,
+        duration: const Duration(seconds: 3),
       );
 
-      // TODO: Integrate with parent dashboard notification system
+      // TODO: Send notification to parent dashboard
     } catch (e) {
       Get.snackbar('Erreur', 'Impossible de partager le dessin');
     }
   }
 
-  // Export artwork
+  // Export with multiple format support
   Future<void> exportArtwork(String artworkId) async {
     try {
       final artwork = artworks.firstWhere((a) => a.id == artworkId);
-      final file = File(artwork.imagePath);
+      final file = XFile(artwork.imagePath);
 
-      await Share.shareXFiles([
-        XFile(file.path),
-      ], text: 'Mon dessin: ${artwork.title}');
+      await Share.shareXFiles(
+        [file],
+        text:
+            'Regardez le superbe dessin "${artwork.title}" créé avec Le Petit Davinci! 🎨',
+        subject: 'Dessin - ${artwork.title}',
+      );
+
+      _playSound('export_success.mp3');
     } catch (e) {
       Get.snackbar('Erreur', 'Impossible d\'exporter le dessin');
     }
   }
 
-  // Load artworks from storage
+  // Load artworks with better error handling
   Future<void> loadArtworks() async {
     try {
       isLoading.value = true;
@@ -246,95 +399,146 @@ class StudioController extends GetxController {
       final artworksList = _storageService.getList('artworks') ?? [];
       artworks.value =
           artworksList
-              .map(
-                (json) =>
-                    ArtworkModel.fromJson(Map<String, dynamic>.from(json)),
-              )
+              .map((json) {
+                try {
+                  return ArtworkModel.fromJson(Map<String, dynamic>.from(json));
+                } catch (e) {
+                  print('Error parsing artwork: $e');
+                  return null;
+                }
+              })
+              .where((artwork) => artwork != null)
+              .cast<ArtworkModel>()
               .toList()
             ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
     } catch (e) {
       print('Error loading artworks: $e');
+      Get.snackbar('Erreur', 'Impossible de charger les dessins');
     } finally {
       isLoading.value = false;
     }
   }
 
-  // Delete artwork
+  // Delete with confirmation and feedback
   Future<void> deleteArtwork(String artworkId) async {
     try {
+      // Find artwork first
+      final artwork = artworks.firstWhere((a) => a.id == artworkId);
+
       // Remove from list
       artworks.removeWhere((a) => a.id == artworkId);
 
       // Delete from storage
       await _deleteArtworkFromStorage(artworkId);
 
+      _playSound('delete.mp3');
+
       Get.snackbar(
-        'Supprimé',
-        'Dessin supprimé',
+        'Supprimé 🗑️',
+        '"${artwork.title}" a été supprimé',
         backgroundColor: Colors.orange.withOpacity(0.8),
         colorText: Colors.white,
+        duration: const Duration(seconds: 2),
       );
     } catch (e) {
       Get.snackbar('Erreur', 'Impossible de supprimer le dessin');
     }
   }
 
-  // Start new artwork
+  // Start new artwork with clean state
   void startNewArtwork() {
     clearCanvas();
     currentArtworkId.value = '';
-    currentArtworkTitle.value = 'Mon dessin';
+    currentArtworkTitle.value = 'Mon nouveau dessin';
     selectedTemplate.value = null;
+    hasUnsavedChanges.value = false;
+
+    // Reset to default drawing settings
+    selectedTool.value = DrawingTool.brush;
+    selectedColor.value = Colors.blue;
+    brushSize.value = 5.0;
+    _updateDrawingPaint();
   }
 
-  // Load existing artwork for editing
+  // Load existing artwork (placeholder for future enhancement)
   Future<void> loadArtworkForEditing(String artworkId) async {
     try {
       final artwork = artworks.firstWhere((a) => a.id == artworkId);
       currentArtworkId.value = artwork.id;
       currentArtworkTitle.value = artwork.title;
 
-      // Note: In a full implementation, you'd need to store and restore
-      // the actual drawing paths, not just the final image
-      // For now, we'll start with a blank canvas
+      // Note: Loading actual drawing data would require storing
+      // the drawing board's JSON data, not just the final image
       clearCanvas();
+      hasUnsavedChanges.value = false;
     } catch (e) {
-      Get.snackbar('Erreur', 'Impossible de charger le dessin');
+      Get.snackbar(
+        'Erreur',
+        'Impossible de charger le dessin pour modification',
+      );
     }
   }
 
-  // Initialize default templates
+  // Initialize templates with proper data
   void initializeTemplates() {
     templates.value = [
       TemplateModel(
         id: 'animal_cat',
-        name: 'Chat',
-        previewImagePath: 'assets/templates/cat_preview.png',
+        name: 'Chat Mignon',
+        previewImagePath: 'assets/templates/previews/cat_preview.png',
         templateImagePath: 'assets/templates/cat_template.png',
         category: TemplateCategory.animals,
         difficulty: 1,
         colors: ['orange', 'black', 'white'],
-        educationalPrompt: 'Colorie le chat avec de belles couleurs!',
+        educationalPrompt: 'Colorie ce joli chat avec tes couleurs préférées!',
       ),
       TemplateModel(
         id: 'shape_circle',
-        name: 'Cercle',
-        previewImagePath: 'assets/templates/circle_preview.png',
+        name: 'Cercle Parfait',
+        previewImagePath: 'assets/templates/previews/circle_preview.png',
         templateImagePath: 'assets/templates/circle_template.png',
         category: TemplateCategory.shapes,
         difficulty: 1,
-        educationalPrompt: 'Trace un beau cercle!',
+        educationalPrompt: 'Trace un beau cercle et décore-le!',
       ),
       TemplateModel(
         id: 'letter_a',
         name: 'Lettre A',
-        previewImagePath: 'assets/templates/letter_a_preview.png',
+        previewImagePath: 'assets/templates/previews/letter_a_preview.png',
         templateImagePath: 'assets/templates/letter_a_template.png',
         category: TemplateCategory.letters,
         difficulty: 1,
         educationalPrompt: 'Trace la lettre A comme dans "Ami"!',
       ),
+      TemplateModel(
+        id: 'number_5',
+        name: 'Chiffre 5',
+        previewImagePath: 'assets/templates/previews/number_5_preview.png',
+        templateImagePath: 'assets/templates/number_5_template.png',
+        category: TemplateCategory.numbers,
+        difficulty: 1,
+        educationalPrompt: 'Écris le chiffre 5 et dessine 5 objets!',
+      ),
+      TemplateModel(
+        id: 'seasonal_sun',
+        name: 'Soleil d\'Été',
+        previewImagePath: 'assets/templates/previews/sun_preview.png',
+        templateImagePath: 'assets/templates/sun_template.png',
+        category: TemplateCategory.seasonal,
+        difficulty: 2,
+        educationalPrompt: 'Dessine un beau soleil pour l\'été!',
+      ),
     ];
+  }
+
+  // Audio feedback system
+  Future<void> _playSound(String soundFile) async {
+    try {
+      await _audioPlayer.play(AssetSource('sounds/$soundFile'));
+    } catch (e) {
+      // Silently fail if sound file doesn't exist
+      print('Sound file not found: $soundFile');
+    }
   }
 
   // Helper methods
@@ -342,18 +546,7 @@ class StudioController extends GetxController {
     return 'artwork_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}';
   }
 
-  Future<ui.Image?> _captureCanvas() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          canvasKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
-      return await boundary.toImage(pixelRatio: 2.0);
-    } catch (e) {
-      print('Error capturing canvas: $e');
-      return null;
-    }
-  }
-
-  Future<String> _saveImageToFile(ui.Image image, String artworkId) async {
+  Future<String> _saveImageToFile(Uint8List imageData, String artworkId) async {
     final directory = await getApplicationDocumentsDirectory();
     final artworksDir = Directory('${directory.path}/artworks');
 
@@ -362,10 +555,7 @@ class StudioController extends GetxController {
     }
 
     final file = File('${artworksDir.path}/$artworkId.png');
-    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    final buffer = byteData!.buffer.asUint8List();
-
-    await file.writeAsBytes(buffer);
+    await file.writeAsBytes(imageData);
     return file.path;
   }
 
@@ -398,11 +588,23 @@ class StudioController extends GetxController {
     }
   }
 
-  List<String> _getUsedColors() {
-    final colors = <String>{};
-    for (final path in drawingPaths) {
-      colors.add(path.color.toString());
-    }
-    return colors.toList();
+  String _getColorName(Color color) {
+    if (color.value == 0xFFE53E3E) return 'Rouge';
+    if (color.value == 0xFF3182CE) return 'Bleu';
+    if (color.value == 0xFF38A169) return 'Vert';
+    if (color.value == 0xFFD69E2E) return 'Jaune';
+    if (color.value == 0xFFDD6B20) return 'Orange';
+    if (color.value == 0xFF9F7AEA) return 'Violet';
+    if (color.value == 0xFFED64A6) return 'Rose';
+    if (color.value == 0xFF975A16) return 'Marron';
+    if (color.value == 0xFF1A202C) return 'Noir';
+    if (color.value == 0xFF718096) return 'Gris';
+    return 'Personnalisée';
+  }
+
+  Color _getContrastColor(Color color) {
+    final luminance =
+        (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+    return luminance > 0.5 ? Colors.black : Colors.white;
   }
 }

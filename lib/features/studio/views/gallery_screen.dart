@@ -7,6 +7,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class GalleryScreen extends GetView<StudioController> {
   final bool showOnlyShared;
@@ -475,7 +476,9 @@ class GalleryScreen extends GetView<StudioController> {
                     onPressed: () {
                       Get.back();
                       controller.loadArtworkForEditing(artwork.id);
-                      Get.to(() => const DrawingCanvasScreen());
+                      Get.toNamed(
+                        AppRoutes.drawingCanvas,
+                      ); // ✅ Fixed from Get.to(() => const DrawingCanvasScreen())
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,

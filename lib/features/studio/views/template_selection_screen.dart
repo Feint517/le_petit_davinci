@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
 import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class TemplateSelectionScreen extends GetView<StudioController> {
   const TemplateSelectionScreen({super.key});
@@ -180,7 +181,9 @@ class TemplateSelectionScreen extends GetView<StudioController> {
     return GestureDetector(
       onTap: () {
         controller.selectTemplate(template);
-        Get.to(() => const DrawingCanvasScreen());
+        Get.toNamed(
+          AppRoutes.drawingCanvas,
+        ); // ✅ Uses proper binding instead of Get.to()
       },
       child: Container(
         decoration: BoxDecoration(
