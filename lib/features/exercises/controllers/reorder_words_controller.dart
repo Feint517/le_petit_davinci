@@ -8,26 +8,15 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 
-class ReorderWordOptionModel {
-  ReorderWordOptionModel({required this.optionText});
 
-  final String optionText;
 
-  @override
-  String toString() => optionText;
-}
 
-class ReorderWordsExercise {
-  ReorderWordsExercise({required this.words, required this.correctOrder});
-
-  final List<String> words;
-  final List<int> correctOrder;
-}
 
 class ReorderWordsController extends GetxController {
-  ReorderWordsController(this.exercises,{required this.dialect});
+  ReorderWordsController(this.exercises, {required this.dialect});
 
   final FlutterTts _tts = FlutterTts();
   final String dialect;

@@ -95,12 +95,19 @@ class ListenAndChooseScreen extends StatelessWidget {
                                   ),
                                 ),
                                 alignment: Alignment.center,
-                                child: SizedBox(
-                                  width: 120,
-                                  height: 120,
-                                  child: ResponsiveImageAsset(
-                                    assetPath: exercise.imageAssets[index],
-                                  ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 120,
+                                      height: 120,
+                                      child: ResponsiveImageAsset(
+                                        assetPath: exercise.imageAssets[index],
+                                        width: 120,
+                                        height: 120,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
@@ -64,20 +65,24 @@ class GamesScreen extends StatelessWidget {
                         mainAxisExtent: 250,
                         itemCount: 2,
                         itemBuilder: (context, index) {
-                          final List<GameModel> gamesList = [
+                          final List gamesList = [
                             GameModel(
                               name: 'Tic Tac Toe',
                               numOfVictories: 5,
                               color: AppColors.primaryDeep,
                               icon: SvgAssets.tictactoe,
-                              gameScreen: const TicTacToeIntroScreen(),
+                              goToGameScreen:
+                                  () => Get.to(
+                                    () => const TicTacToeIntroScreen(),
+                                  ),
                             ),
                             GameModel(
                               name: 'Échecs simplifiés',
                               numOfVictories: 2,
                               color: AppColors.accent,
                               icon: SvgAssets.chess,
-                              gameScreen: const SnakeGame(),
+                              goToGameScreen:
+                                  () => Get.to(() => const SnakeGame()),
                             ),
                           ];
                           return GameCard(gameModel: gamesList[index]);

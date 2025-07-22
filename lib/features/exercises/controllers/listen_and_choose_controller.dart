@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/background_music_controller.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
@@ -12,8 +14,9 @@ class ListenAndChooseController extends GetxController {
   ListenAndChooseController(this.exercises, {required this.dialect});
 
   final FlutterTts flutterTts = FlutterTts();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final List<ListenAndChooseExercise> exercises;
-  final String dialect; //? 'en-US' for English, 'fr-FR' for French
+  final String dialect;
   var selectedIndex = RxnInt();
   var currentExerciseIndex = 0.obs;
 
@@ -27,6 +30,16 @@ class ListenAndChooseController extends GetxController {
   void onInit() async {
     super.onInit();
     await BackgroundMusicController.instance.stopMusic();
+    await _audioPlayer.setAsset(
+      AudioAssets.correctSound,
+    );
+    await _audioPlayer.setAsset(AudioAssets.errorSound);
+  }
+
+  @override
+  void onClose() {
+    _audioPlayer.dispose();
+    super.onClose();
   }
 
   Future<void> playCurrentAudio() async {
@@ -39,9 +52,19 @@ class ListenAndChooseController extends GetxController {
     await flutterTts.speak(currentExercise.label);
   }
 
-  void checkAnswer() {
+  void checkAnswer() async {
     final isCorrect = selectedIndex.value == currentExercise.correctIndex;
     final correctLabel = currentExercise.label;
+
+    if (isCorrect) {
+      await _audioPlayer.setAsset(AudioAssets.correctSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    } else {
+      await _audioPlayer.setAsset(AudioAssets.errorSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    }
 
     Get.bottomSheet(
       Container(
@@ -105,6 +128,8 @@ class ListenAndChooseController extends GetxController {
               onPressed: () {
                 if (isCorrect) {
                   if (currentExerciseIndex.value < exercises.length - 1) {
+                    showHint.value = false;
+                    playCount.value = 0;
                     currentExerciseIndex.value++;
                     selectedIndex.value = null;
                     Get.back();

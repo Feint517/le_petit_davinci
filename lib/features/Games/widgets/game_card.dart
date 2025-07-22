@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
@@ -7,21 +6,8 @@ import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 
 class GameCard extends StatelessWidget {
-  const GameCard({
-    super.key,
-    // required this.cardColor,
-    // required this.label,
-    // required this.title,
-    // this.onTap,
-    // required this.assetPath,
-    required this.gameModel,
-  });
+  const GameCard({super.key, required this.gameModel});
 
-  // final Color cardColor;
-  // final int label;
-  // final String title;
-  // final String assetPath;
-  // final VoidCallback? onTap;
   final GameModel gameModel;
 
   @override
@@ -69,13 +55,10 @@ class GameCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 10,
             children: [
-              SizedBox(
-                width: 70,
+              ResponsiveImageAsset(
+                assetPath: gameModel.icon,
                 height: 70,
-                child: ResponsiveImageAsset(
-                  assetPath: gameModel.icon,
-                  width: 70,
-                ),
+                width: 70,
               ),
               Text(
                 gameModel.name,
@@ -85,18 +68,10 @@ class GameCard extends StatelessWidget {
                   fontWeight: FontWeight.w100,
                 ),
               ),
-              // CustomButtonNew(
-              //   buttonColor: AppColors.secondary,
-              //   shadowColor: AppColors.orangeAccentDark,
-              //   label: 'Jouer',
-              //   labelColor: AppColors.background,
-              // ),
               CustomButton(
                 label: 'Jouer',
                 variant: ButtonVariant.secondary,
-                onPressed: () {
-                  Get.to(() => gameModel.gameScreen);
-                },
+                onPressed: gameModel.goToGameScreen,
               ),
             ],
           ),

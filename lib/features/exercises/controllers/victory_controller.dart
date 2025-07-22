@@ -13,6 +13,12 @@ class VictoryController extends GetxController {
     playVictorySound();
   }
 
+  @override
+  void onClose() {
+    _audioPlayer.dispose();
+    super.onClose();
+  }
+
   void playVictorySound() async {
     await _audioPlayer.seek(Duration.zero); //? Ensure playback from start
     await _audioPlayer.play();

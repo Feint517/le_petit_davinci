@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/background_music_controller.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
@@ -12,6 +14,7 @@ import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 class FillTheBlankController extends GetxController {
   FillTheBlankController(this.exercises);
 
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final List<FillTheBlankExercise> exercises;
   var selectedIndex = RxnInt();
   var currentExerciseIndex = 0.obs;
@@ -23,12 +26,24 @@ class FillTheBlankController extends GetxController {
   void onInit() async {
     super.onInit();
     await BackgroundMusicController.instance.stopMusic();
+    await _audioPlayer.setAsset(AudioAssets.correctSound);
+    await _audioPlayer.setAsset(AudioAssets.errorSound);
   }
 
-  void checkAnswer() {
+  void checkAnswer() async {
     final isCorrect = selectedIndex.value == currentExercise.correctIndex;
     final correctText =
         currentExercise.options[currentExercise.correctIndex].optionText;
+
+    if (isCorrect) {
+      await _audioPlayer.setAsset(AudioAssets.correctSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    } else {
+      await _audioPlayer.setAsset(AudioAssets.errorSound);
+      await _audioPlayer.seek(Duration.zero);
+      await _audioPlayer.play();
+    }
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(AppSizes.md),

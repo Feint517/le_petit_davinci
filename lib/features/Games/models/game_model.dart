@@ -6,12 +6,12 @@ class GameModel {
     required this.numOfVictories,
     required this.color,
     required this.icon,
-    required this.gameScreen,
+    required this.goToGameScreen,
   });
 
-  String name;
-  int numOfVictories;
-  Color color;
-  String icon;
-  Widget gameScreen;
+  final String name;
+  final int numOfVictories;
+  final Color color;
+  final String icon;
+  final VoidCallback goToGameScreen;
 }

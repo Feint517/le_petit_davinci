@@ -10,6 +10,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/exercises/controllers/reorder_words_controller.dart';
+import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/progress_bar.dart';
 
@@ -167,7 +168,7 @@ class ReorderWordsScreen extends GetView<ReorderWordsController> {
                     const Spacer(),
                     CustomButton(
                       label: 'Check',
-                      disabled: selectedOrder.length != words.length,
+                      disabled: selectedOrder.length != controller.currentExercise.correctOrder.length,
                       onPressed: controller.checkAnswer,
                     ),
                     Gap(DeviceUtils.getBottomNavigationBarHeight()),

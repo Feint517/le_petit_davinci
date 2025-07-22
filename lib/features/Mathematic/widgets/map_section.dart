@@ -19,31 +19,6 @@ class MapSection extends StatelessWidget {
       children: [
         SectionTitle(title: data.title),
         const Gap(24.0),
-        // ...List.generate(
-        //   9,
-        //   (index) =>
-        //       index % 9 != 4
-        //           ? Container(
-        //             margin: EdgeInsets.only(
-        //               bottom: index != 8 ? 24.0 : 0,
-        //               left: getLeft(index),
-        //               right: getRight(index),
-        //             ),
-        //             child: MapButton(
-        //               iconPath: SvgAssets.chat,
-        //               backgroundColor: AppColors.pinkLight,
-        //               level: data.levels[index],
-        //             ),
-        //           )
-        //           : Container(
-        //             margin: const EdgeInsets.only(bottom: 24.0),
-        //             child: const ResponsiveImageAsset(
-        //               assetPath: 'assets/test/cofre-ruta.svg',
-        //               width: 72,
-        //               height: 72,
-        //             ),
-        //           ),
-        // ),
         ...List.generate(
           data.levels.length,
           (index) =>
