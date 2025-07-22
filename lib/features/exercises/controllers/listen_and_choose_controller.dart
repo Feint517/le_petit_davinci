@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory_screen.dart';
 
 class ListenAndChooseController extends GetxController {
-  ListenAndChooseController(this.exercises);
+  ListenAndChooseController(this.exercises, {required this.dialect});
 
-  final AudioPlayer audioPlayer = AudioPlayer();
+  final FlutterTts flutterTts = FlutterTts();
   final List<ListenAndChooseExercise> exercises;
+  final String dialect; //? 'en-US' for English, 'fr-FR' for French
   var selectedIndex = RxnInt();
   var currentExerciseIndex = 0.obs;
 
@@ -26,10 +27,9 @@ class ListenAndChooseController extends GetxController {
     if (playCount.value >= 5) {
       showHint.value = true;
     }
-    await audioPlayer.stop();
-    await audioPlayer.play(
-      AssetSource(currentExercise.audioAsset.replaceFirst('assets/', '')),
-    );
+    await flutterTts.setLanguage(dialect);
+    await flutterTts.stop();
+    await flutterTts.speak(currentExercise.label);
   }
 
   void checkAnswer() {
@@ -95,26 +95,6 @@ class ListenAndChooseController extends GetxController {
               variant:
                   isCorrect ? ButtonVariant.secondary : ButtonVariant.warning,
               label: isCorrect ? 'Suivant' : 'Réessayer',
-              // onPressed: () {
-              //   if (isCorrect) {
-              //     if (currentExerciseIndex.value < exercises.length - 1) {
-              //       showHint.value = false;
-              //       playCount.value = 0;
-              //       selectedIndex.value = null;
-              //       currentExerciseIndex.value++;
-              //       Get.back();
-              //     } else {
-              //       Get.back();
-              //       Get.snackbar(
-              //         'Félicitations!',
-              //         'Vous avez terminé tous les exercices.',
-              //       );
-              //     }
-              //   } else {
-              //     selectedIndex.value = null;
-              //     Get.back();
-              //   }
-              // },
               onPressed: () {
                 if (isCorrect) {
                   if (currentExerciseIndex.value < exercises.length - 1) {

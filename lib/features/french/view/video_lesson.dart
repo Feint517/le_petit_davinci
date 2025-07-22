@@ -10,7 +10,7 @@ import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart
 import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/french/controller/video_lesson_controller.dart';
-import 'package:le_petit_davinci/features/french/view/video_player_screen.dart';
+import 'package:le_petit_davinci/features/video_player/views/video_player.dart';
 
 class VideoLessonScreen extends GetView<VideoLessonController> {
   const VideoLessonScreen({super.key, required this.videoId});

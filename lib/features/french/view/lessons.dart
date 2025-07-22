@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/features/french/controller/french_lessons_controller.dart';
-import 'package:le_petit_davinci/features/french/view/video_player_screen.dart';
+import 'package:le_petit_davinci/features/video_player/views/video_player.dart';
 
 class FrenchLessons extends StatelessWidget {
   const FrenchLessons({super.key});

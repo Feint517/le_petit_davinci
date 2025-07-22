@@ -15,14 +15,19 @@ import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.da
 import 'package:le_petit_davinci/features/exercises/widgets/progress_bar.dart';
 
 class ListenAndChooseScreen extends StatelessWidget {
-  const ListenAndChooseScreen({super.key, required this.exercises});
+  const ListenAndChooseScreen({
+    super.key,
+    required this.exercises,
+    required this.dialect,
+  });
 
   final List<ListenAndChooseExercise> exercises;
+  final String dialect;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ListenAndChooseController>(
-      init: ListenAndChooseController(exercises),
+      init: ListenAndChooseController(exercises, dialect: dialect),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.backgroundLight,

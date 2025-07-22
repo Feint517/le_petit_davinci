@@ -79,7 +79,6 @@ flutter:
     - assets/svg/misc/
     - assets/animations/
     - assets/audio/
-    - assets/audio/listen_and_choose/
     - assets/audio/alphabets_en/
     - assets/audio/sound_effects/
     - assets/audio/tts/

@@ -24,16 +24,25 @@ class ImageAssets {
   static const String banana = 'assets/images/listen_and_choose/banana.png';
   static const String bear = 'assets/images/listen_and_choose/bear.png';
   static const String bed = 'assets/images/listen_and_choose/bed.png';
+  static const String bird = 'assets/images/listen_and_choose/bird.png';
   static const String cat = 'assets/images/listen_and_choose/cat.png';
+  static const String chicken = 'assets/images/listen_and_choose/chicken.png';
+  static const String cow = 'assets/images/listen_and_choose/cow.png';
   static const String dog = 'assets/images/listen_and_choose/dog.png';
+  static const String duck = 'assets/images/listen_and_choose/duck.png';
   static const String elephant = 'assets/images/listen_and_choose/elephant.png';
+  static const String fish = 'assets/images/listen_and_choose/fish.png';
   static const String home = 'assets/images/listen_and_choose/home.png';
+  static const String horse = 'assets/images/listen_and_choose/horse.png';
   static const String lion = 'assets/images/listen_and_choose/lion.png';
   static const String monkey = 'assets/images/listen_and_choose/monkey.png';
+  static const String mouse = 'assets/images/listen_and_choose/mouse.png';
+  static const String panda = 'assets/images/listen_and_choose/panda.png';
   static const String parrot = 'assets/images/listen_and_choose/parrot.png';
   static const String phone = 'assets/images/listen_and_choose/phone.png';
   static const String pineapple =
       'assets/images/listen_and_choose/pineapple.png';
+  static const String rabbit = 'assets/images/listen_and_choose/rabbit.png';
   static const String restaurant =
       'assets/images/listen_and_choose/restaurant.png';
   static const String strawberry =
@@ -191,10 +200,6 @@ class SvgAssets {
 }
 
 class AudioAssets {
-  // static const String apple = 'assets/audio/tts/TTS_apple.mp3';
-  static const String igloo = 'assets/audio/tts/TTS_igloo.mp3';
-  static const String octopus = 'assets/audio/tts/TTS_octopus.mp3';
-
   //* sound effects
   static const String victory = 'assets/audio/sound_effects/victory.mp3';
 
@@ -225,27 +230,4 @@ class AudioAssets {
   static const String x_en = 'assets/audio/alphabets_en/x.mp3';
   static const String y_en = 'assets/audio/alphabets_en/y.mp3';
   static const String z_en = 'assets/audio/alphabets_en/z.mp3';
-
-  //* listen and choose
-  static const String apple = 'assets/audio/listen_and_choose/apple.mp3';
-  static const String banana = 'assets/audio/listen_and_choose/banana.mp3';
-  static const String bear = 'assets/audio/listen_and_choose/bear.mp3';
-  static const String bed = 'assets/audio/listen_and_choose/bed.mp3';
-  static const String cat = 'assets/audio/listen_and_choose/cat.mp3';
-  static const String dog = 'assets/audio/listen_and_choose/dog.mp3';
-  static const String elephant = 'assets/audio/listen_and_choose/elephant.mp3';
-  static const String home = 'assets/audio/listen_and_choose/home.mp3';
-  static const String lion = 'assets/audio/listen_and_choose/lion.mp3';
-  static const String monkey = 'assets/audio/listen_and_choose/monkey.mp3';
-  static const String parrot = 'assets/audio/listen_and_choose/parrot.mp3';
-  static const String phone = 'assets/audio/listen_and_choose/phone.mp3';
-  static const String pineapple =
-      'assets/audio/listen_and_choose/pineapple.mp3';
-  static const String restaurant =
-      'assets/audio/listen_and_choose/restaurant.mp3';
-  static const String strawberry =
-      'assets/audio/listen_and_choose/strawberry.mp3';
-  static const String table = 'assets/audio/listen_and_choose/table.mp3';
-  static const String tiger = 'assets/audio/listen_and_choose/tigerq.mp3';
-  static const String zebra = 'assets/audio/listen_and_choose/zebra.mp3';
 }

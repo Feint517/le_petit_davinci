@@ -9,7 +9,7 @@ import 'package:le_petit_davinci/features/authentication/views/user_selection.da
 import 'package:le_petit_davinci/features/authentication/views/welcome.dart';
 import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
 import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
-import 'package:le_petit_davinci/features/french/view/french_map_screen.dart';
+import 'package:le_petit_davinci/features/french/view/french_map.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/features/rewards/bindings/rewards_binding.dart';

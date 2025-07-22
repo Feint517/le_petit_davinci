@@ -16,17 +16,17 @@ class ListenAndMatchController extends GetxController {
   final items =
       [
         ListenAndMatchItem(
-          audioAsset: AudioAssets.apple,
+          audioAsset: AudioAssets.a_en,
           options: [SvgAssets.apple, SvgAssets.igloo, SvgAssets.octopus],
           correctIndex: 0,
         ),
         ListenAndMatchItem(
-          audioAsset: AudioAssets.igloo,
+          audioAsset: AudioAssets.b_en,
           options: [SvgAssets.apple, SvgAssets.igloo, SvgAssets.octopus],
           correctIndex: 1,
         ),
         ListenAndMatchItem(
-          audioAsset: AudioAssets.octopus,
+          audioAsset: AudioAssets.c_en,
           options: [SvgAssets.apple, SvgAssets.igloo, SvgAssets.octopus],
           correctIndex: 2,
         ),
