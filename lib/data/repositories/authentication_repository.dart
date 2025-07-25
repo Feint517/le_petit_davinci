@@ -12,6 +12,7 @@ import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/services/api_service.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
+import 'package:le_petit_davinci/test.dart';
 
 String isLoggedInKey = 'is_logged_in';
 String isFirstTimeKey = 'is_first_time';
@@ -39,13 +40,14 @@ class AuthenticationRepository extends GetxController {
       print('[Auth] isLoggedIn => $isLoggedIn');
     }
 
-    if (isFirstTime) {
-      Get.offAll(() => const QuestionsIntroScreen());
-    } else if (isLoggedIn) {
-      Get.offAll(() => const HomeScreen());
-    } else {
-      Get.offAll(() => const LoginScreen());
-    }
+    // if (isFirstTime) {
+    //   Get.offAll(() => const QuestionsIntroScreen());
+    // } else if (isLoggedIn) {
+    //   Get.offAll(() => const HomeScreen());
+    // } else {
+    //   Get.offAll(() => const LoginScreen());
+    // }
+    Get.to(() => const TestScreen());
   }
 
   Future<LoginResponse> loginWithEmailAndPassword({
