@@ -40,14 +40,14 @@ class AuthenticationRepository extends GetxController {
       print('[Auth] isLoggedIn => $isLoggedIn');
     }
 
-    // if (isFirstTime) {
-    //   Get.offAll(() => const QuestionsIntroScreen());
-    // } else if (isLoggedIn) {
-    //   Get.offAll(() => const HomeScreen());
-    // } else {
-    //   Get.offAll(() => const LoginScreen());
-    // }
-    Get.to(() => const TestScreen());
+    if (isFirstTime) {
+      Get.offAll(() => const QuestionsIntroScreen());
+    } else if (isLoggedIn) {
+      Get.offAll(() => const HomeScreen());
+    } else {
+      Get.offAll(() => const LoginScreen());
+    }
+    // Get.to(() => const TestScreen());
   }
 
   Future<LoginResponse> loginWithEmailAndPassword({

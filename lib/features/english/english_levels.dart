@@ -5,22 +5,16 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 import 'package:le_petit_davinci/features/english/models/level_config_model.dart';
-import 'package:le_petit_davinci/features/exercises/data/fill_the_blank_data.dart';
-import 'package:le_petit_davinci/features/exercises/data/listen_and_choose_data.dart';
-import 'package:le_petit_davinci/features/exercises/data/reorder_words_data.dart';
-import 'package:le_petit_davinci/features/exercises/views/fill_the_blank.dart';
-import 'package:le_petit_davinci/features/exercises/views/listen_and_choose.dart';
-import 'package:le_petit_davinci/features/exercises/views/reorder_words.dart';
+import 'package:le_petit_davinci/features/exercises/data/unified_exercise_data.dart';
+import 'package:le_petit_davinci/features/exercises/views/unified_exercise.dart';
 import 'package:le_petit_davinci/features/french/view/video_lesson.dart';
 
 //* 1. List of level configs (just the number and type/status)
 List<LevelConfig> generateLevelConfigsFromData() {
   final Set<int> allLevels = {};
 
-  //* Collect all unique level numbers from all data files
-  allLevels.addAll(fillTheBlankEnglishLevels.keys);
-  allLevels.addAll(listenAndChooseEnglishLevels.keys);
-  allLevels.addAll(reorderWordsEnglishLevels.keys);
+  //* Collect all unique level numbers from unified data
+  allLevels.addAll(unifiedEnglishLevels.keys);
 
   //* Sort levels
   final sortedLevels = allLevels.toList()..sort();
@@ -28,11 +22,7 @@ List<LevelConfig> generateLevelConfigsFromData() {
   //* Generate LevelConfig for each level
   return sortedLevels.map((level) {
     LevelType type;
-    if (fillTheBlankEnglishLevels.containsKey(level)) {
-      type = LevelType.exercise;
-    } else if (listenAndChooseEnglishLevels.containsKey(level)) {
-      type = LevelType.exercise;
-    } else if (reorderWordsEnglishLevels.containsKey(level)) {
+    if (unifiedEnglishLevels.containsKey(level)) {
       type = LevelType.exercise;
     } else {
       type = LevelType.lesson;
@@ -54,17 +44,10 @@ final List<LevelConfig> englishLevelConfigs = generateLevelConfigsFromData();
 
 //* 2. Helper function to get the correct page for each level
 Widget? getLevelPage(int level) {
-  if (fillTheBlankEnglishLevels.containsKey(level)) {
-    return FillTheBlankScreen(exercises: fillTheBlankEnglishLevels[level]!);
-  } else if (listenAndChooseEnglishLevels.containsKey(level)) {
-    return ListenAndChooseScreen(
-      exercises: listenAndChooseEnglishLevels[level]!,
+  if (unifiedEnglishLevels.containsKey(level)) {
+    return UnifiedExerciseScreen(
+      exercises: unifiedEnglishLevels[level]!,
       dialect: 'en-US', //? Default to English dialect
-    );
-  } else if (reorderWordsEnglishLevels.containsKey(level)) {
-    return ReorderWordsScreen(
-      exercises: reorderWordsEnglishLevels[level]!,
-      dialect: 'en-US',
     );
   } else if (level == 1) {
     return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
