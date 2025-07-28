@@ -12,60 +12,7 @@ final Map<int, LessonModel> englishLessons = {
     status: LessonStatus.available,
     videoId: 'ccEpTTZW34g',
     videoTitle: 'ABC Song - Letters A to E',
-    // thumbnailImagePath: null,
-    // estimatedTotalMinutes: 15,
     activities: [
-      // SelectItemsActivity(
-      //   id: 'select_letters_ae',
-      //   title: 'Find the Letters',
-      //   instruction:
-      //       'Select all the letters you learned in the video: A, B, C, D, E',
-      //   estimatedDurationMinutes: 3,
-      //   items: [
-      //     SelectableItem(
-      //       id: 'letter_a',
-      //       label: 'A',
-      //       imagePath: SvgAssets.letterA,
-      //     ),
-      //     SelectableItem(
-      //       id: 'letter_b',
-      //       label: 'B',
-      //       imagePath: SvgAssets.letterB,
-      //     ),
-      //     SelectableItem(
-      //       id: 'letter_c',
-      //       label: 'C',
-      //       imagePath: SvgAssets.letterC,
-      //     ),
-      //     SelectableItem(
-      //       id: 'wrong_letter_1',
-      //       label: 'X',
-      //       imagePath: 'assets/svg/X.svg',
-      //     ),
-      //     SelectableItem(
-      //       id: 'letter_d',
-      //       label: 'D',
-      //       imagePath: 'assets/svg/D.svg',
-      //     ),
-      //     SelectableItem(
-      //       id: 'letter_e',
-      //       label: 'E',
-      //       imagePath: 'assets/svg/E.svg',
-      //     ),
-      //     SelectableItem(
-      //       id: 'wrong_letter_2',
-      //       label: 'Z',
-      //       imagePath: 'assets/svg/Z.svg',
-      //     ),
-      //     SelectableItem(
-      //       id: 'wrong_letter_3',
-      //       label: 'M',
-      //       imagePath: 'assets/svg/M.svg',
-      //     ),
-      //   ],
-      //   correctIndices: [0, 1, 2, 4, 5], // A, B, C, D, E
-      //   selectionPrompt: 'Tap on the letters A, B, C, D, and E!',
-      // ),
       DrawLettersActivity(
         id: 'draw_letters_ae',
         title: 'Draw Your Letters',
@@ -124,10 +71,8 @@ final Map<int, LessonModel> englishLessons = {
     description: 'Learn about farm animals and their sounds!',
     language: LessonLanguage.english,
     status: LessonStatus.available,
-    videoId: 'ccEpTTZW34g', // Real farm animals video
+    videoId: 'ccEpTTZW34g',
     videoTitle: 'Farm Animals for Kids',
-    // thumbnailImagePath: null,
-    // estimatedTotalMinutes: 12,
     activities: [
       SelectItemsActivity(
         id: 'select_farm_animals',
@@ -379,27 +324,3 @@ final Map<int, LessonModel> frenchLessons = {
     ],
   ),
 };
-
-//? Map to access lessons by language key
-// final Map<int, List<LessonModel>> lessonsByLanguage = {
-//   1: englishLessons.values.toList(),
-//   2: frenchLessons.values.toList(),
-// };
-
-//? Helper function to get lessons by language
-// List<LessonModel> getLessonsByLanguage(LessonLanguage language) {
-//   final key = language == LessonLanguage.english ? 1 : 2;
-//   return lessonsByLanguage[key] ?? [];
-// }
-
-//? Helper function to get a specific lesson by ID
-// LessonModel? getLessonById(String lessonId) {
-//   for (final lessons in lessonsByLanguage.values) {
-//     for (final lesson in lessons) {
-//       if (lesson.id == lessonId) {
-//         return lesson;
-//       }
-//     }
-//   }
-//   return null;
-// }

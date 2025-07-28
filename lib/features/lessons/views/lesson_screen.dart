@@ -14,128 +14,120 @@ import 'package:le_petit_davinci/features/lessons/widgets/lesson_activities_widg
 import 'package:le_petit_davinci/features/lessons/widgets/lesson_completion_widget.dart';
 
 class LessonScreen extends GetView<LessonController> {
-  final LessonModel lesson;
-
   const LessonScreen({super.key, required this.lesson});
+
+  final LessonModel lesson;
 
   @override
   Widget build(BuildContext context) {
     Get.put(LessonController(lesson: lesson));
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (didPop) return;
-        controller.handleBackButton();
-      },
-      child: Scaffold(
-        backgroundColor: AppColors.backgroundLight,
-        appBar: ProfileHeader(
-          type: ProfileHeaderType.compact,
-          onBackButtonPressed: () => controller.handleBackButton(),
-        ),
-        body: SafeArea(
-          top: false,
-          right: false,
-          left: false,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                //* Progress bar
-                const ProgressBar(progress: 0.52),
+    return Scaffold(
+      backgroundColor: AppColors.backgroundLight,
+      appBar: ProfileHeader(
+        type: ProfileHeaderType.compact,
+        onBackButtonPressed: () => controller.handleBackButton(),
+      ),
+      body: SafeArea(
+        top: false,
+        right: false,
+        left: false,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            children: [
+              //* Progress bar
+              const ProgressBar(progress: 0.52),
 
-                //* Main content area
-                Expanded(
-                  child: Obx(
-                    () => AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: switch (controller.currentPhase.value) {
-                        LessonPhase.introduction => LessonIntroWidget(
-                          lesson: lesson,
-                        ),
-                        LessonPhase.video => LessonVideoWidget(lesson: lesson),
-                        LessonPhase.activities =>
-                          const LessonActivitiesWidget(),
-                        LessonPhase.completion => LessonCompletionWidget(
-                          lesson: lesson,
-                        ),
-                      },
-                    ),
+              //* Main content area
+              Expanded(
+                child: Obx(
+                  () => AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: switch (controller.currentPhase.value) {
+                      LessonPhase.introduction => LessonIntroWidget(
+                        lesson: lesson,
+                      ),
+                      LessonPhase.video => LessonVideoWidget(lesson: lesson),
+                      LessonPhase.activities => const LessonActivitiesWidget(),
+                      LessonPhase.completion => LessonCompletionWidget(
+                        lesson: lesson,
+                      ),
+                    },
                   ),
                 ),
+              ),
 
-                //* Navigation controls
-                Obx(
-                  () => Row(
-                    children: [
-                      //* Previous button (if applicable)
-                      if (_canGoPrevious())
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: controller.goToPrevious,
-                            label:
-                                lesson.language == LessonLanguage.french
-                                    ? 'Précédent'
-                                    : 'Previous',
-                            variant: ButtonVariant.ghost,
-                          ),
-                        ),
-
-                      if (_canGoPrevious()) Gap(16.w),
-
-                      //* Next/Complete button
+              //* Navigation controls
+              Obx(
+                () => Row(
+                  children: [
+                    //* Previous button (if applicable)
+                    if (_canGoPrevious())
                       Expanded(
-                        flex: _canGoPrevious() ? 1 : 2,
                         child: CustomButton(
-                          onPressed:
-                              _canProceed() ? controller.moveToNextPhase : null,
-                          label: switch (controller.currentPhase.value) {
-                            LessonPhase.introduction =>
+                          onPressed: controller.goToPrevious,
+                          label:
                               lesson.language == LessonLanguage.french
-                                  ? 'Commencer'
-                                  : 'Start',
-                            LessonPhase.video =>
-                              controller.isVideoCompleted.value
-                                  ? lesson.language == LessonLanguage.french
-                                      ? 'Activités'
-                                      : 'Activities'
-                                  : lesson.language == LessonLanguage.french
-                                  ? 'Terminer la vidéo'
-                                  : 'Complete Video',
-                            LessonPhase.activities =>
-                              controller.isActivityCompleted.value
-                                  ? (controller.currentActivityIndex.value <
-                                          (controller
-                                                      .currentLesson
-                                                      .value
-                                                      ?.activities
-                                                      .length ??
-                                                  0) -
-                                              1)
-                                      ? lesson.language == LessonLanguage.french
-                                          ? 'Activité suivante'
-                                          : 'Next Activity'
-                                      : lesson.language == LessonLanguage.french
-                                      ? 'Terminer la leçon'
-                                      : 'Complete Lesson'
-                                  : lesson.language == LessonLanguage.french
-                                  ? 'Terminer l\'activité'
-                                  : 'Complete Activity',
-                            LessonPhase.completion =>
-                              lesson.language == LessonLanguage.french
-                                  ? 'Terminer'
-                                  : 'Finish',
-                          },
-                          variant: ButtonVariant.primary,
-                          isLoading: controller.isLoading.value,
-                          disabled: !_canProceed(),
+                                  ? 'Précédent'
+                                  : 'Previous',
+                          variant: ButtonVariant.ghost,
                         ),
                       ),
-                    ],
-                  ),
+
+                    if (_canGoPrevious()) Gap(16.w),
+
+                    //* Next/Complete button
+                    Expanded(
+                      flex: _canGoPrevious() ? 1 : 2,
+                      child: CustomButton(
+                        onPressed:
+                            _canProceed() ? controller.moveToNextPhase : null,
+                        label: switch (controller.currentPhase.value) {
+                          LessonPhase.introduction =>
+                            lesson.language == LessonLanguage.french
+                                ? 'Commencer'
+                                : 'Start',
+                          LessonPhase.video =>
+                            controller.isVideoCompleted.value
+                                ? lesson.language == LessonLanguage.french
+                                    ? 'Activités'
+                                    : 'Activities'
+                                : lesson.language == LessonLanguage.french
+                                ? 'Terminer la vidéo'
+                                : 'Complete Video',
+                          LessonPhase.activities =>
+                            controller.isActivityCompleted.value
+                                ? (controller.currentActivityIndex.value <
+                                        (controller
+                                                    .currentLesson
+                                                    .value
+                                                    ?.activities
+                                                    .length ??
+                                                0) -
+                                            1)
+                                    ? lesson.language == LessonLanguage.french
+                                        ? 'Activité suivante'
+                                        : 'Next Activity'
+                                    : lesson.language == LessonLanguage.french
+                                    ? 'Terminer la leçon'
+                                    : 'Complete Lesson'
+                                : lesson.language == LessonLanguage.french
+                                ? 'Terminer l\'activité'
+                                : 'Complete Activity',
+                          LessonPhase.completion =>
+                            lesson.language == LessonLanguage.french
+                                ? 'Terminer'
+                                : 'Finish',
+                        },
+                        variant: ButtonVariant.primary,
+                        isLoading: controller.isLoading.value,
+                        disabled: !_canProceed(),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -25,9 +25,9 @@ class LessonTemplateHelper {
       id: 'lesson_letter_${letter.toLowerCase()}',
       name: isEnglish ? 'Letter $letter' : 'Lettre $letter',
       previewImagePath:
-          'assets/printables/letters/printable_${letter.toUpperCase()}.png', // same as templateImagePath if no separate preview
+          'assets/images/templates/alphabets/printable_${letter.toUpperCase()}.png', // same as templateImagePath if no separate preview
       templateImagePath:
-          'assets/printables/letters/printable_${letter.toUpperCase()}.png',
+          'assets/images/templates/alphabets/printable_${letter.toUpperCase()}.png',
       category: TemplateCategory.educational,
       difficulty: 1,
       colors: _defaultColors,

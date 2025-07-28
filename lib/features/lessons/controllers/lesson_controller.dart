@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:flutter_drawing_board/paint_contents.dart';
@@ -481,7 +480,7 @@ class LessonController extends GetxController {
           id: 'lesson_letter_${firstLetter.letter}',
           name: 'Lettre ${firstLetter.letter}',
           templateImagePath:
-              'assets/printables/letters/printable_${firstLetter.letter.toUpperCase()}.png',
+              'assets/images/templates/alphabets/printable_${firstLetter.letter.toUpperCase()}.png',
           category: TemplateCategory.educational,
           difficulty: 1,
           colors: [
