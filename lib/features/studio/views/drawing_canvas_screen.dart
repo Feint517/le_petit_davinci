@@ -129,10 +129,9 @@ class DrawingCanvasScreen extends GetView<StudioController> {
         body: SafeArea(
           child: Column(
             children: [
-              // Enhanced toolbar
               const DrawingToolbar(),
-              Divider(height: 1, color: AppColors.borderPrimary),
-              // Canvas area with professional drawing board
+
+              //* Canvas area with professional drawing board
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -154,32 +153,22 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
-                    // FINAL FIX: Use a LayoutBuilder to get the available constraints.
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        // The LayoutBuilder provides the exact width and height the
-                        // DrawingBoard can occupy.
                         return DrawingBoard(
                           controller: controller.drawingController,
-                          // BEST PRACTICE: Pass these constraints to the background widget.
-                          // This gives the background a definite size, which the DrawingBoard
-                          // needs to initialize its canvas correctly.
                           background: Obx(() {
                             final template = controller.selectedTemplate.value;
-                            // Create a base background container with the EXACT size
-                            // from the LayoutBuilder.
-                            Widget backgroundWidget = Container(
-                              width: constraints.maxWidth,
-                              height: constraints.maxHeight,
-                              color: Colors.white,
-                            );
-
                             if (template != null) {
-                              // If a template exists, stack it on top of the sized container.
+                              //? If a template exists, stack it on top of the sized container.
                               return Stack(
                                 alignment: Alignment.center,
                                 children: [
-                                  backgroundWidget,
+                                  Container(
+                                    width: constraints.maxWidth,
+                                    height: constraints.maxHeight,
+                                    color: Colors.white,
+                                  ),
                                   Image.asset(
                                     template.templateImagePath,
                                     fit: BoxFit.contain,
@@ -189,7 +178,11 @@ class DrawingCanvasScreen extends GetView<StudioController> {
                               );
                             }
 
-                            return backgroundWidget;
+                            return Container(
+                              width: constraints.maxWidth,
+                              height: constraints.maxHeight,
+                              color: Colors.white,
+                            );
                           }),
                           showDefaultActions: false,
                           showDefaultTools: false,

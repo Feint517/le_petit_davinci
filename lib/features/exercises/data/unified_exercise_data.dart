@@ -6,8 +6,7 @@ import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercis
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 
 final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
-  1: [
-    // Fill the blank exercise
+  2: [
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is a pet that purrs.',
@@ -19,7 +18,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctIndex: 1,
       ),
     ),
-    // Listen and choose exercise
     UnifiedExercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
@@ -32,7 +30,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         label: 'Cat',
       ),
     ),
-    // Reorder words exercise
     UnifiedExercise.reorderWords(
       ReorderWordsExercise(
         words: ['cat', 'a', 'is', 'banana', 'blue'],
@@ -40,8 +37,7 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
       ),
     ),
   ],
-  2: [
-    // Fill the blank exercise
+  3: [
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'can fly.',
@@ -53,7 +49,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    // Listen and choose exercise
     UnifiedExercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
@@ -66,7 +61,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         label: 'Bird',
       ),
     ),
-    // Reorder words exercise
     UnifiedExercise.reorderWords(
       ReorderWordsExercise(
         words: ['dog', 'the', 'barks', 'quickly', 'table'],
@@ -74,8 +68,7 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
       ),
     ),
   ],
-  3: [
-    // Fill the blank exercise
+  4: [
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is the king of the jungle.',
@@ -87,7 +80,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    // Listen and choose exercise
     UnifiedExercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
@@ -100,7 +92,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         label: 'Lion',
       ),
     ),
-    // Reorder words exercise
     UnifiedExercise.reorderWords(
       ReorderWordsExercise(
         words: ['milk', 'likes', 'cat', 'the', 'banana', 'blue'],
@@ -108,8 +99,7 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
       ),
     ),
   ],
-  4: [
-    // Fill the blank exercise
+  5: [
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'lives in water.',
@@ -121,7 +111,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    // Listen and choose exercise
     UnifiedExercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
@@ -134,7 +123,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         label: 'Fish',
       ),
     ),
-    // Reorder words exercise
     UnifiedExercise.reorderWords(
       ReorderWordsExercise(
         words: ['swims', 'the', 'in', 'water', 'fish', 'quickly', 'table'],
@@ -142,8 +130,7 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
       ),
     ),
   ],
-  5: [
-    // Fill the blank exercise
+  6: [
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'has stripes.',
@@ -155,7 +142,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    // Listen and choose exercise
     UnifiedExercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
@@ -168,7 +154,6 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         label: 'Tiger',
       ),
     ),
-    // Reorder words exercise
     UnifiedExercise.reorderWords(
       ReorderWordsExercise(
         words: ['the', 'tiger', 'has', 'stripes', 'banana', 'blue'],

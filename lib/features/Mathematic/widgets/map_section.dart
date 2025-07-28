@@ -31,7 +31,7 @@ class MapSection extends StatelessWidget {
                       right: getRight(index),
                     ),
                     child: MapButton(
-                      title: data.levels[index].title,
+                      // title: data.levels[index].title,
                       iconPath: SvgAssets.chat,
                       backgroundColor: _getButtonColor(index),
                       level: data.levels[index],

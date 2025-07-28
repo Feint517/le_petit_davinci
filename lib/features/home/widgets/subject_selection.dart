@@ -24,7 +24,7 @@ class SubjectSelection extends GetView<HomeController> {
 
           //* Grid of subject cards
           CustomGridLayout(
-            itemCount: 6,
+            itemCount: controller.subjects.length,
             mainAxisExtent: 185.h,
             itemBuilder: (context, index) {
               final subject = controller.subjects[index];

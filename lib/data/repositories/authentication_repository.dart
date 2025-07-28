@@ -12,7 +12,6 @@ import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/services/api_service.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
-import 'package:le_petit_davinci/test.dart';
 
 String isLoggedInKey = 'is_logged_in';
 String isFirstTimeKey = 'is_first_time';

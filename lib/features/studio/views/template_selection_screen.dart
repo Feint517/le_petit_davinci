@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
+import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class TemplateSelectionScreen extends GetView<StudioController> {
@@ -182,21 +184,15 @@ class TemplateSelectionScreen extends GetView<StudioController> {
     return GestureDetector(
       onTap: () {
         controller.selectTemplate(template);
-        Get.toNamed(
-          AppRoutes.drawingCanvas,
-        );
+        Get.to(() => const DrawingCanvasScreen());
       },
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: 0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          boxShadow: CustomShadowStyle.customCircleShadows(
+            color: AppColors.white,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -259,8 +259,7 @@ class ColorPalette extends GetView<StudioController> {
         final color = extendedColors[index];
 
         return Obx(() {
-          final isSelected =
-              controller.selectedColor.value == color.value;
+          final isSelected = controller.selectedColor.value == color.value;
 
           return GestureDetector(
             onTap: () {

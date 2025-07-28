@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/features/Mathematic/models/level_model.dart';
+import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 
 class MapButton extends StatelessWidget {
   const MapButton({
@@ -26,7 +26,7 @@ class MapButton extends StatelessWidget {
   final Color backgroundColor;
   final double dimension;
   final VoidCallback? onTap;
-  final LevelModel level;
+  final Level level;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MapButton extends StatelessWidget {
           onTap ??
           () {
             if (level.levelStatus != LevelStatus.locked) {
-              print('Navigating to content for ${level.title}');
+              // print('Navigating to content for ${level.title}');
               level.onTap?.call();
             } else if (level.levelStatus != LevelStatus.locked) {
               Get.snackbar('Info', 'Content coming soon!');

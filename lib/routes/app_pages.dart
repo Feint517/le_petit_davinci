@@ -7,9 +7,6 @@ import 'package:le_petit_davinci/features/authentication/views/login.dart';
 import 'package:le_petit_davinci/features/authentication/views/pin.dart';
 import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
 import 'package:le_petit_davinci/features/authentication/views/welcome.dart';
-import 'package:le_petit_davinci/features/french/bindings/french_binding.dart';
-import 'package:le_petit_davinci/features/french/view/french_intro_screen.dart';
-import 'package:le_petit_davinci/features/french/view/french_map.dart';
 import 'package:le_petit_davinci/features/home/bindings/home_binding.dart';
 import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/features/rewards/bindings/rewards_binding.dart';
@@ -57,20 +54,20 @@ class AppPages {
       transition: Transition.cupertino,
       binding: HomeBinding(),
       children: [
-        GetPage(
-          name: AppRoutes.frenchIntro,
-          page: () => const FrenchIntroScreen(),
-          transition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 500),
-          binding: FrenchBinding(),
-        ),
-        GetPage(
-          name: AppRoutes.frenchMap,
-          page: () => const FrenchMapScreen(),
-          transition: Transition.rightToLeft,
-          transitionDuration: const Duration(milliseconds: 500),
-          binding: FrenchBinding(),
-        ),
+        // GetPage(
+        //   name: AppRoutes.frenchIntro,
+        //   page: () => const FrenchIntroScreen(),
+        //   transition: Transition.rightToLeft,
+        //   transitionDuration: const Duration(milliseconds: 500),
+        //   binding: FrenchBinding(),
+        // ),
+        // GetPage(
+        //   name: AppRoutes.frenchMap,
+        //   page: () => const FrenchMapScreen(),
+        //   transition: Transition.rightToLeft,
+        //   transitionDuration: const Duration(milliseconds: 500),
+        //   binding: FrenchBinding(),
+        // ),
         // GetPage(
         //   name: AppRoutes.englishMap,
         //   page: () => const EnglishMapScreen(),
@@ -165,12 +162,12 @@ class AppPages {
       binding: StudioBinding(),
       transition: Transition.rightToLeft,
     ),
-    GetPage(
-      name: AppRoutes.drawingCanvas,
-      page: () => const DrawingCanvasScreen(),
-      binding: StudioBinding(),
-      transition: Transition.rightToLeft,
-    ),
+    // GetPage(
+    //   name: AppRoutes.drawingCanvas,
+    //   page: () => const DrawingCanvasScreen(),
+    //   binding: StudioBinding(),
+    //   transition: Transition.rightToLeft,
+    // ),
     GetPage(
       name: AppRoutes.studioGallery,
       page: () => const GalleryScreen(),

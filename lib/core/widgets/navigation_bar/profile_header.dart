@@ -24,6 +24,7 @@ class ProfileHeader extends GetView<UserController>
     this.bottomLineColor = AppColors.grey,
     this.showTrailingIcon = false,
     this.avatarOnTap,
+    this.onBackButtonPressed,
     this.type = ProfileHeaderType.normal,
   });
 
@@ -32,6 +33,7 @@ class ProfileHeader extends GetView<UserController>
   final Color bottomLineColor;
   final VoidCallback? trailingIconOnTap;
   final VoidCallback? avatarOnTap;
+  final VoidCallback? onBackButtonPressed;
   final ProfileHeaderType type;
 
   @override
@@ -116,7 +118,7 @@ class ProfileHeader extends GetView<UserController>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: onBackButtonPressed ?? () => Get.back(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10.0,
