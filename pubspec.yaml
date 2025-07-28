@@ -87,6 +87,7 @@ flutter:
     - assets/images/
     - assets/images/listen_and_choose/
     - assets/images/illustrations/
+    - assets/images/templates/alphabets/
     - assets/images/tictactoe/
     - assets/sfx/
     - assets/sfx/alphabet/

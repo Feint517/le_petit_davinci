@@ -26,168 +26,57 @@ class LessonActivitiesWidget extends GetView<LessonController> {
           ),
         );
       }
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Activity header
-            // Card(
-            //   elevation: 4,
-            //   shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(16.r),
-            //   ),
-            //   child: Padding(
-            //     padding: EdgeInsets.all(20.w),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         Row(
-            //           children: [
-            //             Container(
-            //               padding: EdgeInsets.all(12.w),
-            //               decoration: BoxDecoration(
-            //                 color: AppColors.primary.withValues(alpha: 0.1),
-            //                 borderRadius: BorderRadius.circular(12.r),
-            //               ),
-            //               child: Icon(
-            //                 _getActivityIcon(activity.type),
-            //                 color: AppColors.primary,
-            //                 size: 24.sp,
-            //               ),
-            //             ),
-            //             Gap(16.w),
-            //             Expanded(
-            //               child: Column(
-            //                 crossAxisAlignment: CrossAxisAlignment.start,
-            //                 children: [
-            //                   Text(
-            //                     activity.title,
-            //                     style: TextStyle(
-            //                       fontSize: 18.sp,
-            //                       fontWeight: FontWeight.bold,
-            //                       color: AppColors.textPrimary,
-            //                       fontFamily: 'DynaPuff_SemiCondensed',
-            //                     ),
-            //                   ),
-            //                   Gap(4.h),
-            //                   Text(
-            //                     '${controller.currentActivityIndex.value + 1} / ${controller.currentLesson.value?.activities.length ?? 0}',
-            //                     style: TextStyle(
-            //                       fontSize: 14.sp,
-            //                       color: AppColors.textSecondary,
-            //                       fontWeight: FontWeight.w500,
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         Gap(16.h),
-            //         Text(
-            //           activity.instruction,
-            //           style: TextStyle(
-            //             fontSize: 16.sp,
-            //             color: AppColors.textSecondary,
-            //             height: 1.5,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Gap(AppSizes.spaceBtwSections),
+          ActivityIntroduction(activity: activity),
+
+          Gap(24.h),
+
+          // Activity content based on type
+          _buildActivityContent(activity),
+
+          Gap(24.h),
+
+          // Activity completion status
+          if (controller.isActivityCompleted.value)
             Container(
+              width: double.infinity,
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Colors.green.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(16.r),
-                boxShadow: CustomShadowStyle.customCircleShadows(
-                  color: AppColors.white,
-                ),
+                border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        _getActivityIcon(activity.type),
-                        color: AppColors.primary,
-                        size: 24.sp,
-                      ),
-                      Gap(AppSizes.md.h),
-                      Text(
-                        activity.title,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ],
+                  Icon(Icons.check_circle, color: Colors.green, size: 32.sp),
+                  Gap(12.h),
+                  Text(
+                    controller.currentLesson.value?.language ==
+                            LessonLanguage.french
+                        ? 'Activité terminée!'
+                        : 'Activity Complete!',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                      fontFamily: 'DynaPuff_SemiCondensed',
+                    ),
                   ),
                   Gap(8.h),
                   Text(
-                    activity.instruction,
+                    '${controller.currentLesson.value?.language == LessonLanguage.french ? "Score" : "Score"}: ${(controller.currentActivityScore.value * 100).round()}%',
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       color: AppColors.textSecondary,
-                      height: 1.5,
                     ),
                   ),
                 ],
               ),
             ),
-
-            Gap(24.h),
-
-            // Activity content based on type
-            _buildActivityContent(activity),
-
-            Gap(24.h),
-
-            // Activity completion status
-            if (controller.isActivityCompleted.value)
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(20.w),
-                decoration: BoxDecoration(
-                  color: Colors.green.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(16.r),
-                  border: Border.all(
-                    color: Colors.green.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Icon(Icons.check_circle, color: Colors.green, size: 32.sp),
-                    Gap(12.h),
-                    Text(
-                      controller.currentLesson.value?.language ==
-                              LessonLanguage.french
-                          ? 'Activité terminée!'
-                          : 'Activity Complete!',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
-                        fontFamily: 'DynaPuff_SemiCondensed',
-                      ),
-                    ),
-                    Gap(8.h),
-                    Text(
-                      '${controller.currentLesson.value?.language == LessonLanguage.french ? "Score" : "Score"}: ${(controller.currentActivityScore.value * 100).round()}%',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+        ],
       );
     });
   }
@@ -436,19 +325,62 @@ class LessonActivitiesWidget extends GetView<LessonController> {
       ),
     );
   }
+}
 
-  IconData _getActivityIcon(ActivityType type) {
-    switch (type) {
-      case ActivityType.selectItems:
-        return Icons.touch_app;
-      case ActivityType.drawLetters:
-        return Icons.draw;
-      case ActivityType.matchPairs:
-        return Icons.link;
-      case ActivityType.sequenceOrder:
-        return Icons.reorder;
-      case ActivityType.coloringTemplate:
-        return Icons.palette;
-    }
+class ActivityIntroduction extends GetView<LessonController> {
+  const ActivityIntroduction({super.key, required this.activity});
+
+  final LessonActivity? activity;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: CustomShadowStyle.customCircleShadows(
+          color: AppColors.white,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                switch (activity?.type) {
+                  ActivityType.selectItems => Icons.touch_app,
+                  ActivityType.drawLetters => Icons.draw,
+                  ActivityType.matchPairs => Icons.link,
+                  ActivityType.sequenceOrder => Icons.reorder,
+                  ActivityType.coloringTemplate => Icons.palette,
+                  null => Icons.help_outline,
+                },
+                color: AppColors.primary,
+                size: 24.sp,
+              ),
+              Gap(AppSizes.md.h),
+              Text(
+                activity?.title ?? '',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black,
+                ),
+              ),
+            ],
+          ),
+          Gap(8.h),
+          Text(
+            activity?.instruction ?? '',
+            style: TextStyle(
+              fontSize: 16.sp,
+              color: AppColors.textSecondary,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

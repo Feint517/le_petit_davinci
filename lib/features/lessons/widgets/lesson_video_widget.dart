@@ -31,7 +31,7 @@ class LessonVideoWidget extends GetView<LessonController> {
                 borderRadius: BorderRadius.circular(16.r),
                 gradient: LinearGradient(
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.1),
+                    AppColors.accent.withValues(alpha: 0.1),
                     AppColors.secondary.withValues(alpha: 0.1),
                   ],
                   begin: Alignment.topLeft,
@@ -117,24 +117,6 @@ class LessonVideoWidget extends GetView<LessonController> {
                 ],
               ),
             ),
-          ),
-
-          Gap(24.h),
-
-          //* Video info
-          Row(
-            children: [
-              Expanded(
-                child: InfoCard(
-                  icon: Icons.schedule,
-                  title:
-                      lesson.language == LessonLanguage.french
-                          ? 'Durée'
-                          : 'Duration',
-                  subtitle: '6 min',
-                ),
-              ),
-            ],
           ),
 
           Gap(24.h),

@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:flutter_drawing_board/paint_contents.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gap/gap.dart';
@@ -44,6 +46,13 @@ class LessonController extends GetxController {
     }
   }
 
+  final DrawingController drawingController = DrawingController();
+
+  void _initializeDrawingController() {
+    drawingController.setPaintContent(SimpleLine());
+    drawingController.setStyle(color: AppColors.accent);
+  }
+
   final StorageService _storageService = Get.find<StorageService>();
   final FlutterTts _tts = FlutterTts();
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -85,6 +94,7 @@ class LessonController extends GetxController {
     _initializeTTS();
     _initializeAudio();
     fetchVideoDetails(videoId: lesson.videoId);
+    _initializeDrawingController();
   }
 
   @override
@@ -393,8 +403,6 @@ class LessonController extends GetxController {
       true,
     );
 
-    debugCurrentLesson();
-
     await _playSound(AudioAssets.correctSound);
 
     if (isTTSEnabled.value) {
@@ -404,7 +412,6 @@ class LessonController extends GetxController {
             : "Great video! Now let's move on to the activities!",
       );
     }
-
     _updateLessonProgress();
   }
 
@@ -786,18 +793,5 @@ class LessonController extends GetxController {
     }
     currentPhase.value = LessonPhase.activities;
     _startFirstActivity();
-  }
-
-  void debugCurrentLesson() {
-    final lesson = currentLesson.value;
-    print('=== LESSON DEBUG ===');
-    print('Lesson ID: ${lesson?.id}');
-    print('Lesson has activities: ${lesson?.hasActivities}');
-    print('Activities count: ${lesson?.activities.length}');
-    print('Activities list: ${lesson?.activities}');
-    print('Current phase: ${currentPhase.value}');
-    print('Video completed: ${isVideoCompleted.value}');
-    print('Current activity index: ${currentActivityIndex.value}');
-    print('==================');
   }
 }

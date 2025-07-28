@@ -8,11 +8,9 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
 import 'package:le_petit_davinci/features/lessons/widgets/info_card.dart';
-import 'package:le_petit_davinci/features/video_player/views/video_player.dart';
 
 class LessonIntroWidget extends GetView<LessonController> {
   final LessonModel lesson;
@@ -65,8 +63,6 @@ class LessonIntroWidget extends GetView<LessonController> {
   }
 }
 
-
-
 class VideoIntro extends GetView<LessonController> {
   const VideoIntro({super.key});
 
@@ -93,42 +89,13 @@ class VideoIntro extends GetView<LessonController> {
               color: AppColors.white,
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Obx(
-                    () =>
-                        (controller.isLoading.value)
-                            ? const CustomShimmerEffect(width: 161, height: 25)
-                            : Expanded(
-                              child: Text(
-                                controller.videoTitle.value,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                  ),
-                  GestureDetector(
-                    onTap:
-                        () => Get.to(
-                          () => VideoPlayerScreen(
-                            videoId: controller.lesson.videoId,
-                            videoTitle: controller.videoTitle.value,
-                          ),
-                        ),
-                    child: Icon(
-                      Icons.play_circle_fill,
-                      color: AppColors.primary,
-                      size: 60,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          child: Expanded(
+            child: Text(
+              controller.lesson.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ),
         ),
       ],

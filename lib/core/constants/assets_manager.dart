@@ -47,9 +47,20 @@ class ImageAssets {
       'assets/images/listen_and_choose/restaurant.png';
   static const String strawberry =
       'assets/images/listen_and_choose/strawberry.png';
-  static const String table = 'assets/images/listen_and_choose/table.png';
+  static const String table = 'assets/images/listen_and_choose/table.png';  
   static const String tiger = 'assets/images/listen_and_choose/tiger.png';
   static const String zebra = 'assets/images/listen_and_choose/zebra.png';
+
+  //* drawing
+  static const String drawableA = 'assets/images/templates/alphabets/printable_A.png';
+  static const String drawableB = 'assets/images/templates/alphabets/printable_B.png';
+  static const String drawableC = 'assets/images/templates/alphabets/printable_C.png';
+  static const String drawableD = 'assets/images/templates/alphabets/printable_D.png';
+  static const String drawableE = 'assets/images/templates/alphabets/printable_E.png';
+  static const String drawableF = 'assets/images/templates/alphabets/printable_F.png';
+  static const String drawableG = 'assets/images/templates/alphabets/printable_G.png';
+  static const String drawableH = 'assets/images/templates/alphabets/printable_H.png';
+  static const String drawableI = 'assets/images/templates/alphabets/printable_I.png';
 }
 
 class GifAssets {
