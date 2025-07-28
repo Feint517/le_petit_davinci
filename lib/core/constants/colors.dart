@@ -11,6 +11,7 @@ class AppColors {
   static const Color background = Color(0xFFF9ECFF);
   static const Color primaryDeep = Color(0xFF0B9FD9);
 
+
   static const Color succuss = Color(0xFF4CAF50);
   static const Color warning = Color(0xFFFF3B3B);
   static const Color disabled = Color(0xFFC4C4C4);
@@ -45,6 +46,9 @@ class AppColors {
   //* Additional colors for user selection screen
   static const Color backgroundLight = Color(0xFFF0FBFF);
   static const Color primaryOrange = orangeAccent;
+
+  //* blueAccent for educational templates
+  static const Color blueAccent = Color(0xFF0B9FD9);
 
   //* Couleurs pour le DynamicSelectionWidget
   static const Color lightPink = Color(0xFFFFC0CB);

@@ -337,6 +337,10 @@ class TemplateSelectionScreen extends GetView<StudioController> {
         return 'Saisons';
       case TemplateCategory.daily:
         return 'Quotidien';
+      case TemplateCategory.educational:
+        return 'Éducatif';
+      default:
+        return 'Inconnu';
     }
   }
 
@@ -354,6 +358,10 @@ class TemplateSelectionScreen extends GetView<StudioController> {
         return Icons.wb_sunny;
       case TemplateCategory.daily:
         return Icons.home;
+      case TemplateCategory.educational:
+        return Icons.school;
+      default:
+        return Icons.help_outline;
     }
   }
 
@@ -371,6 +379,10 @@ class TemplateSelectionScreen extends GetView<StudioController> {
         return AppColors.orangeAccent;
       case TemplateCategory.daily:
         return AppColors.pinkAccent;
+      case TemplateCategory.educational:
+        return AppColors.blueAccent;
+      default:
+        return AppColors.grey;
     }
   }
 

@@ -7,12 +7,29 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/widgets/drawing_toolbar.dart';
 import 'package:le_petit_davinci/features/studio/widgets/color_palette.dart';
+import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
 
 class DrawingCanvasScreen extends GetView<StudioController> {
-  const DrawingCanvasScreen({super.key});
+  final TemplateModel? template;
+  final bool isLessonMode;
+  final Function(String)? onComplete;
+
+  const DrawingCanvasScreen({
+    super.key,
+    this.template,
+    this.isLessonMode = false,
+    this.onComplete,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Initialize template if provided
+    if (template != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.initializeForLesson(template!);
+      });
+    }
+
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
@@ -32,219 +49,214 @@ class DrawingCanvasScreen extends GetView<StudioController> {
               size: 24.sp,
             ),
           ),
-          title: Obx(
-            () => Text(
-              controller.currentArtworkTitle.value,
+          title: Obx(() {
+            String title;
+            if (isLessonMode && template != null) {
+              title = template!.name;
+            } else {
+              title = controller.currentArtworkTitle.value;
+            }
+
+            return Text(
+              title,
               style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'DynaPuff_SemiCondensed',
               ),
-            ),
-          ),
+            );
+          }),
           centerTitle: true,
           actions: [
-            // Quick save button
-            Obx(
-              () => IconButton(
-                onPressed:
-                    controller.isLoading.value ? null : () => _quickSave(),
-                icon:
-                    controller.isLoading.value
-                        ? SizedBox(
-                          width: 20.w,
-                          height: 20.w,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: AppColors.primary,
-                          ),
-                        )
-                        : Icon(
-                          Icons.save,
-                          color:
-                              controller.hasUnsavedChanges.value
-                                  ? AppColors.primary
-                                  : AppColors.textSecondary,
-                          size: 24.sp,
-                        ),
-              ),
-            ),
-            // Menu button
-            PopupMenuButton<String>(
-              icon: Icon(
-                Icons.more_vert,
-                color: AppColors.textPrimary,
-                size: 24.sp,
-              ),
-              itemBuilder:
-                  (context) => [
-                    PopupMenuItem(
-                      value: 'save_as',
-                      child: Row(
-                        children: [
-                          Icon(Icons.save_as, size: 16.sp),
-                          Gap(8.w),
-                          const Text('Sauvegarder sous...'),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'share',
-                      child: Row(
-                        children: [
-                          Icon(Icons.family_restroom, size: 16.sp),
-                          Gap(8.w),
-                          const Text('Partager avec parents'),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'export',
-                      child: Row(
-                        children: [
-                          Icon(Icons.share, size: 16.sp),
-                          Gap(8.w),
-                          const Text('Exporter'),
-                        ],
-                      ),
-                    ),
-                  ],
-              onSelected: (value) {
-                switch (value) {
-                  case 'save_as':
-                    _showSaveDialog(context);
-                    break;
-                  case 'share':
-                    _shareCurrentArtwork();
-                    break;
-                  case 'export':
-                    _exportCurrentArtwork();
-                    break;
-                }
-              },
-            ),
-          ],
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              const DrawingToolbar(),
-
-              //* Canvas area with professional drawing board
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(16.w),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                      color: AppColors.borderPrimary,
-                      width: 2,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.black.withValues(alpha: 0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.r),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return DrawingBoard(
-                          controller: controller.drawingController,
-                          background: Obx(() {
-                            final template = controller.selectedTemplate.value;
-                            if (template != null) {
-                              //? If a template exists, stack it on top of the sized container.
-                              return Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    width: constraints.maxWidth,
-                                    height: constraints.maxHeight,
-                                    color: Colors.white,
-                                  ),
-                                  Image.asset(
-                                    template.templateImagePath,
-                                    fit: BoxFit.contain,
-                                    opacity: const AlwaysStoppedAnimation(0.3),
-                                  ),
-                                ],
-                              );
-                            }
-
-                            return Container(
-                              width: constraints.maxWidth,
-                              height: constraints.maxHeight,
-                              color: Colors.white,
-                            );
-                          }),
-                          showDefaultActions: false,
-                          showDefaultTools: false,
-                        );
-                      },
+            // Show different actions based on mode
+            if (isLessonMode)
+              // Complete button for lesson mode
+              Obx(
+                () => TextButton(
+                  onPressed:
+                      controller.isLoading.value
+                          ? null
+                          : () => _completeLesson(),
+                  child: Text(
+                    'Terminé',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
+              )
+            else
+              // Quick save button for normal mode
+              Obx(
+                () => IconButton(
+                  onPressed:
+                      controller.isLoading.value ? null : () => _quickSave(),
+                  icon:
+                      controller.isLoading.value
+                          ? SizedBox(
+                            width: 20.w,
+                            height: 20.w,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AppColors.primary,
+                            ),
+                          )
+                          : Icon(
+                            Icons.save,
+                            color:
+                                controller.hasUnsavedChanges.value
+                                    ? AppColors.primary
+                                    : AppColors.textSecondary,
+                            size: 24.sp,
+                          ),
+                ),
               ),
-              const ColorPalette(),
-              Gap(16.h),
-            ],
-          ),
+
+            // Menu button (only in normal mode)
+            if (!isLessonMode)
+              PopupMenuButton<String>(
+                icon: Icon(
+                  Icons.more_vert,
+                  color: AppColors.textPrimary,
+                  size: 24.sp,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                onSelected: (value) => _handleMenuAction(value),
+                itemBuilder:
+                    (context) => [
+                      PopupMenuItem(
+                        value: 'save',
+                        child: Row(
+                          children: [
+                            Icon(Icons.save_alt, size: 20.sp),
+                            Gap(12.w),
+                            const Text('Sauvegarder'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'share',
+                        child: Row(
+                          children: [
+                            Icon(Icons.share, size: 20.sp),
+                            Gap(12.w),
+                            const Text('Partager'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'new',
+                        child: Row(
+                          children: [
+                            Icon(Icons.add, size: 20.sp),
+                            Gap(12.w),
+                            const Text('Nouveau dessin'),
+                          ],
+                        ),
+                      ),
+                    ],
+              ),
+          ],
+        ),
+        body: Column(
+          children: [
+            // Drawing toolbar
+            const DrawingToolbar(),
+
+            // Main drawing area
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: AppColors.borderPrimary, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withValues(alpha: 0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.r),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return DrawingBoard(
+                        controller: controller.drawingController,
+                        background: Obx(() {
+                          final selectedTemplate =
+                              controller.selectedTemplate.value;
+                          final templateToUse =
+                              isLessonMode && template != null
+                                  ? template
+                                  : selectedTemplate;
+
+                          if (templateToUse != null) {
+                            return Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: constraints.maxWidth,
+                                  height: constraints.maxHeight,
+                                  color: Colors.white,
+                                ),
+                                Image.asset(
+                                  templateToUse.templateImagePath,
+                                  fit: BoxFit.contain,
+                                  opacity: const AlwaysStoppedAnimation(0.3),
+                                ),
+                              ],
+                            );
+                          }
+
+                          return Container(
+                            width: constraints.maxWidth,
+                            height: constraints.maxHeight,
+                            color: Colors.white,
+                          );
+                        }),
+                        showDefaultActions: false,
+                        showDefaultTools: false,
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            // Color palette
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              child: const ColorPalette(),
+            ),
+          ],
         ),
       ),
     );
   }
 
+
   void _handleBackButton(BuildContext context) {
-    if (controller.hasUnsavedChanges.value) {
-      _showExitDialog(context);
+    if (controller.hasUnsavedChanges.value && !isLessonMode) {
+      // Show save dialog only in normal mode
+      _showUnsavedChangesDialog(context);
+    } else if (isLessonMode) {
+      // In lesson mode, show confirmation dialog
+      _showLessonExitDialog(context);
     } else {
       Get.back();
     }
   }
 
-  void _quickSave() async {
-    if (controller.drawingController.getHistory.isEmpty) {
-      Get.snackbar(
-        'Attention',
-        'Dessine quelque chose avant de sauvegarder!',
-        backgroundColor: Colors.orange.withValues(alpha: 0.8),
-        colorText: Colors.white,
-      );
-      return;
-    }
-    await controller.saveArtwork();
-  }
-
-  void _shareCurrentArtwork() async {
-    if (controller.currentArtworkId.value.isEmpty) {
-      await controller.saveArtwork();
-      if (controller.currentArtworkId.value.isNotEmpty) {
-        await controller.shareWithParent(controller.currentArtworkId.value);
-      }
-    } else {
-      await controller.shareWithParent(controller.currentArtworkId.value);
-    }
-  }
-
-  void _exportCurrentArtwork() async {
-    if (controller.currentArtworkId.value.isEmpty) {
-      await controller.saveArtwork();
-      if (controller.currentArtworkId.value.isNotEmpty) {
-        await controller.exportArtwork(controller.currentArtworkId.value);
-      }
-    } else {
-      await controller.exportArtwork(controller.currentArtworkId.value);
-    }
-  }
-
-  void _showExitDialog(BuildContext context) {
+  void _showLessonExitDialog(BuildContext context) {
     Get.dialog(
       AlertDialog(
         shape: RoundedRectangleBorder(
@@ -252,10 +264,10 @@ class DrawingCanvasScreen extends GetView<StudioController> {
         ),
         title: Row(
           children: [
-            Icon(Icons.warning_amber, color: Colors.orange, size: 20.sp),
+            Icon(Icons.warning_amber, color: AppColors.warning, size: 24.sp),
             Gap(8.w),
             Text(
-              'Quitter le dessin?',
+              'Quitter l\'exercice?',
               style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
@@ -265,32 +277,82 @@ class DrawingCanvasScreen extends GetView<StudioController> {
           ],
         ),
         content: Text(
-          'Tu as des modifications non sauvegardées. Veux-tu sauvegarder ton dessin avant de partir?',
+          'Tu n\'as pas encore terminé ton dessin. Veux-tu vraiment quitter?',
+          style: TextStyle(fontSize: 14.sp, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text(
+              'Continuer',
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 14.sp),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.back(); // Close dialog
+              Get.back(); // Return to lesson
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.warning,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            child: Text(
+              'Quitter',
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showUnsavedChangesDialog(BuildContext context) {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.warning_amber, color: AppColors.warning, size: 24.sp),
+            Gap(8.w),
+            Text(
+              'Modifications non sauvegardées',
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'DynaPuff_SemiCondensed',
+              ),
+            ),
+          ],
+        ),
+        content: Text(
+          'Tu as des modifications non sauvegardées. Que veux-tu faire?',
           style: TextStyle(fontSize: 14.sp, color: AppColors.textSecondary),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Get.back();
-              Get.back();
+              Get.back(); // Close dialog
+              Get.back(); // Exit without saving
             },
             child: Text(
-              'Quitter sans sauver',
-              style: TextStyle(color: AppColors.error, fontSize: 14.sp),
-            ),
-          ),
-          TextButton(
-            onPressed: () => Get.back(),
-            child: Text(
-              'Continuer le dessin',
+              'Quitter sans sauvegarder',
               style: TextStyle(color: AppColors.textSecondary, fontSize: 14.sp),
             ),
           ),
           ElevatedButton(
             onPressed: () async {
-              Get.back();
-              await controller.saveArtwork();
-              Get.back();
+              Get.back(); // Close dialog
+              await _quickSave();
+              Get.back(); // Exit after saving
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
@@ -312,149 +374,112 @@ class DrawingCanvasScreen extends GetView<StudioController> {
     );
   }
 
-  void _showSaveDialog(BuildContext context) {
-    final titleController = TextEditingController(
-      text: controller.currentArtworkTitle.value,
-    );
-    bool shareWithParents = false;
+  Future<void> _quickSave() async {
+    await controller.saveArtwork();
 
-    Get.dialog(
-      StatefulBuilder(
-        builder:
-            (context, setState) => AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              title: Row(
-                children: [
-                  Icon(Icons.save, color: AppColors.primary, size: 20.sp),
-                  Gap(8.w),
-                  Text(
-                    'Sauvegarder le dessin',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'DynaPuff_SemiCondensed',
-                    ),
-                  ),
-                ],
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Nom du dessin',
-                      hintText: 'Mon super dessin...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 8.h,
-                      ),
-                    ),
-                    style: TextStyle(fontSize: 14.sp),
-                    maxLength: 30,
-                  ),
-                  Gap(16.h),
-                  CheckboxListTile(
-                    value: shareWithParents,
-                    onChanged: (value) {
-                      setState(() {
-                        shareWithParents = value ?? false;
-                      });
-                    },
-                    title: Text(
-                      'Partager avec mes parents',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Papa et maman pourront voir ton dessin et te laisser des messages!',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                    activeColor: AppColors.primary,
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Get.back(),
-                  child: Text(
-                    'Annuler',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ),
-                Obx(
-                  () => ElevatedButton(
-                    onPressed:
-                        controller.isLoading.value
-                            ? null
-                            : () async {
-                              final title = titleController.text.trim();
-                              if (title.isEmpty) {
-                                Get.snackbar(
-                                  'Attention',
-                                  'Donne un nom à ton dessin!',
-                                  backgroundColor: Colors.orange.withValues(
-                                    alpha: 0.8,
-                                  ),
-                                  colorText: Colors.white,
-                                );
-                                return;
-                              }
-                              await controller.saveArtwork(customTitle: title);
-                              if (shareWithParents &&
-                                  controller
-                                      .currentArtworkId
-                                      .value
-                                      .isNotEmpty) {
-                                await controller.shareWithParent(
-                                  controller.currentArtworkId.value,
-                                );
-                              }
-                              Get.back();
-                            },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                    ),
-                    child:
-                        controller.isLoading.value
-                            ? SizedBox(
-                              width: 16.w,
-                              height: 16.w,
-                              child: CircularProgressIndicator(
-                                color: AppColors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                            : Text(
-                              'Sauvegarder',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                  ),
-                ),
-              ],
-            ),
-      ),
+    Get.snackbar(
+      'Dessin sauvegardé!',
+      'Ton chef-d\'œuvre a été sauvegardé dans ta galerie',
+      backgroundColor: AppColors.greenPrimary,
+      colorText: AppColors.white,
+      snackPosition: SnackPosition.TOP,
+      margin: EdgeInsets.all(16.w),
+      borderRadius: 12.r,
+      duration: const Duration(seconds: 2),
     );
+  }
+
+  Future<void> _completeLesson() async {
+    // Save the artwork with lesson-specific naming
+    final artworkId = await controller.saveArtworkForLesson(
+      lessonId: template?.id ?? 'lesson',
+      activityName: template?.name ?? 'Dessin',
+    );
+
+    // Call the completion callback
+    if (onComplete != null && artworkId != null) {
+      onComplete!(artworkId);
+    }
+
+    // Return to lesson
+    Get.back();
+  }
+
+  void _handleMenuAction(String action) {
+    switch (action) {
+      case 'save':
+        _quickSave();
+        break;
+      case 'share':
+        _shareArtwork();
+        break;
+      case 'new':
+        _startNewDrawing();
+        break;
+    }
+  }
+
+  void _shareArtwork() {
+    if (controller.currentArtworkId.value.isNotEmpty) {
+      controller.shareArtwork(controller.currentArtworkId.value);
+    }
+  }
+
+  void _startNewDrawing() {
+    if (controller.hasUnsavedChanges.value) {
+      Get.dialog(
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          title: Text(
+            'Nouveau dessin?',
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'DynaPuff_SemiCondensed',
+            ),
+          ),
+          content: Text(
+            'Cela effacera ton dessin actuel. Es-tu sûr?',
+            style: TextStyle(fontSize: 14.sp, color: AppColors.textSecondary),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: Text(
+                'Annuler',
+                style: TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Get.back();
+                controller.startNewArtwork();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+              ),
+              child: Text(
+                'Nouveau dessin',
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      controller.startNewArtwork();
+    }
   }
 }

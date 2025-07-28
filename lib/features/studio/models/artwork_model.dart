@@ -222,4 +222,4 @@ class TemplateModel {
   }
 }
 
-enum TemplateCategory { animals, shapes, letters, numbers, seasonal, daily }
+enum TemplateCategory { animals, shapes, letters, numbers, seasonal, daily ,educational}

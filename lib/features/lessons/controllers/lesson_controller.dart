@@ -12,6 +12,8 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_activity_model.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
+import 'package:le_petit_davinci/features/studio/models/artwork_model.dart';
+import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/services/youtube_service.dart';
@@ -468,15 +470,95 @@ class LessonController extends GetxController {
   }
 
   void _initializeDrawingActivity(LessonActivity activity) {
-    // Initialize or reuse drawing controller
-    _drawingController ??= Get.put(StudioController(), tag: 'lesson_drawing');
-    _drawingController!.startNewArtwork();
+    // For drawing activities, we'll navigate to the Studio with parameters
+    // instead of trying to embed it directly
 
-    // Set up template if needed
-    if (activity is ColoringTemplateActivity) {
-      // Set coloring template
-      // Note: You might need to create template models from the activity data
+    if (activity is DrawLettersActivity) {
+      // For letter drawing, create template from the first letter
+      if (activity.letters.isNotEmpty) {
+        final firstLetter = activity.letters.first;
+        final template = TemplateModel(
+          id: 'lesson_letter_${firstLetter.letter}',
+          name: 'Lettre ${firstLetter.letter}',
+          templateImagePath:
+              'assets/printables/letters/printable_${firstLetter.letter.toUpperCase()}.png',
+          category: TemplateCategory.educational,
+          difficulty: 1,
+          colors: [
+            '#FF0000', // Red
+            '#00FF00', // Green
+            '#0000FF', // Blue
+            '#FFFF00', // Yellow
+            '#FFA500', // Orange
+            '#800080', // Purple
+            '#000000', // Black
+            '#FFFFFF', // White
+          ],
+          educationalPrompt: activity.instruction,
+          previewImagePath: "", // Optional: add preview if available
+        );
+        Get.put(StudioController());
+
+        // Navigate to drawing screen with template
+        Get.to(
+          () => DrawingCanvasScreen(
+            template: template,
+            isLessonMode: true,
+            onComplete: (artworkId) {
+              _handleDrawingCompletion(artworkId);
+            },
+          ),
+        );
+      }
+    } else if (activity is ColoringTemplateActivity) {
+      // For coloring activities
+      final template = TemplateModel(
+        id: 'lesson_coloring_${activity.id}',
+        name: activity.title,
+        templateImagePath: activity.templateImagePath,
+        category: TemplateCategory.educational,
+        difficulty: 1,
+        colors: activity.suggestedColors,
+        educationalPrompt: activity.coloringPrompt,
+        previewImagePath: "",
+      );
+      Get.put(StudioController());
+
+      // Navigate to drawing screen with template
+      Get.to(
+        () => DrawingCanvasScreen(
+          template: template,
+          isLessonMode: true,
+          onComplete: (artworkId) {
+            _handleDrawingCompletion(artworkId);
+          },
+        ),
+      );
     }
+  }
+
+  void _handleDrawingCompletion(String artworkId) {
+    // Mark the drawing activity as completed
+    completeCurrentActivity(
+      score: 0.9, // Good score for completing drawing
+      metadata: {
+        'artworkId': artworkId,
+        'completedAt': DateTime.now().toIso8601String(),
+      },
+    );
+  }
+
+  Future<void> submitDrawingActivity() async {
+    // This method is now simplified since the actual drawing
+    // happens in the Studio screen
+    final activity = getCurrentActivity();
+    if (activity?.type != ActivityType.drawLetters &&
+        activity?.type != ActivityType.coloringTemplate) {
+      return;
+    }
+
+    // The drawing completion is handled by the callback
+    // from DrawingCanvasScreen, so this method might not be needed
   }
 
   LessonActivity? getCurrentActivity() {
@@ -719,33 +801,33 @@ class LessonController extends GetxController {
     );
   }
 
-  Future<void> submitDrawingActivity() async {
-    final activity = getCurrentActivity();
-    if (activity?.type != ActivityType.drawLetters &&
-        activity?.type != ActivityType.coloringTemplate) {
-      return;
-    }
+  // Future<void> submitDrawingActivity() async {
+  //   final activity = getCurrentActivity();
+  //   if (activity?.type != ActivityType.drawLetters &&
+  //       activity?.type != ActivityType.coloringTemplate) {
+  //     return;
+  //   }
 
-    // Save the drawing
-    if (_drawingController != null) {
-      await _drawingController!.saveArtwork(
-        customTitle: '${activity!.title} - ${DateTime.now().toLocal()}',
-      );
-    }
+  //   // Save the drawing
+  //   if (_drawingController != null) {
+  //     await _drawingController!.saveArtwork(
+  //       customTitle: '${activity!.title} - ${DateTime.now().toLocal()}',
+  //     );
+  //   }
 
-    // For now, give a good score if they drew something
-    final hasDrawing =
-        _drawingController?.drawingController.getHistory.isNotEmpty ?? false;
-    final score = hasDrawing ? 0.9 : 0.3;
+  //   // For now, give a good score if they drew something
+  //   final hasDrawing =
+  //       _drawingController?.drawingController.getHistory.isNotEmpty ?? false;
+  //   final score = hasDrawing ? 0.9 : 0.3;
 
-    await completeCurrentActivity(
-      score: score,
-      metadata: {
-        'drawingCompleted': hasDrawing,
-        'artworkId': _drawingController?.currentArtworkId.value,
-      },
-    );
-  }
+  //   await completeCurrentActivity(
+  //     score: score,
+  //     metadata: {
+  //       'drawingCompleted': hasDrawing,
+  //       'artworkId': _drawingController?.currentArtworkId.value,
+  //     },
+  //   );
+  // }
 
   //* Navigation helpers and utility methods
   bool get canProceedToNext {

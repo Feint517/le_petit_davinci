@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/lesson_template_model.dart';
+import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
+import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 
 class LessonActivitiesWidget extends GetView<LessonController> {
   const LessonActivitiesWidget({super.key});
@@ -17,68 +18,55 @@ class LessonActivitiesWidget extends GetView<LessonController> {
     return Obx(() {
       final activity = controller.getCurrentActivity();
       if (activity == null) {
-        return Center(
-          child: Text(
-            controller.currentLesson.value?.language == LessonLanguage.french
-                ? 'Aucune activité disponible'
-                : 'No activities available',
-            style: TextStyle(fontSize: 16.sp, color: AppColors.textSecondary),
-          ),
-        );
+        return const Center(child: CircularProgressIndicator());
       }
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Gap(AppSizes.spaceBtwSections),
-          ActivityIntroduction(activity: activity),
 
-          Gap(24.h),
-
-          // Activity content based on type
-          _buildActivityContent(activity),
-
-          Gap(24.h),
-
-          // Activity completion status
-          if (controller.isActivityCompleted.value)
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(20.w),
-              decoration: BoxDecoration(
-                color: Colors.green.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
-              ),
-              child: Column(
-                children: [
-                  Icon(Icons.check_circle, color: Colors.green, size: 32.sp),
-                  Gap(12.h),
-                  Text(
-                    controller.currentLesson.value?.language ==
-                            LessonLanguage.french
-                        ? 'Activité terminée!'
-                        : 'Activity Complete!',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                      fontFamily: 'DynaPuff_SemiCondensed',
-                    ),
-                  ),
-                  Gap(8.h),
-                  Text(
-                    '${controller.currentLesson.value?.language == LessonLanguage.french ? "Score" : "Score"}: ${(controller.currentActivityScore.value * 100).round()}%',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
+      return SingleChildScrollView(
+        padding: EdgeInsets.all(20.w),
+        child: Column(
+          children: [
+            _buildActivityHeader(activity),
+            Gap(24.h),
+            _buildActivityContent(activity),
+            Gap(32.h),
+            _buildActivityControls(),
+          ],
+        ),
       );
     });
+  }
+
+  Widget _buildActivityHeader(LessonActivity activity) {
+    return Column(
+      children: [
+        Text(
+          activity.title,
+          style: TextStyle(
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+            color: AppColors.textPrimary,
+            fontFamily: 'DynaPuff_SemiCondensed',
+          ),
+          textAlign: TextAlign.center,
+        ),
+        Gap(8.h),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Text(
+            '${activity.estimatedDurationMinutes} minutes',
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: AppColors.primary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildActivityContent(LessonActivity activity) {
@@ -101,7 +89,6 @@ class LessonActivitiesWidget extends GetView<LessonController> {
       child: Padding(
         padding: EdgeInsets.all(20.w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               activity.selectionPrompt,
@@ -110,22 +97,19 @@ class LessonActivitiesWidget extends GetView<LessonController> {
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
               ),
+              textAlign: TextAlign.center,
             ),
-            Gap(16.h),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12.w,
-                mainAxisSpacing: 12.h,
-                childAspectRatio: 1.2,
-              ),
-              itemCount: activity.items.length,
-              itemBuilder: (context, index) {
-                final item = activity.items[index];
-                return _buildSelectableItem(item, index);
-              },
+            Gap(24.h),
+            Wrap(
+              spacing: 16.w,
+              runSpacing: 16.h,
+              alignment: WrapAlignment.center,
+              children:
+                  activity.items.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
+                    return _buildSelectableItem(item, index);
+                  }).toList(),
             ),
           ],
         ),
@@ -135,12 +119,15 @@ class LessonActivitiesWidget extends GetView<LessonController> {
 
   Widget _buildSelectableItem(SelectableItem item, int index) {
     return Obx(() {
-      final selectedIndices = controller.selectedItemIndices;
-      final isSelected = selectedIndices.contains(index);
+      final isSelected = controller.selectedItemIndices.contains(index);
 
       return GestureDetector(
         onTap: () => controller.toggleItemSelection(index),
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          width: 100.w,
+          height: 120.h,
+          padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color:
                 isSelected
@@ -225,17 +212,111 @@ class LessonActivitiesWidget extends GetView<LessonController> {
               ),
             ),
             Gap(16.h),
-            Container(
-              height: 200.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.borderPrimary),
-                borderRadius: BorderRadius.circular(12.r),
+
+            // Letter selection grid
+            if (activity.letters.isNotEmpty)
+              Wrap(
+                spacing: 12.w,
+                runSpacing: 12.h,
+                children:
+                    activity.letters.map((letterTask) {
+                      return _buildLetterCard(letterTask, activity);
+                    }).toList(),
               ),
-              child: const Center(child: Text('Drawing Canvas Coming Soon')),
+
+            Gap(24.h),
+
+            // Start drawing button
+            ElevatedButton.icon(
+              onPressed: () => _startLetterDrawing(activity),
+              icon: Icon(Icons.brush, size: 20.sp),
+              label: Text(
+                controller.currentLesson.value?.language ==
+                        LessonLanguage.french
+                    ? 'Commencer à dessiner'
+                    : 'Start Drawing',
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLetterCard(
+    LetterDrawingTask letter,
+    DrawLettersActivity activity,
+  ) {
+    return GestureDetector(
+      onTap: () => _startSpecificLetterDrawing(letter, activity),
+      child: Container(
+        width: 80.w,
+        height: 80.w,
+        decoration: BoxDecoration(
+          color: AppColors.primary.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: AppColors.primary, width: 2),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              letter.letter,
+              style: TextStyle(
+                fontSize: 32.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
+            Text(
+              letter.pronunciation,
+              style: TextStyle(fontSize: 12.sp, color: AppColors.textSecondary),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _startLetterDrawing(DrawLettersActivity activity) {
+    // Start with the first letter
+    if (activity.letters.isNotEmpty) {
+      _startSpecificLetterDrawing(activity.letters.first, activity);
+    }
+  }
+
+  void _startSpecificLetterDrawing(
+    LetterDrawingTask letter,
+    DrawLettersActivity activity,
+  ) {
+    final template = LessonTemplateHelper.createLetterTemplate(
+      letter: letter.letter,
+      instruction: '${activity.instruction} - ${letter.letter}',
+      language:
+          controller.currentLesson.value?.language == LessonLanguage.french
+              ? 'french'
+              : 'english',
+    );
+    Get.put(StudioController());
+
+    Get.to(
+      () => DrawingCanvasScreen(
+        template: template,
+        isLessonMode: true,
+        onComplete: (artworkId) {
+          controller.completeCurrentActivity(
+            score: 0.9,
+            metadata: {'artworkId': artworkId, 'letter': letter.letter},
+          );
+        },
       ),
     );
   }
@@ -257,17 +338,95 @@ class LessonActivitiesWidget extends GetView<LessonController> {
               ),
             ),
             Gap(16.h),
+
+            // Preview of the template
             Container(
               height: 200.h,
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.borderPrimary),
                 borderRadius: BorderRadius.circular(12.r),
+                color: AppColors.white,
               ),
-              child: const Center(child: Text('Coloring Canvas Coming Soon')),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: Image.asset(
+                  activity.templateImagePath,
+                  fit: BoxFit.contain,
+                  opacity: const AlwaysStoppedAnimation(0.5),
+                  errorBuilder: (context, error, stackTrace) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.image_not_supported,
+                            size: 48.sp,
+                            color: AppColors.textSecondary,
+                          ),
+                          Gap(8.h),
+                          Text(
+                            'Image non disponible',
+                            style: TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            Gap(24.h),
+
+            // Start coloring button
+            ElevatedButton.icon(
+              onPressed: () => _startColoringActivity(activity),
+              icon: Icon(Icons.palette, size: 20.sp),
+              label: Text(
+                controller.currentLesson.value?.language ==
+                        LessonLanguage.french
+                    ? 'Commencer à colorier'
+                    : 'Start Coloring',
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.secondary,
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _startColoringActivity(ColoringTemplateActivity activity) {
+    final template = LessonTemplateHelper.createColoringTemplate(
+      id: activity.id,
+      title: activity.title,
+      templatePath: activity.templateImagePath,
+      instruction: activity.coloringPrompt,
+      suggestedColors: activity.suggestedColors,
+    );
+    Get.put(StudioController());
+
+    Get.to(
+      () => DrawingCanvasScreen(
+        template: template,
+        isLessonMode: true,
+        onComplete: (artworkId) {
+          controller.completeCurrentActivity(
+            score: 0.9,
+            metadata: {'artworkId': artworkId, 'activityId': activity.id},
+          );
+        },
       ),
     );
   }
@@ -290,97 +449,74 @@ class LessonActivitiesWidget extends GetView<LessonController> {
               controller.currentLesson.value?.language == LessonLanguage.french
                   ? 'Cette activité arrive bientôt!'
                   : 'This activity is coming soon!',
-              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
                 color: AppColors.textSecondary,
+                fontWeight: FontWeight.w500,
               ),
-            ),
-            Gap(12.h),
-            ElevatedButton(
-              onPressed: () {
-                // Mark as completed with a default score
-                controller.completeCurrentActivity(score: 0.8);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-              ),
-              child: Text(
-                controller.currentLesson.value?.language ==
-                        LessonLanguage.french
-                    ? 'Marquer comme terminé'
-                    : 'Mark as Complete',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
       ),
     );
   }
-}
 
-class ActivityIntroduction extends GetView<LessonController> {
-  const ActivityIntroduction({super.key, required this.activity});
+  Widget _buildActivityControls() {
+    final activity = controller.getCurrentActivity();
 
-  final LessonActivity? activity;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: CustomShadowStyle.customCircleShadows(
-          color: AppColors.white,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                switch (activity?.type) {
-                  ActivityType.selectItems => Icons.touch_app,
-                  ActivityType.drawLetters => Icons.draw,
-                  ActivityType.matchPairs => Icons.link,
-                  ActivityType.sequenceOrder => Icons.reorder,
-                  ActivityType.coloringTemplate => Icons.palette,
-                  null => Icons.help_outline,
-                },
-                color: AppColors.primary,
-                size: 24.sp,
-              ),
-              Gap(AppSizes.md.h),
-              Text(
-                activity?.title ?? '',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.black,
-                ),
-              ),
-            ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // Skip button (if allowed)
+        TextButton(
+          onPressed: () => controller.skipToActivities(),
+          child: Text(
+            controller.currentLesson.value?.language == LessonLanguage.french
+                ? 'Passer'
+                : 'Skip',
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 14.sp),
           ),
-          Gap(8.h),
-          Text(
-            activity?.instruction ?? '',
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: AppColors.textSecondary,
-              height: 1.5,
+        ),
+
+        // Submit/Complete button
+        Obx(
+          () => ElevatedButton(
+            onPressed:
+                controller.isActivityCompleted.value
+                    ? null
+                    : () {
+                      if (activity?.type == ActivityType.selectItems) {
+                        controller.submitCurrentSelections();
+                      }
+                      // Drawing activities are completed via callback
+                    },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            child: Text(
+              controller.isActivityCompleted.value
+                  ? (controller.currentLesson.value?.language ==
+                          LessonLanguage.french
+                      ? 'Terminé!'
+                      : 'Completed!')
+                  : (controller.currentLesson.value?.language ==
+                          LessonLanguage.french
+                      ? 'Valider'
+                      : 'Submit'),
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
