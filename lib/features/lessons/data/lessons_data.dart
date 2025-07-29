@@ -46,16 +46,16 @@ final Map<int, LessonModel> englishLessons = {
           ),
         ],
       ),
-      ColoringTemplateActivity(
-        id: 'color_alphabet',
-        title: 'Color the Alphabet',
-        instruction: 'Color this beautiful alphabet picture!',
-        estimatedDurationMinutes: 7,
-        templateImagePath: 'assets/templates/alphabet_coloring.png',
-        suggestedColors: ['red', 'blue', 'green', 'yellow', 'orange'],
-        coloringPrompt:
-            'Use your favorite colors to make this alphabet picture beautiful!',
-      ),
+      // ColoringTemplateActivity(
+      //   id: 'color_alphabet',
+      //   title: 'Color the Alphabet',
+      //   instruction: 'Color this beautiful alphabet picture!',
+      //   estimatedDurationMinutes: 7,
+      //   templateImagePath: TestAssets.alphabetColoring,
+      //   suggestedColors: ['red', 'blue', 'green', 'yellow', 'orange'],
+      //   coloringPrompt:
+      //       'Use your favorite colors to make this alphabet picture beautiful!',
+      // ),
     ],
     learningObjectives: [
       'Recognize letters A through E',
