@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
     super.key,
-    required this.child,
     this.bubbleColor = Colors.blue,
     this.width,
     this.borderColor,
     this.borderWidth = 2.0,
+    required this.bubbleText,
+    this.textColor = Colors.white,
   });
 
-  final Widget child;
   final Color bubbleColor;
   final double? width;
   final Color? borderColor;
   final double borderWidth;
+  final String bubbleText;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,12 @@ class ChatBubble extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(25, 15, 15, 15),
-          child: child,
+          child: Text(
+            bubbleText,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: textColor),
+          ),
         ),
       ),
     );

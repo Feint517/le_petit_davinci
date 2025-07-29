@@ -39,6 +39,15 @@ List<LevelConfig> generateLevelConfigsFromData() {
       type = LevelType.exercise;
       // title = 'Level $level';
     }
+    // if (unifiedEnglishLevels.containsKey(level)) {
+    //   //? This is an exercise level
+    //   type = LevelType.exercise;
+    //   // title = 'Exercise $level';
+    // } else {
+    //   //? Default case
+    //   type = LevelType.exercise;
+    //   // title = 'Level $level';
+    // }
 
     LevelStatus status = LevelStatus.inProgress;
 
@@ -57,6 +66,12 @@ Widget? getLevelPage(int level) {
       dialect: 'en-US', //? Default to English dialect
     );
   }
+  // if (unifiedEnglishLevels.containsKey(level)) {
+  //   return UnifiedExerciseScreen(
+  //     exercises: unifiedEnglishLevels[level]!,
+  //     dialect: 'en-US', //? Default to English dialect
+  //   );
+  // }
   return null; //? Locked or not implemented
 }
 

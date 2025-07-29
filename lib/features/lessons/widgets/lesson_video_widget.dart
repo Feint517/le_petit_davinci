@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
-import 'package:le_petit_davinci/features/lessons/widgets/info_card.dart';
 import 'package:le_petit_davinci/features/video_player/views/video_player.dart';
 
 class LessonVideoWidget extends GetView<LessonController> {

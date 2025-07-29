@@ -243,7 +243,6 @@ class DrawingCanvasScreen extends GetView<StudioController> {
     );
   }
 
-
   void _handleBackButton(BuildContext context) {
     if (controller.hasUnsavedChanges.value && !isLessonMode) {
       // Show save dialog only in normal mode

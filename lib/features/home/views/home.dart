@@ -9,19 +9,18 @@ import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.da
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
-import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
 import 'package:le_petit_davinci/features/home/widgets/subject_selection.dart';
 import 'package:le_petit_davinci/features/home/widgets/welcome_section.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 
-class HomeScreen extends GetView<HomeController> {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    Get.put(HomeController());
+    // Get.put(HomeController());
     if (!Get.isRegistered<BackgroundMusicController>()) {
       Get.put(BackgroundMusicController());
     }

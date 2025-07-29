@@ -2,13 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
-import 'package:le_petit_davinci/features/home/controllers/home_controller.dart';
+import 'package:le_petit_davinci/features/home/data/home_subject.dart';
 import 'package:le_petit_davinci/features/home/widgets/section_heading.dart';
 import 'subject_card.dart';
 
-class SubjectSelection extends GetView<HomeController> {
+class SubjectSelection extends StatelessWidget {
   const SubjectSelection({super.key});
 
   @override
@@ -24,10 +23,10 @@ class SubjectSelection extends GetView<HomeController> {
 
           //* Grid of subject cards
           CustomGridLayout(
-            itemCount: controller.subjects.length,
+            itemCount: subjects.length,
             mainAxisExtent: 185.h,
             itemBuilder: (context, index) {
-              final subject = controller.subjects[index];
+              final subject = subjects[index];
               return SubjectCard(subject: subject);
             },
           ),
