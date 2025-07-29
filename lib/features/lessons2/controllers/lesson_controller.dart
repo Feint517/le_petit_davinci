@@ -7,7 +7,7 @@ enum LessonPhase { introduction, video, activities, completion }
 
 enum VideoCompletionStatus { notStarted, inProgress, completed }
 
-class LessonController extends GetxController {
+class LessonController2 extends GetxController {
   //* Lesson data
   final lesson = Rx<Lesson?>(null);
 

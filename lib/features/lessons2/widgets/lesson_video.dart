@@ -7,7 +7,7 @@ import 'package:le_petit_davinci/features/lessons2/controllers/lesson_controller
 import 'package:le_petit_davinci/features/lessons2/models/lesson_model.dart';
 import 'package:le_petit_davinci/features/lessons2/widgets/talking_mascot.dart';
 
-class LessonVideoWidget extends GetView<LessonController> {
+class LessonVideoWidget extends GetView<LessonController2> {
   const LessonVideoWidget({super.key, required this.lesson});
 
   final Lesson lesson;

@@ -33,7 +33,7 @@ class VideoPlayerScreen extends GetView<VideoPlayerController> {
               child: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  final lessonController = Get.find<LessonController>();
+                  final lessonController = Get.put(LessonController2());
                   lessonController.markVideoCompleted();
                   Get.back();
                 },

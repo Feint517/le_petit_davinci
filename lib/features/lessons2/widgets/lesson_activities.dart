@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/lessons2/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons2/models/lesson_model.dart';
 
-class LessonActivitiesWidget extends GetView<LessonController> {
+class LessonActivitiesWidget extends GetView<LessonController2> {
   const LessonActivitiesWidget({super.key, required this.activities});
 
   final List<LessonActivity> activities;

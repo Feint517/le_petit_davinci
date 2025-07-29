@@ -11,14 +11,14 @@ import 'package:le_petit_davinci/features/lessons2/widgets/lesson_completion.dar
 import 'package:le_petit_davinci/features/lessons2/widgets/lesson_video.dart';
 import 'package:le_petit_davinci/features/lessons2/widgets/lessson_intro.dart';
 
-class LessonScreen extends GetView<LessonController> {
+class LessonScreen extends GetView<LessonController2> {
   const LessonScreen({super.key, required this.lesson});
 
   final Lesson lesson;
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LessonController());
+    Get.put(LessonController2());
     controller.setLesson(lesson);
     return Scaffold(
       appBar: ProfileHeader(type: ProfileHeaderType.compact),

@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/features/lessons2/controllers/lesson_controller
 import 'package:le_petit_davinci/features/lessons2/models/lesson_model.dart';
 import 'package:le_petit_davinci/features/lessons2/widgets/talking_mascot.dart';
 
-class LessonIntroWidget extends GetView<LessonController> {
+class LessonIntroWidget extends GetView<LessonController2> {
   const LessonIntroWidget({
     super.key,
     required this.lesson,
