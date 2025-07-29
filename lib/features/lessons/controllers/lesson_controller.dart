@@ -499,15 +499,15 @@ class LessonController extends GetxController {
         Get.put(StudioController());
 
         // Navigate to drawing screen with template
-        Get.to(
-          () => DrawingCanvasScreen(
-            template: template,
-            isLessonMode: true,
-            onComplete: (artworkId) {
-              _handleDrawingCompletion(artworkId);
-            },
-          ),
-        );
+        // Get.to(
+        //   () => DrawingCanvasScreen(
+        //     template: template,
+        //     isLessonMode: true,
+        //     onComplete: (artworkId) {
+        //       _handleDrawingCompletion(artworkId);
+        //     },
+        //   ),
+        // );
       }
     } else if (activity is ColoringTemplateActivity) {
       // For coloring activities
