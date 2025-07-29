@@ -49,24 +49,28 @@ class DrawingCanvasScreen extends GetView<StudioController> {
               size: 24.sp,
             ),
           ),
-          title: Obx(() {
-            String title;
-            if (isLessonMode && template != null) {
-              title = template!.name;
-            } else {
-              title = controller.currentArtworkTitle.value;
-            }
-
-            return Text(
-              title,
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'DynaPuff_SemiCondensed',
-              ),
-            );
-          }),
+          title:
+              isLessonMode && template != null
+                  ? Text(
+                    template!.name,
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'DynaPuff_SemiCondensed',
+                    ),
+                  )
+                  : Obx(
+                    () => Text(
+                      controller.currentArtworkTitle.value,
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'DynaPuff_SemiCondensed',
+                      ),
+                    ),
+                  ),
           centerTitle: true,
           actions: [
             // Show different actions based on mode
@@ -242,7 +246,6 @@ class DrawingCanvasScreen extends GetView<StudioController> {
       ),
     );
   }
-
 
   void _handleBackButton(BuildContext context) {
     if (controller.hasUnsavedChanges.value && !isLessonMode) {
