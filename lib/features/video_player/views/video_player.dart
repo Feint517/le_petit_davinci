@@ -5,14 +5,9 @@ import 'package:le_petit_davinci/features/video_player/controllers/video_player_
 import 'package:webview_flutter/webview_flutter.dart';
 
 class VideoPlayerScreen extends GetView<VideoPlayerController> {
-  const VideoPlayerScreen({
-    super.key,
-    required this.videoId,
-    required this.videoTitle,
-  });
+  const VideoPlayerScreen({super.key, required this.videoId});
 
   final String videoId;
-  final String videoTitle;
 
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,12 @@ import 'package:le_petit_davinci/core/widgets/misc/chat_bubble.dart';
 
 class TalkingMascotController extends GetxController {
   final List<String> messages;
-  final Function() onCompleted;
+  final Function()? onCompleted;
 
   final RxInt currentIndex = 0.obs;
   final RxBool isCompleted = false.obs;
 
-  TalkingMascotController({required this.messages, required this.onCompleted});
+  TalkingMascotController({required this.messages, this.onCompleted});
 
   String get currentMessage => messages[currentIndex.value];
 
@@ -21,7 +21,7 @@ class TalkingMascotController extends GetxController {
       currentIndex.value++;
     } else if (!isCompleted.value) {
       isCompleted.value = true;
-      onCompleted();
+      onCompleted?.call();
     }
   }
 
@@ -36,11 +36,15 @@ class TalkingMascot extends StatelessWidget {
     super.key,
     this.mascotSize = 300,
     required this.bubbleText,
+    this.bubbleWidth = 200,
+    this.bubbleColor = AppColors.accent,
     this.onTap,
   });
 
   final double mascotSize;
   final String bubbleText;
+  final double bubbleWidth;
+  final Color bubbleColor;
   final VoidCallback? onTap;
 
   @override
@@ -58,8 +62,8 @@ class TalkingMascot extends StatelessWidget {
           ),
           ChatBubble(
             bubbleText: bubbleText,
-            bubbleColor: AppColors.accent,
-            width: 200,
+            bubbleColor: bubbleColor,
+            width: bubbleWidth,
           ),
         ],
       ),

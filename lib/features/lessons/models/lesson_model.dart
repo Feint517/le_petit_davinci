@@ -129,7 +129,7 @@ class LessonModel {
       videoTitle: videoTitle ?? this.videoTitle,
       // thumbnailImagePath: thumbnailImagePath ?? this.thumbnailImagePath,
       // estimatedTotalMinutes:
-          // estimatedTotalMinutes ?? this.estimatedTotalMinutes,
+      // estimatedTotalMinutes ?? this.estimatedTotalMinutes,
       activities: activities ?? this.activities,
       // prerequisiteLessonId: prerequisiteLessonId ?? this.prerequisiteLessonId,
       learningObjectives: learningObjectives ?? this.learningObjectives,

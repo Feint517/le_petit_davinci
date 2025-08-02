@@ -1,4 +1,3 @@
 import 'package:get/get.dart';
 
-class DrawingActivityController extends GetxController {
-}
+class DrawingActivityController extends GetxController {}

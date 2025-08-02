@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/lessons2/models/lesson_model.dart';
-import 'package:le_petit_davinci/features/lessons2/widgets/talking_mascot.dart';
+import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/video_player/views/video_player.dart';
 
 enum LessonPhase { introduction, video, activities, completion }
@@ -37,10 +37,7 @@ class LessonController2 extends GetxController {
       if (lesson.value?.youtubeVideoId != null &&
           lesson.value!.youtubeVideoId.isNotEmpty) {
         Get.to(
-          () => VideoPlayerScreen(
-            videoId: lesson.value!.youtubeVideoId,
-            videoTitle: lesson.value!.title,
-          ),
+          () => VideoPlayerScreen(videoId: lesson.value!.youtubeVideoId),
           transition: Transition.rightToLeft,
         );
       }

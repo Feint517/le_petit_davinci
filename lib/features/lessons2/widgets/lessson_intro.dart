@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/lessons2/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons2/models/lesson_model.dart';
-import 'package:le_petit_davinci/features/lessons2/widgets/talking_mascot.dart';
+import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 
 class LessonIntroWidget extends GetView<LessonController2> {
   const LessonIntroWidget({

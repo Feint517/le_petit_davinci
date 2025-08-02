@@ -217,12 +217,7 @@ class LessonVideoWidget extends GetView<LessonController> {
   }
 
   void _openVideoPlayer() {
-    Get.to(
-      () => VideoPlayerScreen(
-        videoId: lesson.videoId,
-        videoTitle: lesson.videoTitle,
-      ),
-    )?.then((_) {
+    Get.to(() => VideoPlayerScreen(videoId: lesson.videoId))?.then((_) {
       // When returning from video player, mark as completed
       controller.markVideoAsCompleted();
     });

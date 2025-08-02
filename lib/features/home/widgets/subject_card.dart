@@ -19,7 +19,7 @@ class SubjectCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (subject.destination != null) {
-            Get.to(() => subject.destination!);
+            Get.to(() => subject.destination!, binding: subject.bindings);
           }
         },
         borderRadius: BorderRadius.circular(20.r),

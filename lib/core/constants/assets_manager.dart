@@ -258,6 +258,5 @@ class AudioAssets {
 
 class TestAssets {
   static const String videoThumbnail = 'assets/test/video_thumbnail.jpg';
-  static const String alphabetColoring =
-      'assets/test/alphabet_coloring.png';
+  static const String alphabetColoring = 'assets/test/alphabet_coloring.png';
 }
