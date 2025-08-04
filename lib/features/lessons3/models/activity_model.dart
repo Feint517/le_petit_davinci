@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/features/lessons3/views/audio_matching_activity_view.dart';
 import 'package:le_petit_davinci/features/lessons3/views/drawing_activity_view.dart';
 import 'package:le_petit_davinci/features/lessons3/views/video_activity_view.dart';
 
@@ -25,8 +26,9 @@ class VideoActivity extends Activity {
 
 class DrawingActivity extends Activity {
   final String prompt;
-  final String? backgroundImage;
-  DrawingActivity({required this.prompt, this.backgroundImage});
+  final String? templateImagePath; // Path to the letter/shape template
+  final List<String>? suggestedColors;
+  DrawingActivity({required this.prompt, this.templateImagePath, this.suggestedColors});
 
   @override
   Widget build(BuildContext context) {
@@ -46,4 +48,27 @@ class Lesson {
     required this.introduction,
     required this.activities,
   });
+}
+
+
+//* A helper class to hold a single audio-word pair.
+class AudioWordPair {
+  final String audioAssetPath;
+  final String word;
+
+  AudioWordPair({required this.audioAssetPath, required this.word});
+}
+
+//* The model for the audio-word matching activity.
+class AudioMatchingActivity extends Activity {
+  final String prompt;
+  final List<AudioWordPair> pairs;
+
+  AudioMatchingActivity({required this.prompt, required this.pairs});
+
+  @override
+  Widget build(BuildContext context) {
+    // This will build our new game view.
+    return AudioMatchingActivityView(activity: this);
+  }
 }

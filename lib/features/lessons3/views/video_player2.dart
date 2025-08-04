@@ -1,51 +1,5 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:le_petit_davinci/features/video_player/controllers/video_player_controller.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
-
-// class VideoPlayerScreen2 extends GetView<VideoPlayerController> {
-//   const VideoPlayerScreen2({
-//     super.key,
-//     required this.videoId,
-//     required this.onVideoCompleted,
-//   });
-
-//   final String videoId;
-//   final VoidCallback onVideoCompleted;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Get.put(VideoPlayerController(videoId: videoId));
-//     return Scaffold(
-//       backgroundColor: Colors.black,
-//       body: SafeArea(
-//         child: Stack(
-//           children: [
-//             //? Video player takes full screen
-//             Center(
-//               child: WebViewWidget(controller: controller.webViewController),
-//             ),
-//             //? Back button overlay
-//             Positioned(
-//               top: 16,
-//               left: 16,
-//               child: IconButton(
-//                 icon: const Icon(Icons.arrow_back, color: Colors.white),
-//                 onPressed: () {
-//                   //? When the user leaves, call the callback to mark it complete.
-//                   onVideoCompleted();
-//                   Get.back();
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
@@ -72,12 +26,22 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
   @override
   void initState() {
     super.initState();
+
+    //* Force landscape mode when this screen is displayed
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
         forceHD: true,
+        hideControls: false,
+        hideThumbnail: true,
+        enableCaption: false,
       ),
     )..addListener(_videoPlayerListener);
   }
@@ -93,6 +57,12 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
 
   @override
   void dispose() {
+    //* IMPORTANT: Reset orientation to portrait when the screen is closed
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     // Clean up the controller when the widget is removed.
     _controller.removeListener(_videoPlayerListener);
     _controller.dispose();
@@ -119,26 +89,9 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
             Obx(() {
               if (_isVideoEnded.value) {
                 return Center(
-                  // child: ElevatedButton.icon(
-                  //   icon: const Icon(Icons.arrow_forward),
-                  //   label: const Text('Continue to Next Activity'),
-                  //   onPressed: () {
-                  //     // Go back to the lesson screen. The "Continue" button
-                  //     // there will now be enabled.
-                  //     Get.back();
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 24,
-                  //       vertical: 12,
-                  //     ),
-                  //   ),
-                  // ),
                   child: CustomButton(
                     label: 'Continue to Next Activity',
                     onPressed: () {
-                      // Go back to the lesson screen. The "Continue" button
-                      // there will now be enabled.
                       Get.back();
                     },
                     width: DeviceUtils.getScreenWidth() * 0.6,

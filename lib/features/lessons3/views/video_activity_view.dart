@@ -26,10 +26,10 @@ class _VideoActivityViewState extends State<VideoActivityView> {
   void initState() {
     super.initState();
     // Use addPostFrameCallback to ensure the call happens after the build.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Safely notify the controller that this activity is now visible.
-      lessonsController.onActivityInit(widget.activity);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   // Safely notify the controller that this activity is now visible.
+    //   lessonsController.onActivityInit(widget.activity);
+    // });
   }
 
   @override
