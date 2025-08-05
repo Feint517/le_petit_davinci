@@ -1,12 +1,15 @@
+import 'package:le_petit_davinci/features/english/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/models/unified_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/features/lessons3/data/lessons_data3.dart';
 
-final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
-  2: [
+final Map<int, LevelContent> unifiedEnglishLevels = {
+  1: LessonSet(exampleLesson),
+  2: ExerciseSet([
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is a pet that purrs.',
@@ -36,8 +39,8 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctOrder: [2, 1, 0],
       ),
     ),
-  ],
-  3: [
+  ]),
+  3: ExerciseSet([
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'can fly.',
@@ -67,8 +70,8 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctOrder: [1, 0, 2],
       ),
     ),
-  ],
-  4: [
+  ]),
+  4: ExerciseSet([
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is the king of the jungle.',
@@ -98,8 +101,8 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctOrder: [3, 2, 1, 0],
       ),
     ),
-  ],
-  5: [
+  ]),
+  5: ExerciseSet([
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'lives in water.',
@@ -129,8 +132,8 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctOrder: [1, 4, 0, 2, 3],
       ),
     ),
-  ],
-  6: [
+  ]),
+  6: ExerciseSet([
     UnifiedExercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'has stripes.',
@@ -160,7 +163,7 @@ final Map<int, List<UnifiedExercise>> unifiedEnglishLevels = {
         correctOrder: [0, 1, 2, 3],
       ),
     ),
-  ],
+  ]),
 };
 
 final Map<int, List<UnifiedExercise>> unifiedFrenchLevels = {
