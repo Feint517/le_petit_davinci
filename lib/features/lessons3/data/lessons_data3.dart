@@ -6,11 +6,11 @@ final exampleLesson = Lesson(
   title: 'Learning the Alphabet',
   introduction: 'Let\'s learn the first three letters of the alphabet!',
   activities: [
-    VideoActivity(videoId: 'ccEpTTZW34g'),
-    DrawingActivity(
-      prompt: 'Great job! Now, try to draw the letter "A"!',
-      templateImagePath: ImageAssets.drawableA,
-    ),
+    // VideoActivity(videoId: 'ccEpTTZW34g'),
+    // DrawingActivity(
+    //   prompt: 'Great job! Now, try to draw the letter "A"!',
+    //   templateImagePath: ImageAssets.drawableA,
+    // ),
     AudioMatchingActivity(
       prompt: 'Match the sound to the word!',
       pairs: [

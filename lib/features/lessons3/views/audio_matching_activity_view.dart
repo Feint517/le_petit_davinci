@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
 
 class AudioMatchingActivityView extends StatefulWidget {
@@ -8,13 +10,13 @@ class AudioMatchingActivityView extends StatefulWidget {
   final AudioMatchingActivity activity;
 
   @override
-  State<AudioMatchingActivityView> createState() => _AudioMatchingActivityViewState();
+  State<AudioMatchingActivityView> createState() =>
+      _AudioMatchingActivityViewState();
 }
 
 class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
   final _audioPlayer = AudioPlayer();
 
-  // Game State
   late List<AudioWordPair> shuffledAudio;
   late List<AudioWordPair> shuffledWords;
   final Set<String> matchedWords = {};
@@ -25,7 +27,6 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
   @override
   void initState() {
     super.initState();
-    // Create shuffled lists for the UI so the game is challenging.
     shuffledAudio = List.from(widget.activity.pairs)..shuffle(Random());
     shuffledWords = List.from(widget.activity.pairs)..shuffle(Random());
   }
@@ -51,7 +52,6 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
       final audioChoice = shuffledAudio[selectedAudioIndex!];
       final wordChoice = shuffledWords[selectedWordIndex!];
 
-      // Check if the selected audio and word belong to the same original pair.
       if (audioChoice.word == wordChoice.word) {
         // Correct Match!
         setState(() {
@@ -85,54 +85,78 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(widget.activity.prompt, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Audio Buttons Column
-              _buildButtonColumn(shuffledAudio.length, (index) {
-                final item = shuffledAudio[index];
-                final isMatched = matchedWords.contains(item.word);
-                return _buildChoiceButton(
-                  icon: Icons.volume_up,
-                  onTap: isMatched ? null : () => _onAudioTap(index),
-                  isSelected: selectedAudioIndex == index,
-                  isMatched: isMatched,
-                );
-              }),
-              // Word Buttons Column
-              _buildButtonColumn(shuffledWords.length, (index) {
-                final item = shuffledWords[index];
-                final isMatched = matchedWords.contains(item.word);
-                return _buildChoiceButton(
-                  text: item.word,
-                  onTap: isMatched ? null : () => _onWordTap(index),
-                  isSelected: selectedWordIndex == index,
-                  isMatched: isMatched,
-                );
-              }),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
+      child: Column(
+        children: [
+          Text(
+            widget.activity.prompt,
+            style: Theme.of(context).textTheme.headlineSmall,
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //* Audio Buttons Column
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:
+                      shuffledAudio.asMap().entries.expand((entry) {
+                        final index = entry.key;
+                        final item = entry.value;
+                        final isMatched = matchedWords.contains(item.word);
+                        final button = _buildChoiceButton(
+                          icon: Icons.volume_up,
+                          onTap: isMatched ? null : () => _onAudioTap(index),
+                          isSelected: selectedAudioIndex == index,
+                          isMatched: isMatched,
+                        );
+                        if (index < shuffledAudio.length - 1) {
+                          return [button, const Gap(24)];
+                        }
+                        return [button];
+                      }).toList(),
+                ),
+                //* Word Buttons Column
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:
+                      shuffledWords.asMap().entries.expand((entry) {
+                        final index = entry.key;
+                        final item = entry.value;
+                        final isMatched = matchedWords.contains(item.word);
+                        final button = _buildChoiceButton(
+                          text: item.word,
+                          onTap: isMatched ? null : () => _onWordTap(index),
+                          isSelected: selectedWordIndex == index,
+                          isMatched: isMatched,
+                        );
+                        if (index < shuffledWords.length - 1) {
+                          return [button, const Gap(24)];
+                        }
+                        return [button];
+                      }).toList(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildButtonColumn(int count, Widget Function(int index) builder) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(count, builder),
-    );
-  }
-
-  Widget _buildChoiceButton({IconData? icon, String? text, VoidCallback? onTap, bool isSelected = false, bool isMatched = false}) {
-    final color = isMatched ? Colors.green.shade100 : (isSelected ? Colors.blue.shade100 : Colors.grey.shade200);
+  Widget _buildChoiceButton({
+    IconData? icon,
+    String? text,
+    VoidCallback? onTap,
+    bool isSelected = false,
+    bool isMatched = false,
+  }) {
+    final color =
+        isMatched
+            ? Colors.green.shade100
+            : (isSelected ? Colors.blue.shade100 : Colors.grey.shade200);
     final borderColor = isSelected ? Colors.blue : Colors.grey.shade400;
 
     return GestureDetector(
@@ -146,7 +170,16 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
           border: Border.all(color: borderColor, width: 2),
         ),
         child: Center(
-          child: icon != null ? Icon(icon, size: 30) : Text(text!, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child:
+              icon != null
+                  ? Icon(icon, size: 30)
+                  : Text(
+                    text!,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
         ),
       ),
     );

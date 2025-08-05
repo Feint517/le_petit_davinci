@@ -26,7 +26,7 @@ class VideoActivity extends Activity {
 
 class DrawingActivity extends Activity {
   final String prompt;
-  final String? templateImagePath; // Path to the letter/shape template
+  final String? templateImagePath;
   final List<String>? suggestedColors;
   DrawingActivity({required this.prompt, this.templateImagePath, this.suggestedColors});
 
@@ -68,7 +68,6 @@ class AudioMatchingActivity extends Activity {
 
   @override
   Widget build(BuildContext context) {
-    // This will build our new game view.
     return AudioMatchingActivityView(activity: this);
   }
 }

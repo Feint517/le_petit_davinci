@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
@@ -27,12 +26,6 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
   void initState() {
     super.initState();
 
-    //* Force landscape mode when this screen is displayed
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
-
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
       flags: const YoutubePlayerFlags(
@@ -57,13 +50,6 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
 
   @override
   void dispose() {
-    //* IMPORTANT: Reset orientation to portrait when the screen is closed
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    // Clean up the controller when the widget is removed.
     _controller.removeListener(_videoPlayerListener);
     _controller.dispose();
     super.dispose();
@@ -76,7 +62,6 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
       body: SafeArea(
         child: Stack(
           children: [
-            // The YouTube Player
             Center(
               child: YoutubePlayer(
                 controller: _controller,
@@ -85,7 +70,6 @@ class _VideoPlayerScreen2State extends State<VideoPlayerScreen2> {
               ),
             ),
 
-            // The "Continue" button that appears when the video ends.
             Obx(() {
               if (_isVideoEnded.value) {
                 return Center(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
+import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_template_model.dart';
 import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
@@ -43,60 +43,49 @@ class DrawingActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            activity.prompt,
-            style: Theme.of(context).textTheme.headlineSmall,
-            textAlign: TextAlign.center,
+    final mascotController = Get.put(
+      TalkingMascotController(
+        messages: [
+          'Super! Prêt à dessiner?',
+          activity.prompt, // The mascot will now deliver the prompt.
+        ],
+      ),
+      // Use a unique tag to avoid controller conflicts within the same lesson.
+      tag: 'drawing_activity_mascot_${activity.hashCode}',
+    );
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Obx(
+          () => TalkingMascot(
+            mascotSize: 180,
+            bubbleText: mascotController.currentMessage,
+            onTap: mascotController.nextMessage,
           ),
-          const Gap(20),
-          if (activity.templateImagePath != null)
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: AssetImage(activity.templateImagePath!),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-          const Gap(20),
-          Padding(
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
             padding: EdgeInsets.only(
               bottom: DeviceUtils.getBottomNavigationBarHeight() + 16,
             ),
-            child: CustomButton(
-              label: 'Start Drawing',
-              onPressed: () => _startDrawing(context),
-            ),
+            child: Obx(() {
+              return AnimatedOpacity(
+                opacity: mascotController.isCompleted.value ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
+                child:
+                    mascotController.isCompleted.value
+                        ? CustomButton(
+                          label: 'Start Drawing',
+                          width: DeviceUtils.getScreenWidth() * 0.6,
+                          onPressed: () => _startDrawing(context),
+                        )
+                        : const SizedBox.shrink(),
+              );
+            }),
           ),
-          // Expanded(
-          //   child: Container(
-          //     margin: const EdgeInsets.all(16),
-          //     decoration: BoxDecoration(
-          //       border: Border.all(color: Colors.grey.shade300),
-          //       borderRadius: BorderRadius.circular(12),
-          //     ),
-          //     child: const Center(child: Text('Drawing Canvas Here')),
-          //   ),
-          // ),
-          // const Gap(20),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     // When the user is done, they press this button to complete the activity.
-          //     activity.isCompleted.value = true;
-          //   },
-          //   child: const Text('I\'m Done!'),
-          // ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
