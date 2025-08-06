@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.dart';
-import 'package:le_petit_davinci/features/exercises2/controllers/exercises_controller.dart';
+import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
 
 class ReorderWordsView extends GetView<ExercisesController> {
   const ReorderWordsView({super.key, required this.exercise});

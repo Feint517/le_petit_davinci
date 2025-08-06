@@ -5,16 +5,14 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
-import 'package:le_petit_davinci/features/exercises/data/unified_exercise_data.dart';
-import 'package:le_petit_davinci/features/exercises/views/unified_exercise.dart';
-import 'package:le_petit_davinci/features/exercises2/views/exercise.dart';
+
 
 //* 1. List of level configs (just the number and type/status)
 List<LevelConfig> generateLevelConfigsFromData() {
   final Set<int> allLevels = {};
 
   //* Collect all unique level numbers from unified data
-  allLevels.addAll(unifiedFrenchLevels.keys);
+  // allLevels.addAll(unifiedFrenchLevels.keys);
 
   //* Sort levels
   final sortedLevels = allLevels.toList()..sort();
@@ -22,12 +20,15 @@ List<LevelConfig> generateLevelConfigsFromData() {
   //* Generate LevelConfig for each level
   return sortedLevels.map((level) {
     LevelType type;
-    if (unifiedFrenchLevels.containsKey(level)) {
-      type = LevelType.exercise;
-    } else {
-      type = LevelType.lesson;
-    }
+    // if (unifiedFrenchLevels.containsKey(level)) {
+    //   type = LevelType.exercise;
+    // } else {
+    //   type = LevelType.lesson;
 
+
+    // }
+
+type = LevelType.lesson;
     // You can set status dynamically or use a default
     LevelStatus status = LevelStatus.inProgress;
 

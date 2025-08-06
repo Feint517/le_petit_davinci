@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises2/views/fill_the_blank_view.dart';
-import 'package:le_petit_davinci/features/exercises2/views/listen_and_choose_view.dart';
-import 'package:le_petit_davinci/features/exercises2/views/reorder_words_view.dart'; // Import other exercise views here...
+import 'package:le_petit_davinci/features/exercises/views/fill_the_blank_view.dart';
+import 'package:le_petit_davinci/features/exercises/views/listen_and_choose_view.dart';
+import 'package:le_petit_davinci/features/exercises/views/reorder_words_view.dart'; // Import other exercise views here...
 // import 'package:le_petit_davinci/features/exercises/views/listen_and_choose_view.dart';
 // import 'package:le_petit_davinci/features/exercises/views/reorder_words_view.dart';
 
 enum ExerciseType { fillTheBlank, listenAndChoose, reorderWords }
 
-class UnifiedExercise {
+class Exercise {
   final ExerciseType type;
   final FillTheBlankExercise? fillTheBlankExercise;
   final ListenAndChooseExercise? listenAndChooseExercise;
   final ReorderWordsExercise? reorderWordsExercise;
 
-  const UnifiedExercise._({
+  const Exercise._({
     required this.type,
     this.fillTheBlankExercise,
     this.listenAndChooseExercise,
@@ -24,24 +24,24 @@ class UnifiedExercise {
   });
 
   /// Constructor for FillTheBlank exercises.
-  factory UnifiedExercise.fillTheBlank(FillTheBlankExercise exercise) {
-    return UnifiedExercise._(
+  factory Exercise.fillTheBlank(FillTheBlankExercise exercise) {
+    return Exercise._(
       type: ExerciseType.fillTheBlank,
       fillTheBlankExercise: exercise,
     );
   }
 
   /// Constructor for ListenAndChoose exercises.
-  factory UnifiedExercise.listenAndChoose(ListenAndChooseExercise exercise) {
-    return UnifiedExercise._(
+  factory Exercise.listenAndChoose(ListenAndChooseExercise exercise) {
+    return Exercise._(
       type: ExerciseType.listenAndChoose,
       listenAndChooseExercise: exercise,
     );
   }
 
   /// Constructor for ReorderWords exercises.
-  factory UnifiedExercise.reorderWords(ReorderWordsExercise exercise) {
-    return UnifiedExercise._(
+  factory Exercise.reorderWords(ReorderWordsExercise exercise) {
+    return Exercise._(
       type: ExerciseType.reorderWords,
       reorderWordsExercise: exercise,
     );

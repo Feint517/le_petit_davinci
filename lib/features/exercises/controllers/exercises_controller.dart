@@ -11,12 +11,12 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory.dart';
-import 'package:le_petit_davinci/features/exercises2/models/unified_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
 
 class ExercisesController extends GetxController {
   ExercisesController({required this.exercises, required this.dialect});
 
-  final List<UnifiedExercise> exercises;
+  final List<Exercise> exercises;
   final String dialect;
   late final PageController pageController;
 
@@ -35,7 +35,7 @@ class ExercisesController extends GetxController {
 
 
   // UnifiedExercise get currentExercise => exercises[currentExerciseIndex.value];
-  UnifiedExercise get currentExercise {
+  Exercise get currentExercise {
     if (!hasExercises) {
       throw Exception('Attempted to access an exercise from an empty list.');
     }

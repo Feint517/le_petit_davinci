@@ -5,9 +5,8 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
-import 'package:le_petit_davinci/features/english/level_content.dart';
-import 'package:le_petit_davinci/features/exercises/bindings/exercise_binding.dart';
-import 'package:le_petit_davinci/features/exercises2/views/exercise.dart';
+import 'package:le_petit_davinci/features/english/data/level_content.dart';
+import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
 import 'package:le_petit_davinci/features/lessons3/bindings/lesson_bindings.dart';
 import 'package:le_petit_davinci/features/lessons3/views/lesson.dart';
 
@@ -68,13 +67,7 @@ List<Level> generateLevelModels(int start, int end) {
         //       binding: ExerciseBinding(),
         //     );
         if (levelContent is ExerciseSet) {
-          onTap =
-              () => Get.to(
-                () => page,
-                binding: ExerciseBinding(),
-                // IMPORTANT: Pass the list of exercises as an argument.
-                arguments: levelContent.exercises,
-              );
+          onTap = () => Get.to(() => page);
         }
       } else {
         onTap = () => Get.to(() => page);

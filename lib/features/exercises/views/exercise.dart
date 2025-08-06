@@ -7,8 +7,8 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/progress_bar.dart';
-import 'package:le_petit_davinci/features/exercises2/controllers/exercises_controller.dart';
-import 'package:le_petit_davinci/features/exercises2/models/unified_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
+import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
 
 class ExerciseScreen extends GetView<ExercisesController> {
   const ExerciseScreen({
@@ -17,11 +17,15 @@ class ExerciseScreen extends GetView<ExercisesController> {
     required this.dialect,
   });
 
-  final List<UnifiedExercise> exercises;
+  final List<Exercise> exercises;
   final String dialect;
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ExercisesController(
+      exercises: exercises,
+      dialect: dialect,
+    ));
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(type: ProfileHeaderType.compact),

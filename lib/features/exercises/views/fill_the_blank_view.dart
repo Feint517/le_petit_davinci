@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises2/controllers/exercises_controller.dart';
+import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
 
 class FillTheBlankView extends GetView<ExercisesController> {
   const FillTheBlankView({super.key, required this.exercise});

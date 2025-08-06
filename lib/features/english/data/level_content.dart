@@ -3,7 +3,7 @@ import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exerci
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises2/models/unified_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
 import 'package:le_petit_davinci/features/lessons3/data/lessons_data3.dart';
 import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
 
@@ -13,14 +13,14 @@ abstract class LevelContent {}
 /// A wrapper for levels that consist of a list of exercises.
 class ExerciseSet extends LevelContent {
   ExerciseSet(this.exercises);
-  
-  final List<UnifiedExercise> exercises;
+
+  final List<Exercise> exercises;
 }
 
 final Map<int, LevelContent> unifiedEnglishLevels = {
   1: LessonSet(exampleLesson),
   2: ExerciseSet([
-    UnifiedExercise.fillTheBlank(
+    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is a pet that purrs.',
         options: [
@@ -31,7 +31,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         correctIndex: 1,
       ),
     ),
-    UnifiedExercise.listenAndChoose(
+    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat,
@@ -43,7 +43,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         label: 'Cat',
       ),
     ),
-    UnifiedExercise.reorderWords(
+    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['cat', 'a', 'is', 'banana', 'blue'],
         correctOrder: [2, 1, 0],
@@ -51,7 +51,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   3: ExerciseSet([
-    UnifiedExercise.fillTheBlank(
+    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'can fly.',
         options: [
@@ -62,7 +62,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    UnifiedExercise.listenAndChoose(
+    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.bird,
@@ -74,7 +74,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         label: 'Bird',
       ),
     ),
-    UnifiedExercise.reorderWords(
+    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['dog', 'the', 'barks', 'quickly', 'table'],
         correctOrder: [1, 0, 2],
@@ -82,7 +82,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   4: ExerciseSet([
-    UnifiedExercise.fillTheBlank(
+    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'is the king of the jungle.',
         options: [
@@ -93,7 +93,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    UnifiedExercise.listenAndChoose(
+    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.lion,
@@ -105,7 +105,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         label: 'Lion',
       ),
     ),
-    UnifiedExercise.reorderWords(
+    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['milk', 'likes', 'cat', 'the', 'banana', 'blue'],
         correctOrder: [3, 2, 1, 0],
@@ -113,7 +113,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   5: ExerciseSet([
-    UnifiedExercise.fillTheBlank(
+    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'lives in water.',
         options: [
@@ -124,7 +124,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    UnifiedExercise.listenAndChoose(
+    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.fish,
@@ -136,7 +136,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         label: 'Fish',
       ),
     ),
-    UnifiedExercise.reorderWords(
+    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['swims', 'the', 'in', 'water', 'fish', 'quickly', 'table'],
         correctOrder: [1, 4, 0, 2, 3],
@@ -144,7 +144,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   6: ExerciseSet([
-    UnifiedExercise.fillTheBlank(
+    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: 'has stripes.',
         options: [
@@ -155,7 +155,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         correctIndex: 0,
       ),
     ),
-    UnifiedExercise.listenAndChoose(
+    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.tiger,
@@ -167,7 +167,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         label: 'Tiger',
       ),
     ),
-    UnifiedExercise.reorderWords(
+    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['the', 'tiger', 'has', 'stripes', 'banana', 'blue'],
         correctOrder: [0, 1, 2, 3],
@@ -178,6 +178,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
 
 /// A wrapper for levels that are structured as a full lesson.
 class LessonSet extends LevelContent {
-  final Lesson lesson;
   LessonSet(this.lesson);
+
+  final Lesson lesson;
 }
