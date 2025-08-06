@@ -7,6 +7,7 @@ import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.d
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/features/exercises/data/unified_exercise_data.dart';
 import 'package:le_petit_davinci/features/exercises/views/unified_exercise.dart';
+import 'package:le_petit_davinci/features/exercises2/views/exercise.dart';
 
 //* 1. List of level configs (just the number and type/status)
 List<LevelConfig> generateLevelConfigsFromData() {
@@ -43,16 +44,16 @@ final List<LevelConfig> frenchLevelConfigs = generateLevelConfigsFromData();
 
 //* 2. Helper function to get the correct page for each level
 Widget? getLevelPage(int level) {
-  if (unifiedFrenchLevels.containsKey(level)) {
-    return UnifiedExerciseScreen(
-      exercises: unifiedFrenchLevels[level]!,
-      dialect: 'fr-FR', // French dialect
-    );
-  } else if (level == 1) {
-    // TODO: fix the french section
-    // return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
-    return const Placeholder();
-  }
+  // if (unifiedFrenchLevels.containsKey(level)) {
+  //   return ExerciseScreen(
+  //     exercises: unifiedFrenchLevels[level]!,
+  //     dialect: 'fr-FR', // French dialect
+  //   );
+  // } else if (level == 1) {
+  //   // TODO: fix the french section
+  //   // return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
+  //   return const Placeholder();
+  // }
   return null; // ?Locked or not implemented
 }
 

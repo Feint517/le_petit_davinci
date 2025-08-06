@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    // Get.put(HomeController());
     if (!Get.isRegistered<BackgroundMusicController>()) {
       Get.put(BackgroundMusicController());
     }

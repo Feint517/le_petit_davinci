@@ -6,11 +6,11 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
-import 'package:le_petit_davinci/features/exercises/controllers/unified_exercise_controller.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.dart';
+import 'package:le_petit_davinci/features/exercises2/controllers/exercises_controller.dart';
 
-class ListenAndChooseView extends GetView<UnifiedExerciseController> {
+class ListenAndChooseView extends GetView<ExercisesController> {
   const ListenAndChooseView({super.key, required this.exercise});
 
   final ListenAndChooseExercise exercise;
