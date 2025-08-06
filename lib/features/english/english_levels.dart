@@ -7,11 +7,9 @@ import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.d
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/features/english/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/bindings/exercise_binding.dart';
-import 'package:le_petit_davinci/features/exercises/data/unified_exercise_data.dart';
-import 'package:le_petit_davinci/features/exercises/views/unified_exercise.dart';
+import 'package:le_petit_davinci/features/exercises2/views/exercise.dart';
 import 'package:le_petit_davinci/features/lessons3/bindings/lesson_bindings.dart';
 import 'package:le_petit_davinci/features/lessons3/views/lesson.dart';
-
 
 List<LevelConfig> generateLevelConfigsFromData() {
   final sortedLevels = unifiedEnglishLevels.keys.toList()..sort();
@@ -19,14 +17,11 @@ List<LevelConfig> generateLevelConfigsFromData() {
   //* Generate LevelConfig for each level
   return sortedLevels.map((level) {
     LevelType type;
-    // FIX: Fetch the level content for the current level inside the map.
     final levelContent = unifiedEnglishLevels[level];
 
-    // Determine the level type based on the content model
     if (levelContent is LessonSet) {
       type = LevelType.lesson;
     } else {
-      // Default to exercise for ExerciseSet or any other case
       type = LevelType.exercise;
     }
 
@@ -43,8 +38,9 @@ Widget? getLevelPage(int level) {
   if (levelContent is LessonSet) {
     return const LessonScreen3();
   } else if (levelContent is ExerciseSet) {
-    return UnifiedExerciseScreen(
+    return ExerciseScreen(
       exercises: levelContent.exercises,
+      // exercises: levelContent.exercises,
       dialect: 'en-US',
     );
   }
@@ -60,17 +56,27 @@ List<Level> generateLevelModels(int start, int end) {
     final page = getLevelPage(config.number);
     VoidCallback? onTap;
 
-    // 3. Handle navigation conditionally
     if (page != null) {
-      // 2. Update the navigation logic
       if (page is LessonScreen3) {
-        // For lessons, use the lesson binding
         onTap = () => Get.to(() => page, binding: LessonBinding());
-      } else if (page is UnifiedExerciseScreen) {
-        // For exercises, use the new exercise binding
-        onTap = () => Get.to(() => page, binding: ExerciseBinding());
+      } else if (page is ExerciseScreen) {
+        final levelContent = unifiedEnglishLevels[config.number];
+
+        // onTap =
+        //     () => Get.to(
+        //       () => page,
+        //       binding: ExerciseBinding(),
+        //     );
+        if (levelContent is ExerciseSet) {
+          onTap =
+              () => Get.to(
+                () => page,
+                binding: ExerciseBinding(),
+                // IMPORTANT: Pass the list of exercises as an argument.
+                arguments: levelContent.exercises,
+              );
+        }
       } else {
-        // Fallback for any other page types
         onTap = () => Get.to(() => page);
       }
     }
