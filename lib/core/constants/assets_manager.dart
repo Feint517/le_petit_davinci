@@ -70,6 +70,40 @@ class ImageAssets {
       'assets/images/templates/alphabets/printable_H.png';
   static const String drawableI =
       'assets/images/templates/alphabets/printable_I.png';
+  static const String drawableJ =
+      'assets/images/templates/alphabets/printable_J.png';
+  static const String drawableK =
+      'assets/images/templates/alphabets/printable_K.png';
+  static const String drawableL =
+      'assets/images/templates/alphabets/printable_L.png';
+  static const String drawableM =
+      'assets/images/templates/alphabets/printable_M.png';
+  static const String drawableN =
+      'assets/images/templates/alphabets/printable_N.png';
+  static const String drawableO =
+      'assets/images/templates/alphabets/printable_O.png';
+  static const String drawableP =
+      'assets/images/templates/alphabets/printable_P.png';
+  static const String drawableQ =
+      'assets/images/templates/alphabets/printable_Q.png';
+  static const String drawableR =
+      'assets/images/templates/alphabets/printable_R.png';
+  static const String drawableS =
+      'assets/images/templates/alphabets/printable_S.png';
+  static const String drawableT =
+      'assets/images/templates/alphabets/printable_T.png';
+  static const String drawableU =
+      'assets/images/templates/alphabets/printable_U.png';
+  static const String drawableV =
+      'assets/images/templates/alphabets/printable_V.png';
+  static const String drawableW =
+      'assets/images/templates/alphabets/printable_W.png';
+  static const String drawableX =
+      'assets/images/templates/alphabets/printable_X.png';
+  static const String drawableY =
+      'assets/images/templates/alphabets/printable_Y.png';
+  static const String drawableZ =
+      'assets/images/templates/alphabets/printable_Z.png';
 }
 
 class GifAssets {

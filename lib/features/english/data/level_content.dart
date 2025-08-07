@@ -113,19 +113,19 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s start with "E"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableE,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Next up is "F"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableF,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Now for "G"!',
-          templateImagePath: ImageAssets.drawableC,
+          templateImagePath: ImageAssets.drawableG,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And finally, "H"!',
-          templateImagePath: ImageAssets.drawableD,
+          templateImagePath: ImageAssets.drawableH,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
@@ -205,19 +205,19 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s write "I"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableI,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Next is "J"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableJ,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Here comes "K"!',
-          templateImagePath: ImageAssets.drawableC,
+          templateImagePath: ImageAssets.drawableK,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And now "L"!',
-          templateImagePath: ImageAssets.drawableD,
+          templateImagePath: ImageAssets.drawableL,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
@@ -297,19 +297,19 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s write "M"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableM,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Next is "N"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableN,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Here comes "O"!',
-          templateImagePath: ImageAssets.drawableC,
+          templateImagePath: ImageAssets.drawableO,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And now "P"!',
-          templateImagePath: ImageAssets.drawableD,
+          templateImagePath: ImageAssets.drawableP,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
@@ -389,19 +389,19 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s write "Q"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableQ,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Next is "R"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableR,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Here comes "S"!',
-          templateImagePath: ImageAssets.drawableC,
+          templateImagePath: ImageAssets.drawableS,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And now "T"!',
-          templateImagePath: ImageAssets.drawableD,
+          templateImagePath: ImageAssets.drawableT,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
@@ -481,19 +481,19 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s write "U"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableU,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Next is "V"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableV,
         ), // Placeholder
         DrawingActivity(
           prompt: 'Here comes "W"!',
-          templateImagePath: ImageAssets.drawableC,
+          templateImagePath: ImageAssets.drawableW,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And now "X"!',
-          templateImagePath: ImageAssets.drawableD,
+          templateImagePath: ImageAssets.drawableX,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
@@ -573,11 +573,11 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       activities: [
         DrawingActivity(
           prompt: 'Let\'s write "Y"!',
-          templateImagePath: ImageAssets.drawableA,
+          templateImagePath: ImageAssets.drawableY,
         ), // Placeholder
         DrawingActivity(
           prompt: 'And finally, "Z"!',
-          templateImagePath: ImageAssets.drawableB,
+          templateImagePath: ImageAssets.drawableZ,
         ), // Placeholder
         AudioMatchingActivity(
           prompt: 'Match the sound to the letter!',
