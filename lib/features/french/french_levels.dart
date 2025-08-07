@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart'
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 
-
 //* 1. List of level configs (just the number and type/status)
 List<LevelConfig> generateLevelConfigsFromData() {
   final Set<int> allLevels = {};
@@ -25,10 +24,9 @@ List<LevelConfig> generateLevelConfigsFromData() {
     // } else {
     //   type = LevelType.lesson;
 
-
     // }
 
-type = LevelType.lesson;
+    type = LevelType.lesson;
     // You can set status dynamically or use a default
     LevelStatus status = LevelStatus.inProgress;
 
@@ -78,8 +76,8 @@ List<Level> generateLevelModels(int start, int end) {
 final frenchMapSections = [
   SectionData(
     color: AppColors.secondary,
-    etapa: 1,
-    seccion: 1,
+    level: 1,
+    section: 1,
     title: 'Les animaux',
     levels: generateLevelModels(1, 10),
   ),

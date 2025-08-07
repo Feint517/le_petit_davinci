@@ -22,8 +22,8 @@ class MathMapController extends GetxController {
   final mapSections = [
     SectionData(
       color: Colors.blue,
-      etapa: 1,
-      seccion: 1,
+      level: 1,
+      section: 1,
       title: 'Calculs', // Changed to French
       levels: [
         Level(
@@ -83,8 +83,8 @@ class MathMapController extends GetxController {
     ),
     SectionData(
       color: Colors.orange,
-      etapa: 1,
-      seccion: 2,
+      level: 1,
+      section: 2,
       title: "Géométrie", // Changed to French
       levels: [
         Level(

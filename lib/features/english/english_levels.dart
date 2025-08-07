@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.d
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/features/english/data/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons3/bindings/lesson_bindings.dart';
 import 'package:le_petit_davinci/features/lessons3/views/lesson.dart';
 
 List<LevelConfig> generateLevelConfigsFromData() {
@@ -35,13 +34,9 @@ Widget? getLevelPage(int level) {
   final levelContent = unifiedEnglishLevels[level];
 
   if (levelContent is LessonSet) {
-    return const LessonScreen3();
+    return LessonScreen3(lesson: levelContent.lesson);
   } else if (levelContent is ExerciseSet) {
-    return ExerciseScreen(
-      exercises: levelContent.exercises,
-      // exercises: levelContent.exercises,
-      dialect: 'en-US',
-    );
+    return ExerciseScreen(exercises: levelContent.exercises, dialect: 'en-US');
   }
   return null;
 }
@@ -57,15 +52,9 @@ List<Level> generateLevelModels(int start, int end) {
 
     if (page != null) {
       if (page is LessonScreen3) {
-        onTap = () => Get.to(() => page, binding: LessonBinding());
+        onTap = () => Get.to(() => page);
       } else if (page is ExerciseScreen) {
         final levelContent = unifiedEnglishLevels[config.number];
-
-        // onTap =
-        //     () => Get.to(
-        //       () => page,
-        //       binding: ExerciseBinding(),
-        //     );
         if (levelContent is ExerciseSet) {
           onTap = () => Get.to(() => page);
         }
@@ -86,9 +75,9 @@ List<Level> generateLevelModels(int start, int end) {
 final englishMapSections = [
   SectionData(
     color: AppColors.secondary,
-    etapa: 1,
-    seccion: 1,
-    title: 'English Learning Path',
+    level: 1,
+    section: 1,
+    title: 'The Alphabets',
     levels: generateLevelModels(1, 9),
   ),
 ];

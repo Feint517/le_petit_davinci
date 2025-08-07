@@ -34,7 +34,7 @@ class CurrentSection extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'ETAPA ${data.etapa}, SECCIÓN ${data.seccion}',
+                      'Level ${data.level}, SECTION ${data.section}',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.w500,

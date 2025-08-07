@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/background_music_controller.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
@@ -67,7 +66,7 @@ class VictoryScreen extends GetView<VictoryController> {
                           MaterialPageRoute(builder: (_) => EnglishMapScreen()),
                           (route) => route.isFirst,
                         );
-                        BackgroundMusicController.instance.playMusic();
+                        // BackgroundMusicController.instance.playMusic();
                       },
                     ),
                     Gap(DeviceUtils.getBottomNavigationBarHeight()),

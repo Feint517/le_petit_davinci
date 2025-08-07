@@ -4,7 +4,6 @@ import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
-import 'package:le_petit_davinci/features/lessons3/data/lessons_data3.dart';
 import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
 
 /// A base class to represent the content of any given level.
@@ -18,7 +17,32 @@ class ExerciseSet extends LevelContent {
 }
 
 final Map<int, LevelContent> unifiedEnglishLevels = {
-  1: LessonSet(exampleLesson),
+  1: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_101',
+      title: 'Learning the Alphabet',
+      introduction: 'Let\'s learn the first three letters of the alphabet!',
+      activities: [
+        // VideoActivity(videoId: 'ccEpTTZW34g'),
+        // DrawingActivity(
+        //   prompt: 'Great job! Now, try to draw the letter "A"!',
+        //   templateImagePath: ImageAssets.drawableA,
+        // ),
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the word!',
+          pairs: [
+            AudioWordPair(audioAssetPath: AudioAssets.a_en, word: 'A'),
+            AudioWordPair(audioAssetPath: AudioAssets.b_en, word: 'B'),
+            AudioWordPair(audioAssetPath: AudioAssets.c_en, word: 'C'),
+          ],
+        ),
+        DrawingActivity(
+          prompt: 'Awesome! Now let\'s draw the letter "B"!',
+          templateImagePath: ImageAssets.drawableB,
+        ),
+      ],
+    ),
+  ),
   2: ExerciseSet([
     Exercise.fillTheBlank(
       FillTheBlankExercise(

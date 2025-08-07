@@ -28,7 +28,11 @@ class DrawingActivity extends Activity {
   final String prompt;
   final String? templateImagePath;
   final List<String>? suggestedColors;
-  DrawingActivity({required this.prompt, this.templateImagePath, this.suggestedColors});
+  DrawingActivity({
+    required this.prompt,
+    this.templateImagePath,
+    this.suggestedColors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,6 @@ class Lesson {
     required this.activities,
   });
 }
-
 
 //* A helper class to hold a single audio-word pair.
 class AudioWordPair {

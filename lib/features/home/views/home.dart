@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/background_music_controller.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
@@ -20,10 +19,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    if (!Get.isRegistered<BackgroundMusicController>()) {
-      Get.put(BackgroundMusicController());
-    }
-    BackgroundMusicController.instance.playMusic();
+    // if (!Get.isRegistered<BackgroundMusicController>()) {
+    //   Get.put(BackgroundMusicController());
+    // }
+    // BackgroundMusicController.instance.playMusic();
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(

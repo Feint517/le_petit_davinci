@@ -5,7 +5,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:le_petit_davinci/background_music_controller.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
@@ -45,7 +44,7 @@ class ExercisesController extends GetxController {
   void onInit() async {
     super.onInit();
     pageController = PageController();
-    await BackgroundMusicController.instance.stopMusic();
+    // await BackgroundMusicController.instance.stopMusic();
     await _audioPlayer.setAsset(AudioAssets.correctSound);
     await _audioPlayer.setAsset(AudioAssets.errorSound);
     await _tts.setLanguage(dialect);

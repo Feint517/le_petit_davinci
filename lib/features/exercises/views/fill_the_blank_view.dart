@@ -35,18 +35,22 @@ class FillTheBlankView extends GetView<ExercisesController> {
                 child: Obx(() {
                   final selected = controller.selectedFillBlankIndex.value;
                   return Text(
-                    selected != null ? exercise.options[selected].optionText : '',
+                    selected != null
+                        ? exercise.options[selected].optionText
+                        : '',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: AppColors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   );
                 }),
               ),
             ),
             Text(
               ' ${exercise.questionSuffix}',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.black),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
             ),
           ],
         ),
@@ -59,25 +63,34 @@ class FillTheBlankView extends GetView<ExercisesController> {
                 padding: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
                 child: Obx(
                   () => GestureDetector(
-                    onTap: () => controller.selectedFillBlankIndex.value = index,
+                    onTap:
+                        () => controller.selectedFillBlankIndex.value = index,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       width: DeviceUtils.getScreenWidth(),
                       height: 45,
                       decoration: BoxDecoration(
-                        color: controller.selectedFillBlankIndex.value == index ? AppColors.accent : AppColors.white,
+                        color:
+                            controller.selectedFillBlankIndex.value == index
+                                ? AppColors.accent
+                                : AppColors.white,
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: CustomShadowStyle.customCircleShadows(
-                          color: controller.selectedFillBlankIndex.value == index ? AppColors.accent : AppColors.white,
+                          color:
+                              controller.selectedFillBlankIndex.value == index
+                                  ? AppColors.accent
+                                  : AppColors.white,
                         ),
                       ),
                       child: Center(
                         child: Text(
                           exercise.options[index].optionText,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                color: AppColors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge?.copyWith(
+                            color: AppColors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),

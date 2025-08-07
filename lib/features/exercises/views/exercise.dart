@@ -22,10 +22,7 @@ class ExerciseScreen extends GetView<ExercisesController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ExercisesController(
-      exercises: exercises,
-      dialect: dialect,
-    ));
+    Get.put(ExercisesController(exercises: exercises, dialect: dialect));
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(type: ProfileHeaderType.compact),
