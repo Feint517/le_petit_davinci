@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -31,10 +32,8 @@ class ExercisesController extends GetxController {
   var playCount = 0.obs;
   var showHint = false.obs;
 
-    bool get hasExercises => exercises.isNotEmpty;
+  bool get hasExercises => exercises.isNotEmpty;
 
-
-  // UnifiedExercise get currentExercise => exercises[currentExerciseIndex.value];
   Exercise get currentExercise {
     if (!hasExercises) {
       throw Exception('Attempted to access an exercise from an empty list.');
@@ -50,6 +49,8 @@ class ExercisesController extends GetxController {
     await _audioPlayer.setAsset(AudioAssets.correctSound);
     await _audioPlayer.setAsset(AudioAssets.errorSound);
     await _tts.setLanguage(dialect);
+    print('========= EXERCISES =========');
+    print(exercises);
   }
 
   @override
@@ -69,7 +70,7 @@ class ExercisesController extends GetxController {
       );
       _resetExerciseState();
     } else {
-      // All exercises are completed
+      //? All exercises are completed
       Get.off(() => const VictoryScreen(starsCount: 3));
     }
   }
@@ -100,7 +101,7 @@ class ExercisesController extends GetxController {
         break;
     }
 
-    // Play sound feedback
+    //* Play sound feedback
     if (isCorrect) {
       await _audioPlayer.setAsset(AudioAssets.correctSound);
       await _audioPlayer.seek(Duration.zero);
@@ -111,7 +112,7 @@ class ExercisesController extends GetxController {
       await _audioPlayer.play();
     }
 
-    // Show feedback bottom sheet
+    //* Show feedback bottom sheet
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(AppSizes.md),
@@ -174,18 +175,13 @@ class ExercisesController extends GetxController {
                   isCorrect ? ButtonVariant.secondary : ButtonVariant.warning,
               label: isCorrect ? 'Suivant' : 'Réessayer',
               onPressed: () {
+                //? First, always close the bottom sheet.
+                Get.back();
+
                 if (isCorrect) {
-                  if (currentExerciseIndex.value < exercises.length - 1) {
-                    currentExerciseIndex.value++;
-                    _resetExerciseState();
-                    Get.back();
-                  } else {
-                    Get.back();
-                    Get.off(() => const VictoryScreen(starsCount: 3));
-                  }
+                  nextExercise();
                 } else {
                   _resetExerciseState();
-                  Get.back();
                 }
               },
             ),
