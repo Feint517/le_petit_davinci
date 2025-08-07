@@ -80,4 +80,12 @@ final englishMapSections = [
     title: 'The Alphabets',
     levels: generateLevelModels(1, 21),
   ),
+
+  SectionData(
+    color: AppColors.accent,
+    level: 1,
+    section: 1,
+    title: 'The animals',
+    levels: generateLevelModels(22, 30),
+  ),
 ];

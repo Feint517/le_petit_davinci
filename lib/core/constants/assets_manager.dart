@@ -288,6 +288,23 @@ class AudioAssets {
   static const String x_en = 'assets/audio/alphabets_en/x.mp3';
   static const String y_en = 'assets/audio/alphabets_en/y.mp3';
   static const String z_en = 'assets/audio/alphabets_en/z.mp3';
+
+
+
+  //* animals names
+  static const String lionName = 'assets/audio/animals_en/lion_en.mp3';
+  static const String tigerName = 'assets/audio/animals_en/tiger_en.mp3';
+  static const String elephantName = 'assets/audio/animals_en/elephant_en.mp3';
+  static const String monkeyName = 'assets/audio/animals_en/monkey_en.mp3';
+
+
+  //* animals sounds
+  static const String catSound = 'assets/audio/animals_sounds/cat_sound.wav';
+  static const String chickenSound = 'assets/audio/animals_sounds/chicken_sound.wav';
+  static const String cowSound = 'assets/audio/animals_sounds/cow_sound.wav';
+  static const String dogSound = 'assets/audio/animals_sounds/dog_sound.wav';
+  static const String pigSound = 'assets/audio/animals_sounds/pig_sound.wav';
+  static const String sheepSound = 'assets/audio/animals_sounds/sheep_sound.wav';
 }
 
 class TestAssets {

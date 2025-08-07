@@ -639,4 +639,224 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       ),
     ),
   ]),
+
+  // ========== Animals: Farm ==========
+  22: LessonSet(
+    Lesson(
+      lessonId: 'farm_animals_101',
+      title: 'Fun on the Farm!',
+      introduction: 'Let\'s learn about some animals that live on a farm.',
+      activities: [
+        VideoActivity(videoId: 'CA6Mofzh7jo'),
+        AudioMatchingActivity(
+          prompt: 'Match the animal to its sound!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.a_en,
+              word: 'Cow',
+            ), // Placeholder
+            AudioWordPair(
+              audioAssetPath: AudioAssets.b_en,
+              word: 'Sheep',
+            ), // Placeholder
+            AudioWordPair(
+              audioAssetPath: AudioAssets.c_en,
+              word: 'Pig',
+            ), // Placeholder
+            AudioWordPair(
+              audioAssetPath: AudioAssets.d_en,
+              word: 'Chicken',
+            ), // Placeholder
+          ],
+        ),
+      ],
+    ),
+  ),
+  23: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: " says 'moo'.",
+        options: [
+          FillTheBlankOption(optionText: 'A Cow'),
+          FillTheBlankOption(optionText: 'A Sheep'),
+          FillTheBlankOption(optionText: 'A Pig'),
+        ],
+        correctIndex: 0,
+      ),
+    ),
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.cat, // Placeholder
+          ImageAssets.dog, // Placeholder
+          ImageAssets.bird, // Placeholder
+          ImageAssets.fish, // Placeholder
+        ],
+        correctIndex: 1,
+        label: 'Cow',
+      ),
+    ),
+  ]),
+  24: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['The', 'pig', 'likes', 'mud'],
+        correctOrder: [0, 1, 2, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' gives us wool.',
+        options: [
+          FillTheBlankOption(optionText: 'A Chicken'),
+          FillTheBlankOption(optionText: 'A Sheep'),
+          FillTheBlankOption(optionText: 'A Cow'),
+        ],
+        correctIndex: 1,
+      ),
+    ),
+  ]),
+
+  // ========== Animals: Wild ==========
+  25: LessonSet(
+    Lesson(
+      lessonId: 'wild_animals_101',
+      title: 'A Trip to the Jungle!',
+      introduction: 'Let\'s learn about some animals that live in the wild.',
+      activities: [
+        VideoActivity(videoId: 'T3_v_mmvCC4'),
+        AudioMatchingActivity(
+          prompt: 'Match the animal to its name!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.lionName,
+              word: 'Lion',
+            ), 
+            AudioWordPair(
+              audioAssetPath: AudioAssets.tigerName,
+              word: 'Tiger',
+            ), 
+            AudioWordPair(
+              audioAssetPath: AudioAssets.elephantName,
+              word: 'Elephant',
+            ), 
+            AudioWordPair(
+              audioAssetPath: AudioAssets.monkeyName,
+              word: 'Monkey',
+            ), 
+          ],
+        ),
+      ],
+    ),
+  ),
+  26: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is the king of the jungle.',
+        options: [
+          FillTheBlankOption(optionText: 'A Tiger'),
+          FillTheBlankOption(optionText: 'A Lion'),
+          FillTheBlankOption(optionText: 'An Elephant'),
+        ],
+        correctIndex: 1,
+      ),
+    ),
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.tiger,
+          ImageAssets.bear,
+          ImageAssets.elephant,
+          ImageAssets.lion,
+        ],
+        correctIndex: 0,
+        label: 'Tiger',
+      ),
+    ),
+  ]),
+  27: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['The', 'monkey', 'eats', 'bananas'],
+        correctOrder: [0, 1, 2, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' has a very long trunk.',
+        options: [
+          FillTheBlankOption(optionText: 'An Elephant'),
+          FillTheBlankOption(optionText: 'A Monkey'),
+          FillTheBlankOption(optionText: 'A Lion'),
+        ],
+        correctIndex: 0,
+      ),
+    ),
+  ]),
+
+  // ========== Animals: Mixed Review ==========
+  28: ExerciseSet([
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.dog,
+          ImageAssets.lion,
+          ImageAssets.cat,
+          ImageAssets.bear,
+        ],
+        correctIndex: 3,
+        label: 'Monkey',
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' has black and white stripes.',
+        options: [
+          FillTheBlankOption(optionText: 'A Tiger'),
+          FillTheBlankOption(optionText: 'A Zebra'),
+          FillTheBlankOption(optionText: 'A Cow'),
+        ],
+        correctIndex: 1,
+      ),
+    ),
+  ]),
+  29: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['The', 'cow', 'lives', 'on', 'the', 'farm'],
+        correctOrder: [0, 1, 2, 3, 4, 5],
+      ),
+    ),
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.bird,
+          ImageAssets.tiger,
+          ImageAssets.fish,
+          ImageAssets.elephant,
+        ],
+        correctIndex: 3,
+        label: 'Elephant',
+      ),
+    ),
+  ]),
+  30: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is a big cat with stripes.',
+        options: [
+          FillTheBlankOption(optionText: 'A Lion'),
+          FillTheBlankOption(optionText: 'A Tiger'),
+          FillTheBlankOption(optionText: 'A Cat'),
+        ],
+        correctIndex: 1,
+      ),
+    ),
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['The', 'elephant', 'is', 'a', 'wild', 'animal'],
+        correctOrder: [0, 1, 2, 3, 4, 5],
+      ),
+    ),
+  ]),
 };
