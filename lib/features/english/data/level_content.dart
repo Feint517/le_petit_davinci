@@ -9,6 +9,13 @@ import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
 /// A base class to represent the content of any given level.
 abstract class LevelContent {}
 
+/// A wrapper for levels that are structured as a full lesson.
+class LessonSet extends LevelContent {
+  LessonSet(this.lesson);
+
+  final Lesson lesson;
+}
+
 /// A wrapper for levels that consist of a list of exercises.
 class ExerciseSet extends LevelContent {
   ExerciseSet(this.exercises);
@@ -17,28 +24,37 @@ class ExerciseSet extends LevelContent {
 }
 
 final Map<int, LevelContent> unifiedEnglishLevels = {
+  // ========== Group 1: A, B, C, D ==========
   1: LessonSet(
     Lesson(
-      lessonId: 'alphabet_101',
-      title: 'Learning the Alphabet',
-      introduction: 'Let\'s learn the first three letters of the alphabet!',
+      lessonId: 'alphabet_abcd',
+      title: 'Alphabet - A, B, C, D',
+      introduction: 'Let\'s learn the letters A, B, C, and D!',
       activities: [
-        // VideoActivity(videoId: 'ccEpTTZW34g'),
-        // DrawingActivity(
-        //   prompt: 'Great job! Now, try to draw the letter "A"!',
-        //   templateImagePath: ImageAssets.drawableA,
-        // ),
+        DrawingActivity(
+          prompt: 'Let\'s learn to write the letter "A"!',
+          templateImagePath: ImageAssets.drawableA,
+        ),
+        DrawingActivity(
+          prompt: 'Great! Now let\'s write the letter "B"!',
+          templateImagePath: ImageAssets.drawableB,
+        ),
+        DrawingActivity(
+          prompt: 'Awesome! Here comes "C"!',
+          templateImagePath: ImageAssets.drawableC,
+        ),
+        DrawingActivity(
+          prompt: 'You\'re doing great! Let\'s write "D"!',
+          templateImagePath: ImageAssets.drawableD,
+        ),
         AudioMatchingActivity(
-          prompt: 'Match the sound to the word!',
+          prompt: 'Match the sound to the letter!',
           pairs: [
             AudioWordPair(audioAssetPath: AudioAssets.a_en, word: 'A'),
             AudioWordPair(audioAssetPath: AudioAssets.b_en, word: 'B'),
             AudioWordPair(audioAssetPath: AudioAssets.c_en, word: 'C'),
+            AudioWordPair(audioAssetPath: AudioAssets.d_en, word: 'D'),
           ],
-        ),
-        DrawingActivity(
-          prompt: 'Awesome! Now let\'s draw the letter "B"!',
-          templateImagePath: ImageAssets.drawableB,
         ),
       ],
     ),
@@ -46,42 +62,103 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
   2: ExerciseSet([
     Exercise.fillTheBlank(
       FillTheBlankExercise(
-        questionSuffix: 'is a pet that purrs.',
+        questionSuffix: ' is for Apple.',
         options: [
-          FillTheBlankOption(optionText: 'Dog'),
-          FillTheBlankOption(optionText: 'Cat'),
-          FillTheBlankOption(optionText: 'Bird'),
+          FillTheBlankOption(optionText: 'A'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
         ],
-        correctIndex: 1,
+        correctIndex: 0,
       ),
     ),
     Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
+          ImageAssets.apple,
           ImageAssets.cat,
           ImageAssets.dog,
           ImageAssets.bird,
-          ImageAssets.fish,
         ],
         correctIndex: 0,
-        label: 'Cat',
-      ),
-    ),
-    Exercise.reorderWords(
-      ReorderWordsExercise(
-        words: ['cat', 'a', 'is', 'banana', 'blue'],
-        correctOrder: [2, 1, 0],
+        label: 'Apple',
       ),
     ),
   ]),
   3: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['is', 'a', 'This', 'cat'],
+        correctOrder: [2, 0, 1, 3],
+      ),
+    ),
     Exercise.fillTheBlank(
       FillTheBlankExercise(
-        questionSuffix: 'can fly.',
+        questionSuffix: ' is for Dog.',
         options: [
-          FillTheBlankOption(optionText: 'Bird'),
-          FillTheBlankOption(optionText: 'Fish'),
-          FillTheBlankOption(optionText: 'Horse'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
+          FillTheBlankOption(optionText: 'D'),
+        ],
+        correctIndex: 2,
+      ),
+    ),
+  ]),
+
+  // ========== Group 2: E, F, G, H ==========
+  4: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_efgh',
+      title: 'Alphabet - E, F, G, H',
+      introduction: 'Time to learn E, F, G, and H!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s start with "E"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Next up is "F"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Now for "G"!',
+          templateImagePath: ImageAssets.drawableC,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And finally, "H"!',
+          templateImagePath: ImageAssets.drawableD,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.e_en,
+              word: 'E',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.f_en,
+              word: 'F',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.g_en,
+              word: 'G',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.h_en,
+              word: 'H',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  5: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Elephant.',
+        options: [
+          FillTheBlankOption(optionText: 'E'),
+          FillTheBlankOption(optionText: 'F'),
+          FillTheBlankOption(optionText: 'G'),
         ],
         correctIndex: 0,
       ),
@@ -89,30 +166,91 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
-          ImageAssets.bird,
-          ImageAssets.cat,
-          ImageAssets.dog,
+          ImageAssets.elephant,
           ImageAssets.fish,
+          ImageAssets.lion,
+          ImageAssets.bear,
         ],
         correctIndex: 0,
-        label: 'Bird',
-      ),
-    ),
-    Exercise.reorderWords(
-      ReorderWordsExercise(
-        words: ['dog', 'the', 'barks', 'quickly', 'table'],
-        correctOrder: [1, 0, 2],
+        label: 'Elephant',
       ),
     ),
   ]),
-  4: ExerciseSet([
+  6: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['is', 'a', 'This', 'fish'],
+        correctOrder: [2, 0, 1, 3],
+      ),
+    ),
     Exercise.fillTheBlank(
       FillTheBlankExercise(
-        questionSuffix: 'is the king of the jungle.',
+        questionSuffix: ' is for Hat.',
         options: [
-          FillTheBlankOption(optionText: 'Lion'),
-          FillTheBlankOption(optionText: 'Tiger'),
-          FillTheBlankOption(optionText: 'Elephant'),
+          FillTheBlankOption(optionText: 'F'),
+          FillTheBlankOption(optionText: 'G'),
+          FillTheBlankOption(optionText: 'H'),
+        ],
+        correctIndex: 2,
+      ),
+    ),
+  ]),
+
+  // ========== Group 3: I, J, K, L ==========
+  7: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_ijkl',
+      title: 'Alphabet - I, J, K, L',
+      introduction: 'Let\'s learn I, J, K, and L!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s write "I"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Next is "J"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Here comes "K"!',
+          templateImagePath: ImageAssets.drawableC,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And now "L"!',
+          templateImagePath: ImageAssets.drawableD,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.i_en,
+              word: 'I',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.j_en,
+              word: 'J',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.k_en,
+              word: 'K',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.l_en,
+              word: 'L',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  8: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Igloo.',
+        options: [
+          FillTheBlankOption(optionText: 'I'),
+          FillTheBlankOption(optionText: 'J'),
+          FillTheBlankOption(optionText: 'K'),
         ],
         correctIndex: 0,
       ),
@@ -122,28 +260,89 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         imageAssets: [
           ImageAssets.lion,
           ImageAssets.tiger,
-          ImageAssets.elephant,
           ImageAssets.bear,
+          ImageAssets.cat,
         ],
         correctIndex: 0,
         label: 'Lion',
       ),
     ),
+  ]),
+  9: ExerciseSet([
     Exercise.reorderWords(
       ReorderWordsExercise(
-        words: ['milk', 'likes', 'cat', 'the', 'banana', 'blue'],
-        correctOrder: [3, 2, 1, 0],
+        words: ['a', 'is', 'This', 'kite'], // Placeholder word
+        correctOrder: [2, 1, 0, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Jam.', // Placeholder
+        options: [
+          FillTheBlankOption(optionText: 'J'),
+          FillTheBlankOption(optionText: 'K'),
+          FillTheBlankOption(optionText: 'L'),
+        ],
+        correctIndex: 0,
       ),
     ),
   ]),
-  5: ExerciseSet([
+
+  // ========== Group 4: M, N, O, P ==========
+  10: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_mnop',
+      title: 'Alphabet - M, N, O, P',
+      introduction: 'Let\'s learn M, N, O, and P!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s write "M"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Next is "N"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Here comes "O"!',
+          templateImagePath: ImageAssets.drawableC,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And now "P"!',
+          templateImagePath: ImageAssets.drawableD,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.m_en,
+              word: 'M',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.n_en,
+              word: 'N',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.o_en,
+              word: 'O',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.p_en,
+              word: 'P',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  11: ExerciseSet([
     Exercise.fillTheBlank(
       FillTheBlankExercise(
-        questionSuffix: 'lives in water.',
+        questionSuffix: ' is for Moon.',
         options: [
-          FillTheBlankOption(optionText: 'Fish'),
-          FillTheBlankOption(optionText: 'Dog'),
-          FillTheBlankOption(optionText: 'Cat'),
+          FillTheBlankOption(optionText: 'M'),
+          FillTheBlankOption(optionText: 'N'),
+          FillTheBlankOption(optionText: 'O'),
         ],
         correctIndex: 0,
       ),
@@ -151,30 +350,91 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
-          ImageAssets.fish,
-          ImageAssets.bird,
           ImageAssets.cat,
           ImageAssets.dog,
+          ImageAssets.bird,
+          ImageAssets.fish,
         ],
         correctIndex: 0,
-        label: 'Fish',
-      ),
-    ),
-    Exercise.reorderWords(
-      ReorderWordsExercise(
-        words: ['swims', 'the', 'in', 'water', 'fish', 'quickly', 'table'],
-        correctOrder: [1, 4, 0, 2, 3],
+        label: 'Nest', // Placeholder
       ),
     ),
   ]),
-  6: ExerciseSet([
+  12: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['is', 'an', 'This', 'octopus'], // Placeholder
+        correctOrder: [2, 0, 1, 3],
+      ),
+    ),
     Exercise.fillTheBlank(
       FillTheBlankExercise(
-        questionSuffix: 'has stripes.',
+        questionSuffix: ' is for Pen.',
         options: [
-          FillTheBlankOption(optionText: 'Tiger'),
-          FillTheBlankOption(optionText: 'Elephant'),
-          FillTheBlankOption(optionText: 'Bird'),
+          FillTheBlankOption(optionText: 'N'),
+          FillTheBlankOption(optionText: 'O'),
+          FillTheBlankOption(optionText: 'P'),
+        ],
+        correctIndex: 2,
+      ),
+    ),
+  ]),
+
+  // ========== Group 5: Q, R, S, T ==========
+  13: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_qrst',
+      title: 'Alphabet - Q, R, S, T',
+      introduction: 'Let\'s learn Q, R, S, and T!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s write "Q"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Next is "R"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Here comes "S"!',
+          templateImagePath: ImageAssets.drawableC,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And now "T"!',
+          templateImagePath: ImageAssets.drawableD,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.q_en,
+              word: 'Q',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.r_en,
+              word: 'R',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.s_en,
+              word: 'S',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.t_en,
+              word: 'T',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  14: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Queen.',
+        options: [
+          FillTheBlankOption(optionText: 'Q'),
+          FillTheBlankOption(optionText: 'R'),
+          FillTheBlankOption(optionText: 'S'),
         ],
         correctIndex: 0,
       ),
@@ -184,25 +444,199 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         imageAssets: [
           ImageAssets.tiger,
           ImageAssets.lion,
-          ImageAssets.elephant,
           ImageAssets.bear,
+          ImageAssets.cat,
         ],
         correctIndex: 0,
-        label: 'Tiger',
+        label: 'Rabbit', // Placeholder
       ),
     ),
+  ]),
+  15: ExerciseSet([
     Exercise.reorderWords(
       ReorderWordsExercise(
-        words: ['the', 'tiger', 'has', 'stripes', 'banana', 'blue'],
-        correctOrder: [0, 1, 2, 3],
+        words: ['is', 'The', 'sun', 'shining'], // Placeholder
+        correctOrder: [1, 2, 0, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Tiger.',
+        options: [
+          FillTheBlankOption(optionText: 'R'),
+          FillTheBlankOption(optionText: 'S'),
+          FillTheBlankOption(optionText: 'T'),
+        ],
+        correctIndex: 2,
+      ),
+    ),
+  ]),
+
+  // ========== Group 6: U, V, W, X ==========
+  16: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_uvwx',
+      title: 'Alphabet - U, V, W, X',
+      introduction: 'Let\'s learn U, V, W, and X!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s write "U"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Next is "V"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'Here comes "W"!',
+          templateImagePath: ImageAssets.drawableC,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And now "X"!',
+          templateImagePath: ImageAssets.drawableD,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.u_en,
+              word: 'U',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.v_en,
+              word: 'V',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.w_en,
+              word: 'W',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.x_en,
+              word: 'X',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  17: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Umbrella.',
+        options: [
+          FillTheBlankOption(optionText: 'U'),
+          FillTheBlankOption(optionText: 'V'),
+          FillTheBlankOption(optionText: 'W'),
+        ],
+        correctIndex: 0,
+      ),
+    ),
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
+          ImageAssets.fish,
+        ],
+        correctIndex: 0,
+        label: 'Van', // Placeholder
+      ),
+    ),
+  ]),
+  18: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['is', 'a', 'This', 'watch'], // Placeholder
+        correctOrder: [2, 0, 1, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for X-ray.',
+        options: [
+          FillTheBlankOption(optionText: 'V'),
+          FillTheBlankOption(optionText: 'W'),
+          FillTheBlankOption(optionText: 'X'),
+        ],
+        correctIndex: 2,
+      ),
+    ),
+  ]),
+
+  // ========== Group 7: Y, Z ==========
+  19: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_yz',
+      title: 'Alphabet - Y, Z',
+      introduction: 'Let\'s learn the last two letters: Y and Z!',
+      activities: [
+        DrawingActivity(
+          prompt: 'Let\'s write "Y"!',
+          templateImagePath: ImageAssets.drawableA,
+        ), // Placeholder
+        DrawingActivity(
+          prompt: 'And finally, "Z"!',
+          templateImagePath: ImageAssets.drawableB,
+        ), // Placeholder
+        AudioMatchingActivity(
+          prompt: 'Match the sound to the letter!',
+          pairs: [
+            AudioWordPair(
+              audioAssetPath: AudioAssets.y_en,
+              word: 'Y',
+            ), // Placeholder audio
+            AudioWordPair(
+              audioAssetPath: AudioAssets.z_en,
+              word: 'Z',
+            ), // Placeholder audio
+          ],
+        ),
+      ],
+    ),
+  ),
+  20: ExerciseSet([
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Yo-yo.',
+        options: [
+          FillTheBlankOption(optionText: 'Y'),
+          FillTheBlankOption(optionText: 'Z'),
+          FillTheBlankOption(optionText: 'A'),
+        ],
+        correctIndex: 0,
+      ),
+    ),
+    Exercise.listenAndChoose(
+      ListenAndChooseExercise(
+        imageAssets: [
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
+          ImageAssets.fish,
+        ],
+        correctIndex: 0,
+        label: 'Zebra', // Placeholder
+      ),
+    ),
+  ]),
+  21: ExerciseSet([
+    Exercise.reorderWords(
+      ReorderWordsExercise(
+        words: ['is', 'a', 'This', 'zebra'], // Placeholder
+        correctOrder: [2, 0, 1, 3],
+      ),
+    ),
+    Exercise.fillTheBlank(
+      FillTheBlankExercise(
+        questionSuffix: ' is for Zipper.',
+        options: [
+          FillTheBlankOption(optionText: 'X'),
+          FillTheBlankOption(optionText: 'Y'),
+          FillTheBlankOption(optionText: 'Z'),
+        ],
+        correctIndex: 2,
       ),
     ),
   ]),
 };
-
-/// A wrapper for levels that are structured as a full lesson.
-class LessonSet extends LevelContent {
-  LessonSet(this.lesson);
-
-  final Lesson lesson;
-}

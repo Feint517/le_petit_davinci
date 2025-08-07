@@ -78,6 +78,6 @@ final englishMapSections = [
     level: 1,
     section: 1,
     title: 'The Alphabets',
-    levels: generateLevelModels(1, 9),
+    levels: generateLevelModels(1, 21),
   ),
 ];
