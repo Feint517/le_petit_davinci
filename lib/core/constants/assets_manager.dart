@@ -289,7 +289,33 @@ class AudioAssets {
   static const String y_en = 'assets/audio/alphabets_en/y.mp3';
   static const String z_en = 'assets/audio/alphabets_en/z.mp3';
 
-
+  //* alphabets french
+  static const String a_fr = 'assets/audio/alphabets_en/a.mp3';
+  static const String b_fr = 'assets/audio/alphabets_en/b.mp3';
+  static const String c_fr = 'assets/audio/alphabets_en/c.mp3';
+  static const String d_fr = 'assets/audio/alphabets_en/d.mp3';
+  static const String e_fr = 'assets/audio/alphabets_en/e.mp3';
+  static const String f_fr = 'assets/audio/alphabets_en/f.mp3';
+  static const String g_fr = 'assets/audio/alphabets_en/g.mp3';
+  static const String h_fr = 'assets/audio/alphabets_en/h.mp3';
+  static const String i_fr = 'assets/audio/alphabets_en/i.mp3';
+  static const String j_fr = 'assets/audio/alphabets_en/j.mp3';
+  static const String k_fr = 'assets/audio/alphabets_en/k.mp3';
+  static const String l_fr = 'assets/audio/alphabets_en/l.mp3';
+  static const String m_fr = 'assets/audio/alphabets_en/m.mp3';
+  static const String n_fr = 'assets/audio/alphabets_en/n.mp3';
+  static const String o_fr = 'assets/audio/alphabets_en/o.mp3';
+  static const String p_fr = 'assets/audio/alphabets_en/p.mp3';
+  static const String q_fr = 'assets/audio/alphabets_en/q.mp3';
+  static const String r_fr = 'assets/audio/alphabets_en/r.mp3';
+  static const String s_fr = 'assets/audio/alphabets_en/s.mp3';
+  static const String t_fr = 'assets/audio/alphabets_en/t.mp3';
+  static const String u_fr = 'assets/audio/alphabets_en/u.mp3';
+  static const String v_fr = 'assets/audio/alphabets_en/v.mp3';
+  static const String w_fr = 'assets/audio/alphabets_en/w.mp3';
+  static const String x_fr = 'assets/audio/alphabets_en/x.mp3';
+  static const String y_fr = 'assets/audio/alphabets_en/y.mp3';
+  static const String z_fr = 'assets/audio/alphabets_en/z.mp3';
 
   //* animals names
   static const String lionName = 'assets/audio/animals_en/lion_en.mp3';
@@ -297,14 +323,15 @@ class AudioAssets {
   static const String elephantName = 'assets/audio/animals_en/elephant_en.mp3';
   static const String monkeyName = 'assets/audio/animals_en/monkey_en.mp3';
 
-
   //* animals sounds
   static const String catSound = 'assets/audio/animals_sounds/cat_sound.wav';
-  static const String chickenSound = 'assets/audio/animals_sounds/chicken_sound.wav';
+  static const String chickenSound =
+      'assets/audio/animals_sounds/chicken_sound.wav';
   static const String cowSound = 'assets/audio/animals_sounds/cow_sound.wav';
   static const String dogSound = 'assets/audio/animals_sounds/dog_sound.wav';
   static const String pigSound = 'assets/audio/animals_sounds/pig_sound.wav';
-  static const String sheepSound = 'assets/audio/animals_sounds/sheep_sound.wav';
+  static const String sheepSound =
+      'assets/audio/animals_sounds/sheep_sound.wav';
 }
 
 class TestAssets {

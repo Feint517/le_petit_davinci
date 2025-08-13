@@ -5,37 +5,27 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
+import 'package:le_petit_davinci/features/french/data/level_content.dart';
+import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
+import 'package:le_petit_davinci/features/lessons3/views/lesson.dart';
 
 //* 1. List of level configs (just the number and type/status)
 List<LevelConfig> generateLevelConfigsFromData() {
-  final Set<int> allLevels = {};
-
-  //* Collect all unique level numbers from unified data
-  // allLevels.addAll(unifiedFrenchLevels.keys);
-
-  //* Sort levels
-  final sortedLevels = allLevels.toList()..sort();
+  final sortedLevels = unifiedFrenchLevels.keys.toList()..sort();
 
   //* Generate LevelConfig for each level
   return sortedLevels.map((level) {
     LevelType type;
-    // if (unifiedFrenchLevels.containsKey(level)) {
-    //   type = LevelType.exercise;
-    // } else {
-    //   type = LevelType.lesson;
+    final levelContent = unifiedFrenchLevels[level];
 
-    // }
+    if (levelContent is LessonSet) {
+      type = LevelType.lesson;
+    } else {
+      type = LevelType.exercise;
+    }
 
-    type = LevelType.lesson;
-    // You can set status dynamically or use a default
     LevelStatus status = LevelStatus.inProgress;
-
-    return LevelConfig(
-      number: level,
-      title: 'Level $level',
-      type: type,
-      status: status,
-    );
+    return LevelConfig(number: level, type: type, status: status);
   }).toList();
 }
 
@@ -43,17 +33,14 @@ final List<LevelConfig> frenchLevelConfigs = generateLevelConfigsFromData();
 
 //* 2. Helper function to get the correct page for each level
 Widget? getLevelPage(int level) {
-  // if (unifiedFrenchLevels.containsKey(level)) {
-  //   return ExerciseScreen(
-  //     exercises: unifiedFrenchLevels[level]!,
-  //     dialect: 'fr-FR', // French dialect
-  //   );
-  // } else if (level == 1) {
-  //   // TODO: fix the french section
-  //   // return const VideoLessonScreen(videoId: 'ccEpTTZW34g');
-  //   return const Placeholder();
-  // }
-  return null; // ?Locked or not implemented
+  final levelContent = unifiedFrenchLevels[level];
+
+  if (levelContent is LessonSet) {
+    return LessonScreen3(lesson: levelContent.lesson);
+  } else if (levelContent is ExerciseSet) {
+    return ExerciseScreen(exercises: levelContent.exercises, dialect: 'fr-FR');
+  }
+  return null;
 }
 
 //* 3. Generate LevelModel list dynamically
@@ -63,11 +50,24 @@ List<Level> generateLevelModels(int start, int end) {
   );
   return filteredConfigs.map((config) {
     final page = getLevelPage(config.number);
+    VoidCallback? onTap;
+
+    if (page != null) {
+      if (page is LessonScreen3) {
+        onTap = () => Get.to(() => page);
+      } else if (page is ExerciseScreen) {
+        final levelContent = unifiedFrenchLevels[config.number];
+        if (levelContent is ExerciseSet) {
+          onTap = () => Get.to(() => page);
+        }
+      } else {
+        onTap = () => Get.to(() => page);
+      }
+    }
     return Level(
-      // title: config.title!,
       levelType: config.type,
       levelStatus: config.status,
-      onTap: page != null ? () => Get.to(page) : null,
+      onTap: onTap,
     );
   }).toList();
 }
@@ -78,7 +78,14 @@ final frenchMapSections = [
     color: AppColors.secondary,
     level: 1,
     section: 1,
+    title: 'Les Alphabets',
+    levels: generateLevelModels(1, 21),
+  ),
+  SectionData(
+    color: AppColors.accent,
+    level: 1,
+    section: 1,
     title: 'Les animaux',
-    levels: generateLevelModels(1, 10),
+    levels: generateLevelModels(22, 30),
   ),
 ];
