@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 
 class AudioMatchingActivityView extends StatefulWidget {
   const AudioMatchingActivityView({super.key, required this.activity});

@@ -6,9 +6,9 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
-import 'package:le_petit_davinci/features/lessons3/controllers/lessons_controller.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
-import 'package:le_petit_davinci/features/lessons3/views/video_player2.dart';
+import 'package:le_petit_davinci/features/lessons/controllers/lessons_controller.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/views/video_player2.dart';
 
 class VideoActivityView extends StatefulWidget {
   const VideoActivityView({super.key, required this.activity});

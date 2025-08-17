@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 
 /// A base class to represent the content of any given level.
 abstract class LevelContent {}

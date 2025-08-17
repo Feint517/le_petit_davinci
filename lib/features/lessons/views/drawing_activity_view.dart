@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/lessons/models/lesson_template_model.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 import 'package:le_petit_davinci/features/studio/views/drawing_canvas_screen.dart';
 

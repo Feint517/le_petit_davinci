@@ -7,7 +7,7 @@ import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.d
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/features/english/data/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons3/views/lesson.dart';
+import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
 
 List<LevelConfig> generateLevelConfigsFromData() {
   final sortedLevels = unifiedEnglishLevels.keys.toList()..sort();

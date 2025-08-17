@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
-import 'package:le_petit_davinci/features/lessons3/views/reward.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/views/reward.dart';
 
 class LessonsController3 extends GetxController {
   LessonsController3({required this.lessonData});

@@ -1,15 +1,5 @@
 import 'package:le_petit_davinci/features/lessons/models/lesson_activity_model.dart';
 
-// enum LessonType {
-//   alphabets,
-//   numbers,
-//   colors,
-//   shapes,
-//   animals,
-//   family,
-//   food,
-//   weather,
-// }
 
 enum LessonLanguage { english, french }
 

@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
-import 'package:le_petit_davinci/features/lessons3/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 
 class IntroductionView extends StatelessWidget {
   const IntroductionView({

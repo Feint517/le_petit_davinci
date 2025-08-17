@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/features/lessons3/views/audio_matching_activity_view.dart';
-import 'package:le_petit_davinci/features/lessons3/views/drawing_activity_view.dart';
-import 'package:le_petit_davinci/features/lessons3/views/video_activity_view.dart';
+import 'package:le_petit_davinci/features/lessons/views/audio_matching_activity_view.dart';
+import 'package:le_petit_davinci/features/lessons/views/drawing_activity_view.dart';
+import 'package:le_petit_davinci/features/lessons/views/video_activity_view.dart';
 
 //* Base class for any lesson activity.
 abstract class Activity {
