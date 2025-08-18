@@ -1,6 +1,5 @@
 import 'package:le_petit_davinci/features/lessons/models/lesson_activity_model.dart';
 
-
 enum LessonLanguage { english, french }
 
 enum LessonStatus { locked, available, inProgress, completed }

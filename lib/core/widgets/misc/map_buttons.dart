@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/core/styles/loaders.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
@@ -35,10 +36,13 @@ class MapButton extends StatelessWidget {
           onTap ??
           () {
             if (level.levelStatus != LevelStatus.locked) {
-              // print('Navigating to content for ${level.title}');
               level.onTap?.call();
-            } else if (level.levelStatus != LevelStatus.locked) {
-              Get.snackbar('Info', 'Content coming soon!');
+            } else {
+              CustomLoaders.showSnackBar(
+                type: SnackBarType.warning,
+                title: 'Level locked',
+                message: 'Complete the previous level to unlock it',
+              );
             }
           },
       child: Column(

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
+import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
@@ -12,6 +13,7 @@ import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
 import 'package:le_petit_davinci/features/home/widgets/subject_selection.dart';
 import 'package:le_petit_davinci/features/home/widgets/welcome_section.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
+import 'package:le_petit_davinci/services/progress_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,10 +21,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(UserController());
-    // if (!Get.isRegistered<BackgroundMusicController>()) {
-    //   Get.put(BackgroundMusicController());
-    // }
-    // BackgroundMusicController.instance.playMusic();
+    Get.put(ProgressService());
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(
@@ -53,6 +52,15 @@ class HomeScreen extends StatelessWidget {
             const ScrollAnimatedItem(
               child: ResponsiveImageAsset(assetPath: SvgAssets.homeBottom),
             ),
+
+            Gap(40.h),
+            CustomButton(
+              label: 'test',
+              onPressed: () {
+                ProgressService.instance.logUnlocked('en');
+              },
+            ),
+            Gap(40.h),
           ],
         ),
       ),

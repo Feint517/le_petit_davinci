@@ -12,12 +12,21 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
+import 'package:le_petit_davinci/services/progress_service.dart';
 
 class ExercisesController extends GetxController {
-  ExercisesController({required this.exercises, required this.dialect});
+  ExercisesController({
+    required this.exercises,
+    required this.dialect,
+    required this.levelNumber,
+    required this.language,
+  });
 
   final List<Exercise> exercises;
   final String dialect;
+  final int levelNumber;
+  final String language;
+
   late final PageController pageController;
 
   final FlutterTts _tts = FlutterTts();
@@ -30,6 +39,9 @@ class ExercisesController extends GetxController {
   var selectedOrder = <int>[].obs;
   var playCount = 0.obs;
   var showHint = false.obs;
+
+  //? Track mistakes across the whole level to compute stars.
+  var wrongAttemptsTotal = 0.obs;
 
   bool get hasExercises => exercises.isNotEmpty;
 
@@ -48,8 +60,6 @@ class ExercisesController extends GetxController {
     await _audioPlayer.setAsset(AudioAssets.correctSound);
     await _audioPlayer.setAsset(AudioAssets.errorSound);
     await _tts.setLanguage(dialect);
-    print('========= EXERCISES =========');
-    print(exercises);
   }
 
   @override
@@ -69,8 +79,20 @@ class ExercisesController extends GetxController {
       );
       _resetExerciseState();
     } else {
-      //? All exercises are completed
-      Get.off(() => const VictoryScreen(starsCount: 3));
+      // Compute stars: simple rule -> start at 3, -1 for each mistake threshold.
+      // You can refine later with time, hints, etc.
+      final mistakes = wrongAttemptsTotal.value;
+      int stars = 3;
+      if (mistakes >= 1) stars = 2;
+      if (mistakes >= 3) stars = 1;
+      if (mistakes >= 6) stars = 0;
+
+      // Persist progression
+      ProgressService.instance.setStars(language, levelNumber, stars);
+      ProgressService.instance.unlockNextIfNeeded(language, levelNumber);
+
+      // Show victory with awarded stars
+      Get.off(() => VictoryScreen(starsCount: stars));
     }
   }
 
@@ -98,6 +120,11 @@ class ExercisesController extends GetxController {
             .map((i) => exercise.words[i])
             .join(' ');
         break;
+    }
+
+    //? Count mistakes globally
+    if (!isCorrect) {
+      wrongAttemptsTotal.value++;
     }
 
     //* Play sound feedback
@@ -176,7 +203,6 @@ class ExercisesController extends GetxController {
               onPressed: () {
                 //? First, always close the bottom sheet.
                 Get.back();
-
                 if (isCorrect) {
                   nextExercise();
                 } else {

@@ -728,22 +728,16 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         AudioMatchingActivity(
           prompt: 'Match the animal to its name!',
           pairs: [
-            AudioWordPair(
-              audioAssetPath: AudioAssets.lionName,
-              word: 'Lion',
-            ), 
-            AudioWordPair(
-              audioAssetPath: AudioAssets.tigerName,
-              word: 'Tiger',
-            ), 
+            AudioWordPair(audioAssetPath: AudioAssets.lionName, word: 'Lion'),
+            AudioWordPair(audioAssetPath: AudioAssets.tigerName, word: 'Tiger'),
             AudioWordPair(
               audioAssetPath: AudioAssets.elephantName,
               word: 'Elephant',
-            ), 
+            ),
             AudioWordPair(
               audioAssetPath: AudioAssets.monkeyName,
               word: 'Monkey',
-            ), 
+            ),
           ],
         ),
       ],

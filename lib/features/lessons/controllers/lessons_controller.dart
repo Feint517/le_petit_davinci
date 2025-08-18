@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/views/reward.dart';
+import 'package:le_petit_davinci/services/progress_service.dart';
 
-class LessonsController3 extends GetxController {
-  LessonsController3({required this.lessonData});
+class LessonsController extends GetxController {
+  LessonsController({required this.lessonData});
 
   final Lesson lessonData;
   late PageController pageController;
@@ -65,7 +66,8 @@ class LessonsController3 extends GetxController {
       );
     } else {
       //? Lesson finished!
-      Get.off(() => const RewardScreen());
+      // Get.off(() => const RewardScreen());
+      _completeLessonAndUnlock();
     }
   }
 
@@ -75,5 +77,34 @@ class LessonsController3 extends GetxController {
     _completionSubscription?.cancel();
     pageController.dispose();
     super.onClose();
+  }
+
+  Future<void> _completeLessonAndUnlock() async {
+    try {
+      // Read level metadata from navigation arguments
+      final args = Get.arguments;
+      int? levelNumber;
+      String language = 'en';
+
+      if (args is Map) {
+        final ln = args['levelNumber'];
+        final lang = args['language'];
+        if (ln is int) levelNumber = ln;
+        if (lang is String && lang.isNotEmpty) language = lang;
+      }
+
+      if (levelNumber != null && Get.isRegistered<ProgressService>()) {
+        // Mark as completed by awarding stars (adjust if you prefer a different rule)
+        await ProgressService.instance.setStars(language, levelNumber, 3);
+        // Unlock the next level
+        await ProgressService.instance.unlockNextIfNeeded(
+          language,
+          levelNumber,
+        );
+      }
+    } catch (e) {
+      debugPrint('Lesson completion persistence failed: $e');
+    }
+    Get.off(() => const RewardScreen());
   }
 }

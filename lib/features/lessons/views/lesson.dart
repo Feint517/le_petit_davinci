@@ -6,14 +6,14 @@ import 'package:le_petit_davinci/features/lessons/controllers/lessons_controller
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/views/introduction_view.dart';
 
-class LessonScreen3 extends GetView<LessonsController3> {
-  const LessonScreen3({super.key, required this.lesson});
+class LessonScreen extends GetView<LessonsController> {
+  const LessonScreen({super.key, required this.lesson});
 
   final Lesson lesson;
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LessonsController3(lessonData: lesson));
+    Get.put(LessonsController(lessonData: lesson));
     return Scaffold(
       appBar: ProfileHeader(type: ProfileHeaderType.compact),
       body: Padding(

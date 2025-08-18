@@ -4,12 +4,12 @@ import 'package:get_storage/get_storage.dart';
 class StorageService extends GetxController {
   static StorageService get instance => Get.find();
 
-  late final GetStorage locacStorage;
+  late final GetStorage localStorage;
 
   //* Initialize storage
   Future<void> init() async {
     await GetStorage.init();
-    locacStorage = GetStorage();
+    localStorage = GetStorage();
   }
 
   //* keys
@@ -18,19 +18,19 @@ class StorageService extends GetxController {
   static const String authTokenKey = 'auth_token';
 
   //* Generic methods (if needed)
-  T? read<T>(String key) => locacStorage.read<T>(key);
+  T? read<T>(String key) => localStorage.read<T>(key);
 
   Future<void> write<T>(String key, T value) async =>
-      await locacStorage.write(key, value);
+      await localStorage.write(key, value);
 
-  Future<void> remove(String key) async => await locacStorage.remove(key);
+  Future<void> remove(String key) async => await localStorage.remove(key);
 
-  Future<void> clear() async => await locacStorage.erase();
+  Future<void> clear() async => await localStorage.erase();
 
-  // Get a list from storage (returns List<dynamic> or null)
-  List<dynamic>? getList(String key) => locacStorage.read<List<dynamic>>(key);
+  //? Get a list from storage (returns List<dynamic> or null)
+  List<dynamic>? getList(String key) => localStorage.read<List<dynamic>>(key);
 
   // Set a list in storage
   Future<void> setList(String key, List<dynamic> value) async =>
-      await locacStorage.write(key, value);
+      await localStorage.write(key, value);
 }

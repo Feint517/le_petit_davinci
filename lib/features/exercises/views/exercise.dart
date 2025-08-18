@@ -15,14 +15,25 @@ class ExerciseScreen extends GetView<ExercisesController> {
     super.key,
     required this.exercises,
     required this.dialect,
+    required this.levelNumber,
+    required this.language,
   });
 
   final List<Exercise> exercises;
   final String dialect;
+  final int levelNumber;
+  final String language;
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ExercisesController(exercises: exercises, dialect: dialect));
+    Get.put(
+      ExercisesController(
+        exercises: exercises,
+        dialect: dialect,
+        levelNumber: levelNumber,
+        language: language,
+      ),
+    );
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: ProfileHeader(type: ProfileHeaderType.compact),
