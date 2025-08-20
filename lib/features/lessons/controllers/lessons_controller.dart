@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -22,6 +24,7 @@ class LessonsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('[Lesson] onInit: activities=${lessonData.activities.length}');
     startLesson();
 
     //? This worker will re-run our listener setup every time the page changes.
@@ -32,6 +35,7 @@ class LessonsController extends GetxController {
     currentPage.value = 0;
     isLessonStarted.value = false;
     pageController = PageController();
+    print('[Lesson] startLesson: currentPage=${currentPage.value}');
     _setupCompletionListener();
   }
 
@@ -39,10 +43,12 @@ class LessonsController extends GetxController {
   void _setupCompletionListener() {
     //? Cancel any previous listener to prevent memory leaks.
     _completionSubscription?.cancel();
+        print('[Lesson] attach listener for page ${currentPage.value}');
     _completionSubscription = lessonData
         .activities[currentPage.value]
         .isCompleted
         .listen((isDone) {
+                    print('[Lesson] activity ${currentPage.value} completed=$isDone');
           if (isDone) {
             //? This ensures nextStage() is called only after the UI has finished building.
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -54,11 +60,18 @@ class LessonsController extends GetxController {
 
   void beginActivities() {
     isLessonStarted.value = true;
+        print('[Lesson] beginActivities');
+
   }
 
   void nextStage() {
-    if (!pageController.hasClients) return;
+    if (!pageController.hasClients) {
+              print('[Lesson] nextStage: pageController has no clients');
+
+      return;}
     if (currentPage.value < lessonData.activities.length - 1) {
+            print('[Lesson] nextStage: moving ${currentPage.value} -> ${currentPage.value + 1}');
+
       currentPage.value++;
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -67,6 +80,8 @@ class LessonsController extends GetxController {
     } else {
       //? Lesson finished!
       // Get.off(() => const RewardScreen());
+            print('[Lesson] nextStage: lesson finished, completing and unlocking…');
+
       _completeLessonAndUnlock();
     }
   }
@@ -92,6 +107,8 @@ class LessonsController extends GetxController {
         if (ln is int) levelNumber = ln;
         if (lang is String && lang.isNotEmpty) language = lang;
       }
+            print('[Lesson] complete: args=$args -> levelNumber=$levelNumber, language=$language');
+
 
       if (levelNumber != null && Get.isRegistered<ProgressService>()) {
         // Mark as completed by awarding stars (adjust if you prefer a different rule)
