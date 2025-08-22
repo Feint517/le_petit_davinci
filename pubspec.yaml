@@ -85,6 +85,7 @@ flutter:
     - assets/audio/alphabets_en/
     - assets/audio/animals_en/
     - assets/audio/animals_sounds/
+    - assets/audio/numbers_fr/
     - assets/audio/sound_effects/
     - assets/audio/tts/
     - assets/icons/
