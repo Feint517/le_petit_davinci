@@ -4,7 +4,7 @@ class ShapePatternExercise {
   final int correctIndex;
   final String instruction;
   final PatternType patternType;
-  
+
   const ShapePatternExercise({
     required this.patternImages,
     required this.optionImages,
@@ -14,8 +14,4 @@ class ShapePatternExercise {
   });
 }
 
-enum PatternType {
-  shapes,
-  numbers,
-  colors
-}
+enum PatternType { shapes, numbers, colors }

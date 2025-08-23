@@ -105,12 +105,11 @@ class ImageAssets {
   static const String drawableZ =
       'assets/images/templates/alphabets/printable_Z.png';
 
-
-      //* math assets
-      static const String orange = 'assets/images/illustrations/orange.png';
-      static const String circle = 'assets/images/illustrations/circle.png';
-      static const String square = 'assets/images/illustrations/square.png';
-      static const String triangle = 'assets/images/illustrations/triangle.png';
+  //* math assets
+  static const String orange = 'assets/images/illustrations/orange.png';
+  static const String circle = 'assets/images/illustrations/circle.png';
+  static const String square = 'assets/images/illustrations/square.png';
+  static const String triangle = 'assets/images/illustrations/triangle.png';
   static const String rectangle = 'assets/images/illustrations/rectangle.png';
 }
 
@@ -341,13 +340,10 @@ class AudioAssets {
   static const String sheepSound =
       'assets/audio/animals_sounds/sheep_sound.wav';
 
-
-      //* numbers
+  //* numbers
   static const String number1_fr = 'assets/audio/numbers_fr/number1_fr.mp3';
   static const String number2_fr = 'assets/audio/numbers_fr/number2_fr.mp3';
   static const String number3_fr = 'assets/audio/numbers_fr/number3_fr.mp3';
-
-      
 }
 
 class TestAssets {

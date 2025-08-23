@@ -14,7 +14,7 @@ class NumberMatchingView extends StatefulWidget {
 class _NumberMatchingViewState extends State<NumberMatchingView> {
   // Map to track which number is connected to which image
   Map<String, String?> connections = {};
-  
+
   @override
   void initState() {
     super.initState();
@@ -22,7 +22,7 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
       connections[item.number] = null;
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,7 +39,7 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
             textAlign: TextAlign.center,
           ),
         ),
-        
+
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -49,26 +49,33 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: widget.exercise.items.map((item) => 
-                      _buildDraggableNumber(item.number)
-                    ).toList(),
+                    children:
+                        widget.exercise.items
+                            .map((item) => _buildDraggableNumber(item.number))
+                            .toList(),
                   ),
                 ),
-                
+
                 // Right side: Images with quantities
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: widget.exercise.items.map((item) => 
-                      _buildImageTarget(item.imageAsset, item.quantity)
-                    ).toList(),
+                    children:
+                        widget.exercise.items
+                            .map(
+                              (item) => _buildImageTarget(
+                                item.imageAsset,
+                                item.quantity,
+                              ),
+                            )
+                            .toList(),
                   ),
                 ),
               ],
             ),
           ),
         ),
-        
+
         // Check answer button
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -160,26 +167,23 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
         return Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: candidateData.isNotEmpty ? 
-              AppColors.secondary.withOpacity(0.3) :
-              Colors.transparent,
-            border: Border.all(
-              color: AppColors.secondary,
-              width: 2,
-            ),
+            color:
+                candidateData.isNotEmpty
+                    ? AppColors.secondary.withOpacity(0.3)
+                    : Colors.transparent,
+            border: Border.all(color: AppColors.secondary, width: 2),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
             children: [
-              Image.asset(
-                imageAsset,
-                height: 80,
-              ),
+              Image.asset(imageAsset, height: 80),
               const SizedBox(height: 8),
               Text(
-                connections.entries.any((e) => e.value == imageAsset) ?
-                  connections.entries.firstWhere((e) => e.value == imageAsset).key :
-                  '',
+                connections.entries.any((e) => e.value == imageAsset)
+                    ? connections.entries
+                        .firstWhere((e) => e.value == imageAsset)
+                        .key
+                    : '',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -212,11 +216,13 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
         break;
       }
     }
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          allCorrect ? 'Bravo! Toutes les réponses sont correctes!' : 'Essaie encore!',
+          allCorrect
+              ? 'Bravo! Toutes les réponses sont correctes!'
+              : 'Essaie encore!',
         ),
         backgroundColor: allCorrect ? Colors.green : Colors.red,
       ),

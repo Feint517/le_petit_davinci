@@ -103,9 +103,6 @@
 //   ),
 // ];
 
-
-
-
 // ignore_for_file: constant_identifier_names
 
 import 'package:le_petit_davinci/core/constants/colors.dart';

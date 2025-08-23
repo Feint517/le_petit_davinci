@@ -4,7 +4,7 @@ class ArrangeNumbersExercise {
   final String instruction;
   final int? maxNumber;
   final int? minNumber;
-  
+
   const ArrangeNumbersExercise({
     required this.numbers,
     required this.isAscending,

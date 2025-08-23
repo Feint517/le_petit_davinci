@@ -4,9 +4,7 @@ import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exerci
 import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
-
 
 final Map<int, LevelContent> unifiedFrenchLevels = {
   // ========== Group 1: A, B, C, D ==========
@@ -45,7 +43,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   2: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Arbre.',
         options: [
@@ -53,10 +50,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'B'),
           FillTheBlankOption(optionText: 'C'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.apple, // Placeholder for Arbre
@@ -64,19 +60,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.dog,
           ImageAssets.bird,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Arbre',
       ),
-    ),
+    
   ]),
   3: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'chat'],
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Dinosaure.',
         options: [
@@ -84,9 +78,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'C'),
           FillTheBlankOption(optionText: 'D'),
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
       ),
-    ),
+    
   ]),
 
   // ========== Group 2: E, F, G, H ==========
@@ -125,7 +119,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   5: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Éléphant.',
         options: [
@@ -133,10 +126,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'F'),
           FillTheBlankOption(optionText: 'G'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.elephant,
@@ -144,19 +136,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.lion,
           ImageAssets.bear,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Éléphant',
       ),
-    ),
+    
   ]),
   6: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'poisson'],
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Hibou.',
         options: [
@@ -164,9 +154,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'G'),
           FillTheBlankOption(optionText: 'H'),
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
       ),
-    ),
+    
   ]),
 
   // ========== Group 3: I, J, K, L ==========
@@ -205,7 +195,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   8: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Igloo.',
         options: [
@@ -213,10 +202,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'J'),
           FillTheBlankOption(optionText: 'K'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.lion,
@@ -224,19 +212,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bear,
           ImageAssets.cat,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Lion',
       ),
-    ),
+    
   ]),
   9: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['un', 'est', 'Ceci', 'koala'], // Placeholder
         correctOrder: [2, 1, 0, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Jus.', // Placeholder
         options: [
@@ -244,9 +230,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'K'),
           FillTheBlankOption(optionText: 'L'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
+    
   ]),
 
   // ========== Group 4: M, N, O, P ==========
@@ -285,7 +271,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   11: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Montagne.',
         options: [
@@ -293,10 +278,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'N'),
           FillTheBlankOption(optionText: 'O'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat,
@@ -304,19 +288,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bird,
           ImageAssets.fish,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Nid', // Placeholder
       ),
-    ),
+    
   ]),
   12: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'oiseau'], // Placeholder
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Poisson.',
         options: [
@@ -324,9 +306,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'O'),
           FillTheBlankOption(optionText: 'P'),
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
       ),
-    ),
+    
   ]),
 
   // ========== Group 5: Q, R, S, T ==========
@@ -365,7 +347,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   14: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Quille.',
         options: [
@@ -373,10 +354,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'R'),
           FillTheBlankOption(optionText: 'S'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.tiger,
@@ -384,19 +364,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bear,
           ImageAssets.cat,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Robot', // Placeholder
       ),
-    ),
+    
   ]),
   15: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'serpent'], // Placeholder
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Tortue.',
         options: [
@@ -404,9 +382,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'S'),
           FillTheBlankOption(optionText: 'T'),
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
       ),
-    ),
+    
   ]),
 
   // ========== Group 6: U, V, W, X ==========
@@ -445,7 +423,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   17: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Uniforme.',
         options: [
@@ -453,10 +430,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'V'),
           FillTheBlankOption(optionText: 'W'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat,
@@ -464,19 +440,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bird,
           ImageAssets.fish,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Violon', // Placeholder
       ),
-    ),
+    
   ]),
   18: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'wagon'], // Placeholder
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Xylophone.',
         options: [
@@ -484,9 +458,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'W'),
           FillTheBlankOption(optionText: 'X'),
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
       ),
-    ),
+    
   ]),
 
   // ========== Group 7: Y, Z ==========
@@ -515,17 +489,15 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   20: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' comme dans Yaourt.',
         options: [
           FillTheBlankOption(optionText: 'Y'),
           FillTheBlankOption(optionText: 'Z'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat,
@@ -533,28 +505,26 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bird,
           ImageAssets.fish,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Zèbre', // Placeholder
       ),
-    ),
+    
   ]),
   21: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['est', 'un', 'Ceci', 'zèbre'],
         correctOrder: [2, 0, 1, 3],
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' comme dans Zéro.',
         options: [
           FillTheBlankOption(optionText: 'Y'),
           FillTheBlankOption(optionText: 'Z'),
         ],
-        correctIndex: 1,
+        correctAnswer: 1,
       ),
-    ),
+    
   ]),
 
   // ========== Animals Path ==========
@@ -592,7 +562,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   23: ExerciseSet([
-    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat, // Placeholder for Vache
@@ -600,11 +569,9 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bird, // Placeholder for Mouton
           ImageAssets.fish, // Placeholder for Poule
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Vache',
       ),
-    ),
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' dit "groin groin".',
         options: [
@@ -612,18 +579,16 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'Une vache'),
           FillTheBlankOption(optionText: 'Un mouton'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
+    
   ]),
   24: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['donne', 'de', 'Le', 'mouton', 'la', 'laine'],
         correctOrder: [2, 3, 0, 1, 4, 5],
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.cat, // Placeholder for Cheval
@@ -631,13 +596,12 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bird, // Placeholder for Chèvre
           ImageAssets.fish, // Placeholder for Poule
         ],
-        correctIndex: 3,
+        correctAnswer: 3,
         label: 'Poule',
       ),
-    ),
+    
   ]),
   25: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' est un bébé mouton.',
         options: [
@@ -645,15 +609,14 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'Un veau'),
           FillTheBlankOption(optionText: 'Un porcelet'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.reorderWords(
+    
       ReorderWordsExercise(
         words: ['La', 'vache', 'mange', 'de', 'l\'herbe'],
         correctOrder: [0, 1, 2, 3, 4],
       ),
-    ),
+    
   ]),
 
   // ========== Lesson 2: Wild Animals ==========
@@ -691,7 +654,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     ),
   ),
   27: ExerciseSet([
-    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.lion,
@@ -699,11 +661,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bear,
           ImageAssets.elephant,
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
         label: 'Lion',
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' est le roi de la jungle.',
         options: [
@@ -711,18 +672,16 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'Le tigre'),
           FillTheBlankOption(optionText: 'L\'ours'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
+    
   ]),
   28: ExerciseSet([
-    Exercise.reorderWords(
       ReorderWordsExercise(
         words: ['a', 'une', 'Un', 'éléphant', 'longue', 'trompe'],
         correctOrder: [2, 3, 0, 1, 4, 5],
       ),
-    ),
-    Exercise.listenAndChoose(
+    
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.lion, // Placeholder for Singe
@@ -730,13 +689,12 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bear, // Placeholder for Zèbre
           ImageAssets.elephant, // Placeholder for Tigre
         ],
-        correctIndex: 3,
+        correctAnswer: 3,
         label: 'Tigre',
       ),
-    ),
+    
   ]),
   29: ExerciseSet([
-    Exercise.fillTheBlank(
       FillTheBlankExercise(
         questionSuffix: ' a des rayures noires et blanches.',
         options: [
@@ -744,18 +702,16 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'Une girafe'),
           FillTheBlankOption(optionText: 'Un singe'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
-    Exercise.reorderWords(
+    
       ReorderWordsExercise(
         words: ['Le', 'singe', 'aime', 'manger', 'des', 'bananes'],
         correctOrder: [0, 1, 2, 3, 4, 5],
       ),
-    ),
+    
   ]),
   30: ExerciseSet([
-    Exercise.listenAndChoose(
       ListenAndChooseExercise(
         imageAssets: [
           ImageAssets.lion, // Placeholder for Girafe
@@ -763,11 +719,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ImageAssets.bear,
           ImageAssets.fish,
         ],
-        correctIndex: 2,
+        correctAnswer: 2,
         label: 'Ours',
       ),
-    ),
-    Exercise.fillTheBlank(
+    
       FillTheBlankExercise(
         questionSuffix: ' a un très long cou.',
         options: [
@@ -775,8 +730,8 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           FillTheBlankOption(optionText: 'Un éléphant'),
           FillTheBlankOption(optionText: 'Un lion'),
         ],
-        correctIndex: 0,
+        correctAnswer: 0,
       ),
-    ),
+    
   ]),
 };

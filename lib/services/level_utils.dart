@@ -19,17 +19,17 @@ class LevelUtils {
 
     return sortedLevels.map((level) {
       final levelContent = contentMap[level];
-      // final type = (levelContent is LessonSet) 
-      //     ? LevelType.lesson 
+      // final type = (levelContent is LessonSet)
+      //     ? LevelType.lesson
       //     : LevelType.exercise;
-      final type = (levelContent is LessonSet || 
-                   levelContent is MathLessonSet) 
-          ? LevelType.lesson 
-          : LevelType.exercise;
+      final type =
+          (levelContent is LessonSet || levelContent is MathLessonSet)
+              ? LevelType.lesson
+              : LevelType.exercise;
 
       return LevelConfig(
-        number: level, 
-        type: type, 
+        number: level,
+        type: type,
         status: LevelStatus.inProgress,
       );
     }).toList();
@@ -74,22 +74,30 @@ class LevelUtils {
       VoidCallback? onTap;
 
       // Safe unlock check (works even if ProgressService isn't registered yet)
-      final unlocked = Get.isRegistered<ProgressService>()
-          ? ProgressService.instance.isUnlocked(language, config.number)
-          : (config.number == 1);
-      
-      final hasStars = Get.isRegistered<ProgressService>()
-          ? ProgressService.instance.getStars(language, config.number) > 0
-          : false;
-          
-      final status = unlocked
-          ? (hasStars ? LevelStatus.completed : LevelStatus.inProgress)
-          : LevelStatus.locked;
+      final unlocked =
+          Get.isRegistered<ProgressService>()
+              ? ProgressService.instance.isUnlocked(language, config.number)
+              : (config.number == 1);
+
+      final hasStars =
+          Get.isRegistered<ProgressService>()
+              ? ProgressService.instance.getStars(language, config.number) > 0
+              : false;
+
+      final status =
+          unlocked
+              ? (hasStars ? LevelStatus.completed : LevelStatus.inProgress)
+              : LevelStatus.locked;
 
       // Only wire onTap when unlocked; build the page at tap-time
       if (unlocked) {
         onTap = () {
-          final page = getLevelPage(contentMap, config.number, language, dialect);
+          final page = getLevelPage(
+            contentMap,
+            config.number,
+            language,
+            dialect,
+          );
           if (page != null) Get.to(() => page);
         };
       }
