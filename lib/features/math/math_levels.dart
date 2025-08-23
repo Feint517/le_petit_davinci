@@ -1,103 +1,47 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// ignore_for_file: constant_identifier_names
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/enums.dart';
+import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
-import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
-import 'package:le_petit_davinci/features/english/data/level_content.dart';
-import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
-import 'package:le_petit_davinci/services/progress_service.dart';
+import 'package:le_petit_davinci/features/math/data/math_levels.dart';
+import 'package:le_petit_davinci/services/level_utils.dart';
 
-List<LevelConfig> generateLevelConfigsFromData() {
-  final sortedLevels = unifiedEnglishLevels.keys.toList()..sort();
+// Constants for Math subject
+const String MATH_LANG_CODE = 'math';
+const String MATH_DIALECT = 'en-US';
 
-  //* Generate LevelConfig for each level
-  return sortedLevels.map((level) {
-    LevelType type;
-    final levelContent = unifiedEnglishLevels[level];
+// Generate configs using the utility
+// Replace unifiedMathLevels with your actual math content map
+final List<LevelConfig> mathLevels = LevelUtils.generateLevelConfigsFromData(
+  unifiedMathLevels,
+);
 
-    if (levelContent is LessonSet) {
-      type = LevelType.lesson;
-    } else {
-      type = LevelType.exercise;
-    }
-
-    LevelStatus status = LevelStatus.inProgress;
-    return LevelConfig(number: level, type: type, status: status);
-  }).toList();
-}
-
-final List<LevelConfig> englishLevels = generateLevelConfigsFromData();
-
-Widget? getLevelPage(int level) {
-  final levelContent = unifiedEnglishLevels[level];
-
-  if (levelContent is LessonSet) {
-    return LessonScreen(lesson: levelContent.lesson);
-  } else if (levelContent is ExerciseSet) {
-    return ExerciseScreen(
-      exercises: levelContent.exercises,
-      dialect: 'en-US',
-      levelNumber: level,
-      language: 'en',
-    );
-  }
-  return null;
-}
-
-//* 4. Generate LevelModel list dynamically
-List<Level> generateLevelModels(int start, int end) {
-  final filteredLevels = englishLevels.where(
-    (config) => config.number >= start && config.number <= end,
+// Generate level models for a specific range
+List<Level> generateMathLevelModels(int start, int end) {
+  return LevelUtils.generateLevelModels(
+    levelConfigs: mathLevels,
+    contentMap: unifiedMathLevels,
+    start: start,
+    end: end,
+    language: MATH_LANG_CODE,
+    dialect: MATH_DIALECT,
   );
-  return filteredLevels.map((config) {
-    final page = getLevelPage(config.number);
-    VoidCallback? onTap;
-
-    final unlocked = ProgressService.instance.isUnlocked('en', config.number);
-    final hasStars = ProgressService.instance.getStars('en', config.number) > 0;
-    final status =
-        unlocked
-            ? (hasStars ? LevelStatus.completed : LevelStatus.inProgress)
-            : LevelStatus.locked;
-
-    if (page != null) {
-      if (page is LessonScreen) {
-        onTap = () => Get.to(() => page);
-      } else if (page is ExerciseScreen) {
-        final levelContent = unifiedEnglishLevels[config.number];
-        if (levelContent is ExerciseSet) {
-          onTap = () => Get.to(() => page);
-        }
-      } else {
-        onTap = () => Get.to(() => page);
-      }
-    }
-
-    return Level(
-      levelType: config.type,
-      levelStatus: status,
-      onTap: onTap,
-    );
-  }).toList();
 }
 
-//? getter so it recalculates on each access
+// Math-specific sections
 List<SectionData> get mathMapSections => [
   SectionData(
-    color: AppColors.secondary,
+    color: AppColors.orangeAccent,
     level: 1,
     section: 1,
-    title: 'The Alphabets',
-    levels: generateLevelModels(1, 21),
+    title: 'Numbers',
+    levels: generateMathLevelModels(1, 10),
   ),
   SectionData(
-    color: AppColors.accent,
+    color: AppColors.primary,
     level: 1,
-    section: 1,
-    title: 'The animals',
-    levels: generateLevelModels(22, 30),
+    section: 2,
+    title: 'Shapes',
+    levels: generateMathLevelModels(11, 20),
   ),
 ];
