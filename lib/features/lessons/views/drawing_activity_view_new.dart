@@ -51,16 +51,18 @@ class DrawingActivityView extends StatelessWidget {
             ),
             child: Obx(() {
               return AnimatedOpacity(
-                opacity: activity.mascotController.isCompleted.value ? 1.0 : 0.0,
+                opacity:
+                    activity.mascotController.isCompleted.value ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 300),
-                child: activity.mascotController.isCompleted.value
-                    ? CustomButton(
-                        label: 'Start Drawing',
-                        width: DeviceUtils.getScreenWidth() * 0.6,
-                        // The button does nothing; the model handles the transition automatically.
-                        onPressed: () {},
-                      )
-                    : const SizedBox.shrink(),
+                child:
+                    activity.mascotController.isCompleted.value
+                        ? CustomButton(
+                          label: 'Start Drawing',
+                          width: DeviceUtils.getScreenWidth() * 0.6,
+                          // The button does nothing; the model handles the transition automatically.
+                          onPressed: () {},
+                        )
+                        : const SizedBox.shrink(),
               );
             }),
           ),

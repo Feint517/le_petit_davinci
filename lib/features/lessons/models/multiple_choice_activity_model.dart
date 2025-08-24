@@ -25,7 +25,8 @@ class MultipleChoiceActivity extends Activity {
   }
 
   void markIntroAsCompleted() => isIntroCompleted.value = true;
-  void submitAnswer() => isCompleted.value = true; // For now, completion is just submitting.
+  void submitAnswer() =>
+      isCompleted.value = true; // For now, completion is just submitting.
 
   @override
   Widget build(BuildContext context) {

@@ -38,27 +38,6 @@ class LessonsController extends GetxController {
     _setupCompletionListener();
   }
 
-  /// Listens to the current activity's `isCompleted` flag.
-  // void _setupCompletionListener() {
-  //   _completionSubscription?.cancel();
-
-  //   // The actual activity index is `currentPage - 1` because page 0 is the intro.
-  //   final activityIndex = currentPage.value - 1;
-
-  //   // Only set up a listener if we are on an actual activity page.
-  //   if (activityIndex >= 0 && activityIndex < lessonData.activities.length) {
-  //     _completionSubscription = lessonData
-  //         .activities[activityIndex]
-  //         .isCompleted
-  //         .listen((isDone) {
-  //       if (isDone) {
-  //         // Ensure nextStage() is called safely after the current frame.
-  //         WidgetsBinding.instance.addPostFrameCallback((_) => nextStage());
-  //       }
-  //     });
-  //   }
-  // }
-
   void _setupCompletionListener() {
     _completionSubscription?.cancel();
     final activityIndex = currentPage.value; // No more -1 offset.
@@ -105,7 +84,10 @@ class LessonsController extends GetxController {
         // Mark as completed by awarding 3 stars.
         await ProgressService.instance.setStars(language, levelNumber, 3);
         // Unlock the next level.
-        await ProgressService.instance.unlockNextIfNeeded(language, levelNumber);
+        await ProgressService.instance.unlockNextIfNeeded(
+          language,
+          levelNumber,
+        );
       }
     } catch (e) {
       debugPrint('Lesson completion persistence failed: $e');

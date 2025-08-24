@@ -14,7 +14,6 @@ abstract class Activity {
   void dispose() {}
 }
 
-
 class Lesson {
   final String lessonId;
   final String title;
@@ -28,5 +27,3 @@ class Lesson {
     required this.activities,
   });
 }
-
-

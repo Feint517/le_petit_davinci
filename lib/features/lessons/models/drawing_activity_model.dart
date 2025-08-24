@@ -26,26 +26,20 @@ class DrawingActivity extends Activity {
     });
   }
 
-
   final String prompt;
   final String? templateImagePath;
   final List<String>? suggestedColors;
 
   /// State specific to this activity: is the intro mascot done talking?
-   late final TalkingMascotController mascotController;
+  late final TalkingMascotController mascotController;
   final RxBool isIntroCompleted = false.obs;
-
-  /// The view will call this when the intro is finished.
-  // void markIntroAsCompleted() {
-  //   isIntroCompleted.value = true;
-  // }
 
   /// The drawing canvas will call this when the user is done drawing.
   /// This triggers the main `isCompleted` flag, advancing the lesson.
   void markDrawingAsCompleted() {
     isCompleted.value = true;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return DrawingActivityView(activity: this);

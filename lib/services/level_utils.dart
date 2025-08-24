@@ -6,8 +6,8 @@ import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart'
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
 import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller_new.dart';
-import 'package:le_petit_davinci/features/lessons/views/lesson_new.dart';
+import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
+import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
 /// Utility class to generate level data for different subjects
