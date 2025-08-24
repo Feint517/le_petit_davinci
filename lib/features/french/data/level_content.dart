@@ -5,6 +5,10 @@ import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option
 import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
 
 final Map<int, LevelContent> unifiedFrenchLevels = {
   // ========== Group 1: A, B, C, D ==========

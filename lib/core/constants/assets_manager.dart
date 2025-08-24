@@ -50,6 +50,8 @@ class ImageAssets {
   static const String table = 'assets/images/listen_and_choose/table.png';
   static const String tiger = 'assets/images/listen_and_choose/tiger.png';
   static const String zebra = 'assets/images/listen_and_choose/zebra.png';
+  static const String sheep = 'assets/images/illustrations/sheep.png';
+  static const String pig = 'assets/images/illustrations/pig.png';
 
   //* drawing
   static const String drawableA =

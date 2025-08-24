@@ -4,8 +4,10 @@ import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
+import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
 import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
+import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller_new.dart';
+import 'package:le_petit_davinci/features/lessons/views/lesson_new.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
 /// Utility class to generate level data for different subjects
@@ -33,28 +35,81 @@ class LevelUtils {
   }
 
   /// Gets the appropriate page for a level
-  static Widget? getLevelPage(
-    Map<int, LevelContent> contentMap,
-    int level,
-    String language,
-    String dialect,
-  ) {
-    final levelContent = contentMap[level];
+  // static Widget? getLevelPage(
+  //   Map<int, LevelContent> contentMap,
+  //   int level,
+  //   String language,
+  //   String dialect,
+  // ) {
+  //   final levelContent = contentMap[level];
 
-    if (levelContent is LessonSet) {
-      return LessonScreen(lesson: levelContent.lesson);
-    } else if (levelContent is ExerciseSet) {
-      return ExerciseScreen(
-        exercises: levelContent.exercises,
-        dialect: dialect,
-        levelNumber: level,
-        language: language,
-      );
-    }
-    return null;
-  }
+  //   if (levelContent is LessonSet) {
+  //     return LessonScreen(lesson: levelContent.lesson);
+  //   } else if (levelContent is ExerciseSet) {
+  //     return ExerciseScreen(
+  //       exercises: levelContent.exercises,
+  //       dialect: dialect,
+  //       levelNumber: level,
+  //       language: language,
+  //     );
+  //   }
+  //   return null;
+  // }
 
-  /// Generates level models for a range of levels
+  //? Generates level models for a range of levels
+  // static List<Level> generateLevelModels<T extends LevelContent>({
+  //   required List<LevelConfig> levelConfigs,
+  //   required Map<int, T> contentMap,
+  //   required int start,
+  //   required int end,
+  //   required String language,
+  //   required String dialect,
+  // }) {
+  //   final filteredLevels = levelConfigs.where(
+  //     (config) => config.number >= start && config.number <= end,
+  //   );
+
+  //   return filteredLevels.map((config) {
+  //     VoidCallback? onTap;
+
+  //     // Safe unlock check (works even if ProgressService isn't registered yet)
+  //     final unlocked =
+  //         Get.isRegistered<ProgressService>()
+  //             ? ProgressService.instance.isUnlocked(language, config.number)
+  //             : (config.number == 1);
+
+  //     final hasStars =
+  //         Get.isRegistered<ProgressService>()
+  //             ? ProgressService.instance.getStars(language, config.number) > 0
+  //             : false;
+
+  //     final status =
+  //         unlocked
+  //             ? (hasStars ? LevelStatus.completed : LevelStatus.inProgress)
+  //             : LevelStatus.locked;
+
+  //     // Only wire onTap when unlocked; build the page at tap-time
+  //     if (unlocked) {
+  //       onTap = () {
+  //         final page = getLevelPage(
+  //           contentMap,
+  //           config.number,
+  //           language,
+  //           dialect,
+  //         );
+  //         if (page != null) Get.to(() => page);
+  //       };
+  //     }
+
+  //     return Level(
+  //       levelType: config.type,
+  //       levelStatus: status,
+  //       onTap: onTap,
+  //       number: config.number,
+  //     );
+  //   }).toList();
+  // }
+
   static List<Level> generateLevelModels<T extends LevelContent>({
     required List<LevelConfig> levelConfigs,
     required Map<int, T> contentMap,
@@ -70,32 +125,53 @@ class LevelUtils {
     return filteredLevels.map((config) {
       VoidCallback? onTap;
 
-      // Safe unlock check (works even if ProgressService isn't registered yet)
-      final unlocked =
-          Get.isRegistered<ProgressService>()
-              ? ProgressService.instance.isUnlocked(language, config.number)
-              : (config.number == 1);
-
+      final unlocked = ProgressService.instance.isUnlocked(
+        language,
+        config.number,
+      );
       final hasStars =
-          Get.isRegistered<ProgressService>()
-              ? ProgressService.instance.getStars(language, config.number) > 0
-              : false;
-
+          ProgressService.instance.getStars(language, config.number) > 0;
       final status =
           unlocked
               ? (hasStars ? LevelStatus.completed : LevelStatus.inProgress)
               : LevelStatus.locked;
 
-      // Only wire onTap when unlocked; build the page at tap-time
+      // Only wire onTap when unlocked.
       if (unlocked) {
         onTap = () {
-          final page = getLevelPage(
-            contentMap,
-            config.number,
-            language,
-            dialect,
-          );
-          if (page != null) Get.to(() => page);
+          // --- REFACTORED NAVIGATION LOGIC ---
+          final levelContent = contentMap[config.number];
+
+          if (levelContent is LessonSet) {
+            // Navigate to the LessonScreen using a binding to inject the controller.
+            Get.to(
+              () => const LessonScreen(),
+              binding: BindingsBuilder(() {
+                Get.put(
+                  LessonsController(
+                    lessonData: levelContent.lesson,
+                    levelNumber: config.number,
+                    language: language,
+                  ),
+                );
+              }),
+            );
+          } else if (levelContent is ExerciseSet) {
+            // Navigate to the ExerciseScreen using a binding to inject the controller.
+            Get.to(
+              () => const ExerciseScreen(),
+              binding: BindingsBuilder(() {
+                Get.put(
+                  ExercisesController(
+                    exercises: levelContent.exercises,
+                    levelNumber: config.number,
+                    language: language,
+                    dialect: dialect,
+                  ),
+                );
+              }),
+            );
+          }
         };
       }
 

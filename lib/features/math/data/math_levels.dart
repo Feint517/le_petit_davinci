@@ -2,6 +2,10 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/models/solve_equation_exercise_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
 
 final Map<int, LevelContent> unifiedMathLevels = {
   // ========== Group 1: Numbers 1-10 ==========
