@@ -78,9 +78,12 @@ class ListenAndChooseView extends GetView<ExercisesController> {
           ],
         ),
         const Gap(AppSizes.spaceBtwSections),
-        Obx(
-          () => AnimatedOpacity(
-            opacity: controller.showHint.value ? 1.0 : 0.0,
+        Obx(() {
+          // Cast the exercise to access its specific properties
+          final listenExercise = exercise;
+          return AnimatedOpacity(
+            // Read the state directly from the exercise model
+            opacity: listenExercise.showHint.value ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 400),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -95,8 +98,8 @@ class ListenAndChooseView extends GetView<ExercisesController> {
                 ),
               ],
             ),
-          ),
-        ),
+          );
+        }),
       ],
     );
   }

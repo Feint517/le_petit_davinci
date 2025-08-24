@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/exercises/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/views/listen_and_choose_view.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 
-class ListenAndChooseExercise extends Exercise with Audible{
+class ListenAndChooseExercise extends Exercise with Audible {
   final List<String> imageAssets;
   final int correctAnswer;
   final String label;
@@ -15,12 +16,13 @@ class ListenAndChooseExercise extends Exercise with Audible{
     required this.label,
   });
 
-  // State for this specific exercise is managed here.
-  int? selectedIndex;
+  // --- State Management for this specific exercise type ---
+  final Rxn<int> selectedIndex = Rxn<int>();
+  final RxBool showHint = false.obs;
 
   /// The view will call this method when the user selects an image.
   void selectOption(int index) {
-    selectedIndex = index;
+    selectedIndex.value = index;
   }
 
   @override
@@ -30,24 +32,21 @@ class ListenAndChooseExercise extends Exercise with Audible{
 
   @override
   AnswerResult checkAnswer() {
-    final bool isCorrect = selectedIndex == correctAnswer;
+    final bool isCorrect = selectedIndex.value == correctAnswer;
 
     // The correct answer text is the label that was spoken.
-    return AnswerResult(
-      isCorrect: isCorrect,
-      correctAnswerText: label,
-    );
+    return AnswerResult(isCorrect: isCorrect, correctAnswerText: label);
   }
 
   @override
-  bool get isAnswerReady => selectedIndex != null;
+  bool get isAnswerReady => selectedIndex.value != null;
 
   @override
   void reset() {
-    selectedIndex = null;
+    selectedIndex.value = null;
     resetAudio();
   }
-  
+
   // This is required by the Audible mixin.
   @override
   String get audioText => label;

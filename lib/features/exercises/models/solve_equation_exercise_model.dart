@@ -16,7 +16,6 @@
 
 // enum EquationType { addition, subtraction, mixed }
 
-
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/features/exercises/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
@@ -57,7 +56,8 @@ class SolveEquationExercise extends Exercise {
 
   @override
   AnswerResult checkAnswer() {
-    final bool isCorrect = (selectedIndex != null) && (options[selectedIndex!] == correctAnswer);
+    final bool isCorrect =
+        (selectedIndex != null) && (options[selectedIndex!] == correctAnswer);
     return AnswerResult(
       isCorrect: isCorrect,
       correctAnswerText: '$equation ${correctAnswer.toString()}',

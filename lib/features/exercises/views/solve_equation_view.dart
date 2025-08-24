@@ -25,18 +25,23 @@ class SolveEquationView extends StatelessWidget {
           runSpacing: 16,
           alignment: WrapAlignment.center,
           children: List.generate(exercise.options.length, (index) {
-            return Obx(() => ChoiceChip(
-                  label: Text(exercise.options[index].toString(), style: const TextStyle(fontSize: 24)),
-                  selected: exercise.selectedIndex == index,
-                  onSelected: (isSelected) {
-                    if (isSelected) {
-                      // Update the model's state, not the controller's
-                      exercise.selectOption(index);
-                      // Trigger a rebuild of this widget
-                      controller.update(); 
-                    }
-                  },
-                ));
+            return Obx(
+              () => ChoiceChip(
+                label: Text(
+                  exercise.options[index].toString(),
+                  style: const TextStyle(fontSize: 24),
+                ),
+                selected: exercise.selectedIndex == index,
+                onSelected: (isSelected) {
+                  if (isSelected) {
+                    // Update the model's state, not the controller's
+                    exercise.selectOption(index);
+                    // Trigger a rebuild of this widget
+                    controller.update();
+                  }
+                },
+              ),
+            );
           }),
         ),
       ],

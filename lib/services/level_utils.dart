@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart'
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
 import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
-import 'package:le_petit_davinci/features/math/data/math_levels.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
 /// Utility class to generate level data for different subjects
@@ -23,9 +22,7 @@ class LevelUtils {
       //     ? LevelType.lesson
       //     : LevelType.exercise;
       final type =
-          (levelContent is LessonSet || levelContent is MathLessonSet)
-              ? LevelType.lesson
-              : LevelType.exercise;
+          (levelContent is LessonSet) ? LevelType.lesson : LevelType.exercise;
 
       return LevelConfig(
         number: level,

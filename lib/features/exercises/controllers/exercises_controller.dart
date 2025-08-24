@@ -218,7 +218,7 @@ class ExercisesController extends GetxController {
   //   );
   // }
 
-  void _handleAnswerSubmission(dynamic userAnswer) async {
+  void checkAnswer() async {
     // The controller no longer needs a switch statement.
     // It just tells the current exercise to check itself.
     final result = currentExercise.checkAnswer();
