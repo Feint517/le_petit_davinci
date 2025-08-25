@@ -19,7 +19,7 @@ class DrawingActivity extends Activity {
     ever(mascotController.isCompleted, (bool isDone) {
       if (isDone) {
         // Use a small delay to allow the button animation to finish.
-        Future.delayed(const Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 1), () {
           isIntroCompleted.value = true;
         });
       }
