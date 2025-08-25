@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/views/drawing_activity_view_new.dart';
+import 'package:le_petit_davinci/features/lessons/views/drawing_activity_view.dart';
 
 class DrawingActivity extends Activity {
   DrawingActivity({
@@ -19,7 +19,7 @@ class DrawingActivity extends Activity {
     ever(mascotController.isCompleted, (bool isDone) {
       if (isDone) {
         // Use a small delay to allow the button animation to finish.
-        Future.delayed(const Duration(milliseconds: 400), () {
+        Future.delayed(const Duration(seconds: 3), () {
           isIntroCompleted.value = true;
         });
       }

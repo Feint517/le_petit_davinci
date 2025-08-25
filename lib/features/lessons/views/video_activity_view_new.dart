@@ -11,26 +11,6 @@ class VideoActivityView extends StatelessWidget {
 
   final VideoActivity activity;
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Obx(() {
-  //     if (!activity.isIntroCompleted.value) {
-  //       // State 1: Show the introduction.
-  //       return LessonIntroWrapper(
-  //         messages: ['First of all, let\'s watch a video!'],
-  //         buttonLabel: 'Start Video',
-  //         onIntroComplete: activity.markIntroAsCompleted,
-  //       );
-  //     } else {
-  //       // State 2: Show the embedded video player.
-  //       return EmbeddedVideoPlayer(
-  //         videoId: activity.videoId,
-  //         onVideoCompleted: activity.markVideoAsCompleted,
-  //       );
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Obx(() {
