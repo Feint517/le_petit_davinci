@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/views/video_activity_view_new.dart';
+import 'package:le_petit_davinci/features/lessons/widgets/full_screen_video_player.dart';
+import 'package:le_petit_davinci/features/lessons/views/video_activity_view.dart';
 
 class VideoActivity extends Activity {
   VideoActivity({required this.videoId}) {
@@ -18,6 +19,22 @@ class VideoActivity extends Activity {
         Future.delayed(const Duration(milliseconds: 400), () {
           isIntroCompleted.value = true;
         });
+      }
+    });
+
+    // When the intro is complete, launch the full-screen player.
+    ever(isIntroCompleted, (bool isReady) {
+      if (isReady) {
+        Get.to(
+          () => FullScreenVideoPlayer(
+            videoId: videoId,
+            onVideoCompleted: () {
+              // When the video finishes, navigate back and mark the activity as complete.
+              Get.back();
+              markVideoAsCompleted();
+            },
+          ),
+        );
       }
     });
   }

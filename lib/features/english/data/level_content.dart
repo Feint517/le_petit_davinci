@@ -18,6 +18,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       title: 'Alphabet - A, B, C, D',
       introduction: 'Let\'s learn the letters A, B, C, and D!',
       activities: [
+        VideoActivity(videoId: 'ccEpTTZW34g'),
         DrawingActivity(
           prompt: 'Let\'s learn to write the letter "A"!',
           templateImagePath: ImageAssets.drawableA,
