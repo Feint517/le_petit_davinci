@@ -9,11 +9,13 @@ import 'package:le_petit_davinci/core/utils/string_utils.dart';
 import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
+import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
+import 'package:le_petit_davinci/features/lessons/widgets/progress_bar.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import '../../constants/assets_manager.dart';
 import '../../constants/colors.dart';
 
-enum ProfileHeaderType { normal, compact }
+enum ProfileHeaderType { normal, compact, lesson }
 
 class ProfileHeader extends GetView<UserController>
     implements PreferredSizeWidget {
@@ -36,8 +38,12 @@ class ProfileHeader extends GetView<UserController>
   final VoidCallback? onBackButtonPressed;
   final ProfileHeaderType type;
 
+  // @override
+  // Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
   @override
-  Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
+  Size get preferredSize => Size.fromHeight(
+    type == ProfileHeaderType.lesson ? 100.h : DeviceUtils.getAppBarHeight(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -49,123 +55,119 @@ class ProfileHeader extends GetView<UserController>
         width: double.infinity,
         height: DeviceUtils.getAppBarHeight(),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child:
-            type == ProfileHeaderType.normal
-                ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //* Left Section - User Info
-                    Row(
-                      children: [
-                        //* Avatar
-                        GestureDetector(
-                          onTap:
-                              avatarOnTap ??
-                              () => Get.to(() => const RewardsScreen()),
-                          child: Container(
-                            width: 48.w,
-                            height: 48.w,
-                            padding: EdgeInsets.all(2.w),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: AppColors.primary,
-                                width: 2.5,
-                              ),
-                            ),
-                            child: ClipOval(
-                              child: SvgPicture.asset(
-                                avatarPath ?? SvgAssets.avatar1,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ),
+        child: switch (type) {
+          ProfileHeaderType.normal => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //* Left Section - User Info
+              Row(
+                children: [
+                  //* Avatar
+                  GestureDetector(
+                    onTap:
+                        avatarOnTap ??
+                        () => Get.to(() => const RewardsScreen()),
+                    child: Container(
+                      width: 48.w,
+                      height: 48.w,
+                      padding: EdgeInsets.all(2.w),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.primary,
+                          width: 2.5,
                         ),
-
-                        Gap(12.w),
-
-                        //* User Name and Class
-                        Obx(
-                          () =>
-                              ((controller.isLoading.value)
-                                  ? const CustomShimmerEffect(
-                                    width: 160,
-                                    height: 25,
-                                  )
-                                  : Text(
-                                    '${StringUtils.capitalize(controller.user.value!.name)} | ${StringUtils.capitalize(controller.user.value!.userClass)}',
-                                    style:
-                                        Theme.of(
-                                          context,
-                                        ).textTheme.headlineSmall,
-                                  )),
-                        ),
-                      ],
-                    ),
-
-                    //* Right Section - Change Avatar Action
-                    if (showTrailingIcon)
-                      IconButton(
-                        onPressed:
-                            trailingIconOnTap ??
-                            () => Get.to(() => const DashboardScreen()),
-                        icon: Icon(Iconsax.setting),
                       ),
-                  ],
-                )
-                : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: onBackButtonPressed ?? () => Get.back(),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0,
-                          vertical: 5.0,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: AppColors.white,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                              size: 10,
-                            ),
-                            Text('Back', style: TextStyle(color: Colors.black)),
-                          ],
+                      child: ClipOval(
+                        child: SvgPicture.asset(
+                          avatarPath ?? SvgAssets.avatar1,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap:
-                          avatarOnTap ??
-                          () => Get.to(() => const RewardsScreen()),
-                      child: Container(
-                        width: 48.w,
-                        height: 48.w,
-                        padding: EdgeInsets.all(2.w),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.primary,
-                            width: 2.5,
-                          ),
-                        ),
-                        child: ClipOval(
-                          child: SvgPicture.asset(
-                            avatarPath ?? SvgAssets.avatar1,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+
+                  Gap(12.w),
+
+                  //* User Name and Class
+                  Obx(
+                    () =>
+                        ((controller.isLoading.value)
+                            ? const CustomShimmerEffect(width: 160, height: 25)
+                            : Text(
+                              '${StringUtils.capitalize(controller.user.value!.name)} | ${StringUtils.capitalize(controller.user.value!.userClass)}',
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            )),
+                  ),
+                ],
+              ),
+
+              //* Right Section - Change Avatar Action
+              if (showTrailingIcon)
+                IconButton(
+                  onPressed:
+                      trailingIconOnTap ??
+                      () => Get.to(() => const DashboardScreen()),
+                  icon: Icon(Iconsax.setting),
                 ),
+            ],
+          ),
+          ProfileHeaderType.compact => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: onBackButtonPressed ?? () => Get.back(),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                    vertical: 5.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: AppColors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                        size: 10,
+                      ),
+                      Text('Back', style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: avatarOnTap ?? () => Get.to(() => const RewardsScreen()),
+                child: Container(
+                  width: 48.w,
+                  height: 48.w,
+                  padding: EdgeInsets.all(2.w),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.primary, width: 2.5),
+                  ),
+                  child: ClipOval(
+                    child: SvgPicture.asset(
+                      avatarPath ?? SvgAssets.avatar1,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          ProfileHeaderType.lesson => Obx(() {
+            final lessonsController = Get.find<LessonsController>();
+            return LessonProgressBar(
+              totalSteps: lessonsController.lessonData.activities.length,
+              currentStep: lessonsController.currentPage.value,
+            );
+          }),
+        },
       ),
     );
   }
