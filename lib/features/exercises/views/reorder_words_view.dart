@@ -44,10 +44,11 @@ class ReorderWordsView extends GetView<ExercisesController> {
         Obx(
           () => Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(controller.selectedOrder.length, (i) {
-              final wordIdx = controller.selectedOrder[i];
+            children: List.generate(exercise.selectedOrder.length, (i) {
+              final wordIdx = exercise.selectedOrder[i];
               return GestureDetector(
-                onTap: () => controller.selectedOrder.remove(wordIdx),
+                // onTap: () => controller.selectedOrder.remove(wordIdx),
+                onTap: () => exercise.selectedOrder.remove(wordIdx),
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   padding: const EdgeInsets.symmetric(
@@ -79,12 +80,10 @@ class ReorderWordsView extends GetView<ExercisesController> {
             runSpacing: AppSizes.md,
             alignment: WrapAlignment.center,
             children: List.generate(exercise.words.length, (index) {
-              final isSelected = controller.selectedOrder.contains(index);
+              final isSelected = exercise.selectedOrder.contains(index);
               return GestureDetector(
                 onTap:
-                    isSelected
-                        ? null
-                        : () => controller.selectedOrder.add(index),
+                    isSelected ? null : () => exercise.selectedOrder.add(index),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   padding: const EdgeInsets.symmetric(

@@ -35,7 +35,7 @@ class ExerciseScreen extends GetView<ExercisesController> {
             Obx(
               () => CustomButton(
                 label: 'Check',
-                disabled: !controller.canCheckAnswer,
+                disabled: !controller.isAnswerReady.value,
                 onPressed: controller.checkAnswer,
               ),
             ),

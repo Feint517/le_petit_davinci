@@ -27,6 +27,10 @@ class FillTheBlankExercise extends Exercise {
   @override
   bool get isAnswerReady => selectedIndex.value != null;
 
+  @override
+  Stream<bool> get isAnswerReadyStream =>
+      selectedIndex.stream.map((index) => index != null);
+
   /// The view will call this method when the user selects an option.
   void selectOption(int index) {
     selectedIndex.value = index;
@@ -47,4 +51,6 @@ class FillTheBlankExercise extends Exercise {
   void reset() {
     selectedIndex.value = null;
   }
+  
+  
 }

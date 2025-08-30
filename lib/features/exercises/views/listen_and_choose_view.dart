@@ -28,29 +28,28 @@ class ListenAndChooseView extends GetView<ExercisesController> {
               itemBuilder: (context, index) {
                 return Obx(
                   () => GestureDetector(
-                    onTap:
-                        () =>
-                            controller.selectedListenChooseIndex.value = index,
+                    // onTap:
+                    //     () =>
+                    //         controller.selectedListenChooseIndex.value = index,
+                     onTap: () => exercise.selectOption(index),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       padding: EdgeInsets.all(AppSizes.sm),
                       decoration: BoxDecoration(
                         color:
-                            controller.selectedListenChooseIndex.value == index
+                            exercise.selectedIndex.value == index
                                 ? Color(0xFFe1f4ff)
                                 : AppColors.white,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: CustomShadowStyle.customCircleShadows(
                           color:
-                              controller.selectedListenChooseIndex.value ==
-                                      index
+                              exercise.selectedIndex.value == index
                                   ? AppColors.primary
                                   : AppColors.grey,
                         ),
                         border: Border.all(
                           color:
-                              controller.selectedListenChooseIndex.value ==
-                                      index
+                              exercise.selectedIndex.value == index
                                   ? AppColors.primary
                                   : AppColors.grey,
                         ),

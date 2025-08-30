@@ -33,7 +33,7 @@ class FillTheBlankView extends GetView<ExercisesController> {
               ),
               child: Center(
                 child: Obx(() {
-                  final selected = controller.selectedFillBlankIndex.value;
+                  final selected = exercise.selectedIndex.value;
                   return Text(
                     selected != null
                         ? exercise.options[selected].optionText
@@ -63,21 +63,23 @@ class FillTheBlankView extends GetView<ExercisesController> {
                 padding: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
                 child: Obx(
                   () => GestureDetector(
-                    onTap:
-                        () => controller.selectedFillBlankIndex.value = index,
+                    // onTap:
+                    //     () => controller.selectedFillBlankIndex.value = index,
+                    onTap: () => exercise.selectOption(index),
+
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       width: DeviceUtils.getScreenWidth(),
                       height: 45,
                       decoration: BoxDecoration(
                         color:
-                            controller.selectedFillBlankIndex.value == index
+                            exercise.selectedIndex.value == index
                                 ? AppColors.accent
                                 : AppColors.white,
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: CustomShadowStyle.customCircleShadows(
                           color:
-                              controller.selectedFillBlankIndex.value == index
+                              exercise.selectedIndex.value == index
                                   ? AppColors.accent
                                   : AppColors.white,
                         ),
