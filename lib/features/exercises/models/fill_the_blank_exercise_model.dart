@@ -35,10 +35,6 @@ class FillTheBlankExercise extends Exercise {
   @override
   AnswerResult checkAnswer() {
     final bool isCorrect = selectedIndex.value == correctAnswer;
-    // final String correctAnswerText =
-    //     (correctAnswer >= 0 && correctAnswer < options.length)
-    //         ? options[correctAnswer].optionText
-    //         : 'Error: Invalid correct answer index.';
     final String correctAnswerText = options[correctAnswer].optionText;
 
     return AnswerResult(

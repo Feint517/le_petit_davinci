@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/views/reward.dart';
+import 'package:le_petit_davinci/services/progress_service.dart';
 
 class LessonsController extends GetxController {
   final Lesson lessonData;
@@ -92,6 +93,8 @@ class LessonsController extends GetxController {
     //   debugPrint('Lesson completion persistence failed: $e');
     // }
     // Navigate to the reward screen.
+
+    await ProgressService.instance.completeLevel(language, levelNumber);
     Get.off(() => const RewardScreen());
   }
 }

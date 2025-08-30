@@ -51,6 +51,21 @@ class ProgressService extends GetxService {
     }
   }
 
+  /// A high-level method to mark a level as complete.
+  /// This is the ONLY method controllers should call when a level is finished.
+  /// It awards 3 stars and unlocks the next level automatically.
+  Future<void> completeLevel(String lang, int level) async {
+    // Award 3 stars for completing the level.
+    await setStars(lang, level, 3);
+
+    // Unlock the next level.
+    await unlock(lang, level + 1);
+
+    // For debugging, you can log the new state.
+    print('Completed Level $level for language $lang. Unlocking level ${level + 1}.');
+    logUnlocked(lang);
+  }
+
   int totalStars(String lang) {
     final map = _starsMap(lang);
     return map.values.whereType<int>().fold<int>(

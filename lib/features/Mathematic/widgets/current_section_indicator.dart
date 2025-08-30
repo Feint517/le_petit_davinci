@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:le_petit_davinci/core/utils/colors_utils.dart';
-import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/data/models/section_data_model.dart';
 
 class CurrentSection extends StatelessWidget {
   const CurrentSection({super.key, required this.data});

@@ -9,6 +9,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/exercises/views/victory.dart';
 import 'package:le_petit_davinci/features/exercises/models/exercise_model.dart';
+import 'package:le_petit_davinci/features/lessons/views/reward.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
@@ -66,6 +67,14 @@ class ExercisesController extends GetxController {
     _audioPlayer.dispose();
     _tts.stop();
     super.onClose();
+  }
+
+  Future<void> _completeExercises() async {
+    // Call the single, clean method in the ProgressService.
+    await ProgressService.instance.completeLevel(language, levelNumber);
+
+    // Navigate to the reward screen.
+    Get.off(() => const RewardScreen());
   }
 
   void nextExercise() {

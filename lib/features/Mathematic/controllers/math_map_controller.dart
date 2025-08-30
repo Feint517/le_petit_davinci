@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
-import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/data/models/section_data_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/animal_counting_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/candy_shop_screen.dart';
 import 'package:le_petit_davinci/features/Mathematic/view/market_balance_screen.dart';

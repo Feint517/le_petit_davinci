@@ -9,13 +9,14 @@ import 'package:le_petit_davinci/core/utils/string_utils.dart';
 import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
+import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
 import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
 import 'package:le_petit_davinci/features/lessons/widgets/progress_bar.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import '../../constants/assets_manager.dart';
 import '../../constants/colors.dart';
 
-enum ProfileHeaderType { normal, compact, lesson }
+enum ProfileHeaderType { normal, compact, activity }
 
 class ProfileHeader extends GetView<UserController>
     implements PreferredSizeWidget {
@@ -42,7 +43,7 @@ class ProfileHeader extends GetView<UserController>
   // Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
   @override
   Size get preferredSize => Size.fromHeight(
-    type == ProfileHeaderType.lesson ? 100.h : DeviceUtils.getAppBarHeight(),
+    type == ProfileHeaderType.activity ? 100.h : DeviceUtils.getAppBarHeight(),
   );
 
   @override
@@ -160,13 +161,27 @@ class ProfileHeader extends GetView<UserController>
               ),
             ],
           ),
-          ProfileHeaderType.lesson => Obx(() {
-            final lessonsController = Get.find<LessonsController>();
-            return LessonProgressBar(
-              totalSteps: lessonsController.lessonData.activities.length,
-              currentStep: lessonsController.currentPage.value,
-            );
-          }),
+
+          ProfileHeaderType.activity => Obx(() {
+                int totalSteps = 0;
+                int currentStep = 0;
+
+                // Check which controller is active and get the progress data.
+                if (Get.isRegistered<LessonsController>()) {
+                  final controller = Get.find<LessonsController>();
+                  totalSteps = controller.lessonData.activities.length;
+                  currentStep = controller.currentPage.value;
+                } else if (Get.isRegistered<ExercisesController>()) {
+                  final controller = Get.find<ExercisesController>();
+                  totalSteps = controller.exercises.length;
+                  currentStep = controller.currentExerciseIndex.value;
+                }
+
+                return LessonProgressBar(
+                  totalSteps: totalSteps,
+                  currentStep: currentStep,
+                );
+              }),
         },
       ),
     );

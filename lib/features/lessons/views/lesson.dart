@@ -11,7 +11,7 @@ class LessonScreen extends GetView<LessonsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ProfileHeader(type: ProfileHeaderType.lesson),
+      appBar: ProfileHeader(type: ProfileHeaderType.activity),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
         child: Column(

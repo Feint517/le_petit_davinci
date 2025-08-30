@@ -20,7 +20,13 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: ColorsUtils.makeDarker(AppColors.accent),
-      appBar: const ProfileHeader(type: ProfileHeaderType.compact),
+      appBar: ProfileHeader(
+        type: ProfileHeaderType.compact,
+        onBackButtonPressed: () {
+          controller.loadMapData();
+          Get.back();
+        },
+      ),
       body: Stack(
         children: [
           const Positioned.fill(
@@ -31,20 +37,24 @@ class EnglishMapScreen extends GetView<EnglishMapController> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
-            child: ListView.separated(
-              controller: controller.scrollController,
-              itemBuilder:
-                  (_, index) =>
-                      index == 0
-                          ? Gap(DeviceUtils.getAppBarHeight() * 2)
-                          : MapSection(data: controller.mapSections[index - 1]),
-              separatorBuilder: (_, i) => const Gap(24.0),
-              padding: const EdgeInsets.only(
-                bottom: 24.0,
-                left: 16.0,
-                right: 16.0,
+            child: Obx(
+              () => ListView.separated(
+                controller: controller.scrollController,
+                itemBuilder:
+                    (_, index) =>
+                        index == 0
+                            ? Gap(DeviceUtils.getAppBarHeight() * 2)
+                            : MapSection(
+                              data: controller.mapSections[index - 1],
+                            ),
+                separatorBuilder: (_, i) => const Gap(24.0),
+                padding: const EdgeInsets.only(
+                  bottom: 24.0,
+                  left: 16.0,
+                  right: 16.0,
+                ),
+                itemCount: controller.mapSections.length + 1,
               ),
-              itemCount: controller.mapSections.length + 1,
             ),
           ),
         ],

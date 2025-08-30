@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/map_buttons.dart';
-import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/data/models/section_data_model.dart';
 import 'package:le_petit_davinci/features/Mathematic/widgets/section_title.dart';
 
 class MapSection extends StatelessWidget {

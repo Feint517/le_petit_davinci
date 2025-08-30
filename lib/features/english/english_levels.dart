@@ -2,7 +2,7 @@
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
-import 'package:le_petit_davinci/features/Mathematic/models/section_data_model.dart';
+import 'package:le_petit_davinci/data/models/section_data_model.dart';
 import 'package:le_petit_davinci/features/english/data/level_content.dart';
 import 'package:le_petit_davinci/services/level_utils.dart';
 
