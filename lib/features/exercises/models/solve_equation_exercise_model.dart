@@ -47,7 +47,6 @@ class SolveEquationExercise extends Exercise {
         (options[selectedIndex.value!] == correctAnswer);
     return AnswerResult(
       isCorrect: isCorrect,
-      // correctAnswerText: '$equation ${correctAnswer.toString()}',
       correctAnswerText: '$equation ${correctAnswer.toString()}',
     );
   }

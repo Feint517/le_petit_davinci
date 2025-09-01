@@ -28,9 +28,6 @@ class ListenAndChooseView extends GetView<ExercisesController> {
               itemBuilder: (context, index) {
                 return Obx(
                   () => GestureDetector(
-                    // onTap:
-                    //     () =>
-                    //         controller.selectedListenChooseIndex.value = index,
                      onTap: () => exercise.selectOption(index),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),

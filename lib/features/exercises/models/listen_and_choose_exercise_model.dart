@@ -47,11 +47,11 @@ class ListenAndChooseExercise extends Exercise with Audible {
     resetAudio();
   }
 
-  // This is required by the Audible mixin.
+  //? This is required by the Audible mixin.
   @override
   String get audioText => label;
-  
-   @override
+
+  @override
   Stream<bool> get isAnswerReadyStream =>
       selectedIndex.stream.map((index) => index != null);
 }

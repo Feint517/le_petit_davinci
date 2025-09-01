@@ -69,6 +69,58 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       label: 'Apple',
     ),
   ]),
+  // 2: ExerciseSet([
+  //   StoryExercise(
+  //     title: 'A Trip to the Supermarket',
+  //     elements: [
+  //       DialogueLine(
+  //         characterName: 'Mom',
+  //         avatarAsset: SvgAssets.bear, // Assuming you have a mom avatar
+  //         text: 'Leo, we need to buy some fruit.',
+  //       ),
+  //       DialogueLine(
+  //         characterName: 'Leo',
+  //         avatarAsset: SvgAssets.bearMasscot,
+  //         text: 'Okay, Mom! I see a red fruit.',
+  //       ),
+  //       // 3. An interactive question based on the dialogue.
+  //       StoryQuestion(
+  //         exercise: FillTheBlankExercise(
+  //           questionSuffix: ' is red.',
+  //           options: [
+  //             FillTheBlankOption(optionText: 'The apple'),
+  //             FillTheBlankOption(optionText: 'The banana'),
+  //           ],
+  //           correctAnswer: 0,
+  //         ),
+  //       ),
+  //       // 4. More dialogue.
+  //       DialogueLine(
+  //         characterName: 'Mom',
+  //         avatarAsset: SvgAssets.bear,
+  //         text: "That's right! Now, can you find a long, yellow fruit?",
+  //       ),
+  //       // 5. A different type of question.
+  //       StoryQuestion(
+  //         exercise: ListenAndChooseExercise(
+  //           imageAssets: [
+  //             ImageAssets.apple,
+  //             ImageAssets.banana,
+  //             ImageAssets.orange, // Assuming you have an orange asset
+  //           ],
+  //           correctAnswer: 1,
+  //           label: 'Banana',
+  //         ),
+  //       ),
+  //       // 6. Concluding dialogue.
+  //       DialogueLine(
+  //         characterName: 'Mom',
+  //         avatarAsset: SvgAssets.bear,
+  //         text: 'Perfect! You found the banana. Great job!',
+  //       ),
+  //     ],
+  //   ),
+  // ]),
   3: ExerciseSet([
     ReorderWordsExercise(
       words: ['is', 'a', 'This', 'cat'],

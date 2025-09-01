@@ -63,8 +63,6 @@ class FillTheBlankView extends GetView<ExercisesController> {
                 padding: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
                 child: Obx(
                   () => GestureDetector(
-                    // onTap:
-                    //     () => controller.selectedFillBlankIndex.value = index,
                     onTap: () => exercise.selectOption(index),
 
                     child: AnimatedContainer(
