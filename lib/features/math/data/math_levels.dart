@@ -1,6 +1,7 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/models/count_by_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/follow_pattern_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/solve_equation_exercise_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
@@ -72,4 +73,26 @@ final Map<int, LevelContent> unifiedMathLevels = {
       correctAnswers: [16, 20, 24],
     ),
   ]),
+  3: ExerciseSet([
+  FollowPatternExercise(
+    instruction: 'Follow the pattern to find the answer!',
+    examples: [
+      '3 + 1 = 4',
+      '4 + 1 = 5',
+    ],
+    question: '5 + 1 = ?',
+    options: [6, 7],
+    correctAnswerIndex: 0,
+  ),
+  FollowPatternExercise(
+    instruction: 'What comes next?',
+    examples: [
+      '10 - 2 = 8',
+      '8 - 2 = 6',
+    ],
+    question: '6 - 2 = ?',
+    options: [5, 4],
+    correctAnswerIndex: 1,
+  ),
+]),
 };
