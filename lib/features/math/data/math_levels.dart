@@ -47,16 +47,29 @@ final Map<int, LevelContent> unifiedMathLevels = {
   ]),
 
   2: ExerciseSet([
-    // SolveEquationExercise(
-    //   equation: '1 + 2 = ?',
-    //   options: [2, 3, 4, 5],
-    //   correctAnswer: 3,
-    // ),
     CountByExercise(
       instruction: 'Comptez de 1 en 1 jusqu\'à 6',
       initialSequence: [1, 2, 3],
       numberOfInputs: 3,
       correctAnswers: [4, 5, 6],
+    ),
+    CountByExercise(
+      instruction: 'Comptez de 2 en 2 jusqu\'à 12',
+      initialSequence: [2, 4, 6],
+      numberOfInputs: 3,
+      correctAnswers: [8, 10, 12],
+    ),
+    CountByExercise(
+      instruction: 'Comptez de 3 en 3 jusqu\'à 15',
+      initialSequence: [3, 6, 9],
+      numberOfInputs: 3,
+      correctAnswers: [12, 15, 18],
+    ),
+    CountByExercise(
+      instruction: 'Comptez de 4 en 4 jusqu\'à 24',
+      initialSequence: [4, 8, 12],
+      numberOfInputs: 3,
+      correctAnswers: [16, 20, 24],
     ),
   ]),
 };

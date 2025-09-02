@@ -43,6 +43,9 @@ class ExercisesController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    for (final exercise in exercises) {
+      exercise.reset();
+    }
     pageController = PageController();
     _setupExerciseListener();
     await _audioPlayer.setAsset(AudioAssets.correctSound);

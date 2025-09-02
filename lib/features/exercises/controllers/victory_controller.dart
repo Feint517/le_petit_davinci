@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/features/Mathematic/view/math_map.dart';
 import 'package:le_petit_davinci/features/english/view/english_map.dart';
 import 'package:le_petit_davinci/features/french/view/french_map.dart';
+import 'package:le_petit_davinci/features/math/views/math_map.dart';
 
 enum Subjects { english, math, french }
 
@@ -38,13 +38,13 @@ class VictoryController extends GetxController {
 
     switch (subject) {
       case Subjects.english:
-        destination = EnglishMapScreen(); // Replace with actual screen
+        destination = EnglishMapScreen();
         break;
       case Subjects.math:
-        destination = MathMapScreen(); // Replace with actual screen
+        destination = MathMapScreen2();
         break;
       case Subjects.french:
-        destination = FrenchMapScreen(); // Replace with actual screen
+        destination = FrenchMapScreen();
         break;
     }
 
