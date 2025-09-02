@@ -163,25 +163,25 @@ class ProfileHeader extends GetView<UserController>
           ),
 
           ProfileHeaderType.activity => Obx(() {
-                int totalSteps = 0;
-                int currentStep = 0;
+            int totalSteps = 0;
+            int currentStep = 0;
 
-                // Check which controller is active and get the progress data.
-                if (Get.isRegistered<LessonsController>()) {
-                  final controller = Get.find<LessonsController>();
-                  totalSteps = controller.lessonData.activities.length;
-                  currentStep = controller.currentPage.value;
-                } else if (Get.isRegistered<ExercisesController>()) {
-                  final controller = Get.find<ExercisesController>();
-                  totalSteps = controller.exercises.length;
-                  currentStep = controller.currentExerciseIndex.value;
-                }
+            // Check which controller is active and get the progress data.
+            if (Get.isRegistered<LessonsController>()) {
+              final controller = Get.find<LessonsController>();
+              totalSteps = controller.lessonData.activities.length;
+              currentStep = controller.currentPage.value;
+            } else if (Get.isRegistered<ExercisesController>()) {
+              final controller = Get.find<ExercisesController>();
+              totalSteps = controller.exercises.length;
+              currentStep = controller.currentExerciseIndex.value;
+            }
 
-                return LessonProgressBar(
-                  totalSteps: totalSteps,
-                  currentStep: currentStep,
-                );
-              }),
+            return LessonProgressBar(
+              totalSteps: totalSteps,
+              currentStep: currentStep,
+            );
+          }),
         },
       ),
     );

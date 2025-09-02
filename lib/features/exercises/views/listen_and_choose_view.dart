@@ -28,7 +28,7 @@ class ListenAndChooseView extends GetView<ExercisesController> {
               itemBuilder: (context, index) {
                 return Obx(
                   () => GestureDetector(
-                     onTap: () => exercise.selectOption(index),
+                    onTap: () => exercise.selectOption(index),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       padding: EdgeInsets.all(AppSizes.sm),

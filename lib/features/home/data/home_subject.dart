@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/features/Mathematic/view/math_map.dart';
 import 'package:le_petit_davinci/features/english/view/english_map.dart';
 import 'package:le_petit_davinci/features/french/view/french_map.dart';
 import 'package:le_petit_davinci/features/home/models/subject_card_model.dart';
+import 'package:le_petit_davinci/features/math/views/math_map.dart';
 import 'package:le_petit_davinci/features/studio/views/studio_main_screen.dart';
 import 'package:le_petit_davinci/features/vieQuotidienne/view/vie_quotidienne.dart';
 
@@ -18,6 +19,12 @@ final List<SubjectCardModel> subjects = [
   SubjectCardModel(
     name: 'Mathématiques',
     imagePath: SvgAssets.mathCard,
+    cardColor: AppColors.black,
+    destination: const MathMapScreen2(),
+  ),
+  SubjectCardModel(
+    name: 'Mathématiques',
+    imagePath: SvgAssets.mathCard,
     cardColor: AppColors.orangeAccent,
     destination: const MathMapScreen(),
   ),
@@ -27,12 +34,12 @@ final List<SubjectCardModel> subjects = [
     cardColor: AppColors.accent,
     destination: const EnglishMapScreen(),
   ),
-  SubjectCardModel(
-    name: 'Vie quotidienne',
-    imagePath: SvgAssets.lifeCard,
-    cardColor: AppColors.pinkAccent,
-    destination: const VieQuotidienneScreen(),
-  ),
+  // SubjectCardModel(
+  //   name: 'Vie quotidienne',
+  //   imagePath: SvgAssets.lifeCard,
+  //   cardColor: AppColors.pinkAccent,
+  //   destination: const VieQuotidienneScreen(),
+  // ),
   SubjectCardModel(
     name: 'Jeux',
     imagePath: SvgAssets.gameCard,

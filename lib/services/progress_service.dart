@@ -62,7 +62,9 @@ class ProgressService extends GetxService {
     await unlock(lang, level + 1);
 
     // For debugging, you can log the new state.
-    print('Completed Level $level for language $lang. Unlocking level ${level + 1}.');
+    print(
+      'Completed Level $level for language $lang. Unlocking level ${level + 1}.',
+    );
     logUnlocked(lang);
   }
 

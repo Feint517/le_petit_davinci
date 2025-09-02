@@ -21,12 +21,14 @@ class ReorderWordsExercise extends Exercise {
 
   @override
   AnswerResult checkAnswer() {
-    final bool isCorrect = ListEquality().equals(selectedOrder.toList(), correctOrder);
+    final bool isCorrect = ListEquality().equals(
+      selectedOrder.toList(),
+      correctOrder,
+    );
     return AnswerResult(
       isCorrect: isCorrect,
       // correctAnswerText: correctOrder.join(' '),
-      correctAnswerText:
-          correctOrder.map((i) => words[i]).join(' '),
+      correctAnswerText: correctOrder.map((i) => words[i]).join(' '),
     );
   }
 

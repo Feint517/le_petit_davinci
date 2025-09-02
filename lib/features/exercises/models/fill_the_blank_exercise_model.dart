@@ -51,6 +51,4 @@ class FillTheBlankExercise extends Exercise {
   void reset() {
     selectedIndex.value = null;
   }
-  
-  
 }

@@ -8,12 +8,11 @@ import 'package:le_petit_davinci/core/utils/colors_utils.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/features/Mathematic/controllers/math_map_controller.dart';
 import 'package:le_petit_davinci/features/Mathematic/widgets/map_section.dart';
 import 'package:le_petit_davinci/features/math/controllers/math_map_controller.dart';
 
-class MathMapScreen extends GetView<MathMapController> {
-  const MathMapScreen({super.key});
+class MathMapScreen2 extends GetView<MathMapController2> {
+  const MathMapScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -17,7 +17,7 @@ class EnglishMapController extends GetxController {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     scrollController.dispose();
     super.dispose();
   }

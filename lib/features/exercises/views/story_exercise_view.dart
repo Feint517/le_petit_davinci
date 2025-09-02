@@ -16,7 +16,7 @@ class StoryExerciseView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-         child: Obx(
+          child: Obx(
             () => ListView.builder(
               controller: exercise.scrollController,
               padding: const EdgeInsets.only(bottom: 20),
@@ -46,9 +46,9 @@ class StoryExerciseView extends StatelessWidget {
             disabled: !exercise.isInternalStepReady.value,
             onPressed: () {
               if (isQuestion) {
-                final result = (exercise.currentElement as StoryQuestion)
-                    .exercise
-                    .checkAnswer();
+                final result =
+                    (exercise.currentElement as StoryQuestion).exercise
+                        .checkAnswer();
                 // TODO: Implement feedback sheet logic.
                 if (result.isCorrect) {
                   exercise.advanceToNextElement();

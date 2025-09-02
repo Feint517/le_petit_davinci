@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/features/english/view/english_map.dart';
 import 'package:le_petit_davinci/features/exercises/controllers/victory_controller.dart';
 import 'package:le_petit_davinci/features/exercises/widgets/stars_section.dart';
 
@@ -18,7 +17,6 @@ class VictoryScreen extends GetView<VictoryController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VictoryController());
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
@@ -60,14 +58,7 @@ class VictoryScreen extends GetView<VictoryController> {
                     const Spacer(),
                     CustomButton(
                       label: 'Continue',
-                      onPressed: () {
-                        //? Remove current and previous screen, then push the next screen
-                        Get.offUntil(
-                          MaterialPageRoute(builder: (_) => EnglishMapScreen()),
-                          (route) => route.isFirst,
-                        );
-                        // BackgroundMusicController.instance.playMusic();
-                      },
+                      onPressed: () => controller.navigateToMapScreen(),
                     ),
                     Gap(DeviceUtils.getBottomNavigationBarHeight()),
                   ],
