@@ -6,6 +6,9 @@ const String LOTTIE_PATH = 'assets/lottie/misc';
 const String ICON_PATH = 'assets/icons';
 
 class ImageAssets {
+
+
+
   static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';
   static const String questionBackground =
@@ -20,36 +23,37 @@ class ImageAssets {
   static const String ticTacToeOn = 'assets/images/tictactoe/on.png';
 
   //* listen and choose
-  static const String apple = 'assets/images/listen_and_choose/apple.png';
-  static const String banana = 'assets/images/listen_and_choose/banana.png';
-  static const String bear = 'assets/images/listen_and_choose/bear.png';
-  static const String bed = 'assets/images/listen_and_choose/bed.png';
-  static const String bird = 'assets/images/listen_and_choose/bird.png';
-  static const String cat = 'assets/images/listen_and_choose/cat.png';
-  static const String chicken = 'assets/images/listen_and_choose/chicken.png';
-  static const String cow = 'assets/images/listen_and_choose/cow.png';
-  static const String dog = 'assets/images/listen_and_choose/dog.png';
-  static const String duck = 'assets/images/listen_and_choose/duck.png';
-  static const String elephant = 'assets/images/listen_and_choose/elephant.png';
-  static const String fish = 'assets/images/listen_and_choose/fish.png';
-  static const String home = 'assets/images/listen_and_choose/home.png';
-  static const String horse = 'assets/images/listen_and_choose/horse.png';
-  static const String lion = 'assets/images/listen_and_choose/lion.png';
-  static const String monkey = 'assets/images/listen_and_choose/monkey.png';
-  static const String mouse = 'assets/images/listen_and_choose/mouse.png';
-  static const String panda = 'assets/images/listen_and_choose/panda.png';
-  static const String parrot = 'assets/images/listen_and_choose/parrot.png';
-  static const String phone = 'assets/images/listen_and_choose/phone.png';
+  static const String apple = 'assets/images/illustrations/apple.png';
+  static const String banana = 'assets/images/illustrations/banana.png';
+  static const String bear = 'assets/images/illustrations/bear.png';
+  static const String bed = 'assets/images/illustrations/bed.png';
+  static const String bird = 'assets/images/illustrations/bird.png';
+  static const String cat = 'assets/images/illustrations/cat.png';
+  static const String chicken = 'assets/images/illustrations/chicken.png';
+  static const String cow = 'assets/images/illustrations/cow.png';
+  static const String dog = 'assets/images/illustrations/dog.png';
+  static const String duck = 'assets/images/illustrations/duck.png';
+  static const String elephant = 'assets/images/illustrations/elephant.png';
+  static const String fish = 'assets/images/illustrations/fish.png';
+  static const String home = 'assets/images/illustrations/home.png';
+  static const String horse = 'assets/images/illustrations/horse.png';
+  static const String lion = 'assets/images/illustrations/lion.png';
+  static const String moneyPaper = 'assets/images/illustrations/money_paper.jpg';
+  static const String monkey = 'assets/images/illustrations/monkey.png';
+  static const String mouse = 'assets/images/illustrations/mouse.png';
+  static const String panda = 'assets/images/illustrations/panda.png';
+  static const String parrot = 'assets/images/illustrations/parrot.png';
+  static const String phone = 'assets/images/illustrations/phone.png';
   static const String pineapple =
-      'assets/images/listen_and_choose/pineapple.png';
-  static const String rabbit = 'assets/images/listen_and_choose/rabbit.png';
+      'assets/images/illustrations/pineapple.png';
+  static const String rabbit = 'assets/images/illustrations/rabbit.png';
   static const String restaurant =
-      'assets/images/listen_and_choose/restaurant.png';
+      'assets/images/illustrations/restaurant.png';
   static const String strawberry =
-      'assets/images/listen_and_choose/strawberry.png';
-  static const String table = 'assets/images/listen_and_choose/table.png';
-  static const String tiger = 'assets/images/listen_and_choose/tiger.png';
-  static const String zebra = 'assets/images/listen_and_choose/zebra.png';
+      'assets/images/illustrations/strawberry.png';
+  static const String table = 'assets/images/illustrations/table.png';
+  static const String tiger = 'assets/images/illustrations/tiger.png';
+  static const String zebra = 'assets/images/illustrations/zebra.png';
   static const String sheep = 'assets/images/illustrations/sheep.png';
   static const String pig = 'assets/images/illustrations/pig.png';
 

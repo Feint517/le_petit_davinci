@@ -22,7 +22,7 @@ class ListenAndChooseView extends GetView<ExercisesController> {
         Stack(
           alignment: Alignment.center,
           children: [
-            CustomGridLayout2(
+            CustomGridLayout(
               itemCount: exercise.imageAssets.length,
               spacing: AppSizes.gridViewSpacing * 2,
               itemBuilder: (context, index) {

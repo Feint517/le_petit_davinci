@@ -1,8 +1,10 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/models/count_by_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/draggable_item_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/follow_pattern_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/solve_equation_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/story_problem_exercise.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
@@ -93,6 +95,17 @@ final Map<int, LevelContent> unifiedMathLevels = {
     question: '6 - 2 = ?',
     options: [5, 4],
     correctAnswerIndex: 1,
+  ),
+]),
+4: ExerciseSet([
+  StoryProblemExercise(
+    instruction: 'I offered to buy protein bars for 5 friends. Each bar costs \$3. How much will that cost me?',
+    correctTotalValue: 15,
+    draggableOptions: [
+      DraggableItem(id: '1', value: 1, assetPath: ImageAssets.moneyPaper),
+      DraggableItem(id: '5', value: 5, assetPath: ImageAssets.moneyPaper),
+      DraggableItem(id: '10', value: 10, assetPath: ImageAssets.moneyPaper),
+    ],
   ),
 ]),
 };

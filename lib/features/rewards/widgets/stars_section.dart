@@ -27,7 +27,7 @@ class StarsSection extends GetView<RewardsController> {
         const Gap(AppSizes.spaceBtwSections),
 
         CustomGridLayout(
-          mainAxisExtent: 90,
+          spacing: 16,
           itemCount: 7,
           itemBuilder: (_, index) {
             final starsPerDay = [3, 4, 1, 3, 2, 2, 2];

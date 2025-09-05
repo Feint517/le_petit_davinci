@@ -62,7 +62,7 @@ class GamesScreen extends StatelessWidget {
                       ),
                       const Gap(AppSizes.spaceBtwSections),
                       CustomGridLayout(
-                        mainAxisExtent: 250,
+                        spacing: 250,
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           final List gamesList = [

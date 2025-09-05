@@ -24,7 +24,7 @@ class SubjectSelection extends StatelessWidget {
           //* Grid of subject cards
           CustomGridLayout(
             itemCount: subjects.length,
-            mainAxisExtent: 185.h,
+            spacing: 16.h,
             itemBuilder: (context, index) {
               final subject = subjects[index];
               return SubjectCard(subject: subject);
