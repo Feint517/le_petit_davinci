@@ -6,9 +6,6 @@ const String LOTTIE_PATH = 'assets/lottie/misc';
 const String ICON_PATH = 'assets/icons';
 
 class ImageAssets {
-
-
-
   static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';
   static const String questionBackground =
@@ -38,19 +35,17 @@ class ImageAssets {
   static const String home = 'assets/images/illustrations/home.png';
   static const String horse = 'assets/images/illustrations/horse.png';
   static const String lion = 'assets/images/illustrations/lion.png';
-  static const String moneyPaper = 'assets/images/illustrations/money_paper.jpg';
+  static const String moneyPaper =
+      'assets/images/illustrations/money_paper.jpg';
   static const String monkey = 'assets/images/illustrations/monkey.png';
   static const String mouse = 'assets/images/illustrations/mouse.png';
   static const String panda = 'assets/images/illustrations/panda.png';
   static const String parrot = 'assets/images/illustrations/parrot.png';
   static const String phone = 'assets/images/illustrations/phone.png';
-  static const String pineapple =
-      'assets/images/illustrations/pineapple.png';
+  static const String pineapple = 'assets/images/illustrations/pineapple.png';
   static const String rabbit = 'assets/images/illustrations/rabbit.png';
-  static const String restaurant =
-      'assets/images/illustrations/restaurant.png';
-  static const String strawberry =
-      'assets/images/illustrations/strawberry.png';
+  static const String restaurant = 'assets/images/illustrations/restaurant.png';
+  static const String strawberry = 'assets/images/illustrations/strawberry.png';
   static const String table = 'assets/images/illustrations/table.png';
   static const String tiger = 'assets/images/illustrations/tiger.png';
   static const String zebra = 'assets/images/illustrations/zebra.png';

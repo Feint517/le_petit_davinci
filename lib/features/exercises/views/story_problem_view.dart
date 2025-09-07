@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/exercises/models/draggable_item_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/story_problem_exercise.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/money_paper.dart';
+import 'package:le_petit_davinci/features/exercises/widgets/item_widget.dart';
 
 class StoryProblemView extends StatelessWidget {
   const StoryProblemView({super.key, required this.exercise});
@@ -59,7 +59,7 @@ class StoryProblemView extends StatelessWidget {
                         // Allow tapping an item in the drop zone to remove it
                         return GestureDetector(
                           onTap: () => exercise.removeItem(item),
-                          child: MoneyPaperWidget(
+                          child: ItemWidget(
                             assetPath: item.assetPath,
                             value: item.value,
                           ),
@@ -82,19 +82,19 @@ class StoryProblemView extends StatelessWidget {
                   return Draggable<DraggableItem>(
                     data: item,
                     // The feedback widget is what's shown while dragging
-                    feedback: MoneyPaperWidget(
+                    feedback: ItemWidget(
                       assetPath: item.assetPath,
                       value: item.value,
+                      height: 60,
                     ),
                     childWhenDragging: Opacity(
                       opacity: 0.5,
-                      child: MoneyPaperWidget(
+                      child: ItemWidget(
                         assetPath: item.assetPath,
                         value: item.value,
                       ),
                     ),
-                    // This is the widget in its normal state
-                    child: MoneyPaperWidget(
+                    child: ItemWidget(
                       assetPath: item.assetPath,
                       value: item.value,
                     ),

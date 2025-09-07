@@ -15,7 +15,6 @@ class WelcomeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //const AchievementBanner(starCount: 4),
         Gap(AppSizes.spaceBtwItems.h),
         Stack(
           alignment: Alignment.topCenter,
@@ -35,17 +34,17 @@ class WelcomeSection extends StatelessWidget {
             ),
 
             //* Mission Card positioned slightly below center
-            Align(
-              widthFactor: 4,
-              heightFactor: 2.1,
-              alignment: Alignment(0, 4),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: const MissionCard(
-                  missionDescription: 'Trouve 5 mots qui riment !',
-                ),
-              ),
-            ),
+            // Align(
+            //   widthFactor: 4,
+            //   heightFactor: 2.1,
+            //   alignment: Alignment(0, 4),
+            //   child: Padding(
+            //     padding: EdgeInsets.symmetric(horizontal: 20.w),
+            //     child: const MissionCard(
+            //       missionDescription: 'Trouve 5 mots qui riment !',
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         Gap(36.h),

@@ -43,8 +43,10 @@ class FollowPatternExercise extends Exercise {
   AnswerResult checkAnswer() {
     final bool isCorrect = selectedIndex.value == correctAnswerIndex;
     // Construct the full correct answer string, e.g., "5 + 1 = 6"
-    final String correctAnswerText =
-        question.replaceFirst('?', options[correctAnswerIndex].toString());
+    final String correctAnswerText = question.replaceFirst(
+      '?',
+      options[correctAnswerIndex].toString(),
+    );
 
     return AnswerResult(
       isCorrect: isCorrect,

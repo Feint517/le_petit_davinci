@@ -23,27 +23,27 @@ class MapSection extends StatelessWidget {
         ...List.generate(
           data.levels.length,
           (index) =>
-              index % 9 != 4
-                  ? Container(
-                    margin: EdgeInsets.only(
-                      bottom: index != data.levels.length - 1 ? 24.0 : 0,
-                      left: getLeft(index),
-                      right: getRight(index),
-                    ),
-                    child: MapButton(
-                      iconPath: SvgAssets.chat,
-                      backgroundColor: _getButtonColor(index),
-                      level: data.levels[index],
-                    ),
-                  )
-                  : Container(
-                    margin: const EdgeInsets.only(bottom: 24.0),
-                    child: const ResponsiveImageAsset(
-                      assetPath: 'assets/test/cofre-ruta.svg',
-                      width: 72,
-                      height: 72,
-                    ),
-                  ),
+          // index % 9 != 4
+          Container(
+            margin: EdgeInsets.only(
+              bottom: index != data.levels.length - 1 ? 24.0 : 0,
+              left: getLeft(index),
+              right: getRight(index),
+            ),
+            child: MapButton(
+              iconPath: SvgAssets.chat,
+              backgroundColor: _getButtonColor(index),
+              level: data.levels[index],
+            ),
+          ),
+          // : Container(
+          //   margin: const EdgeInsets.only(bottom: 24.0),
+          //   child: const ResponsiveImageAsset(
+          //     assetPath: 'assets/test/cofre-ruta.svg',
+          //     width: 72,
+          //     height: 72,
+          //   ),
+          // ),
         ),
       ],
     );

@@ -13,7 +13,7 @@ class CustomGridLayout extends StatelessWidget {
     required this.itemBuilder,
     this.columns = 2,
     this.spacing = 8.0,
-     this.childAspectRatio = 1.0, // Default to 1.0 (a square)
+    this.childAspectRatio = 1.0, // Default to 1.0 (a square)
   });
 
   @override

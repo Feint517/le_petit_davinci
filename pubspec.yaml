@@ -53,6 +53,7 @@ dependencies:
   permission_handler: ^12.0.1
   logger: ^2.6.0
   collection: ^1.19.1
+  rxdart: ^0.28.0
 
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
@@ -90,7 +91,6 @@ flutter:
     - assets/audio/tts/
     - assets/icons/
     - assets/images/
-    - assets/images/listen_and_choose/
     - assets/images/illustrations/
     - assets/images/templates/alphabets/
     - assets/images/tictactoe/

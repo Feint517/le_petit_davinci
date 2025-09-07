@@ -1,8 +1,10 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/exercises/models/count_by_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/crowssword_equation_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/draggable_item_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/follow_pattern_exercise_model.dart';
+import 'package:le_petit_davinci/features/exercises/models/math_crossword_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/solve_equation_exercise_model.dart';
 import 'package:le_petit_davinci/features/exercises/models/story_problem_exercise.dart';
 import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
@@ -76,36 +78,80 @@ final Map<int, LevelContent> unifiedMathLevels = {
     ),
   ]),
   3: ExerciseSet([
-  FollowPatternExercise(
-    instruction: 'Follow the pattern to find the answer!',
-    examples: [
-      '3 + 1 = 4',
-      '4 + 1 = 5',
-    ],
-    question: '5 + 1 = ?',
-    options: [6, 7],
-    correctAnswerIndex: 0,
-  ),
-  FollowPatternExercise(
-    instruction: 'What comes next?',
-    examples: [
-      '10 - 2 = 8',
-      '8 - 2 = 6',
-    ],
-    question: '6 - 2 = ?',
-    options: [5, 4],
-    correctAnswerIndex: 1,
-  ),
-]),
-4: ExerciseSet([
-  StoryProblemExercise(
-    instruction: 'I offered to buy protein bars for 5 friends. Each bar costs \$3. How much will that cost me?',
-    correctTotalValue: 15,
-    draggableOptions: [
-      DraggableItem(id: '1', value: 1, assetPath: ImageAssets.moneyPaper),
-      DraggableItem(id: '5', value: 5, assetPath: ImageAssets.moneyPaper),
-      DraggableItem(id: '10', value: 10, assetPath: ImageAssets.moneyPaper),
-    ],
-  ),
-]),
+    FollowPatternExercise(
+      instruction: 'Follow the pattern to find the answer!',
+      examples: ['3 + 1 = 4', '4 + 1 = 5'],
+      question: '5 + 1 = ?',
+      options: [6, 7],
+      correctAnswerIndex: 0,
+    ),
+    FollowPatternExercise(
+      instruction: 'What comes next?',
+      examples: ['10 - 2 = 8', '8 - 2 = 6'],
+      question: '6 - 2 = ?',
+      options: [5, 4],
+      correctAnswerIndex: 1,
+    ),
+  ]),
+  4: ExerciseSet([
+    StoryProblemExercise(
+      instruction:
+          'I offered to buy protein bars for 5 friends. Each bar costs \$3. How much will that cost me?',
+      correctTotalValue: 15,
+      unitName: 'dollars',
+      draggableOptions: [
+        // Use a generic money paper asset, the widget will handle the value text
+        DraggableItem(id: '5', value: 5, assetPath: ImageAssets.moneyPaper),
+        DraggableItem(id: '10', value: 10, assetPath: ImageAssets.moneyPaper),
+      ],
+    ),
+    StoryProblemExercise(
+      instruction:
+          'I have 3 apples. If I buy 2 more, how many apples do I have now?',
+      correctTotalValue: 5,
+      unitName: 'apples',
+      draggableOptions: [
+        // Each draggable apple represents a value of 1
+        DraggableItem(id: '1', value: 1, assetPath: ImageAssets.apple),
+      ],
+    ),
+  ]),
+  5: ExerciseSet([
+    MathEquationCrosswordExercise(
+      instruction: 'Solve the math crossword puzzle!',
+      gridSize: 5,
+      equations: [
+        // Horizontal equations
+        CrosswordEquation(
+          equation: "2+?=5",
+          answer: 3,
+          isHorizontal: true,
+          row: 1,
+          column: 0,
+        ),
+        CrosswordEquation(
+          equation: "?-2=4",
+          answer: 6,
+          isHorizontal: true,
+          row: 3,
+          column: 1,
+        ),
+        // Vertical equations
+        CrosswordEquation(
+          equation: "4×?=8",
+          answer: 2,
+          isHorizontal: false,
+          row: 0,
+          column: 2,
+        ),
+        CrosswordEquation(
+          equation: "9÷?=3",
+          answer: 3,
+          isHorizontal: false,
+          row: 2,
+          column: 4,
+        ),
+      ],
+    ),
+  ]),
 };

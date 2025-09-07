@@ -10,6 +10,8 @@ class StoryProblemExercise extends Exercise {
   final List<DraggableItem> draggableOptions;
   final int correctTotalValue;
 
+  final String unitName; // e.g., "dollars", "apples", "friends"
+
   // --- State Management for this Exercise ---
   // A list to hold the items the user has dropped into the answer area.
   final RxList<DraggableItem> droppedItems = <DraggableItem>[].obs;
@@ -18,6 +20,7 @@ class StoryProblemExercise extends Exercise {
     required this.instruction,
     required this.draggableOptions,
     required this.correctTotalValue,
+    this.unitName = '', // Default to empty string
   });
 
   /// Adds an item to the drop zone. Called by the view's DragTarget.
@@ -45,14 +48,19 @@ class StoryProblemExercise extends Exercise {
   @override
   AnswerResult checkAnswer() {
     // Calculate the sum of values of all dropped items.
-    final int userAnswer =
-        droppedItems.fold(0, (sum, item) => sum + item.value);
+    final int userAnswer = droppedItems.fold(
+      0,
+      (sum, item) => sum + item.value,
+    );
 
     final bool isCorrect = userAnswer == correctTotalValue;
 
+    final String answerText =
+        'The correct answer is $correctTotalValue ${unitName.trim()}';
+
     return AnswerResult(
       isCorrect: isCorrect,
-      correctAnswerText: 'The correct answer is \$${correctTotalValue.toString()}',
+      correctAnswerText: answerText.trim(),
     );
   }
 

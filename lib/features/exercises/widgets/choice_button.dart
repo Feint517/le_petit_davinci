@@ -28,7 +28,10 @@ class ChoiceButton extends StatelessWidget {
           color: isSelected ? AppColors.primary : AppColors.white,
           borderRadius: BorderRadius.circular(AppSizes.cardRadiusLg),
           boxShadow: CustomShadowStyle.customCircleShadows(
-            color: isSelected ? AppColors.primary.withValues(alpha: 0.5) : AppColors.grey,
+            color:
+                isSelected
+                    ? AppColors.primary.withValues(alpha: 0.5)
+                    : AppColors.grey,
           ),
           border: isSelected ? null : Border.all(color: AppColors.grey),
         ),
@@ -36,9 +39,9 @@ class ChoiceButton extends StatelessWidget {
           child: Text(
             text,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: isSelected ? AppColors.white : AppColors.black,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: isSelected ? AppColors.white : AppColors.black,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

@@ -19,7 +19,7 @@ class Numpad extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
-      childAspectRatio: 2 / 1.5,
+      childAspectRatio: 2.5,
       children: [
         ...List.generate(9, (index) {
           final number = (index + 1).toString();
