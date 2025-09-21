@@ -9,9 +9,8 @@ import 'package:le_petit_davinci/core/utils/string_utils.dart';
 import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
-import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
-import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
-import 'package:le_petit_davinci/features/lessons/widgets/progress_bar.dart';
+import 'package:le_petit_davinci/features/levels/widgets/progress_bar.dart';
+import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import '../../constants/assets_manager.dart';
 import '../../constants/colors.dart';
@@ -167,17 +166,13 @@ class ProfileHeader extends GetView<UserController>
             int currentStep = 0;
 
             // Check which controller is active and get the progress data.
-            if (Get.isRegistered<LessonsController>()) {
-              final controller = Get.find<LessonsController>();
-              totalSteps = controller.lessonData.activities.length;
-              currentStep = controller.currentPage.value;
-            } else if (Get.isRegistered<ExercisesController>()) {
-              final controller = Get.find<ExercisesController>();
-              totalSteps = controller.exercises.length;
-              currentStep = controller.currentExerciseIndex.value;
+            if (Get.isRegistered<LevelController>()) {
+              final controller = Get.find<LevelController>();
+              totalSteps = controller.levelSet.activities.length;
+              currentStep = controller.currentIndex.value;
             }
 
-            return LessonProgressBar(
+            return LevelProgressBar(
               totalSteps: totalSteps,
               currentStep: currentStep,
             );

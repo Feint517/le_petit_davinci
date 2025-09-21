@@ -1,14 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/enums.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_config_model.dart';
 import 'package:le_petit_davinci/data/models/lessons&exercises/level_model.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
-import 'package:le_petit_davinci/features/exercises/controllers/exercises_controller.dart';
-import 'package:le_petit_davinci/features/exercises/controllers/victory_controller.dart';
-import 'package:le_petit_davinci/features/exercises/views/exercise.dart';
-import 'package:le_petit_davinci/features/lessons/controllers/lesson_controller.dart';
-import 'package:le_petit_davinci/features/lessons/views/lesson.dart';
+import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
+import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
+import 'package:le_petit_davinci/features/levels/views/level_screen.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
 class LevelUtils {
@@ -19,9 +19,11 @@ class LevelUtils {
     final sortedLevels = contentMap.keys.toList()..sort();
 
     return sortedLevels.map((level) {
-      final levelContent = contentMap[level];
+      // With the new unified system, all levels are LevelSet with activities
+      // No distinction between lessons and exercises - everything is activities
       final type =
-          (levelContent is LessonSet) ? LevelType.lesson : LevelType.exercise;
+          LevelType
+              .exercise; // All levels are now treated as exercise-type for navigation
 
       return LevelConfig(
         number: level,
@@ -60,43 +62,31 @@ class LevelUtils {
       // Only wire onTap when unlocked.
       if (unlocked) {
         onTap = () {
-          // --- REFACTORED NAVIGATION LOGIC ---
+          // --- UNIFIED NAVIGATION LOGIC ---
           final levelContent = contentMap[config.number];
 
-          if (levelContent is LessonSet) {
-            // Navigate to the LessonScreen using a binding to inject the controller.
+          // Determine subject for the level
+          Subjects subject;
+          switch (language) {
+            case 'french':
+              subject = Subjects.french;
+              break;
+            case 'math':
+              subject = Subjects.math;
+              break;
+            case 'english':
+            default:
+              subject = Subjects.english;
+          }
+
+          // All levels now use the unified LevelController and LevelScreen
+          if (levelContent is LevelContent) {
             Get.to(
-              () => const LessonScreen(),
+              () => const LevelScreen(),
               binding: BindingsBuilder(() {
                 Get.put(
-                  LessonsController(
-                    lessonData: levelContent.lesson,
-                    levelNumber: config.number,
-                    language: language,
-                  ),
-                );
-              }),
-            );
-          } else if (levelContent is ExerciseSet) {
-            Subjects subject;
-            switch (language) {
-              case 'french':
-                subject = Subjects.french;
-                break;
-              case 'math':
-                subject = Subjects.math;
-                break;
-              case 'english':
-              default:
-                subject = Subjects.english;
-            }
-            // Navigate to the ExerciseScreen using a binding to inject the controller.
-            Get.to(
-              () => const ExerciseScreen(),
-              binding: BindingsBuilder(() {
-                Get.put(
-                  ExercisesController(
-                    exercises: levelContent.exercises,
+                  LevelController(
+                    content: levelContent,
                     levelNumber: config.number,
                     language: language,
                     subject: subject,
@@ -104,6 +94,10 @@ class LevelUtils {
                   ),
                 );
               }),
+            );
+          } else {
+            print(
+              'Warning: Level ${config.number} content is not a valid LevelContent',
             );
           }
         };

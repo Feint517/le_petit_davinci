@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 
-class LessonProgressBar extends StatelessWidget implements PreferredSizeWidget {
-  const LessonProgressBar({
+class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
+  const LevelProgressBar({
     super.key,
     required this.totalSteps,
     required this.currentStep,

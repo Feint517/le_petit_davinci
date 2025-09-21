@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
-import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/widgets/drawing_area.dart';
+import 'package:le_petit_davinci/features/levels/widgets/drawing_area.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/studio/controllers/studio_controller.dart';
 
 class DrawingActivityView extends StatelessWidget {

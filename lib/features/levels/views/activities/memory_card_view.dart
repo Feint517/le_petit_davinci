@@ -6,8 +6,8 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
-import 'package:le_petit_davinci/features/lessons/models/memory_card_activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/memory_card_models.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
+import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
 
 class MemoryCardActivityView extends StatelessWidget {
   const MemoryCardActivityView({super.key, required this.activity});

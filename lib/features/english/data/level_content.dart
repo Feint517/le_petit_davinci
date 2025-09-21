@@ -1,16 +1,10 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
-import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises/models/fill_the_blank_option_model.dart';
-import 'package:le_petit_davinci/features/exercises/models/listen_and_choose_exercise_model.dart';
-import 'package:le_petit_davinci/features/exercises/models/reorder_words_exercise_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/memory_card_activity_model.dart';
-import 'package:le_petit_davinci/features/lessons/models/memory_card_models.dart';
-import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
+import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
+import 'package:le_petit_davinci/features/levels/models/fill_the_blank_option_model.dart';
+import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
 
 final Map<int, LevelContent> unifiedEnglishLevels = {
   // ========== Group 1: A, B, C, D ==========
@@ -191,12 +185,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
   //   ),
   // ]),
   3: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'a', 'This', 'cat'],
       correctOrder: [2, 0, 1, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Dog.',
       options: [
         FillTheBlankOption(optionText: 'B'),
@@ -255,7 +249,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   5: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Elephant.',
       options: [
         FillTheBlankOption(optionText: 'E'),
@@ -265,7 +259,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.elephant,
         ImageAssets.fish,
@@ -277,12 +271,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   6: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'a', 'This', 'fish'],
       correctOrder: [2, 0, 1, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Hat.',
       options: [
         FillTheBlankOption(optionText: 'F'),
@@ -341,7 +335,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   8: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Igloo.',
       options: [
         FillTheBlankOption(optionText: 'I'),
@@ -351,7 +345,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.lion,
         ImageAssets.tiger,
@@ -363,12 +357,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   9: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['a', 'is', 'This', 'kite'], // Placeholder word
       correctOrder: [2, 1, 0, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Jam.', // Placeholder
       options: [
         FillTheBlankOption(optionText: 'J'),
@@ -427,7 +421,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   11: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Moon.',
       options: [
         FillTheBlankOption(optionText: 'M'),
@@ -437,7 +431,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.cat,
         ImageAssets.dog,
@@ -449,12 +443,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   12: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'an', 'This', 'octopus'], // Placeholder
       correctOrder: [2, 0, 1, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Pen.',
       options: [
         FillTheBlankOption(optionText: 'N'),
@@ -513,7 +507,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   14: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Queen.',
       options: [
         FillTheBlankOption(optionText: 'Q'),
@@ -523,7 +517,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.tiger,
         ImageAssets.lion,
@@ -535,12 +529,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   15: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'The', 'sun', 'shining'], // Placeholder
       correctOrder: [1, 2, 0, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Tiger.',
       options: [
         FillTheBlankOption(optionText: 'R'),
@@ -599,7 +593,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   17: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Umbrella.',
       options: [
         FillTheBlankOption(optionText: 'U'),
@@ -609,7 +603,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.cat,
         ImageAssets.dog,
@@ -621,12 +615,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   18: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'a', 'This', 'watch'], // Placeholder
       correctOrder: [2, 0, 1, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for X-ray.',
       options: [
         FillTheBlankOption(optionText: 'V'),
@@ -669,7 +663,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   20: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Yo-yo.',
       options: [
         FillTheBlankOption(optionText: 'Y'),
@@ -679,7 +673,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.cat,
         ImageAssets.dog,
@@ -691,12 +685,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   21: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['is', 'a', 'This', 'zebra'], // Placeholder
       correctOrder: [2, 0, 1, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is for Zipper.',
       options: [
         FillTheBlankOption(optionText: 'X'),
@@ -740,7 +734,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   23: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: " says 'moo'.",
       options: [
         FillTheBlankOption(optionText: 'A Cow'),
@@ -750,7 +744,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 0,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.cat, // Placeholder
         ImageAssets.dog, // Placeholder
@@ -762,12 +756,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   24: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['The', 'pig', 'likes', 'mud'],
       correctOrder: [0, 1, 2, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' gives us wool.',
       options: [
         FillTheBlankOption(optionText: 'A Chicken'),
@@ -805,7 +799,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ),
   26: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is the king of the jungle.',
       options: [
         FillTheBlankOption(optionText: 'A Tiger'),
@@ -815,7 +809,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 1,
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.tiger,
         ImageAssets.bear,
@@ -827,12 +821,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   27: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['The', 'monkey', 'eats', 'bananas'],
       correctOrder: [0, 1, 2, 3],
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' has a very long trunk.',
       options: [
         FillTheBlankOption(optionText: 'An Elephant'),
@@ -845,7 +839,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
 
   // ========== Animals: Mixed Review ==========
   28: ExerciseSet([
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.dog,
         ImageAssets.lion,
@@ -856,7 +850,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       label: 'Monkey',
     ),
 
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' has black and white stripes.',
       options: [
         FillTheBlankOption(optionText: 'A Tiger'),
@@ -867,12 +861,12 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   29: ExerciseSet([
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['The', 'cow', 'lives', 'on', 'the', 'farm'],
       correctOrder: [0, 1, 2, 3, 4, 5],
     ),
 
-    ListenAndChooseExercise(
+    ListenAndChooseActivity(
       imageAssets: [
         ImageAssets.bird,
         ImageAssets.tiger,
@@ -884,7 +878,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     ),
   ]),
   30: ExerciseSet([
-    FillTheBlankExercise(
+    FillTheBlankActivity(
       questionSuffix: ' is a big cat with stripes.',
       options: [
         FillTheBlankOption(optionText: 'A Lion'),
@@ -894,7 +888,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       correctAnswer: 1,
     ),
 
-    ReorderWordsExercise(
+    ReorderWordsActivity(
       words: ['The', 'elephant', 'is', 'a', 'wild', 'animal'],
       correctOrder: [0, 1, 2, 3, 4, 5],
     ),

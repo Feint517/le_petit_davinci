@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 
 class MultipleChoiceActivity extends Activity {
   final String instruction;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
-import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 
 class VideoActivityView extends StatelessWidget {
   const VideoActivityView({super.key, required this.activity});

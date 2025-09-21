@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/exercises/models/story/story_element_model.dart';
+import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 
 class DialogueLineView extends StatelessWidget {
   const DialogueLineView({super.key, required this.dialogue});

@@ -1,5 +1,5 @@
-class FillTheBlankOption {
-  FillTheBlankOption({required this.optionText});
+// class FillTheBlankOption {
+//   FillTheBlankOption({required this.optionText});
 
-  final String optionText;
-}
+//   final String optionText;
+// }
