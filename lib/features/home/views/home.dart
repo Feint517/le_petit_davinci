@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 220,
               child: RiveAnimation.asset(
-                'assets/animations/rive/talkingbear.riv',
+                'assets/animations/rive/talking_bear.riv',
                 fit: BoxFit.contain,
                 onInit: (artboard) {
                   final first =

@@ -79,21 +79,6 @@ class LessonsController extends GetxController {
 
   /// Persists the lesson completion and unlocks the next level.
   Future<void> _completeLessonAndUnlock() async {
-    // try {
-    //   if (Get.isRegistered<ProgressService>()) {
-    //     // Mark as completed by awarding 3 stars.
-    //     await ProgressService.instance.setStars(language, levelNumber, 3);
-    //     // Unlock the next level.
-    //     await ProgressService.instance.unlockNextIfNeeded(
-    //       language,
-    //       levelNumber,
-    //     );
-    //   }
-    // } catch (e) {
-    //   debugPrint('Lesson completion persistence failed: $e');
-    // }
-    // Navigate to the reward screen.
-
     await ProgressService.instance.completeLevel(language, levelNumber);
     Get.off(() => const RewardScreen());
   }

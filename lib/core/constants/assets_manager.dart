@@ -5,6 +5,12 @@ const String ICONS_PATH = 'assets/icons';
 const String LOTTIE_PATH = 'assets/lottie/misc';
 const String ICON_PATH = 'assets/icons';
 
+class AnimationAssets {
+  static const String talkingBear = 'assets/animations/rive/talking_bear.riv';
+  static const String happyBear = 'assets/animations/rive/happy_bear.riv';
+  static const String sadBear = 'assets/animations/rive/sad_bear.riv';
+}
+
 class ImageAssets {
   static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';

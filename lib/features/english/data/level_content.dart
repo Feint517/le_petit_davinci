@@ -8,6 +8,8 @@ import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/memory_card_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/memory_card_models.dart';
 import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
 
 final Map<int, LevelContent> unifiedEnglishLevels = {
@@ -47,28 +49,95 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       ],
     ),
   ),
-  2: ExerciseSet([
-    FillTheBlankExercise(
-      questionSuffix: ' is for Apple.',
-      options: [
-        FillTheBlankOption(optionText: 'A'),
-        FillTheBlankOption(optionText: 'B'),
-        FillTheBlankOption(optionText: 'C'),
+  2: LessonSet(
+    Lesson(
+      lessonId: 'alphabet_abcd_memory',
+      title: 'Memory Game - A, B, C, D',
+      introduction:
+          'Let\'s play a memory game with the letters A, B, C, and D!',
+      activities: [
+        MemoryCardActivity(
+          instruction: 'Find the matching pairs of letters and words!',
+          cardPairs: [
+            CardPair(
+              pairId: 'a_apple',
+              card1: MemoryCard(
+                id: 'a_letter',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: 'A',
+                type: CardType.text,
+                label: 'Letter A',
+              ),
+              card2: MemoryCard(
+                id: 'a_word',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: ImageAssets.apple,
+                type: CardType.image,
+                label: 'Apple',
+              ),
+              pairDescription: 'A is for Apple',
+            ),
+            CardPair(
+              pairId: 'b_ball',
+              card1: MemoryCard(
+                id: 'b_letter',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: 'B',
+                type: CardType.text,
+                label: 'Letter B',
+              ),
+              card2: MemoryCard(
+                id: 'b_word',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent:
+                    ImageAssets.cat, // Using cat as placeholder for ball
+                type: CardType.image,
+                label: 'Ball',
+              ),
+              pairDescription: 'B is for Ball',
+            ),
+            CardPair(
+              pairId: 'c_cat',
+              card1: MemoryCard(
+                id: 'c_letter',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: 'C',
+                type: CardType.text,
+                label: 'Letter C',
+              ),
+              card2: MemoryCard(
+                id: 'c_word',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: ImageAssets.cat,
+                type: CardType.image,
+                label: 'Cat',
+              ),
+              pairDescription: 'C is for Cat',
+            ),
+            CardPair(
+              pairId: 'd_dog',
+              card1: MemoryCard(
+                id: 'd_letter',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: 'D',
+                type: CardType.text,
+                label: 'Letter D',
+              ),
+              card2: MemoryCard(
+                id: 'd_word',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: ImageAssets.dog,
+                type: CardType.image,
+                label: 'Dog',
+              ),
+              pairDescription: 'D is for Dog',
+            ),
+          ],
+          difficulty: MemoryDifficulty.medium,
+        ),
       ],
-      correctAnswer: 0,
     ),
-
-    ListenAndChooseExercise(
-      imageAssets: [
-        ImageAssets.apple,
-        ImageAssets.cat,
-        ImageAssets.dog,
-        ImageAssets.bird,
-      ],
-      correctAnswer: 0,
-      label: 'Apple',
-    ),
-  ]),
+  ),
   // 2: ExerciseSet([
   //   StoryExercise(
   //     title: 'A Trip to the Supermarket',

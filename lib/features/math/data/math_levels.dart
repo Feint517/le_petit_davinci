@@ -11,6 +11,8 @@ import 'package:le_petit_davinci/features/lessons/models/activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_matching_activity_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/audio_pair_model.dart';
 import 'package:le_petit_davinci/features/lessons/models/drawing_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/memory_card_activity_model.dart';
+import 'package:le_petit_davinci/features/lessons/models/memory_card_models.dart';
 import 'package:le_petit_davinci/features/lessons/models/video_activity_model.dart';
 
 final Map<int, LevelContent> unifiedMathLevels = {
@@ -154,4 +156,115 @@ final Map<int, LevelContent> unifiedMathLevels = {
       ],
     ),
   ]),
+
+  // ========== Memory Game for Numbers ==========
+  6: LessonSet(
+    Lesson(
+      lessonId: 'math_numbers_memory',
+      title: 'Memory Game - Numbers 1-5',
+      introduction: 'Let\'s play a memory game with numbers and quantities!',
+      activities: [
+        MemoryCardActivity(
+          instruction: 'Match the numbers with their quantities!',
+          cardPairs: [
+            CardPair(
+              pairId: 'one_1',
+              card1: MemoryCard(
+                id: 'number_1',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: '1',
+                type: CardType.text,
+                label: 'Number 1',
+              ),
+              card2: MemoryCard(
+                id: 'quantity_1',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: ImageAssets.apple, // Single apple represents 1
+                type: CardType.image,
+                label: 'One Apple',
+              ),
+              pairDescription: '1 = One',
+            ),
+            CardPair(
+              pairId: 'two_2',
+              card1: MemoryCard(
+                id: 'number_2',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: '2',
+                type: CardType.text,
+                label: 'Number 2',
+              ),
+              card2: MemoryCard(
+                id: 'quantity_2',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent:
+                    ImageAssets.cat, // Using cat as placeholder for 2 items
+                type: CardType.image,
+                label: 'Two Items',
+              ),
+              pairDescription: '2 = Two',
+            ),
+            CardPair(
+              pairId: 'three_3',
+              card1: MemoryCard(
+                id: 'number_3',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: '3',
+                type: CardType.text,
+                label: 'Number 3',
+              ),
+              card2: MemoryCard(
+                id: 'quantity_3',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent:
+                    ImageAssets.dog, // Using dog as placeholder for 3 items
+                type: CardType.image,
+                label: 'Three Items',
+              ),
+              pairDescription: '3 = Three',
+            ),
+            CardPair(
+              pairId: 'four_4',
+              card1: MemoryCard(
+                id: 'number_4',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: '4',
+                type: CardType.text,
+                label: 'Number 4',
+              ),
+              card2: MemoryCard(
+                id: 'quantity_4',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent:
+                    ImageAssets.bird, // Using bird as placeholder for 4 items
+                type: CardType.image,
+                label: 'Four Items',
+              ),
+              pairDescription: '4 = Four',
+            ),
+            CardPair(
+              pairId: 'five_5',
+              card1: MemoryCard(
+                id: 'number_5',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent: '5',
+                type: CardType.text,
+                label: 'Number 5',
+              ),
+              card2: MemoryCard(
+                id: 'quantity_5',
+                frontImage: ImageAssets.apple, // Placeholder for card back
+                backContent:
+                    ImageAssets.fish, // Using fish as placeholder for 5 items
+                type: CardType.image,
+                label: 'Five Items',
+              ),
+              pairDescription: '5 = Five',
+            ),
+          ],
+          difficulty: MemoryDifficulty.hard,
+        ),
+      ],
+    ),
+  ),
 };
