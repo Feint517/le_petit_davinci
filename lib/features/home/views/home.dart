@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:rive/rive.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
@@ -48,6 +49,25 @@ class HomeScreen extends StatelessWidget {
             const ScrollAnimatedItem(child: RewardsSection()),
             Gap(40.h),
 
+            //* Rive Animation Testing Section
+            SizedBox(
+              height: 220,
+              child: RiveAnimation.asset(
+                'assets/animations/rive/talkingbear.riv',
+                fit: BoxFit.contain,
+                onInit: (artboard) {
+                  final first =
+                      artboard.animations.isNotEmpty
+                          ? artboard.animations.first.name
+                          : null;
+                  if (first != null) {
+                    artboard.addController(SimpleAnimation(first));
+                  }
+                },
+              ),
+            ),
+            Gap(40.h),
+
             //* Bottom footer image
             const ScrollAnimatedItem(
               child: ResponsiveImageAsset(assetPath: SvgAssets.homeBottom),
@@ -55,9 +75,30 @@ class HomeScreen extends StatelessWidget {
 
             Gap(40.h),
             CustomButton(
-              label: 'test',
-              onPressed: () {
-                ProgressService.instance.logUnlocked('en');
+              label: '🔓 Unlock All Levels (Testing)',
+              onPressed: () async {
+                await ProgressService.instance.unlockAllLevelsForTesting();
+                Get.snackbar(
+                  'Testing Mode',
+                  'All levels unlocked for testing!',
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.green,
+                  colorText: Colors.white,
+                );
+              },
+            ),
+            Gap(20.h),
+            CustomButton(
+              label: ' Reset Progress (Testing)',
+              onPressed: () async {
+                await ProgressService.instance.resetAllProgressForTesting();
+                Get.snackbar(
+                  'Testing Mode',
+                  'All progress reset!',
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.orange,
+                  colorText: Colors.white,
+                );
               },
             ),
             Gap(40.h),

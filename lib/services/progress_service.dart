@@ -89,4 +89,31 @@ class ProgressService extends GetxService {
     final levels = getUnlockedLevels(lang);
     print('Unlocked[$lang]: $levels');
   }
+
+  Future<void> unlockAllLevelsForTesting() async {
+    const maxLevel = 50; // Generous upper bound to cover all possible levels
+    
+    for (final lang in ['en', 'fr']) {
+      final allLevels = List.generate(maxLevel, (index) => index + 1);
+      await _box.write('unlocked:$lang', allLevels);
+      
+      // Also give 3 stars to all levels for testing
+      final starsMap = <String, int>{};
+      for (int level = 1; level <= maxLevel; level++) {
+        starsMap['$level'] = 3;
+      }
+      await _box.write('stars:$lang', starsMap);
+      
+      print('�� UNLOCKED ALL LEVELS FOR TESTING - Language: $lang, Levels: 1-$maxLevel');
+    }
+  }
+
+  /// FOR TESTING PURPOSES ONLY: Reset all progress
+  Future<void> resetAllProgressForTesting() async {
+    for (final lang in ['en', 'fr']) {
+      await _box.remove('unlocked:$lang');
+      await _box.remove('stars:$lang');
+    }
+    print('🔄 RESET ALL PROGRESS FOR TESTING');
+  }
 }
