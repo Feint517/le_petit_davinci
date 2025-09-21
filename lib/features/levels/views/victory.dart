@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/stars_section.dart';
+import 'package:le_petit_davinci/features/levels/widgets/stars_section.dart';
 
 class VictoryScreen extends GetView<VictoryController> {
   const VictoryScreen({super.key, required this.starsCount});

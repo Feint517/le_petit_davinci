@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/count_by_activity.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/numpad.dart';
+import 'package:le_petit_davinci/features/levels/widgets/numpad.dart';
 
 class CountByView extends StatelessWidget {
   const CountByView({super.key, required this.activity});

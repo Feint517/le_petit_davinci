@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/item_widget.dart';
+import 'package:le_petit_davinci/features/levels/widgets/item_widget.dart';
 
 class StoryProblemView extends StatelessWidget {
   const StoryProblemView({super.key, required this.activity});

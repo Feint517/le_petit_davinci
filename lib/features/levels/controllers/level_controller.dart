@@ -9,7 +9,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
-import 'package:le_petit_davinci/features/lessons/views/reward.dart';
+import 'package:le_petit_davinci/features/levels/views/reward.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
@@ -44,52 +44,18 @@ class LevelController extends GetxController {
     required this.subject,
   });
 
-  // --- Content Type Detection ---
-  bool get isLevelSet => content is LevelSet;
-  bool get isLegacyLessonSet => content is LessonSet;
-  bool get isLegacyExerciseSet => content is ExerciseSet;
-
+  // --- Content Access ---
   LevelSet get levelSet => content as LevelSet;
-  LessonSet get lessonSet => content as LessonSet;
-  ExerciseSet get exerciseSet => content as ExerciseSet;
 
   // --- Current Item Access ---
-  Activity get currentActivity {
-    if (isLevelSet) {
-      return levelSet.activities[currentIndex.value];
-    } else if (isLegacyLessonSet) {
-      return lessonSet.lesson.activities[currentIndex.value];
-    } else if (isLegacyExerciseSet) {
-      return exerciseSet.exercises[currentIndex.value];
-    }
-    throw StateError('Unknown content type');
-  }
+  Activity get currentActivity => levelSet.activities[currentIndex.value];
 
   bool get currentActivityRequiresValidation =>
       currentActivity.requiresValidation;
 
   // --- Level Information ---
-  String get levelTitle {
-    if (isLevelSet) {
-      return levelSet.title;
-    } else if (isLegacyLessonSet) {
-      return lessonSet.lesson.title;
-    } else if (isLegacyExerciseSet) {
-      return 'Exercise Set';
-    }
-    return 'Level';
-  }
-
-  int get totalItems {
-    if (isLevelSet) {
-      return levelSet.activities.length;
-    } else if (isLegacyLessonSet) {
-      return lessonSet.lesson.activities.length;
-    } else if (isLegacyExerciseSet) {
-      return exerciseSet.exercises.length;
-    }
-    return 0;
-  }
+  String get levelTitle => levelSet.title;
+  int get totalItems => levelSet.activities.length;
 
   @override
   void onInit() async {
@@ -100,21 +66,11 @@ class LevelController extends GetxController {
       hasError.value = false;
       errorMessage.value = null;
 
-      // Initialize content
-      if (isLevelSet) {
-        for (final activity in levelSet.activities) {
-          activity.isCompleted.value = false;
-          if (activity.requiresValidation) {
-            activity.reset();
-          }
-        }
-      } else if (isLegacyLessonSet) {
-        for (final activity in lessonSet.lesson.activities) {
-          activity.isCompleted.value = false;
-        }
-      } else if (isLegacyExerciseSet) {
-        for (final exercise in exerciseSet.exercises) {
-          exercise.reset();
+      // Initialize activities
+      for (final activity in levelSet.activities) {
+        activity.isCompleted.value = false;
+        if (activity.requiresValidation) {
+          activity.reset();
         }
       }
 
@@ -241,17 +197,9 @@ class LevelController extends GetxController {
   Future<void> _completeLevel() async {
     await ProgressService.instance.completeLevel(language, levelNumber);
 
-    // Determine completion screen based on content type
-    bool shouldShowRewardScreen = false;
-
-    if (isLevelSet) {
-      // For LevelSet, show reward screen if it's lesson-only or mixed
-      shouldShowRewardScreen = levelSet.isLessonOnly || levelSet.isMixed;
-    } else if (isLegacyLessonSet) {
-      shouldShowRewardScreen = true;
-    } else if (isLegacyExerciseSet) {
-      shouldShowRewardScreen = false;
-    }
+    // Determine completion screen based on level content
+    // Show reward screen if it's lesson-only or mixed, otherwise show victory screen
+    bool shouldShowRewardScreen = levelSet.isLessonOnly || levelSet.isMixed;
 
     if (shouldShowRewardScreen) {
       Get.off(() => const RewardScreen());

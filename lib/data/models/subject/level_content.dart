@@ -1,4 +1,3 @@
-import 'package:le_petit_davinci/features/lessons/models/lesson_model.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 
 /// A base class to represent the content of any given level.
@@ -42,15 +41,15 @@ class LevelSet extends LevelContent {
 // --- Legacy Support (Deprecated) ---
 
 /// @deprecated Use LevelSet instead. All content is now unified as activities.
-class LessonSet extends LevelContent {
-  LessonSet(this.lesson);
+// class LessonSet extends LevelContent {
+//   LessonSet(this.lesson);
 
-  final Lesson lesson;
-}
+//   final Lesson lesson;
+// }
 
-/// @deprecated Use LevelSet instead. All content is now unified as activities.
-class ExerciseSet extends LevelContent {
-  ExerciseSet(this.exercises);
+// /// @deprecated Use LevelSet instead. All content is now unified as activities.
+// class ExerciseSet extends LevelContent {
+//   ExerciseSet(this.exercises);
 
-  final List<Activity> exercises;
-}
+//   final List<Activity> exercises;
+// }

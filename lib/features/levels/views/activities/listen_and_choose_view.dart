@@ -8,7 +8,7 @@ import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/listen_and_choose_activity.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/play_audio_button.dart';
+import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
 
 class ListenAndChooseView extends GetView<LevelController> {
   const ListenAndChooseView({super.key, required this.activity});

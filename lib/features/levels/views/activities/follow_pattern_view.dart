@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/follow_pattern_activity.dart';
-import 'package:le_petit_davinci/features/exercises/widgets/choice_button.dart';
+import 'package:le_petit_davinci/features/levels/widgets/choice_button.dart';
 
 class FollowPatternView extends StatelessWidget {
   const FollowPatternView({super.key, required this.activity});

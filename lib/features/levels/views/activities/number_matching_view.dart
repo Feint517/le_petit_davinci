@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/features/exercises/models/number_matching_exercise_model.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/number_matching_activity.dart';
 
 class NumberMatchingView extends StatefulWidget {
-  final NumberMatchingExercise exercise;
+  final NumberMatchingActivity exercise;
 
   const NumberMatchingView({super.key, required this.exercise});
 
