@@ -11,62 +11,49 @@ class LevelBottomBar extends GetView<LevelController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.lg),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 8,
-            offset: Offset(0, -2),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Obx(() {
-          final isAnswerReady = controller.isAnswerReady.value;
-          final currentActivity = controller.currentActivity;
-          final requiresValidation =
-              controller.currentActivityRequiresValidation;
+    return SafeArea(
+      child: Obx(() {
+        final isAnswerReady = controller.isAnswerReady.value;
+        final currentIndex = controller.currentIndex.value;
+        final currentActivity = controller.levelSet.activities[currentIndex];
+        final requiresValidation = currentActivity.requiresValidation;
 
-          return Row(
-            children: [
-              // Audio button (if current activity is audible)
-              if (currentActivity is Audible) ...[
-                IconButton(
-                  onPressed: controller.playCurrentAudio,
-                  icon: const Icon(
-                    Icons.volume_up,
-                    color: AppColors.primary,
-                    size: 28,
-                  ),
+        return Row(
+          children: [
+            // Audio button (if current activity is audible)
+            if (currentActivity is Audible) ...[
+              IconButton(
+                onPressed: controller.playCurrentAudio,
+                icon: const Icon(
+                  Icons.volume_up,
+                  color: AppColors.primary,
+                  size: 28,
                 ),
-                const SizedBox(width: AppSizes.sm),
-              ],
-
-              // Check button (if activity requires validation)
-              if (requiresValidation) ...[
-                Expanded(
-                  child: CustomButton(
-                    label: 'Check',
-                    disabled: !isAnswerReady,
-                    onPressed: isAnswerReady ? controller.checkAnswer : null,
-                  ),
-                ),
-              ] else ...[
-                // Continue button for auto-complete activities
-                Expanded(
-                  child: CustomButton(
-                    label: 'Continue',
-                    onPressed: controller.nextActivity,
-                  ),
-                ),
-              ],
+              ),
+              const SizedBox(width: AppSizes.sm),
             ],
-          );
-        }),
-      ),
+
+            // Check button (if activity requires validation)
+            if (requiresValidation) ...[
+              Expanded(
+                child: CustomButton(
+                  label: 'Check',
+                  disabled: !isAnswerReady,
+                  onPressed: isAnswerReady ? controller.checkAnswer : null,
+                ),
+              ),
+            ] else ...[
+              // Continue button for auto-complete activities
+              Expanded(
+                child: CustomButton(
+                  label: 'Continue',
+                  onPressed: controller.nextActivity,
+                ),
+              ),
+            ],
+          ],
+        );
+      }),
     );
   }
 }

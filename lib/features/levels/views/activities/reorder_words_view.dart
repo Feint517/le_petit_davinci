@@ -10,7 +10,7 @@ import 'package:le_petit_davinci/features/levels/models/activities/reorder_words
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
 
-class ReorderWordsView extends GetView<LevelController> {
+class ReorderWordsView extends StatelessWidget {
   const ReorderWordsView({super.key, required this.activity});
 
   final ReorderWordsActivity activity;
@@ -31,7 +31,7 @@ class ReorderWordsView extends GetView<LevelController> {
             const Gap(AppSizes.md),
             PlayAudioButton(
               onPressed:
-                  () async => await controller.speakSentence(
+                  () async => await Get.find<LevelController>().speakSentence(
                     activity.correctOrder
                         .map((i) => activity.words[i])
                         .join(' '),

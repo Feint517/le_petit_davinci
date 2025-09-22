@@ -161,22 +161,23 @@ class ProfileHeader extends GetView<UserController>
             ],
           ),
 
-          ProfileHeaderType.activity => Obx(() {
-            int totalSteps = 0;
-            int currentStep = 0;
+          // ProfileHeaderType.activity => Obx(() {
+          //   // int totalSteps = 0;
+          //   // int currentStep = 0;
 
-            // Check which controller is active and get the progress data.
-            if (Get.isRegistered<LevelController>()) {
-              final controller = Get.find<LevelController>();
-              totalSteps = controller.levelSet.activities.length;
-              currentStep = controller.currentIndex.value;
-            }
+          //   // Check which controller is active and get the progress data.
+          //   // if (Get.isRegistered<LevelController>()) {
+          //   //   final controller = Get.find<LevelController>();
+          //   //   totalSteps = controller.levelSet.activities.length;
+          //   //   currentStep = controller.currentIndex.value;
+          //   // }
 
-            return LevelProgressBar(
-              totalSteps: totalSteps,
-              currentStep: currentStep,
-            );
-          }),
+          //   return LevelProgressBar(
+          //     // totalSteps: totalSteps,
+          //     // currentStep: currentStep,
+          //   );
+          // }),
+          ProfileHeaderType.activity => const LevelProgressBar(),
         },
       ),
     );

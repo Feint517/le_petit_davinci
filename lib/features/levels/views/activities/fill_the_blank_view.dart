@@ -6,9 +6,8 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
-import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 
-class FillTheBlankView extends GetView<LevelController> {
+class FillTheBlankView extends StatelessWidget {
   const FillTheBlankView({super.key, required this.activity});
 
   final FillTheBlankActivity activity;

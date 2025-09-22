@@ -38,9 +38,10 @@ class LevelContentView extends GetView<LevelController> {
           ),
         );
       }
-
-      // Build the current activity
-      return controller.currentActivity.build(context);
+      // Build the current activity directly
+      final currentIndex = controller.currentIndex.value;
+      final currentActivity = controller.levelSet.activities[currentIndex];
+      return currentActivity.build(context);
     });
   }
 }

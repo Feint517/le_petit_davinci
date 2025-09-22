@@ -10,7 +10,7 @@ import 'package:le_petit_davinci/features/levels/models/activities/listen_and_ch
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
 
-class ListenAndChooseView extends GetView<LevelController> {
+class ListenAndChooseView extends StatelessWidget {
   const ListenAndChooseView({super.key, required this.activity});
 
   final ListenAndChooseActivity activity;
@@ -69,7 +69,7 @@ class ListenAndChooseView extends GetView<LevelController> {
             ),
             PlayAudioButton(
               buttonSize: PlayAudioButtonSize.big,
-              onPressed: controller.playCurrentAudio,
+              onPressed: () => Get.find<LevelController>().playCurrentAudio(),
             ),
           ],
         ),
