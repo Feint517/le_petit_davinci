@@ -1,35 +1,24 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/memory_card_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 
-class MemoryCardActivity extends Activity {
+class MemoryCardActivity extends Activity with MascotIntroductionMixin {
   MemoryCardActivity({
     required this.instruction,
     required this.cardPairs,
     this.difficulty = MemoryDifficulty.medium,
     this.timeLimit, // Optional time limit in seconds
   }) {
-    // Initialize mascot controller
-    mascotController = TalkingMascotController(
-      messages: [
-        'Let\'s play a memory game!',
-        instruction,
-        'Find the matching pairs!',
-      ],
-    );
-
-    // Listen to mascot completion
-    ever(mascotController.isCompleted, (bool isDone) {
-      if (isDone) {
-        Future.delayed(const Duration(milliseconds: 400), () {
-          isIntroCompleted.value = true;
-        });
-      }
-    });
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s play a memory game!',
+      instruction,
+      'Find the matching pairs!',
+    ], completionDelay: const Duration(seconds: 2));
 
     // Initialize game state
     _initializeGame();
@@ -40,9 +29,7 @@ class MemoryCardActivity extends Activity {
   final MemoryDifficulty difficulty;
   final int? timeLimit; // Optional time limit
 
-  /// State management - following the same pattern as FillTheBlankExercise
-  late final TalkingMascotController mascotController;
-  final RxnBool isIntroCompleted = RxnBool(false);
+  /// State management - using the mixin approach
   final Rxn<MemoryGameState> gameState = Rxn<MemoryGameState>(
     MemoryGameState(
       allCards: [],
@@ -244,7 +231,7 @@ class MemoryCardActivity extends Activity {
   @override
   void dispose() {
     _gameTimer?.cancel();
-    mascotController.dispose();
+    disposeMascot(); // Use mixin method
     // Reset the activity state when disposing (when user moves to next screen)
     _resetActivityState();
     super.dispose();
@@ -252,7 +239,7 @@ class MemoryCardActivity extends Activity {
 
   /// Reset the activity state to initial values
   void _resetActivityState() {
-    isIntroCompleted.value = false;
+    resetMascotIntroduction(); // Use mixin method
     isGameStarted.value = false;
     isCompleted.value = false;
     _initializeGame();

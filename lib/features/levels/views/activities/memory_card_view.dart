@@ -5,9 +5,9 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class MemoryCardActivityView extends StatelessWidget {
   const MemoryCardActivityView({super.key, required this.activity});
@@ -16,36 +16,29 @@ class MemoryCardActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Main content
-        Column(
-          children: [
-            Obx(() {
-              if (activity.isIntroCompleted.value == true) {
-                return _buildStatsRow();
-              }
-              return const SizedBox.shrink();
-            }),
-            const Gap(AppSizes.md),
-            Text(
-              activity.instruction,
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const Gap(AppSizes.md),
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Game',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+        activity.startGame();
+      },
+    );
+  }
 
-            // Game area
-            Expanded(
-              child: Obx(() {
-                if (activity.isIntroCompleted.value != true) {
-                  return _buildIntro();
-                }
-                return _buildGameArea();
-              }),
-            ),
-          ],
+  Widget _buildMainContent() {
+    return Column(
+      children: [
+        _buildStatsRow(),
+        const Gap(AppSizes.md),
+        Text(
+          activity.instruction,
+          style: Get.textTheme.headlineSmall,
+          textAlign: TextAlign.center,
         ),
+        const Gap(AppSizes.md),
+        Expanded(child: _buildGameArea()),
       ],
     );
   }
@@ -91,31 +84,6 @@ class MemoryCardActivityView extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildIntro() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Spacer(),
-        TalkingMascot(
-          mascotSize: 200,
-          bubbleText: 'Let\'s play a memory game!',
-          onTap: () {
-            activity.mascotController.nextMessage();
-          },
-        ),
-        const Spacer(),
-        CustomButton(
-          label: 'Start Game',
-          onPressed: () {
-            activity.isIntroCompleted.value = true;
-            activity.startGame();
-          },
-        ),
-        const Spacer(),
-      ],
     );
   }
 
