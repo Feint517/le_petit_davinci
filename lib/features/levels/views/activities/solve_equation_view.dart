@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/solve_equation_activity.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class SolveEquationView extends StatelessWidget {
   const SolveEquationView({super.key, required this.activity});
@@ -9,13 +10,21 @@ class SolveEquationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Exercise',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          activity.equation,
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
+        Text(activity.equation, style: Get.textTheme.headlineLarge),
         const SizedBox(height: 40),
         Wrap(
           spacing: 16,

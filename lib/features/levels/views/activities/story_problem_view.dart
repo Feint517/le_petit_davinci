@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
 import 'package:le_petit_davinci/features/levels/widgets/item_widget.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class StoryProblemView extends StatelessWidget {
   const StoryProblemView({super.key, required this.activity});
@@ -14,12 +15,23 @@ class StoryProblemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Exercise',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
     return Column(
       children: [
         // 1. The Story/Dialogue
         Text(
           activity.instruction,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Get.textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         const Gap(AppSizes.spaceBtwSections),

@@ -5,9 +5,13 @@ import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/story_activity_view.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
 /// Represents a complete, multi-step story as a single Activity.
-class StoryActivity extends Activity {
+class StoryActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   final String title;
   final List<StoryElement> elements;
 
@@ -30,6 +34,12 @@ class StoryActivity extends Activity {
     // Start by showing the first element.
     visibleElements.add(elements.first);
     _setupListenerForCurrentElement();
+
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s read a story together!',
+      'Follow along and answer the questions.',
+    ]);
   }
 
   StoryElement get currentElement => elements[currentElementIndex.value];
@@ -107,5 +117,30 @@ class StoryActivity extends Activity {
       }
     }
     _setupListenerForCurrentElement();
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => true; // Story activity has its own navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Navigation is handled in the view
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    _readinessSubscription?.cancel();
+    scrollController.dispose();
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

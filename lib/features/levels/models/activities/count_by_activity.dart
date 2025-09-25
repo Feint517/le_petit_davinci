@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/count_by_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class CountByActivity extends Activity {
+class CountByActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   final String instruction;
   final List<int> initialSequence;
   final int numberOfInputs;
@@ -29,6 +33,12 @@ class CountByActivity extends Activity {
     assert(numberOfInputs == correctAnswers.length);
     // Initialize user inputs with empty strings.
     userInputs = List.generate(numberOfInputs, (_) => '').obs;
+
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s count by numbers!',
+      'Fill in the missing numbers.',
+    ], completionDelay: const Duration(seconds: 2));
   }
 
   void setActiveIndex(int index) {
@@ -109,5 +119,28 @@ class CountByActivity extends Activity {
     userInputs.fillRange(0, userInputs.length, '');
     // Also reset the active index to the beginning for a clean state.
     activeInputIndex.value = 0;
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/count_by_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/numpad.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class CountByView extends StatelessWidget {
   const CountByView({super.key, required this.activity});
@@ -13,12 +14,23 @@ class CountByView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Exercise',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           activity.instruction,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Get.textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         const Gap(AppSizes.spaceBtwSections * 2),
@@ -30,12 +42,12 @@ class CountByView extends StatelessWidget {
           children: [
             // Display the initial numbers of the sequence
             ...activity.initialSequence.map(
-              (number) => _buildNumberDisplay(context, number),
+              (number) => _buildNumberDisplay(number),
             ),
             // Display the input boxes for the user
             ...List.generate(
               activity.numberOfInputs,
-              (index) => _buildInputBox(context, index),
+              (index) => _buildInputBox(index),
             ),
           ],
         ),
@@ -52,21 +64,21 @@ class CountByView extends StatelessWidget {
     );
   }
 
-  Widget _buildNumberDisplay(BuildContext context, int number) {
+  Widget _buildNumberDisplay(int number) {
     return Container(
       width: 60,
       height: 60,
       alignment: Alignment.center,
       child: Text(
         number.toString(),
-        style: Theme.of(
-          context,
-        ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+        style: Get.textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
 
-  Widget _buildInputBox(BuildContext context, int index) {
+  Widget _buildInputBox(int index) {
     return GestureDetector(
       onTap: () => activity.setActiveIndex(index),
       child: Obx(() {
@@ -86,7 +98,7 @@ class CountByView extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             activity.userInputs[index],
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            style: Get.textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
             ),

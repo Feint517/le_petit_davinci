@@ -266,23 +266,7 @@ class MemoryCardActivityView extends StatelessWidget {
             ),
           ),
           const Gap(AppSizes.lg),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomButton(
-                label: 'Play Again',
-                onPressed: () {
-                  activity.reset();
-                },
-              ),
-              CustomButton(
-                label: 'Continue',
-                onPressed: () {
-                  // Activity completion is handled by the model
-                },
-              ),
-            ],
-          ),
+          // Navigation is now handled by the ActivityNavigationInterface
         ],
       ),
     );

@@ -5,8 +5,11 @@ import 'package:le_petit_davinci/features/levels/views/activities/memory_card_vi
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
 import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class MemoryCardActivity extends Activity with MascotIntroductionMixin {
+class MemoryCardActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   MemoryCardActivity({
     required this.instruction,
     required this.cardPairs,
@@ -243,5 +246,68 @@ class MemoryCardActivity extends Activity with MascotIntroductionMixin {
     isGameStarted.value = false;
     isCompleted.value = false;
     _initializeGame();
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => true; // Memory card game needs custom navigation
+
+  @override
+  Widget? get customNavigationWidget {
+    final state = gameState.value;
+    if (state?.isGameComplete == true) {
+      return _buildGameCompleteNavigation();
+    }
+    return null; // Use standard navigation during game
+  }
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle any custom navigation logic
+    // For memory card, this might trigger game completion
+  }
+
+  Widget _buildGameCompleteNavigation() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.green.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.celebration, color: Colors.green),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Game Complete!',
+                  style: Get.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                Text('Score: ${getScore()}', style: Get.textTheme.bodyMedium),
+              ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => markCompleted(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Continue'),
+          ),
+        ],
+      ),
+    );
   }
 }

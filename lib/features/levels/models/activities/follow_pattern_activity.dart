@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/follow_pattern_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class FollowPatternActivity extends Activity {
+class FollowPatternActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   final String instruction;
   final List<String> examples;
   final String question;
@@ -24,7 +28,13 @@ class FollowPatternActivity extends Activity {
     required this.question,
     required this.options,
     required this.correctAnswerIndex,
-  });
+  }) {
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s follow the pattern!',
+      'Find the next number in the sequence.',
+    ], completionDelay: const Duration(seconds: 2));
+  }
 
   /// The view will call this to update the state when a choice is selected.
   void selectOption(int index) {
@@ -61,5 +71,28 @@ class FollowPatternActivity extends Activity {
   @override
   void reset() {
     selectedIndex.value = null;
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class StoryActivityView extends StatelessWidget {
   const StoryActivityView({super.key, required this.activity});
@@ -13,6 +14,17 @@ class StoryActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Story',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
     return Column(
       children: [
         Expanded(

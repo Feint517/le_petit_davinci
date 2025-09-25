@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class FillTheBlankView extends StatelessWidget {
   const FillTheBlankView({super.key, required this.activity});
@@ -14,6 +15,17 @@ class FillTheBlankView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Exercise',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,7 +49,7 @@ class FillTheBlankView extends StatelessWidget {
                     selected != null
                         ? activity.options[selected].optionText
                         : '',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    style: Get.textTheme.bodyMedium?.copyWith(
                       color: AppColors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -47,9 +59,7 @@ class FillTheBlankView extends StatelessWidget {
             ),
             Text(
               ' ${activity.questionSuffix}',
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
+              style: Get.textTheme.bodyMedium?.copyWith(color: AppColors.black),
             ),
           ],
         ),
@@ -84,9 +94,7 @@ class FillTheBlankView extends StatelessWidget {
                       child: Center(
                         child: Text(
                           activity.options[index].optionText,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyLarge?.copyWith(
+                          style: Get.textTheme.bodyLarge?.copyWith(
                             color: AppColors.black,
                             fontWeight: FontWeight.w600,
                           ),

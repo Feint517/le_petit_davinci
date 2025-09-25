@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/follow_pattern_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/choice_button.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class FollowPatternView extends StatelessWidget {
   const FollowPatternView({super.key, required this.activity});
@@ -14,7 +15,18 @@ class FollowPatternView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    return ActivityIntroWrapper(
+      activity: _buildMainContent(),
+      mascotMixin: activity,
+      startButtonText: 'Start Exercise',
+      onStartPressed: () {
+        activity.isIntroCompleted.value = true;
+      },
+    );
+  }
+
+  Widget _buildMainContent() {
+    final textTheme = Get.textTheme;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

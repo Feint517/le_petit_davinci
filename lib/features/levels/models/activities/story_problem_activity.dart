@@ -4,8 +4,12 @@ import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart
 import 'package:le_petit_davinci/features/levels/views/activities/story_problem_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class StoryProblemActivity extends Activity {
+class StoryProblemActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   final String instruction;
   final List<DraggableItem> draggableOptions;
   final int correctTotalValue;
@@ -25,7 +29,13 @@ class StoryProblemActivity extends Activity {
     required this.draggableOptions,
     required this.correctTotalValue,
     this.unitName = '', // Default to empty string
-  });
+  }) {
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s solve this story problem!',
+      'Drag the items to find the answer.',
+    ]);
+  }
 
   /// Adds an item to the drop zone. Called by the view's DragTarget.
   void addItem(DraggableItem item) {
@@ -71,5 +81,28 @@ class StoryProblemActivity extends Activity {
   @override
   void reset() {
     droppedItems.clear();
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

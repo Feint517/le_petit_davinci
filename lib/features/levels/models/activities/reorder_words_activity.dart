@@ -4,9 +4,19 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/reorder_words_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class ReorderWordsActivity extends Activity {
-  ReorderWordsActivity({required this.words, required this.correctOrder});
+class ReorderWordsActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
+  ReorderWordsActivity({required this.words, required this.correctOrder}) {
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s reorder the words!',
+      'Put the words in the correct order.',
+    ], completionDelay: const Duration(seconds: 2));
+  }
 
   // Override to indicate this activity requires validation
   @override
@@ -46,5 +56,28 @@ class ReorderWordsActivity extends Activity {
   @override
   void reset() {
     selectedOrder.clear();
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

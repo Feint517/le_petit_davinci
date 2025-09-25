@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 import 'package:le_petit_davinci/features/levels/widgets/full_screen_video_player.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/video_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class VideoActivity extends Activity {
+class VideoActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   VideoActivity({required this.videoId}) {
-    // The model now creates and configures its own mascot controller.
-    mascotController = TalkingMascotController(
-      messages: ['Super! Prêt à voir la vidéo?'],
-    );
-
-    // Listen to the mascot controller to know when the intro is done.
-    ever(mascotController.isCompleted, (bool isDone) {
-      if (isDone) {
-        // Use a small delay to allow the button animation to finish.
-        Future.delayed(const Duration(milliseconds: 400), () {
-          isIntroCompleted.value = true;
-        });
-      }
-    });
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Super! Prêt à voir la vidéo?',
+    ], completionDelay: const Duration(seconds: 2));
 
     // When the intro is complete, launch the full-screen player.
     ever(isIntroCompleted, (bool isReady) {
@@ -41,10 +34,6 @@ class VideoActivity extends Activity {
 
   final String videoId;
 
-  /// State specific to this activity: is the intro mascot done talking?
-  late final TalkingMascotController mascotController;
-  final RxBool isIntroCompleted = false.obs;
-
   /// The video player will call this when the video ends.
   /// This triggers the main `isCompleted` flag, advancing the lesson.
   void markVideoAsCompleted() {
@@ -57,9 +46,26 @@ class VideoActivity extends Activity {
     return VideoActivityView(activity: this);
   }
 
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig =>
+      ActivityButtonConfig(continueButtonText: 'Watch Video');
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
   @override
   void dispose() {
-    // Clean up the controller when the activity is disposed.
-    mascotController.dispose();
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }

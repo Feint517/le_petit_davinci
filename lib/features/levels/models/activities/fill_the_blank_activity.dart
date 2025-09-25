@@ -4,13 +4,23 @@ import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart
 import 'package:le_petit_davinci/features/levels/views/activities/fill_the_blank_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/fill_the_blank_option_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class FillTheBlankActivity extends Activity {
+class FillTheBlankActivity extends Activity
+    with MascotIntroductionMixin
+    implements ActivityNavigationInterface {
   FillTheBlankActivity({
     required this.questionSuffix,
     required this.options,
     required this.correctAnswer,
-  });
+  }) {
+    // Initialize mascot with standardized approach
+    initializeMascot([
+      'Let\'s fill in the blank!',
+      'Choose the correct answer.',
+    ], completionDelay: const Duration(seconds: 2));
+  }
 
   final String questionSuffix;
   final List<FillTheBlankOption> options;
@@ -54,5 +64,28 @@ class FillTheBlankActivity extends Activity {
   @override
   void reset() {
     selectedIndex.value = null;
+    resetMascotIntroduction(); // Reset mascot state
+  }
+
+  // --- ActivityNavigationInterface Implementation ---
+
+  @override
+  bool get useCustomNavigation => false; // Use standard navigation
+
+  @override
+  Widget? get customNavigationWidget => null; // Use standard navigation
+
+  @override
+  ActivityButtonConfig? get buttonConfig => null; // Use default button config
+
+  @override
+  void onNavigationTriggered() {
+    // Handle custom navigation logic if needed
+  }
+
+  @override
+  void dispose() {
+    disposeMascot(); // Use mixin method
+    super.dispose();
   }
 }
