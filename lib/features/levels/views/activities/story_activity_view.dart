@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
+import 'package:le_petit_davinci/features/levels/widgets/mascot_feedback_widget.dart';
 
 class StoryActivityView extends StatelessWidget {
   const StoryActivityView({super.key, required this.activity});
@@ -61,10 +62,23 @@ class StoryActivityView extends StatelessWidget {
                 final result =
                     (activity.currentElement as StoryQuestion).activity
                         .checkAnswer();
-                // TODO: Implement feedback sheet logic.
-                if (result.isCorrect) {
-                  activity.advanceToNextElement();
-                }
+
+                // Show mascot feedback
+                Get.bottomSheet(
+                  MascotFeedbackWidget(
+                    isCorrect: result.isCorrect,
+                    correctAnswer:
+                        result.isCorrect ? null : result.correctAnswerText,
+                    onContinue: () {
+                      Get.back(); // Close the bottom sheet
+                      if (result.isCorrect) {
+                        activity.advanceToNextElement();
+                      }
+                    },
+                  ),
+                  isDismissible: false,
+                  enableDrag: false,
+                );
               } else {
                 activity.advanceToNextElement();
               }

@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rive/rive.dart';
@@ -5,14 +6,15 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/misc/chat_bubble.dart';
 
-class TalkingMascotController extends GetxController {
+class RiveTalkingMascotController extends GetxController {
   final List<String> messages;
   final Function()? onCompleted;
 
   final RxInt currentIndex = 0.obs;
   final RxBool isCompleted = false.obs;
+  final RxBool isTalking = false.obs;
 
-  TalkingMascotController({required this.messages, this.onCompleted});
+  RiveTalkingMascotController({required this.messages, this.onCompleted});
 
   String get currentMessage => messages[currentIndex.value];
 
@@ -28,17 +30,23 @@ class TalkingMascotController extends GetxController {
   void reset() {
     currentIndex.value = 0;
     isCompleted.value = false;
+    isTalking.value = false;
+  }
+
+  void setTalking(bool talking) {
+    isTalking.value = talking;
   }
 }
 
-class TalkingMascot extends StatefulWidget {
-  const TalkingMascot({
+class RiveTalkingMascot extends StatefulWidget {
+  const RiveTalkingMascot({
     super.key,
     this.mascotSize = 300,
     required this.bubbleText,
     this.bubbleWidth = 200,
     this.bubbleColor = AppColors.accent,
     this.onTap,
+    this.animationType = MascotAnimationType.talking,
   });
 
   final double mascotSize;
@@ -46,14 +54,15 @@ class TalkingMascot extends StatefulWidget {
   final double bubbleWidth;
   final Color bubbleColor;
   final VoidCallback? onTap;
+  final MascotAnimationType animationType;
 
   @override
-  State<TalkingMascot> createState() => _TalkingMascotState();
+  State<RiveTalkingMascot> createState() => _RiveTalkingMascotState();
 }
 
-class _TalkingMascotState extends State<TalkingMascot> {
-  Artboard? _artboard;
+class _RiveTalkingMascotState extends State<RiveTalkingMascot> {
   StateMachineController? _stateMachineController;
+  Artboard? _artboard;
 
   @override
   void initState() {
@@ -62,11 +71,9 @@ class _TalkingMascotState extends State<TalkingMascot> {
   }
 
   Future<void> _loadRiveAnimation() async {
-    try {
-      final data = await DefaultAssetBundle.of(
-        context,
-      ).load(AnimationAssets.talkingBear);
-      final file = RiveFile.import(data);
+    final data = await _getRiveData();
+    if (data != null) {
+      final file = RiveFile.import(ByteData.sublistView(data));
       final artboard = file.mainArtboard;
 
       setState(() {
@@ -82,15 +89,38 @@ class _TalkingMascotState extends State<TalkingMascot> {
       if (_stateMachineController != null) {
         artboard.addController(_stateMachineController!);
       }
+    }
+  }
+
+  Future<Uint8List?> _getRiveData() async {
+    try {
+      // Load the appropriate Rive file based on animation type
+      String assetPath;
+      switch (widget.animationType) {
+        case MascotAnimationType.talking:
+          assetPath = AnimationAssets.talkingBear;
+          break;
+        case MascotAnimationType.happy:
+          assetPath = AnimationAssets.happyBear;
+          break;
+        case MascotAnimationType.sad:
+          assetPath = AnimationAssets.sadBear;
+          break;
+      }
+
+      // Load the asset
+      final data = await DefaultAssetBundle.of(context).load(assetPath);
+      return data.buffer.asUint8List();
     } catch (e) {
       debugPrint('Error loading Rive animation: $e');
+      return null;
     }
   }
 
   void _triggerAnimation() {
     if (_stateMachineController != null) {
-      // Trigger the talking animation
-      // Note: The exact input name and value may need to be adjusted based on your Rive file
+      // Trigger the appropriate animation based on the state
+      // This might need to be adjusted based on your Rive file's state machine
       try {
         // Note: The exact input name and value may need to be adjusted based on your Rive file
         // This is a placeholder - you'll need to check your Rive file's state machine inputs
@@ -149,3 +179,5 @@ class _TalkingMascotState extends State<TalkingMascot> {
     );
   }
 }
+
+enum MascotAnimationType { talking, happy, sad }

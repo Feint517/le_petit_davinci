@@ -12,7 +12,6 @@ class LevelScreen extends GetView<LevelController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const LevelProgressBar(),
       appBar: const ProfileHeader(type: ProfileHeaderType.activity),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),

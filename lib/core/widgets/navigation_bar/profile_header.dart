@@ -10,7 +10,6 @@ import 'package:le_petit_davinci/core/widgets/loaders/shimmer.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
 import 'package:le_petit_davinci/features/levels/widgets/progress_bar.dart';
-import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import '../../constants/assets_manager.dart';
 import '../../constants/colors.dart';

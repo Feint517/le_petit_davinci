@@ -51,48 +51,32 @@ class StandardActivityNavigation extends GetView<LevelController> {
     required bool requiresValidation,
     ActivityButtonConfig? buttonConfig,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.md,
-        vertical: AppSizes.sm,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 4,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          // Audio button (if current activity is audible and enabled)
-          if (currentActivity is Audible &&
-              (buttonConfig?.showAudioButton ?? true)) ...[
-            IconButton(
-              onPressed: controller.playCurrentAudio,
-              icon: const Icon(
-                Icons.volume_up,
-                color: AppColors.primary,
-                size: 28,
-              ),
+    return Row(
+      children: [
+        // Audio button (if current activity is audible and enabled)
+        if (currentActivity is Audible &&
+            (buttonConfig?.showAudioButton ?? true)) ...[
+          IconButton(
+            onPressed: controller.playCurrentAudio,
+            icon: const Icon(
+              Icons.volume_up,
+              color: AppColors.primary,
+              size: 28,
             ),
-            const SizedBox(width: AppSizes.sm),
-          ],
+          ),
+          const SizedBox(width: AppSizes.sm),
+        ],
 
-          // Main action button
-          Expanded(
-            child: _buildMainButton(
-              currentActivity: currentActivity,
-              isAnswerReady: isAnswerReady,
-              requiresValidation: requiresValidation,
-              buttonConfig: buttonConfig,
-            ),
+        // Main action button
+        Expanded(
+          child: _buildMainButton(
+            currentActivity: currentActivity,
+            isAnswerReady: isAnswerReady,
+            requiresValidation: requiresValidation,
+            buttonConfig: buttonConfig,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

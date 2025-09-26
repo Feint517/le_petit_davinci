@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';

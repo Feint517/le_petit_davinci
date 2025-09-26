@@ -5,12 +5,12 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
 import 'package:le_petit_davinci/features/levels/views/reward.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/widgets/mascot_feedback_widget.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
@@ -157,6 +157,8 @@ class LevelController extends GetxController {
     Get.back(); // Close the bottom sheet
 
     if (isCorrect) {
+      // Mark the current activity as completed before moving to the next one
+      currentActivity.markCompleted();
       _nextActivity();
     } else {
       // Incorrect, reset the current activity for another try
@@ -231,42 +233,10 @@ class LevelController extends GetxController {
 
   // --- UI Helper ---
   Widget _buildFeedbackSheet(bool isCorrect, String correctAnswer) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isCorrect ? const Color(0xFFd7f9e9) : const Color(0xFFfde2e4),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            isCorrect ? 'Correct!' : 'Incorrect',
-            style: Get.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: isCorrect ? Colors.green.shade800 : Colors.red.shade800,
-            ),
-          ),
-          if (!isCorrect) ...[
-            const SizedBox(height: 16),
-            Text('The correct answer is:', style: Get.textTheme.bodyLarge),
-            const SizedBox(height: 8),
-            Text(
-              correctAnswer,
-              style: Get.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-          const SizedBox(height: 24),
-          CustomButton(
-            label: 'Continue',
-            onPressed: () => _handleNextStep(isCorrect),
-            variant: isCorrect ? ButtonVariant.primary : ButtonVariant.warning,
-          ),
-        ],
-      ),
+    return MascotFeedbackWidget(
+      isCorrect: isCorrect,
+      correctAnswer: isCorrect ? null : correctAnswer,
+      onContinue: () => _handleNextStep(isCorrect),
     );
   }
 }
