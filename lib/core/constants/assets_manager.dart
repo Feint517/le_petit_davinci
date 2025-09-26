@@ -12,6 +12,9 @@ class AnimationAssets {
 }
 
 class ImageAssets {
+  //* logo
+  static const String StripeLogo = 'assets/images/logos/stripe_logo.png';
+
   static const String masscotbg = '$IMAGE_PATH/mascotbg.png';
   static const String finalMasscotIntro = '$IMAGE_PATH/finalMasscotIntro.png';
   static const String questionBackground =
@@ -142,6 +145,9 @@ class IconAssets {
 }
 
 class SvgAssets {
+  //* logo
+  static const String StripeLogo = 'assets/images/logos/stripe_logo.svg';
+
   //* First time questions
   static const String questionsBackground =
       'assets/svg/questoins_background.svg';

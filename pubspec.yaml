@@ -92,6 +92,7 @@ flutter:
     - assets/audio/tts/
     - assets/icons/
     - assets/images/
+    - assets/images/logos/
     - assets/images/illustrations/
     - assets/images/templates/alphabets/
     - assets/images/tictactoe/

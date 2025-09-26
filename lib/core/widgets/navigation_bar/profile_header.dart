@@ -11,6 +11,7 @@ import 'package:le_petit_davinci/features/authentication/controllers/user_contro
 import 'package:le_petit_davinci/features/dashboard/views/dashboard.dart';
 import 'package:le_petit_davinci/features/levels/widgets/progress_bar.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
+import 'package:le_petit_davinci/features/subscription/views/subscription_plans_screen.dart';
 import '../../constants/assets_manager.dart';
 import '../../constants/colors.dart';
 
@@ -102,14 +103,64 @@ class ProfileHeader extends GetView<UserController>
                 ],
               ),
 
-              //* Right Section - Change Avatar Action
-              if (showTrailingIcon)
-                IconButton(
-                  onPressed:
-                      trailingIconOnTap ??
-                      () => Get.to(() => const DashboardScreen()),
-                  icon: Icon(Iconsax.setting),
-                ),
+              //* Right Section - Subscribe Button and Settings
+              Row(
+                children: [
+                  // Subscribe Button
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 6.h,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF6B73FF), Color(0xFF9B59B6)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF6B73FF).withOpacity(0.3),
+                          spreadRadius: 0,
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap:
+                          () => Get.to(() => const PremiumSubscriptionPage2()),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.stars, color: Colors.white, size: 16.sp),
+                          Gap(4.w),
+                          Text(
+                            'Subscribe',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Gap(8.w),
+
+                  // Settings Icon
+                  if (showTrailingIcon)
+                    IconButton(
+                      onPressed:
+                          trailingIconOnTap ??
+                          () => Get.to(() => const DashboardScreen()),
+                      icon: Icon(Iconsax.setting),
+                    ),
+                ],
+              ),
             ],
           ),
           ProfileHeaderType.compact => Row(
@@ -160,22 +211,6 @@ class ProfileHeader extends GetView<UserController>
             ],
           ),
 
-          // ProfileHeaderType.activity => Obx(() {
-          //   // int totalSteps = 0;
-          //   // int currentStep = 0;
-
-          //   // Check which controller is active and get the progress data.
-          //   // if (Get.isRegistered<LevelController>()) {
-          //   //   final controller = Get.find<LevelController>();
-          //   //   totalSteps = controller.levelSet.activities.length;
-          //   //   currentStep = controller.currentIndex.value;
-          //   // }
-
-          //   return LevelProgressBar(
-          //     // totalSteps: totalSteps,
-          //     // currentStep: currentStep,
-          //   );
-          // }),
           ProfileHeaderType.activity => const LevelProgressBar(),
         },
       ),
