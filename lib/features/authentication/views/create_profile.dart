@@ -13,6 +13,7 @@ import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/create_profile_controller.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
+import 'package:le_petit_davinci/features/authentication/widgets/social_login_button.dart';
 
 class CreateProfileScreen extends GetView<CreateProfileController> {
   const CreateProfileScreen({super.key});
@@ -51,6 +52,76 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
                   ),
 
                   const Gap(AppSizes.spaceBtwSections),
+
+                  // Social Login Options
+                  Column(
+                    children: [
+                      Text(
+                        'Ou connectez-vous avec',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      
+                      Gap(AppSizes.spaceBtwInputFields),
+                      
+                      // Google Login
+                      SocialLoginButton(
+                        onTap: () {},
+                        icon: Icons.g_mobiledata,
+                        label: 'Google',
+                        backgroundColor: Colors.white,
+                        textColor: Colors.black87,
+                        isLoading: false,
+                      ),
+                      
+                      Gap(AppSizes.spaceBtwInputFields),
+                      
+                      // Facebook Login
+                      SocialLoginButton(
+                        onTap: () {},
+                        icon: Icons.facebook,
+                        label: 'Facebook',
+                        backgroundColor: const Color(0xFF1877F2),
+                        textColor: Colors.white,
+                        isLoading: false,
+                      ),
+                      
+                      Gap(AppSizes.spaceBtwInputFields),
+                      
+                      // Microsoft Login
+                      SocialLoginButton(
+                        onTap: () {},
+                        icon: Icons.business,
+                        label: 'Microsoft',
+                        backgroundColor: const Color(0xFF00BCF2),
+                        textColor: Colors.white,
+                        isLoading: false,
+                      ),
+                      
+                      Gap(AppSizes.spaceBtwSections),
+                      
+                      // Divider
+                      Row(
+                        children: [
+                          const Expanded(child: Divider(color: AppColors.textSecondary)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Text(
+                              'OU',
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ),
+                          const Expanded(child: Divider(color: AppColors.textSecondary)),
+                        ],
+                      ),
+                      
+                      Gap(AppSizes.spaceBtwSections),
+                    ],
+                  ),
 
                   CustomTextField(
                     controller: controller.kidName,
