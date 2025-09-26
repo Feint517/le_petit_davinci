@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
-import 'package:le_petit_davinci/features/levels/widgets/mascot_feedback_widget.dart';
+import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
 
 class StoryActivityView extends StatelessWidget {
   const StoryActivityView({super.key, required this.activity});
@@ -18,10 +18,10 @@ class StoryActivityView extends StatelessWidget {
     return ActivityIntroWrapper(
       activity: _buildMainContent(),
       mascotMixin: activity,
-      startButtonText: 'Start Story',
-      onStartPressed: () {
-        activity.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Start Story',
+      // onStartPressed: () {
+      //   activity.isIntroCompleted.value = true;
+      // },
     );
   }
 
@@ -63,21 +63,20 @@ class StoryActivityView extends StatelessWidget {
                     (activity.currentElement as StoryQuestion).activity
                         .checkAnswer();
 
-                // Show mascot feedback
-                Get.bottomSheet(
-                  MascotFeedbackWidget(
+                // Show full-screen mascot feedback
+                Get.to(
+                  () => FullScreenMascotFeedback(
                     isCorrect: result.isCorrect,
                     correctAnswer:
                         result.isCorrect ? null : result.correctAnswerText,
                     onContinue: () {
-                      Get.back(); // Close the bottom sheet
+                      Get.back(); // Close the full-screen feedback
                       if (result.isCorrect) {
                         activity.advanceToNextElement();
                       }
                     },
                   ),
-                  isDismissible: false,
-                  enableDrag: false,
+                  fullscreenDialog: true,
                 );
               } else {
                 activity.advanceToNextElement();

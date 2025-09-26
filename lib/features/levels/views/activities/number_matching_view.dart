@@ -30,10 +30,10 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
     return ActivityIntroWrapper(
       activity: _buildMainContent(),
       mascotMixin: widget.exercise,
-      startButtonText: 'Start Exercise',
-      onStartPressed: () {
-        widget.exercise.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Start Exercise',
+      // onStartPressed: () {
+      //   widget.exercise.isIntroCompleted.value = true;
+      // },
     );
   }
 

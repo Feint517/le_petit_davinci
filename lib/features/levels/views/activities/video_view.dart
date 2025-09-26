@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
@@ -13,10 +12,10 @@ class VideoActivityView extends StatelessWidget {
     return ActivityIntroWrapper(
       activity: const Center(child: CircularProgressIndicator()),
       mascotMixin: activity,
-      startButtonText: 'Watch Video',
-      onStartPressed: () {
-        activity.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Watch Video',
+      // onStartPressed: () {
+      //   activity.isIntroCompleted.value = true;
+      // },
     );
   }
 }

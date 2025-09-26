@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:le_petit_davinci/core/widgets/misc/animated_text_widget.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
@@ -9,6 +10,9 @@ class ChatBubble extends StatelessWidget {
     this.borderWidth = 2.0,
     required this.bubbleText,
     this.textColor = Colors.white,
+    this.enableTypingAnimation = false,
+    this.characterDelay = const Duration(milliseconds: 50),
+    this.onAnimationComplete,
   });
 
   final Color bubbleColor;
@@ -17,6 +21,9 @@ class ChatBubble extends StatelessWidget {
   final double borderWidth;
   final String bubbleText;
   final Color? textColor;
+  final bool enableTypingAnimation;
+  final Duration characterDelay;
+  final VoidCallback? onAnimationComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +37,25 @@ class ChatBubble extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(25, 15, 15, 15),
-          child: Text(
-            bubbleText,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(color: textColor),
-          ),
+          child:
+              enableTypingAnimation
+                  ? AnimatedTextWidget(
+                    key: ValueKey(
+                      bubbleText,
+                    ), // Force restart when text changes
+                    text: bubbleText,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: textColor),
+                    characterDelay: characterDelay,
+                    onAnimationComplete: onAnimationComplete,
+                  )
+                  : Text(
+                    bubbleText,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: textColor),
+                  ),
         ),
       ),
     );

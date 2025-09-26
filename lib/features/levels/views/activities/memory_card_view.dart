@@ -18,11 +18,11 @@ class MemoryCardActivityView extends StatelessWidget {
     return ActivityIntroWrapper(
       activity: _buildMainContent(),
       mascotMixin: activity,
-      startButtonText: 'Start Game',
-      onStartPressed: () {
-        activity.isIntroCompleted.value = true;
-        activity.startGame();
-      },
+      // startButtonText: 'Start Game',
+      // onStartPressed: () {
+      //   activity.isIntroCompleted.value = true;
+      //   activity.startGame();
+      // },
     );
   }
 

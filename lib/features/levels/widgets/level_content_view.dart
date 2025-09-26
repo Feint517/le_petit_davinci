@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
+import 'package:le_petit_davinci/features/levels/widgets/activity_wrapper.dart';
 
 class LevelContentView extends GetView<LevelController> {
   const LevelContentView({super.key});
@@ -38,10 +39,23 @@ class LevelContentView extends GetView<LevelController> {
           ),
         );
       }
-      // Build the current activity directly
-      final currentIndex = controller.currentIndex.value;
-      final currentActivity = controller.levelSet.activities[currentIndex];
-      return currentActivity.build(context);
+
+      // Use PageView for smooth activity navigation
+      return PageView.builder(
+        controller: controller.pageController,
+        itemCount: controller.totalItems,
+        physics: const NeverScrollableScrollPhysics(), // Disable manual swiping
+        onPageChanged: (index) {
+          // This will be handled by the PageController listener in the controller
+        },
+        itemBuilder: (context, index) {
+          final activity = controller.levelSet.activities[index];
+          return ActivityWrapper(
+            activity: activity.build(context),
+            showNavigation: false, // Navigation is handled by the outer wrapper
+          );
+        },
+      );
     });
   }
 }

@@ -39,10 +39,10 @@ class _ReorderWordsViewState extends State<ReorderWordsView> {
     return ActivityIntroWrapper(
       activity: _buildMainContent(),
       mascotMixin: widget.activity,
-      startButtonText: 'Start Exercise',
-      onStartPressed: () {
-        widget.activity.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Start Exercise',
+      // onStartPressed: () {
+      //   widget.activity.isIntroCompleted.value = true;
+      // },
     );
   }
 

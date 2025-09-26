@@ -21,10 +21,10 @@ class ListenAndChooseView extends StatelessWidget {
     return ActivityIntroWrapper(
       activity: _buildMainContent(),
       mascotMixin: activity,
-      startButtonText: 'Start Exercise',
-      onStartPressed: () {
-        activity.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Start Exercise',
+      // onStartPressed: () {
+      //   activity.isIntroCompleted.value = true;
+      // },
     );
   }
 

@@ -18,10 +18,10 @@ class DrawingActivityView extends StatelessWidget {
     return ActivityIntroWrapper(
       activity: _buildDrawingCanvas(),
       mascotMixin: activity,
-      startButtonText: 'Start Drawing',
-      onStartPressed: () {
-        activity.isIntroCompleted.value = true;
-      },
+      // startButtonText: 'Start Drawing',
+      // onStartPressed: () {
+      //   activity.isIntroCompleted.value = true;
+      // },
     );
   }
 

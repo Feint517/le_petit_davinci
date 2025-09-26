@@ -39,6 +39,8 @@ class TalkingMascot extends StatefulWidget {
     this.bubbleWidth = 200,
     this.bubbleColor = AppColors.accent,
     this.onTap,
+    this.enableTypingAnimation = true,
+    this.characterDelay = const Duration(milliseconds: 50),
   });
 
   final double mascotSize;
@@ -46,6 +48,8 @@ class TalkingMascot extends StatefulWidget {
   final double bubbleWidth;
   final Color bubbleColor;
   final VoidCallback? onTap;
+  final bool enableTypingAnimation;
+  final Duration characterDelay;
 
   @override
   State<TalkingMascot> createState() => _TalkingMascotState();
@@ -134,14 +138,14 @@ class _TalkingMascotState extends State<TalkingMascot> {
           Positioned(
             left:
                 widget.mascotSize -
-                20, // Position near the right side of mascot
-            top:
-                widget.mascotSize *
-                0.3, // Position near the mouth area (30% from top)
+                80, // Position near the right side of mascot
+            top: 0,
             child: ChatBubble(
               bubbleText: widget.bubbleText,
               bubbleColor: widget.bubbleColor,
               width: widget.bubbleWidth,
+              enableTypingAnimation: widget.enableTypingAnimation,
+              characterDelay: widget.characterDelay,
             ),
           ),
         ],

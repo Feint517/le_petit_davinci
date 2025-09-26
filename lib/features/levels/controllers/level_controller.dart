@@ -8,9 +8,8 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
-import 'package:le_petit_davinci/features/levels/views/reward.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
-import 'package:le_petit_davinci/features/levels/widgets/mascot_feedback_widget.dart';
+import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
@@ -145,27 +144,49 @@ class LevelController extends GetxController {
       _audioPlayer.seek(Duration.zero);
     }
 
-    // Show feedback bottom sheet
-    Get.bottomSheet(
-      _buildFeedbackSheet(result.isCorrect, result.correctAnswerText),
-      isDismissible: false,
-      enableDrag: false,
+    // Show full-screen feedback
+    Get.to(
+      () => FullScreenMascotFeedback(
+        isCorrect: result.isCorrect,
+        correctAnswer: result.isCorrect ? null : result.correctAnswerText,
+        onContinue: () => _handleNextStep(result.isCorrect),
+      ),
+      fullscreenDialog: true,
     );
   }
 
   void _handleNextStep(bool isCorrect) {
-    Get.back(); // Close the bottom sheet
+    // Close the full-screen feedback first
+    Get.back();
 
-    if (isCorrect) {
-      // Mark the current activity as completed before moving to the next one
-      currentActivity.markCompleted();
-      _nextActivity();
-    } else {
-      // Incorrect, reset the current activity for another try
-      if (currentActivityRequiresValidation) {
-        currentActivity.reset();
+    // Use a post-frame callback to ensure the navigation is complete before resetting
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        if (isCorrect) {
+          // Mark the current activity as completed before moving to the next one
+          currentActivity.markCompleted();
+          _nextActivity();
+        } else {
+          // Incorrect, reset the current activity for another try
+          if (currentActivityRequiresValidation) {
+            // Add a small delay to ensure UI is stable before resetting
+            Future.delayed(const Duration(milliseconds: 100), () {
+              try {
+                currentActivity.reset();
+              } catch (e) {
+                debugPrint('Error resetting activity: $e');
+              }
+            });
+          }
+        }
+      } catch (e) {
+        debugPrint('Error in _handleNextStep: $e');
+        // Fallback: just reset the activity if there's an error
+        if (currentActivityRequiresValidation) {
+          currentActivity.reset();
+        }
       }
-    }
+    });
   }
 
   void _nextActivity() {
@@ -199,20 +220,27 @@ class LevelController extends GetxController {
   Future<void> _completeLevel() async {
     await ProgressService.instance.completeLevel(language, levelNumber);
 
-    // Determine completion screen based on level content
-    // Show reward screen if it's lesson-only or mixed, otherwise show victory screen
-    bool shouldShowRewardScreen = levelSet.isLessonOnly || levelSet.isMixed;
-
-    if (shouldShowRewardScreen) {
-      Get.off(() => const RewardScreen());
-    } else {
-      Get.off(
+    Get.off(
         () => const VictoryScreen(starsCount: 3),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => VictoryController(subject: subject));
         }),
       );
-    }
+
+    // Determine completion screen based on level content
+    // Show reward screen if it's lesson-only or mixed, otherwise show victory screen
+    // bool shouldShowRewardScreen = levelSet.isLessonOnly || levelSet.isMixed;
+
+    // if (shouldShowRewardScreen) {
+    //   Get.off(() => const RewardScreen());
+    // } else {
+    //   Get.off(
+    //     () => const VictoryScreen(starsCount: 3),
+    //     binding: BindingsBuilder(() {
+    //       Get.lazyPut(() => VictoryController(subject: subject));
+    //     }),
+    //   );
+    // }
   }
 
   // --- Audio Helpers ---
@@ -229,14 +257,5 @@ class LevelController extends GetxController {
   // --- Error Handling ---
   void retry() {
     onInit();
-  }
-
-  // --- UI Helper ---
-  Widget _buildFeedbackSheet(bool isCorrect, String correctAnswer) {
-    return MascotFeedbackWidget(
-      isCorrect: isCorrect,
-      correctAnswer: isCorrect ? null : correctAnswer,
-      onContinue: () => _handleNextStep(isCorrect),
-    );
   }
 }
