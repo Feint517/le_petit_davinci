@@ -5,8 +5,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/core/widgets/misc/mascot_widget_old.dart';
-import 'package:le_petit_davinci/features/home/widgets/mission_card.dart';
+import 'package:le_petit_davinci/core/widgets/misc/rive_mascot_widget.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
@@ -22,11 +21,12 @@ class WelcomeSection extends StatelessWidget {
             //* Background homeScreen image
             const ResponsiveImageAsset(assetPath: SvgAssets.homeScreenImage),
 
-            //* Mascot widget positioned in center-right, slightly top
+            //* Rive animated mascot widget positioned in center-right, slightly top
             Align(
               alignment: Alignment(0.8, -0.8),
-              child: MascotWidget(
+              child: RiveMascotWidget(
                 speechText: StringsManager.homeScreenMessage,
+                riveAssetPath: 'assets/animations/rive/talking_bear.riv',
                 mascotSize: 150.h,
                 textSize: 18.sp,
                 bubblePosition: BubblePosition.center,
