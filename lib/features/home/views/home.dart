@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:rive/rive.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.dart';
@@ -50,23 +49,23 @@ class HomeScreen extends StatelessWidget {
             Gap(40.h),
 
             //* Rive Animation Testing Section
-            SizedBox(
-              height: 220,
-              child: RiveAnimation.asset(
-                'assets/animations/rive/talking_bear.riv',
-                fit: BoxFit.contain,
-                onInit: (artboard) {
-                  final first =
-                      artboard.animations.isNotEmpty
-                          ? artboard.animations.first.name
-                          : null;
-                  if (first != null) {
-                    artboard.addController(SimpleAnimation(first));
-                  }
-                },
-              ),
-            ),
-            Gap(40.h),
+            // SizedBox(
+            //   height: 220,
+            //   child: RiveAnimation.asset(
+            //     'assets/animations/rive/talking_bear.riv',
+            //     fit: BoxFit.contain,
+            //     onInit: (artboard) {
+            //       final first =
+            //           artboard.animations.isNotEmpty
+            //               ? artboard.animations.first.name
+            //               : null;
+            //       if (first != null) {
+            //         artboard.addController(SimpleAnimation(first));
+            //       }
+            //     },
+            //   ),
+            // ),
+            // Gap(40.h),
 
             //* Bottom footer image
             const ScrollAnimatedItem(

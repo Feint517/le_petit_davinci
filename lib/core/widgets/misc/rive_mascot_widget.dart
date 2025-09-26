@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:rive/rive.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
+import 'package:le_petit_davinci/core/widgets/misc/animated_text_widget.dart';
 
 enum BubblePosition { left, center, right }
 
@@ -36,6 +37,12 @@ class RiveMascotWidget extends StatelessWidget {
   /// Animation name to play (optional, will use first animation if not specified)
   final String? animationName;
 
+  /// Duration between each character in the typing animation (optional)
+  final Duration? characterDelay;
+
+  /// Whether to show animated typing effect (default true)
+  final bool enableTypingAnimation;
+
   const RiveMascotWidget({
     super.key,
     required this.speechText,
@@ -47,6 +54,8 @@ class RiveMascotWidget extends StatelessWidget {
     this.textSize,
     this.bubblePosition = BubblePosition.center,
     this.animationName,
+    this.characterDelay,
+    this.enableTypingAnimation = true,
   });
 
   @override
@@ -148,17 +157,32 @@ class RiveMascotWidget extends StatelessWidget {
               ),
             ),
             child: SingleChildScrollView(
-              child: Text(
-                speechText,
-                style: TextStyle(
-                  fontSize: textSize ?? 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: textColor ?? AppColors.white,
-                  fontFamily: 'DynaPuff_SemiCondensed',
-                  height: 1.3,
-                ),
-                textAlign: _getTextAlignment(),
-              ),
+              child:
+                  enableTypingAnimation
+                      ? AnimatedTextWidget(
+                        text: speechText,
+                        style: TextStyle(
+                          fontSize: textSize ?? 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: textColor ?? AppColors.white,
+                          fontFamily: 'DynaPuff_SemiCondensed',
+                          height: 1.3,
+                        ),
+                        textAlign: _getTextAlignment(),
+                        characterDelay:
+                            characterDelay ?? const Duration(milliseconds: 50),
+                      )
+                      : Text(
+                        speechText,
+                        style: TextStyle(
+                          fontSize: textSize ?? 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: textColor ?? AppColors.white,
+                          fontFamily: 'DynaPuff_SemiCondensed',
+                          height: 1.3,
+                        ),
+                        textAlign: _getTextAlignment(),
+                      ),
             ),
           ),
 
