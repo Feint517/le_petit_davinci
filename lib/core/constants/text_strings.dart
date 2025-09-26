@@ -25,4 +25,19 @@ class StringsManager {
   static const String homeScreenMessage =
       "Bonjour Alex ! Prêt pour une nouvelle aventure ?";
   static const String discoverMySpace = "Découvrir mon espace";
+  
+  //* Signup related strings
+  static const String signupText = "Créez votre compte\nau Petit Davinci";
+  static const String alreadyHaveAccount = "Déjà un compte?";
+  static const String signIn = "Se connecter";
+  static const String createAccount = "Créer un compte";
+  static const String firstName = "Prénom";
+  static const String lastName = "Nom";
+  static const String confirmPassword = "Confirmer le mot de passe";
+  static const String emailSignup = "Email Signup";
+  static const String socialSignup = "Social Signup";
+  static const String continueWithGoogle = "Continuer avec Google";
+  static const String continueWithFacebook = "Continuer avec Facebook";
+  static const String continueWithMicrosoft = "Continuer avec Microsoft";
+  static const String signupWithAuth0 = "S'inscrire avec Auth0";
 }

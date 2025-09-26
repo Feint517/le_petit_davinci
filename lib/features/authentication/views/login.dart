@@ -11,7 +11,8 @@ import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/login_controller.dart';
-import 'package:le_petit_davinci/features/authentication/views/create_profile.dart';
+import 'package:le_petit_davinci/features/authentication/views/signup.dart';
+import 'package:le_petit_davinci/features/authentication/widgets/social_login_button.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
@@ -64,7 +65,7 @@ class LoginScreen extends GetView<LoginController> {
                           ),
                           TextButton(
                             onPressed:
-                                () => Get.to(() => const CreateProfileScreen()),
+                                () => Get.to(() => const SignupScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
                               style: Theme.of(context).textTheme.bodyMedium!
@@ -95,6 +96,66 @@ class LoginScreen extends GetView<LoginController> {
                       ),
 
                       Gap(AppSizes.spaceBtwSections.h),
+
+                      //* Social Login Buttons
+                      Column(
+                        children: [
+                          // Google Login
+                          SocialLoginButton(
+                            onTap: () {},
+                            icon: Icons.g_mobiledata,
+                            label: 'Continue with Google',
+                            backgroundColor: Colors.white,
+                            textColor: Colors.black87,
+                            isLoading: false,
+                          ),
+                          
+                          Gap(AppSizes.spaceBtwInputFields.h),
+                          
+                          // Facebook Login
+                          SocialLoginButton(
+                            onTap: () {},
+                            icon: Icons.facebook,
+                            label: 'Continue with Facebook',
+                            backgroundColor: const Color(0xFF1877F2),
+                            textColor: Colors.white,
+                            isLoading: false,
+                          ),
+                          
+                          Gap(AppSizes.spaceBtwInputFields.h),
+                          
+                          // Microsoft Login
+                          SocialLoginButton(
+                            onTap: () {},
+                            icon: Icons.business,
+                            label: 'Continue with Microsoft',
+                            backgroundColor: const Color(0xFF00BCF2),
+                            textColor: Colors.white,
+                            isLoading: false,
+                          ),
+                          
+                          Gap(AppSizes.spaceBtwSections.h),
+                          
+                          // Divider
+                          Row(
+                            children: [
+                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'OR',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ),
+                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                            ],
+                          ),
+                          
+                          Gap(AppSizes.spaceBtwSections.h),
+                        ],
+                      ),
 
                       //* Login button
                       CustomButton(
