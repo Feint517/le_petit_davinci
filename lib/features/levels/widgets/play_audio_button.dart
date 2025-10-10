@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 
 enum PlayAudioButtonSize { small, big }
@@ -39,13 +41,19 @@ class PlayAudioButton extends StatelessWidget {
             color: backgroundColor,
           ),
         ),
-        child: Icon(
-          Icons.volume_up,
-          color: AppColors.white,
-          size: switch (buttonSize) {
-            PlayAudioButtonSize.small => 30,
-            PlayAudioButtonSize.big => 40,
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SvgPicture.asset(
+            IconAssets.audio,
+            width: switch (buttonSize) {
+              PlayAudioButtonSize.small => 40,
+              PlayAudioButtonSize.big => 50,
+            },
+            height: switch (buttonSize) {
+              PlayAudioButtonSize.small => 40,
+              PlayAudioButtonSize.big => 50,
+            },
+          ),
         ),
       ),
     );

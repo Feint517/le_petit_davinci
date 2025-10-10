@@ -16,22 +16,22 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       // Video introduction
       VideoActivity(videoId: 'ccEpTTZW34g'),
 
-      // Drawing activities (auto-complete)
-      DrawingActivity(
-        prompt: 'Let\'s learn to write the letter "A"!',
-        templateImagePath: ImageAssets.drawableA,
+      // Letter tracing activities (auto-complete)
+      LetterTracingActivity(
+        letter: 'A',
+        prompt: 'Let\'s learn to trace the letter "A"!',
       ),
-      DrawingActivity(
-        prompt: 'Great! Now let\'s write the letter "B"!',
-        templateImagePath: ImageAssets.drawableB,
+      LetterTracingActivity(
+        letter: 'B',
+        prompt: 'Great! Now let\'s trace the letter "B"!',
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'C',
         prompt: 'Awesome! Here comes "C"!',
-        templateImagePath: ImageAssets.drawableC,
       ),
-      DrawingActivity(
-        prompt: 'You\'re doing great! Let\'s write "D"!',
-        templateImagePath: ImageAssets.drawableD,
+      LetterTracingActivity(
+        letter: 'D',
+        prompt: 'You\'re doing great! Let\'s trace "D"!',
       ),
 
       // Audio matching (auto-complete)
@@ -161,22 +161,22 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     title: 'Alphabet - E, F, G, H',
     introduction: 'Time to learn E, F, G, and H!',
     activities: [
-      // Drawing activities (auto-complete)
-      DrawingActivity(
+      // Letter tracing activities (auto-complete)
+      LetterTracingActivity(
+        letter: 'E',
         prompt: 'Let\'s start with "E"!',
-        templateImagePath: ImageAssets.drawableE,
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'F',
         prompt: 'Next up is "F"!',
-        templateImagePath: ImageAssets.drawableF,
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'G',
         prompt: 'Now for "G"!',
-        templateImagePath: ImageAssets.drawableG,
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'H',
         prompt: 'And finally, "H"!',
-        templateImagePath: ImageAssets.drawableH,
       ),
 
       // Audio matching (auto-complete)
@@ -249,22 +249,22 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     title: 'Alphabet - I, J, K, L',
     introduction: 'Let\'s learn I, J, K, and L!',
     activities: [
-      // Drawing activities (auto-complete)
-      DrawingActivity(
-        prompt: 'Let\'s write "I"!',
-        templateImagePath: ImageAssets.drawableI,
+      // Letter tracing activities (auto-complete)
+      LetterTracingActivity(
+        letter: 'I',
+        prompt: 'Let\'s trace "I"!',
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'J',
         prompt: 'Next is "J"!',
-        templateImagePath: ImageAssets.drawableJ,
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'K',
         prompt: 'Here comes "K"!',
-        templateImagePath: ImageAssets.drawableK,
       ),
-      DrawingActivity(
+      LetterTracingActivity(
+        letter: 'L',
         prompt: 'And now "L"!',
-        templateImagePath: ImageAssets.drawableL,
       ),
 
       // Audio matching (auto-complete)
@@ -397,10 +397,10 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       // Video introduction (auto-complete)
       VideoActivity(videoId: 'CA6Mofzh7jo'),
 
-      // Drawing activity (auto-complete)
-      DrawingActivity(
-        prompt: 'Let\'s draw something fun!',
-        templateImagePath: ImageAssets.drawableA,
+      // Letter tracing activity (auto-complete)
+      LetterTracingActivity(
+        letter: 'A',
+        prompt: 'Let\'s trace something fun!',
       ),
 
       // Fill in the blank exercise (requires validation)

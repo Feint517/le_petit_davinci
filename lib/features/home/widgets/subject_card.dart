@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/home/models/subject_card_model.dart';
 import '../../../core/constants/colors.dart';
+import 'package:le_petit_davinci/services/sfx_service.dart';
 
 class SubjectCard extends StatelessWidget {
   const SubjectCard({super.key, required this.subject});
@@ -18,6 +19,7 @@ class SubjectCard extends StatelessWidget {
       aspectRatio: 0.85, //? Slightly taller than wide
       child: InkWell(
         onTap: () {
+          AppSfx.click();
           if (subject.destination != null) {
             Get.to(() => subject.destination!, binding: subject.bindings);
           }

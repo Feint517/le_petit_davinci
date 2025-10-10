@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/selectable_option_model.dart';
+import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
+import 'package:le_petit_davinci/features/levels/views/activities/multiple_choice_view.dart';
 
 class MultipleChoiceActivity extends Activity
     with MascotIntroductionMixin
@@ -11,14 +13,20 @@ class MultipleChoiceActivity extends Activity
   final String instruction;
   final List<SelectableOption> options;
   final List<int> correctIndices;
+  final String? question;
 
   final RxList<int> selectedIndices = <int>[].obs;
   final RxBool isIntroCompleted = false.obs;
+
+  // Override to indicate this activity requires validation
+  @override
+  bool get requiresValidation => true;
 
   MultipleChoiceActivity({
     required this.instruction,
     required this.options,
     required this.correctIndices,
+    this.question,
   }) {
     // Initialize mascot with standardized approach
     initializeMascot([
@@ -41,7 +49,40 @@ class MultipleChoiceActivity extends Activity
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Multiple Choice Activity: $instruction'));
+    return MultipleChoiceView(activity: this);
+  }
+
+  @override
+  bool get isAnswerReady => selectedIndices.isNotEmpty;
+
+  @override
+  Stream<bool> get isAnswerReadyStream =>
+      selectedIndices.stream.map((indices) => indices.isNotEmpty);
+
+  @override
+  AnswerResult checkAnswer() {
+    // Sort both lists for comparison
+    final sortedSelected = List<int>.from(selectedIndices)..sort();
+    final sortedCorrect = List<int>.from(correctIndices)..sort();
+    
+    final bool isCorrect = sortedSelected.length == sortedCorrect.length &&
+        sortedSelected.every((index) => sortedCorrect.contains(index));
+
+    // Create correct answer text from the correct options
+    final correctAnswers = correctIndices
+        .map((index) => options[index].label)
+        .join(', ');
+
+    return AnswerResult(
+      isCorrect: isCorrect,
+      correctAnswerText: correctAnswers,
+    );
+  }
+
+  @override
+  void reset() {
+    selectedIndices.clear();
+    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

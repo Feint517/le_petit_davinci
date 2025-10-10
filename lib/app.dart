@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/core/bindings/general_bindings.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/themes/theme.dart';
 import 'package:le_petit_davinci/routes/app_pages.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -24,12 +25,7 @@ class App extends StatelessWidget {
           darkTheme: CustomAppTheme.darkTheme,
           initialBinding: GeneralBindings(),
           getPages: AppPages.routes,
-          home: const Scaffold(
-            backgroundColor: AppColors.primary,
-            body: Center(
-              child: CircularProgressIndicator(color: AppColors.white),
-            ),
-          ),
+          initialRoute: AppRoutes.splash,
         );
       },
     );

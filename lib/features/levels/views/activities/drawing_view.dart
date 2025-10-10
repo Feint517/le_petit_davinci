@@ -15,6 +15,11 @@ class DrawingActivityView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(StudioController(), permanent: true);
 
+    // Initialize mascot when the view is built
+    activity.initializeMascot([
+      'Super! Prêt à dessiner?', 
+    ], completionDelay: const Duration(seconds: 1));
+
     return ActivityIntroWrapper(
       activity: _buildDrawingCanvas(),
       mascotMixin: activity,
@@ -34,8 +39,7 @@ class DrawingActivityView extends StatelessWidget {
     lessonDrawingController.setStyle(color: Colors.blue, strokeWidth: 5.0);
 
     return DrawingArea(
-      drawingController: lessonDrawingController,
-      templateImagePath: activity.templateImagePath,
+      drawingController: lessonDrawingController, 
     );
   }
 }

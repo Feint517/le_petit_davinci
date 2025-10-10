@@ -7,6 +7,7 @@ import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/widgets/buttons/buttons.dart';
+import 'package:le_petit_davinci/services/sfx_service.dart';
 
 class MissionCard extends StatelessWidget {
   const MissionCard({
@@ -129,7 +130,10 @@ class MissionCard extends StatelessWidget {
                 label: 'Accepter la mission',
                 width: 160,
                 size: ButtonSize.sm,
-                onPressed: () {},
+                onPressed: () {
+                  AppSfx.click();
+                  if (onAcceptMission != null) onAcceptMission!();
+                },
               ),
               Spacer(),
             ],

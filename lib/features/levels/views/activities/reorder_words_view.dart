@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
-import 'package:le_petit_davinci/core/widgets/misc/animated_mascot.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
@@ -20,19 +19,6 @@ class ReorderWordsView extends StatefulWidget {
 }
 
 class _ReorderWordsViewState extends State<ReorderWordsView> {
-  late final AnimatedMascotController _mascotController;
-
-  @override
-  void initState() {
-    super.initState();
-    _mascotController = AnimatedMascotController();
-  }
-
-  @override
-  void dispose() {
-    _mascotController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,49 +34,24 @@ class _ReorderWordsViewState extends State<ReorderWordsView> {
 
   Widget _buildMainContent() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Audio button row with mascot
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        // Audio section with instruction text
+        Column(
           children: [
-            // Animated mascot with dynamic message
-            Obx(() {
-              final selectedCount = widget.activity.selectedOrder.length;
-              final totalWords = widget.activity.words.length;
-
-              String message;
-              MascotAnimationType animationType;
-
-              if (selectedCount == 0) {
-                message = 'Listen to the sentence!';
-                animationType = MascotAnimationType.talking;
-              } else if (selectedCount < totalWords) {
-                message =
-                    'Keep going! ${totalWords - selectedCount} more words.';
-                animationType = MascotAnimationType.talking;
-              } else {
-                message = 'Great! Now check your answer!';
-                animationType = MascotAnimationType.happy;
-              }
-
-              return AnimatedMascot(
-                mascotSize: 200,
-                bubbleText: message,
-                bubbleWidth: 150,
-                bubbleColor: AppColors.primary,
-                animationType: animationType,
-                autoPlay:
-                    false, // Disable auto-play since we'll trigger manually
-                showBubble: false, // Set to false to hide the bubble
-                controller: _mascotController,
-              );
-            }),
-            const Gap(AppSizes.md),
+            Text(
+              'Listen to the audio and then reorder the words',
+              style: Get.textTheme.titleMedium?.copyWith(
+                color: AppColors.black,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const Gap(AppSizes.lg),
             // Audio button
             PlayAudioButton(
               onPressed: () async {
-                // Trigger mascot animation when audio button is pressed
-                _mascotController.triggerAnimation();
                 // Play the audio
                 await Get.find<LevelController>().speakSentence(
                   widget.activity.correctOrder

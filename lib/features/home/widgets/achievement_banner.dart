@@ -6,6 +6,7 @@ import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/sizes.dart';
+import 'package:le_petit_davinci/services/sfx_service.dart';
 
 class AchievementBanner extends StatelessWidget {
   const AchievementBanner({super.key, this.starCount = 5});
@@ -84,7 +85,10 @@ class RewardsButton extends StatelessWidget {
       children: [
         //* Button container (placed first so gift icon appears on top)
         InkWell(
-          onTap: onRewardsPressed ?? () {},
+          onTap: () {
+            AppSfx.click();
+            if (onRewardsPressed != null) onRewardsPressed!();
+          },
           borderRadius: BorderRadius.circular(20.r),
           child: Container(
             padding: EdgeInsets.only(

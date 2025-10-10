@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -42,7 +43,9 @@ class ProfileHeader extends GetView<UserController>
   // Size get preferredSize => Size.fromHeight(DeviceUtils.getAppBarHeight());
   @override
   Size get preferredSize => Size.fromHeight(
-    type == ProfileHeaderType.activity ? 100.h : DeviceUtils.getAppBarHeight(),
+    type == ProfileHeaderType.activity
+        ? 100.h
+        : math.max(DeviceUtils.getAppBarHeight(), 48.w + 20), // avatar (48) + vertical padding (10*2)
   );
 
   @override
@@ -53,7 +56,9 @@ class ProfileHeader extends GetView<UserController>
       bottom: false,
       child: Container(
         width: double.infinity,
-        height: DeviceUtils.getAppBarHeight(),
+        height: type == ProfileHeaderType.activity
+            ? 100.h
+            : math.max(DeviceUtils.getAppBarHeight(), 48.w + 20),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: switch (type) {
           ProfileHeaderType.normal => Row(
@@ -88,17 +93,22 @@ class ProfileHeader extends GetView<UserController>
                     ),
                   ),
 
-                  Gap(12.w),
+                  Gap(10.w),
 
                   //* User Name and Class
-                  Obx(
-                    () =>
-                        ((controller.isLoading.value)
-                            ? const CustomShimmerEffect(width: 160, height: 25)
-                            : Text(
-                              '${StringUtils.capitalize(controller.user.value!.name)} | ${StringUtils.capitalize(controller.user.value!.userClass)}',
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            )),
+                  Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Good morning,', style:TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: AppColors.black),textAlign: TextAlign.start,),
+                      Obx(
+                        () =>
+                            ((controller.isLoading.value)
+                                ? const CustomShimmerEffect(width: 160, height: 25)
+                                : Text(
+                                  '${StringUtils.capitalize(controller.user.value!.name)}  ',
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                )),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -167,7 +177,7 @@ class ProfileHeader extends GetView<UserController>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: onBackButtonPressed ?? () => Get.back(),
+                onTap: () => Navigator.of(context).pop(),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,

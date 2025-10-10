@@ -43,4 +43,25 @@ final List<SectionData> frenchMapSections = [
     title: 'Les animaux',
     levels: generateFrenchLevelModels(22, 30),
   ),
+  SectionData(
+    color: AppColors.primary,
+    level: 1,
+    section: 1,
+    title: 'Test - Toutes les Activités',
+    levels: generateFrenchLevelModels(31, 31),
+  ),
+  SectionData(
+    color: AppColors.secondary,
+    level: 1,
+    section: 1,
+    title: 'Nombres & Couleurs',
+    levels: generateFrenchLevelModels(32, 35),
+  ),
+  SectionData(
+    color: AppColors.accent,
+    level: 1,
+    section: 1,
+    title: 'Formes & Famille',
+    levels: generateFrenchLevelModels(36, 40),
+  ),
 ];

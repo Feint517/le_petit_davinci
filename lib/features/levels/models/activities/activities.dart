@@ -5,6 +5,8 @@ export 'video_activity.dart';
 export 'drawing_activity.dart';
 export 'memory_card_activity.dart';
 export 'audio_matching_activity.dart';
+
+// Exercise Activities (require validation)
 export 'multiple_choice_activity.dart';
 
 // Exercise Activities (require validation)

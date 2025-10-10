@@ -10,15 +10,18 @@ class StarsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: AppSizes.md,
-      children: List.generate(
-        starsCount,
-        (index) => ResponsiveImageAsset(
-          assetPath: SvgAssets.star,
-          width: 50,
-          height: 50,
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSizes.lg),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: AppSizes.md,
+        children: List.generate(
+          starsCount,
+          (index) => ResponsiveImageAsset(
+            assetPath: SvgAssets.star,
+            width: 50,
+            height: 50,
+          ),
         ),
       ),
     );

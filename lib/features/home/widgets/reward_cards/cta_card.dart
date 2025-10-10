@@ -5,6 +5,7 @@ import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
+import 'package:le_petit_davinci/services/sfx_service.dart';
 
 class CTACard extends StatelessWidget {
   const CTACard({
@@ -60,7 +61,10 @@ class CTACard extends StatelessWidget {
 
   Widget _buildContinueButton() {
     return InkWell(
-      onTap: onButtonPressed ?? () {},
+      onTap: () {
+        AppSfx.click();
+        if (onButtonPressed != null) onButtonPressed!();
+      },
       borderRadius: BorderRadius.circular(16.r),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),

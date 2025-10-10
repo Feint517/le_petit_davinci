@@ -157,6 +157,50 @@ class _VictoryScreenState extends State<VictoryScreen>
                     ),
                     const Gap(AppSizes.spaceBtwSections),
                     StarsSection(starsCount: widget.starsCount),
+                    const Gap(AppSizes.spaceBtwSections),
+                    // Master of Sounds Badge
+                    Container(
+                      padding: const EdgeInsets.all(AppSizes.sm),
+                      decoration: BoxDecoration(
+                        color: AppColors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(AppSizes.md),
+                        border: Border.all(
+                          color: AppColors.white.withOpacity(0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Congratulations!',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Gap(AppSizes.xs),
+                          Text(
+                            'You\'ve earned the',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.white.withOpacity(0.9),
+                            ),
+                          ),
+                          const Gap(AppSizes.xs),
+                          ResponsiveImageAsset(
+                            assetPath: SvgAssets.masterOfSounds,
+                            width: 180,
+                            height: 60,
+                          ),
+                          const Gap(AppSizes.xs),
+                          Text(
+                            'Badge!',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.white.withOpacity(0.9),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const Spacer(),
                     CustomButton(
                       label: 'Continue',

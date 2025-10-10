@@ -67,13 +67,15 @@ class StoryActivity extends Activity
       visibleElements.add(currentElement);
       _setupListenerForCurrentElement();
 
-      // Animate scroll to the bottom.
+      // Animate scroll to the bottom only if the controller is attached.
       Timer(const Duration(milliseconds: 100), () {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
+        if (scrollController.hasClients) {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        }
       });
     } else {
       _isStoryCompleted.value = true;
@@ -110,7 +112,9 @@ class StoryActivity extends Activity
   void reset() {
     currentElementIndex.value = 0;
     visibleElements.assignAll([elements.first]);
-    scrollController.jumpTo(0);
+    if (scrollController.hasClients) {
+      scrollController.jumpTo(0);
+    }
     for (var element in elements) {
       if (element is StoryQuestion) {
         element.activity.reset();

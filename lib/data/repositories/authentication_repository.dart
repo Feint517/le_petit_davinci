@@ -9,6 +9,7 @@ import 'package:le_petit_davinci/data/models/responses/logout_response.dart';
 import 'package:le_petit_davinci/data/network/api_routes.dart';
 import 'package:le_petit_davinci/features/authentication/views/login.dart';
 import 'package:le_petit_davinci/features/home/views/home.dart';
+import 'package:le_petit_davinci/features/navigation/views/main_navigation_screen.dart';
 import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/services/api_service.dart';
 import 'package:le_petit_davinci/services/storage_service.dart';
@@ -42,7 +43,7 @@ class AuthenticationRepository extends GetxController {
     if (isFirstTime) {
       Get.offAll(() => const QuestionsIntroScreen());
     } else if (isLoggedIn) {
-      Get.offAll(() => const HomeScreen());
+      Get.offAll(() => const MainNavigationScreen());
     } else {
       Get.offAll(() => const LoginScreen());
     }

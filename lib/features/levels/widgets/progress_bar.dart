@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
-import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
-import 'package:le_petit_davinci/features/english/view/english_map.dart';
-import 'package:le_petit_davinci/features/french/view/french_map.dart';
-import 'package:le_petit_davinci/features/math/views/math_map.dart';
+import 'package:le_petit_davinci/features/levels/widgets/exit_level_modal.dart';
 
 class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
   const LevelProgressBar({super.key});
@@ -25,51 +23,53 @@ class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
       final double progress = totalSteps > 0 ? currentStep / totalSteps : 0;
 
       return SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.md),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
           child: Row(
             children: [
-              // Close/Exit button
-              GestureDetector(
-                onTap: () => _showExitConfirmation(context, controller),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 2,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.close,
-                    color: AppColors.darkGrey,
-                    size: 20,
-                  ),
-                ),
-              ),
-              const Gap(12),
-              // Progress bar
+              // Cancel button
+              _buildCancelButton(context, controller),
+              const Gap(AppSizes.md),
+              // Progress section
               Expanded(
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween<double>(begin: 0, end: progress),
-                  duration: const Duration(milliseconds: 300),
-                  builder: (context, animatedValue, child) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: LinearProgressIndicator(
-                        value: animatedValue,
-                        minHeight: 10,
-                        backgroundColor: AppColors.grey.withValues(alpha: 0.2),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          AppColors.primary,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Progress text
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Progress',
+                          style: Get.textTheme.bodySmall?.copyWith(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                        Text(
+                          '$currentStep / $totalSteps',
+                          style: Get.textTheme.bodySmall?.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(AppSizes.xs),
+                    // Enhanced progress bar
+                    _buildEnhancedProgressBar(progress),
+                  ],
                 ),
               ),
             ],
@@ -79,53 +79,116 @@ class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
     });
   }
 
-  void _showExitConfirmation(BuildContext context, LevelController controller) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Exit Level'),
-          content: const Text(
-            'Are you sure you want to leave this level? Your progress will be saved.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+  Widget _buildCancelButton(BuildContext context, LevelController controller) {
+    return GestureDetector(
+      onTap: () => _showExitConfirmation(context, controller),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10.0,
+          vertical: 5.0,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: AppColors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Icon(
+              Icons.close,
+              color: Colors.black,
+              size: 10,
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                _navigateToMapScreen(controller);
-              },
-              child: const Text('Exit'),
-            ),
+            Text('Cancel', style: TextStyle(color: Colors.black)),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEnhancedProgressBar(double progress) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween<double>(begin: 0, end: progress),
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+      builder: (context, animatedValue, child) {
+        return Container(
+          height: 12,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+            color: AppColors.grey.withValues(alpha: 0.2),
+          ),
+          child: Stack(
+            children: [
+              // Background
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: AppColors.grey.withValues(alpha: 0.2),
+                ),
+              ),
+              // Progress fill with gradient
+              FractionallySizedBox(
+                widthFactor: animatedValue,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    gradient: const LinearGradient(
+                      colors: [AppColors.primary, Color(0xFF1AB1FF)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: 0.3),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Shimmer effect
+              if (animatedValue > 0)
+                FractionallySizedBox(
+                  widthFactor: animatedValue,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white.withValues(alpha: 0.0),
+                          Colors.white.withValues(alpha: 0.3),
+                          Colors.white.withValues(alpha: 0.0),
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         );
       },
     );
   }
 
-  void _navigateToMapScreen(LevelController controller) {
-    // Determine the appropriate map screen based on the subject
-    Widget destination;
-
-    switch (controller.subject) {
-      case Subjects.english:
-        destination = const EnglishMapScreen();
-        break;
-      case Subjects.math:
-        destination = const MathMapScreen2();
-        break;
-      case Subjects.french:
-        destination = const FrenchMapScreen();
-        break;
-    }
-
-    // Navigate back to the map screen and clear the level screen from the stack
-    Get.offUntil(
-      MaterialPageRoute(builder: (_) => destination),
-      (route) => route.isFirst,
+  void _showExitConfirmation(BuildContext context, LevelController controller) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => ExitLevelModal(
+        onCancel: () => Navigator.of(context).pop(),
+        onExit: () {
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+        },
+      ),
     );
   }
+
+ 
 }

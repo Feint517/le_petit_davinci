@@ -5,32 +5,80 @@ import 'package:le_petit_davinci/features/levels/models/activities/drawing_activ
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/listen_and_choose_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/video_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/memory_card_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/multiple_choice_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/solve_equation_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/count_by_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/follow_pattern_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/number_matching_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/shape_pattern_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/arrange_numbers_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
 import 'package:le_petit_davinci/features/levels/models/fill_the_blank_option_model.dart';
+import 'package:le_petit_davinci/features/levels/models/selectable_option_model.dart';
+import 'package:le_petit_davinci/features/levels/models/pattern_models.dart';
+import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
+import 'package:le_petit_davinci/features/levels/models/number_matching_models.dart';
+import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
+import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 
 final Map<int, LevelContent> unifiedFrenchLevels = {
   // ========== Group 1: A, B, C, D ==========
   1: LevelSet(
-    title: 'Alphabet - A, B, C, D',
-    introduction: 'Apprenons les lettres A, B, C, et D !',
-    lessonId: 'alphabet_abcd_fr',
+    title: 'Test Level - Toutes les Activités',
+    introduction: 'Testons toutes les activités disponibles !',
+    lessonId: 'test_all_activities_fr',
     activities: [
-      DrawingActivity(
-        prompt: 'Apprenons à écrire la lettre "A" !',
-        templateImagePath: ImageAssets.drawableA,
+      // Lesson Activities (auto-complete)
+      
+      LetterTracingActivity(
+        letter: 'A',
+        prompt: 'Trace la lettre "A" !',
       ),
-      DrawingActivity(
-        prompt: 'Super ! Maintenant, écrivons la lettre "B" !',
-        templateImagePath: ImageAssets.drawableB,
+      LetterTracingActivity(
+        letter: 'B',
+        prompt: 'Trace la lettre "A" !',
       ),
-      DrawingActivity(
-        prompt: 'Génial ! Voici le "C" !',
-        templateImagePath: ImageAssets.drawableC,
-      ),
-      DrawingActivity(
-        prompt: 'Tu te débrouilles très bien ! Écrivons "D" !',
-        templateImagePath: ImageAssets.drawableD,
+      MemoryCardActivity(
+        instruction: 'Trouve les paires !',
+        cardPairs: [
+          CardPair(
+            pairId: 'pair1',
+            card1: MemoryCard(
+              id: 'card1a',
+              frontImage: ImageAssets.apple,
+              backContent: ImageAssets.apple,
+              type: CardType.image,
+              label: 'Pomme',
+            ),
+            card2: MemoryCard(
+              id: 'card1b',
+              frontImage: ImageAssets.apple,
+              backContent: ImageAssets.apple,
+              type: CardType.image,
+              label: 'Pomme',
+            ),
+          ),
+          CardPair(
+            pairId: 'pair2',
+            card1: MemoryCard(
+              id: 'card2a',
+              frontImage: ImageAssets.cat,
+              backContent: ImageAssets.cat,
+              type: CardType.image,
+              label: 'Chat',
+            ),
+            card2: MemoryCard(
+              id: 'card2b',
+              frontImage: ImageAssets.cat,
+              backContent: ImageAssets.cat,
+              type: CardType.image,
+              label: 'Chat',
+            ),
+          ),
+        ],
       ),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
@@ -39,6 +87,103 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
           AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
           AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
+        ],
+      ),
+      MultipleChoiceActivity(
+        instruction: 'Quelle lettre vient après A ?',
+        options: [
+          SelectableOption(label: 'B', imagePath: ImageAssets.apple),
+          SelectableOption(label: 'C', imagePath: ImageAssets.cat),
+          SelectableOption(label: 'D', imagePath: ImageAssets.dog),
+        ],
+        correctIndices: [0],
+      ),
+
+      // Exercise Activities (require validation)
+      FillTheBlankActivity(
+        questionSuffix: ' comme dans Arbre.',
+        options: [
+          FillTheBlankOption(optionText: 'A'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
+        ],
+        correctAnswer: 0,
+      ),
+      ListenAndChooseActivity(
+        imageAssets: [
+          ImageAssets.apple,
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
+        ],
+        correctAnswer: 0,
+        label: 'Pomme',
+      ),
+      ReorderWordsActivity(
+        words: ['est', 'un', 'Ceci', 'chat'],
+        correctOrder: [2, 0, 1, 3],
+      ),
+      SolveEquationActivity(
+        equation: '2 + 3 = ?',
+        options: [3, 4, 5, 6],
+        correctAnswer: 5,
+      ),
+      CountByActivity(
+        instruction: 'Compte par 2 !',
+        initialSequence: [2, 4, 6],
+        numberOfInputs: 2,
+        correctAnswers: [8, 10],
+      ),
+      FollowPatternActivity(
+        instruction: 'Suit le motif !',
+        examples: ['2, 4, 6', '1, 3, 5'],
+        question: 'Quel est le prochain nombre ?',
+        options: [7, 8, 9, 10],
+        correctAnswerIndex: 1,
+      ),
+      NumberMatchingActivity(
+        instruction: 'Associe les nombres !',
+        items: [
+          NumberMatchingItem(number: '1', imageAsset: ImageAssets.apple, quantity: 1),
+          NumberMatchingItem(number: '2', imageAsset: ImageAssets.cat, quantity: 2),
+        ],
+      ),
+      ShapePatternActivity(
+        instruction: 'Trouve le motif des formes !',
+        patternImages: [
+          ImageAssets.apple,
+          ImageAssets.cat,
+          ImageAssets.apple,
+        ],
+        optionImages: [
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
+        ],
+        correctIndex: 0,
+        patternType: PatternType.shapes,
+      ),
+      ArrangeNumbersActivity(
+        instruction: 'Range les nombres dans l\'ordre !',
+        numbers: [3, 1, 4, 2],
+        isAscending: true,
+      ),
+      StoryProblemActivity(
+        instruction: 'Résous ce problème !',
+        draggableOptions: [
+          DraggableItem(id: 'apple1', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
+          DraggableItem(id: 'apple2', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
+        ],
+        correctTotalValue: 2,
+      ),
+      StoryActivity(
+        title: 'Histoire du petit chat',
+        elements: [
+          DialogueLine(
+            characterName: 'Narrateur',
+            avatarAsset: ImageAssets.cat,
+            text: 'Il était une fois un petit chat qui aimait jouer dans le jardin.',
+          ),
         ],
       ),
     ],
@@ -94,22 +239,22 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Il est temps d\'apprendre E, F, G, et H !',
     lessonId: 'alphabet_efgh_fr',
     activities: [
-      DrawingActivity(
-        prompt: 'Commençons par "E" !',
-        templateImagePath: ImageAssets.drawableE,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Le suivant est "F" !',
-        templateImagePath: ImageAssets.drawableF,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Maintenant, le "G" !',
-        templateImagePath: ImageAssets.drawableG,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et enfin, "H" !',
-        templateImagePath: ImageAssets.drawableH,
-      ), // Placeholder
+      LetterTracingActivity(
+        letter: 'E',
+        prompt: 'Trace la lettre "E" !',
+      ),
+      LetterTracingActivity(
+        letter: 'F',
+        prompt: 'Trace la lettre "F" !',
+      ),
+      LetterTracingActivity(
+        letter: 'G',
+        prompt: 'Trace la lettre "G" !',
+      ),
+      LetterTracingActivity(
+        letter: 'H',
+        prompt: 'Trace la lettre "H" !',
+      ),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -173,22 +318,22 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Apprenons I, J, K, et L !',
     lessonId: 'alphabet_ijkl_fr',
     activities: [
-      DrawingActivity(
-        prompt: 'Écrivons "I" !',
-        templateImagePath: ImageAssets.drawableI,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Le suivant est "J" !',
-        templateImagePath: ImageAssets.drawableJ,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Voici le "K" !',
-        templateImagePath: ImageAssets.drawableK,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et maintenant "L" !',
-        templateImagePath: ImageAssets.drawableL,
-      ), // Placeholder
+      LetterTracingActivity(
+        letter: 'I',
+        prompt: 'Trace la lettre "I" !',
+      ),
+      LetterTracingActivity(
+        letter: 'J',
+        prompt: 'Trace la lettre "J" !',
+      ),
+      LetterTracingActivity(
+        letter: 'K',
+        prompt: 'Trace la lettre "K" !',
+      ),
+      LetterTracingActivity(
+        letter: 'L',
+        prompt: 'Trace la lettre "L" !',
+      ),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -246,537 +391,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
       ),
     ],
   ),
-
-  // ========== Group 4: M, N, O, P ==========
-  10: LevelSet(
-    lessonId: 'alphabet_mnop_fr',
-    title: 'Alphabet - M, N, O, P',
-    introduction: 'Apprenons M, N, O, et P !',
-    activities: [
-      DrawingActivity(
-        prompt: 'Écrivons "M" !',
-        templateImagePath: ImageAssets.drawableM,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Le suivant est "N" !',
-        templateImagePath: ImageAssets.drawableN,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Voici le "O" !',
-        templateImagePath: ImageAssets.drawableO,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et maintenant "P" !',
-        templateImagePath: ImageAssets.drawableP,
-      ), // Placeholder
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.m_fr, word: 'M'),
-          AudioWordPair(audioAssetPath: AudioAssets.n_fr, word: 'N'),
-          AudioWordPair(audioAssetPath: AudioAssets.o_fr, word: 'O'),
-          AudioWordPair(audioAssetPath: AudioAssets.p_fr, word: 'P'),
-        ],
-      ),
-    ],
-  ),
-  11: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Montagne.',
-        options: [
-          FillTheBlankOption(optionText: 'M'),
-          FillTheBlankOption(optionText: 'N'),
-          FillTheBlankOption(optionText: 'O'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-          ImageAssets.fish,
-        ],
-        correctAnswer: 0,
-        label: 'Nid', // Placeholder
-      ),
-    ],
-  ),
-  12: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'oiseau'], // Placeholder
-        correctOrder: [2, 0, 1, 3],
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Poisson.',
-        options: [
-          FillTheBlankOption(optionText: 'N'),
-          FillTheBlankOption(optionText: 'O'),
-          FillTheBlankOption(optionText: 'P'),
-        ],
-        correctAnswer: 2,
-      ),
-    ],
-  ),
-
-  // ========== Group 5: Q, R, S, T ==========
-  13: LevelSet(
-    lessonId: 'alphabet_qrst_fr',
-    title: 'Alphabet - Q, R, S, T',
-    introduction: 'Apprenons Q, R, S, et T !',
-    activities: [
-      DrawingActivity(
-        prompt: 'Écrivons "Q" !',
-        templateImagePath: ImageAssets.drawableQ,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Le suivant est "R" !',
-        templateImagePath: ImageAssets.drawableR,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Voici le "S" !',
-        templateImagePath: ImageAssets.drawableS,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et maintenant "T" !',
-        templateImagePath: ImageAssets.drawableT,
-      ), // Placeholder
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.q_fr, word: 'Q'),
-          AudioWordPair(audioAssetPath: AudioAssets.r_fr, word: 'R'),
-          AudioWordPair(audioAssetPath: AudioAssets.s_fr, word: 'S'),
-          AudioWordPair(audioAssetPath: AudioAssets.t_fr, word: 'T'),
-        ],
-      ),
-    ],
-  ),
-  14: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Quille.',
-        options: [
-          FillTheBlankOption(optionText: 'Q'),
-          FillTheBlankOption(optionText: 'R'),
-          FillTheBlankOption(optionText: 'S'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.tiger,
-          ImageAssets.lion,
-          ImageAssets.bear,
-          ImageAssets.cat,
-        ],
-        correctAnswer: 0,
-        label: 'Robot', // Placeholder
-      ),
-    ],
-  ),
-  15: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'serpent'], // Placeholder
-        correctOrder: [2, 0, 1, 3],
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Tortue.',
-        options: [
-          FillTheBlankOption(optionText: 'R'),
-          FillTheBlankOption(optionText: 'S'),
-          FillTheBlankOption(optionText: 'T'),
-        ],
-        correctAnswer: 2,
-      ),
-    ],
-  ),
-
-  // ========== Group 6: U, V, W, X ==========
-  16: LevelSet(
-    lessonId: 'alphabet_uvwx_fr',
-    title: 'Alphabet - U, V, W, X',
-    introduction: 'Apprenons U, V, W, et X !',
-    activities: [
-      DrawingActivity(
-        prompt: 'Écrivons "U" !',
-        templateImagePath: ImageAssets.drawableU,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Le suivant est "V" !',
-        templateImagePath: ImageAssets.drawableV,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Voici le "W" !',
-        templateImagePath: ImageAssets.drawableW,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et maintenant "X" !',
-        templateImagePath: ImageAssets.drawableX,
-      ), // Placeholder
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.u_fr, word: 'U'),
-          AudioWordPair(audioAssetPath: AudioAssets.v_fr, word: 'V'),
-          AudioWordPair(audioAssetPath: AudioAssets.w_fr, word: 'W'),
-          AudioWordPair(audioAssetPath: AudioAssets.x_fr, word: 'X'),
-        ],
-      ),
-    ],
-  ),
-  17: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Uniforme.',
-        options: [
-          FillTheBlankOption(optionText: 'U'),
-          FillTheBlankOption(optionText: 'V'),
-          FillTheBlankOption(optionText: 'W'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-          ImageAssets.fish,
-        ],
-        correctAnswer: 0,
-        label: 'Violon', // Placeholder
-      ),
-    ],
-  ),
-  18: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'wagon'], // Placeholder
-        correctOrder: [2, 0, 1, 3],
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Xylophone.',
-        options: [
-          FillTheBlankOption(optionText: 'V'),
-          FillTheBlankOption(optionText: 'W'),
-          FillTheBlankOption(optionText: 'X'),
-        ],
-        correctAnswer: 2,
-      ),
-    ],
-  ),
-
-  // ========== Group 7: Y, Z ==========
-  19: LevelSet(
-    lessonId: 'alphabet_yz_fr',
-    title: 'Alphabet - Y, Z',
-    introduction: 'Apprenons les deux dernières lettres, Y et Z !',
-    activities: [
-      DrawingActivity(
-        prompt: 'Presque fini ! Écrivons "Y" !',
-        templateImagePath: ImageAssets.drawableY,
-      ), // Placeholder
-      DrawingActivity(
-        prompt: 'Et la dernière, "Z" !',
-        templateImagePath: ImageAssets.drawableZ,
-      ), // Placeholder
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.y_fr, word: 'Y'),
-          AudioWordPair(audioAssetPath: AudioAssets.z_fr, word: 'Z'),
-        ],
-      ),
-    ],
-  ),
-  20: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Yaourt.',
-        options: [
-          FillTheBlankOption(optionText: 'Y'),
-          FillTheBlankOption(optionText: 'Z'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-          ImageAssets.fish,
-        ],
-        correctAnswer: 0,
-        label: 'Zèbre', // Placeholder
-      ),
-    ],
-  ),
-  21: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'zèbre'],
-        correctOrder: [2, 0, 1, 3],
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Zéro.',
-        options: [
-          FillTheBlankOption(optionText: 'Y'),
-          FillTheBlankOption(optionText: 'Z'),
-        ],
-        correctAnswer: 1,
-      ),
-    ],
-  ),
-
-  // ========== Animals Path ==========
-
-  // ========== Lesson 1: Farm Animals ==========
-  22: LevelSet(
-    lessonId: 'farm_animals_1_fr',
-    title: 'Les animaux de la ferme',
-    introduction: 'Apprenons à connaître les animaux de la ferme !',
-    activities: [
-      VideoActivity(videoId: 'febfeifibge'),
-      AudioMatchingActivity(
-        prompt: 'Associe l\'animal à son cri !',
-        pairs: [
-          AudioWordPair(
-            audioAssetPath: AudioAssets.a_fr, // Placeholder
-            word: 'Vache',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.b_fr, // Placeholder
-            word: 'Cochon',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.c_fr, // Placeholder
-            word: 'Mouton',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.d_fr, // Placeholder
-            word: 'Poule',
-          ),
-        ],
-      ),
-    ],
-  ),
-  23: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.cat, // Placeholder for Vache
-          ImageAssets.dog, // Placeholder for Cochon
-          ImageAssets.bird, // Placeholder for Mouton
-          ImageAssets.fish, // Placeholder for Poule
-        ],
-        correctAnswer: 0,
-        label: 'Vache',
-      ),
-      FillTheBlankActivity(
-        questionSuffix: ' dit "groin groin".',
-        options: [
-          FillTheBlankOption(optionText: 'Un cochon'),
-          FillTheBlankOption(optionText: 'Une vache'),
-          FillTheBlankOption(optionText: 'Un mouton'),
-        ],
-        correctAnswer: 0,
-      ),
-    ],
-  ),
-  24: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['donne', 'de', 'Le', 'mouton', 'la', 'laine'],
-        correctOrder: [2, 3, 0, 1, 4, 5],
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.cat, // Placeholder for Cheval
-          ImageAssets.dog, // Placeholder for Canard
-          ImageAssets.bird, // Placeholder for Chèvre
-          ImageAssets.fish, // Placeholder for Poule
-        ],
-        correctAnswer: 3,
-        label: 'Poule',
-      ),
-    ],
-  ),
-  25: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' est un bébé mouton.',
-        options: [
-          FillTheBlankOption(optionText: 'Un agneau'),
-          FillTheBlankOption(optionText: 'Un veau'),
-          FillTheBlankOption(optionText: 'Un porcelet'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ReorderWordsActivity(
-        words: ['La', 'vache', 'mange', 'de', 'l\'herbe'],
-        correctOrder: [0, 1, 2, 3, 4],
-      ),
-    ],
-  ),
-
-  // ========== Lesson 2: Wild Animals ==========
-  26: LevelSet(
-    lessonId: 'wild_animals_1_fr',
-    title: 'Les animaux sauvages',
-    introduction: 'Explorons les animaux dans la nature !',
-    activities: [
-      VideoActivity(
-        videoId: 'febfeifibge', // Placeholder
-      ),
-      AudioMatchingActivity(
-        prompt: 'Associe l\'animal à son cri !',
-        pairs: [
-          AudioWordPair(
-            audioAssetPath: AudioAssets.e_fr, // Placeholder
-            word: 'Lion',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.f_fr, // Placeholder
-            word: 'Tigre',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.g_fr, // Placeholder
-            word: 'Ours',
-          ),
-          AudioWordPair(
-            audioAssetPath: AudioAssets.h_fr, // Placeholder
-            word: 'Éléphant',
-          ),
-        ],
-      ),
-    ],
-  ),
-  27: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.lion,
-          ImageAssets.tiger,
-          ImageAssets.bear,
-          ImageAssets.elephant,
-        ],
-        correctAnswer: 0,
-        label: 'Lion',
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' est le roi de la jungle.',
-        options: [
-          FillTheBlankOption(optionText: 'Le lion'),
-          FillTheBlankOption(optionText: 'Le tigre'),
-          FillTheBlankOption(optionText: 'L\'ours'),
-        ],
-        correctAnswer: 0,
-      ),
-    ],
-  ),
-  28: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ReorderWordsActivity(
-        words: ['a', 'une', 'Un', 'éléphant', 'longue', 'trompe'],
-        correctOrder: [2, 3, 0, 1, 4, 5],
-      ),
-
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.lion, // Placeholder for Singe
-          ImageAssets.tiger, // Placeholder for Girafe
-          ImageAssets.bear, // Placeholder for Zèbre
-          ImageAssets.elephant, // Placeholder for Tigre
-        ],
-        correctAnswer: 3,
-        label: 'Tigre',
-      ),
-    ],
-  ),
-  29: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      FillTheBlankActivity(
-        questionSuffix: ' a des rayures noires et blanches.',
-        options: [
-          FillTheBlankOption(optionText: 'Un zèbre'),
-          FillTheBlankOption(optionText: 'Une girafe'),
-          FillTheBlankOption(optionText: 'Un singe'),
-        ],
-        correctAnswer: 0,
-      ),
-
-      ReorderWordsActivity(
-        words: ['Le', 'singe', 'aime', 'manger', 'des', 'bananes'],
-        correctOrder: [0, 1, 2, 3, 4, 5],
-      ),
-    ],
-  ),
-  30: LevelSet(
-    title: 'Exercices',
-    introduction: 'Pratiquons nos connaissances !',
-    activities: [
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.lion, // Placeholder for Girafe
-          ImageAssets.dog, // Placeholder for Cochon
-          ImageAssets.bear,
-          ImageAssets.fish,
-        ],
-        correctAnswer: 2,
-        label: 'Ours',
-      ),
-
-      FillTheBlankActivity(
-        questionSuffix: ' a un très long cou.',
-        options: [
-          FillTheBlankOption(optionText: 'Une girafe'),
-          FillTheBlankOption(optionText: 'Un éléphant'),
-          FillTheBlankOption(optionText: 'Un lion'),
-        ],
-        correctAnswer: 0,
-      ),
-    ],
-  ),
+ 
+  
 };

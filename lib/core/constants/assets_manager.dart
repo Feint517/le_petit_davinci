@@ -142,6 +142,7 @@ class IconAssets {
   static const String play = 'assets/icons/play.svg';
   static const String writingPen = 'assets/icons/writing_pen.svg';
   static const String add = 'assets/icons/add.svg';
+  static const String audio = 'assets/icons/audio.svg';
 }
 
 class SvgAssets {
@@ -271,11 +272,14 @@ class SvgAssets {
   static const String bearMasscot = 'assets/svg/mascots/bear_masscot.svg';
   static const String happyCat = 'assets/svg/mascots/happy_cat.svg';
   static const String peakingMascot = 'assets/svg/mascots/peaking_mascot.svg';
+  
+  //* badges
+  static const String masterOfSounds = 'assets/icons/masterofsounds.svg';
 }
 
 class AudioAssets {
   //* sound effects
-  static const String victorySound = 'assets/audio/sound_effects/victory.mp3';
+  static const String victorySound = 'assets/sfx/success-finish-activity.mp3';
   static const String backgroundMusic =
       'assets/audio/sound_effects/background_music.mp3';
   static const String correctSound = 'assets/audio/sound_effects/correct.mp3';
@@ -344,14 +348,14 @@ class AudioAssets {
   static const String monkeyName = 'assets/audio/animals_en/monkey_en.mp3';
 
   //* animals sounds
-  static const String catSound = 'assets/audio/animals_sounds/cat_sound.wav';
+  static const String catSound = 'assets/audio/animals_sounds/cat_sound.mp3';
   static const String chickenSound =
-      'assets/audio/animals_sounds/chicken_sound.wav';
-  static const String cowSound = 'assets/audio/animals_sounds/cow_sound.wav';
-  static const String dogSound = 'assets/audio/animals_sounds/dog_sound.wav';
-  static const String pigSound = 'assets/audio/animals_sounds/pig_sound.wav';
+      'assets/audio/animals_sounds/chicken_sound.mp3';
+  static const String cowSound = 'assets/audio/animals_sounds/cow_sound.mp3';
+  static const String dogSound = 'assets/audio/animals_sounds/dog_sound.mp3';
+  static const String pigSound = 'assets/audio/animals_sounds/pig_sound.mp3';
   static const String sheepSound =
-      'assets/audio/animals_sounds/sheep_sound.wav';
+      'assets/audio/animals_sounds/sheep_sound.mp3';
 
   //* numbers
   static const String number1_fr = 'assets/audio/numbers_fr/number1_fr.mp3';

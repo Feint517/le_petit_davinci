@@ -20,6 +20,8 @@ class ProgressService extends GetxService {
 
   bool isUnlocked(String lang, int level) {
     if (level == 1) return true;
+    // Always unlock test levels for testing purposes
+    if (level >= 31 && level <= 40) return true;
     final unlocked = _unlockedList(lang).cast<int>();
     return unlocked.contains(level);
   }

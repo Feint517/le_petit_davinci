@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/widgets/misc/talking_mascot.dart';
 /// for all activities that need a talking mascot intro.
 mixin MascotIntroductionMixin {
   /// The mascot controller for this activity
-  late final TalkingMascotController mascotController;
+  TalkingMascotController? _mascotController;
 
   /// Whether the mascot introduction is completed
   final RxBool isIntroCompleted = false.obs;
@@ -17,10 +17,10 @@ mixin MascotIntroductionMixin {
   void initializeMascot(List<String> messages, {Duration? completionDelay}) {
     if (_isInitialized) return;
 
-    mascotController = TalkingMascotController(messages: messages);
+    _mascotController = TalkingMascotController(messages: messages);
 
     // Listen to mascot completion
-    ever(mascotController.isCompleted, (bool isDone) {
+    ever(_mascotController!.isCompleted, (bool isDone) {
       if (isDone) {
         final delay = completionDelay ?? const Duration(seconds: 2);
         Future.delayed(delay, () {
@@ -35,27 +35,31 @@ mixin MascotIntroductionMixin {
   /// Reset the mascot introduction state
   void resetMascotIntroduction() {
     isIntroCompleted.value = false;
-    if (_isInitialized) {
-      mascotController.reset();
+    if (_isInitialized && _mascotController != null) {
+      _mascotController!.reset();
     }
   }
 
   /// Dispose of mascot resources
   void disposeMascot() {
-    if (_isInitialized) {
-      mascotController.dispose();
+    if (_isInitialized && _mascotController != null) {
+      _mascotController!.dispose();
+      _mascotController = null;
       _isInitialized = false;
     }
   }
 
   /// Get the current mascot message
   String get currentMascotMessage =>
-      _isInitialized ? mascotController.currentMessage : '';
+      _isInitialized && _mascotController != null ? _mascotController!.currentMessage : '';
 
   /// Check if mascot is completed
   bool get isMascotCompleted =>
-      _isInitialized ? mascotController.isCompleted.value : false;
+      _isInitialized && _mascotController != null ? _mascotController!.isCompleted.value : false;
 
   /// Check if mascot is initialized (for internal use)
   bool get isInitialized => _isInitialized;
+
+  /// Get the mascot controller (for external access)
+  TalkingMascotController? get mascotController => _mascotController;
 }

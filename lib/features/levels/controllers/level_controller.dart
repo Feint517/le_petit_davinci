@@ -10,6 +10,7 @@ import 'package:le_petit_davinci/features/levels/controllers/victory_controller.
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
+import 'package:le_petit_davinci/features/levels/widgets/success_bottom_modal.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
@@ -142,16 +143,33 @@ class LevelController extends GetxController {
     if (result.isCorrect) {
       _audioPlayer.play();
       _audioPlayer.seek(Duration.zero);
+      
+      // Show bottom modal for correct answers
+      _showSuccessBottomModal();
+    } else {
+      // Show full-screen feedback for incorrect answers
+      Get.to(
+        () => FullScreenMascotFeedback(
+          isCorrect: result.isCorrect,
+          correctAnswer: result.correctAnswerText,
+          onContinue: () => _handleNextStep(result.isCorrect),
+        ),
+        fullscreenDialog: true,
+      );
     }
+  }
 
-    // Show full-screen feedback
-    Get.to(
-      () => FullScreenMascotFeedback(
-        isCorrect: result.isCorrect,
-        correctAnswer: result.isCorrect ? null : result.correctAnswerText,
-        onContinue: () => _handleNextStep(result.isCorrect),
+  void _showSuccessBottomModal() {
+    showModalBottomSheet(
+      context: Get.context!,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SuccessBottomModal(
+        onContinue: () {
+          Navigator.of(context).pop(); // Close the modal
+          _handleNextStep(true); // Handle the next step
+        },
       ),
-      fullscreenDialog: true,
     );
   }
 

@@ -15,6 +15,8 @@ import 'package:le_petit_davinci/features/studio/bindings/studio_binding.dart';
 import 'package:le_petit_davinci/features/studio/views/gallery_screen.dart';
 import 'package:le_petit_davinci/features/studio/views/studio_main_screen.dart';
 import 'package:le_petit_davinci/features/studio/views/template_selection_screen.dart';
+import 'package:le_petit_davinci/features/navigation/views/main_navigation_screen.dart';
+import 'package:le_petit_davinci/features/leaderboard/views/leaderboard_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class AppPages {
@@ -173,6 +175,20 @@ class AppPages {
       name: AppRoutes.templateSelection,
       page: () => const TemplateSelectionScreen(),
       binding: StudioBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    
+    // Main Navigation
+    GetPage(
+      name: AppRoutes.mainNavigation,
+      page: () => const MainNavigationScreen(),
+      transition: Transition.fadeIn,
+    ),
+    
+    // Leaderboard
+    GetPage(
+      name: AppRoutes.leaderboard,
+      page: () => const LeaderboardScreen(),
       transition: Transition.rightToLeft,
     ),
   ];

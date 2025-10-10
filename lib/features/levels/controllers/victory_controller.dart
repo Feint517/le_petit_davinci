@@ -18,8 +18,7 @@ class VictoryController extends GetxController {
   void onInit() async {
     super.onInit();
     await _audioPlayer.setAsset(AudioAssets.victorySound);
-    await _audioPlayer.setVolume(0.5);
-    playVictorySound();
+    await _audioPlayer.setVolume(0.5); 
   }
 
   @override
@@ -34,6 +33,9 @@ class VictoryController extends GetxController {
   }
 
   void navigateToMapScreen() {
+    // Play victory sound when user clicks Continue
+    playVictorySound();
+    
     Widget destination;
 
     switch (subject) {

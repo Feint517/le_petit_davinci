@@ -3,6 +3,8 @@ class AppRoutes {
   static const String welcome = '/welcome';
   static const String intro = '/intro';
   static const String home = '/home';
+  static const String mainNavigation = '/main-navigation';
+  static const String leaderboard = '/leaderboard';
   static const String login = '/login';
   static const String userSelection = '/user-selection';
   static const String parentOnboarding = '/parent-onboarding';

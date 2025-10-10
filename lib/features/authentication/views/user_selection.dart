@@ -13,6 +13,7 @@ import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
 import 'package:le_petit_davinci/features/onboarding/views/questions_intro.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
+import 'package:le_petit_davinci/services/sfx_service.dart';
 
 class UserSelectionScreen extends GetView<UserSelectionController> {
   const UserSelectionScreen({super.key});
@@ -100,6 +101,7 @@ class UserSelectionScreen extends GetView<UserSelectionController> {
                         size: ButtonSize.lg,
                         width: double.infinity,
                         onPressed: () {
+                          AppSfx.click();
                           print('🚀 Parent button pressed');
                           Get.toNamed(AppRoutes.login);
                         },
@@ -122,6 +124,7 @@ class UserSelectionScreen extends GetView<UserSelectionController> {
                         size: ButtonSize.lg,
                         width: double.infinity,
                         onPressed: () {
+                          AppSfx.click();
                           print('🚀 Child button pressed');
                           Get.toNamed(AppRoutes.home);
                         },

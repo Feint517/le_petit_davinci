@@ -28,9 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _initializeApp() async {
     // Simulate loading time (replace with actual initialization)
     await Future.delayed(const Duration(seconds: 3));
-    setState(() {
-      _isReady = true;
-    });
+    
+    // Check if widget is still mounted before calling setState
+    if (mounted) {
+      setState(() {
+        _isReady = true;
+      });
+    }
 
     if (widget.onReady != null) {
       widget.onReady!();

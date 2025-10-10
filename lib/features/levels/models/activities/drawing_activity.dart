@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/features/levels/views/activities/drawing_view.dart';
+import 'package:le_petit_davinci/features/levels/views/activities/letter_tracing_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
-class DrawingActivity extends Activity
+class LetterTracingActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
-  DrawingActivity({
-    required this.prompt,
-    this.templateImagePath,
-    this.suggestedColors,
-  }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Super! Prêt à dessiner?',
-      prompt,
-    ], completionDelay: const Duration(seconds: 1));
-  }
+  LetterTracingActivity({
+    required String letter,
+    this.prompt,
+  }) : letter = letter.toUpperCase().isNotEmpty ? letter.toUpperCase() : 'A';
 
-  final String prompt;
-  final String? templateImagePath;
-  final List<String>? suggestedColors;
+  final String letter; // The letter to trace (A-Z)
+  final String? prompt;
 
-  /// The drawing canvas will call this when the user is done drawing.
+  /// The letter tracing canvas will call this when the user completes tracing.
   /// This triggers the main `isCompleted` flag, advancing the lesson.
-  void markDrawingAsCompleted() {
+  void markTracingAsCompleted() {
     markCompleted(); // Use the new unified helper method
   }
 
   @override
   Widget build(BuildContext context) {
-    return DrawingActivityView(activity: this);
+    return LetterTracingView(activity: this);
   }
 
   // --- ActivityNavigationInterface Implementation ---
@@ -44,7 +36,7 @@ class DrawingActivity extends Activity
 
   @override
   ActivityButtonConfig? get buttonConfig =>
-      ActivityButtonConfig(continueButtonText: 'Finish Drawing');
+      const ActivityButtonConfig(continueButtonText: 'Next Letter');
 
   @override
   void onNavigationTriggered() {
@@ -56,4 +48,16 @@ class DrawingActivity extends Activity
     disposeMascot(); // Use mixin method
     super.dispose();
   }
+}
+
+// Keep the old DrawingActivity for backward compatibility
+class DrawingActivity extends LetterTracingActivity {
+  DrawingActivity({
+    required String prompt,
+    String? templateImagePath,
+    List<String>? suggestedColors,
+  }) : super(
+          letter: 'A', // Default letter for backward compatibility
+          prompt: prompt,
+        );
 }
