@@ -19,7 +19,7 @@ class FillTheBlankActivity extends Activity
     initializeMascot([
       'Let\'s fill in the blank!',
       'Choose the correct answer.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   final String questionSuffix;

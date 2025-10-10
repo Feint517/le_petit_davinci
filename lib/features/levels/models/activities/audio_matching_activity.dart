@@ -14,7 +14,7 @@ class AudioMatchingActivity extends Activity
     initializeMascot([
       'Let\'s match audio with words!',
       'Listen and find the matching word.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   final String prompt;

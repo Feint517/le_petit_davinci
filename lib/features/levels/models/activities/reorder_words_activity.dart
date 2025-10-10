@@ -15,7 +15,7 @@ class ReorderWordsActivity extends Activity
     initializeMascot([
       'Let\'s reorder the words!',
       'Put the words in the correct order.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   // Override to indicate this activity requires validation

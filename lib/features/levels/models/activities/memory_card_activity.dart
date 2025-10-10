@@ -21,7 +21,7 @@ class MemoryCardActivity extends Activity
       'Let\'s play a memory game!',
       instruction,
       'Find the matching pairs!',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
 
     // Initialize game state
     _initializeGame();

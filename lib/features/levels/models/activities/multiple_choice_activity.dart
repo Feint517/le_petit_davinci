@@ -32,7 +32,7 @@ class MultipleChoiceActivity extends Activity
     initializeMascot([
       'Let\'s answer this question!',
       'Choose all the correct answers.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   void toggleSelection(int index) {

@@ -18,7 +18,7 @@ class LetterTracingView extends StatelessWidget {
       activity.prompt ?? 'Trace la lettre $letter avec ton doigt!',
     ].where((message) => message.isNotEmpty).toList();
     
-    activity.initializeMascot(messages, completionDelay: const Duration(seconds: 1));
+    activity.initializeMascot(messages);
 
     return ActivityIntroWrapper(
       activity: _buildTracingCanvas(),

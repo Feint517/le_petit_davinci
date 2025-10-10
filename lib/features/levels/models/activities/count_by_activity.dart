@@ -38,7 +38,7 @@ class CountByActivity extends Activity
     initializeMascot([
       'Let\'s count by numbers!',
       'Fill in the missing numbers.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   void setActiveIndex(int index) {

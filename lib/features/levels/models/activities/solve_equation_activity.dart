@@ -29,7 +29,7 @@ class SolveEquationActivity extends Activity
     initializeMascot([
       'Let\'s solve this equation!',
       'Choose the correct answer.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   /// The view will call this to update the state.

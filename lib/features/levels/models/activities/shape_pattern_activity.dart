@@ -28,7 +28,7 @@ class ShapePatternActivity extends Activity
     initializeMascot([
       'Let\'s find the pattern!',
       'Look at the shapes and find what comes next.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   @override

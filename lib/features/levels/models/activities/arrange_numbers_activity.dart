@@ -29,7 +29,7 @@ class ArrangeNumbersActivity extends Activity
       isAscending
           ? 'Put them in order from smallest to largest.'
           : 'Put them in order from largest to smallest.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   @override

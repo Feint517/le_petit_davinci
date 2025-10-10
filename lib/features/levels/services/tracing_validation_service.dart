@@ -5,8 +5,10 @@ import 'package:le_petit_davinci/services/tracing_sound_service.dart';
 /// Service for validating letter tracing accuracy
 class TracingValidationService {
   static const double defaultTolerance = 25.0;
-  static const double minAccuracyThreshold = 0.7;
-  static const double completionThreshold = 0.85;
+  static const double minAccuracyThreshold = 0.6;
+  static const double completionThreshold = 0.95; // Much higher threshold
+  static const double pathCoverageThreshold = 0.85; // Require 85% path coverage
+  static const int minStrokeLength = 10; // Minimum points required for a valid stroke
 
   /// Validates a user's tracing stroke against the expected letter path
   static TracingResult validateStroke(
@@ -24,6 +26,17 @@ class TracingValidationService {
       );
     }
 
+    // Require minimum stroke length for meaningful validation
+    if (userStroke.length < minStrokeLength) {
+      return TracingResult(
+        accuracy: 0.0,
+        isValid: false,
+        feedback: TracingFeedback.veryPoor,
+        correctPoints: [],
+        incorrectPoints: userStroke,
+      );
+    }
+
     final tolerance = customTolerance ?? defaultTolerance;
     final correctPoints = <Offset>[];
     final incorrectPoints = <Offset>[];
@@ -38,8 +51,12 @@ class TracingValidationService {
       }
     }
 
-    // Calculate accuracy
-    totalAccuracy = correctPoints.length / userStroke.length;
+    // Calculate accuracy based on stroke quality, not just point count
+    totalAccuracy = _calculateStrokeAccuracy(
+      userStroke,
+      correctPoints,
+      letterPath,
+    );
 
     // Determine feedback
     TracingFeedback feedback = _determineFeedback(
@@ -48,8 +65,9 @@ class TracingValidationService {
       letterPath,
     );
 
-    // Check if stroke is valid
+    // Check if stroke is valid - require both accuracy and proper coverage
     final isValid = totalAccuracy >= minAccuracyThreshold &&
+        _hasGoodPathCoverage(userStroke, letterPath) &&
         letterPath.followsCorrectDirection(userStroke);
 
     return TracingResult(
@@ -61,6 +79,74 @@ class TracingValidationService {
     );
   }
 
+  /// Calculates stroke accuracy based on multiple factors
+  static double _calculateStrokeAccuracy(
+    List<Offset> userStroke,
+    List<Offset> correctPoints,
+    LetterPathData letterPath,
+  ) {
+    if (userStroke.isEmpty) return 0.0;
+
+    // Basic accuracy from correct points
+    final basicAccuracy = correctPoints.length / userStroke.length;
+    
+    // Path coverage factor - how much of the path was covered
+    final coverageFactor = _calculatePathCoverage(userStroke, letterPath);
+    
+    // Stroke length factor - longer strokes get bonus (encourages complete tracing)
+    final strokeLengthFactor = _calculateStrokeLengthFactor(userStroke, letterPath);
+    
+    // Combine factors with weights
+    final accuracy = (basicAccuracy * 0.4) + (coverageFactor * 0.4) + (strokeLengthFactor * 0.2);
+    
+    return accuracy.clamp(0.0, 1.0);
+  }
+
+  /// Calculates how much of the letter path was covered by the stroke
+  static double _calculatePathCoverage(List<Offset> userStroke, LetterPathData letterPath) {
+    if (userStroke.isEmpty || letterPath.keyPoints.isEmpty) return 0.0;
+
+    int coveredKeyPoints = 0;
+    for (final keyPoint in letterPath.keyPoints) {
+      bool isCovered = userStroke.any((userPoint) =>
+          (userPoint - keyPoint).distance <= defaultTolerance * 1.5);
+      if (isCovered) {
+        coveredKeyPoints++;
+      }
+    }
+
+    return coveredKeyPoints / letterPath.keyPoints.length;
+  }
+
+  /// Calculates stroke length factor to encourage complete tracing
+  static double _calculateStrokeLengthFactor(List<Offset> userStroke, LetterPathData letterPath) {
+    if (userStroke.length < 2) return 0.0;
+
+    // Calculate total stroke length
+    double strokeLength = 0.0;
+    for (int i = 0; i < userStroke.length - 1; i++) {
+      strokeLength += (userStroke[i + 1] - userStroke[i]).distance;
+    }
+
+    // Estimate expected path length (rough approximation)
+    double expectedLength = 0.0;
+    for (int i = 0; i < letterPath.keyPoints.length - 1; i++) {
+      expectedLength += (letterPath.keyPoints[i + 1] - letterPath.keyPoints[i]).distance;
+    }
+
+    if (expectedLength == 0) return 0.0;
+
+    // Return factor based on how close stroke length is to expected length
+    final lengthRatio = strokeLength / expectedLength;
+    return lengthRatio.clamp(0.0, 1.0);
+  }
+
+  /// Checks if the stroke has good path coverage
+  static bool _hasGoodPathCoverage(List<Offset> userStroke, LetterPathData letterPath) {
+    final coverage = _calculatePathCoverage(userStroke, letterPath);
+    return coverage >= pathCoverageThreshold; // Require 85% path coverage
+  }
+
   /// Determines appropriate feedback based on tracing performance
   static TracingFeedback _determineFeedback(
     double accuracy,
@@ -69,11 +155,11 @@ class TracingValidationService {
   ) {
     if (accuracy >= completionThreshold) {
       return TracingFeedback.excellent;
-    } else if (accuracy >= 0.8) {
+    } else if (accuracy >= 0.85) {
       return TracingFeedback.good;
-    } else if (accuracy >= 0.6) {
+    } else if (accuracy >= 0.7) {
       return TracingFeedback.needsImprovement;
-    } else if (accuracy >= 0.4) {
+    } else if (accuracy >= 0.5) {
       return TracingFeedback.poor;
     } else {
       return TracingFeedback.veryPoor;
@@ -107,9 +193,8 @@ class TracingValidationService {
     // Calculate overall accuracy
     totalAccuracy /= allStrokes.length;
 
-    // Check if tracing is complete
-    final isComplete = totalAccuracy >= completionThreshold &&
-        _hasCoveredAllKeyPoints(allStrokes, letterPath);
+    // Check if tracing is complete - much stricter requirements
+    final isComplete = _isTracingComplete(allStrokes, letterPath, totalAccuracy);
 
     // Determine overall feedback
     final feedback = _determineFeedback(totalAccuracy, [], letterPath);
@@ -120,6 +205,34 @@ class TracingValidationService {
       feedback: feedback,
       strokeResults: strokeResults,
     );
+  }
+
+  /// Checks if tracing is truly complete with strict requirements
+  static bool _isTracingComplete(
+    List<List<Offset>> allStrokes,
+    LetterPathData letterPath,
+    double totalAccuracy,
+  ) {
+    // Must have high overall accuracy
+    if (totalAccuracy < completionThreshold) return false;
+    
+    // Must have covered all key points
+    if (!_hasCoveredAllKeyPoints(allStrokes, letterPath)) return false;
+    
+    // Must have good path coverage across all strokes
+    final allUserPoints = <Offset>[];
+    for (final stroke in allStrokes) {
+      allUserPoints.addAll(stroke);
+    }
+    
+    final coverage = _calculatePathCoverage(allUserPoints, letterPath);
+    if (coverage < pathCoverageThreshold) return false;
+    
+    // Must have traced a significant portion of the path length
+    final strokeLengthFactor = _calculateStrokeLengthFactor(allUserPoints, letterPath);
+    if (strokeLengthFactor < 0.7) return false; // Require 70% of expected path length
+    
+    return true;
   }
 
   /// Checks if all key points of the letter have been covered
@@ -141,8 +254,8 @@ class TracingValidationService {
       }
     }
 
-    // Require at least 80% of key points to be covered
-    return coveredKeyPoints >= (letterPath.keyPoints.length * 0.8);
+    // Require at least 90% of key points to be covered
+    return coveredKeyPoints >= (letterPath.keyPoints.length * 0.9);
   }
 
   /// Provides real-time feedback during tracing
@@ -151,12 +264,21 @@ class TracingValidationService {
     LetterPathData letterPath,
     List<Offset> currentStroke,
   ) {
+    // Only provide feedback for longer strokes to avoid spam
+    if (currentStroke.length < 5) {
+      return RealTimeFeedback(
+        type: FeedbackType.correct,
+        message: 'Start tracing...',
+        color: Colors.blue,
+      );
+    }
+
     final isOnPath = letterPath.isPointOnPath(currentPoint);
     final distance = letterPath.getClosestPointOnPath(currentPoint);
     
     if (isOnPath) {
       // Play correct sound occasionally to avoid spam
-      if (currentStroke.length % 10 == 0) {
+      if (currentStroke.length % 20 == 0) {
         TracingSoundService.playCorrectSound();
       }
       
@@ -173,7 +295,7 @@ class TracingValidationService {
       );
     } else {
       // Play incorrect sound occasionally to avoid spam
-      if (currentStroke.length % 15 == 0) {
+      if (currentStroke.length % 25 == 0) {
         TracingSoundService.playIncorrectSound();
       }
       

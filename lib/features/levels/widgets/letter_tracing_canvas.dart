@@ -114,6 +114,11 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
   void _validateCurrentStroke() {
     if (_currentStroke.isEmpty) return;
 
+    // Only validate if stroke is long enough
+    if (_currentStroke.length < TracingValidationService.minStrokeLength) {
+      return;
+    }
+
     final result = TracingValidationService.validateStroke(
       _currentStroke,
       _letterPathData,
@@ -132,10 +137,8 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
       HapticFeedback.heavyImpact();
     }
 
-    // Check if tracing is complete
-    if (result.accuracy >= TracingValidationService.completionThreshold && !_isCompleted) {
-      _completeTracing();
-    }
+    // Don't complete on single stroke - wait for complete tracing validation
+    // The completion will be checked when the stroke ends
   }
 
   void _updateRealTimeFeedback(Offset point) {
@@ -155,6 +158,24 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
         _feedbackController.reverse();
       });
     });
+  }
+
+  void _checkCompleteTracing() {
+    if (_allStrokes.isEmpty) return;
+
+    final completeResult = TracingValidationService.validateCompleteTracing(
+      _allStrokes,
+      _letterPathData,
+    );
+
+    setState(() {
+      _accuracy = completeResult.overallAccuracy;
+    });
+
+    // Only complete if all strict requirements are met
+    if (completeResult.isComplete && !_isCompleted) {
+      _completeTracing();
+    }
   }
 
   void _completeTracing() {
@@ -190,97 +211,100 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
           _isInitialized = true;
         }
 
-        return Container(
-          width: double.infinity,
-          height: double.infinity,
-          margin: EdgeInsets.all(16.w),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.pink.shade50,
-                Colors.purple.shade50,
-                Colors.blue.shade50,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(20.r),
-            border: Border.all(color: Colors.white, width: 3),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 15,
-                offset: const Offset(0, 5),
-              ),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      margin: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.pink.shade50,
+              Colors.purple.shade50,
+              Colors.blue.shade50,
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(17.r),
-            child: Stack(
-              children: [
-                // Main tracing canvas
-                GestureDetector(
-                  onPanStart: (details) {
-                    setState(() {
-                      _isTracing = true;
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(color: Colors.white, width: 3),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(17.r),
+          child: Stack(
+            children: [
+              // Main tracing canvas
+              GestureDetector(
+                onPanStart: (details) {
+                  setState(() {
+                    _isTracing = true;
                       _currentStroke.clear();
-                    });
+                  });
                     // Play tracing start sound
                     TracingSoundService.playTracingStartSound();
-                  },
-                  onPanUpdate: (details) {
-                    if (_isTracing && !_isCompleted) {
-                      setState(() {
+                },
+                onPanUpdate: (details) {
+                  if (_isTracing && !_isCompleted) {
+                    setState(() {
                         _currentStroke.add(details.localPosition);
-                      });
+                    });
                       _updateRealTimeFeedback(details.localPosition);
                       _validateCurrentStroke();
-                    }
-                  },
-                  onPanEnd: (details) {
+                  }
+                },
+                onPanEnd: (details) {
                     if (_isTracing) {
-                      setState(() {
-                        _isTracing = false;
+                  setState(() {
+                    _isTracing = false;
                         _allStrokes.add(List.from(_currentStroke));
-                      });
+                  });
+                      
+                      // Check if complete tracing is achieved
+                      _checkCompleteTracing();
                     }
-                  },
-                  child: CustomPaint(
-                    size: Size.infinite,
+                },
+                child: CustomPaint(
+                  size: Size.infinite,
                     painter: ImprovedLetterTracingPainter(
                       letterPathData: _letterPathData,
                       currentStroke: _currentStroke,
                       allStrokes: _allStrokes,
                       currentResult: _currentResult,
-                      isCompleted: _isCompleted,
-                      glowAnimation: _glowAnimation,
+                    isCompleted: _isCompleted,
+                    glowAnimation: _glowAnimation,
                       realTimeFeedback: _realTimeFeedback,
                       feedbackAnimation: _feedbackAnimation,
-                    ),
                   ),
                 ),
+              ),
               
-                // Success overlay
-                if (_isCompleted)
-                  AnimatedBuilder(
-                    animation: _successController,
-                    builder: (context, child) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          gradient: RadialGradient(
-                            center: Alignment.center,
-                            radius: _successController.value * 2,
-                            colors: [
-                              Colors.yellow.withValues(alpha: 0.3 * _successController.value),
-                              Colors.orange.withValues(alpha: 0.2 * _successController.value),
-                              Colors.transparent,
-                            ],
-                          ),
+              // Success overlay
+              if (_isCompleted)
+                AnimatedBuilder(
+                  animation: _successController,
+                  builder: (context, child) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        gradient: RadialGradient(
+                          center: Alignment.center,
+                          radius: _successController.value * 2,
+                          colors: [
+                            Colors.yellow.withValues(alpha: 0.3 * _successController.value),
+                            Colors.orange.withValues(alpha: 0.2 * _successController.value),
+                            Colors.transparent,
+                          ],
                         ),
-                      );
-                    },
-                  ),
-                
+                      ),
+                    );
+                  },
+                ),
+              
                 // Real-time feedback overlay
                 if (_realTimeFeedback != null)
                   AnimatedBuilder(
@@ -314,93 +338,79 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
                               ),
                               textAlign: TextAlign.center,
                             ),
-                          ),
                         ),
-                      );
-                    },
-                  ),
-                
-                // Control buttons
-                Positioned(
-                  bottom: 20.h,
-                  left: 20.w,
-                  right: 20.w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildControlButton(
-                        icon: Icons.refresh,
+                      ),
+                    );
+                  },
+                ),
+              
+              // Control buttons
+              Positioned(
+                bottom: 20.h,
+                left: 20.w,
+                right: 20.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildControlButton(
+                      icon: Icons.refresh,
                         onPressed: () {
                           TracingSoundService.playButtonClickSound();
                           _resetTracing();
                         },
-                        color: Colors.orange,
+                      color: Colors.orange,
+                    ), 
+                  ],
+                ),
+              ),
+              
+              // Progress indicator
+              Positioned(
+                top: 20.h,
+                left: 20.w,
+                right: 20.w,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    borderRadius: BorderRadius.circular(20.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        blurRadius: 5,
+                        offset: const Offset(0, 2),
                       ),
-                      _buildControlButton(
-                        icon: Icons.arrow_back,
-                        onPressed: () {
-                          // Previous letter functionality
-                        },
-                        color: Colors.blue,
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Lettre ${widget.letter}',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple.shade700,
+                        ),
                       ),
-                      _buildControlButton(
-                        icon: Icons.arrow_forward,
-                        onPressed: () {
-                          // Next letter functionality
-                        },
-                        color: Colors.green,
+                      const Spacer(),
+                      Text(
+                        '${(_accuracy * 100).toInt()}%',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: _accuracy >= 0.8 ? Colors.green : Colors.orange,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                
-                // Progress indicator
-                Positioned(
-                  top: 20.h,
-                  left: 20.w,
-                  right: 20.w,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.9),
-                      borderRadius: BorderRadius.circular(20.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Lettre ${widget.letter}',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple.shade700,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${(_accuracy * 100).toInt()}%',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: _accuracy >= 0.8 ? Colors.green : Colors.orange,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
+        ),
         );
       },
-    );
+      );
   }
 
   Widget _buildControlButton({
@@ -545,9 +555,9 @@ class ImprovedLetterTracingPainter extends CustomPainter {
       } else {
         paint.color = Colors.red;
       }
-    } else {
-      paint.color = Colors.blue;
-    }
+      } else {
+        paint.color = Colors.blue;
+      }
 
     for (int i = 0; i < currentStroke.length - 1; i++) {
       canvas.drawLine(currentStroke[i], currentStroke[i + 1], paint);

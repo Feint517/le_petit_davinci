@@ -13,7 +13,7 @@ class VideoActivity extends Activity
     // Initialize mascot with standardized approach
     initializeMascot([
       'Super! Prêt à voir la vidéo?',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
 
     // When the intro is complete, launch the full-screen player.
     ever(isIntroCompleted, (bool isReady) {

@@ -18,7 +18,7 @@ class DrawingActivityView extends StatelessWidget {
     // Initialize mascot when the view is built
     activity.initializeMascot([
       'Super! Prêt à dessiner?', 
-    ], completionDelay: const Duration(seconds: 1));
+    ]);
 
     return ActivityIntroWrapper(
       activity: _buildDrawingCanvas(),

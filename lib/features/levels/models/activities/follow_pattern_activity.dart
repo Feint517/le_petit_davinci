@@ -33,7 +33,7 @@ class FollowPatternActivity extends Activity
     initializeMascot([
       'Let\'s follow the pattern!',
       'Find the next number in the sequence.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   /// The view will call this to update the state when a choice is selected.

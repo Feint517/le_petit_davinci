@@ -24,8 +24,7 @@ class ListenAndChooseActivity extends Activity
     required this.label,
   }) {
     // Initialize mascot with standardized approach
-    initializeMascot(['Listen carefully!', 'Choose the correct answer.'],
-        completionDelay: const Duration(seconds: 2));
+    initializeMascot(['Listen carefully!', 'Choose the correct answer.']);
   }
 
   // --- State Management for this specific exercise type ---

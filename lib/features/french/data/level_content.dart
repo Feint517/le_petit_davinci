@@ -31,16 +31,11 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Testons toutes les activités disponibles !',
     lessonId: 'test_all_activities_fr',
     activities: [
-      // Lesson Activities (auto-complete)
-      
+      // Lesson Activities (auto-complete) 
       LetterTracingActivity(
         letter: 'A',
         prompt: 'Trace la lettre "A" !',
-      ),
-      LetterTracingActivity(
-        letter: 'B',
-        prompt: 'Trace la lettre "A" !',
-      ),
+      ), 
       MemoryCardActivity(
         instruction: 'Trouve les paires !',
         cardPairs: [
@@ -98,7 +93,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
         ],
         correctIndices: [0],
       ),
-
       // Exercise Activities (require validation)
       FillTheBlankActivity(
         questionSuffix: ' comme dans Arbre.',

@@ -19,7 +19,7 @@ class NumberMatchingActivity extends Activity
     initializeMascot([
       'Let\'s match numbers!',
       'Find the matching pairs.',
-    ], completionDelay: const Duration(seconds: 2));
+    ]);
   }
 
   @override

@@ -14,7 +14,7 @@ mixin MascotIntroductionMixin {
   bool _isInitialized = false;
 
   /// Initialize the mascot with the provided messages
-  void initializeMascot(List<String> messages, {Duration? completionDelay}) {
+  void initializeMascot(List<String> messages) {
     if (_isInitialized) return;
 
     _mascotController = TalkingMascotController(messages: messages);
@@ -22,10 +22,7 @@ mixin MascotIntroductionMixin {
     // Listen to mascot completion
     ever(_mascotController!.isCompleted, (bool isDone) {
       if (isDone) {
-        final delay = completionDelay ?? const Duration(seconds: 2);
-        Future.delayed(delay, () {
-          isIntroCompleted.value = true;
-        });
+        isIntroCompleted.value = true;
       }
     });
 
