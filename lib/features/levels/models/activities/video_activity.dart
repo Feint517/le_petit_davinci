@@ -10,8 +10,7 @@ class VideoActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   VideoActivity({required this.videoId}) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot(['Super! Prêt à voir la vidéo?', 'Regardons ensemble!']);
+    // Mascot initialization is handled in the view's build method
   }
 
   /// Start the video player - called by the view when ready

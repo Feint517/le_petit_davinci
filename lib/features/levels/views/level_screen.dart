@@ -25,29 +25,56 @@ class LevelScreen extends GetView<LevelController> {
 
         // Focus overlay for mascot introduction - covers entire screen including app bar
         Obx(() {
-          final currentActivity = controller.currentActivity;
+          try {
+            final currentActivity = controller.currentActivity;
 
-          if (currentActivity is MascotIntroductionMixin) {
-            final mascotMixin = currentActivity as MascotIntroductionMixin;
+            if (currentActivity is MascotIntroductionMixin) {
+              final mascotMixin = currentActivity as MascotIntroductionMixin;
 
-            return AnimatedOpacity(
-              opacity:
-                  mascotMixin.isInitialized &&
-                          mascotMixin.mascotController != null &&
-                          !mascotMixin.isIntroCompleted.value
-                      ? 1.0
-                      : 0.0,
-              duration: const Duration(milliseconds: 500),
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.black.withOpacity(0.4),
-                child: const SizedBox.shrink(),
-              ),
-            );
+              // Make the overlay check reactive to mascot state changes
+              return Obx(() {
+                // Check if we should show overlay
+                final shouldShowOverlay =
+                    mascotMixin.isInitialized.value &&
+                    mascotMixin.mascotController != null &&
+                    !mascotMixin.isIntroCompleted.value;
+
+                // Debug logging
+                debugPrint('Focus overlay check:');
+                debugPrint(
+                  '  - isInitialized: ${mascotMixin.isInitialized.value}',
+                );
+                debugPrint(
+                  '  - mascotController != null: ${mascotMixin.mascotController != null}',
+                );
+                debugPrint(
+                  '  - isIntroCompleted: ${mascotMixin.isIntroCompleted.value}',
+                );
+                debugPrint('  - shouldShowOverlay: $shouldShowOverlay');
+
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child:
+                      shouldShowOverlay
+                          ? Container(
+                            key: const ValueKey('overlay'),
+                            width: double.infinity,
+                            height: double.infinity,
+                            color: Colors.black.withValues(alpha: 0.4),
+                            child: const SizedBox.shrink(),
+                          )
+                          : const SizedBox.shrink(
+                            key: ValueKey('no-overlay-mascot'),
+                          ),
+                );
+              });
+            }
+
+            return const SizedBox.shrink(key: ValueKey('no-overlay-no-mascot'));
+          } catch (e) {
+            debugPrint('Error in focus overlay: $e');
+            return const SizedBox.shrink(key: ValueKey('no-overlay-error'));
           }
-
-          return const SizedBox.shrink();
         }),
 
         // Mascot widget - on top layer for interaction

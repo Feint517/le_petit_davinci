@@ -27,11 +27,35 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Testons toutes les activités disponibles !',
     lessonId: 'test_all_activities_fr',
     activities: [
-      // Lesson Activities (auto-complete) 
-      LetterTracingActivity(
-        letter: 'A',
-        prompt: 'Trace la lettre "A" !',
-      ), 
+      // Lesson Activities (auto-complete)
+      FillTheBlankActivity(
+        questionSuffix: ' comme dans Arbre.',
+        options: [
+          FillTheBlankOption(optionText: 'A'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
+        ],
+        correctAnswer: 0,
+      ),
+      MultipleChoiceActivity(
+        instruction: 'Quelle lettre vient après A ?',
+        options: [
+          SelectableOption(label: 'B', imagePath: ImageAssets.apple),
+          SelectableOption(label: 'C', imagePath: ImageAssets.cat),
+          SelectableOption(label: 'D', imagePath: ImageAssets.dog),
+        ],
+        correctIndices: [0],
+      ),
+      AudioMatchingActivity(
+        prompt: 'Associe le son à la lettre !',
+        pairs: [
+          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
+          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
+          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
+          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
+        ],
+      ),
+      LetterTracingActivity(letter: 'A', prompt: 'Trace la lettre "A" !'),
       MemoryCardActivity(
         instruction: 'Trouve les paires !',
         cardPairs: [
@@ -71,34 +95,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ),
         ],
       ),
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
-          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
-          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
-          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
-        ],
-      ),
-      MultipleChoiceActivity(
-        instruction: 'Quelle lettre vient après A ?',
-        options: [
-          SelectableOption(label: 'B', imagePath: ImageAssets.apple),
-          SelectableOption(label: 'C', imagePath: ImageAssets.cat),
-          SelectableOption(label: 'D', imagePath: ImageAssets.dog),
-        ],
-        correctIndices: [0],
-      ),
+      
+      
+
       // Exercise Activities (require validation)
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Arbre.',
-        options: [
-          FillTheBlankOption(optionText: 'A'),
-          FillTheBlankOption(optionText: 'B'),
-          FillTheBlankOption(optionText: 'C'),
-        ],
-        correctAnswer: 0,
-      ),
       ListenAndChooseActivity(
         imageAssets: [
           ImageAssets.apple,
@@ -134,22 +134,22 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
       NumberMatchingActivity(
         instruction: 'Associe les nombres !',
         items: [
-          NumberMatchingItem(number: '1', imageAsset: ImageAssets.apple, quantity: 1),
-          NumberMatchingItem(number: '2', imageAsset: ImageAssets.cat, quantity: 2),
+          NumberMatchingItem(
+            number: '1',
+            imageAsset: ImageAssets.apple,
+            quantity: 1,
+          ),
+          NumberMatchingItem(
+            number: '2',
+            imageAsset: ImageAssets.cat,
+            quantity: 2,
+          ),
         ],
       ),
       ShapePatternActivity(
         instruction: 'Trouve le motif des formes !',
-        patternImages: [
-          ImageAssets.apple,
-          ImageAssets.cat,
-          ImageAssets.apple,
-        ],
-        optionImages: [
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-        ],
+        patternImages: [ImageAssets.apple, ImageAssets.cat, ImageAssets.apple],
+        optionImages: [ImageAssets.cat, ImageAssets.dog, ImageAssets.bird],
         correctIndex: 0,
         patternType: PatternType.shapes,
       ),
@@ -229,22 +229,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Il est temps d\'apprendre E, F, G, et H !',
     lessonId: 'alphabet_efgh_fr',
     activities: [
-      LetterTracingActivity(
-        letter: 'E',
-        prompt: 'Trace la lettre "E" !',
-      ),
-      LetterTracingActivity(
-        letter: 'F',
-        prompt: 'Trace la lettre "F" !',
-      ),
-      LetterTracingActivity(
-        letter: 'G',
-        prompt: 'Trace la lettre "G" !',
-      ),
-      LetterTracingActivity(
-        letter: 'H',
-        prompt: 'Trace la lettre "H" !',
-      ),
+      LetterTracingActivity(letter: 'E', prompt: 'Trace la lettre "E" !'),
+      LetterTracingActivity(letter: 'F', prompt: 'Trace la lettre "F" !'),
+      LetterTracingActivity(letter: 'G', prompt: 'Trace la lettre "G" !'),
+      LetterTracingActivity(letter: 'H', prompt: 'Trace la lettre "H" !'),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -308,22 +296,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Apprenons I, J, K, et L !',
     lessonId: 'alphabet_ijkl_fr',
     activities: [
-      LetterTracingActivity(
-        letter: 'I',
-        prompt: 'Trace la lettre "I" !',
-      ),
-      LetterTracingActivity(
-        letter: 'J',
-        prompt: 'Trace la lettre "J" !',
-      ),
-      LetterTracingActivity(
-        letter: 'K',
-        prompt: 'Trace la lettre "K" !',
-      ),
-      LetterTracingActivity(
-        letter: 'L',
-        prompt: 'Trace la lettre "L" !',
-      ),
+      LetterTracingActivity(letter: 'I', prompt: 'Trace la lettre "I" !'),
+      LetterTracingActivity(letter: 'J', prompt: 'Trace la lettre "J" !'),
+      LetterTracingActivity(letter: 'K', prompt: 'Trace la lettre "K" !'),
+      LetterTracingActivity(letter: 'L', prompt: 'Trace la lettre "L" !'),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -381,6 +357,4 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
       ),
     ],
   ),
- 
-  
 };

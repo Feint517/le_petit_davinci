@@ -19,6 +19,24 @@ class ListenAndChooseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Listen carefully!',
+        'Choose the correct answer.',
+        'Use your ears to help you!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in ListenAndChooseView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

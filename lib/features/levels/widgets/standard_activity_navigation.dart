@@ -86,19 +86,34 @@ class StandardActivityNavigation extends GetView<LevelController> {
         tooltip: buttonConfig?.checkButtonText ?? 'Check',
       );
     } else {
-      // Continue button for auto-complete activities
-      return _buildCircularButton(
-        icon: Icons.arrow_forward,
-        onPressed: () {
-          // If activity has custom navigation interface, notify it
-          if (currentActivity is ActivityNavigationInterface) {
-            currentActivity.onNavigationTriggered();
-          }
-          controller.nextActivity();
-        },
-        enabled: true,
-        tooltip: buttonConfig?.continueButtonText ?? 'Continue',
-      );
+      // For auto-complete activities, wrap the completion check in Obx
+      return Obx(() {
+        final isCompleted = currentActivity.isCompleted.value;
+
+        if (isCompleted) {
+          // Show Continue button when activity is completed
+          return _buildCircularButton(
+            icon: Icons.arrow_forward,
+            onPressed: () {
+              // If activity has custom navigation interface, notify it
+              if (currentActivity is ActivityNavigationInterface) {
+                currentActivity.onNavigationTriggered();
+              }
+              controller.nextActivity();
+            },
+            enabled: true,
+            tooltip: buttonConfig?.continueButtonText ?? 'Continue',
+          );
+        } else {
+          // Show a disabled button or no button when not completed
+          return _buildCircularButton(
+            icon: Icons.arrow_forward,
+            onPressed: null,
+            enabled: false,
+            tooltip: 'Complete the activity to continue',
+          );
+        }
+      });
     }
   }
 

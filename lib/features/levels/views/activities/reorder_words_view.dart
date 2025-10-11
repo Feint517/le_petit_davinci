@@ -22,6 +22,24 @@ class ReorderWordsView extends StatefulWidget {
 class _ReorderWordsViewState extends State<ReorderWordsView> {
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!widget.activity.isInitialized.value) {
+      final messages = [
+        'Let\'s reorder the words!',
+        'Put the words in the correct order.',
+        'Think about the sentence structure!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          widget.activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in ReorderWordsView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

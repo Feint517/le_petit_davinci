@@ -14,6 +14,24 @@ class StoryProblemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s solve this story problem!',
+        'Drag the items to find the answer.',
+        'Read carefully and think!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in StoryProblemView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

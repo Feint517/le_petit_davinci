@@ -16,16 +16,9 @@ class MemoryCardActivity extends Activity
     this.difficulty = MemoryDifficulty.medium,
     this.timeLimit, // Optional time limit in seconds
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s play a memory game!',
-      instruction,
-      'Find the matching pairs!',
-      'Use your memory to win!',
-    ]);
-
     // Initialize game state
     _initializeGame();
+    // Mascot initialization is handled in the view's build method
   }
 
   final String instruction;

@@ -34,11 +34,7 @@ class CountByActivity extends Activity
     // Initialize user inputs with empty strings.
     userInputs = List.generate(numberOfInputs, (_) => '').obs;
 
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s count by numbers!',
-      'Fill in the missing numbers.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   void setActiveIndex(int index) {

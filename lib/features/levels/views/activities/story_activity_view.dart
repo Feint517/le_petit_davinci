@@ -5,7 +5,7 @@ import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
-import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 
 class StoryActivityView extends StatelessWidget {
   const StoryActivityView({super.key, required this.activity});
@@ -14,6 +14,23 @@ class StoryActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s read a story together!',
+        'Follow along and answer the questions.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in StoryActivityView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 
@@ -55,21 +72,26 @@ class StoryActivityView extends StatelessWidget {
                     (activity.currentElement as StoryQuestion).activity
                         .checkAnswer();
 
-                // Show full-screen mascot feedback
-                Get.to(
-                  () => FullScreenMascotFeedback(
-                    isCorrect: result.isCorrect,
-                    correctAnswer:
-                        result.isCorrect ? null : result.correctAnswerText,
-                    onContinue: () {
-                      Get.back(); // Close the full-screen feedback
-                      if (result.isCorrect) {
-                        activity.advanceToNextElement();
-                      }
-                    },
-                  ),
-                  fullscreenDialog: true,
-                );
+                // Show feedback using the persistent mascot
+                final storyActivity =
+                    (activity.currentElement as StoryQuestion).activity;
+                if (storyActivity is MascotIntroductionMixin) {
+                  final mascotMixin = storyActivity as MascotIntroductionMixin;
+                  if (result.isCorrect) {
+                    mascotMixin.showSuccessFeedback();
+                  } else {
+                    mascotMixin.showEncouragementFeedback();
+                  }
+                }
+
+                // Handle the result
+                if (result.isCorrect) {
+                  // Add a small delay to show feedback before advancing
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    activity.advanceToNextElement();
+                  });
+                }
+                // For incorrect answers, the activity will be reset automatically
               } else {
                 activity.advanceToNextElement();
               }

@@ -13,6 +13,23 @@ class CountByView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s count by numbers!',
+        'Fill in the missing numbers.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in CountByView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

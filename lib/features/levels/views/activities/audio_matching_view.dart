@@ -65,11 +65,8 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
           selectedWordIndex = null;
         });
 
-        // Check for win condition
-        if (matchedWords.length == widget.activity.pairs.length) {
-          // All pairs matched, complete the activity.
-          widget.activity.isCompleted.value = true;
-        }
+        // Use the activity's completion tracking
+        widget.activity.addMatchedWord(wordChoice.word);
       } else {
         // Incorrect Match - reset selection after a short delay
         Future.delayed(const Duration(milliseconds: 500), () {
@@ -90,6 +87,24 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!widget.activity.isInitialized.value) {
+      final messages = [
+        'Let\'s match audio with words!',
+        'Listen carefully and find the matching word.',
+        'Use your ears to help you!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          widget.activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in AudioMatchingView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

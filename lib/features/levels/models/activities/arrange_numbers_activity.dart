@@ -23,14 +23,7 @@ class ArrangeNumbersActivity extends Activity
     this.maxNumber,
     this.minNumber,
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s arrange numbers!',
-      isAscending
-          ? 'Put them in order from smallest to largest.'
-          : 'Put them in order from largest to smallest.',
-      'Think about number order!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   @override

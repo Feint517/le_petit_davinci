@@ -14,6 +14,23 @@ class FillTheBlankView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s fill in the blank!',
+        'Choose the correct answer.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in FillTheBlankView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

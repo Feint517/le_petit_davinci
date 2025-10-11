@@ -16,6 +16,25 @@ class MemoryCardActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s play a memory game!',
+        activity.instruction,
+        'Find the matching pairs!',
+        'Use your memory to win!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in MemoryCardView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

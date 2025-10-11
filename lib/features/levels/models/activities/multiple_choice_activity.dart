@@ -27,12 +27,7 @@ class MultipleChoiceActivity extends Activity
     required this.correctIndices,
     this.question,
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s answer this question!',
-      'Choose all the correct answers.',
-      'Take your time and think carefully!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   void toggleSelection(int index) {

@@ -26,6 +26,24 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!widget.exercise.isInitialized.value) {
+      final messages = [
+        'Let\'s match numbers!',
+        'Find the matching pairs.',
+        'Look for the same numbers!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          widget.exercise.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in NumberMatchingView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

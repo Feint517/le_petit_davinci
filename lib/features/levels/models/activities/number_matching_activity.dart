@@ -15,12 +15,7 @@ class NumberMatchingActivity extends Activity
   bool get requiresValidation => true;
 
   NumberMatchingActivity({required this.items, required this.instruction}) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s match numbers!',
-      'Find the matching pairs.',
-      'Look for the same numbers!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   @override

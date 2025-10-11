@@ -11,6 +11,24 @@ class SolveEquationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s solve this equation!',
+        'Choose the correct answer.',
+        'Think carefully about the math!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in SolveEquationView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

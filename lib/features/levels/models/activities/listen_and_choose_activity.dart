@@ -23,12 +23,7 @@ class ListenAndChooseActivity extends Activity
     required this.correctAnswer,
     required this.label,
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Listen carefully!',
-      'Choose the correct answer.',
-      'Use your ears to help you!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   // --- State Management for this specific exercise type ---

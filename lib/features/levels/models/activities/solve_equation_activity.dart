@@ -25,12 +25,7 @@ class SolveEquationActivity extends Activity
     required this.options,
     required this.correctAnswer,
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s solve this equation!',
-      'Choose the correct answer.',
-      'Think carefully about the math!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   /// The view will call this to update the state.

@@ -10,7 +10,6 @@ import 'package:le_petit_davinci/features/levels/controllers/victory_controller.
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
-import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
@@ -116,8 +115,9 @@ class LevelController extends GetxController {
     // Always listen for completion
     _completionSubscription = activity.isCompleted.listen((isCompleted) {
       if (isCompleted) {
-        activity.dispose();
-        WidgetsBinding.instance.addPostFrameCallback((_) => _nextActivity());
+        // Don't dispose immediately - let the _handleNextStep method handle the transition
+        // activity.dispose();
+        // WidgetsBinding.instance.addPostFrameCallback((_) => _nextActivity());
       }
     });
 
@@ -158,55 +158,57 @@ class LevelController extends GetxController {
             .showEncouragementFeedback();
       }
 
-      // Still show full-screen feedback for incorrect answers (optional)
-      // You can remove this if you want only mascot feedback
-      Get.to(
-        () => FullScreenMascotFeedback(
-          isCorrect: result.isCorrect,
-          correctAnswer: result.correctAnswerText,
-          onContinue: () => _handleNextStep(result.isCorrect),
-        ),
-        fullscreenDialog: true,
-      );
+      // Handle incorrect answer - reset activity for another try
+      _handleNextStep(result.isCorrect);
     }
   }
 
   void _handleNextStep(bool isCorrect) {
-    // Close the full-screen feedback first
-    Get.back();
+    try {
+      if (isCorrect) {
+        // Mark the current activity as completed
+        currentActivity.markCompleted();
 
-    // Use a post-frame callback to ensure the navigation is complete before resetting
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      try {
-        if (isCorrect) {
-          // Mark the current activity as completed before moving to the next one
-          currentActivity.markCompleted();
-          _nextActivity();
-        } else {
-          // Incorrect, reset the current activity for another try
-          if (currentActivityRequiresValidation) {
-            // Add a small delay to ensure UI is stable before resetting
-            Future.delayed(const Duration(milliseconds: 100), () {
-              try {
-                currentActivity.reset();
-              } catch (e) {
-                debugPrint('Error resetting activity: $e');
-              }
-            });
+        // Add a delay to allow success feedback to complete before moving to next activity
+        Future.delayed(const Duration(milliseconds: 2000), () {
+          try {
+            _nextActivity();
+          } catch (e) {
+            debugPrint('Error moving to next activity: $e');
           }
-        }
-      } catch (e) {
-        debugPrint('Error in _handleNextStep: $e');
-        // Fallback: just reset the activity if there's an error
+        });
+      } else {
+        // Incorrect, reset the current activity for another try
         if (currentActivityRequiresValidation) {
-          currentActivity.reset();
+          // Add a small delay to ensure feedback is shown before resetting
+          Future.delayed(const Duration(milliseconds: 500), () {
+            try {
+              currentActivity.reset();
+            } catch (e) {
+              debugPrint('Error resetting activity: $e');
+            }
+          });
         }
       }
-    });
+    } catch (e) {
+      debugPrint('Error in _handleNextStep: $e');
+      // Fallback: just reset the activity if there's an error
+      if (currentActivityRequiresValidation) {
+        currentActivity.reset();
+      }
+    }
   }
 
   void _nextActivity() {
     if (!pageController.hasClients) return;
+
+    // Dispose the current activity before moving to the next one
+    try {
+      final currentActivity = this.currentActivity;
+      currentActivity.dispose();
+    } catch (e) {
+      debugPrint('Error disposing current activity: $e');
+    }
 
     if (currentIndex.value < totalItems - 1) {
       // Move to next activity
@@ -231,6 +233,9 @@ class LevelController extends GetxController {
       activity.markCompleted();
     }
     // For validation-required activities, the completion is handled by checkAnswer()
+
+    // Actually move to the next activity
+    _nextActivity();
   }
 
   Future<void> _completeLevel() async {

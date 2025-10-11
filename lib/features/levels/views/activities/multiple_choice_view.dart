@@ -11,6 +11,24 @@ class MultipleChoiceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s answer this question!',
+        'Choose all the correct answers.',
+        'Take your time and think carefully!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in MultipleChoiceView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

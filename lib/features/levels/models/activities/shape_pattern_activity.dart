@@ -24,12 +24,7 @@ class ShapePatternActivity extends Activity
     required this.instruction,
     required this.patternType,
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s find the pattern!',
-      'Look at the shapes and find what comes next.',
-      'Use your pattern recognition skills!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   @override

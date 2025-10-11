@@ -9,12 +9,7 @@ class LetterTracingActivity extends Activity
     implements ActivityNavigationInterface {
   LetterTracingActivity({required String letter, this.prompt})
     : letter = letter.toUpperCase().isNotEmpty ? letter.toUpperCase() : 'A' {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s trace the letter $letter!',
-      'Follow the lines carefully.',
-      'Take your time and do your best!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   final String letter; // The letter to trace (A-Z)

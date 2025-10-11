@@ -14,6 +14,23 @@ class FollowPatternView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s follow the pattern!',
+        'Find the next number in the sequence.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in FollowPatternView: $e');
+        }
+      });
+    }
+
     return _buildMainContent();
   }
 

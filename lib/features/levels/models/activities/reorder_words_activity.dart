@@ -11,12 +11,7 @@ class ReorderWordsActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   ReorderWordsActivity({required this.words, required this.correctOrder}) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s reorder the words!',
-      'Put the words in the correct order.',
-      'Think about the sentence structure!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   // Override to indicate this activity requires validation

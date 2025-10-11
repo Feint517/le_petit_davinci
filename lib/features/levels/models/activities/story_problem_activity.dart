@@ -30,12 +30,7 @@ class StoryProblemActivity extends Activity
     required this.correctTotalValue,
     this.unitName = '', // Default to empty string
   }) {
-    // Initialize mascot with activity-specific introduction messages
-    initializeMascot([
-      'Let\'s solve this story problem!',
-      'Drag the items to find the answer.',
-      'Read carefully and think!',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   /// Adds an item to the drop zone. Called by the view's DragTarget.
