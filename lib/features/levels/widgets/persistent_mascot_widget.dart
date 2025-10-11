@@ -30,6 +30,9 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
 
   Future<void> _loadRiveFile() async {
     try {
+      // Initialize RiveFile before importing
+      await RiveFile.initialize();
+
       final data = await DefaultAssetBundle.of(
         context,
       ).load(AnimationAssets.talkingBear);
@@ -66,6 +69,21 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
     }
   }
 
+  void _setAnimationState(bool isTalking) {
+    if (_stateMachineController != null) {
+      try {
+        // Control the state machine directly - pause when not talking, resume when talking
+        if (!isTalking) {
+          _stateMachineController!.isActive = false;
+        } else {
+          _stateMachineController!.isActive = true;
+        }
+      } catch (e) {
+        debugPrint('Error setting animation state: $e');
+      }
+    }
+  }
+
   @override
   void dispose() {
     _stateMachineController?.dispose();
@@ -91,6 +109,9 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
               final showBubble =
                   !mascotMixin.isIntroCompleted.value &&
                   mascotMixin.mascotController!.currentMessage.isNotEmpty;
+
+              // Control animation state based on whether there's a message
+              _setAnimationState(showBubble);
 
               return GestureDetector(
                 onTap: () {
