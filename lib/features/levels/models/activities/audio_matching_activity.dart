@@ -10,10 +10,11 @@ class AudioMatchingActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   AudioMatchingActivity({required this.prompt, required this.pairs}) {
-    // Initialize mascot with standardized approach
+    // Initialize mascot with activity-specific introduction messages
     initializeMascot([
       'Let\'s match audio with words!',
-      'Listen and find the matching word.',
+      'Listen carefully and find the matching word.',
+      'Use your ears to help you!',
     ]);
   }
 
@@ -43,7 +44,7 @@ class AudioMatchingActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
   }
 }

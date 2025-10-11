@@ -28,54 +28,54 @@ class HomeScreen extends StatelessWidget {
     Get.put(ProgressService());
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
-            child: GNav(
-              backgroundColor: AppColors.white,
-              color: AppColors.textSecondary,
-              activeColor: AppColors.primary,
-              tabBackgroundColor: AppColors.primary.withOpacity(0.1),
-              gap: 8.w,
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-              tabs: const [
-                GButton(
-                  icon: Icons.home,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.leaderboard,
-                  text: 'Leaderboard',
-                ),
-                GButton(
-                  icon: Icons.person,
-                  text: 'Profile',
-                ),
-              ],
-              selectedIndex: 0,
-              onTabChange: (index) {
-                if (index == 0) return;
-                if (index == 1) {
-                  Get.to(() => const LeaderboardScreen());
-                } else if (index == 2) {
-                  Get.to(() => const RewardsScreen());
-                }
-              },
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     color: AppColors.white,
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.black.withOpacity(0.1),
+      //         blurRadius: 10,
+      //         offset: const Offset(0, -2),
+      //       ),
+      //     ],
+      //   ),
+      //   child: SafeArea(
+      //     child: Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+      //       child: GNav(
+      //         backgroundColor: AppColors.white,
+      //         color: AppColors.textSecondary,
+      //         activeColor: AppColors.primary,
+      //         tabBackgroundColor: AppColors.primary.withOpacity(0.1),
+      //         gap: 8.w,
+      //         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+      //         tabs: const [
+      //           GButton(
+      //             icon: Icons.home,
+      //             text: 'Home',
+      //           ),
+      //           GButton(
+      //             icon: Icons.leaderboard,
+      //             text: 'Leaderboard',
+      //           ),
+      //           GButton(
+      //             icon: Icons.person,
+      //             text: 'Profile',
+      //           ),
+      //         ],
+      //         selectedIndex: 0,
+      //         onTabChange: (index) {
+      //           if (index == 0) return;
+      //           if (index == 1) {
+      //             Get.to(() => const LeaderboardScreen());
+      //           } else if (index == 2) {
+      //             Get.to(() => const RewardsScreen());
+      //           }
+      //         },
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
             ProfileHeader(
               avatarOnTap: () => Get.to(() => const RewardsScreen()),
             ),
-            
+
             const Divider(
               color: AppColors.grey,
               thickness: 1.5,
@@ -102,25 +102,6 @@ class HomeScreen extends StatelessWidget {
             //* Rewards Section
             const ScrollAnimatedItem(child: RewardsSection()),
             Gap(40.h),
-
-            //* Rive Animation Testing Section
-            // SizedBox(
-            //   height: 220,
-            //   child: RiveAnimation.asset(
-            //     'assets/animations/rive/talking_bear.riv',
-            //     fit: BoxFit.contain,
-            //     onInit: (artboard) {
-            //       final first =
-            //           artboard.animations.isNotEmpty
-            //               ? artboard.animations.first.name
-            //               : null;
-            //       if (first != null) {
-            //         artboard.addController(SimpleAnimation(first));
-            //       }
-            //     },
-            //   ),
-            // ),
-            // Gap(40.h),
 
             //* Bottom footer image
             const ScrollAnimatedItem(

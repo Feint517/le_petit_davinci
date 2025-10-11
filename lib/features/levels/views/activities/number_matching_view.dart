@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/number_matching_activity.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class NumberMatchingView extends StatefulWidget {
   final NumberMatchingActivity exercise;
@@ -27,14 +26,7 @@ class _NumberMatchingViewState extends State<NumberMatchingView> {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: widget.exercise,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   widget.exercise.isIntroCompleted.value = true;
-      // },
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

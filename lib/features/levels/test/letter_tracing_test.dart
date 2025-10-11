@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/drawing_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/letter_tracing_activity.dart';
 
 /// Simple test to verify LetterTracingActivity works correctly
 class LetterTracingTest extends StatelessWidget {

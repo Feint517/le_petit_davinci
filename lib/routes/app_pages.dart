@@ -179,11 +179,11 @@ class AppPages {
     ),
     
     // Main Navigation
-    GetPage(
-      name: AppRoutes.mainNavigation,
-      page: () => const MainNavigationScreen(),
-      transition: Transition.fadeIn,
-    ),
+    // GetPage(
+    //   name: AppRoutes.mainNavigation,
+    //   page: () => const MainNavigationScreen(),
+    //   transition: Transition.fadeIn,
+    // ),
     
     // Leaderboard
     GetPage(

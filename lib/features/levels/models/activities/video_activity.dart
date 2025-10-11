@@ -10,26 +10,22 @@ class VideoActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   VideoActivity({required this.videoId}) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Super! Prêt à voir la vidéo?',
-    ]);
+    // Initialize mascot with activity-specific introduction messages
+    initializeMascot(['Super! Prêt à voir la vidéo?', 'Regardons ensemble!']);
+  }
 
-    // When the intro is complete, launch the full-screen player.
-    ever(isIntroCompleted, (bool isReady) {
-      if (isReady) {
-        Get.to(
-          () => FullScreenVideoPlayer(
-            videoId: videoId,
-            onVideoCompleted: () {
-              // When the video finishes, navigate back and mark the activity as complete.
-              Get.back();
-              markVideoAsCompleted();
-            },
-          ),
-        );
-      }
-    });
+  /// Start the video player - called by the view when ready
+  void startVideo() {
+    Get.to(
+      () => FullScreenVideoPlayer(
+        videoId: videoId,
+        onVideoCompleted: () {
+          // When the video finishes, navigate back and mark the activity as complete.
+          Get.back();
+          markVideoAsCompleted();
+        },
+      ),
+    );
   }
 
   final String videoId;
@@ -65,7 +61,7 @@ class VideoActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
   }
 }

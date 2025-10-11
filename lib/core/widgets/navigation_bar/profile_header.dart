@@ -45,7 +45,10 @@ class ProfileHeader extends GetView<UserController>
   Size get preferredSize => Size.fromHeight(
     type == ProfileHeaderType.activity
         ? 100.h
-        : math.max(DeviceUtils.getAppBarHeight(), 48.w + 20), // avatar (48) + vertical padding (10*2)
+        : math.max(
+          DeviceUtils.getAppBarHeight(),
+          48.w + 20,
+        ), // avatar (48) + vertical padding (10*2)
   );
 
   @override
@@ -56,9 +59,10 @@ class ProfileHeader extends GetView<UserController>
       bottom: false,
       child: Container(
         width: double.infinity,
-        height: type == ProfileHeaderType.activity
-            ? 100.h
-            : math.max(DeviceUtils.getAppBarHeight(), 48.w + 20),
+        height:
+            type == ProfileHeaderType.activity
+                ? 100.h
+                : math.max(DeviceUtils.getAppBarHeight(), 48.w + 20),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: switch (type) {
           ProfileHeaderType.normal => Row(
@@ -96,16 +100,30 @@ class ProfileHeader extends GetView<UserController>
                   Gap(10.w),
 
                   //* User Name and Class
-                  Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Good morning,', style:TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: AppColors.black),textAlign: TextAlign.start,),
+                      Text(
+                        'Good morning,',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.black,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
                       Obx(
                         () =>
                             ((controller.isLoading.value)
-                                ? const CustomShimmerEffect(width: 160, height: 25)
+                                ? const CustomShimmerEffect(
+                                  width: 160,
+                                  height: 25,
+                                )
                                 : Text(
                                   '${StringUtils.capitalize(controller.user.value!.name)}  ',
-                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
                                 )),
                       ),
                     ],
@@ -220,7 +238,6 @@ class ProfileHeader extends GetView<UserController>
               ),
             ],
           ),
-
           ProfileHeaderType.activity => const LevelProgressBar(),
         },
       ),

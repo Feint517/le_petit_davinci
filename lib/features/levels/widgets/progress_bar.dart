@@ -22,88 +22,49 @@ class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
       //? The progress is the number of completed steps divided by the total.
       final double progress = totalSteps > 0 ? currentStep / totalSteps : 0;
 
-      return SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg, vertical: AppSizes.md),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
+      return Row(
+        children: [
+          // Cancel button
+          GestureDetector(
+            onTap: () => _showExitConfirmation(context, controller),
+            child: const Icon(Icons.close, color: Colors.black, size: 20),
           ),
-          child: Row(
-            children: [
-              // Cancel button
-              _buildCancelButton(context, controller),
-              const Gap(AppSizes.md),
-              // Progress section
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+          const Gap(AppSizes.md),
+          // Progress section
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Progress text
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Progress text
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Progress',
-                          style: Get.textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          '$currentStep / $totalSteps',
-                          style: Get.textTheme.bodySmall?.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Progress',
+                      style: Get.textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    const Gap(AppSizes.xs),
-                    // Enhanced progress bar
-                    _buildEnhancedProgressBar(progress),
+                    Text(
+                      '$currentStep / $totalSteps',
+                      style: Get.textTheme.bodySmall?.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                const Gap(AppSizes.xs),
+                // Enhanced progress bar
+                _buildEnhancedProgressBar(progress),
+              ],
+            ),
           ),
-        ),
+        ],
       );
     });
-  }
-
-  Widget _buildCancelButton(BuildContext context, LevelController controller) {
-    return GestureDetector(
-      onTap: () => _showExitConfirmation(context, controller),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 5.0,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: AppColors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Icon(
-              Icons.close,
-              color: Colors.black,
-              size: 10,
-            ),
-            Text('Cancel', style: TextStyle(color: Colors.black)),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _buildEnhancedProgressBar(double progress) {
@@ -180,15 +141,14 @@ class LevelProgressBar extends StatelessWidget implements PreferredSizeWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => ExitLevelModal(
-        onCancel: () => Navigator.of(context).pop(),
-        onExit: () {
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-        },
-      ),
+      builder:
+          (context) => ExitLevelModal(
+            onCancel: () => Navigator.of(context).pop(),
+            onExit: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+          ),
     );
   }
-
- 
 }

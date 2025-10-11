@@ -6,8 +6,9 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class MemoryCardActivityView extends StatelessWidget {
   const MemoryCardActivityView({super.key, required this.activity});
 
@@ -15,15 +16,7 @@ class MemoryCardActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Game',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      //   activity.startGame();
-      // },
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

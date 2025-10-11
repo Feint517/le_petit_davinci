@@ -5,7 +5,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/count_by_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/numpad.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class CountByView extends StatelessWidget {
   const CountByView({super.key, required this.activity});
@@ -14,14 +13,7 @@ class CountByView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

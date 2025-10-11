@@ -119,7 +119,6 @@ class CountByActivity extends Activity
     userInputs.fillRange(0, userInputs.length, '');
     // Also reset the active index to the beginning for a clean state.
     activeInputIndex.value = 0;
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

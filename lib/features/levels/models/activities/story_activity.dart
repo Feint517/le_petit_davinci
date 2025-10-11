@@ -121,7 +121,6 @@ class StoryActivity extends Activity
       }
     }
     _setupListenerForCurrentElement();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

@@ -71,7 +71,6 @@ class FollowPatternActivity extends Activity
   @override
   void reset() {
     selectedIndex.value = null;
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

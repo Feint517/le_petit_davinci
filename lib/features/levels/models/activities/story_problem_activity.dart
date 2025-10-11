@@ -30,10 +30,11 @@ class StoryProblemActivity extends Activity
     required this.correctTotalValue,
     this.unitName = '', // Default to empty string
   }) {
-    // Initialize mascot with standardized approach
+    // Initialize mascot with activity-specific introduction messages
     initializeMascot([
       'Let\'s solve this story problem!',
       'Drag the items to find the answer.',
+      'Read carefully and think!',
     ]);
   }
 
@@ -81,7 +82,6 @@ class StoryProblemActivity extends Activity
   @override
   void reset() {
     droppedItems.clear();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---
@@ -102,7 +102,19 @@ class StoryProblemActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

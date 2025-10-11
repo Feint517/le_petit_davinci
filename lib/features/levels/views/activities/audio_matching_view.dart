@@ -6,8 +6,9 @@ import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/audio_matching_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class AudioMatchingActivityView extends StatefulWidget {
   const AudioMatchingActivityView({super.key, required this.activity});
 
@@ -89,14 +90,7 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: widget.activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   widget.activity.isIntroCompleted.value = true;
-      // },
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

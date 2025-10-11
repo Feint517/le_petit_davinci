@@ -7,8 +7,9 @@ import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class ReorderWordsView extends StatefulWidget {
   const ReorderWordsView({super.key, required this.activity});
 
@@ -19,17 +20,9 @@ class ReorderWordsView extends StatefulWidget {
 }
 
 class _ReorderWordsViewState extends State<ReorderWordsView> {
-
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: widget.activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   widget.activity.isIntroCompleted.value = true;
-      // },
-    );
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

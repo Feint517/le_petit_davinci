@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/drawing_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/letter_tracing_activity.dart';
 
 /// Sample usage of the LetterTracingActivity
 /// This demonstrates how to create letter tracing activities for different letters

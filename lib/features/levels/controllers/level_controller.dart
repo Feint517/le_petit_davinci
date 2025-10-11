@@ -9,6 +9,7 @@ import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/controllers/victory_controller.dart';
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 import 'package:le_petit_davinci/features/levels/widgets/fullscreen_mascot_feedback.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
@@ -142,11 +143,23 @@ class LevelController extends GetxController {
     if (result.isCorrect) {
       _audioPlayer.play();
       _audioPlayer.seek(Duration.zero);
-      
+
+      // Show correct feedback using mixin (if activity has it)
+      if (currentActivity is MascotIntroductionMixin) {
+        (currentActivity as MascotIntroductionMixin).showSuccessFeedback();
+      }
+
       // Handle next step directly for correct answers
       _handleNextStep(true);
     } else {
-      // Show full-screen feedback for incorrect answers
+      // Show incorrect feedback using mixin (if activity has it)
+      if (currentActivity is MascotIntroductionMixin) {
+        (currentActivity as MascotIntroductionMixin)
+            .showEncouragementFeedback();
+      }
+
+      // Still show full-screen feedback for incorrect answers (optional)
+      // You can remove this if you want only mascot feedback
       Get.to(
         () => FullScreenMascotFeedback(
           isCorrect: result.isCorrect,
@@ -157,7 +170,6 @@ class LevelController extends GetxController {
       );
     }
   }
-
 
   void _handleNextStep(bool isCorrect) {
     // Close the full-screen feedback first
@@ -225,11 +237,11 @@ class LevelController extends GetxController {
     await ProgressService.instance.completeLevel(language, levelNumber);
 
     Get.off(
-        () => const VictoryScreen(starsCount: 3),
-        binding: BindingsBuilder(() {
-          Get.lazyPut(() => VictoryController(subject: subject));
-        }),
-      );
+      () => const VictoryScreen(starsCount: 3),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => VictoryController(subject: subject));
+      }),
+    );
 
     // Determine completion screen based on level content
     // Show reward screen if it's lesson-only or mixed, otherwise show victory screen

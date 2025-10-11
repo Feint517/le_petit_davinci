@@ -24,10 +24,11 @@ class ShapePatternActivity extends Activity
     required this.instruction,
     required this.patternType,
   }) {
-    // Initialize mascot with standardized approach
+    // Initialize mascot with activity-specific introduction messages
     initializeMascot([
       'Let\'s find the pattern!',
       'Look at the shapes and find what comes next.',
+      'Use your pattern recognition skills!',
     ]);
   }
 
@@ -54,7 +55,19 @@ class ShapePatternActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

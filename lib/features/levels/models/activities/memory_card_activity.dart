@@ -16,11 +16,12 @@ class MemoryCardActivity extends Activity
     this.difficulty = MemoryDifficulty.medium,
     this.timeLimit, // Optional time limit in seconds
   }) {
-    // Initialize mascot with standardized approach
+    // Initialize mascot with activity-specific introduction messages
     initializeMascot([
       'Let\'s play a memory game!',
       instruction,
       'Find the matching pairs!',
+      'Use your memory to win!',
     ]);
 
     // Initialize game state
@@ -234,7 +235,7 @@ class MemoryCardActivity extends Activity
   @override
   void dispose() {
     _gameTimer?.cancel();
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     // Reset the activity state when disposing (when user moves to next screen)
     _resetActivityState();
     super.dispose();
@@ -242,7 +243,6 @@ class MemoryCardActivity extends Activity
 
   /// Reset the activity state to initial values
   void _resetActivityState() {
-    resetMascotIntroduction(); // Use mixin method
     isGameStarted.value = false;
     isCompleted.value = false;
     _initializeGame();
@@ -309,5 +309,17 @@ class MemoryCardActivity extends Activity
         ],
       ),
     );
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when game is completed
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when match is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

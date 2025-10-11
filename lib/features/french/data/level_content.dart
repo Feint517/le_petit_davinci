@@ -1,7 +1,7 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/audio_matching_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/drawing_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/letter_tracing_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/listen_and_choose_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
@@ -13,16 +13,12 @@ import 'package:le_petit_davinci/features/levels/models/activities/follow_patter
 import 'package:le_petit_davinci/features/levels/models/activities/number_matching_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/shape_pattern_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/arrange_numbers_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
 import 'package:le_petit_davinci/features/levels/models/fill_the_blank_option_model.dart';
 import 'package:le_petit_davinci/features/levels/models/selectable_option_model.dart';
 import 'package:le_petit_davinci/features/levels/models/pattern_models.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
 import 'package:le_petit_davinci/features/levels/models/number_matching_models.dart';
-import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
-import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 
 final Map<int, LevelContent> unifiedFrenchLevels = {
   // ========== Group 1: A, B, C, D ==========
@@ -162,24 +158,24 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
         numbers: [3, 1, 4, 2],
         isAscending: true,
       ),
-      StoryProblemActivity(
-        instruction: 'Résous ce problème !',
-        draggableOptions: [
-          DraggableItem(id: 'apple1', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-          DraggableItem(id: 'apple2', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-        ],
-        correctTotalValue: 2,
-      ),
-      StoryActivity(
-        title: 'Histoire du petit chat',
-        elements: [
-          DialogueLine(
-            characterName: 'Narrateur',
-            avatarAsset: ImageAssets.cat,
-            text: 'Il était une fois un petit chat qui aimait jouer dans le jardin.',
-          ),
-        ],
-      ),
+      // StoryProblemActivity(
+      //   instruction: 'Résous ce problème !',
+      //   draggableOptions: [
+      //     DraggableItem(id: 'apple1', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
+      //     DraggableItem(id: 'apple2', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
+      //   ],
+      //   correctTotalValue: 2,
+      // ),
+      // StoryActivity(
+      //   title: 'Histoire du petit chat',
+      //   elements: [
+      //     DialogueLine(
+      //       characterName: 'Narrateur',
+      //       avatarAsset: ImageAssets.cat,
+      //       text: 'Il était une fois un petit chat qui aimait jouer dans le jardin.',
+      //     ),
+      //   ],
+      // ),
     ],
   ),
   2: LevelSet(

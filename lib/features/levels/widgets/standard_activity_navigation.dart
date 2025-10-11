@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 import 'package:le_petit_davinci/mixin/audible_mixin.dart';
@@ -51,36 +49,29 @@ class StandardActivityNavigation extends GetView<LevelController> {
     required bool requiresValidation,
     ActivityButtonConfig? buttonConfig,
   }) {
-    return Row(
-      children: [
-        // Audio button (if current activity is audible and enabled)
-        if (currentActivity is Audible &&
-            (buttonConfig?.showAudioButton ?? true)) ...[
-          IconButton(
-            onPressed: controller.playCurrentAudio,
-            icon: const Icon(
-              Icons.volume_up,
-              color: AppColors.primary,
-              size: 28,
-            ),
-          ),
-          const SizedBox(width: AppSizes.sm),
-        ],
-
-        // Main action button
-        Expanded(
-          child: _buildMainButton(
-            currentActivity: currentActivity,
-            isAnswerReady: isAnswerReady,
-            requiresValidation: requiresValidation,
-            buttonConfig: buttonConfig,
-          ),
-        ),
-      ],
+    return buildCircularNavigationButton(
+      currentActivity: currentActivity,
+      isAnswerReady: isAnswerReady,
+      requiresValidation: requiresValidation,
+      buttonConfig: buttonConfig,
     );
   }
 
-  Widget _buildMainButton({
+  /// Builds the audio button widget (if applicable)
+  Widget? buildAudioButton({
+    required dynamic currentActivity,
+    ActivityButtonConfig? buttonConfig,
+  }) {
+    if (currentActivity is Audible && (buttonConfig?.showAudioButton ?? true)) {
+      return IconButton(
+        onPressed: controller.playCurrentAudio,
+        icon: const Icon(Icons.volume_up, color: AppColors.primary, size: 28),
+      );
+    }
+    return null;
+  }
+
+  Widget buildCircularNavigationButton({
     required dynamic currentActivity,
     required bool isAnswerReady,
     required bool requiresValidation,
@@ -88,15 +79,16 @@ class StandardActivityNavigation extends GetView<LevelController> {
   }) {
     if (requiresValidation) {
       // Check button for validation-required activities
-      return CustomButton(
-        label: buttonConfig?.checkButtonText ?? 'Check',
-        disabled: !isAnswerReady,
+      return _buildCircularButton(
+        icon: Icons.check,
         onPressed: isAnswerReady ? controller.checkAnswer : null,
+        enabled: isAnswerReady,
+        tooltip: buttonConfig?.checkButtonText ?? 'Check',
       );
     } else {
       // Continue button for auto-complete activities
-      return CustomButton(
-        label: buttonConfig?.continueButtonText ?? 'Continue',
+      return _buildCircularButton(
+        icon: Icons.arrow_forward,
         onPressed: () {
           // If activity has custom navigation interface, notify it
           if (currentActivity is ActivityNavigationInterface) {
@@ -104,7 +96,55 @@ class StandardActivityNavigation extends GetView<LevelController> {
           }
           controller.nextActivity();
         },
+        enabled: true,
+        tooltip: buttonConfig?.continueButtonText ?? 'Continue',
       );
     }
+  }
+
+  Widget _buildCircularButton({
+    required IconData icon,
+    required VoidCallback? onPressed,
+    required bool enabled,
+    required String tooltip,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: Container(
+        width: 56,
+        height: 56,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color:
+              enabled
+                  ? AppColors.primary
+                  : AppColors.primary.withValues(alpha: 0.3),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.2),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(28),
+            onTap: enabled ? onPressed : null,
+            child: Center(
+              child: Icon(
+                icon,
+                color:
+                    enabled
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.6),
+                size: 24,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

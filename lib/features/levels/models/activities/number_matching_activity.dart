@@ -15,10 +15,11 @@ class NumberMatchingActivity extends Activity
   bool get requiresValidation => true;
 
   NumberMatchingActivity({required this.items, required this.instruction}) {
-    // Initialize mascot with standardized approach
+    // Initialize mascot with activity-specific introduction messages
     initializeMascot([
       'Let\'s match numbers!',
       'Find the matching pairs.',
+      'Look for the same numbers!',
     ]);
   }
 
@@ -45,7 +46,19 @@ class NumberMatchingActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

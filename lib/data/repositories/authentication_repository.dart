@@ -43,7 +43,8 @@ class AuthenticationRepository extends GetxController {
     if (isFirstTime) {
       Get.offAll(() => const QuestionsIntroScreen());
     } else if (isLoggedIn) {
-      Get.offAll(() => const MainNavigationScreen());
+      // Get.offAll(() => const MainNavigationScreen());
+      Get.offAll(() => const HomeScreen());
     } else {
       Get.offAll(() => const LoginScreen());
     }

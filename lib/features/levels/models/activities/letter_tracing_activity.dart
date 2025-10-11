@@ -7,10 +7,15 @@ import 'package:le_petit_davinci/features/levels/models/activity_navigation_inte
 class LetterTracingActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
-  LetterTracingActivity({
-    required String letter,
-    this.prompt,
-  }) : letter = letter.toUpperCase().isNotEmpty ? letter.toUpperCase() : 'A';
+  LetterTracingActivity({required String letter, this.prompt})
+    : letter = letter.toUpperCase().isNotEmpty ? letter.toUpperCase() : 'A' {
+    // Initialize mascot with activity-specific introduction messages
+    initializeMascot([
+      'Let\'s trace the letter $letter!',
+      'Follow the lines carefully.',
+      'Take your time and do your best!',
+    ]);
+  }
 
   final String letter; // The letter to trace (A-Z)
   final String? prompt;
@@ -45,8 +50,20 @@ class LetterTracingActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when tracing is completed
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when tracing needs improvement
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }
 
@@ -57,7 +74,7 @@ class DrawingActivity extends LetterTracingActivity {
     String? templateImagePath,
     List<String>? suggestedColors,
   }) : super(
-          letter: 'A', // Default letter for backward compatibility
-          prompt: prompt,
-        );
+         letter: 'A', // Default letter for backward compatibility
+         prompt: prompt,
+       );
 }
