@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 import 'package:le_petit_davinci/features/levels/widgets/standard_activity_navigation.dart';
-import 'package:le_petit_davinci/features/levels/widgets/persistent_mascot_widget.dart';
 
 class LevelContentView extends GetView<LevelController> {
   const LevelContentView({super.key});
@@ -50,19 +48,11 @@ class LevelContentView extends GetView<LevelController> {
           PageView.builder(
             controller: controller.pageController,
             itemCount: controller.totalItems,
-            physics:
-                const NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final activity = controller.levelSet.activities[index];
               return activity.build(context); // Direct activity rendering
             },
-          ),
-
-          // Persistent mascot widget
-          Positioned(
-            left: -15,
-            bottom: -10,
-            child: const PersistentMascotWidget(),
           ),
 
           // Floating navigation buttons
