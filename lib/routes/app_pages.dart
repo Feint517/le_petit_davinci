@@ -177,14 +177,14 @@ class AppPages {
       binding: StudioBinding(),
       transition: Transition.rightToLeft,
     ),
-    
+
     // Main Navigation
     // GetPage(
     //   name: AppRoutes.mainNavigation,
     //   page: () => const MainNavigationScreen(),
     //   transition: Transition.fadeIn,
     // ),
-    
+
     // Leaderboard
     GetPage(
       name: AppRoutes.leaderboard,

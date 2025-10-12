@@ -45,7 +45,7 @@ class _ReorderWordsViewState extends State<ReorderWordsView> {
 
   Widget _buildMainContent() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Audio section with instruction text
@@ -53,11 +53,7 @@ class _ReorderWordsViewState extends State<ReorderWordsView> {
           children: [
             Text(
               'Listen to the audio and then reorder the words',
-              style: Get.textTheme.titleMedium?.copyWith(
-                color: AppColors.black,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const Gap(AppSizes.lg),
             // Audio button

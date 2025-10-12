@@ -72,7 +72,8 @@ class _EnhancedLoginScreenState extends State<EnhancedLoginScreen> {
                                 ?.copyWith(color: AppColors.black),
                           ),
                           TextButton(
-                            onPressed: () => Get.to(() => const CreateProfileScreen()),
+                            onPressed:
+                                () => Get.to(() => const CreateProfileScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
                               style: Theme.of(context).textTheme.bodyMedium!
@@ -90,20 +91,25 @@ class _EnhancedLoginScreenState extends State<EnhancedLoginScreen> {
                           Expanded(
                             child: CustomButton(
                               label: 'Email Login',
-                              onPressed: () => setState(() => showAuth0Options = false),
-                              variant: showAuth0Options 
-                                  ? ButtonVariant.ghost 
-                                  : ButtonVariant.primary,
+                              onPressed:
+                                  () =>
+                                      setState(() => showAuth0Options = false),
+                              variant:
+                                  showAuth0Options
+                                      ? ButtonVariant.ghost
+                                      : ButtonVariant.primary,
                             ),
                           ),
                           const Gap(8),
                           Expanded(
                             child: CustomButton(
                               label: 'Social Login',
-                              onPressed: () => setState(() => showAuth0Options = true),
-                              variant: showAuth0Options 
-                                  ? ButtonVariant.primary 
-                                  : ButtonVariant.ghost,
+                              onPressed:
+                                  () => setState(() => showAuth0Options = true),
+                              variant:
+                                  showAuth0Options
+                                      ? ButtonVariant.primary
+                                      : ButtonVariant.ghost,
                             ),
                           ),
                         ],
@@ -148,9 +154,9 @@ class _EnhancedLoginScreenState extends State<EnhancedLoginScreen> {
                               textColor: Colors.black87,
                               isLoading: false,
                             ),
-                            
+
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Facebook Login
                             SocialLoginButton(
                               onTap: () {},
@@ -160,9 +166,9 @@ class _EnhancedLoginScreenState extends State<EnhancedLoginScreen> {
                               textColor: Colors.white,
                               isLoading: false,
                             ),
-                            
+
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Microsoft Login
                             SocialLoginButton(
                               onTap: () {},
@@ -172,28 +178,40 @@ class _EnhancedLoginScreenState extends State<EnhancedLoginScreen> {
                               textColor: Colors.white,
                               isLoading: false,
                             ),
-                            
+
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Divider
                             Row(
                               children: [
-                                const Expanded(child: Divider(color: AppColors.textSecondary)),
+                                const Expanded(
+                                  child: Divider(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
                                   child: Text(
                                     'OR',
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall?.copyWith(
                                       color: AppColors.textSecondary,
                                     ),
                                   ),
                                 ),
-                                const Expanded(child: Divider(color: AppColors.textSecondary)),
+                                const Expanded(
+                                  child: Divider(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                               ],
                             ),
-                            
+
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Universal Login
                             CustomButton(
                               label: 'Login with Auth0',

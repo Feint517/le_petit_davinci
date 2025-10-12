@@ -27,35 +27,54 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Testons toutes les activités disponibles !',
     lessonId: 'test_all_activities_fr',
     activities: [
-      // Lesson Activities (auto-complete)
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Arbre.',
-        options: [
-          FillTheBlankOption(optionText: 'A'),
-          FillTheBlankOption(optionText: 'B'),
-          FillTheBlankOption(optionText: 'C'),
+      ListenAndChooseActivity(
+        imageAssets: [
+          ImageAssets.apple,
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
         ],
         correctAnswer: 0,
+        label: 'Pomme',
       ),
-      MultipleChoiceActivity(
-        instruction: 'Quelle lettre vient après A ?',
-        options: [
-          SelectableOption(label: 'B', imagePath: ImageAssets.apple),
-          SelectableOption(label: 'C', imagePath: ImageAssets.cat),
-          SelectableOption(label: 'D', imagePath: ImageAssets.dog),
-        ],
-        correctIndices: [0],
+      ReorderWordsActivity(
+        words: ['est', 'un', 'Ceci', 'chat'],
+        correctOrder: [2, 0, 1, 3],
       ),
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
-          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
-          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
-          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
-        ],
+      SolveEquationActivity(
+        equation: '2 + 3 = ?',
+        options: [3, 4, 5, 6],
+        correctAnswer: 5,
       ),
-      LetterTracingActivity(letter: 'A', prompt: 'Trace la lettre "A" !'),
+      CountByActivity(
+        instruction: 'Compte par 2 !',
+        initialSequence: [2, 4, 6],
+        numberOfInputs: 2,
+        correctAnswers: [8, 10],
+      ),
+      FollowPatternActivity(
+        instruction: 'Suit le motif !',
+        examples: ['2, 4, 6', '1, 3, 5'],
+        question: 'Quel est le prochain nombre ?',
+        options: [7, 8, 9, 10],
+        correctAnswerIndex: 1,
+      ),
+
+      // NumberMatchingActivity(
+      //   instruction: 'Associe les nombres !',
+      //   items: [
+      //     NumberMatchingItem(
+      //       number: '1',
+      //       imageAsset: ImageAssets.apple,
+      //       quantity: 1,
+      //     ),
+      //     NumberMatchingItem(
+      //       number: '2',
+      //       imageAsset: ImageAssets.cat,
+      //       quantity: 2,
+      //     ),
+      //   ],
+      // ),
       MemoryCardActivity(
         instruction: 'Trouve les paires !',
         cardPairs: [
@@ -95,57 +114,38 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ),
         ],
       ),
-      
-      
+      LetterTracingActivity(letter: 'A', prompt: 'Trace la lettre "A" !'),
 
-      // Exercise Activities (require validation)
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.apple,
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
+      // Lesson Activities (auto-complete)
+      FillTheBlankActivity(
+        questionSuffix: ' comme dans Arbre.',
+        options: [
+          FillTheBlankOption(optionText: 'A'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
         ],
         correctAnswer: 0,
-        label: 'Pomme',
       ),
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'chat'],
-        correctOrder: [2, 0, 1, 3],
+      MultipleChoiceActivity(
+        instruction: 'Quelle lettre vient après A ?',
+        options: [
+          SelectableOption(label: 'B', imagePath: ImageAssets.apple),
+          SelectableOption(label: 'C', imagePath: ImageAssets.cat),
+          SelectableOption(label: 'D', imagePath: ImageAssets.dog),
+        ],
+        correctIndices: [0],
       ),
-      SolveEquationActivity(
-        equation: '2 + 3 = ?',
-        options: [3, 4, 5, 6],
-        correctAnswer: 5,
-      ),
-      CountByActivity(
-        instruction: 'Compte par 2 !',
-        initialSequence: [2, 4, 6],
-        numberOfInputs: 2,
-        correctAnswers: [8, 10],
-      ),
-      FollowPatternActivity(
-        instruction: 'Suit le motif !',
-        examples: ['2, 4, 6', '1, 3, 5'],
-        question: 'Quel est le prochain nombre ?',
-        options: [7, 8, 9, 10],
-        correctAnswerIndex: 1,
-      ),
-      NumberMatchingActivity(
-        instruction: 'Associe les nombres !',
-        items: [
-          NumberMatchingItem(
-            number: '1',
-            imageAsset: ImageAssets.apple,
-            quantity: 1,
-          ),
-          NumberMatchingItem(
-            number: '2',
-            imageAsset: ImageAssets.cat,
-            quantity: 2,
-          ),
+      AudioMatchingActivity(
+        prompt: 'Associe le son à la lettre !',
+        pairs: [
+          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
+          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
+          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
+          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
         ],
       ),
+
+      // Exercise Activities (require validation)
       ShapePatternActivity(
         instruction: 'Trouve le motif des formes !',
         patternImages: [ImageAssets.apple, ImageAssets.cat, ImageAssets.apple],
@@ -158,24 +158,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
         numbers: [3, 1, 4, 2],
         isAscending: true,
       ),
-      // StoryProblemActivity(
-      //   instruction: 'Résous ce problème !',
-      //   draggableOptions: [
-      //     DraggableItem(id: 'apple1', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-      //     DraggableItem(id: 'apple2', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-      //   ],
-      //   correctTotalValue: 2,
-      // ),
-      // StoryActivity(
-      //   title: 'Histoire du petit chat',
-      //   elements: [
-      //     DialogueLine(
-      //       characterName: 'Narrateur',
-      //       avatarAsset: ImageAssets.cat,
-      //       text: 'Il était une fois un petit chat qui aimait jouer dans le jardin.',
-      //     ),
-      //   ],
-      // ),
     ],
   ),
   2: LevelSet(

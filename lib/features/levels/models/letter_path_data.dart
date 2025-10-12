@@ -81,13 +81,15 @@ class LetterPathData {
     for (int i = 0; i < userStroke.length - 1; i++) {
       final userDirection = userStroke[i + 1] - userStroke[i];
       final closestPoint = getClosestPointOnPath(userStroke[i]);
-      
+
       if (closestPoint != null) {
         // Find next point on path
         final nextPathPoint = _getNextPointOnPath(closestPoint);
         if (nextPathPoint != null) {
           final pathDirection = nextPathPoint - closestPoint;
-          final dotProduct = userDirection.dx * pathDirection.dx + userDirection.dy * pathDirection.dy;
+          final dotProduct =
+              userDirection.dx * pathDirection.dx +
+              userDirection.dy * pathDirection.dy;
           if (dotProduct < 0) {
             return false; // Wrong direction
           }
@@ -102,7 +104,8 @@ class LetterPathData {
     for (final metric in pathMetrics) {
       for (double d = 0; d < metric.length - 2; d += 2) {
         final tangent = metric.getTangentForOffset(d);
-        if (tangent != null && (tangent.position - point).distance < tolerance) {
+        if (tangent != null &&
+            (tangent.position - point).distance < tolerance) {
           final nextTangent = metric.getTangentForOffset(d + 2);
           return nextTangent?.position;
         }
@@ -127,11 +130,7 @@ class PathSegment {
   });
 }
 
-enum PathSegmentType {
-  line,
-  curve,
-  arc,
-}
+enum PathSegmentType { line, curve, arc }
 
 /// Factory class for creating letter path data
 class LetterPathFactory {
@@ -207,23 +206,33 @@ class LetterPathFactory {
     final leftStart = Offset(center.dx - scale * 0.3, center.dy + scale * 0.3);
     final topPoint = Offset(center.dx, center.dy - scale * 0.3);
     final rightEnd = Offset(center.dx + scale * 0.3, center.dy + scale * 0.3);
-    
+
     path.moveTo(leftStart.dx, leftStart.dy);
     path.lineTo(topPoint.dx, topPoint.dy);
     path.lineTo(rightEnd.dx, rightEnd.dy);
-    
+
     // Crossbar
     final crossbarLeft = Offset(center.dx - scale * 0.2, center.dy);
     final crossbarRight = Offset(center.dx + scale * 0.2, center.dy);
     path.moveTo(crossbarLeft.dx, crossbarLeft.dy);
     path.lineTo(crossbarRight.dx, crossbarRight.dy);
 
-    keyPoints.addAll([leftStart, topPoint, rightEnd, crossbarLeft, crossbarRight]);
-    
+    keyPoints.addAll([
+      leftStart,
+      topPoint,
+      rightEnd,
+      crossbarLeft,
+      crossbarRight,
+    ]);
+
     segments.addAll([
       PathSegment(start: leftStart, end: topPoint, type: PathSegmentType.line),
       PathSegment(start: topPoint, end: rightEnd, type: PathSegmentType.line),
-      PathSegment(start: crossbarLeft, end: crossbarRight, type: PathSegmentType.line),
+      PathSegment(
+        start: crossbarLeft,
+        end: crossbarRight,
+        type: PathSegmentType.line,
+      ),
     ]);
 
     return LetterPathData(
@@ -242,26 +251,30 @@ class LetterPathFactory {
     // Vertical line
     final topLeft = Offset(center.dx - scale * 0.3, center.dy - scale * 0.3);
     final bottomLeft = Offset(center.dx - scale * 0.3, center.dy + scale * 0.3);
-    
+
     path.moveTo(topLeft.dx, topLeft.dy);
     path.lineTo(bottomLeft.dx, bottomLeft.dy);
-    
+
     // Top curve
     path.moveTo(topLeft.dx, topLeft.dy);
     path.quadraticBezierTo(
-      center.dx + scale * 0.2, center.dy - scale * 0.3,
-      center.dx + scale * 0.2, center.dy,
+      center.dx + scale * 0.2,
+      center.dy - scale * 0.3,
+      center.dx + scale * 0.2,
+      center.dy,
     );
-    
+
     // Bottom curve
     path.moveTo(center.dx - scale * 0.3, center.dy);
     path.quadraticBezierTo(
-      center.dx + scale * 0.2, center.dy,
-      center.dx + scale * 0.2, center.dy + scale * 0.3,
+      center.dx + scale * 0.2,
+      center.dy,
+      center.dx + scale * 0.2,
+      center.dy + scale * 0.3,
     );
 
     keyPoints.addAll([topLeft, bottomLeft, center]);
-    
+
     segments.addAll([
       PathSegment(start: topLeft, end: bottomLeft, type: PathSegmentType.line),
       PathSegment(start: topLeft, end: center, type: PathSegmentType.curve),
@@ -285,28 +298,41 @@ class LetterPathFactory {
     final rightTop = Offset(center.dx + scale * 0.2, center.dy - scale * 0.2);
     final leftTop = Offset(center.dx - scale * 0.2, center.dy - scale * 0.2);
     final leftBottom = Offset(center.dx - scale * 0.2, center.dy + scale * 0.2);
-    final rightBottom = Offset(center.dx + scale * 0.2, center.dy + scale * 0.2);
-    
+    final rightBottom = Offset(
+      center.dx + scale * 0.2,
+      center.dy + scale * 0.2,
+    );
+
     path.moveTo(rightTop.dx, rightTop.dy);
     path.quadraticBezierTo(
-      center.dx - scale * 0.3, center.dy - scale * 0.2,
-      leftTop.dx, leftTop.dy,
+      center.dx - scale * 0.3,
+      center.dy - scale * 0.2,
+      leftTop.dx,
+      leftTop.dy,
     );
     path.quadraticBezierTo(
-      center.dx - scale * 0.3, center.dy,
-      leftBottom.dx, leftBottom.dy,
+      center.dx - scale * 0.3,
+      center.dy,
+      leftBottom.dx,
+      leftBottom.dy,
     );
     path.quadraticBezierTo(
-      center.dx - scale * 0.3, center.dy + scale * 0.2,
-      rightBottom.dx, rightBottom.dy,
+      center.dx - scale * 0.3,
+      center.dy + scale * 0.2,
+      rightBottom.dx,
+      rightBottom.dy,
     );
 
     keyPoints.addAll([rightTop, leftTop, leftBottom, rightBottom]);
-    
+
     segments.addAll([
       PathSegment(start: rightTop, end: leftTop, type: PathSegmentType.curve),
       PathSegment(start: leftTop, end: leftBottom, type: PathSegmentType.curve),
-      PathSegment(start: leftBottom, end: rightBottom, type: PathSegmentType.curve),
+      PathSegment(
+        start: leftBottom,
+        end: rightBottom,
+        type: PathSegmentType.curve,
+      ),
     ]);
 
     return LetterPathData(

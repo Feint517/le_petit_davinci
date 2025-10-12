@@ -25,10 +25,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
         letter: 'B',
         prompt: 'Great! Now let\'s trace the letter "B"!',
       ),
-      LetterTracingActivity(
-        letter: 'C',
-        prompt: 'Awesome! Here comes "C"!',
-      ),
+      LetterTracingActivity(letter: 'C', prompt: 'Awesome! Here comes "C"!'),
       LetterTracingActivity(
         letter: 'D',
         prompt: 'You\'re doing great! Let\'s trace "D"!',
@@ -162,22 +159,10 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     introduction: 'Time to learn E, F, G, and H!',
     activities: [
       // Letter tracing activities (auto-complete)
-      LetterTracingActivity(
-        letter: 'E',
-        prompt: 'Let\'s start with "E"!',
-      ),
-      LetterTracingActivity(
-        letter: 'F',
-        prompt: 'Next up is "F"!',
-      ),
-      LetterTracingActivity(
-        letter: 'G',
-        prompt: 'Now for "G"!',
-      ),
-      LetterTracingActivity(
-        letter: 'H',
-        prompt: 'And finally, "H"!',
-      ),
+      LetterTracingActivity(letter: 'E', prompt: 'Let\'s start with "E"!'),
+      LetterTracingActivity(letter: 'F', prompt: 'Next up is "F"!'),
+      LetterTracingActivity(letter: 'G', prompt: 'Now for "G"!'),
+      LetterTracingActivity(letter: 'H', prompt: 'And finally, "H"!'),
 
       // Audio matching (auto-complete)
       AudioMatchingActivity(
@@ -250,22 +235,10 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
     introduction: 'Let\'s learn I, J, K, and L!',
     activities: [
       // Letter tracing activities (auto-complete)
-      LetterTracingActivity(
-        letter: 'I',
-        prompt: 'Let\'s trace "I"!',
-      ),
-      LetterTracingActivity(
-        letter: 'J',
-        prompt: 'Next is "J"!',
-      ),
-      LetterTracingActivity(
-        letter: 'K',
-        prompt: 'Here comes "K"!',
-      ),
-      LetterTracingActivity(
-        letter: 'L',
-        prompt: 'And now "L"!',
-      ),
+      LetterTracingActivity(letter: 'I', prompt: 'Let\'s trace "I"!'),
+      LetterTracingActivity(letter: 'J', prompt: 'Next is "J"!'),
+      LetterTracingActivity(letter: 'K', prompt: 'Here comes "K"!'),
+      LetterTracingActivity(letter: 'L', prompt: 'And now "L"!'),
 
       // Audio matching (auto-complete)
       AudioMatchingActivity(
@@ -398,10 +371,7 @@ final Map<int, LevelContent> unifiedEnglishLevels = {
       VideoActivity(videoId: 'CA6Mofzh7jo'),
 
       // Letter tracing activity (auto-complete)
-      LetterTracingActivity(
-        letter: 'A',
-        prompt: 'Let\'s trace something fun!',
-      ),
+      LetterTracingActivity(letter: 'A', prompt: 'Let\'s trace something fun!'),
 
       // Fill in the blank exercise (requires validation)
       FillTheBlankActivity(

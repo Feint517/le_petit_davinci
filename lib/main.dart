@@ -31,7 +31,6 @@ void main() async {
   final storageService = Get.put(StorageService());
   await storageService.init();
 
-
   Get.put(AuthenticationRepository());
 
   runApp(const App());

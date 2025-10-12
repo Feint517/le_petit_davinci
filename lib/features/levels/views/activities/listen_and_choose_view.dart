@@ -37,12 +37,18 @@ class ListenAndChooseView extends StatelessWidget {
       });
     }
 
-    return _buildMainContent();
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          'Listen and choose the correct answer',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Gap(AppSizes.spaceBtwSections),
         Stack(
           alignment: Alignment.center,
           children: [

@@ -31,19 +31,21 @@ class FollowPatternView extends StatelessWidget {
       });
     }
 
-    return _buildMainContent();
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     final textTheme = Get.textTheme;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          activity.instruction,
-          style: textTheme.headlineSmall,
-          textAlign: TextAlign.center,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            activity.instruction,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         const Gap(AppSizes.spaceBtwSections),
         // Display the pattern examples in a table
@@ -79,7 +81,7 @@ class FollowPatternView extends StatelessWidget {
                 style: textTheme.headlineMedium?.copyWith(
                   fontWeight:
                       (rowIndex == activity.examples.length || colIndex == 1)
-                          ? FontWeight.bold
+                          ? FontWeight.normal
                           : FontWeight.normal,
                 ),
               ),

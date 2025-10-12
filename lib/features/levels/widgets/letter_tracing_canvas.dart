@@ -205,7 +205,7 @@ class _LetterTracingCanvasState extends State<LetterTracingCanvas>
         return Container(
           width: double.infinity,
           height: double.infinity,
-          margin: EdgeInsets.all(16.w),
+          // margin: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,

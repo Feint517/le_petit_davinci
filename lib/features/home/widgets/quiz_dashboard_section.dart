@@ -50,7 +50,11 @@ class _TopChampionCard extends StatelessWidget {
           CircleAvatar(
             radius: 24.r,
             backgroundColor: Colors.white,
-            child: Icon(Icons.emoji_events_rounded, color: AppColors.accentDark, size: 28.r),
+            child: Icon(
+              Icons.emoji_events_rounded,
+              color: AppColors.accentDark,
+              size: 28.r,
+            ),
           ),
           Gap(12.w),
           Expanded(
@@ -84,7 +88,11 @@ class _TopChampionCard extends StatelessWidget {
               ],
             ),
           ),
-          Icon(Icons.workspace_premium_rounded, color: Colors.white.withOpacity(0.9), size: 28.r),
+          Icon(
+            Icons.workspace_premium_rounded,
+            color: Colors.white.withOpacity(0.9),
+            size: 28.r,
+          ),
         ],
       ),
     );
@@ -195,7 +203,7 @@ class _DailyQuizCard extends StatelessWidget {
             color: const Color(0xFFFF9C3D).withOpacity(0.25),
             blurRadius: 16,
             offset: const Offset(0, 8),
-          )
+          ),
         ],
       ),
       child: Row(
@@ -224,7 +232,10 @@ class _DailyQuizCard extends StatelessWidget {
                 ),
                 Gap(12.h),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 8.h,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(24.r),
@@ -232,7 +243,11 @@ class _DailyQuizCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.play_arrow_rounded, color: AppColors.orangeAccentDark, size: 20.r),
+                      Icon(
+                        Icons.play_arrow_rounded,
+                        color: AppColors.orangeAccentDark,
+                        size: 20.r,
+                      ),
                       Gap(4.w),
                       Text(
                         'Join a quiz',
@@ -244,7 +259,7 @@ class _DailyQuizCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -267,5 +282,3 @@ class _DailyQuizCard extends StatelessWidget {
     );
   }
 }
-
-

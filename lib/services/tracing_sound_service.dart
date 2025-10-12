@@ -16,7 +16,7 @@ class TracingSoundService {
   /// Play sound for correct tracing
   static Future<void> playCorrectSound() async {
     if (!_isEnabled) return;
-    
+
     try {
       await _audioPlayer.play(AssetSource('sfx/correct-anwser.mp3'));
     } catch (e) {
@@ -27,7 +27,7 @@ class TracingSoundService {
   /// Play sound for incorrect tracing
   static Future<void> playIncorrectSound() async {
     if (!_isEnabled) return;
-    
+
     try {
       await _audioPlayer.play(AssetSource('sfx/game-over.mp3'));
     } catch (e) {
@@ -38,7 +38,7 @@ class TracingSoundService {
   /// Play sound for tracing completion
   static Future<void> playCompletionSound() async {
     if (!_isEnabled) return;
-    
+
     try {
       await _audioPlayer.play(AssetSource('sfx/success-finish-activity.mp3'));
     } catch (e) {
@@ -49,7 +49,7 @@ class TracingSoundService {
   /// Play sound for button clicks
   static Future<void> playButtonClickSound() async {
     if (!_isEnabled) return;
-    
+
     try {
       await _audioPlayer.play(AssetSource('sfx/buttonclick.mp3'));
     } catch (e) {
@@ -60,7 +60,7 @@ class TracingSoundService {
   /// Play sound for tracing start
   static Future<void> playTracingStartSound() async {
     if (!_isEnabled) return;
-    
+
     try {
       await _audioPlayer.play(AssetSource('sfx/notification.mp3'));
     } catch (e) {

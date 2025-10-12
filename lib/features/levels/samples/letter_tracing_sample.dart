@@ -39,9 +39,32 @@ class LetterTracingSample {
   /// Create a series of letter tracing activities for the alphabet
   static List<LetterTracingActivity> createAlphabetSeries() {
     List<String> alphabet = [
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-      'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-      'U', 'V', 'W', 'X', 'Y', 'Z'
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
     ];
 
     return alphabet.map((letter) => createLetter(letter)).toList();
@@ -56,8 +79,27 @@ class LetterTracingSample {
   /// Create letter tracing activities for consonants only
   static List<LetterTracingActivity> createConsonantsSeries() {
     List<String> consonants = [
-      'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
-      'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'
+      'B',
+      'C',
+      'D',
+      'F',
+      'G',
+      'H',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
     ];
     return consonants.map((letter) => createLetter(letter)).toList();
   }
@@ -70,16 +112,12 @@ class LetterTracingExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Letter Tracing Example'),
-      ),
+      appBar: AppBar(title: const Text('Letter Tracing Example')),
       body: Column(
         children: [
           // Example: Single letter tracing
-          Expanded(
-            child: LetterTracingSample.createLetterA().build(context),
-          ),
-          
+          Expanded(child: LetterTracingSample.createLetterA().build(context)),
+
           // Example: Navigation buttons
           Padding(
             padding: const EdgeInsets.all(16.0),

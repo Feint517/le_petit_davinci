@@ -44,13 +44,9 @@ class SocialLoginButton extends StatelessWidget {
             child: Row(
               children: [
                 // Icon
-                Icon(
-                  icon,
-                  color: textColor,
-                  size: 24,
-                ),
+                Icon(icon, color: textColor, size: 24),
                 const SizedBox(width: 16),
-                
+
                 // Label
                 Expanded(
                   child: Text(
@@ -62,7 +58,7 @@ class SocialLoginButton extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+
                 // Loading indicator
                 if (isLoading)
                   SizedBox(

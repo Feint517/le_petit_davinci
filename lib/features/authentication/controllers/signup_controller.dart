@@ -55,7 +55,7 @@ class SignupController extends GetxController {
 
       // TODO: Implement actual signup logic here
       // This is where you would call your API to create the user account
-      
+
       // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
 
@@ -70,7 +70,6 @@ class SignupController extends GetxController {
 
       // Navigate to homepage
       Get.offAll(() => const HomeScreen());
-
     } catch (e) {
       // Handle errors
       Get.snackbar(

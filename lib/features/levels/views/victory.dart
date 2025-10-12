@@ -173,7 +173,9 @@ class _VictoryScreenState extends State<VictoryScreen>
                         children: [
                           Text(
                             'Congratulations!',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium?.copyWith(
                               color: AppColors.white,
                               fontWeight: FontWeight.bold,
                             ),
@@ -181,7 +183,9 @@ class _VictoryScreenState extends State<VictoryScreen>
                           const Gap(AppSizes.xs),
                           Text(
                             'You\'ve earned the',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
                               color: AppColors.white.withOpacity(0.9),
                             ),
                           ),
@@ -194,7 +198,9 @@ class _VictoryScreenState extends State<VictoryScreen>
                           const Gap(AppSizes.xs),
                           Text(
                             'Badge!',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
                               color: AppColors.white.withOpacity(0.9),
                             ),
                           ),

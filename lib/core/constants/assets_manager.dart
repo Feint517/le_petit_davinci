@@ -272,7 +272,7 @@ class SvgAssets {
   static const String bearMasscot = 'assets/svg/mascots/bear_masscot.svg';
   static const String happyCat = 'assets/svg/mascots/happy_cat.svg';
   static const String peakingMascot = 'assets/svg/mascots/peaking_mascot.svg';
-  
+
   //* badges
   static const String masterOfSounds = 'assets/icons/masterofsounds.svg';
 }

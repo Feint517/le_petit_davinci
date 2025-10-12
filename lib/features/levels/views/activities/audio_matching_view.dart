@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/audio_matching_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
 
@@ -112,6 +113,7 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             widget.activity.prompt,
@@ -165,6 +167,7 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
               ],
             ),
           ),
+          Gap(DeviceUtils.getScreenHeight() * 0.3),
         ],
       ),
     );

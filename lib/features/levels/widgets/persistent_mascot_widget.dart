@@ -236,35 +236,12 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
         final levelController = Get.find<LevelController>();
         final currentActivity = levelController.currentActivity;
 
-        // Check if activity has changed and reset retry count
+        // Simple activity change detection - just reset retry count
         final currentActivityHashCode = currentActivity.hashCode;
         if (_lastActivityHashCode != currentActivityHashCode) {
-          debugPrint(
-            'Activity changed, resetting retry count and mascot state',
-          );
+          debugPrint('Activity changed, resetting retry count');
           _lastActivityHashCode = currentActivityHashCode;
           _retryCount = 0; // Reset retry count for new activity
-
-          // Force reset the mascot state for the new activity
-          if (currentActivity is MascotIntroductionMixin) {
-            final mascotMixin = currentActivity as MascotIntroductionMixin;
-            debugPrint(
-              'Activity change detected - mascot initialized: ${mascotMixin.isInitialized.value}',
-            );
-            if (mascotMixin.isInitialized.value) {
-              debugPrint('Resetting mascot for new activity');
-              mascotMixin.resetMascot();
-            } else {
-              debugPrint('Mascot not initialized yet for new activity');
-            }
-
-            // Force a rebuild after reset to ensure the activity view can reinitialize
-            Future.delayed(const Duration(milliseconds: 100), () {
-              if (mounted) {
-                setState(() {}); // Trigger rebuild
-              }
-            });
-          }
         }
 
         if (currentActivity is MascotIntroductionMixin) {

@@ -10,7 +10,7 @@ import 'package:le_petit_davinci/features/levels/controllers/victory_controller.
 import 'package:le_petit_davinci/features/levels/views/victory.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
-import 'package:le_petit_davinci/mixin/audible_mixin.dart';
+import 'package:le_petit_davinci/features/levels/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 
 class LevelController extends GetxController {

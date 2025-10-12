@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/solve_equation_activity.dart';
 
 // OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
@@ -29,15 +31,23 @@ class SolveEquationView extends StatelessWidget {
       });
     }
 
-    return _buildMainContent();
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Solve the equation',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+        const Gap(AppSizes.spaceBtwSections * 2),
         Text(activity.equation, style: Get.textTheme.headlineLarge),
-        const SizedBox(height: 40),
+        Gap(AppSizes.spaceBtwSections),
         Wrap(
           spacing: 16,
           runSpacing: 16,

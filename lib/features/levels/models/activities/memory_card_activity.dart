@@ -244,7 +244,7 @@ class MemoryCardActivity extends Activity
   // --- ActivityNavigationInterface Implementation ---
 
   @override
-  bool get useCustomNavigation => true; // Memory card game needs custom navigation
+  bool get useCustomNavigation => false; // Use standard navigation
 
   @override
   Widget? get customNavigationWidget {

@@ -82,7 +82,7 @@ class LeaderboardController extends GetxController {
 
     // Sort by total stars (descending)
     leaderboardData.sort((a, b) => b.totalStars.compareTo(a.totalStars));
-    
+
     update();
   }
 
@@ -112,5 +112,3 @@ class LeaderboardController extends GetxController {
     _loadLeaderboardData();
   }
 }
-
-

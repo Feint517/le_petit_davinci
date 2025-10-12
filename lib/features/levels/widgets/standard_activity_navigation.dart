@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
-import 'package:le_petit_davinci/mixin/audible_mixin.dart';
+import 'package:le_petit_davinci/features/levels/mixin/audible_mixin.dart';
 
 /// Standardized navigation bar for all activities
 /// Handles Check/Continue buttons, audio controls, and custom configurations

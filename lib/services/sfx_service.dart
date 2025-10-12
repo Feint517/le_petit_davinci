@@ -16,9 +16,8 @@ class AppSfx {
   }
 
   static Future<void> click() => playAsset('sfx/buttonclick.mp3');
-  static Future<void> success() => playAsset('sfx/mixkit-completion-of-a-level-2063.wav');
+  static Future<void> success() =>
+      playAsset('sfx/mixkit-completion-of-a-level-2063.wav');
   static Future<void> win() => playAsset('sfx/winner.mp3');
   static Future<void> reset() => playAsset('sfx/reset.mp3');
 }
-
-

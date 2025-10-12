@@ -64,8 +64,7 @@ class LoginScreen extends GetView<LoginController> {
                                 ?.copyWith(color: AppColors.black),
                           ),
                           TextButton(
-                            onPressed:
-                                () => Get.to(() => const SignupScreen()),
+                            onPressed: () => Get.to(() => const SignupScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
                               style: Theme.of(context).textTheme.bodyMedium!
@@ -109,9 +108,9 @@ class LoginScreen extends GetView<LoginController> {
                             textColor: Colors.black87,
                             isLoading: false,
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwInputFields.h),
-                          
+
                           // Facebook Login
                           SocialLoginButton(
                             onTap: () {},
@@ -121,9 +120,9 @@ class LoginScreen extends GetView<LoginController> {
                             textColor: Colors.white,
                             isLoading: false,
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwInputFields.h),
-                          
+
                           // Microsoft Login
                           SocialLoginButton(
                             onTap: () {},
@@ -133,26 +132,34 @@ class LoginScreen extends GetView<LoginController> {
                             textColor: Colors.white,
                             isLoading: false,
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwSections.h),
-                          
+
                           // Divider
                           Row(
                             children: [
-                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                              const Expanded(
+                                child: Divider(color: AppColors.textSecondary),
+                              ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
                                 child: Text(
                                   'OR',
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
                                     color: AppColors.textSecondary,
                                   ),
                                 ),
                               ),
-                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                              const Expanded(
+                                child: Divider(color: AppColors.textSecondary),
+                              ),
                             ],
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwSections.h),
                         ],
                       ),

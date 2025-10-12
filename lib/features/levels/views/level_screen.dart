@@ -90,7 +90,9 @@ class LevelScreen extends GetView<LevelController> {
         }),
 
         // Mascot widget - on top layer for interaction
-        const PersistentMascotWidget(),
+        PersistentMascotWidget(
+          key: ValueKey('mascot-${controller.currentActivity.hashCode}'),
+        ),
       ],
     );
   }

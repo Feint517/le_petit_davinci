@@ -63,9 +63,9 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      
+
                       Gap(AppSizes.spaceBtwInputFields),
-                      
+
                       // Google Login
                       SocialLoginButton(
                         onTap: () {},
@@ -75,9 +75,9 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
                         textColor: Colors.black87,
                         isLoading: false,
                       ),
-                      
+
                       Gap(AppSizes.spaceBtwInputFields),
-                      
+
                       // Facebook Login
                       SocialLoginButton(
                         onTap: () {},
@@ -87,9 +87,9 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
                         textColor: Colors.white,
                         isLoading: false,
                       ),
-                      
+
                       Gap(AppSizes.spaceBtwInputFields),
-                      
+
                       // Microsoft Login
                       SocialLoginButton(
                         onTap: () {},
@@ -99,26 +99,29 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
                         textColor: Colors.white,
                         isLoading: false,
                       ),
-                      
+
                       Gap(AppSizes.spaceBtwSections),
-                      
+
                       // Divider
                       Row(
                         children: [
-                          const Expanded(child: Divider(color: AppColors.textSecondary)),
+                          const Expanded(
+                            child: Divider(color: AppColors.textSecondary),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
                               'OU',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.textSecondary,
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.textSecondary),
                             ),
                           ),
-                          const Expanded(child: Divider(color: AppColors.textSecondary)),
+                          const Expanded(
+                            child: Divider(color: AppColors.textSecondary),
+                          ),
                         ],
                       ),
-                      
+
                       Gap(AppSizes.spaceBtwSections),
                     ],
                   ),

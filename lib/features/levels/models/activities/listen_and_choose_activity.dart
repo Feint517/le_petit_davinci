@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin
 import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/listen_and_choose_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
-import 'package:le_petit_davinci/mixin/audible_mixin.dart';
+import 'package:le_petit_davinci/features/levels/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
 class ListenAndChooseActivity extends Activity

@@ -30,17 +30,19 @@ class CountByView extends StatelessWidget {
       });
     }
 
-    return _buildMainContent();
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          activity.instruction,
-          style: Get.textTheme.headlineSmall,
-          textAlign: TextAlign.center,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            activity.instruction,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         const Gap(AppSizes.spaceBtwSections * 2),
         Wrap(
@@ -68,7 +70,7 @@ class CountByView extends StatelessWidget {
             onBackspacePressed: activity.backspace,
           ),
         ),
-        const Gap(AppSizes.md),
+        const Gap(AppSizes.spaceBtwSections),
       ],
     );
   }

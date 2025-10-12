@@ -6,7 +6,7 @@ import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 
 class MainNavigationController extends GetxController {
   final RxInt currentIndex = 0.obs;
-  
+
   final List<Widget> pages = [
     const HomeScreen(),
     const LeaderboardScreen(),
