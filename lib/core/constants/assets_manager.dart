@@ -149,6 +149,11 @@ class SvgAssets {
   //* logo
   static const String StripeLogo = 'assets/images/logos/stripe_logo.svg';
 
+  //* levels backgroungs
+  static const String blueBackground = 'assets/svg/misc/blue_background.svg';
+  static const String purpleBackground = 'assets/svg/misc/purple_background.svg';
+  static const String yellowBackground = 'assets/svg/misc/yellow_background.svg';
+
   //* First time questions
   static const String questionsBackground =
       'assets/svg/questoins_background.svg';

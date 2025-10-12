@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/level_content_view.dart';
@@ -17,9 +19,19 @@ class LevelScreen extends GetView<LevelController> {
         // Main scaffold with app bar and content
         Scaffold(
           appBar: const ProfileHeader(type: ProfileHeaderType.activity),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
-            child: const LevelContentView(),
+          body: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
+                child: const ResponsiveImageAsset(
+                  assetPath: SvgAssets.blueBackground,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
+                child: const LevelContentView(),
+              ),
+            ],
           ),
         ),
 
