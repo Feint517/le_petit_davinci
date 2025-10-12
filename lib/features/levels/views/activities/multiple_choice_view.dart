@@ -12,7 +12,11 @@ class MultipleChoiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize mascot when the view is built (only if not already initialized)
+    debugPrint(
+      'MultipleChoiceView build - isInitialized: ${activity.isInitialized.value}',
+    );
     if (!activity.isInitialized.value) {
+      debugPrint('MultipleChoiceView: Initializing mascot');
       final messages = [
         'Let\'s answer this question!',
         'Choose all the correct answers.',
@@ -27,6 +31,8 @@ class MultipleChoiceView extends StatelessWidget {
           debugPrint('Error initializing mascot in MultipleChoiceView: $e');
         }
       });
+    } else {
+      debugPrint('MultipleChoiceView: Mascot already initialized, skipping');
     }
 
     return _buildMainContent();

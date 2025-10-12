@@ -167,6 +167,9 @@ class UnifiedMascotController extends GetxController {
       currentState.value = MascotState.idle;
       currentMessage.value = '';
       isShowingMessage.value = false;
+
+      // Update animation to idle state
+      _animationController.setAnimationState(MascotState.idle);
       return;
     }
 
@@ -182,6 +185,9 @@ class UnifiedMascotController extends GetxController {
       currentState.value = MascotState.idle;
       currentMessage.value = '';
       isShowingMessage.value = false;
+
+      // Update animation to idle state
+      _animationController.setAnimationState(MascotState.idle);
       return;
     }
 
@@ -195,6 +201,9 @@ class UnifiedMascotController extends GetxController {
     currentMessage.value = message;
     currentState.value = state;
     isShowingMessage.value = true;
+
+    // Update animation state
+    _animationController.setAnimationState(state);
 
     // Clear any existing timer
     _clearAutoHideTimer();

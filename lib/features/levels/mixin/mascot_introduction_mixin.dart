@@ -145,6 +145,9 @@ mixin MascotIntroductionMixin {
     if (_mascotController != null) {
       _mascotController!.reset();
     }
+    // Reset the initialization flag so mascot can be reinitialized
+    _isInitialized.value = false;
+    debugPrint('Mascot state reset - ready for reinitialization');
   }
 
   /// Dispose of the mascot controller

@@ -90,6 +90,12 @@ class LevelController extends GetxController {
 
   @override
   void onClose() {
+    // Reset mascot state for current activity
+    if (currentActivity is MascotIntroductionMixin) {
+      final mascotMixin = currentActivity as MascotIntroductionMixin;
+      mascotMixin.resetMascot();
+    }
+
     pageController.dispose();
     _audioPlayer.dispose();
     _tts.stop();

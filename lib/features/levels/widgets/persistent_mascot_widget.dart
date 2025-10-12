@@ -25,6 +25,7 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
   bool _isInitializing = false; // Prevent multiple initialization attempts
   int _retryCount = 0; // Track retry attempts
   static const int _maxRetries = 100; // Maximum retry attempts
+  dynamic _lastActivityHashCode; // Track activity changes
 
   // Animation state management (handled by unified controller)
 
@@ -235,6 +236,37 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
         final levelController = Get.find<LevelController>();
         final currentActivity = levelController.currentActivity;
 
+        // Check if activity has changed and reset retry count
+        final currentActivityHashCode = currentActivity.hashCode;
+        if (_lastActivityHashCode != currentActivityHashCode) {
+          debugPrint(
+            'Activity changed, resetting retry count and mascot state',
+          );
+          _lastActivityHashCode = currentActivityHashCode;
+          _retryCount = 0; // Reset retry count for new activity
+
+          // Force reset the mascot state for the new activity
+          if (currentActivity is MascotIntroductionMixin) {
+            final mascotMixin = currentActivity as MascotIntroductionMixin;
+            debugPrint(
+              'Activity change detected - mascot initialized: ${mascotMixin.isInitialized.value}',
+            );
+            if (mascotMixin.isInitialized.value) {
+              debugPrint('Resetting mascot for new activity');
+              mascotMixin.resetMascot();
+            } else {
+              debugPrint('Mascot not initialized yet for new activity');
+            }
+
+            // Force a rebuild after reset to ensure the activity view can reinitialize
+            Future.delayed(const Duration(milliseconds: 100), () {
+              if (mounted) {
+                setState(() {}); // Trigger rebuild
+              }
+            });
+          }
+        }
+
         if (currentActivity is MascotIntroductionMixin) {
           final mascotMixin = currentActivity as MascotIntroductionMixin;
 
@@ -257,7 +289,7 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
             return const SizedBox.shrink();
           }
 
-          // If mascot is not initialized at all, trigger a rebuild
+          // If mascot is not initialized at all, show fallback mascot and trigger rebuild
           if (!mascotMixin.isInitialized.value) {
             if (_retryCount < _maxRetries) {
               debugPrint('Mascot not initialized, will retry...');
@@ -268,7 +300,12 @@ class _PersistentMascotWidgetState extends State<PersistentMascotWidget> {
                 }
               });
             }
-            return const SizedBox.shrink();
+            // Show fallback mascot even when not initialized
+            return Positioned(
+              left: -10,
+              bottom: 0,
+              child: _buildFallbackMascot(),
+            );
           }
 
           if (mascotMixin.isInitialized.value &&

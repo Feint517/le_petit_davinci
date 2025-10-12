@@ -56,21 +56,33 @@ class LevelScreen extends GetView<LevelController> {
                   duration: const Duration(milliseconds: 500),
                   child:
                       shouldShowOverlay
-                          ? Container(
-                            key: const ValueKey('overlay'),
-                            width: double.infinity,
-                            height: double.infinity,
-                            color: Colors.black.withValues(alpha: 0.4),
-                            child: const SizedBox.shrink(),
+                          ? GestureDetector(
+                            key: ValueKey(
+                              'overlay-${currentActivity.hashCode}',
+                            ),
+                            onTap: () {
+                              // Allow user to tap anywhere to advance to next message
+                              mascotMixin.nextMessage();
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: Colors.black.withValues(alpha: 0.4),
+                              child: const SizedBox.shrink(),
+                            ),
                           )
-                          : const SizedBox.shrink(
-                            key: ValueKey('no-overlay-mascot'),
+                          : SizedBox.shrink(
+                            key: ValueKey(
+                              'no-overlay-${currentActivity.hashCode}',
+                            ),
                           ),
                 );
               });
             }
 
-            return const SizedBox.shrink(key: ValueKey('no-overlay-no-mascot'));
+            return SizedBox.shrink(
+              key: ValueKey('no-overlay-no-mascot-${currentActivity.hashCode}'),
+            );
           } catch (e) {
             debugPrint('Error in focus overlay: $e');
             return const SizedBox.shrink(key: ValueKey('no-overlay-error'));
