@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/authentication/bindings/auth_binding.dart';
+import 'package:le_petit_davinci/features/authentication/views/create_profile.dart';
+import 'package:le_petit_davinci/features/authentication/views/email_verification.dart';
 import 'package:le_petit_davinci/features/authentication/views/error.dart';
 import 'package:le_petit_davinci/features/authentication/views/goodmorning.dart';
 import 'package:le_petit_davinci/features/authentication/views/login.dart';
@@ -15,8 +17,8 @@ import 'package:le_petit_davinci/features/studio/bindings/studio_binding.dart';
 import 'package:le_petit_davinci/features/studio/views/gallery_screen.dart';
 import 'package:le_petit_davinci/features/studio/views/studio_main_screen.dart';
 import 'package:le_petit_davinci/features/studio/views/template_selection_screen.dart';
-import 'package:le_petit_davinci/features/navigation/views/main_navigation_screen.dart';
 import 'package:le_petit_davinci/features/leaderboard/views/leaderboard_screen.dart';
+import 'package:le_petit_davinci/features/rive_inspector/rive_inspector_screen.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class AppPages {
@@ -119,6 +121,16 @@ class AppPages {
       transition: Transition.cupertino,
     ),
     GetPage(
+      name: AppRoutes.emailVerification,
+      page: () => const EmailVerificationScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: AppRoutes.createProfile,
+      page: () => const CreateProfileScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
       name: AppRoutes.userSelection,
       page: () => const UserSelectionScreen(),
       binding: AuthBinding(),
@@ -189,6 +201,13 @@ class AppPages {
     GetPage(
       name: AppRoutes.leaderboard,
       page: () => const LeaderboardScreen(),
+      transition: Transition.rightToLeft,
+    ),
+
+    // Development tools
+    GetPage(
+      name: AppRoutes.riveInspector,
+      page: () => const RiveInspectorScreen(),
       transition: Transition.rightToLeft,
     ),
   ];

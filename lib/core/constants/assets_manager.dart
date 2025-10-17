@@ -9,6 +9,12 @@ class AnimationAssets {
   static const String talkingBear = 'assets/animations/rive/talking_bear.riv';
   static const String happyBear = 'assets/animations/rive/happy_bear.riv';
   static const String sadBear = 'assets/animations/rive/sad_bear.riv';
+  static const String boy1 = 'assets/animations/rive/boy1.riv';
+  static const String boy2 = 'assets/animations/rive/boy2.riv';
+  static const String girl1 = 'assets/animations/rive/girl1.riv';
+  static const String girl2 = 'assets/animations/rive/girl2.riv';
+  static const String games = 'assets/animations/rive/games.riv';
+  static const String subjects = 'assets/animations/rive/subjects.riv';
 }
 
 class ImageAssets {

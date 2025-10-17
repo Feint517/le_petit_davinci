@@ -6,6 +6,8 @@ class AppRoutes {
   static const String mainNavigation = '/main-navigation';
   static const String leaderboard = '/leaderboard';
   static const String login = '/login';
+  static const String emailVerification = '/email-verification';
+  static const String createProfile = '/create-profile';
   static const String userSelection = '/user-selection';
   static const String parentOnboarding = '/parent-onboarding';
   static const String childSetup = '/child-setup';
@@ -34,4 +36,7 @@ class AppRoutes {
   static const String drawingCanvas = '/studio/drawing-canvas';
   static const String studioGallery = '/studio/gallery';
   static const String templateSelection = '/studio/templates';
+
+  // Development tools
+  static const String riveInspector = '/rive-inspector';
 }

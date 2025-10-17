@@ -171,11 +171,8 @@ class DashboardController extends GetxController
   }
 
   void logout() async {
-    final response = await AuthenticationRepository.instance.logout(id: 123);
-    if (response.status == 0) {
-      StorageService.instance.clear();
-      Get.offAll(() => const LoginScreen());
-    }
+    // The new logout method handles clearing storage and navigation internally
+    await AuthenticationRepository.instance.logout();
   }
 
   String _formatDate(DateTime date) {

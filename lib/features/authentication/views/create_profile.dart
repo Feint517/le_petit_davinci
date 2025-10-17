@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/core/constants/sizes.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
-import 'package:le_petit_davinci/core/widgets/dropdown/custom_dropdown_field.dart';
-import 'package:le_petit_davinci/core/widgets/misc/profile_card.dart';
-import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
-import 'package:le_petit_davinci/core/widgets/navigation_bar/navbar.dart';
-import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/create_profile_controller.dart';
-import 'package:le_petit_davinci/features/authentication/widgets/header_vector.dart';
-import 'package:le_petit_davinci/features/authentication/widgets/social_login_button.dart';
 
 class CreateProfileScreen extends GetView<CreateProfileController> {
   const CreateProfileScreen({super.key});
@@ -21,232 +14,42 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
   @override
   Widget build(BuildContext context) {
     Get.put(CreateProfileController());
+
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const CustomNavBar(),
       backgroundColor: AppColors.backgroundLight,
-      body: Stack(
-        children: [
-          const HeaderVector(color: HeaderVectorColor.green),
-          const Positioned(
-            bottom: 0,
-            child: ResponsiveImageAsset(
-              assetPath: SvgAssets.createProfileBackground,
-            ),
-          ),
-          SizedBox.expand(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSizes.defaultSpace,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+          onPressed: () => Get.back(),
+        ),
+        actions: [
+          // Create Profile Button - Top Right
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: ElevatedButton(
+              onPressed: controller.createProfile,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                elevation: 2,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Icon(Icons.check, size: 20.sp),
+                  Gap(8.w),
                   Text(
-                    'À propos de votre enfant',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.headlineMedium!.apply(color: AppColors.primary),
-                  ),
-
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  // Social Login Options
-                  Column(
-                    children: [
-                      Text(
-                        'Ou connectez-vous avec',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-
-                      Gap(AppSizes.spaceBtwInputFields),
-
-                      // Google Login
-                      SocialLoginButton(
-                        onTap: () {},
-                        icon: Icons.g_mobiledata,
-                        label: 'Google',
-                        backgroundColor: Colors.white,
-                        textColor: Colors.black87,
-                        isLoading: false,
-                      ),
-
-                      Gap(AppSizes.spaceBtwInputFields),
-
-                      // Facebook Login
-                      SocialLoginButton(
-                        onTap: () {},
-                        icon: Icons.facebook,
-                        label: 'Facebook',
-                        backgroundColor: const Color(0xFF1877F2),
-                        textColor: Colors.white,
-                        isLoading: false,
-                      ),
-
-                      Gap(AppSizes.spaceBtwInputFields),
-
-                      // Microsoft Login
-                      SocialLoginButton(
-                        onTap: () {},
-                        icon: Icons.business,
-                        label: 'Microsoft',
-                        backgroundColor: const Color(0xFF00BCF2),
-                        textColor: Colors.white,
-                        isLoading: false,
-                      ),
-
-                      Gap(AppSizes.spaceBtwSections),
-
-                      // Divider
-                      Row(
-                        children: [
-                          const Expanded(
-                            child: Divider(color: AppColors.textSecondary),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              'OU',
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(color: AppColors.textSecondary),
-                            ),
-                          ),
-                          const Expanded(
-                            child: Divider(color: AppColors.textSecondary),
-                          ),
-                        ],
-                      ),
-
-                      Gap(AppSizes.spaceBtwSections),
-                    ],
-                  ),
-
-                  CustomTextField(
-                    controller: controller.kidName,
-                    hintText: 'Prénom',
-                  ),
-
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  Obx(
-                    () => CustomDropdownField<String>(
-                      value: controller.selectedYear.value,
-                      hintText: "Année",
-                      items: [],
-                      prefixIcon: Icons.calendar_month,
-                      suffixIcon: Icons.arrow_downward,
-                      onChanged:
-                          (val) => controller.selectedLanguage.value = val,
+                    'Créer',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  Text('Choisissez votre avatar'),
-                  const Gap(AppSizes.spaceBtwItems),
-                  Obx(
-                    () => Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      alignment: WrapAlignment.center,
-                      children:
-                          controller.profiles.asMap().entries.map((entry) {
-                            final index = entry.key;
-                            final profile = entry.value;
-                            final isSelected =
-                                controller.selectedCardIndex.value == index;
-
-                            return ProfileCard(
-                              name: profile.name,
-                              subInfo: profile.subInfo,
-                              image: profile.image,
-                              backgroundColor: profile.backgroundColor,
-                              imageBackgroundColor:
-                                  isSelected
-                                      ? AppColors.accent2
-                                      : AppColors.white,
-                              onTap: () => controller.selectProfile(index),
-                            );
-                          }).toList(),
-                    ),
-                  ),
-
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  Obx(
-                    () => CustomDropdownField<String>(
-                      value: controller.selectedLanguage.value,
-                      hintText: "Langue",
-                      items: [
-                        DropdownMenuItem(
-                          value: "fr",
-                          child: Text(
-                            "Francais",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .apply(color: AppColors.black),
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: "en",
-                          child: Text(
-                            "Anglais",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .apply(color: AppColors.black),
-                          ),
-                        ),
-                      ],
-                      prefixIcon: Icons.flag,
-                      suffixIcon: Icons.arrow_downward,
-                      onChanged:
-                          (val) => controller.selectedLanguage.value = val,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  Obx(
-                    () => CustomDropdownField<int>(
-                      value: controller.selectedTime.value,
-                      hintText: "Temps d'écran",
-                      items: [
-                        DropdownMenuItem(
-                          value: 5,
-                          child: Text(
-                            "5 minutes",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .apply(color: AppColors.black),
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 10,
-                          child: Text(
-                            "10 minutes",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .apply(color: AppColors.black),
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 20,
-                          child: Text(
-                            "20 minutes",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .apply(color: AppColors.black),
-                          ),
-                        ),
-                      ],
-                      prefixIcon: Iconsax.clock,
-                      suffixIcon: Icons.arrow_downward,
-                      onChanged: (val) => controller.selectedTime.value = val,
-                    ),
-                  ),
-                  const Gap(AppSizes.spaceBtwSections),
-
-                  CustomButton(
-                    label: ' Créer un profil enfant',
-                    onPressed: () {},
                   ),
                 ],
               ),
@@ -254,20 +57,204 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
           ),
         ],
       ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Logo
+                SvgPicture.asset(SvgAssets.logoBlue, height: 60.h),
+
+                Gap(24.h),
+
+                // Title
+                Text(
+                  'Créer votre profil',
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textPrimary,
+                    fontFamily: 'DynaPuff_SemiCondensed',
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                Gap(8.h),
+
+                // Subtitle
+                Text(
+                  'Choisissez un avatar et un code PIN pour sécuriser votre profil',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppColors.textSecondary,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                Gap(32.h),
+
+                // Profile Name Input
+                TextFormField(
+                  controller: controller.profileName,
+                  decoration: InputDecoration(
+                    labelText: 'Nom du profil',
+                    hintText: 'Ex: Mon Profil, Enfant, etc.',
+                    prefixIcon: const Icon(Icons.person_outline),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: AppColors.white,
+                  ),
+                  validator: controller.validateProfileName,
+                ),
+
+                Gap(24.h),
+
+                // Avatar Selection
+                Text(
+                  'Choisissez votre avatar',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+
+                Gap(16.h),
+
+                Obx(
+                  () => Wrap(
+                    spacing: 12.w,
+                    runSpacing: 12.h,
+                    alignment: WrapAlignment.center,
+                    children:
+                        controller.avatars.asMap().entries.map((entry) {
+                          final index = entry.key;
+                          final avatar = entry.value;
+                          final isSelected =
+                              controller.selectedAvatarIndex.value == index;
+
+                          return GestureDetector(
+                            onTap: () => controller.selectAvatar(index),
+                            child: Container(
+                              width: 80.w,
+                              height: 80.h,
+                              decoration: BoxDecoration(
+                                color: avatar.backgroundColor.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(16.r),
+                                border: Border.all(
+                                  color:
+                                      isSelected
+                                          ? avatar.backgroundColor
+                                          : Colors.transparent,
+                                  width: 3,
+                                ),
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  avatar.image,
+                                  width: 50.w,
+                                  height: 50.h,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                  ),
+                ),
+
+                Gap(24.h),
+
+                // PIN Input
+                Text(
+                  'Code PIN (4 chiffres)',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+
+                Gap(12.h),
+
+                TextFormField(
+                  controller: controller.pinController,
+                  keyboardType: TextInputType.number,
+                  maxLength: 4,
+                  obscureText: true,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: InputDecoration(
+                    hintText: '••••',
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    filled: true,
+                    fillColor: AppColors.white,
+                    counterText: '',
+                  ),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 8.w,
+                  ),
+                  validator: controller.validatePin,
+                ),
+
+                Gap(16.h),
+
+                // PIN Info
+                Container(
+                  padding: EdgeInsets.all(12.w),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(
+                      color: AppColors.primary.withOpacity(0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        color: AppColors.primary,
+                        size: 20.sp,
+                      ),
+                      Gap(8.w),
+                      Expanded(
+                        child: Text(
+                          'Vous utiliserez ce code PIN pour accéder à votre profil',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Gap(40.h),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
-class ProfileData {
-  final String name;
-  final String subInfo;
+// Avatar Data Model
+class AvatarData {
   final String image;
   final Color backgroundColor;
 
-  ProfileData({
-    required this.name,
-    required this.subInfo,
-    required this.image,
-    required this.backgroundColor,
-  });
+  AvatarData({required this.image, required this.backgroundColor});
 }

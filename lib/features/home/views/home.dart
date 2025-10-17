@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
@@ -9,7 +8,6 @@ import 'package:le_petit_davinci/core/widgets/animations/scroll_animated_item.da
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
-import 'package:le_petit_davinci/features/leaderboard/views/leaderboard_screen.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/home/widgets/rewards_section.dart';
 import 'package:le_petit_davinci/features/home/widgets/subject_selection.dart';
@@ -18,6 +16,7 @@ import 'package:le_petit_davinci/features/home/widgets/quiz_dashboard_section.da
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import 'package:le_petit_davinci/services/progress_service.dart';
 import 'package:le_petit_davinci/services/sfx_service.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -136,6 +135,14 @@ class HomeScreen extends StatelessWidget {
                   backgroundColor: Colors.orange,
                   colorText: Colors.white,
                 );
+              },
+            ),
+            Gap(20.h),
+            CustomButton(
+              label: '🎨 Rive Inspector (Testing)',
+              onPressed: () {
+                AppSfx.click();
+                Get.toNamed(AppRoutes.riveInspector);
               },
             ),
             Gap(40.h),
