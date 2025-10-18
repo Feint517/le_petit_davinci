@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
@@ -176,30 +175,29 @@ class _SignupScreenState extends State<SignupScreen> {
                               isLoading: false,
                             ),
 
-                            Gap(AppSizes.spaceBtwInputFields.h),
+                            // Gap(AppSizes.spaceBtwInputFields.h),
 
                             // Facebook Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.facebook,
-                              label: StringsManager.continueWithFacebook,
-                              backgroundColor: const Color(0xFF1877F2),
-                              textColor: Colors.white,
-                              isLoading: false,
-                            ),
+                            // SocialLoginButton(
+                            //   onTap: () {},
+                            //   icon: Icons.facebook,
+                            //   label: StringsManager.continueWithFacebook,
+                            //   backgroundColor: const Color(0xFF1877F2),
+                            //   textColor: Colors.white,
+                            //   isLoading: false,
+                            // ),
 
-                            Gap(AppSizes.spaceBtwInputFields.h),
+                            // Gap(AppSizes.spaceBtwInputFields.h),
 
-                            // Microsoft Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.business,
-                              label: StringsManager.continueWithMicrosoft,
-                              backgroundColor: const Color(0xFF00BCF2),
-                              textColor: Colors.white,
-                              isLoading: false,
-                            ),
-
+                            // // Microsoft Signup
+                            // SocialLoginButton(
+                            //   onTap: () {},
+                            //   icon: Icons.business,
+                            //   label: StringsManager.continueWithMicrosoft,
+                            //   backgroundColor: const Color(0xFF00BCF2),
+                            //   textColor: Colors.white,
+                            //   isLoading: false,
+                            // ),
                             Gap(AppSizes.spaceBtwInputFields.h),
 
                             // Divider
