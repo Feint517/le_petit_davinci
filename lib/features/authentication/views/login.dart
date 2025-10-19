@@ -19,7 +19,8 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
+    // Use lazyPut with fenix to prevent multiple instances
+    Get.lazyPut(() => LoginController(), fenix: true);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLight,

@@ -1,6 +1,10 @@
 class ApiRoutes {
-  // static const String baseUrl = "http://localhost:3000";
-  static const String baseUrl = "https://lepetitdavinci-api.vercel.app";
+  // Development URLs
+  static const String baseUrl = "http://localhost:3000"; // Local development
+  // static const String baseUrl = "http://10.0.2.2:3000"; // Android emulator
+  
+  // Production URL
+  // static const String baseUrl = "https://lepetitdavinci-api.vercel.app";
 
   //* Health and Status routes
   static const String ping = "/api/ping";

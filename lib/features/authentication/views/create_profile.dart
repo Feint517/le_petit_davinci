@@ -13,7 +13,8 @@ class CreateProfileScreen extends GetView<CreateProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CreateProfileController());
+    // Use lazyPut with fenix to prevent multiple instances
+    Get.lazyPut(() => CreateProfileController(), fenix: true);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,

@@ -36,7 +36,9 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
 
     // Auto-focus first field
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      focusNodes[0].requestFocus();
+      if (mounted && focusNodes.isNotEmpty) {
+        focusNodes[0].requestFocus();
+      }
     });
   }
 
@@ -52,6 +54,8 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   }
 
   void _handleChange(int index, String value) {
+    if (!mounted) return;
+    
     if (value.isEmpty) {
       // Handle backspace
       if (index > 0) {
@@ -82,6 +86,8 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   }
 
   void _handlePaste(String value) {
+    if (!mounted) return;
+    
     // Remove any non-digit characters
     final digits = value.replaceAll(RegExp(r'\D'), '');
 
@@ -103,10 +109,14 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   }
 
   void clear() {
+    if (!mounted) return;
+    
     for (var controller in controllers) {
       controller.clear();
     }
-    focusNodes[0].requestFocus();
+    if (focusNodes.isNotEmpty) {
+      focusNodes[0].requestFocus();
+    }
   }
 
   @override
