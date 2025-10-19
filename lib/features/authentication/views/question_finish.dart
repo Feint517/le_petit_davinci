@@ -11,7 +11,9 @@ import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart
 import 'package:le_petit_davinci/features/authentication/controllers/question_finish_controller.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/header_message_box.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/informational_text_section.dart';
+import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';
+import 'package:le_petit_davinci/services/storage_service.dart';
 
 class QuestionFinishScreen extends GetView<QuestionFinishController> {
   const QuestionFinishScreen({super.key});
@@ -91,9 +93,13 @@ class QuestionFinishScreen extends GetView<QuestionFinishController> {
                               color: AppColors.white,
                             ),
                             iconPosition: IconPosition.right,
-                            onPressed: () {
-                              //AuthenticationRepository.instance.completeIntro();
-                              Get.offAllNamed(AppRoutes.home);
+                            onPressed: () async {
+                              // Store that onboarding is complete
+                              final storage = StorageService.instance;
+                              await storage.write('onboarding_complete', true);
+                              
+                              // Navigate to home screen
+                              Get.offAll(() => const HomeScreen());
                             },
                           ),
                         ),

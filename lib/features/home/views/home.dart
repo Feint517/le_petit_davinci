@@ -23,8 +23,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(UserController());
-    Get.put(ProgressService());
+    // Use lazyPut to avoid re-initialization
+    Get.lazyPut(() => UserController(), fenix: true);
+    Get.lazyPut(() => ProgressService(), fenix: true);
+    
+    print('🏠 [Home] HomeScreen building');
+    
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       // bottomNavigationBar: Container(

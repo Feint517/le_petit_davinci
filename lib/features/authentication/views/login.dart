@@ -101,13 +101,17 @@ class LoginScreen extends GetView<LoginController> {
                       Column(
                         children: [
                           // Google Login
-                          SocialLoginButton(
-                            onTap: () {},
-                            icon: Icons.g_mobiledata,
-                            label: 'Continue with Google',
-                            backgroundColor: Colors.white,
-                            textColor: Colors.black87,
-                            isLoading: false,
+                          Obx(
+                            () => SocialLoginButton(
+                              onTap: controller.isGoogleLoading.value
+                                  ? () {}
+                                  : () => controller.loginWithGoogle(),
+                              icon: Icons.g_mobiledata,
+                              label: 'Continue with Google',
+                              backgroundColor: Colors.white,
+                              textColor: Colors.black87,
+                              isLoading: controller.isGoogleLoading.value,
+                            ),
                           ),
 
                           Gap(AppSizes.spaceBtwInputFields.h),

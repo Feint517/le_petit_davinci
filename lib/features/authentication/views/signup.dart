@@ -166,13 +166,17 @@ class _SignupScreenState extends State<SignupScreen> {
                         Column(
                           children: [
                             // Google Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.g_mobiledata,
-                              label: StringsManager.continueWithGoogle,
-                              backgroundColor: Colors.white,
-                              textColor: Colors.black87,
-                              isLoading: false,
+                            Obx(
+                              () => SocialLoginButton(
+                                onTap: signupController.isGoogleLoading.value
+                                    ? () {}
+                                    : () => signupController.signupWithGoogle(),
+                                icon: Icons.g_mobiledata,
+                                label: StringsManager.continueWithGoogle,
+                                backgroundColor: Colors.white,
+                                textColor: Colors.black87,
+                                isLoading: signupController.isGoogleLoading.value,
+                              ),
                             ),
 
                             // Gap(AppSizes.spaceBtwInputFields.h),

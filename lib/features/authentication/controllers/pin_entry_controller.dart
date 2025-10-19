@@ -21,37 +21,46 @@ class PinEntryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('🔐 [PIN] Controller onInit called');
 
     // Get profiles from arguments
     final args = Get.arguments as Map<String, dynamic>?;
+    print('🔐 [PIN] Arguments: $args');
+    
     if (args != null) {
       if (args['profiles'] != null) {
         profiles.value = args['profiles'] as List<Profile>;
+        print('🔐 [PIN] Loaded ${profiles.length} profiles');
       }
 
       autoSelect.value = args['autoSelect'] == true;
+      print('🔐 [PIN] Auto-select: ${autoSelect.value}');
 
       // Auto-select if only one profile
       if (autoSelect.value && profiles.isNotEmpty) {
         selectedProfile.value = profiles.first;
-        print(
-          '📌 Auto-selected profile: ${selectedProfile.value?.profileName}',
-        );
+        print('🔐 [PIN] Auto-selected profile: ${selectedProfile.value?.profileName}');
       } else if (profiles.isNotEmpty) {
         // Default to first profile for now
         // You can create a profile selection screen later
         selectedProfile.value = profiles.first;
+        print('🔐 [PIN] Default selected profile: ${selectedProfile.value?.profileName}');
       }
+    } else {
+      print('🔐 [PIN] ERROR: No arguments passed!');
     }
   }
 
   void onDigitEntered(String digit) {
+    print('🔐 [PIN] Digit pressed: $digit, current index: ${currentIndex.value}');
     if (currentIndex.value < 4) {
       pin[currentIndex.value] = digit;
       currentIndex.value++;
+      print('🔐 [PIN] New index: ${currentIndex.value}');
 
       // Auto-submit when all 4 digits are entered
       if (currentIndex.value == 4) {
+        print('🔐 [PIN] All 4 digits entered, calling onPinSubmit()');
         onPinSubmit();
       }
     }
@@ -65,7 +74,9 @@ class PinEntryController extends GetxController {
   }
 
   Future<void> onPinSubmit() async {
+    print('🔐 [PIN] ===== onPinSubmit() called =====');
     final pinCode = pin.join();
+    print('🔐 [PIN] PIN code: $pinCode (length: ${pinCode.length})');
 
     if (pinCode.length != 4) {
       CustomLoaders.showSnackBar(
@@ -76,7 +87,10 @@ class PinEntryController extends GetxController {
       return;
     }
 
+    print('🔐 [PIN] Selected profile: ${selectedProfile.value?.profileName ?? "NULL"}');
+    
     if (selectedProfile.value == null) {
+      print('🔐 [PIN] ERROR: No profile selected!');
       CustomLoaders.showSnackBar(
         type: SnackBarType.error,
         title: 'Erreur',
@@ -92,25 +106,38 @@ class PinEntryController extends GetxController {
         LottieAssets.loadingDots,
       );
 
+      print('🔐 [PIN] Validating PIN for profile: ${selectedProfile.value!.id}');
+
       //* Validate PIN with backend
       final response = await authRepo.validateProfilePin(
         profileId: selectedProfile.value!.id,
         pin: pinCode,
       );
 
+      print('🔐 [PIN] Response success: ${response.success}');
+      print('🔐 [PIN] Profile token saved: ${response.data?.profileToken != null}');
+
       //* Remove loader
       CustomFullscreenLoader.stopLoading();
 
       if (response.success) {
+        print('🔐 [PIN] Navigating to HomeScreen');
+        
         CustomLoaders.showSnackBar(
           type: SnackBarType.succes,
           title: 'Bienvenue!',
           message: 'PIN validé avec succès',
         );
 
+        // Small delay to show success message
+        await Future.delayed(const Duration(milliseconds: 300));
+
         // Navigate to home
         Get.offAll(() => const HomeScreen());
+        
+        print('🔐 [PIN] Navigation complete');
       } else {
+        print('🔐 [PIN] Validation failed: ${response.message}');
         // Clear PIN on failure
         resetPin();
 
@@ -120,7 +147,11 @@ class PinEntryController extends GetxController {
           message: response.message,
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('🔐 [PIN] ===== ERROR during validation =====');
+      print('🔐 [PIN] Error: $e');
+      print('🔐 [PIN] Stack trace: $stackTrace');
+      
       //* Remove loader
       CustomFullscreenLoader.stopLoading();
 

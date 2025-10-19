@@ -8,6 +8,7 @@ import 'package:le_petit_davinci/features/authentication/views/login.dart';
 import 'package:le_petit_davinci/features/authentication/views/pin.dart';
 import 'package:le_petit_davinci/features/authentication/views/user_selection.dart';
 import 'package:le_petit_davinci/features/authentication/views/welcome.dart';
+import 'package:le_petit_davinci/features/home/views/home.dart';
 import 'package:le_petit_davinci/features/rewards/bindings/rewards_binding.dart';
 import 'package:le_petit_davinci/features/rewards/views/rewards.dart';
 import 'package:le_petit_davinci/features/splash/splash_feature.dart';
@@ -45,6 +46,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.error,
       page: () => const ErrorScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: AppRoutes.home,
+      page: () => const HomeScreen(),
       transition: Transition.cupertino,
     ),
     // GetPage(

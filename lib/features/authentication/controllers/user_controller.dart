@@ -20,16 +20,16 @@ class UserController extends GetxController {
   Future<void> fetchUserRecords() async {
     isLoading.value = true;
     try {
+      print('👤 [UserController] Fetching user records');
       final UserDataResponse userDataResponse =
           await userRepo.fetchUserProfile();
 
       user.value = userDataResponse.data;
+      print('👤 [UserController] User records fetched successfully');
     } catch (e) {
-      CustomLoaders.showSnackBar(
-        type: SnackBarType.error,
-        title: 'Error',
-        message: '$e',
-      );
+      print('👤 [UserController] Error fetching user records: $e');
+      // Don't show error popup on home screen load
+      // Just log the error for debugging
     } finally {
       isLoading.value = false;
     }

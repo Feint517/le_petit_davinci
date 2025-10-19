@@ -17,6 +17,8 @@ class SignupController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  
+  final RxBool isGoogleLoading = false.obs;
 
   final authRepo = AuthenticationRepository.instance;
 
@@ -123,5 +125,62 @@ class SignupController extends GetxController {
       return 'Les mots de passe ne correspondent pas';
     }
     return null;
+  }
+
+  Future<void> signupWithGoogle() async {
+    try {
+      isGoogleLoading.value = true;
+      
+      print('🔐 [SignupController] Starting Google OAuth');
+      
+      //* Check internet connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.error,
+          title: 'Pas de connexion',
+          message: 'Vérifiez votre connexion internet',
+        );
+        return;
+      }
+      
+      final response = await authRepo.loginWithGoogle();
+      
+      if (response.success) {
+        print('🔐 [SignupController] Google OAuth successful');
+        
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.succes,
+          title: 'Succès',
+          message: 'Inscription avec Google réussie!',
+        );
+        
+        // Same navigation logic as regular signup
+        final profiles = response.data.profiles;
+        
+        if (profiles == null || profiles.isEmpty) {
+          Get.offAllNamed(AppRoutes.createProfile);
+        } else if (profiles.length == 1) {
+          Get.offAllNamed(
+            AppRoutes.pin,
+            arguments: {'profiles': profiles, 'autoSelect': true},
+          );
+        } else {
+          Get.offAllNamed(
+            AppRoutes.pin,
+            arguments: {'profiles': profiles, 'autoSelect': false},
+          );
+        }
+      }
+    } catch (e) {
+      print('🔐 [SignupController] Google OAuth error: $e');
+      CustomLoaders.showSnackBar(
+        type: SnackBarType.error,
+        title: 'Erreur',
+        message: 'Échec de l\'inscription Google: ${e.toString().replaceAll('Exception:', '').trim()}',
+      );
+    } finally {
+      isGoogleLoading.value = false;
+    }
   }
 }

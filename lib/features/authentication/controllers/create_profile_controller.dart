@@ -74,10 +74,17 @@ class CreateProfileController extends GetxController {
       final selectedAvatar = avatars[selectedAvatarIndex.value].image;
 
       // Create profile via API
-      await authRepo.createProfile(
+      final createdProfile = await authRepo.createProfile(
         profileName: profileName.text.trim(),
         pin: pinController.text,
         avatar: selectedAvatar,
+      );
+
+      // Auto-validate the PIN to get profile token
+      // since the user just created it with this PIN
+      await authRepo.validateProfilePin(
+        profileId: createdProfile.id,
+        pin: pinController.text,
       );
 
       CustomFullscreenLoader.stopLoading();
@@ -88,9 +95,9 @@ class CreateProfileController extends GetxController {
         message: 'Votre profil a été créé avec succès!',
       );
 
-      // Navigate to dashboard or home (skip PIN entry since we just created it)
+      // Navigate to onboarding questions to personalize the experience
       await Future.delayed(const Duration(milliseconds: 500));
-      Get.offAllNamed(AppRoutes.home);
+      Get.offAllNamed(AppRoutes.question);
     } catch (e) {
       CustomFullscreenLoader.stopLoading();
       CustomLoaders.showSnackBar(
