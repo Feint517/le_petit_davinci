@@ -9,8 +9,9 @@ import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/listen_and_choose_activity.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class ListenAndChooseView extends StatelessWidget {
   const ListenAndChooseView({super.key, required this.activity});
 
@@ -18,19 +19,36 @@ class ListenAndChooseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Listen carefully!',
+        'Choose the correct answer.',
+        'Use your ears to help you!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in ListenAndChooseView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          'Listen and choose the correct answer',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Gap(AppSizes.spaceBtwSections),
         Stack(
           alignment: Alignment.center,
           children: [

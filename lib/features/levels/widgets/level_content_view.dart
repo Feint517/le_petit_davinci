@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_wrapper.dart';
+import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
+import 'package:le_petit_davinci/features/levels/widgets/standard_activity_navigation.dart';
 
 class LevelContentView extends GetView<LevelController> {
   const LevelContentView({super.key});
@@ -40,22 +41,81 @@ class LevelContentView extends GetView<LevelController> {
         );
       }
 
-      // Use PageView for smooth activity navigation
-      return PageView.builder(
-        controller: controller.pageController,
-        itemCount: controller.totalItems,
-        physics: const NeverScrollableScrollPhysics(), // Disable manual swiping
-        onPageChanged: (index) {
-          // This will be handled by the PageController listener in the controller
-        },
-        itemBuilder: (context, index) {
-          final activity = controller.levelSet.activities[index];
-          return ActivityWrapper(
-            activity: activity.build(context),
-            showNavigation: false, // Navigation is handled by the outer wrapper
-          );
-        },
+      // Use Stack layout with PageView for activities and floating navigation buttons
+      return Stack(
+        children: [
+          // Activity content (full screen)
+          PageView.builder(
+            controller: controller.pageController,
+            itemCount: controller.totalItems,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final activity = controller.levelSet.activities[index];
+              return activity.build(context); // Direct activity rendering
+            },
+          ),
+
+          // Floating navigation buttons
+          ..._buildFloatingNavigationButtons(),
+        ],
       );
     });
+  }
+
+  List<Widget> _buildFloatingNavigationButtons() {
+    final currentActivity = controller.currentActivity;
+    final isAnswerReady = controller.isAnswerReady.value;
+    final requiresValidation = currentActivity.requiresValidation;
+
+    // Check if activity has custom navigation
+    if (currentActivity is ActivityNavigationInterface) {
+      final navInterface = currentActivity as ActivityNavigationInterface;
+      if (navInterface.useCustomNavigation) {
+        return [
+          if (navInterface.customNavigationWidget != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: navInterface.customNavigationWidget!,
+            ),
+        ];
+      }
+    }
+
+    // Get button configuration from activity
+    final buttonConfig =
+        (currentActivity is ActivityNavigationInterface)
+            ? (currentActivity as ActivityNavigationInterface).buttonConfig
+            : null;
+
+    final navigation = StandardActivityNavigation();
+    final audioButton = navigation.buildAudioButton(
+      currentActivity: currentActivity,
+      buttonConfig: buttonConfig,
+    );
+
+    List<Widget> buttons = [];
+
+    // Audio button at bottom left (if applicable)
+    if (audioButton != null) {
+      buttons.add(Positioned(left: 16, bottom: 16, child: audioButton));
+    }
+
+    // Main navigation button at bottom right
+    buttons.add(
+      Positioned(
+        right: 16,
+        bottom: 16,
+        child: navigation.buildCircularNavigationButton(
+          currentActivity: currentActivity,
+          isAnswerReady: isAnswerReady,
+          requiresValidation: requiresValidation,
+          buttonConfig: buttonConfig,
+        ),
+      ),
+    );
+
+    return buttons;
   }
 }

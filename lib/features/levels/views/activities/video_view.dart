@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class VideoActivityView extends StatelessWidget {
   const VideoActivityView({super.key, required this.activity});
@@ -9,13 +8,25 @@ class VideoActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: const Center(child: CircularProgressIndicator()),
-      mascotMixin: activity,
-      // startButtonText: 'Watch Video',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = ['Super! Prêt à voir la vidéo?', 'Regardons ensemble!'];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in VideoView: $e');
+        }
+      });
+    }
+
+    // Start the video immediately when the view is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      activity.startVideo();
+    });
+
+    return const Center(child: CircularProgressIndicator());
   }
 }

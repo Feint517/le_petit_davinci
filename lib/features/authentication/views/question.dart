@@ -15,7 +15,9 @@ class QuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(QuestionsController());
+    // Use lazyPut with fenix to prevent multiple instances
+    Get.lazyPut(() => QuestionsController(), fenix: true);
+    final controller = Get.find<QuestionsController>();
     return Scaffold(
       body: Stack(
         alignment: AlignmentDirectional.topCenter,

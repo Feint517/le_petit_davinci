@@ -5,7 +5,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/count_by_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/numpad.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class CountByView extends StatelessWidget {
   const CountByView({super.key, required this.activity});
@@ -14,24 +13,36 @@ class CountByView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s count by numbers!',
+        'Fill in the missing numbers.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in CountByView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          activity.instruction,
-          style: Get.textTheme.headlineSmall,
-          textAlign: TextAlign.center,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            activity.instruction,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         const Gap(AppSizes.spaceBtwSections * 2),
         Wrap(
@@ -59,7 +70,7 @@ class CountByView extends StatelessWidget {
             onBackspacePressed: activity.backspace,
           ),
         ),
-        const Gap(AppSizes.md),
+        const Gap(AppSizes.spaceBtwSections),
       ],
     );
   }

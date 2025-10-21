@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/features/home/views/home.dart';
+import 'package:le_petit_davinci/core/constants/assets_manager.dart';
+import 'package:le_petit_davinci/core/network/network_manager.dart';
+import 'package:le_petit_davinci/core/styles/loaders.dart';
+import 'package:le_petit_davinci/core/widgets/popups/fullscreen_loader.dart';
+import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
+import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class SignupController extends GetxController {
   // Form key
@@ -12,14 +17,10 @@ class SignupController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  
+  final RxBool isGoogleLoading = false.obs;
 
-  // Loading state
-  final isLoading = false.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final authRepo = AuthenticationRepository.instance;
 
   @override
   void onClose() {
@@ -41,47 +42,77 @@ class SignupController extends GetxController {
 
       // Check if passwords match
       if (password.text != confirmPassword.text) {
-        Get.snackbar(
-          'Erreur',
-          'Les mots de passe ne correspondent pas',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.error,
+          title: 'Erreur',
+          message: 'Les mots de passe ne correspondent pas',
         );
         return;
       }
 
-      isLoading.value = true;
-
-      // TODO: Implement actual signup logic here
-      // This is where you would call your API to create the user account
-      
-      // Simulate API call
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Show success message
-      Get.snackbar(
-        'Succès',
-        'Compte créé avec succès!',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
+      //* Start loading
+      CustomFullscreenLoader.openLoadingDialog(
+        'Création du compte...',
+        LottieAssets.loadingDots,
       );
 
-      // Navigate to homepage
-      Get.offAll(() => const HomeScreen());
+      //* Check internet connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        CustomFullscreenLoader.stopLoading();
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.error,
+          title: 'Pas de connexion',
+          message: 'Vérifiez votre connexion internet',
+        );
+        return;
+      }
 
+      //* Call register API
+      final response = await authRepo.register(
+        email: email.text.trim(),
+        password: password.text,
+        firstName: firstName.text.trim(),
+        lastName: lastName.text.trim(),
+      );
+
+      //* Remove loader
+      CustomFullscreenLoader.stopLoading();
+
+      if (response.success) {
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.succes,
+          title: 'Compte créé!',
+          message: 'Vérifiez votre email pour activer votre compte.',
+        );
+
+        // Navigate to email verification screen
+        Get.toNamed(
+          AppRoutes.emailVerification,
+          arguments: {
+            'email': email.text.trim(),
+            'password':
+                password
+                    .text, // Pass password for auto-login after verification
+          },
+        );
+      } else {
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.error,
+          title: 'Erreur',
+          message: response.message,
+        );
+      }
     } catch (e) {
-      // Handle errors
-      Get.snackbar(
-        'Erreur',
-        'Une erreur s\'est produite lors de la création du compte',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+      //* Remove loader
+      CustomFullscreenLoader.stopLoading();
+
+      //* Handle errors
+      CustomLoaders.showSnackBar(
+        type: SnackBarType.error,
+        title: 'Erreur',
+        message: e.toString().replaceAll('Exception:', '').trim(),
       );
-    } finally {
-      isLoading.value = false;
     }
   }
 
@@ -94,5 +125,62 @@ class SignupController extends GetxController {
       return 'Les mots de passe ne correspondent pas';
     }
     return null;
+  }
+
+  Future<void> signupWithGoogle() async {
+    try {
+      isGoogleLoading.value = true;
+      
+      print('🔐 [SignupController] Starting Google OAuth');
+      
+      //* Check internet connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.error,
+          title: 'Pas de connexion',
+          message: 'Vérifiez votre connexion internet',
+        );
+        return;
+      }
+      
+      final response = await authRepo.loginWithGoogle();
+      
+      if (response.success) {
+        print('🔐 [SignupController] Google OAuth successful');
+        
+        CustomLoaders.showSnackBar(
+          type: SnackBarType.succes,
+          title: 'Succès',
+          message: 'Inscription avec Google réussie!',
+        );
+        
+        // Same navigation logic as regular signup
+        final profiles = response.data.profiles;
+        
+        if (profiles == null || profiles.isEmpty) {
+          Get.offAllNamed(AppRoutes.createProfile);
+        } else if (profiles.length == 1) {
+          Get.offAllNamed(
+            AppRoutes.pin,
+            arguments: {'profiles': profiles, 'autoSelect': true},
+          );
+        } else {
+          Get.offAllNamed(
+            AppRoutes.pin,
+            arguments: {'profiles': profiles, 'autoSelect': false},
+          );
+        }
+      }
+    } catch (e) {
+      print('🔐 [SignupController] Google OAuth error: $e');
+      CustomLoaders.showSnackBar(
+        type: SnackBarType.error,
+        title: 'Erreur',
+        message: 'Échec de l\'inscription Google: ${e.toString().replaceAll('Exception:', '').trim()}',
+      );
+    } finally {
+      isGoogleLoading.value = false;
+    }
   }
 }

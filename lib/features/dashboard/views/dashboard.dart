@@ -18,7 +18,8 @@ class DashboardScreen extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(DashboardController());
+    // Use lazyPut with fenix to prevent multiple instances
+    Get.lazyPut(() => DashboardController(), fenix: true);
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: const CustomNavBar(),

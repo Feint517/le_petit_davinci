@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/follow_pattern_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/choice_button.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class FollowPatternView extends StatelessWidget {
   const FollowPatternView({super.key, required this.activity});
@@ -15,26 +14,38 @@ class FollowPatternView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s follow the pattern!',
+        'Find the next number in the sequence.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in FollowPatternView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent(context);
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(BuildContext context) {
     final textTheme = Get.textTheme;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          activity.instruction,
-          style: textTheme.headlineSmall,
-          textAlign: TextAlign.center,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            activity.instruction,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         const Gap(AppSizes.spaceBtwSections),
         // Display the pattern examples in a table
@@ -70,7 +81,7 @@ class FollowPatternView extends StatelessWidget {
                 style: textTheme.headlineMedium?.copyWith(
                   fontWeight:
                       (rowIndex == activity.examples.length || colIndex == 1)
-                          ? FontWeight.bold
+                          ? FontWeight.normal
                           : FontWeight.normal,
                 ),
               ),

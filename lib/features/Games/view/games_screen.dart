@@ -47,9 +47,7 @@ class GamesScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Gap(AppSizes.spaceBtwItems),
-
-                      const Gap(AppSizes.spaceBtwItems),
+                      const Gap(AppSizes.spaceBtwItems * 2),
                       Text(
                         "C'est l'heure de s'amuser !\nChoisis ton jeu préféré !",
                         style: Theme.of(context).textTheme.headlineMedium!

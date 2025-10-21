@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/bindings/general_bindings.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/themes/theme.dart';
 import 'package:le_petit_davinci/routes/app_pages.dart';
 import 'package:le_petit_davinci/routes/app_routes.dart';

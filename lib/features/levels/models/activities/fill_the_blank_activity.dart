@@ -15,11 +15,7 @@ class FillTheBlankActivity extends Activity
     required this.options,
     required this.correctAnswer,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s fill in the blank!',
-      'Choose the correct answer.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   final String questionSuffix;
@@ -64,7 +60,6 @@ class FillTheBlankActivity extends Activity
   @override
   void reset() {
     selectedIndex.value = null;
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

@@ -23,13 +23,7 @@ class ArrangeNumbersActivity extends Activity
     this.maxNumber,
     this.minNumber,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s arrange numbers!',
-      isAscending
-          ? 'Put them in order from smallest to largest.'
-          : 'Put them in order from largest to smallest.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   @override
@@ -55,7 +49,19 @@ class ArrangeNumbersActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

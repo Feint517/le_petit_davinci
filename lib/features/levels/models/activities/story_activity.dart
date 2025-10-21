@@ -35,11 +35,7 @@ class StoryActivity extends Activity
     visibleElements.add(elements.first);
     _setupListenerForCurrentElement();
 
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s read a story together!',
-      'Follow along and answer the questions.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   StoryElement get currentElement => elements[currentElementIndex.value];
@@ -121,7 +117,6 @@ class StoryActivity extends Activity
       }
     }
     _setupListenerForCurrentElement();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

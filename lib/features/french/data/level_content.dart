@@ -1,7 +1,7 @@
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/data/models/subject/level_content.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/audio_matching_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/drawing_activity.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/letter_tracing_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/listen_and_choose_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
@@ -13,16 +13,12 @@ import 'package:le_petit_davinci/features/levels/models/activities/follow_patter
 import 'package:le_petit_davinci/features/levels/models/activities/number_matching_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/shape_pattern_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/arrange_numbers_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/story_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
 import 'package:le_petit_davinci/features/levels/models/fill_the_blank_option_model.dart';
 import 'package:le_petit_davinci/features/levels/models/selectable_option_model.dart';
 import 'package:le_petit_davinci/features/levels/models/pattern_models.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
 import 'package:le_petit_davinci/features/levels/models/number_matching_models.dart';
-import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
-import 'package:le_petit_davinci/features/levels/models/story_element_model.dart';
 
 final Map<int, LevelContent> unifiedFrenchLevels = {
   // ========== Group 1: A, B, C, D ==========
@@ -31,11 +27,54 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Testons toutes les activités disponibles !',
     lessonId: 'test_all_activities_fr',
     activities: [
-      // Lesson Activities (auto-complete) 
-      LetterTracingActivity(
-        letter: 'A',
-        prompt: 'Trace la lettre "A" !',
-      ), 
+      ListenAndChooseActivity(
+        imageAssets: [
+          ImageAssets.apple,
+          ImageAssets.cat,
+          ImageAssets.dog,
+          ImageAssets.bird,
+        ],
+        correctAnswer: 0,
+        label: 'Pomme',
+      ),
+      ReorderWordsActivity(
+        words: ['est', 'un', 'Ceci', 'chat'],
+        correctOrder: [2, 0, 1, 3],
+      ),
+      SolveEquationActivity(
+        equation: '2 + 3 = ?',
+        options: [3, 4, 5, 6],
+        correctAnswer: 5,
+      ),
+      CountByActivity(
+        instruction: 'Compte par 2 !',
+        initialSequence: [2, 4, 6],
+        numberOfInputs: 2,
+        correctAnswers: [8, 10],
+      ),
+      FollowPatternActivity(
+        instruction: 'Suit le motif !',
+        examples: ['2, 4, 6', '1, 3, 5'],
+        question: 'Quel est le prochain nombre ?',
+        options: [7, 8, 9, 10],
+        correctAnswerIndex: 1,
+      ),
+
+      // NumberMatchingActivity(
+      //   instruction: 'Associe les nombres !',
+      //   items: [
+      //     NumberMatchingItem(
+      //       number: '1',
+      //       imageAsset: ImageAssets.apple,
+      //       quantity: 1,
+      //     ),
+      //     NumberMatchingItem(
+      //       number: '2',
+      //       imageAsset: ImageAssets.cat,
+      //       quantity: 2,
+      //     ),
+      //   ],
+      // ),
       MemoryCardActivity(
         instruction: 'Trouve les paires !',
         cardPairs: [
@@ -75,14 +114,17 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
           ),
         ],
       ),
-      AudioMatchingActivity(
-        prompt: 'Associe le son à la lettre !',
-        pairs: [
-          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
-          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
-          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
-          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
+      LetterTracingActivity(letter: 'A', prompt: 'Trace la lettre "A" !'),
+
+      // Lesson Activities (auto-complete)
+      FillTheBlankActivity(
+        questionSuffix: ' comme dans Arbre.',
+        options: [
+          FillTheBlankOption(optionText: 'A'),
+          FillTheBlankOption(optionText: 'B'),
+          FillTheBlankOption(optionText: 'C'),
         ],
+        correctAnswer: 0,
       ),
       MultipleChoiceActivity(
         instruction: 'Quelle lettre vient après A ?',
@@ -93,67 +135,21 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
         ],
         correctIndices: [0],
       ),
+      AudioMatchingActivity(
+        prompt: 'Associe le son à la lettre !',
+        pairs: [
+          AudioWordPair(audioAssetPath: AudioAssets.a_fr, word: 'A'),
+          AudioWordPair(audioAssetPath: AudioAssets.b_fr, word: 'B'),
+          AudioWordPair(audioAssetPath: AudioAssets.c_fr, word: 'C'),
+          AudioWordPair(audioAssetPath: AudioAssets.d_fr, word: 'D'),
+        ],
+      ),
+
       // Exercise Activities (require validation)
-      FillTheBlankActivity(
-        questionSuffix: ' comme dans Arbre.',
-        options: [
-          FillTheBlankOption(optionText: 'A'),
-          FillTheBlankOption(optionText: 'B'),
-          FillTheBlankOption(optionText: 'C'),
-        ],
-        correctAnswer: 0,
-      ),
-      ListenAndChooseActivity(
-        imageAssets: [
-          ImageAssets.apple,
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-        ],
-        correctAnswer: 0,
-        label: 'Pomme',
-      ),
-      ReorderWordsActivity(
-        words: ['est', 'un', 'Ceci', 'chat'],
-        correctOrder: [2, 0, 1, 3],
-      ),
-      SolveEquationActivity(
-        equation: '2 + 3 = ?',
-        options: [3, 4, 5, 6],
-        correctAnswer: 5,
-      ),
-      CountByActivity(
-        instruction: 'Compte par 2 !',
-        initialSequence: [2, 4, 6],
-        numberOfInputs: 2,
-        correctAnswers: [8, 10],
-      ),
-      FollowPatternActivity(
-        instruction: 'Suit le motif !',
-        examples: ['2, 4, 6', '1, 3, 5'],
-        question: 'Quel est le prochain nombre ?',
-        options: [7, 8, 9, 10],
-        correctAnswerIndex: 1,
-      ),
-      NumberMatchingActivity(
-        instruction: 'Associe les nombres !',
-        items: [
-          NumberMatchingItem(number: '1', imageAsset: ImageAssets.apple, quantity: 1),
-          NumberMatchingItem(number: '2', imageAsset: ImageAssets.cat, quantity: 2),
-        ],
-      ),
       ShapePatternActivity(
         instruction: 'Trouve le motif des formes !',
-        patternImages: [
-          ImageAssets.apple,
-          ImageAssets.cat,
-          ImageAssets.apple,
-        ],
-        optionImages: [
-          ImageAssets.cat,
-          ImageAssets.dog,
-          ImageAssets.bird,
-        ],
+        patternImages: [ImageAssets.apple, ImageAssets.cat, ImageAssets.apple],
+        optionImages: [ImageAssets.cat, ImageAssets.dog, ImageAssets.bird],
         correctIndex: 0,
         patternType: PatternType.shapes,
       ),
@@ -161,24 +157,6 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
         instruction: 'Range les nombres dans l\'ordre !',
         numbers: [3, 1, 4, 2],
         isAscending: true,
-      ),
-      StoryProblemActivity(
-        instruction: 'Résous ce problème !',
-        draggableOptions: [
-          DraggableItem(id: 'apple1', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-          DraggableItem(id: 'apple2', label: 'Pomme', value: 1, imageAsset: ImageAssets.apple),
-        ],
-        correctTotalValue: 2,
-      ),
-      StoryActivity(
-        title: 'Histoire du petit chat',
-        elements: [
-          DialogueLine(
-            characterName: 'Narrateur',
-            avatarAsset: ImageAssets.cat,
-            text: 'Il était une fois un petit chat qui aimait jouer dans le jardin.',
-          ),
-        ],
       ),
     ],
   ),
@@ -233,22 +211,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Il est temps d\'apprendre E, F, G, et H !',
     lessonId: 'alphabet_efgh_fr',
     activities: [
-      LetterTracingActivity(
-        letter: 'E',
-        prompt: 'Trace la lettre "E" !',
-      ),
-      LetterTracingActivity(
-        letter: 'F',
-        prompt: 'Trace la lettre "F" !',
-      ),
-      LetterTracingActivity(
-        letter: 'G',
-        prompt: 'Trace la lettre "G" !',
-      ),
-      LetterTracingActivity(
-        letter: 'H',
-        prompt: 'Trace la lettre "H" !',
-      ),
+      LetterTracingActivity(letter: 'E', prompt: 'Trace la lettre "E" !'),
+      LetterTracingActivity(letter: 'F', prompt: 'Trace la lettre "F" !'),
+      LetterTracingActivity(letter: 'G', prompt: 'Trace la lettre "G" !'),
+      LetterTracingActivity(letter: 'H', prompt: 'Trace la lettre "H" !'),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -312,22 +278,10 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
     introduction: 'Apprenons I, J, K, et L !',
     lessonId: 'alphabet_ijkl_fr',
     activities: [
-      LetterTracingActivity(
-        letter: 'I',
-        prompt: 'Trace la lettre "I" !',
-      ),
-      LetterTracingActivity(
-        letter: 'J',
-        prompt: 'Trace la lettre "J" !',
-      ),
-      LetterTracingActivity(
-        letter: 'K',
-        prompt: 'Trace la lettre "K" !',
-      ),
-      LetterTracingActivity(
-        letter: 'L',
-        prompt: 'Trace la lettre "L" !',
-      ),
+      LetterTracingActivity(letter: 'I', prompt: 'Trace la lettre "I" !'),
+      LetterTracingActivity(letter: 'J', prompt: 'Trace la lettre "J" !'),
+      LetterTracingActivity(letter: 'K', prompt: 'Trace la lettre "K" !'),
+      LetterTracingActivity(letter: 'L', prompt: 'Trace la lettre "L" !'),
       AudioMatchingActivity(
         prompt: 'Associe le son à la lettre !',
         pairs: [
@@ -385,6 +339,4 @@ final Map<int, LevelContent> unifiedFrenchLevels = {
       ),
     ],
   ),
- 
-  
 };

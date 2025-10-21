@@ -42,5 +42,3 @@ class PlayerModel {
         isCurrentUser.hashCode;
   }
 }
-
-

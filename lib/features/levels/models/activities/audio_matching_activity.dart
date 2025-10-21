@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/audio_matching_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
@@ -10,15 +11,37 @@ class AudioMatchingActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   AudioMatchingActivity({required this.prompt, required this.pairs}) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s match audio with words!',
-      'Listen and find the matching word.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   final String prompt;
   final List<AudioWordPair> pairs;
+
+  /// Track matched pairs for completion detection
+  final RxList<String> matchedWords = <String>[].obs;
+
+  /// Whether all pairs have been matched
+  bool get isAllPairsMatched => matchedWords.length == pairs.length;
+
+  /// Add a matched word to the list
+  void addMatchedWord(String word) {
+    if (!matchedWords.contains(word)) {
+      matchedWords.add(word);
+
+      // Check if all pairs are matched
+      if (isAllPairsMatched) {
+        // Mark activity as completed
+        isCompleted.value = true;
+      }
+    }
+  }
+
+  /// Reset the activity state
+  @override
+  void reset() {
+    super.reset();
+    matchedWords.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +66,7 @@ class AudioMatchingActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
   }
 }

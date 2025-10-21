@@ -11,11 +11,7 @@ class ReorderWordsActivity extends Activity
     with MascotIntroductionMixin
     implements ActivityNavigationInterface {
   ReorderWordsActivity({required this.words, required this.correctOrder}) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s reorder the words!',
-      'Put the words in the correct order.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   // Override to indicate this activity requires validation
@@ -56,7 +52,6 @@ class ReorderWordsActivity extends Activity
   @override
   void reset() {
     selectedOrder.clear();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---
@@ -77,7 +72,19 @@ class ReorderWordsActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

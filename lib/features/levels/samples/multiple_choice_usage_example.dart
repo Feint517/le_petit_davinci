@@ -3,7 +3,6 @@ import 'package:le_petit_davinci/features/levels/models/selectable_option_model.
 
 /// Example demonstrating how to create and use the enhanced MultipleChoiceActivity
 class MultipleChoiceUsageExample {
-  
   /// Example 1: Multiple Choice with Network Images
   static MultipleChoiceActivity createAnimalQuiz() {
     return MultipleChoiceActivity(
@@ -12,22 +11,26 @@ class MultipleChoiceUsageExample {
       options: [
         SelectableOption(
           label: 'Lion',
-          imagePath: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Rabbit',
-          imagePath: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Tiger',
-          imagePath: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Cow',
-          imagePath: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
       ],
@@ -74,22 +77,26 @@ class MultipleChoiceUsageExample {
       options: [
         SelectableOption(
           label: 'Earth',
-          imagePath: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Jupiter',
-          imagePath: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Mars',
-          imagePath: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Venus',
-          imagePath: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
       ],
@@ -105,7 +112,8 @@ class MultipleChoiceUsageExample {
       options: [
         SelectableOption(
           label: 'Refrigerator',
-          imagePath: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
@@ -115,22 +123,28 @@ class MultipleChoiceUsageExample {
         ),
         SelectableOption(
           label: 'Stove',
-          imagePath: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
         SelectableOption(
           label: 'Sink',
-          imagePath: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop',
+          imagePath:
+              'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop',
           isNetworkImage: true,
         ),
       ],
-      correctIndices: [0, 2, 3], // Refrigerator, Stove, and Sink are kitchen items
+      correctIndices: [
+        0,
+        2,
+        3,
+      ], // Refrigerator, Stove, and Sink are kitchen items
     );
   }
 }
 
 /// Usage Instructions:
-/// 
+///
 /// 1. Create a MultipleChoiceActivity with your desired options
 /// 2. Add it to a LevelSet in your level content
 /// 3. The activity will automatically handle:
@@ -139,7 +153,7 @@ class MultipleChoiceUsageExample {
 ///    - Answer validation
 ///    - User feedback (correct/incorrect)
 ///    - Mascot introduction
-/// 
+///
 /// Key Features:
 /// - Supports both network images and local assets
 /// - Multiple selection capability
@@ -147,10 +161,6 @@ class MultipleChoiceUsageExample {
 /// - Responsive UI with loading states
 /// - Error handling for failed image loads
 /// - Integration with the existing level system
-
-
-
-
 
 
 

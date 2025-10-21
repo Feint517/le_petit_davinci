@@ -13,26 +13,31 @@ final Map<int, LevelContent> multipleChoiceSampleLevels = {
       // Multiple Choice with Network Images
       MultipleChoiceActivity(
         question: 'Which of these animals are mammals?',
-        instruction: 'Select all the correct answers. You can choose multiple options.',
+        instruction:
+            'Select all the correct answers. You can choose multiple options.',
         options: [
           SelectableOption(
             label: 'Dog',
-            imagePath: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Eagle',
-            imagePath: 'https://images.unsplash.com/photo-1551085254-e96b210db58b?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1551085254-e96b210db58b?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Cat',
-            imagePath: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Shark',
-            imagePath: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
         ],
@@ -56,12 +61,14 @@ final Map<int, LevelContent> multipleChoiceSampleLevels = {
           ),
           SelectableOption(
             label: 'Cherry',
-            imagePath: 'https://images.unsplash.com/photo-1518635017498-87f514b751ba?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1518635017498-87f514b751ba?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Strawberry',
-            imagePath: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
         ],
@@ -75,22 +82,26 @@ final Map<int, LevelContent> multipleChoiceSampleLevels = {
         options: [
           SelectableOption(
             label: 'London',
-            imagePath: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Paris',
-            imagePath: 'https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Berlin',
-            imagePath: 'https://images.unsplash.com/photo-1587330979470-3595ac045ab0?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1587330979470-3595ac045ab0?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Madrid',
-            imagePath: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
         ],
@@ -110,22 +121,26 @@ final Map<int, LevelContent> multipleChoiceSampleLevels = {
         options: [
           SelectableOption(
             label: 'Triangle',
-            imagePath: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Square',
-            imagePath: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Rectangle',
-            imagePath: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
           SelectableOption(
             label: 'Circle',
-            imagePath: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
+            imagePath:
+                'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
             isNetworkImage: true,
           ),
         ],
@@ -134,11 +149,3 @@ final Map<int, LevelContent> multipleChoiceSampleLevels = {
     ],
   ),
 };
-
-
-
-
-
-
-
-

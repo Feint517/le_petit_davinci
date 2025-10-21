@@ -6,8 +6,9 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/activities.dart';
 import 'package:le_petit_davinci/features/levels/models/memory_card_models.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class MemoryCardActivityView extends StatelessWidget {
   const MemoryCardActivityView({super.key, required this.activity});
 
@@ -15,15 +16,26 @@ class MemoryCardActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Game',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      //   activity.startGame();
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s play a memory game!',
+        activity.instruction,
+        'Find the matching pairs!',
+        'Use your memory to win!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in MemoryCardView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

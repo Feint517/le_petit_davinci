@@ -16,12 +16,21 @@ final List<SubjectCardModel> subjects = [
     cardColor: AppColors.primary,
     destination: const FrenchMapScreen(),
   ),
+<<<<<<< HEAD
   /*SubjectCardModel(
     name: 'Mathématiques',
     imagePath: SvgAssets.mathCard,
     cardColor: AppColors.black,
     destination: const MathMapScreen2(),
   ),*/
+=======
+  // SubjectCardModel(
+  //   name: 'Mathématiques',
+  //   imagePath: SvgAssets.mathCard,
+  //   cardColor: AppColors.black,
+  //   destination: const MathMapScreen2(),
+  // ),
+>>>>>>> origin/AUTH
   SubjectCardModel(
     name: 'Mathématiques',
     imagePath: SvgAssets.mathCard,

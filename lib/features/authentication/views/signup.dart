@@ -7,7 +7,6 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/constants/text_strings.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
-import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/core/widgets/images/responsive_image_asset.dart';
 import 'package:le_petit_davinci/core/widgets/text_fields/custom_text_field.dart';
@@ -90,20 +89,25 @@ class _SignupScreenState extends State<SignupScreen> {
                           Expanded(
                             child: CustomButton(
                               label: StringsManager.emailSignup,
-                              onPressed: () => setState(() => showAuth0Options = false),
-                              variant: showAuth0Options 
-                                  ? ButtonVariant.ghost 
-                                  : ButtonVariant.primary,
+                              onPressed:
+                                  () =>
+                                      setState(() => showAuth0Options = false),
+                              variant:
+                                  showAuth0Options
+                                      ? ButtonVariant.ghost
+                                      : ButtonVariant.primary,
                             ),
                           ),
                           const Gap(8),
                           Expanded(
                             child: CustomButton(
                               label: StringsManager.socialSignup,
-                              onPressed: () => setState(() => showAuth0Options = true),
-                              variant: showAuth0Options 
-                                  ? ButtonVariant.primary 
-                                  : ButtonVariant.ghost,
+                              onPressed:
+                                  () => setState(() => showAuth0Options = true),
+                              variant:
+                                  showAuth0Options
+                                      ? ButtonVariant.primary
+                                      : ButtonVariant.ghost,
                             ),
                           ),
                         ],
@@ -124,26 +128,26 @@ class _SignupScreenState extends State<SignupScreen> {
                                 hintText: StringsManager.firstName,
                               ),
                               Gap(AppSizes.spaceBtwInputFields.h),
-                              
+
                               CustomTextField(
                                 type: TextFieldType.text,
                                 controller: signupController.lastName,
                                 hintText: StringsManager.lastName,
                               ),
                               Gap(AppSizes.spaceBtwInputFields.h),
-                              
+
                               CustomTextField(
                                 type: TextFieldType.email,
                                 controller: signupController.email,
                               ),
                               Gap(AppSizes.spaceBtwInputFields.h),
-                              
+
                               CustomTextField(
                                 type: TextFieldType.password,
                                 controller: signupController.password,
                               ),
                               Gap(AppSizes.spaceBtwInputFields.h),
-                              
+
                               CustomTextField(
                                 type: TextFieldType.password,
                                 controller: signupController.confirmPassword,
@@ -162,60 +166,75 @@ class _SignupScreenState extends State<SignupScreen> {
                         Column(
                           children: [
                             // Google Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.g_mobiledata,
-                              label: StringsManager.continueWithGoogle,
-                              backgroundColor: Colors.white,
-                              textColor: Colors.black87,
-                              isLoading: false,
+                            Obx(
+                              () => SocialLoginButton(
+                                onTap: signupController.isGoogleLoading.value
+                                    ? () {}
+                                    : () => signupController.signupWithGoogle(),
+                                icon: Icons.g_mobiledata,
+                                label: StringsManager.continueWithGoogle,
+                                backgroundColor: Colors.white,
+                                textColor: Colors.black87,
+                                isLoading: signupController.isGoogleLoading.value,
+                              ),
                             ),
-                            
-                            Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
+                            // Gap(AppSizes.spaceBtwInputFields.h),
+
                             // Facebook Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.facebook,
-                              label: StringsManager.continueWithFacebook,
-                              backgroundColor: const Color(0xFF1877F2),
-                              textColor: Colors.white,
-                              isLoading: false,
-                            ),
-                            
+                            // SocialLoginButton(
+                            //   onTap: () {},
+                            //   icon: Icons.facebook,
+                            //   label: StringsManager.continueWithFacebook,
+                            //   backgroundColor: const Color(0xFF1877F2),
+                            //   textColor: Colors.white,
+                            //   isLoading: false,
+                            // ),
+
+                            // Gap(AppSizes.spaceBtwInputFields.h),
+
+                            // // Microsoft Signup
+                            // SocialLoginButton(
+                            //   onTap: () {},
+                            //   icon: Icons.business,
+                            //   label: StringsManager.continueWithMicrosoft,
+                            //   backgroundColor: const Color(0xFF00BCF2),
+                            //   textColor: Colors.white,
+                            //   isLoading: false,
+                            // ),
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
-                            // Microsoft Signup
-                            SocialLoginButton(
-                              onTap: () {},
-                              icon: Icons.business,
-                              label: StringsManager.continueWithMicrosoft,
-                              backgroundColor: const Color(0xFF00BCF2),
-                              textColor: Colors.white,
-                              isLoading: false,
-                            ),
-                            
-                            Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Divider
                             Row(
                               children: [
-                                const Expanded(child: Divider(color: AppColors.textSecondary)),
+                                const Expanded(
+                                  child: Divider(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
                                   child: Text(
                                     'OU',
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall?.copyWith(
                                       color: AppColors.textSecondary,
                                     ),
                                   ),
                                 ),
-                                const Expanded(child: Divider(color: AppColors.textSecondary)),
+                                const Expanded(
+                                  child: Divider(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                               ],
                             ),
-                            
+
                             Gap(AppSizes.spaceBtwInputFields.h),
-                            
+
                             // Universal Signup
                             CustomButton(
                               label: StringsManager.signupWithAuth0,

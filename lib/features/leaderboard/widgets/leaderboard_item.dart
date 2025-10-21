@@ -22,11 +22,15 @@ class LeaderboardItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 12.h),
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: isCurrentUser ? AppColors.primary.withOpacity(0.1) : AppColors.white,
+        color:
+            isCurrentUser
+                ? AppColors.primary.withOpacity(0.1)
+                : AppColors.white,
         borderRadius: BorderRadius.circular(16.r),
-        border: isCurrentUser 
-            ? Border.all(color: AppColors.primary, width: 2.w)
-            : Border.all(color: AppColors.grey.withOpacity(0.2)),
+        border:
+            isCurrentUser
+                ? Border.all(color: AppColors.primary, width: 2.w)
+                : Border.all(color: AppColors.grey.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -56,9 +60,9 @@ class LeaderboardItem extends StatelessWidget {
               ),
             ),
           ),
-          
+
           Gap(16.w),
-          
+
           // Avatar
           Container(
             width: 50.w,
@@ -68,15 +72,12 @@ class LeaderboardItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.r),
             ),
             child: Center(
-              child: Text(
-                player.avatar,
-                style: TextStyle(fontSize: 24.sp),
-              ),
+              child: Text(player.avatar, style: TextStyle(fontSize: 24.sp)),
             ),
           ),
-          
+
           Gap(16.w),
-          
+
           // Player info
           Expanded(
             child: Column(
@@ -87,7 +88,10 @@ class LeaderboardItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: isCurrentUser ? AppColors.primary : AppColors.textPrimary,
+                    color:
+                        isCurrentUser
+                            ? AppColors.primary
+                            : AppColors.textPrimary,
                   ),
                 ),
                 Gap(4.h),
@@ -101,7 +105,7 @@ class LeaderboardItem extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Stars
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -109,11 +113,7 @@ class LeaderboardItem extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 18.sp,
-                  ),
+                  Icon(Icons.star, color: Colors.amber, size: 18.sp),
                   Gap(4.w),
                   Text(
                     player.totalStars.toString(),
@@ -153,5 +153,3 @@ class LeaderboardItem extends StatelessWidget {
     }
   }
 }
-
-

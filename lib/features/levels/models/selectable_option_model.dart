@@ -5,7 +5,7 @@ class SelectableOption {
   final String? question;
 
   SelectableOption({
-    required this.label, 
+    required this.label,
     required this.imagePath,
     this.isNetworkImage = false,
     this.question,

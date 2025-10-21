@@ -7,8 +7,9 @@ import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/reorder_words_activity.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
 import 'package:le_petit_davinci/features/levels/widgets/play_audio_button.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class ReorderWordsView extends StatefulWidget {
   const ReorderWordsView({super.key, required this.activity});
 
@@ -19,22 +20,32 @@ class ReorderWordsView extends StatefulWidget {
 }
 
 class _ReorderWordsViewState extends State<ReorderWordsView> {
-
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: widget.activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   widget.activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!widget.activity.isInitialized.value) {
+      final messages = [
+        'Let\'s reorder the words!',
+        'Put the words in the correct order.',
+        'Think about the sentence structure!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          widget.activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in ReorderWordsView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Audio section with instruction text
@@ -42,11 +53,7 @@ class _ReorderWordsViewState extends State<ReorderWordsView> {
           children: [
             Text(
               'Listen to the audio and then reorder the words',
-              style: Get.textTheme.titleMedium?.copyWith(
-                color: AppColors.black,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const Gap(AppSizes.lg),
             // Audio button

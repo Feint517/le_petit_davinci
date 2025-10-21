@@ -9,6 +9,12 @@ class AnimationAssets {
   static const String talkingBear = 'assets/animations/rive/talking_bear.riv';
   static const String happyBear = 'assets/animations/rive/happy_bear.riv';
   static const String sadBear = 'assets/animations/rive/sad_bear.riv';
+  static const String boy1 = 'assets/animations/rive/boy1.riv';
+  static const String boy2 = 'assets/animations/rive/boy2.riv';
+  static const String girl1 = 'assets/animations/rive/girl1.riv';
+  static const String girl2 = 'assets/animations/rive/girl2.riv';
+  static const String games = 'assets/animations/rive/games.riv';
+  static const String subjects = 'assets/animations/rive/subjects.riv';
 }
 
 class ImageAssets {
@@ -149,6 +155,11 @@ class SvgAssets {
   //* logo
   static const String StripeLogo = 'assets/images/logos/stripe_logo.svg';
 
+  //* levels backgroungs
+  static const String blueBackground = 'assets/svg/misc/blue_background.svg';
+  static const String purpleBackground = 'assets/svg/misc/purple_background.svg';
+  static const String yellowBackground = 'assets/svg/misc/yellow_background.svg';
+
   //* First time questions
   static const String questionsBackground =
       'assets/svg/questoins_background.svg';
@@ -272,7 +283,7 @@ class SvgAssets {
   static const String bearMasscot = 'assets/svg/mascots/bear_masscot.svg';
   static const String happyCat = 'assets/svg/mascots/happy_cat.svg';
   static const String peakingMascot = 'assets/svg/mascots/peaking_mascot.svg';
-  
+
   //* badges
   static const String masterOfSounds = 'assets/icons/masterofsounds.svg';
 }

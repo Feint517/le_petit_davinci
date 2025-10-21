@@ -26,9 +26,9 @@ class LeaderboardHeader extends StatelessWidget {
               color: AppColors.primary,
             ),
           ),
-          
+
           Gap(16.h),
-          
+
           // Title
           Text(
             'Leaderboard',
@@ -38,21 +38,18 @@ class LeaderboardHeader extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
           ),
-          
+
           Gap(8.h),
-          
+
           // Subtitle
           Text(
             'See how you rank among other learners!',
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: AppColors.textSecondary,
-            ),
+            style: TextStyle(fontSize: 16.sp, color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
-          
+
           Gap(20.h),
-          
+
           // Stats row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,10 +88,7 @@ class LeaderboardHeader extends StatelessWidget {
         Gap(4.h),
         Text(
           label,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: AppColors.textSecondary,
-          ),
+          style: TextStyle(fontSize: 12.sp, color: AppColors.textSecondary),
         ),
       ],
     );

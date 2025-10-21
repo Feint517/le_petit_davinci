@@ -16,7 +16,6 @@ class MultipleChoiceActivity extends Activity
   final String? question;
 
   final RxList<int> selectedIndices = <int>[].obs;
-  final RxBool isIntroCompleted = false.obs;
 
   // Override to indicate this activity requires validation
   @override
@@ -28,11 +27,7 @@ class MultipleChoiceActivity extends Activity
     required this.correctIndices,
     this.question,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s answer this question!',
-      'Choose all the correct answers.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   void toggleSelection(int index) {
@@ -42,8 +37,6 @@ class MultipleChoiceActivity extends Activity
       selectedIndices.add(index);
     }
   }
-
-  void markIntroAsCompleted() => isIntroCompleted.value = true;
 
   void submitAnswer() => markCompleted(); // Use the new unified helper method
 
@@ -64,8 +57,9 @@ class MultipleChoiceActivity extends Activity
     // Sort both lists for comparison
     final sortedSelected = List<int>.from(selectedIndices)..sort();
     final sortedCorrect = List<int>.from(correctIndices)..sort();
-    
-    final bool isCorrect = sortedSelected.length == sortedCorrect.length &&
+
+    final bool isCorrect =
+        sortedSelected.length == sortedCorrect.length &&
         sortedSelected.every((index) => sortedCorrect.contains(index));
 
     // Create correct answer text from the correct options
@@ -82,7 +76,6 @@ class MultipleChoiceActivity extends Activity
   @override
   void reset() {
     selectedIndices.clear();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---
@@ -103,7 +96,19 @@ class MultipleChoiceActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

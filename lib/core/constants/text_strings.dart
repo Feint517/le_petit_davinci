@@ -25,7 +25,7 @@ class StringsManager {
   static const String homeScreenMessage =
       "Bonjour Alex ! Prêt pour une nouvelle aventure ?";
   static const String discoverMySpace = "Découvrir mon espace";
-  
+
   //* Signup related strings
   static const String signupText = "Créez votre compte\nau Petit Davinci";
   static const String alreadyHaveAccount = "Déjà un compte?";

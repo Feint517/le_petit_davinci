@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/styles/shadows.dart';
 import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/fill_the_blank_activity.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class FillTheBlankView extends StatelessWidget {
   const FillTheBlankView({super.key, required this.activity});
@@ -15,14 +14,24 @@ class FillTheBlankView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s fill in the blank!',
+        'Choose the correct answer.',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in FillTheBlankView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

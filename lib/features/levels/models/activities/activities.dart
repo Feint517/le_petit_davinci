@@ -2,7 +2,7 @@
 
 // Lesson Activities (auto-complete)
 export 'video_activity.dart';
-export 'drawing_activity.dart';
+export 'letter_tracing_activity.dart';
 export 'memory_card_activity.dart';
 export 'audio_matching_activity.dart';
 

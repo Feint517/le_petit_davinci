@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/multiple_choice_activity.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class MultipleChoiceView extends StatelessWidget {
   const MultipleChoiceView({super.key, required this.activity});
@@ -12,10 +11,31 @@ class MultipleChoiceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
+    // Initialize mascot when the view is built (only if not already initialized)
+    debugPrint(
+      'MultipleChoiceView build - isInitialized: ${activity.isInitialized.value}',
     );
+    if (!activity.isInitialized.value) {
+      debugPrint('MultipleChoiceView: Initializing mascot');
+      final messages = [
+        'Let\'s answer this question!',
+        'Choose all the correct answers.',
+        'Take your time and think carefully!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in MultipleChoiceView: $e');
+        }
+      });
+    } else {
+      debugPrint('MultipleChoiceView: Mascot already initialized, skipping');
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {
@@ -31,7 +51,9 @@ class MultipleChoiceView extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(AppSizes.md),
-              border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+              border: Border.all(
+                color: AppColors.primary.withValues(alpha: 0.3),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +76,8 @@ class MultipleChoiceView extends StatelessWidget {
                   ),
                 ],
                 if (activity.instruction.isNotEmpty) ...[
-                  if (activity.question != null) const SizedBox(height: AppSizes.sm),
+                  if (activity.question != null)
+                    const SizedBox(height: AppSizes.sm),
                   Text(
                     'Instruction:',
                     style: Get.textTheme.labelMedium?.copyWith(
@@ -97,23 +120,22 @@ class MultipleChoiceView extends StatelessWidget {
 
   Widget _buildOptionCard(int index) {
     final option = activity.options[index];
-    
+
     return Obx(() {
       final isSelected = activity.selectedIndices.contains(index);
-      
+
       return GestureDetector(
         onTap: () => activity.toggleSelection(index),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
-            color: isSelected 
-                ? AppColors.primary.withValues(alpha: 0.1)
-                : AppColors.white,
+            color:
+                isSelected
+                    ? AppColors.primary.withValues(alpha: 0.1)
+                    : AppColors.white,
             borderRadius: BorderRadius.circular(AppSizes.md),
             border: Border.all(
-              color: isSelected 
-                  ? AppColors.primary
-                  : AppColors.lightGrey,
+              color: isSelected ? AppColors.primary : AppColors.lightGrey,
               width: isSelected ? 2 : 1,
             ),
             boxShadow: [
@@ -139,29 +161,34 @@ class MultipleChoiceView extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSizes.sm),
-                    child: option.isNetworkImage
-                        ? Image.network(
-                            option.imagePath,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return _buildErrorWidget();
-                            },
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return _buildLoadingWidget();
-                            },
-                          )
-                        : Image.asset(
-                            option.imagePath,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return _buildErrorWidget();
-                            },
-                          ),
+                    child:
+                        option.isNetworkImage
+                            ? Image.network(
+                              option.imagePath,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildErrorWidget();
+                              },
+                              loadingBuilder: (
+                                context,
+                                child,
+                                loadingProgress,
+                              ) {
+                                if (loadingProgress == null) return child;
+                                return _buildLoadingWidget();
+                              },
+                            )
+                            : Image.asset(
+                              option.imagePath,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildErrorWidget();
+                              },
+                            ),
                   ),
                 ),
               ),
-              
+
               // Label Section
               Expanded(
                 flex: 1,
@@ -175,12 +202,9 @@ class MultipleChoiceView extends StatelessWidget {
                     child: Text(
                       option.label,
                       style: Get.textTheme.bodyMedium?.copyWith(
-                        color: isSelected 
-                            ? AppColors.primary
-                            : AppColors.black,
-                        fontWeight: isSelected 
-                            ? FontWeight.bold
-                            : FontWeight.normal,
+                        color: isSelected ? AppColors.primary : AppColors.black,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                       textAlign: TextAlign.center,
                       maxLines: 2,
@@ -189,7 +213,7 @@ class MultipleChoiceView extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               // Selection Indicator
               if (isSelected)
                 Container(

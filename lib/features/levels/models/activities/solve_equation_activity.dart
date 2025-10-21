@@ -25,11 +25,7 @@ class SolveEquationActivity extends Activity
     required this.options,
     required this.correctAnswer,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s solve this equation!',
-      'Choose the correct answer.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   /// The view will call this to update the state.
@@ -52,7 +48,6 @@ class SolveEquationActivity extends Activity
   @override
   void reset() {
     selectedIndex.value = null;
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   @override
@@ -84,7 +79,19 @@ class SolveEquationActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

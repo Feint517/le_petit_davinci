@@ -15,19 +15,17 @@ class LeaderboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(LeaderboardController());
-    
+
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: SafeArea(
         child: Column(
           children: [
             // Header
-            const ScrollAnimatedItem(
-              child: LeaderboardHeader(),
-            ),
-            
+            const ScrollAnimatedItem(child: LeaderboardHeader()),
+
             Gap(20.h),
-            
+
             // Leaderboard List
             Expanded(
               child: GetBuilder<LeaderboardController>(
@@ -49,9 +47,9 @@ class LeaderboardScreen extends StatelessWidget {
                 },
               ),
             ),
-            
+
             Gap(20.h),
-            
+
             // Bottom decoration
             const ScrollAnimatedItem(
               child: ResponsiveImageAsset(
@@ -59,7 +57,7 @@ class LeaderboardScreen extends StatelessWidget {
                 height: 100,
               ),
             ),
-            
+
             Gap(20.h),
           ],
         ),

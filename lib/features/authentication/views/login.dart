@@ -19,7 +19,8 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
+    // Use lazyPut with fenix to prevent multiple instances
+    Get.lazyPut(() => LoginController(), fenix: true);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLight,
@@ -64,8 +65,7 @@ class LoginScreen extends GetView<LoginController> {
                                 ?.copyWith(color: AppColors.black),
                           ),
                           TextButton(
-                            onPressed:
-                                () => Get.to(() => const SignupScreen()),
+                            onPressed: () => Get.to(() => const SignupScreen()),
                             child: Text(
                               StringsManager.createParentAccount,
                               style: Theme.of(context).textTheme.bodyMedium!
@@ -101,17 +101,21 @@ class LoginScreen extends GetView<LoginController> {
                       Column(
                         children: [
                           // Google Login
-                          SocialLoginButton(
-                            onTap: () {},
-                            icon: Icons.g_mobiledata,
-                            label: 'Continue with Google',
-                            backgroundColor: Colors.white,
-                            textColor: Colors.black87,
-                            isLoading: false,
+                          Obx(
+                            () => SocialLoginButton(
+                              onTap: controller.isGoogleLoading.value
+                                  ? () {}
+                                  : () => controller.loginWithGoogle(),
+                              icon: Icons.g_mobiledata,
+                              label: 'Continue with Google',
+                              backgroundColor: Colors.white,
+                              textColor: Colors.black87,
+                              isLoading: controller.isGoogleLoading.value,
+                            ),
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwInputFields.h),
-                          
+
                           // Facebook Login
                           SocialLoginButton(
                             onTap: () {},
@@ -121,9 +125,9 @@ class LoginScreen extends GetView<LoginController> {
                             textColor: Colors.white,
                             isLoading: false,
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwInputFields.h),
-                          
+
                           // Microsoft Login
                           SocialLoginButton(
                             onTap: () {},
@@ -133,26 +137,34 @@ class LoginScreen extends GetView<LoginController> {
                             textColor: Colors.white,
                             isLoading: false,
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwSections.h),
-                          
+
                           // Divider
                           Row(
                             children: [
-                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                              const Expanded(
+                                child: Divider(color: AppColors.textSecondary),
+                              ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
                                 child: Text(
                                   'OR',
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
                                     color: AppColors.textSecondary,
                                   ),
                                 ),
                               ),
-                              const Expanded(child: Divider(color: AppColors.textSecondary)),
+                              const Expanded(
+                                child: Divider(color: AppColors.textSecondary),
+                              ),
                             ],
                           ),
-                          
+
                           Gap(AppSizes.spaceBtwSections.h),
                         ],
                       ),

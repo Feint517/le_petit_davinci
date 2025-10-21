@@ -6,7 +6,6 @@ import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/story_problem_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/draggable_item_model.dart';
 import 'package:le_petit_davinci/features/levels/widgets/item_widget.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
 class StoryProblemView extends StatelessWidget {
   const StoryProblemView({super.key, required this.activity});
@@ -15,14 +14,25 @@ class StoryProblemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages = [
+        'Let\'s solve this story problem!',
+        'Drag the items to find the answer.',
+        'Read carefully and think!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in StoryProblemView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
 import 'package:le_petit_davinci/features/levels/models/answer_result_model.dart';
 import 'package:le_petit_davinci/features/levels/views/activities/listen_and_choose_view.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_model.dart';
-import 'package:le_petit_davinci/mixin/audible_mixin.dart';
-import 'package:le_petit_davinci/features/levels/mixin/mascot_introduction_mixin.dart';
+import 'package:le_petit_davinci/features/levels/mixin/audible_mixin.dart';
 import 'package:le_petit_davinci/features/levels/models/activity_navigation_interface.dart';
 
 class ListenAndChooseActivity extends Activity
@@ -23,8 +23,7 @@ class ListenAndChooseActivity extends Activity
     required this.correctAnswer,
     required this.label,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot(['Listen carefully!', 'Choose the correct answer.']);
+    // Mascot initialization is handled in the view's build method
   }
 
   // --- State Management for this specific exercise type ---
@@ -56,7 +55,6 @@ class ListenAndChooseActivity extends Activity
   void reset() {
     selectedIndex.value = null;
     resetAudio();
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   //? This is required by the Audible mixin.
@@ -85,7 +83,19 @@ class ListenAndChooseActivity extends Activity
 
   @override
   void dispose() {
-    disposeMascot(); // Use mixin method
+    disposeMascotWithFeedback(); // Use enhanced dispose method
     super.dispose();
+  }
+
+  // --- Mascot Feedback Methods ---
+
+  /// Show success feedback when answer is correct
+  void showCorrectFeedback() {
+    showSuccessFeedback();
+  }
+
+  /// Show encouragement feedback when answer is incorrect
+  void showIncorrectFeedback() {
+    showEncouragementFeedback();
   }
 }

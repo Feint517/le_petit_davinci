@@ -4,10 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
+import 'package:le_petit_davinci/core/utils/device_utils.dart';
 import 'package:le_petit_davinci/features/levels/models/activities/audio_matching_activity.dart';
 import 'package:le_petit_davinci/features/levels/models/audio_pair_model.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
 
+// OLD IMPLEMENTATION - COMMENTED OUT FOR REVERSION
+//
 class AudioMatchingActivityView extends StatefulWidget {
   const AudioMatchingActivityView({super.key, required this.activity});
 
@@ -64,11 +66,8 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
           selectedWordIndex = null;
         });
 
-        // Check for win condition
-        if (matchedWords.length == widget.activity.pairs.length) {
-          // All pairs matched, complete the activity.
-          widget.activity.isCompleted.value = true;
-        }
+        // Use the activity's completion tracking
+        widget.activity.addMatchedWord(wordChoice.word);
       } else {
         // Incorrect Match - reset selection after a short delay
         Future.delayed(const Duration(milliseconds: 500), () {
@@ -89,20 +88,32 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
 
   @override
   Widget build(BuildContext context) {
-    return ActivityIntroWrapper(
-      activity: _buildMainContent(),
-      mascotMixin: widget.activity,
-      // startButtonText: 'Start Exercise',
-      // onStartPressed: () {
-      //   widget.activity.isIntroCompleted.value = true;
-      // },
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!widget.activity.isInitialized.value) {
+      final messages = [
+        'Let\'s match audio with words!',
+        'Listen carefully and find the matching word.',
+        'Use your ears to help you!',
+      ];
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          widget.activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in AudioMatchingView: $e');
+        }
+      });
+    }
+
+    return _buildMainContent();
   }
 
   Widget _buildMainContent() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             widget.activity.prompt,
@@ -156,6 +167,7 @@ class _AudioMatchingActivityViewState extends State<AudioMatchingActivityView> {
               ],
             ),
           ),
+          Gap(DeviceUtils.getScreenHeight() * 0.3),
         ],
       ),
     );

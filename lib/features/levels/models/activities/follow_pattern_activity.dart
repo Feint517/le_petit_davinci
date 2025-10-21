@@ -29,11 +29,7 @@ class FollowPatternActivity extends Activity
     required this.options,
     required this.correctAnswerIndex,
   }) {
-    // Initialize mascot with standardized approach
-    initializeMascot([
-      'Let\'s follow the pattern!',
-      'Find the next number in the sequence.',
-    ]);
+    // Mascot initialization is handled in the view's build method
   }
 
   /// The view will call this to update the state when a choice is selected.
@@ -71,7 +67,6 @@ class FollowPatternActivity extends Activity
   @override
   void reset() {
     selectedIndex.value = null;
-    resetMascotIntroduction(); // Reset mascot state
   }
 
   // --- ActivityNavigationInterface Implementation ---

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
-import 'package:le_petit_davinci/core/constants/colors.dart';  
+import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/buttons.dart';
 import 'package:le_petit_davinci/features/authentication/widgets/social_login_button.dart';
@@ -10,7 +10,6 @@ class Auth0LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
@@ -19,15 +18,11 @@ class Auth0LoginView extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(),
-              
+
               // Logo and Title
               Column(
                 children: [
-                  Image.asset(
-                    SvgAssets.logoBlue,
-                    height: 120,
-                    width: 120,
-                  ),
+                  Image.asset(SvgAssets.logoBlue, height: 120, width: 120),
                   const SizedBox(height: 24),
                   Text(
                     'Welcome to Le Petit Davinci',
@@ -40,16 +35,16 @@ class Auth0LoginView extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Learn, play, and create with us!',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.white70,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 48),
-              
+
               // Social Login Buttons
               Column(
                 children: [
@@ -62,9 +57,9 @@ class Auth0LoginView extends StatelessWidget {
                     textColor: Colors.black87,
                     isLoading: false,
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Facebook Login
                   SocialLoginButton(
                     onTap: () {},
@@ -74,9 +69,9 @@ class Auth0LoginView extends StatelessWidget {
                     textColor: Colors.white,
                     isLoading: false,
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Microsoft Login
                   SocialLoginButton(
                     onTap: () {},
@@ -86,9 +81,9 @@ class Auth0LoginView extends StatelessWidget {
                     textColor: Colors.white,
                     isLoading: false,
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Divider
                   Row(
                     children: [
@@ -97,17 +92,16 @@ class Auth0LoginView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           'OR',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white70,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: Colors.white70),
                         ),
                       ),
                       const Expanded(child: Divider(color: Colors.white54)),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Universal Login Button
                   CustomButton(
                     label: 'Login with Auth0',
@@ -117,15 +111,15 @@ class Auth0LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const Spacer(),
-              
+
               // Footer
               Text(
                 'By continuing, you agree to our Terms of Service and Privacy Policy',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white60,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.white60),
                 textAlign: TextAlign.center,
               ),
             ],

@@ -27,12 +27,12 @@ class _ExitLevelModalState extends State<ExitLevelModal>
   @override
   void initState() {
     super.initState();
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    
+
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 200),
       vsync: this,
@@ -41,18 +41,14 @@ class _ExitLevelModalState extends State<ExitLevelModal>
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 1),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+    );
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeIn,
-    ));
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeIn));
 
     // Start animations
     _fadeController.forward();
@@ -103,14 +99,14 @@ class _ExitLevelModalState extends State<ExitLevelModal>
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
-                    
+
                     const SizedBox(height: AppSizes.lg),
-                    
+
                     // Warning icon with animation
                     _buildAnimatedIcon(),
-                    
+
                     const SizedBox(height: AppSizes.lg),
-                    
+
                     // Title
                     Text(
                       'Exit Level?',
@@ -120,12 +116,14 @@ class _ExitLevelModalState extends State<ExitLevelModal>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     const SizedBox(height: AppSizes.sm),
-                    
+
                     // Description
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.lg,
+                      ),
                       child: Text(
                         'Are you sure you want to leave this level? Your progress will be saved and you can continue later.',
                         style: Get.textTheme.bodyMedium?.copyWith(
@@ -135,12 +133,14 @@ class _ExitLevelModalState extends State<ExitLevelModal>
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    
+
                     const SizedBox(height: AppSizes.xl),
-                    
+
                     // Action buttons
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.lg),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.lg,
+                      ),
                       child: Row(
                         children: [
                           // Cancel button
@@ -151,9 +151,9 @@ class _ExitLevelModalState extends State<ExitLevelModal>
                               variant: ButtonVariant.ghost,
                             ),
                           ),
-                          
+
                           const SizedBox(width: AppSizes.md),
-                          
+
                           // Exit button
                           Expanded(
                             child: _buildActionButton(
@@ -165,7 +165,7 @@ class _ExitLevelModalState extends State<ExitLevelModal>
                         ],
                       ),
                     ),
-                    
+
                     const SizedBox(height: AppSizes.lg),
                   ],
                 ),
@@ -219,18 +219,20 @@ class _ExitLevelModalState extends State<ExitLevelModal>
         decoration: BoxDecoration(
           color: _getButtonColor(variant),
           borderRadius: BorderRadius.circular(12),
-          border: variant == ButtonVariant.ghost
-              ? Border.all(color: AppColors.grey.withValues(alpha: 0.3))
-              : null,
-          boxShadow: variant != ButtonVariant.ghost
-              ? [
-                  BoxShadow(
-                    color: _getButtonColor(variant).withValues(alpha: 0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
+          border:
+              variant == ButtonVariant.ghost
+                  ? Border.all(color: AppColors.grey.withValues(alpha: 0.3))
+                  : null,
+          boxShadow:
+              variant != ButtonVariant.ghost
+                  ? [
+                    BoxShadow(
+                      color: _getButtonColor(variant).withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                  : null,
         ),
         child: Text(
           label,

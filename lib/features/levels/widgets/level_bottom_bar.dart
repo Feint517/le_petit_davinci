@@ -4,7 +4,7 @@ import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/core/constants/sizes.dart';
 import 'package:le_petit_davinci/core/widgets/buttons/custom_button.dart';
 import 'package:le_petit_davinci/features/levels/controllers/level_controller.dart';
-import 'package:le_petit_davinci/mixin/audible_mixin.dart';
+import 'package:le_petit_davinci/features/levels/mixin/audible_mixin.dart';
 
 class LevelBottomBar extends GetView<LevelController> {
   const LevelBottomBar({super.key});

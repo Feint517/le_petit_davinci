@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:le_petit_davinci/features/levels/models/activities/drawing_activity.dart';
-import 'package:le_petit_davinci/features/levels/widgets/activity_intro_wrapper.dart';
+import 'package:le_petit_davinci/features/levels/models/activities/letter_tracing_activity.dart';
 import 'package:le_petit_davinci/features/levels/widgets/letter_tracing_canvas.dart';
 
 class LetterTracingView extends StatelessWidget {
@@ -11,19 +10,26 @@ class LetterTracingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final letter = activity.letter.isNotEmpty ? activity.letter : 'A';
-    
-    // Initialize mascot when the view is built
-    final messages = [
-      'Super! Prêt à tracer la lettre $letter?',
-      activity.prompt ?? 'Trace la lettre $letter avec ton doigt!',
-    ].where((message) => message.isNotEmpty).toList();
-    
-    activity.initializeMascot(messages);
 
-    return ActivityIntroWrapper(
-      activity: _buildTracingCanvas(),
-      mascotMixin: activity,
-    );
+    // Initialize mascot when the view is built (only if not already initialized)
+    if (!activity.isInitialized.value) {
+      final messages =
+          [
+            'Super! Prêt à tracer la lettre $letter?',
+            activity.prompt ?? 'Trace la lettre $letter avec ton doigt!',
+          ].where((message) => message.isNotEmpty).toList();
+
+      // Use a post-frame callback to ensure proper timing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        try {
+          activity.initializeMascot(messages);
+        } catch (e) {
+          debugPrint('Error initializing mascot in LetterTracingView: $e');
+        }
+      });
+    }
+
+    return _buildTracingCanvas();
   }
 
   Widget _buildTracingCanvas() {
