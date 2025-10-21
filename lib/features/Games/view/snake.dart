@@ -169,7 +169,7 @@ class _SnakeGameState extends State<SnakeGame> with TickerProviderStateMixin {
       // Make sure food is not in the snake's path
       _placeFood();
     });
-    playSound('equal.wav');
+    playSound('x.mp3');
     startTimer();
   }
 

@@ -12,9 +12,12 @@ class GameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return SizedBox(
+      height: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
         Container(
           decoration: BoxDecoration(
             color: Color.alphaBlend(
@@ -38,45 +41,55 @@ class GameCard extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: gameModel.color,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-            ),
-            boxShadow: CustomShadowStyle.customCircleShadows(
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
               color: gameModel.color,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15),
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+              boxShadow: CustomShadowStyle.customCircleShadows(
+                color: gameModel.color,
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              ResponsiveImageAsset(
-                assetPath: gameModel.icon,
-                height: 70,
-                width: 70,
-              ),
-              Text(
-                gameModel.name,
-                style: TextStyle(
-                  color: AppColors.background,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w100,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ResponsiveImageAsset(
+                      assetPath: gameModel.icon,
+                      height: 50,
+                      width: 50,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      gameModel.name,
+                      style: TextStyle(
+                        color: AppColors.background,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              CustomButton(
-                label: 'Jouer',
-                variant: ButtonVariant.secondary,
-                onPressed: gameModel.goToGameScreen,
-              ),
-            ],
+                CustomButton(
+                  label: 'Jouer',
+                  variant: ButtonVariant.secondary,
+                  size: ButtonSize.sm,
+                  onPressed: gameModel.goToGameScreen,
+                ),
+              ],
+            ),
           ),
         ),
-      ],
+        ],
+      ),
     );
   }
 }

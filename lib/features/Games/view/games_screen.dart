@@ -11,6 +11,7 @@ import 'package:le_petit_davinci/core/widgets/layouts/grid_layout.dart';
 import 'package:le_petit_davinci/core/widgets/navigation_bar/profile_header.dart';
 import 'package:le_petit_davinci/features/Games/models/game_model.dart';
 import 'package:le_petit_davinci/features/Games/view/snake.dart';
+import 'package:le_petit_davinci/features/Games/view/chess_game.dart';
 import 'package:le_petit_davinci/features/Games/view/tic_tac_toe_intro.dart';
 import 'package:le_petit_davinci/features/Games/widgets/game_card.dart';
 
@@ -62,8 +63,9 @@ class GamesScreen extends StatelessWidget {
                       ),
                       const Gap(AppSizes.spaceBtwSections),
                       CustomGridLayout(
-                        spacing: 250,
-                        itemCount: 2,
+                        spacing: AppSizes.spaceBtwItems,
+                        childAspectRatio: 0.8,
+                        itemCount: 3,
                         itemBuilder: (context, index) {
                           final List gamesList = [
                             GameModel(
@@ -77,12 +79,20 @@ class GamesScreen extends StatelessWidget {
                                   ),
                             ),
                             GameModel(
-                              name: 'Échecs simplifiés',
+                              name: 'le serpent',
                               numOfVictories: 2,
                               color: AppColors.accent,
                               icon: SvgAssets.chess,
                               goToGameScreen:
                                   () => Get.to(() => const SnakeGame()),
+                            ),
+                            GameModel(
+                              name: 'Échecs simplifiés',
+                              numOfVictories: 2,
+                              color: AppColors.accent,
+                              icon: SvgAssets.chess,
+                              goToGameScreen:
+                                  () => Get.to(() => const ChessGame()),
                             ),
                           ];
                           return GameCard(gameModel: gamesList[index]);
