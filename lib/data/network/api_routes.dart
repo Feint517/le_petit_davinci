@@ -1,8 +1,8 @@
 class ApiRoutes {
   // Development URLs
   // static const String baseUrl = "http://localhost:3000"; // Local development
-  static const String baseUrl = "http://10.0.2.2:3000"; // Android emulator
-  
+  static const String baseUrl = "http://172.20.10.12:3000"; // Android emulator
+
   // Production URL
   // static const String baseUrl = "https://lepetitdavinci-api.vercel.app";
 
@@ -30,8 +30,8 @@ class ApiRoutes {
   static String profileById(String id) => "/auth/profiles/$id";
 
   // User routes
-  static const String createChildProfile = '/child/create';
-  static const String fetchChildData = "/child/fetch";
+  static const String createChildProfile = '/api/child/create';
+  static const String fetchChildData = "/api/child/fetch";
 
   // Security routes
   static const String securityEvents = "/auth/security/events";

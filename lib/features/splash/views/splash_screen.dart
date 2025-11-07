@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback? onReady;
@@ -27,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _initializeApp() async {
     // Simulate loading time (replace with actual initialization)
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     // Check if widget is still mounted before calling setState
     if (mounted) {
@@ -38,10 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (widget.onReady != null) {
       widget.onReady!();
-    } else {
-      // Navigate to user selection screen to start the proper flow
-      Get.offAndToNamed(AppRoutes.userSelection);
     }
+    // Navigation is now handled by AuthenticationRepository
   }
 
   @override

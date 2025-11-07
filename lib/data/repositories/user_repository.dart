@@ -1,26 +1,35 @@
-import 'dart:convert' show jsonDecode;
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:le_petit_davinci/data/models/requests/fetch_user_data_request.dart';
 import 'package:le_petit_davinci/data/models/responses/user_data_response.dart';
 import 'package:le_petit_davinci/services/api_service.dart';
+import 'package:le_petit_davinci/services/storage_service.dart';
 import 'package:le_petit_davinci/data/network/api_routes.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
   final _dio = ApiService().dio;
+  final _storage = StorageService.instance;
 
   Future<UserDataResponse> fetchUserProfile() async {
     try {
-      final response = await _dio.get(
+      // Get the selected profile ID
+      final selectedProfile = _storage.getSelectedProfile();
+      if (selectedProfile == null) {
+        throw Exception('No profile selected. Please select a profile first.');
+      }
+
+      final profileId = selectedProfile.id;
+
+      // Use POST request with profile ID in the body (as per FetchUserDataRequest model)
+      final response = await _dio.post(
         ApiRoutes.fetchChildData,
-        data: FetchUserDataRequest(id: '123').toJson(),
+        data: {'id': profileId},
       );
 
       if (response.statusCode == 200) {
-        return UserDataResponse.fromJson(jsonDecode(response.data));
+        // response.data is already a Map<String, dynamic>, no need for jsonDecode
+        return UserDataResponse.fromJson(response.data);
       } else {
         throw Exception(
           'Data fetching failed with status code: ${response.statusCode}',

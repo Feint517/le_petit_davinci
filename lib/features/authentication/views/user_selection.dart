@@ -9,7 +9,6 @@ import 'package:gap/gap.dart';
 import 'package:le_petit_davinci/core/constants/assets_manager.dart';
 import 'package:le_petit_davinci/core/constants/colors.dart';
 import 'package:le_petit_davinci/features/authentication/controllers/user_selection_controller.dart';
-import 'package:le_petit_davinci/routes/app_routes.dart';
 
 /// Loading screen that automatically redirects to login
 /// This screen is shown briefly during app initialization
@@ -20,12 +19,8 @@ class UserSelectionScreen extends GetView<UserSelectionController> {
   Widget build(BuildContext context) {
     Get.put(UserSelectionController());
 
-    // Automatically navigate to login after a brief delay
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      if (Get.context != null) {
-        Get.offAllNamed(AppRoutes.login);
-      }
-    });
+    // Navigation is now handled by AuthenticationRepository
+    // This screen remains for potential future use
 
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,

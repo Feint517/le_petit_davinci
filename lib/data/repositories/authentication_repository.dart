@@ -26,7 +26,7 @@ class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final _dio = ApiService().dio;
   final _storage = StorageService.instance;
-  
+
   // Flag to prevent multiple redirects
   bool _hasRedirected = false;
 
@@ -50,7 +50,9 @@ class AuthenticationRepository extends GetxController {
     if (kDebugMode) {
       print('[Auth] isLoggedIn => $isLoggedIn');
       print('[Auth] selectedProfile => ${selectedProfile?.profileName}');
-      print('[Auth] profileToken => ${profileToken != null ? 'exists' : 'null'}');
+      print(
+        '[Auth] profileToken => ${profileToken != null ? 'exists' : 'null'}',
+      );
     }
 
     if (isLoggedIn && selectedProfile != null && profileToken != null) {
@@ -60,9 +62,10 @@ class AuthenticationRepository extends GetxController {
       // User is logged in but needs to select/validate profile
       final profiles = _storage.getProfiles();
       if (profiles != null && profiles.isNotEmpty) {
+        // Always show PIN screen, even for single profile
         Get.offAllNamed(
           AppRoutes.pin,
-          arguments: {'profiles': profiles, 'autoSelect': profiles.length == 1},
+          arguments: {'profiles': profiles, 'autoSelect': false},
         );
       } else {
         Get.offAllNamed(AppRoutes.createProfile);
@@ -166,10 +169,12 @@ class AuthenticationRepository extends GetxController {
       }
 
       // Initiate OAuth flow with Supabase (opens browser)
-      final response = await supabase.Supabase.instance.client.auth.signInWithOAuth(
-        supabase.OAuthProvider.google,
-        redirectTo: 'io.supabase.lepetitdavinci://login-callback',
-      );
+      final response = await supabase.Supabase.instance.client.auth
+          .signInWithOAuth(
+            supabase.OAuthProvider.google,
+            redirectTo: 'io.supabase.lepetitdavinci://login-callback',
+            authScreenLaunchMode: supabase.LaunchMode.externalApplication,
+          );
 
       if (!response) {
         throw Exception('Failed to initiate OAuth');
@@ -180,12 +185,21 @@ class AuthenticationRepository extends GetxController {
       }
 
       // Wait for auth state change when user returns to app
-      final authState = await supabase.Supabase.instance.client.auth.onAuthStateChange
-        .firstWhere((event) => event.event == supabase.AuthChangeEvent.signedIn)
-        .timeout(
-          const Duration(seconds: 120),
-          onTimeout: () => throw Exception('OAuth timeout - user may have cancelled'),
-        );
+      final authState = await supabase
+          .Supabase
+          .instance
+          .client
+          .auth
+          .onAuthStateChange
+          .firstWhere(
+            (event) => event.event == supabase.AuthChangeEvent.signedIn,
+          )
+          .timeout(
+            const Duration(seconds: 120),
+            onTimeout:
+                () =>
+                    throw Exception('OAuth timeout - user may have cancelled'),
+          );
 
       final session = authState.session;
       if (session == null) {
@@ -206,9 +220,11 @@ class AuthenticationRepository extends GetxController {
       );
 
       final profilesData = profilesResponse.data['data'];
-      final profiles = (profilesData['profiles'] as List?)
-        ?.map((p) => Profile.fromJson(p))
-        .toList() ?? [];
+      final profiles =
+          (profilesData['profiles'] as List?)
+              ?.map((p) => Profile.fromJson(p))
+              .toList() ??
+          [];
 
       if (kDebugMode) {
         print('🔐 [Auth] Fetched ${profiles.length} profiles');
@@ -268,7 +284,7 @@ class AuthenticationRepository extends GetxController {
       if (kDebugMode) {
         print('🔐 [Repo] Validating PIN for profile: $profileId');
       }
-      
+
       final response = await _dio.post(
         ApiRoutes.validateProfilePin,
         data:
@@ -280,18 +296,24 @@ class AuthenticationRepository extends GetxController {
 
         if (kDebugMode) {
           print('🔐 [Repo] PIN Response success: ${pinResponse.success}');
-          print('🔐 [Repo] Profile token exists: ${pinResponse.data?.profileToken != null}');
+          print(
+            '🔐 [Repo] Profile token exists: ${pinResponse.data?.profileToken != null}',
+          );
         }
 
         // Save profile token if validation was successful
         if (pinResponse.success && pinResponse.data != null) {
           await _storage.saveProfileToken(pinResponse.data!.profileToken);
           await _storage.saveSelectedProfile(pinResponse.data!.profile);
-          
+
           if (kDebugMode) {
             print('🔐 [Repo] Saved profile token and profile');
-            print('🔐 [Repo] Verifying storage - token exists: ${_storage.getProfileToken() != null}');
-            print('🔐 [Repo] Verifying storage - profile exists: ${_storage.getSelectedProfile() != null}');
+            print(
+              '🔐 [Repo] Verifying storage - token exists: ${_storage.getProfileToken() != null}',
+            );
+            print(
+              '🔐 [Repo] Verifying storage - profile exists: ${_storage.getSelectedProfile() != null}',
+            );
           }
         }
 
@@ -410,10 +432,12 @@ class AuthenticationRepository extends GetxController {
     try {
       if (kDebugMode) {
         print('🔐 [Repo] Creating profile: $profileName');
-        print('🔐 [Repo] Access token exists: ${_storage.getAccessToken() != null}');
+        print(
+          '🔐 [Repo] Access token exists: ${_storage.getAccessToken() != null}',
+        );
         print('🔐 [Repo] User logged in: ${_storage.isLoggedIn()}');
       }
-      
+
       final response = await _dio.post(
         ApiRoutes.profiles,
         data: {'profile_name': profileName, 'pin': pin, 'avatar': avatar},

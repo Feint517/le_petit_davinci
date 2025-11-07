@@ -211,10 +211,10 @@ class AppPages {
     ),
 
     // Development tools
-    GetPage(
-      name: AppRoutes.riveInspector,
-      page: () => const RiveInspectorScreen(),
-      transition: Transition.rightToLeft,
-    ),
+    // GetPage(
+    //   name: AppRoutes.riveInspector,
+    //   page: () => const RiveInspectorScreen(),
+    //   transition: Transition.rightToLeft,
+    // ),
   ];
 }
