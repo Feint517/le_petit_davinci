@@ -121,7 +121,7 @@ class ProfileHeader extends GetView<UserController>
                                   height: 25,
                                 )
                                 : Text(
-                                  '${StringUtils.capitalize(controller.user.value!.name)}  ',
+                                  '${StringUtils.capitalize(controller.selectedProfile.value?.profileName ?? '')}  ',
                                   style:
                                       Theme.of(context).textTheme.headlineSmall,
                                 )),

@@ -27,7 +27,7 @@ class ProgressionSection extends GetView<UserController> {
                 style: TextStyle(color: AppColors.black),
               ),
               TextSpan(
-                text: StringUtils.capitalize(controller.user.value!.name),
+                text: StringUtils.capitalize(controller.selectedProfile.value?.profileName ?? ''),
                 style: const TextStyle(color: AppColors.primary),
               ),
             ],

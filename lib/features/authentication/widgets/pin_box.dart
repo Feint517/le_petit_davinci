@@ -64,7 +64,7 @@ class PinBox extends StatelessWidget {
           Gap(24.h),
           CustomButton(
             label: StringsManager.connectWithPin,
-            onPressed: () => Get.to(() => const LoginScreen()),
+            onPressed: () => Get.to(() => const HomeScreen()),
             size: ButtonSize.lg,
           ),
 

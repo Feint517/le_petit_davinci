@@ -4,6 +4,7 @@ import 'package:le_petit_davinci/core/styles/loaders.dart';
 import 'package:le_petit_davinci/core/widgets/popups/fullscreen_loader.dart';
 import 'package:le_petit_davinci/data/models/auth/profile.dart';
 import 'package:le_petit_davinci/data/repositories/authentication_repository.dart';
+import 'package:le_petit_davinci/features/authentication/controllers/user_controller.dart';
 import 'package:le_petit_davinci/features/home/views/home.dart';
 
 class PinEntryController extends GetxController {
@@ -134,6 +135,15 @@ class PinEntryController extends GetxController {
 
         // Navigate to home
         Get.offAll(() => const HomeScreen());
+        
+        // Notify UserController that profile is selected (if it exists)
+        try {
+          final userController = Get.find<UserController>();
+          userController.onProfileSelected();
+        } catch (e) {
+          // UserController might not be initialized yet, that's okay
+          print('🔐 [PIN] UserController not found, will initialize on HomeScreen load');
+        }
         
         print('🔐 [PIN] Navigation complete');
       } else {

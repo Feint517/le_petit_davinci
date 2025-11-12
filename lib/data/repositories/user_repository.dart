@@ -21,10 +21,9 @@ class UserRepository extends GetxController {
 
       final profileId = selectedProfile.id;
 
-      // Use POST request with profile ID in the body (as per FetchUserDataRequest model)
-      final response = await _dio.post(
-        ApiRoutes.fetchChildData,
-        data: {'id': profileId},
+      // Use GET request with profile ID in the URL
+      final response = await _dio.get(
+        ApiRoutes.fetchChildData(profileId),
       );
 
       if (response.statusCode == 200) {
